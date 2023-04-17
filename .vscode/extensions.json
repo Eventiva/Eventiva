@@ -1,0 +1,16 @@
+{
+  "recommendations": [
+    "unifiedjs.vscode-mdx",
+    "github.codespaces",
+    "bit.vscode-bit",
+    "github.copilot",
+    "github.copilot-labs",
+    "github.remotehub",
+    "rangav.vscode-thunder-client",
+    "samverschueren.linter-xo",
+    "hashicorp.terraform",
+    "johnreemar.vscode-qwik-snippets",
+    "aaron-bond.better-comments"
+  ],
+  "unwantedRecommendations": []
+}

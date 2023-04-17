@@ -1,0 +1,74 @@
+name: Other issue type
+description: For use when other issue templates don't work for your issue
+title: "<type>([context]): "
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this fix suggestion, we greatly appriciate it!
+  - type: markdown
+    attributes:
+      value: |
+        Please use <type> in title to describe the type of issue you are raising. 
+        Note that we use semantic titles in our pull requests, so where possible please stick to that format.
+
+        Please use [context] in title to describe the part of the mono-repo is related to this issue.
+        Context example: docs(components): {your title here}
+        Valid options are: 
+          - directory: The frontend website which displays our directory systems
+          - proxy: The api endpoint for proxied connections to private ERP instances
+          - image: The build image used when creating private ERP instances 
+          - terraform: The definition of our build processes
+          - ci/cd: The automations which run at issue create, pull request or push
+          - cli: The custom rush based cli, used to streamline development processes
+          - erp: The default module within our ERP instances
+          - frappe: The frappe ecosystem which our erp instances are built on
+          - payments: The payments module within our ERP instances
+          - tours: The tours module within our ERP instances
+          - logistics: The logistics module within our ERP instances
+          - banking: The banking module within our ERP instances
+          - tickets: The tickets module within our ERP instances
+          - marketing: The marketing module within our ERP instances
+          - hospitality: The hospitality module within our ERP instances
+  - type: dropdown
+    attributes:
+      label: Features
+      description: What product or feature(s) affected?
+      multiple: true
+      options:
+        - "directory"
+        - "proxy"
+        - "image"
+        - "terraform"
+        - "ci/cd"
+        - "cli"
+        - "erp"
+        - "frappe"
+        - "payments"
+        - "tours"
+        - "logistics"
+        - "banking"
+        - "tickets"
+        - "marketing"
+        - "hospitality"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Details
+      description: |
+        Literally whatever you think you need. You chose this template because all other templates didn't fit...
+
+        Links? References? Anything that will give us more context about the issue you are encountering!
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+  - type: checkboxes
+    attributes:
+      label: Code of Conduct
+      description:
+        The Code of Conduct helps create a safe space for everyone. We require
+        that everyone agrees to it.
+      options:
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/Resnovas/eventiva/blob/develop/CODE_OF_CONDUCT.md)
+          required: true

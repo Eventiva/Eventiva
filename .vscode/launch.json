@@ -1,0 +1,25 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Launch directory (npm start)",
+			"request": "launch",
+			"runtimeArgs": [
+				"run-script",
+				"start"
+			],
+			"runtimeExecutable": "npm",
+			"localRoot": "${workspaceFolder}/projects/website",
+			"env": {
+				"BUILDER_PUBLIC_API_KEY": "7979abfc4d3e48f2860087d0c2af565a"
+			},
+			"skipFiles": [
+				"<node_internals>/**"
+			],
+			"type": "node"
+		}
+	]
+}

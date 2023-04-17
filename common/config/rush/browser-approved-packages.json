@@ -1,0 +1,98 @@
+// DO NOT ADD COMMENTS IN THIS FILE.  They will be lost when the Rush tool resaves it.
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/approved-packages.schema.json",
+  "packages": [
+    {
+      "name": "@builder.io/partytown",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@builder.io/qwik",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@builder.io/qwik-city",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@builder.io/sdk-qwik",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@rushstack/heft",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@typescript-eslint/eslint-plugin",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@typescript-eslint/parser",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "@vitest/ui",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "autoprefixer",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "eslint",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "eslint-plugin-qwik",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "postcss",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "prettier",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "tailwindcss",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "typescript",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "undici",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "vercel",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "vite",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "vite-tsconfig-paths",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "vitest",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "webpack",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "wrangler",
+      "allowedCategories": [ "prototypes" ]
+    },
+    {
+      "name": "xo",
+      "allowedCategories": [ "prototypes" ]
+    }
+  ]
+}
