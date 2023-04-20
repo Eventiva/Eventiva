@@ -20,6 +20,6 @@
   "dependencies": {
     "@microsoft/rush": "^5.97.0",
     "@teambit/bvm": "^0.3.1",
-    "pnpm": "^8.2.0"
+    "pnpm": "^8.3.1"
   }
 }
