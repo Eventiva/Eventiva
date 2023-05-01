@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@rushstack/heft": "^0.50.0",
-    "opencommit": "^2.0.0",
+    "opencommit": "^2.0.5",
     "wip": "^1.3.0"
   },
   "dependencies": {
