@@ -1,4 +1,7 @@
 # EVENTIVA
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 ## Index
 
@@ -11,6 +14,8 @@
   - [Why open-source?](#why-open-source)
   - [How to get support 👨‍👩‍👧‍👦](#how-to-get-support-)
   - [Contributing](#contributing)
+    - [Contributors ✨](#contributors-)
+    - [Visualisation of the codebase](#visualisation-of-the-codebase)
     - [Backlog](#backlog)
     - [Running Locally \& Developing](#running-locally--developing)
       - [prerequisites](#prerequisites)
@@ -53,6 +58,32 @@ Thank you for taking an interst in contributing. We have created development con
 This project utilises the [Smartcloud Project](https://github.com/Resnovas/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Resnovas/smartcloud). You can find a example Pull Request, [here](https://github.com/Resnovas/eventiva/pull/36) which shows the standard flow for contributors.
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
+
+### Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://jonathanstevens.org/"><img src="https://avatars.githubusercontent.com/u/11413796?v=4?s=100" width="100px;" alt="Jonathan S"/><br /><sub><b>Jonathan S</b></sub></a><br /><a href="#business-TGTGamer" title="Business development">💼</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Code">💻</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Documentation">📖</a> <a href="#financial-TGTGamer" title="Financial">💵</a> <a href="#ideas-TGTGamer" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-TGTGamer" title="Research">🔬</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
+
+### Visualisation of the codebase
+
+![Visualization of the codebase](./diagram.svg)
 
 ### Backlog
 

@@ -1,17 +1,31 @@
 {
-  "projectName": "Eventiva",
+  "projectName": "eventiva",
   "projectOwner": "Resnovas",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "commitConvention": "gitmoji",
   "files": [
-    "README.md"
+    "README.md",
+    "CONTRIBUTING.md"
   ],
   "imageSize": 100,
-  "contributorsPerLine": 7,
-  "contributorsSortAlphabetically": true,
-  "skipCi": true,
   "commit": true,
-  "linkToUsage": false,
-  "contributors": []
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "login": "TGTGamer",
+      "name": "Jonathan S",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11413796?v=4",
+      "profile": "https://jonathanstevens.org/",
+      "contributions": [
+        "business",
+        "code",
+        "doc",
+        "financial",
+        "ideas",
+        "research"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false
 }
