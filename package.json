@@ -6,7 +6,7 @@
   "keywords": [],
   "private": true,
   "scripts": {
-    "postinstall": "npm exec pnpm add -g @microsoft/rush pnpm && npm exec bvm install",
+    "postinstall": "npm exec pnpm add -g @microsoft/rush pnpm && git submodule update --init --recursive",
     "wip": "wip",
     "wip:finish": "naenae",
     "wip:watch": "wip silently && watch wip --ignoreDotFiles --ignoreDirectoryPatterttern=[\"/node_modules/\"]",
