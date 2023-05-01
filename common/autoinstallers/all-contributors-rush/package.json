@@ -1,0 +1,8 @@
+{
+  "name": "all-contributors-rush",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "all-contributors-cli": "^6.25.0"
+  }
+}
