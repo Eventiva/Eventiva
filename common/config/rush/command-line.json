@@ -28,6 +28,33 @@
       "autoinstallerName": "xo-rush",
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
       "shellCommand": "pnpm xo --fix"
+    },
+    {
+      "name": "wip:watch",
+      "commandKind": "global",
+      "summary": "Will trigger the WIP command on changes allowing you to safely make modifications to the project with full change history.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "wip-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm wip silently && watch wip --ignoreDotFiles --ignoreDirectoryPatterttern=[\"/node_modules/\"]"
+    },
+    {
+      "name": "wip:finish",
+      "commandKind": "global",
+      "summary": "Will squash the WIP commits into one for commiting to branch and pushing.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "wip-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm naenae"
+    },
+    {
+      "name": "wip",
+      "commandKind": "global",
+      "summary": "Can be used to store a local commit for work in progress. Later using 'wip:finish' will squash the commits into one.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "wip-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm wip"
     }
     // {
     //   /**
