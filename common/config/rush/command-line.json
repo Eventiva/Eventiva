@@ -4,7 +4,6 @@
  */
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
-
   /**
    * Custom "commands" introduce new verbs for the command-line.  To see the help for these
    * example commands, try "rush --help", "rush my-bulk-command --help", or
@@ -64,6 +63,24 @@
       "autoinstallerName": "open-commit-rush",
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
       "shellCommand": "pnpm oc"
+    },
+    {
+      "name": "contributors:add",
+      "commandKind": "global",
+      "summary": "Used by the pre-commit Git hook. This command invokes the All-Contributors-CLI to include all contributors in the documentation.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "all-contributors-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm all-contributors all-contributors add"
+    },
+    {
+      "name": "contributors:generate",
+      "commandKind": "global",
+      "summary": "Used by the pre-commit Git hook. This command invokes the All-Contributors-CLI to include all contributors in the documentation.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "all-contributors-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm all-contributors generate"
     }
     // {
     //   /**
@@ -230,7 +247,6 @@
     //   // "autoinstallerName": "my-task"
     // }
   ],
-
   /**
    * Custom "parameters" introduce new parameters for specified Rush command-line commands.
    * For example, you might define a "--production" parameter for the "rush build" command.
