@@ -71,7 +71,7 @@
       "safeForSimultaneousRushProcesses": true,
       "autoinstallerName": "all-contributors-rush",
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
-      "shellCommand": "pnpm all-contributors all-contributors add"
+      "shellCommand": "pnpm all-contributors add"
     },
     {
       "name": "contributors:generate",
