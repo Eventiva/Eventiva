@@ -1,7 +1,6 @@
 # EVENTIVA
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Resnovas/eventiva?quickstart=1)
 
 ## Index
 
@@ -19,9 +18,14 @@
     - [Backlog](#backlog)
     - [Running Locally \& Developing](#running-locally--developing)
       - [prerequisites](#prerequisites)
+      - [Manual Method](#manual-method)
+      - [Codespaces Method (Recommended)](#codespaces-method-recommended)
+      - [Devcontainer Method](#devcontainer-method)
       - [Using Rush](#using-rush)
-        - [1. Avoid certain commands in a Rush repo](#1-avoid-certain-commands-in-a-rush-repo)
-        - [2. If you suspect your install is corrupted...](#2-if-you-suspect-your-install-is-corrupted)
+          - [1. Avoid certain commands in a Rush repo](#1-avoid-certain-commands-in-a-rush-repo)
+          - [2. If you suspect your install is corrupted...](#2-if-you-suspect-your-install-is-corrupted)
+        - [Creating new projects](#creating-new-projects)
+        - [Achieving projects](#achieving-projects)
   - [Security](#security)
     - [Security Policy](#security-policy)
       - [Supported Versions](#supported-versions)
@@ -97,20 +101,31 @@ We use [`@microsoft/rush`](https://rushjs.io/pages/developer/new_developer/) and
 
 You can choose one of the following methods to get your development platform configured
 
-First Method:
- - `npm install` - this will install the main utilities we use
- - Follow the ` @microsoft/rush` \(https://rushjs.io/pages/developer/new_developer/\) speccification for development
+#### Manual Method
+ - Follow the ` @microsoft/rush` \(https://rushjs.io/pages/developer/new_developer/\) specification for development
 
-Second Method:
- - Simply open the github `.devcontainer` which will auto-install all the needed components and extensions
+#### Codespaces Method (Recommended)
 
-\[Under development\]
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Resnovas/eventiva?quickstart=1)
+
+GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
+
+#### Devcontainer Method
+The Dev Container lets you use a Docker container as a full-featured development environment. Whether you deploy to containers or not, containers make a great development environment because you can:
+
+- Develop with a consistent, easily reproducible toolchain on the same operating system you deploy to.
+- Quickly swap between different, separate development environments and safely make updates without worrying about impacting your local machine.
+- Try out new technologies or clone a copy of a code base without impacting your local setup.
+
+
+Simply install the [Dev containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), clone the repository to your local device, and choose the [`Open Devcontainer` option](https://code.visualstudio.com/docs/devcontainers/containers).
+
 
 #### Using Rush
 
 Before we get started, a couple important points to keep in mind:
 
-##### 1. Avoid certain commands in a Rush repo
+###### 1. Avoid certain commands in a Rush repo
 
 Rush optimizes by installing all of your dependency packages in a central folder, and then uses [symlinks](https://en.wikipedia.org/wiki/Symbolic_link) to create the "node_modules" folder for each of your projects.
 
@@ -120,11 +135,48 @@ If you use `git clean -dfx` to clean up your folder, be aware that it handles sy
 
 Afterwards you can run `rush update` to recreate the symlinks. (There is a standalone `rush link` command, but it's rarely needed.)
 
-##### 2. If you suspect your install is corrupted...
+###### 2. If you suspect your install is corrupted...
 
 Rush's package management commands are "incremental", which means they save time by skipping steps that appear to be unnecessary. Since Rush runs in automated build environments, we have many safeguards to ensure these checks are accurate. However when debugging or tinkering with packages on your local machine, sometimes your NPM "node_modules" folder can get into a bad state, causing strange errors.
 
 If you suspect your install is corrupted, try running `rush update --purge`. This will force a full reinstall of your packages, and usually get you back into a good state.
+
+##### Creating new projects
+
+\[coming soon\]
+
+##### Achieving projects
+
+To help keep the mono-repository clean, we have added the ability to achieve projects. 
+
+```
+rush archive-project --package-name <your_package_name>
+```
+
+> restoring your project by `rush unarchive-project --package-name <your_package_name>`
+
+**The automated archive process** 
+
+1. Find project configuration by Rush.js SDK
+2. Check whether there are projects depends on target project
+3. Run `git clean -xdf` under project folder
+4. Create a checkpoint branch with the name `${projectName}-checkpoint-${date}`
+5. Update checkpoint branch information in `common/_graveyard/projectCheckpoints.json` file
+6. Record project configuration into `rush-metadata.json` file
+7. Create a tarball by running `tar -czf <unscoped_package_name>.tar.gz -C <project_folder> .`
+8. Move the tarball to `common/_graveyard` folder
+9. Remove project config from `rush.json`
+10. Delete project folder
+
+**The automated unarchive process** 
+
+1. Find the tarball by `packageName`
+2. Extract the tarball by running `tar xf <package_name>.tar.gz`
+3. Get project configuration by reading `rush-metadata.json`
+4. Remove checkpoint branch information from checkpoint metadata file if it exists
+5. Move the code to project folder
+6. Restore project configuration into `rush.json`
+7. Delete metadata file and tarball
 
 ## Security
 
