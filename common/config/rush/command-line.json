@@ -11,6 +11,24 @@
    * "rush my-global-command --help".
    */
   "commands": [
+    {
+      "name": "xo",
+      "commandKind": "global",
+      "summary": "Will trigger xo to check for issues.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "xo-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm xo"
+    },
+    {
+      "name": "xo:fix",
+      "commandKind": "global",
+      "summary": "Will trigger xo with the Fix flag.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "xo-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm xo --fix"
+    }
     // {
     //   /**
     //    * (Required) Determines the type of custom command.
