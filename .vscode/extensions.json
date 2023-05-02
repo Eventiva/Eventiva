@@ -5,7 +5,8 @@
     "github.copilot-labs",
     "github.remotehub",
     "rangav.vscode-thunder-client",
-    "samverschueren.linter-xo"
+    "samverschueren.linter-xo",
+    "psioniq.psi-header"
   ],
   "unwantedRecommendations": []
 }
