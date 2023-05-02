@@ -36,6 +36,14 @@
     "extends": [
       "xo",
       "xo-typescript"
-    ]
+    ],
+    "rules": {
+      "no-trailing-spaces": [
+        "error",
+        {
+          "ignoreComments": true
+        }
+      ]
+    }
   }
 }
