@@ -1,0 +1,8 @@
+{
+  "name": "open-commit-rush",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "opencommit": "^2.0.0"
+  }
+}

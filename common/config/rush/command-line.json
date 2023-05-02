@@ -55,6 +55,15 @@
       "autoinstallerName": "wip-rush",
       // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
       "shellCommand": "pnpm wip"
+    },
+    {
+      "name": "commit",
+      "commandKind": "global",
+      "summary": "Used to trigger an AI generated Commit Message powered by opencommit.",
+      "safeForSimultaneousRushProcesses": true,
+      "autoinstallerName": "open-commit-rush",
+      // This will invoke common/autoinstallers/rush-prettier/node_modules/.bin/pretty-quick
+      "shellCommand": "pnpm oc"
     }
     // {
     //   /**
