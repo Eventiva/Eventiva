@@ -8,14 +8,34 @@
   "scripts": {
     "preinstall": "node ./common/scripts/preroot.js"
   },
-  "devDependencies": {
-    "@rushstack/heft": "^0.50.0",
-    "opencommit": "^2.0.0",
-    "wip": "^1.3.0"
-  },
   "dependencies": {
-    "@microsoft/rush": "^5.97.0",
-    "@teambit/bvm": "^0.3.1",
-    "pnpm": "^8.2.0"
+    "xo": "^0.54.2"
+  },
+  "xo": {
+    "rules": {
+      "semicolon": 0,
+      "import/extensions": 0,
+      "n/file-extension-in-import": [
+        "error",
+        "always",
+        {
+          ".js": "never",
+          ".mjs": "never",
+          ".tsx": "never"
+        }
+      ],
+      "import/no-cycle": [
+        2,
+        {
+          "maxDepth": 1
+        }
+      ]
+    }
+  },
+  "eslintConfig": {
+    "extends": [
+      "xo",
+      "xo-typescript"
+    ]
   }
 }
