@@ -1,0 +1,65 @@
+{
+  "xo.path": "./common/autoinstallers/xo-rush/node_modules/xo/index.js",
+  "psi-header.variables": [
+    [
+      "githubUser",
+      "YourUsernameHere"
+    ],
+    [
+      "branch",
+      "develop"
+    ]
+  ],
+  "psi-header.config": {
+    "forceToTop": true,
+    "blankLinesAfter": 1,
+    "author": "",
+    "initials": "",
+    "authorEmail": "email@example.com",
+    "creationDateZero": "asIs",
+    "hostname": "localhost"
+  },
+  "psi-header.templates": [
+    {
+      "language": "*",
+      "template": [
+        "@format",
+        "-----",
+        "Project: <<projectname>>",
+        "File: <<filename>>",
+        "Path: <<filerelativepath>>",
+        "Created Date: <<filecreated('dddd, MMMM Do YYYY')>>",
+        "Author: <<author>> (Email: <<authorEmail>>, Github: https://github.com/<<githubUser>>)",
+        "-----",
+        "Contributing: Please read through our contributing guidelines. Included are directions for opening",
+        "issues, coding standards, and notes on development. These can be found at https://github.com/<<projectslug>>/blob/<<branch>>/CONTRIBUTING.md",
+        "",
+        "Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,",
+        "welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/<<projectslug>>/blob/<<branch>>/CODE_OF_CONDUCT.md",
+        "-----",
+        "Copyright (c) <<yeartoyear(fc, now)>> <<company>> - All Rights Reserved",
+        "LICENSE: <<licensename>> (<<spdxid>>)",
+        "-----",
+        "This program has been provided under confidence of the copyright holder and is ",
+        "licensed for copying, distribution and modification under the terms of",
+        "the <<licensename>> (<<spdxid>>) published as the License,",
+        "or (at your option) any later version of this license.",
+        "",
+        "This program is distributed in the hope that it will be useful,",
+        "but WITHOUT ANY WARRANTY; without even the implied warranty of",
+        "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the",
+        "<<licensename>> for more details.",
+        "",
+        "You should have received a copy of the <<licensename>>",
+        "along with this program. If not, please write to: <<authoremail>>,",
+        "or see <<licenseurl>>",
+        "",
+        "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS",
+        "-----",
+        "Last Modified: <<dateformat('DD-MM-YYYY')>>",
+        "By: <<author>> (Email: <<authorEmail>>, Github: https://github.com/<<githubUser>>)",
+        "Current Version: <<projectversion>>"
+      ]
+    }
+  ]
+}
