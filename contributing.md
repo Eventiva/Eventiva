@@ -1,3 +1,27 @@
+# Table of contents
+<!-- toc -->
+
+- [Table of contents](#table-of-contents)
+- [Why the guidelines](#why-the-guidelines)
+  - [Contributor License Agreement](#contributor-license-agreement)
+  - [Responsibilities](#responsibilities)
+- [Beginners](#beginners)
+  - [Your first project](#your-first-project)
+  - [Creating a merge request](#creating-a-merge-request)
+    - [Titling your request](#titling-your-request)
+    - [Draft Pull requests](#draft-pull-requests)
+- [Issue Types](#issue-types)
+  - [Minor Contributions](#minor-contributions)
+  - [Standard Contributions](#standard-contributions)
+  - [Major Contributions](#major-contributions)
+- [Branch Prefixes](#branch-prefixes)
+- [Labels](#labels)
+- [Code review process](#code-review-process)
+- [Security](#security)
+- [Contributors ✨](#contributors-)
+
+<!-- tocstop -->
+
 # Why the guidelines
 
 First off, thank you for considering contributing to this project.
@@ -190,3 +214,25 @@ In order to determine whether you are dealing with a security issue, ask yoursel
 - Can I disable something for other people?
 
 If the answer to either of those two questions are "yes", then you're probably dealing with a security issue. Note that even if you answer "no" to both questions, you may still be dealing with a security issue, so if you're unsure, just email us.
+
+# Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://jonathanstevens.org/"><img src="https://avatars.githubusercontent.com/u/11413796?v=4?s=100" width="100px;" alt="Jonathan S"/><br /><sub><b>Jonathan S</b></sub></a><br /><a href="#business-TGTGamer" title="Business development">💼</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Code">💻</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Documentation">📖</a> <a href="#financial-TGTGamer" title="Financial">💵</a> <a href="#ideas-TGTGamer" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-TGTGamer" title="Research">🔬</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
