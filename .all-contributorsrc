@@ -24,6 +24,18 @@
         "ideas",
         "research"
       ]
+    },
+    {
+      "login": "Verringer",
+      "name": "Chris Verringer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23369223?v=4",
+      "profile": "http://verringer.com/",
+      "contributions": [
+        "business",
+        "design",
+        "ideas",
+        "review"
+      ]
     }
   ],
   "contributorsPerLine": 7,
