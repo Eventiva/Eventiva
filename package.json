@@ -6,11 +6,7 @@
   "keywords": [],
   "private": true,
   "scripts": {
-    "postinstall": "npm exec pnpm add -g @microsoft/rush pnpm && git submodule update --init --recursive",
-    "wip": "wip",
-    "wip:finish": "naenae",
-    "wip:watch": "wip silently && watch wip --ignoreDotFiles --ignoreDirectoryPatterttern=[\"/node_modules/\"]",
-    "reset-hard": "git clean -dfx && git reset --hard"
+    "preinstall": "node ./common/scripts/preroot.js"
   },
   "devDependencies": {
     "@rushstack/heft": "^0.50.0",
