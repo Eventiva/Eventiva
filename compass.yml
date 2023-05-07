@@ -1,0 +1,66 @@
+###
+ # @format
+ # -----
+ # Project: @resnovas/eventiva
+ # File: compass.yml
+ # Path: \compass.yml
+ # Created Date: Monday, May 8th 2023
+ # Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ # -----
+ # Contributing: Please read through our contributing guidelines. Included are directions for opening
+ # issues, coding standards, and notes on development. These can be found at https://github.com/resnovas/eventiva/blob/develop/CONTRIBUTING.md
+ # 
+ # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+ # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/resnovas/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ # -----
+ # Copyright (c) 2023 Resnovas - All Rights Reserved
+ # LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+ # -----
+ # This program has been provided under confidence of the copyright holder and is 
+ # licensed for copying, distribution and modification under the terms of
+ # the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+ # or (at your option) any later version of this license.
+ # 
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # Creative Commons Zero v1.0 Universal for more details.
+ # 
+ # You should have received a copy of the Creative Commons Zero v1.0 Universal
+ # along with this program. If not, please write to: jonathan@resnovas.com,
+ # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+ # 
+ # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+ # -----
+ # Last Modified: 08-05-2023
+ # By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ # Current Version: 0.0.0
+ ###
+
+name: Mono-repository
+id: 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/744fe202-613a-434f-a690-ec6bda6f0d27'
+description: >-
+  This component represents the mono-repository which is used for all development operations. This component is Tier 1 due to it's essential use
+  within all components
+configVersion: 1
+typeId: OTHER
+ownerId: 'ari:cloud:teams::team/faac0a87-40fd-484f-96ae-5150a04af337'
+fields:
+  lifecycle: Active
+  tier: 1
+links:
+  - name: null
+    type: REPOSITORY
+    url: 'https://github.com/Eventiva/Eventiva'
+  - name: ''
+    type: PROJECT
+    url: 'https://eventivaltd.atlassian.net/browse/MONO'
+  - name: ''
+    type: DOCUMENT
+    url: 'https://eventivaltd.atlassian.net/wiki/spaces/MONO'
+relationships: {}
+labels: null
+customFields: null
+
+# Learn more about formatting compass.yml:
+# https://go.atlassian.com/compass-yml-format
