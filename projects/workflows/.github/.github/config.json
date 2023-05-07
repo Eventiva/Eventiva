@@ -1,0 +1,1223 @@
+{
+  "$schema": "https://raw.githubusercontent.com/resnovas/smartcloud/main/schema.json",
+  "labels": {
+    "abandoned": {
+      "name": "Status - Abandoned",
+      "color": "CFD3D7",
+      "description": "This issue/pull request has been abandon"
+    },
+    "available": {
+      "name": "Status - Available",
+      "color": "CFD3D7",
+      "description": "This issue is available for either Developers or Community contributors to develop"
+    },
+    "blocked": {
+      "name": "Status - Blocked",
+      "color": "CFD3D7",
+      "description": "Another issue is blocking the development of this issue"
+    },
+    "completed": {
+      "name": "Status - Completed",
+      "color": "CFD3D7",
+      "description": "Development has finished and had merged for this issue"
+    },
+    "progress": {
+      "name": "Status - In Progress",
+      "color": "CFD3D7",
+      "description": "Development is underway for this issue"
+    },
+    "hold": {
+      "name": "Status - On Hold",
+      "color": "CFD3D7",
+      "description": "The developers have decided to hold the development of this request"
+    },
+    "pending": {
+      "name": "Status - Pending",
+      "color": "CFD3D7",
+      "description": "The developers have approved the development of this request"
+    },
+    "review": {
+      "name": "Status - Review Needed",
+      "color": "CFD3D7",
+      "description": "This pull request is waiting on review"
+    },
+    "revision": {
+      "name": "Status - Revision Needed",
+      "color": "CFD3D7",
+      "description": "This pull request has been reviewed and requires revision"
+    },
+    "doNotDevelop": {
+      "name": "Status - Do not develop",
+      "color": "CFD3D7",
+      "description": "Development by DevOps or Community contributor shall not happen"
+    },
+    "stale": {
+      "name": "Status - Stale",
+      "color": "CFD3D7",
+      "description": "This issue has been automatically marked as stale because it has not had recent activity"
+    },
+    "chore": {
+      "name": "Type - Chore",
+      "color": "0075CA",
+      "description": "Changes to the build process or auxiliary tools and libraries such as documentation generation"
+    },
+    "issue": {
+      "name": "Type - Issue",
+      "color": "0075CA",
+      "description": "A possible Issue"
+    },
+    "maintenance": {
+      "name": "Type - Maintenance",
+      "color": "0075CA",
+      "description": "Changes to maintain the project"
+    },
+    "discussion": {
+      "name": "Type - Discussion",
+      "color": "0075CA",
+      "description": "A conversation about something"
+    },
+    "documentation": {
+      "name": "Type - Documentation",
+      "color": "0075CA",
+      "description": "Changes to the documentation"
+    },
+    "feature": {
+      "name": "Type - Feature",
+      "color": "0075CA",
+      "description": "A new feature"
+    },
+    "enhancement": {
+      "name": "Type - Enhancement",
+      "color": "0075CA",
+      "description": "Improving a feature"
+    },
+    "fix": {
+      "name": "Type - Fix",
+      "color": "0075CA",
+      "description": "A issue fix"
+    },
+    "optimisation": {
+      "name": "Type - Optimisation",
+      "color": "0075CA",
+      "description": "A code change that improves performance"
+    },
+    "refactor": {
+      "name": "Type - Refactor",
+      "color": "0075CA",
+      "description": "A code change that neither fixes a issue nor adds a feature"
+    },
+    "revert": {
+      "name": "Type - Revert",
+      "color": "0075CA",
+      "description": "Removes & Discards a previous change as an error"
+    },
+    "deprecated": {
+      "name": "Type - Deprecated",
+      "color": "0075CA",
+      "description": "Marks functionality which is no longer needed"
+    },
+    "removal": {
+      "name": "Type - Removal",
+      "color": "0075CA",
+      "description": "Removes previous functionality which is no longer needed"
+    },
+    "style": {
+      "name": "Type - Style",
+      "color": "0075CA",
+      "description": "Changes that do not affect the meaning of the code (white-space formatting missing semi-colons)"
+    },
+    "dependences": {
+      "name": "Type - Dependences",
+      "color": "0075CA",
+      "description": "Changes that affect the dependences"
+    },
+    "workflow": {
+      "name": "Context - ci/cd",
+      "color": "f9cea2",
+      "description": "Related to ./.github/workflows"
+    },
+    "directory": {
+      "name": "Context - Directory",
+      "color": "f9cea2",
+      "description": "Related to @eventiva/directory"
+    },
+    "proxy": {
+      "name": "Context - Proxy",
+      "color": "f9cea2",
+      "description": "Related to @eventiva/proxy"
+    },
+    "image": {
+      "name": "Context - Image",
+      "color": "f9cea2",
+      "description": "Related to build image used when creating private ERP instances"
+    },
+    "terraform": {
+      "name": "Context - Terraform",
+      "color": "f9cea2",
+      "description": "Related to the definition of our build processes"
+    },
+    "cli": {
+      "name": "Context - CLI",
+      "color": "f9cea2",
+      "description": "Related to the custom rush based cli, used to streamline development processes"
+    },
+    "erp": {
+      "name": "Context - ERP",
+      "color": "f9cea2",
+      "description": "Related to the default module within our ERP instance"
+    },
+    "frappe": {
+      "name": "Context - Frappe",
+      "color": "f9cea2",
+      "description": "Related to the frappe ecosystem which our erp instances are built on"
+    },
+    "payments": {
+      "name": "Context - Payments",
+      "color": "f9cea2",
+      "description": "Related to payments module within our ERP instances"
+    },
+    "tours": {
+      "name": "Context - Tours",
+      "color": "f9cea2",
+      "description": "Related to tours module within our ERP instances"
+    },
+    "logistics": {
+      "name": "Context - Logistics",
+      "color": "f9cea2",
+      "description": "Related to logistics module within our ERP instances"
+    },
+    "banking": {
+      "name": "Context - Banking",
+      "color": "f9cea2",
+      "description": "Related to banking module within our ERP instances"
+    },
+    "tickets": {
+      "name": "Context - Tickets",
+      "color": "f9cea2",
+      "description": "Related to tickets module within our ERP instances"
+    },
+    "marketing": {
+      "name": "Context - Marketing",
+      "color": "f9cea2",
+      "description": "Related to marketing module within our ERP instances"
+    },
+    "hospitality": {
+      "name": "Context - Hospitality",
+      "color": "f9cea2",
+      "description": "Related to hospitality module within our ERP instances"
+    },
+    "deps": {
+      "name": "Context - Dependencies",
+      "color": "f9cea2",
+      "description": "Related to depenencies"
+    },
+    "depsDev": {
+      "name": "Context - Dependencies",
+      "color": "f9cea2",
+      "description": "Related to developer dependencies"
+    },
+    "devOpsAccepted": {
+      "name": "DevOps - Accepted",
+      "color": "172875",
+      "description": "DevOPS are planning"
+    },
+    "devOpsCompleted": {
+      "name": "DevOps - Completed",
+      "color": "172875",
+      "description": "DevOPS have complete"
+    },
+    "devOpsDeploying": {
+      "name": "DevOps - Deploying",
+      "color": "172875",
+      "description": "DevOps is deploying to latest"
+    },
+    "devOpsDeveloping": {
+      "name": "DevOps - Developing",
+      "color": "172875",
+      "description": "DevOPS are Developing"
+    },
+    "devOpsRejected": {
+      "name": "DevOps - Rejected",
+      "color": "172875",
+      "description": "DevOPS wont continue"
+    },
+    "devOpsReviewing": {
+      "name": "DevOps - Reviewing",
+      "color": "172875",
+      "description": "DevOPS awaiting review"
+    },
+    "devOpsStaging": {
+      "name": "DevOps - Staging",
+      "color": "172875",
+      "description": "DevOPS deployed to Staging"
+    },
+    "devOpsTesting": {
+      "name": "DevOps - Testing",
+      "color": "172875",
+      "description": "DevOPS deployed to Testing"
+    },
+    "comOpsAccepted": {
+      "name": "ComOps - Accepted",
+      "color": "bfdadc",
+      "description": "A community contributor is planning to work on this issue"
+    },
+    "comOpsCompleted": {
+      "name": "ComOps - Completed",
+      "color": "bfdadc",
+      "description": "The contributor has completed this issue and handed over to the developers to stage & deploy"
+    },
+    "comOpsDeveloping": {
+      "name": "ComOps - Developing",
+      "color": "bfdadc",
+      "description": "The contributor is developing this issue"
+    },
+    "comOpsAwaiting Review": {
+      "name": "ComOps - Awaiting Review",
+      "color": "bfdadc",
+      "description": "The contributor is awaiting review"
+    },
+    "comOpsTesting": {
+      "name": "ComOps - Testing",
+      "color": "bfdadc",
+      "description": "The contributor is awaiting testing results"
+    },
+    "android": {
+      "name": "Platform - Android",
+      "color": "E0BE84"
+    },
+    "aws": {
+      "name": "Platform - AWS",
+      "color": "E0BE84"
+    },
+    "google": {
+      "name": "Platform - Google Cloud",
+      "color": "E0BE84"
+    },
+    "ios": {
+      "name": "Platform - IOS",
+      "color": "E0BE84"
+    },
+    "ubuntu": {
+      "name": "Platform - Ubuntu",
+      "color": "E0BE84"
+    },
+    "fedora": {
+      "name": "Platform - Fedora",
+      "color": "E0BE84"
+    },
+    "debian": {
+      "name": "Platform - Debian",
+      "color": "E0BE84"
+    },
+    "macos": {
+      "name": "Platform - MacOS",
+      "color": "E0BE84"
+    },
+    "windows": {
+      "name": "Platform - Windows",
+      "color": "E0BE84"
+    },
+    "platformOther": {
+      "name": "Platform - Other",
+      "color": "E0BE84"
+    },
+    "priorityLow": {
+      "name": "Priority - Low",
+      "color": "8de8b3",
+      "description": "This issue isn't a high priority for the next release"
+    },
+    "priorityMedium": {
+      "name": "Priority - Medium",
+      "color": "8de8b3",
+      "description": "This issue affects more than 10% of users and should be patched before the next major release"
+    },
+    "priorityHigh": {
+      "name": "Priority - High",
+      "color": "8de8b3",
+      "description": "This issue affects more than 25% of users and should be patched before the next minor release"
+    },
+    "priorityCritical": {
+      "name": "Priority - Critical",
+      "color": "8de8b3",
+      "description": "This issue affects more than 50% of users and should be patched before any new features are added"
+    },
+    "xs": {
+      "name": "Size - XS",
+      "color": "d4c5f9",
+      "description": "Less than 10 lines changed"
+    },
+    "s": {
+      "name": "Size - S",
+      "color": "d4c5f9",
+      "description": "More than 10 lines changed"
+    },
+    "m": {
+      "name": "Size - M",
+      "color": "d4c5f9",
+      "description": "More than 30 lines changed"
+    },
+    "l": {
+      "name": "Size - L",
+      "color": "d4c5f9",
+      "description": "More than 100 lines changed"
+    },
+    "xl": {
+      "name": "Size - XL",
+      "color": "d4c5f9",
+      "description": "More than 500 lines changed"
+    },
+    "xxl": {
+      "name": "Size - XXL",
+      "color": "d4c5f9",
+      "description": "More than 1000 lines changed"
+    },
+    "fixConfirmed": {
+      "name": "Fix - Confirmed",
+      "color": "D73A4A",
+      "description": "This fix has been confirmed"
+    },
+    "issueConfirmed": {
+      "name": "Issue - Confirmed",
+      "color": "D73A4A",
+      "description": "This issue has been confirmed"
+    },
+    "new": {
+      "name": "Issue - New",
+      "color": "D73A4A",
+      "description": "This issue is new"
+    },
+    "fixed": {
+      "name": "Issue - Fixed",
+      "color": "D73A4A",
+      "description": "This issue has been fixed"
+    },
+    "claSigned": {
+      "name": "CLA - Signed",
+      "color": "dd6127",
+      "description": "Contributor License Agreement has been signed"
+    },
+    "claUnsigned": {
+      "name": "CLA - Unsigned",
+      "color": "dd6127",
+      "description": "Contributor License Agreement has not been signed"
+    },
+    "claNot Required": {
+      "name": "CLA - Not Required",
+      "color": "dd6127",
+      "description": "Contributor License Agreement not required"
+    },
+    "major": {
+      "name": "Versioning - Major",
+      "color": "e580c8",
+      "description": "Major version increment due to backwards-incompatible changes"
+    },
+    "minor": {
+      "name": "Versioning - Minor",
+      "color": "e580c8",
+      "description": "Minor version increment due to substantial new functionality or improvements"
+    },
+    "patch": {
+      "name": "Versioning - Patch",
+      "color": "e580c8",
+      "description": "Patch version increment due to backwards-compatible issue fixes"
+    },
+    "prerelease": {
+      "name": "Versioning - Prerelease",
+      "color": "e580c8",
+      "description": "Prerelease of the next version"
+    },
+    "build": {
+      "name": "Versioning - Build",
+      "color": "e580c8",
+      "description": "A build to represent dependencies updates and insignificant changes"
+    },
+    "breaking": {
+      "name": "Versioning - BREAKING",
+      "color": "e580c8",
+      "description": "A breaking change"
+    },
+    "securityFix": {
+      "name": "security fix",
+      "color": "D1260F",
+      "description": "A Security Fix"
+    },
+    "securityVulnerability": {
+      "name": "security vulnerability",
+      "color": "D1260F",
+      "description": "A Security vulnerability"
+    },
+    "duplicate": {
+      "name": "Duplicate",
+      "color": "d4c5f9",
+      "description": "A Duplicate of another issue/pull"
+    },
+    "help": {
+      "name": "Help wanted",
+      "color": "d4c5f9",
+      "description": "Help is needed to continue"
+    },
+    "rebase": {
+      "name": "Needs rebase",
+      "color": "d4c5f9",
+      "description": "This request needs to be rebased"
+    },
+    "wip": {
+      "name": "Work in progress",
+      "color": "d4c5f9",
+      "description": "This pull request is a wip"
+    },
+    "moreInfo": {
+      "name": "More information needed",
+      "color": "d4c5f9",
+      "description": "Requires more information before it can continue"
+    },
+    "firstIssue": {
+      "name": "Good first issue",
+      "color": "d4c5f9",
+      "description": "A Good issue for first-time GitHub users"
+    },
+    "firstTimers": {
+      "name": "First Timers",
+      "color": "d4c5f9",
+      "description": "A Good issue for first-time GitHub users"
+    },
+    "skipChangelog": {
+      "name": "skip-changelog",
+      "color": "d4c5f9",
+      "description": "Skip the changelog"
+    }
+  },
+  "runners": [
+    {
+      "root": ".",
+      "sharedConfig": {
+        "stale": {
+          "staleLabel": "stale",
+          "stale": {
+            "days": 60,
+            "comment": "This has been automatically marked as stale by the bot."
+          },
+          "abandoned": {
+            "days": 30,
+            "label": "abandoned",
+            "comment": "This has been automatically marked as abandoned by the bot."
+          }
+        },
+        "enforceConventions": {
+          "condition": [
+            {
+              "requires": 1,
+              "condition": "semanticEmoji"
+            }
+          ]
+        },
+        "labels": {
+          "issue": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^issue(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/(created|new|opened|made)( an| a)? issue/i"
+              }
+            ]
+          },
+          "chore": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^chore(\\(.*\\))?!?:/i"
+              }
+            ]
+          },
+          "optimisation": {
+            "requires": 2,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^opt(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^optimisation(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maint(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maintenance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^type:(,| |Style|Refactoring|Revert|Deprecated|Removal)*optimisation/im"
+              }
+            ]
+          },
+          "style": {
+            "requires": 2,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^style(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maint(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maintenance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^type:(,| |Refactoring|Optimisation|Revert|Deprecated|Removal)*style/im"
+              }
+            ]
+          },
+          "refactor": {
+            "requires": 2,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^ref(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^refactor(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maint(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maintenance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^type:(,| |Style|Optimisation|Revert|Deprecated|Removal)*refactoring/im"
+              }
+            ]
+          },
+          "revert": {
+            "requires": 2,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^revert(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maint(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maintenance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^type:(,| |Style|Refactoring|Optimisation|Deprecated|Removal)*revert/im"
+              }
+            ]
+          },
+          "deprecated": {
+            "requires": 2,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^dep(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^deprecated(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maint(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maintenance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^type:(,| |Style|Refactoring|Optimisation|Revert|Removal)*deprecated/im"
+              }
+            ]
+          },
+          "removal": {
+            "requires": 2,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^removal(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maint(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^maintenance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^type:(,| |Style|Refactoring|Optimisation|Revert|Deprecated)*removal/im"
+              }
+            ]
+          },
+          "discussion": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^discussion(\\(.*\\))?!?:/i"
+              }
+            ]
+          },
+          "documentation": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^docs(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^documentation(\\(.*\\))?!?:/i"
+              }
+            ]
+          },
+          "feature": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^feat(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^enhance(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^feature(\\(.*\\))?!?:/i"
+              },
+              {
+                "type": "titleMatches",
+                "condition": "/^enhancement(\\(.*\\))?!?:/i"
+              }
+            ]
+          },
+          "fix": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^fix(\\(.*\\))?!?:/i"
+              }
+            ]
+          },
+          "workflow": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?workflow\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?workflow.*/im"
+              }
+            ]
+          },
+          "directory": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?directory\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?directory.*/im"
+              }
+            ]
+          },
+          "proxy": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?proxy\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?proxy.*/im"
+              }
+            ]
+          },
+          "image": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?image\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?image.*/im"
+              }
+            ]
+          },
+          "terraform": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?terraform\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?terraform.*/im"
+              }
+            ]
+          },
+          "cli": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?cli\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?cli.*/im"
+              }
+            ]
+          },
+          "erp": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?erp\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?erp.*/im"
+              }
+            ]
+          },
+          "frappe": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?frappe\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?frappe.*/im"
+              }
+            ]
+          },
+          "payments": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?payments\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?payments.*/im"
+              }
+            ]
+          },
+          "tours": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?tours\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?tours.*/im"
+              }
+            ]
+          },
+          "logistics": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?logistics\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?logistics.*/im"
+              }
+            ]
+          },
+          "banking": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?banking\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?banking.*/im"
+              }
+            ]
+          },
+          "tickets": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?tickets\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?tickets.*/im"
+              }
+            ]
+          },
+          "marketing": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?marketing\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?marketing.*/im"
+              }
+            ]
+          },
+          "hospitality": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\((@eventiva\\/)?hospitality\\)!?:/i"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- package\\(s\\):.*(@eventiva\\/)?hospitality.*/im"
+              }
+            ]
+          },
+          "deps": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\(deps\\)!?:/i"
+              }
+            ]
+          },
+          "depsDev": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "/^.*\\(deps-dev\\)!?:/i"
+              }
+            ]
+          },
+          "priorityCritical": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "titleMatches",
+                "condition": "!:.*(critical|urgent)?|!?:.*(critical|urgent)"
+              }
+            ]
+          }
+        }
+      },
+      "pr": {
+        "automaticApprove": {
+          "condition": [
+            {
+              "requires": 1,
+              "condition": [
+                {
+                  "type": "creatorMatches",
+                  "condition": "/^dependabot/i"
+                }
+              ]
+            }
+          ]
+        },
+        "requestApprovals": {
+          "all": {
+            "reviewers": [
+              "tgtgamer"
+            ],
+            "requires": 1,
+            "condition": [
+              {
+                "type": "$not",
+                "requires": 1,
+                "condition": [
+                  {
+                    "type": "creatorMatches",
+                    "condition": "/^dependabot/i"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "labels": {
+          "xs": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "changesSize",
+                "min": 0,
+                "max": 10
+              }
+            ]
+          },
+          "s": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "changesSize",
+                "min": 10,
+                "max": 30
+              }
+            ]
+          },
+          "m": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "changesSize",
+                "min": 40,
+                "max": 100
+              }
+            ]
+          },
+          "l": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "changesSize",
+                "min": 100,
+                "max": 500
+              }
+            ]
+          },
+          "xl": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "changesSize",
+                "min": 500,
+                "max": 1000
+              }
+            ]
+          },
+          "xxl": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "changesSize",
+                "min": 1000
+              }
+            ]
+          },
+          "devOpsReviewing": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "pendingReview",
+                "condition": true
+              }
+            ]
+          },
+          "devOpsRejected": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "requestedChanges",
+                "condition": true
+              }
+            ]
+          }
+        }
+      },
+      "issue": {
+        "labels": {
+          "android": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*android/im"
+              }
+            ]
+          },
+          "aws": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*aws/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*amazon web service/im"
+              }
+            ]
+          },
+          "google": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*google/im"
+              }
+            ]
+          },
+          "ios": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*ios/im"
+              }
+            ]
+          },
+          "ubuntu": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*ubuntu/im"
+              }
+            ]
+          },
+          "fedora": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*fedora/im"
+              }
+            ]
+          },
+          "debian": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*debian/im"
+              }
+            ]
+          },
+          "macos": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*macos/im"
+              }
+            ]
+          },
+          "windows": {
+            "requires": 1,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- platform:.*windows/im"
+              }
+            ]
+          },
+          "issueConfirmed": {
+            "requires": 8,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] issue Confirmed by ((@.*& .*){4,}|(@.*& )*@(tgtgamer|videndum\\/.*))/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have reproduced on my application version/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have reproduced on a clean installation/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have reproduced on a development build/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have included logs or screenshots/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have contacted support/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have asked the community/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have linked any related/im"
+              }
+            ]
+          },
+          "fixConfirmed": {
+            "requires": 6,
+            "condition": [
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] fix Confirmed by ((@.*& .*){4,}|(@.*& )*@(tgtgamer|videndum\\/.*))/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have fixed on a clean installation/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have fixed on a stable build/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have fixed on a development build/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have included logs or screenshots/im"
+              },
+              {
+                "type": "descriptionMatches",
+                "condition": "/^- \\[x\\] have linked any related/im"
+              }
+            ]
+          }
+        }
+      },
+      "schedule": {}
+    }
+  ]
+}
