@@ -44,7 +44,7 @@
   "projects": [
     {
       "packageName": "@eventiva/website",
-      "projectFolder": "projects/website/",
+      "projectFolder": "projects/Directory/",
       "reviewCategory": "prototypes",
       "versionPolicyName": "individualVersion",
       "shouldPublish": false

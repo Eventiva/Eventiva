@@ -8,9 +8,6 @@
   "scripts": {
     "preinstall": "node ./common/scripts/preroot.js"
   },
-  "dependencies": {
-    "xo": "^0.54.2"
-  },
   "xo": {
     "rules": {
       "semicolon": 0,
