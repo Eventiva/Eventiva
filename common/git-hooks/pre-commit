@@ -9,3 +9,4 @@
 node common/scripts/install-run-rush.js --quiet sort-package-json || exit $?
 node common/scripts/install-run-rush.js xo:fix || exit $?
 node common/scripts/install-run-rush.js contributors:generate || exit $?
+ggshield secret scan pre-commit "$@" || exit $?
