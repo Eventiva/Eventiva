@@ -2,10 +2,10 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: create-diagram.yml
- # Path: \projects\.github\.github\workflows\create-diagram.yml
- # Created Date: Monday, May 1st 2023
- # Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ # File: infrastructure_scan.yml
+ # Path: \projects\.github\.github\workflows\infrastructure_scan.yml
+ # Created Date: Monday, May 8th 2023
+ # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -27,7 +27,7 @@
  # Creative Commons Zero v1.0 Universal for more details.
  # 
  # You should have received a copy of the Creative Commons Zero v1.0 Universal
- # along with this program. If not, please write to: jonathan@resnovas.com,
+ # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
  # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
@@ -36,23 +36,29 @@
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
-on:
-  workflow_dispatch: {}
-  pull_request_target:
-    types: [opened, edited, reopened, ready_for_review, synchronize]
-    branches-ignore: [main]
-  
+
+name: GitGuardian iac scan
+on: 
+  push: 
+    paths:
+      - '.terraform/**'
+  pull_request:
+    paths:
+      - '.terraform/**'
+
 jobs:
-  get_data:
+  scanning:
+    name: GitGuardian iac scan
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN }}"
-      - name: Update diagram
-        uses: githubocto/repo-visualizer@main
+      - name: GitGuardian iac scan
+        uses: GitGuardian/ggshield/actions/iac@main
         with:
-          excluded_paths: "ignore,.github"
-          commit_message: ":building_construction: Update codebase visualization"
+          args: ./terraform/ --minimum-severity CRITICAL # pass arguments to the action. If missing, will scan the current directory
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
