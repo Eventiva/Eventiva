@@ -41,13 +41,5 @@
     "postRushBuild": []
   },
   "variants": [],
-  "projects": [
-    {
-      "packageName": "@eventiva/website",
-      "projectFolder": "projects/website/",
-      "reviewCategory": "prototypes",
-      "versionPolicyName": "individualVersion",
-      "shouldPublish": false
-    }
-  ]
+  "projects": []
 }

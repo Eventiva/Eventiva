@@ -6,7 +6,3 @@
 	path = projects/contributors
 	url = https://github.com/Eventiva/contributors.git
 	branch = develop
-[submodule "projects/website"]
-	path = projects/website
-	url = https://github.com/Eventiva/Directory.git
-	branch = develop
