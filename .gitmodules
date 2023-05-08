@@ -8,5 +8,5 @@
 	branch = develop
 [submodule "projects/website"]
 	path = projects/website
-	url = https://github.com/Eventiva/eventiva-website.git
+	url = https://github.com/Eventiva/Directory.git
 	branch = develop
