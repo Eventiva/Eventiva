@@ -1,4 +1,12 @@
+[submodule "projects/.github"]
+	path = projects/.github
+	url = https://github.com/Eventiva/.github.git
+	branch = develop
+[submodule "projects/contributors"]
+	path = projects/contributors
+	url = https://github.com/Eventiva/contributors.git
+	branch = develop
 [submodule "projects/website"]
 	path = projects/website
-	url = https://github.com/Resnovas/eventiva-website.git
+	url = https://github.com/Eventiva/eventiva-website.git
 	branch = develop

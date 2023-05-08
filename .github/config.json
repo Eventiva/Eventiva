@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/resnovas/smartcloud/main/schema.json",
+  "$schema": "https://raw.githubusercontent.com/Eventiva/smartcloud/main/schema.json",
   "labels": {
     "abandoned": {
       "name": "Status - Abandoned",

@@ -14,8 +14,9 @@
     "forceToTop": true,
     "blankLinesAfter": 1,
     "author": "",
+    "company": "Eventiva",
     "initials": "",
-    "authorEmail": "email@example.com",
+    "authorEmail": "email@eventiva.co.uk",
     "creationDateZero": "asIs",
     "hostname": "localhost"
   },
