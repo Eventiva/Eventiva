@@ -34,7 +34,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ## Contributor License Agreement
 
-We have a Contributor License Agreement which can be found at [`@resnovas/contributors/CODE_OF_CONDUCT.md`](https://github.com/Resnovas/contributors/CODE_OF_CONDUCT.md). It is required for [Standard Contributions](#standard-contributions) and [Major Contributions](#major-contributions).
+We have a Contributor License Agreement which can be found at [`@Eventiva/contributors/CODE_OF_CONDUCT.md`](https://github.com/Eventiva/contributors/CODE_OF_CONDUCT.md). It is required for [Standard Contributions](#standard-contributions) and [Major Contributions](#major-contributions).
 
 ## Responsibilities
 
@@ -225,8 +225,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://jonathanstevens.org/"><img src="https://avatars.githubusercontent.com/u/11413796?v=4?s=100" width="100px;" alt="Jonathan S"/><br /><sub><b>Jonathan S</b></sub></a><br /><a href="#business-TGTGamer" title="Business development">💼</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Code">💻</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Documentation">📖</a> <a href="#financial-TGTGamer" title="Financial">💵</a> <a href="#ideas-TGTGamer" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-TGTGamer" title="Research">🔬</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://verringer.com/"><img src="https://avatars.githubusercontent.com/u/23369223?v=4?s=100" width="100px;" alt="Chris Verringer"/><br /><sub><b>Chris Verringer</b></sub></a><br /><a href="#business-Verringer" title="Business development">💼</a> <a href="#design-Verringer" title="Design">🎨</a> <a href="#ideas-Verringer" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Resnovas/eventiva/pulls?q=is%3Apr+reviewed-by%3AVerringer" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://jonathanstevens.org/"><img src="https://avatars.githubusercontent.com/u/11413796?v=4?s=100" width="100px;" alt="Jonathan S"/><br /><sub><b>Jonathan S</b></sub></a><br /><a href="#business-TGTGamer" title="Business development">💼</a> <a href="https://github.com/Eventiva/eventiva/commits?author=TGTGamer" title="Code">💻</a> <a href="https://github.com/Eventiva/eventiva/commits?author=TGTGamer" title="Documentation">📖</a> <a href="#financial-TGTGamer" title="Financial">💵</a> <a href="#ideas-TGTGamer" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-TGTGamer" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://verringer.com/"><img src="https://avatars.githubusercontent.com/u/23369223?v=4?s=100" width="100px;" alt="Chris Verringer"/><br /><sub><b>Chris Verringer</b></sub></a><br /><a href="#business-Verringer" title="Business development">💼</a> <a href="#design-Verringer" title="Design">🎨</a> <a href="#ideas-Verringer" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Eventiva/eventiva/pulls?q=is%3Apr+reviewed-by%3AVerringer" title="Reviewed Pull Requests">👀</a></td>
     </tr>
   </tbody>
 </table>

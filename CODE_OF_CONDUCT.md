@@ -57,15 +57,15 @@ If a community member engages in unacceptable behavior, the community organizers
 
 ## 7. Reporting Guidelines
 
-If you are subject to or witness unacceptable behavior, or have any other concerns, please notify a community organizer as soon as possible. You can email our community standards team on community@resnovas.com.
+If you are subject to or witness unacceptable behavior, or have any other concerns, please notify a community organizer as soon as possible. You can email our community standards team on community@eventiva.co.uk.
 
-[Reporting guidelines](https://github.com/Resnovas/contributors/blob/main/CODE_OF_CONDUCT.md)
+[Reporting guidelines](https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md)
 
 Additionally, community organizers are available to help community members engage with local law enforcement or to otherwise help those experiencing unacceptable behavior feel safe. In the context of in-person events, organizers will also provide escorts as desired by the person experiencing distress.
 
 ## 8. Addressing Grievances
 
-If you feel you have been falsely or unfairly accused of violating this Code of Conduct, you should notify Resnovas with a concise description of your grievance. Your grievance will be handled in accordance with our existing governing policies. [Policy](https://github.com/Resnovas/contributors/blob/main/CODE_OF_CONDUCT.md)
+If you feel you have been falsely or unfairly accused of violating this Code of Conduct, you should notify Eventiva with a concise description of your grievance. Your grievance will be handled in accordance with our existing governing policies. [Policy](https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md)
 
 ## 9. Scope
 
@@ -75,7 +75,7 @@ This code of conduct and its related procedures also applies to unacceptable beh
 
 ## 10. Contact info
 
-You can email our community standards team on community@resnovas.com
+You can email our community standards team on community@eventiva.co.uk
 
 ## 11. License and attribution
 

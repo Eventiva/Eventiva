@@ -1,6 +1,6 @@
 # EVENTIVA
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Resnovas/eventiva?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
 ## Index
 
@@ -47,11 +47,11 @@ We believe in the power of community development, while our tools are designed a
 
 ## How to get support 👨‍👩‍👧‍👦
 
-For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use **[our discussion page](https://github.com/Resnovas/Eventiva/discussions)** 🚑.
+For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use **[our discussion page](https://github.com/Eventiva/Eventiva/discussions)** 🚑.
 
-We have a **FAQ** label in our **[discussion page](https://github.com/Resnovas/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
+We have a **FAQ** label in our **[discussion page](https://github.com/Eventiva/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
 
-Our extensive **documentation** can be found at **[here](https://github.com/Resnovas/Eventiva)**.
+Our extensive **documentation** can be found at **[here](https://github.com/Eventiva/Eventiva)**.
 
 <!-- Contributing -->
 
@@ -59,7 +59,7 @@ Our extensive **documentation** can be found at **[here](https://github.com/Resn
 
 Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
 
-This project utilises the [Smartcloud Project](https://github.com/Resnovas/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Resnovas/smartcloud). You can find a example Pull Request, [here](https://github.com/Resnovas/eventiva/pull/36) which shows the standard flow for contributors.
+This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud). You can find a example Pull Request, [here](https://github.com/Eventiva/eventiva/pull/36) which shows the standard flow for contributors.
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
 
@@ -73,8 +73,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://jonathanstevens.org/"><img src="https://avatars.githubusercontent.com/u/11413796?v=4?s=100" width="100px;" alt="Jonathan S"/><br /><sub><b>Jonathan S</b></sub></a><br /><a href="#business-TGTGamer" title="Business development">💼</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Code">💻</a> <a href="https://github.com/Resnovas/eventiva/commits?author=TGTGamer" title="Documentation">📖</a> <a href="#financial-TGTGamer" title="Financial">💵</a> <a href="#ideas-TGTGamer" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-TGTGamer" title="Research">🔬</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="http://verringer.com/"><img src="https://avatars.githubusercontent.com/u/23369223?v=4?s=100" width="100px;" alt="Chris Verringer"/><br /><sub><b>Chris Verringer</b></sub></a><br /><a href="#business-Verringer" title="Business development">💼</a> <a href="#design-Verringer" title="Design">🎨</a> <a href="#ideas-Verringer" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Resnovas/eventiva/pulls?q=is%3Apr+reviewed-by%3AVerringer" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://jonathanstevens.org/"><img src="https://avatars.githubusercontent.com/u/11413796?v=4?s=100" width="100px;" alt="Jonathan S"/><br /><sub><b>Jonathan S</b></sub></a><br /><a href="#business-TGTGamer" title="Business development">💼</a> <a href="https://github.com/Eventiva/eventiva/commits?author=TGTGamer" title="Code">💻</a> <a href="https://github.com/Eventiva/eventiva/commits?author=TGTGamer" title="Documentation">📖</a> <a href="#financial-TGTGamer" title="Financial">💵</a> <a href="#ideas-TGTGamer" title="Ideas, Planning, & Feedback">🤔</a> <a href="#research-TGTGamer" title="Research">🔬</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="http://verringer.com/"><img src="https://avatars.githubusercontent.com/u/23369223?v=4?s=100" width="100px;" alt="Chris Verringer"/><br /><sub><b>Chris Verringer</b></sub></a><br /><a href="#business-Verringer" title="Business development">💼</a> <a href="#design-Verringer" title="Design">🎨</a> <a href="#ideas-Verringer" title="Ideas, Planning, & Feedback">🤔</a> <a href="https://github.com/Eventiva/eventiva/pulls?q=is%3Apr+reviewed-by%3AVerringer" title="Reviewed Pull Requests">👀</a></td>
     </tr>
   </tbody>
 </table>
@@ -92,7 +92,7 @@ This project follows the [all-contributors](https://github.com/all-contributors/
 
 ### Backlog
 
-Our backlog can be found on either our [Github Project](https://github.com/orgs/Resnovas/projects/12)
+Our backlog can be found on either our [Github Project](https://github.com/orgs/Eventiva/projects/12)
 
 ### Running Locally & Developing
 
@@ -107,7 +107,7 @@ You can choose one of the following methods to get your development platform con
 
 #### Codespaces Method (Recommended)
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Resnovas/eventiva?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
 GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
 

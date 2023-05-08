@@ -2,9 +2,9 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: FUNDING.yml
- # Path: \.github\FUNDING.yml
- # Created Date: Monday, April 17th 2023
+ # File: compass.yml
+ # Path: \compass.yml
+ # Created Date: Monday, May 8th 2023
  # Author: Jonathan Stevens (Email: jonathan@Eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -37,13 +37,30 @@
  # Current Version: 0.0.0
  ###
 
+name: Mono-repository
+id: 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/744fe202-613a-434f-a690-ec6bda6f0d27'
+description: >-
+  This component represents the mono-repository which is used for all development operations. This component is Tier 1 due to it's essential use
+  within all components
+configVersion: 1
+typeId: OTHER
+ownerId: 'ari:cloud:teams::team/faac0a87-40fd-484f-96ae-5150a04af337'
+fields:
+  lifecycle: Active
+  tier: 1
+links:
+  - name: null
+    type: REPOSITORY
+    url: 'https://github.com/Eventiva/Eventiva'
+  - name: ''
+    type: PROJECT
+    url: 'https://eventivaltd.atlassian.net/browse/MONO'
+  - name: ''
+    type: DOCUMENT
+    url: 'https://eventivaltd.atlassian.net/wiki/spaces/MONO'
+relationships: {}
+labels: null
+customFields: null
 
-
-# These are supported funding model platforms
-
-# github: Eventiva # Replace with up to 4 GitHub Sponsors-enabled usernames e.g., [user1, user2]
-# patreon: # Replace with a single Patreon username
-# open_collective: Eventiva # Replace with a single Open Collective username
-# liberapay: TGTGamer # Replace with a single Liberapay username
-# issuehunt: videndum # Replace with a single IssueHunt username
-# custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+# Learn more about formatting compass.yml:
+# https://go.atlassian.com/compass-yml-format

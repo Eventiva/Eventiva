@@ -28,7 +28,7 @@
     "changeLogUpdateCommitMessage": "docs: Update changelogs [skip ci]"
   },
   "repository": {
-    "url": "https://github.com/Resnovas/Eventiva",
+    "url": "https://github.com/Eventiva/Eventiva",
     "defaultBranch": "main",
     "defaultRemote": "origin"
   },

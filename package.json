@@ -1,8 +1,8 @@
 {
-  "name": "@resnovas/eventiva",
+  "name": "@eventiva/eventiva",
   "version": "0.0.0",
   "description": "Imagine a place where you can find all your event vendors, venues and professionals, alongside all the tools you require to be successful within the live events market. ",
-  "repository": "https://github.com/resnovas/eventiva",
+  "repository": "https://github.com/eventiva/eventiva",
   "keywords": [],
   "private": true,
   "scripts": {
