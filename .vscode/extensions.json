@@ -1,12 +1,8 @@
 {
   "recommendations": [
-    "github.codespaces",
-    "github.copilot",
-    "github.copilot-labs",
-    "github.remotehub",
-    "rangav.vscode-thunder-client",
-    "samverschueren.linter-xo",
-    "psioniq.psi-header"
+    "meganrogge.template-string-converter",
+    "codestream.codestream",
+    "massi.javascript-docstrings"
   ],
   "unwantedRecommendations": []
 }
