@@ -59,7 +59,7 @@
 	],
 	"privileged": true,
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "git config --global --add safe.directory /workspaces/Eventiva && SHELL=bash npx @teambit/bvm install --yes && pipx install ggshield",
+	"postCreateCommand": "git config --global --add safe.directory /workspaces/Eventiva && SHELL=bash npm_config_yes=true npx @teambit/bvm install && pipx install ggshield",
 	"postStartCommand": "git submodule update --progress --init --recursive",
 	"postAttachCommand": "ggshield auth login"
 	// Configure tool-specific properties.
