@@ -29,7 +29,6 @@
 		"ghcr.io/devcontainers-contrib/features/json-server:1": {},
 		"ghcr.io/devcontainers-contrib/features/jira-cli:1": {},
 		"ghcr.io/devcontainers-contrib/features/how2:1": {}
-		// "ghcr.io/frntn/devcontainers-features/gitleaks:1": {}
 	},
 	"customizations": {
 		"vscode": {
@@ -58,8 +57,11 @@
 	"forwardPorts": [
 		5432
 	],
+	"privileged": true,
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "git submodule update --progress --init --recursive && npx @teambit/bvm install -y && pipx install ggshield && ggshield auth login"
+	"postCreateCommand": "git config --global --add safe.directory /workspaces/Eventiva && SHELL=bash npx @teambit/bvm install --yes && pipx install ggshield",
+	"postStartCommand": "git submodule update --progress --init --recursive",
+	"postAttachCommand": "ggshield auth login"
 	// Configure tool-specific properties.
 	// "customizations": {},
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
