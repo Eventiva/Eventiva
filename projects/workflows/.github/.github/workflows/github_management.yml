@@ -42,6 +42,8 @@ name: Github Management
 on:
   issues:
     types: [opened, edited, closed, reopened]
+  pull_request:
+    types: [opened, edited, closed, reopened, synchronize]
   pull_request_target:
     types: [opened, edited, closed, reopened, synchronize]
 
