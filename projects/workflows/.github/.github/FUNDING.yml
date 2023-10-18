@@ -2,10 +2,10 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: github_management.yml
- # Path: \projects\.github\.github\workflows\github_management.yml
+ # File: FUNDING.yml
+ # Path: \.github\FUNDING.yml
  # Created Date: Monday, April 17th 2023
- # Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ # Author: Jonathan Stevens (Email: jonathan@Eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -27,32 +27,23 @@
  # Creative Commons Zero v1.0 Universal for more details.
  # 
  # You should have received a copy of the Creative Commons Zero v1.0 Universal
- # along with this program. If not, please write to: jonathan@resnovas.com,
+ # along with this program. If not, please write to: jonathan@Eventiva.co.uk,
  # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 18-10-2023
+ # Last Modified: 08-05-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
 
 
-name: Github Management
-on:
-  issues:
-    types: [opened, edited, closed, reopened]
-  pull_request:
-    types: [opened, edited, closed, reopened, synchronize]
 
-jobs:
-  release-mastermind:
-    name: Release Mastermind
-    runs-on: ubuntu-latest
-    steps:
-      - name: Release Mastermind
-        uses: Resnovas/smartcloud@1.0.0-beta.8
-        with:
-          GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
-          config: .github/config.json
-          configRef: develop
+# These are supported funding model platforms
+
+# github: Eventiva # Replace with up to 4 GitHub Sponsors-enabled usernames e.g., [user1, user2]
+# patreon: # Replace with a single Patreon username
+# open_collective: Eventiva # Replace with a single Open Collective username
+# liberapay: TGTGamer # Replace with a single Liberapay username
+# issuehunt: videndum # Replace with a single IssueHunt username
+# custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
