@@ -2,10 +2,10 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: github_management.yml
- # Path: \projects\.github\.github\workflows\github_management.yml
+ # File: dependabot.yml
+ # Path: \projects\.github\.github\dependabot.yml
  # Created Date: Monday, April 17th 2023
- # Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ # Author: Jonathan Stevens (Email: jonathan@Eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -27,7 +27,7 @@
  # Creative Commons Zero v1.0 Universal for more details.
  # 
  # You should have received a copy of the Creative Commons Zero v1.0 Universal
- # along with this program. If not, please write to: jonathan@resnovas.com,
+ # along with this program. If not, please write to: jonathan@Eventiva.co.uk,
  # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
@@ -37,22 +37,39 @@
  # Current Version: 0.0.0
  ###
 
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    # Keep npm dependencies up to date
+    directory: "/"
+    # Check the npm registry for updates at 2am UTC
+    schedule:
+      interval: "daily"
+      time: "02:00"
+    commit-message:
+      prefix: ":arrow_up: maint"
+      include: scope
+    # Disable labels so my own system can handle this
+    labels: []
 
-name: Github Management
-on:
-  issues:
-    types: [opened, edited, closed, reopened]
-  pull_request:
-    types: [opened, edited, closed, reopened, synchronize]
-
-jobs:
-  release-mastermind:
-    name: Release Mastermind
-    runs-on: ubuntu-latest
-    steps:
-      - name: Release Mastermind
-        uses: Resnovas/smartcloud@1.0.0-beta.8
-        with:
-          GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
-          config: .github/config.json
-          configRef: develop
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "02:00"
+    commit-message:
+      prefix: ":arrow_up: maint"
+      include: scope
+    # Disable labels so my own system can handle this
+    labels: []
+  
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "daily"
+      time: "02:00"
+    commit-message:
+      prefix: ":arrow_up: maint"
+      include: scope
+    # Disable labels so my own system can handle this
+    labels: []
