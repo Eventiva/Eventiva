@@ -98,12 +98,12 @@ Our backlog can be found on either our [Github Project](https://github.com/orgs/
 
 #### prerequisites
 
-We use [`@microsoft/rush`](https://rushjs.io/pages/developer/new_developer/) and highly suggest you setup [`Tab Completion`](https://rushjs.io/pages/developer/tab_completion/)!
+We use [`@teambit/bvm`](https://bit.dev/docs/quick-start/) and highly suggest you utilise one of the supported [IDEs](https://bit.dev/docs/getting-started/installing-bit/editor-setup)!
 
 You can choose one of the following methods to get your development platform configured
 
 #### Manual Method
- - Follow the ` @microsoft/rush` \(https://rushjs.io/pages/developer/new_developer/\) specification for development
+ - Follow the `@teambit/bvm` \(https://bit.dev/docs/quick-start\) specification for installation
 
 #### Codespaces Method (Recommended)
 

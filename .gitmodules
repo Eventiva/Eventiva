@@ -10,3 +10,6 @@
 	path = projects/Directory
 	url = https://github.com/Eventiva/Directory.git
 	branch = develop
+[submodule "projects/FMS"]
+	path = projects/FMS
+	url = git@github.com:Eventiva/FMS.git

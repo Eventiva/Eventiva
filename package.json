@@ -6,7 +6,8 @@
   "keywords": [],
   "private": true,
   "scripts": {
-    "preinstall": "node ./common/scripts/preroot.js"
+    "preinstall": "node ./common/scripts/preroot.js",
+    "postinstall": "bit import && bit compile && bit link"
   },
   "xo": {
     "rules": {
