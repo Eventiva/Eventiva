@@ -1,8 +1,8 @@
-app_name = "control_centre"
-app_title = "Control Centre"
+app_name = "grand_theft_auto"
+app_title = "Grand Theft Auto"
 app_publisher = "Eventiva"
-app_description = "Manage and operate control center without loosing context"
-app_email = "control.centre.application@eventiva.co.uk"
+app_description = "Integrate Grand Theft Auto specific endpoints into Eventiva Gaming"
+app_email = "gta.gaming.application@eventiva.co.uk"
 app_license = "mit"
 # required_apps = []
 
@@ -10,15 +10,15 @@ app_license = "mit"
 # ------------------
 
 # include js, css files in header of desk.html
-# app_include_css = "/assets/control_centre/css/control_centre.css"
-# app_include_js = "/assets/control_centre/js/control_centre.js"
+# app_include_css = "/assets/grand_theft_auto/css/grand_theft_auto.css"
+# app_include_js = "/assets/grand_theft_auto/js/grand_theft_auto.js"
 
 # include js, css files in header of web template
-# web_include_css = "/assets/control_centre/css/control_centre.css"
-# web_include_js = "/assets/control_centre/js/control_centre.js"
+# web_include_css = "/assets/grand_theft_auto/css/grand_theft_auto.css"
+# web_include_js = "/assets/grand_theft_auto/js/grand_theft_auto.js"
 
 # include custom scss in every website theme (without file extension ".scss")
-# website_theme_scss = "control_centre/public/scss/website"
+# website_theme_scss = "grand_theft_auto/public/scss/website"
 
 # include js, css files in header of web form
 # webform_include_js = {"doctype": "public/js/doctype.js"}
@@ -36,7 +36,7 @@ app_license = "mit"
 # Svg Icons
 # ------------------
 # include app icons in desk
-# app_include_icons = "control_centre/public/icons.svg"
+# app_include_icons = "grand_theft_auto/public/icons.svg"
 
 # Home Pages
 # ----------
@@ -60,43 +60,43 @@ app_license = "mit"
 
 # add methods and filters to jinja environment
 # jinja = {
-#	"methods": "control_centre.utils.jinja_methods",
-#	"filters": "control_centre.utils.jinja_filters"
+#	"methods": "grand_theft_auto.utils.jinja_methods",
+#	"filters": "grand_theft_auto.utils.jinja_filters"
 # }
 
 # Installation
 # ------------
 
-# before_install = "control_centre.install.before_install"
-# after_install = "control_centre.install.after_install"
+# before_install = "grand_theft_auto.install.before_install"
+# after_install = "grand_theft_auto.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "control_centre.uninstall.before_uninstall"
-# after_uninstall = "control_centre.uninstall.after_uninstall"
+# before_uninstall = "grand_theft_auto.uninstall.before_uninstall"
+# after_uninstall = "grand_theft_auto.uninstall.after_uninstall"
 
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
 # Name of the app being installed is passed as an argument
 
-# before_app_install = "control_centre.utils.before_app_install"
-# after_app_install = "control_centre.utils.after_app_install"
+# before_app_install = "grand_theft_auto.utils.before_app_install"
+# after_app_install = "grand_theft_auto.utils.after_app_install"
 
 # Integration Cleanup
 # -------------------
 # To clean up dependencies/integrations with other apps
 # Name of the app being uninstalled is passed as an argument
 
-# before_app_uninstall = "control_centre.utils.before_app_uninstall"
-# after_app_uninstall = "control_centre.utils.after_app_uninstall"
+# before_app_uninstall = "grand_theft_auto.utils.before_app_uninstall"
+# after_app_uninstall = "grand_theft_auto.utils.after_app_uninstall"
 
 # Desk Notifications
 # ------------------
 # See frappe.core.notifications.get_notification_config
 
-# notification_config = "control_centre.notifications.get_notification_config"
+# notification_config = "grand_theft_auto.notifications.get_notification_config"
 
 # Permissions
 # -----------
@@ -135,39 +135,39 @@ app_license = "mit"
 
 # scheduler_events = {
 #	"all": [
-#		"control_centre.tasks.all"
+#		"grand_theft_auto.tasks.all"
 #	],
 #	"daily": [
-#		"control_centre.tasks.daily"
+#		"grand_theft_auto.tasks.daily"
 #	],
 #	"hourly": [
-#		"control_centre.tasks.hourly"
+#		"grand_theft_auto.tasks.hourly"
 #	],
 #	"weekly": [
-#		"control_centre.tasks.weekly"
+#		"grand_theft_auto.tasks.weekly"
 #	],
 #	"monthly": [
-#		"control_centre.tasks.monthly"
+#		"grand_theft_auto.tasks.monthly"
 #	],
 # }
 
 # Testing
 # -------
 
-# before_tests = "control_centre.install.before_tests"
+# before_tests = "grand_theft_auto.install.before_tests"
 
 # Overriding Methods
 # ------------------------------
 #
 # override_whitelisted_methods = {
-#	"frappe.desk.doctype.event.event.get_events": "control_centre.event.get_events"
+#	"frappe.desk.doctype.event.event.get_events": "grand_theft_auto.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-#	"Task": "control_centre.task.get_dashboard_data"
+#	"Task": "grand_theft_auto.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -181,13 +181,13 @@ app_license = "mit"
 
 # Request Events
 # ----------------
-# before_request = ["control_centre.utils.before_request"]
-# after_request = ["control_centre.utils.after_request"]
+# before_request = ["grand_theft_auto.utils.before_request"]
+# after_request = ["grand_theft_auto.utils.after_request"]
 
 # Job Events
 # ----------
-# before_job = ["control_centre.utils.before_job"]
-# after_job = ["control_centre.utils.after_job"]
+# before_job = ["grand_theft_auto.utils.before_job"]
+# after_job = ["grand_theft_auto.utils.after_job"]
 
 # User Data Protection
 # --------------------
@@ -217,5 +217,5 @@ app_license = "mit"
 # --------------------------------
 
 # auth_hooks = [
-#	"control_centre.auth.validate"
+#	"grand_theft_auto.auth.validate"
 # ]

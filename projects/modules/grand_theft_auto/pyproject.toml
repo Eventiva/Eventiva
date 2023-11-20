@@ -1,9 +1,9 @@
 [project]
-name = "control_centre"
+name = "grand_theft_auto"
 authors = [
-    { name = "Eventiva", email = "control.centre.application@eventiva.co.uk"}
+    { name = "Eventiva", email = "gta.gaming.application@eventiva.co.uk"}
 ]
-description = "Manage and operate control center without loosing context"
+description = "Integrate Grand Theft Auto specific endpoints into Eventiva Gaming"
 requires-python = ">=3.10"
 readme = "README.md"
 dynamic = ["version"]
