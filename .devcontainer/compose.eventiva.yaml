@@ -2,9 +2,9 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: compose.yml
- # Path: /.devcontainer/compose.yml
- # Created Date: Thursday, January 1st 1970
+ # File: compose.eventiva.yaml
+ # Path: \.devcontainer\compose.eventiva.yaml
+ # Created Date: Wednesday, October 18th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -13,7 +13,7 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 1970 - 2023 Eventiva - All Rights Reserved
+ # Copyright (c) 2023 Eventiva - All Rights Reserved
  # LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
@@ -32,38 +32,23 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 03-06-2023
+ # Last Modified: 18-10-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
 
-version: '3.8'
-
 services:
-  app:
-    image: mcr.microsoft.com/devcontainers/typescript-node:0-20
-    volumes:
-      - ../..:/workspaces:cached
-
-    # Overrides default command so things don't shut down after the process ends.
+  frappe:
+    build:
+      dockerfile: ../../../.devcontainer/dockerfile
     command: sleep infinity
-
-    # Runs app on the same network as the database container, allows "forwardPorts" in devcontainer.json function.
-    network_mode: service:db
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-  db:
-    image: postgres:latest
-    restart: unless-stopped
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
-    # Add "forwardPorts": ["5432"] to **devcontainer.json** to forward PostgreSQL locally.
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-
-volumes:
-  postgres-data:
+      - SHELL=/bin/bash
+    ports:
+      - 8000-8005:8000-8005
+      - 9000-9005:9000-9005
+    volumes:
+    - ../../..:/workspace:cached
+      # Enable if you require git cloning
+      # - ${HOME}/.ssh:/home/frappe/.ssh
+    working_dir: /workspace/projects
