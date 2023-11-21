@@ -13,3 +13,60 @@
 [submodule "projects/FMS"]
 	path = projects/FMS
 	url = git@github.com:Eventiva/FMS.git
+[submodule "projects/frappe_docker"]
+	path = projects/frappe_docker
+	url = git@github.com:frappe/frappe_docker.git
+[submodule "projects/discord"]
+	path = projects/discord_bot
+	url = git@github.com:Eventiva/discord.git
+[submodule "projects/lms"]
+	path = projects/lms
+	url = git@github.com:frappe/lms.git
+[submodule "projects/hrms"]
+	path = projects/hrms
+	url = git@github.com:frappe/hrms.git
+[submodule "projects/lending"]
+	path = projects/lending
+	url = git@github.com:frappe/lending.git
+[submodule "projects/health"]
+	path = projects/health
+	url = git@github.com:frappe/health.git
+[submodule "projects/payments"]
+	path = projects/payments
+	url = git@github.com:frappe/payments.git
+[submodule "projects/vetting"]
+	path = projects/vetting
+	url = git@github.com:Eventiva/vetting.git
+[submodule "projects/Teamspeak-Integration"]
+	path = projects/Teamspeak-Integration
+	url = git@github.com:Eventiva/Teamspeak-Integration.git
+[submodule "projects/Segment_Connect"]
+	path = projects/Segment_Connect
+	url = git@github.com:Eventiva/Segment_Connect.git
+[submodule "projects/justice"]
+	path = projects/justice
+	url = git@github.com:Eventiva/justice.git
+[submodule "projects/incident_management"]
+	path = projects/incident_management
+	url = git@github.com:Eventiva/incident_management.git
+[submodule "projects/grand_theft_auto"]
+	path = projects/grand_theft_auto
+	url = git@github.com:Eventiva/grand_theft_auto.git
+[submodule "projects/gaming"]
+	path = projects/gaming
+	url = git@github.com:Eventiva/gaming.git
+[submodule "projects/fleet_management"]
+	path = projects/fleet_management
+	url = git@github.com:Eventiva/fleet_management.git
+[submodule "projects/discord_integration"]
+	path = projects/discord_integration
+	url = git@github.com:Eventiva/discord_integration.git
+[submodule "projects/custody"]
+	path = projects/custody
+	url = git@github.com:Eventiva/custody.git
+[submodule "projects/Control-Centre"]
+	path = projects/Control-Centre
+	url = git@github.com:Eventiva/Control-Centre.git
+[submodule "projects/webshop"]
+	path = projects/webshop
+	url = https://github.com/frappe/webshop.git
