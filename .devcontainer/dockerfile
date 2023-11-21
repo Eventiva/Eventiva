@@ -1,0 +1,42 @@
+# Use an official Python runtime as a parent image
+FROM python:3.11-slim-bullseye
+
+# # Install python3-venv and python3-pip
+RUN apt-get update --fix-missing && apt-get install -y supervisor python3-venv python3-pip git redis-server curl cron python2
+
+# Set Python 2 as the default interpreter for node-gyp
+ENV PYTHON /usr/bin/python2
+
+# Ensure pip is up to date
+RUN python -m ensurepip --upgrade
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
+
+# Install yarn
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -y yarn
+
+# Setup frappe-bench 
+RUN adduser --disabled-password --gecos '' eventiva
+RUN pip3 install frappe-bench
+
+# switch user to eventiva
+USER eventiva
+# move to user route directory
+WORKDIR /workspace/projects
+
+# Clear yarn cache
+RUN yarn cache clean
+
+# Use the system Python for the bench init command
+RUN bench init --skip-redis-config-generation --frappe-branch version-15 eventiva-bench
+WORKDIR /workspace/projects/eventiva-bench
+
+# RUN bench set-config -g db_host mariadb
+# RUN bench set-config -g redis_cache redis://redis-cache:6379
+# RUN bench set-config -g redis_queue redis://redis-queue:6379
+# RUN bench set-config -g redis_socketio redis://redis-socketio:6379
+
