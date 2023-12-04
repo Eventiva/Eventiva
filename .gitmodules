@@ -26,3 +26,6 @@
 [submodule "projects/modules/eventiva_core"]
 	path = projects/modules/eventiva_core
 	url = git@github.com:Eventiva/eventiva_core.git
+[submodule "projects/modules/fleet_management"]
+	path = projects/modules/fleet_management
+	url = git@github.com:Eventiva/fleet_management.git
