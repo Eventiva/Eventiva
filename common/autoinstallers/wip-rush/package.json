@@ -1,8 +1,0 @@
-{
-  "name": "wip-rush",
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "wip": "^1.3.0"
-  }
-}
