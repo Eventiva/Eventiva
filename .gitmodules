@@ -2,3 +2,6 @@
 [submodule "projects/bots/discord"]
 	path = projects/bots/discord
 	url = git@github.com:Eventiva/discord.git
+[submodule "projects/.github"]
+	path = projects/.github
+	url = git@github.com:Eventiva/.github.git
