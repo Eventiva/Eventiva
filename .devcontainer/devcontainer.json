@@ -1,66 +1,95 @@
+/*
+ * @format
+ * -----
+ * Project: @eventiva/eventiva
+ * File: devcontainer.json
+ * Path: /.devcontainer/devcontainer.json
+ * Created Date: Thursday, January 1st 1970
+ * Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ * -----
+ * Contributing: Please read through our contributing guidelines. Included are directions for opening
+ * issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ * 
+ * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+ * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ * -----
+ * Copyright (c) 1970 - 2023 Resnovas - All Rights Reserved
+ * LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+ * -----
+ * This program has been provided under confidence of the copyright holder and is 
+ * licensed for copying, distribution and modification under the terms of
+ * the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+ * or (at your option) any later version of this license.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Creative Commons Zero v1.0 Universal for more details.
+ * 
+ * You should have received a copy of the Creative Commons Zero v1.0 Universal
+ * along with this program. If not, please write to: jonathan@resnovas.com,
+ * or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+ * 
+ * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+ * -----
+ * Last Modified: 28-11-2023
+ * By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+ * Current Version: 0.0.0
+ */
 {
 	"name": "Eventiva Development Environment",
 	"dockerComposeFile": [
-		"../projects/frappe_docker/devcontainer-example/docker-compose.yml",
+		"../projects/frappe_docker/compose.yaml",
+		"../projects/frappe_docker/overrides/compose.mariadb.yaml",
+		// "../projects/frappe_docker/overrides/compose.mariadb-shared.yaml",
+		"../projects/frappe_docker/overrides/compose.redis.yaml",
+		"../projects/frappe_docker/overrides/compose.https.yaml",
 		"./compose.eventiva.yaml"
-		// "../projects/frappe_docker/overrides/compose.traefik.yaml",
-		// "../projects/frappe_docker/overrides/compose.proxy.yaml",
-		// "../projects/frappe_docker/overrides/compose.redis.yaml"
 	],
-	"service": "frappe",
-	// "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
-	"workspaceFolder": "/workspace/projects",
-	"shutdownAction": "stopCompose",
-	"features": {
-		// "ghcr.io/devcontainers/features/docker-in-docker:2": {
-		// 	"dockerDashComposeVersion": "v2"
-		// },
-		// "ghcr.io/devcontainers/features/python:1": {},
-		// "ghcr.io/devcontainers-contrib/features/consul-asdf:2": {},
-		// "ghcr.io/devcontainers-contrib/features/prisma:2": {},
-		// "ghcr.io/devcontainers-contrib/features/terraform-asdf:2": {},
-		// "ghcr.io/devcontainers-contrib/features/vault-asdf:2": {},
-		// "ghcr.io/devcontainers-contrib/features/vercel-cli:1": {},
-		"ghcr.io/flexwie/devcontainer-features/op:1": {},
-		// "ghcr.io/devcontainers-contrib/features/nomad-asdf:2": {},
-		// "ghcr.io/devcontainers-contrib/features/waypoint-asdf:2": {},
-		// "ghcr.io/jlaundry/devcontainer-features/azure-functions-core-tools:1": {},
-		// "ghcr.io/devcontainers-contrib/features/boundary-asdf:2": {},
-		// "ghcr.io/devcontainers-contrib/features/jest:2": {},
-		// "ghcr.io/devcontainers-contrib/features/pnpm:2": {},
-		// "ghcr.io/joshuanianji/devcontainer-features/terraform-cli-persistence:0": {},
-		// "ghcr.io/devcontainers-contrib/features/json-server:1": {},
-		// "ghcr.io/devcontainers-contrib/features/jira-cli:1": {},
-		// "ghcr.io/devcontainers-contrib/features/how2:1": {},
-		// "ghcr.io/devcontainers-contrib/features/pipenv:2": {}
+	"service": "backend",
+	"workspaceFolder": "/home/frappe/frappe-bench/",
+	"containerEnv": {
+		"ERPNEXT_VERSION": "v15.2.0",
+		"DB_HOST": "db",
+		"DB_PORT": "3306",
+		"REDIS_CACHE": "redis-cache:6379",
+		"REDIS_QUEUE": "redis-queue:6379",
+		"SOCKETIO_PORT": "redis-socketio:6379",
+		"LETSENCRYPT_EMAIL": "system@eventiva.co.uk",
+		"SITE_ADMIN_PASS": "admin",
+		"DB_PASSWORD": "databasePassword",
+		"SITE_NAME": "site1.localhost"
 	},
 	"customizations": {
-		// "vscode": {
-		// 	"extensions": [
-		// 		"github.codespaces",
-		// 		"github.copilot",
-		// 		"github.copilot-labs",
-		// 		"github.remotehub",
-		// 		"rangav.vscode-thunder-client",
-		// 		"samverschueren.linter-xo",
-		// 		"psioniq.psi-header",
-		// 		"WallabyJs.quokka-vscode",
-		// 		"WallabyJs.wallaby-vscode",
-		// 		"WallabyJs.wallaby-extension-pack",
-		// 		"snyk-security.snyk-vulnerability-scanner",
-		// 		"GitHub.codespaces",
-		// 		"GitHub.copilot",
-		// 		"HashiCorp.terraform",
-		// 		"HashiCorp.HCL",
-		// 		"HashiCorp.sentinel",
-		// 		"eamodio.gitlens",
-		// 		"ms-python.python",
-		// 		"ms-vscode.live-server",
-		// 		"grapecity.gc-excelviewer",
-		// 		"mtxr.sqltools",
-		// 		"visualstudioexptteam.vscodeintellicode"
-		// 	]
-		// },
+		"vscode": {
+			"extensions": [
+				"ms-python.black-formatter",
+				"ms-vscode-remote.remote-containers",
+				"benjaminbenais.copilot-theme",
+				"github.vscode-github-actions",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"GitHub.copilot-labs",
+				"Massi.javascript-docstrings",
+				"crystal-spider.jsdoc-generator",
+				"bierner.jsdoc-markdown-highlighting",
+				"PKief.material-icon-theme",
+				"PKief.material-product-icons",
+				"ms-edgedevtools.vscode-edge-devtools",
+				"CodeStream.codestream",
+				"christian-kohler.npm-intellisense",
+				"codeandstuff.package-json-upgrade",
+				"psioniq.psi-header",
+				"ms-python.vscode-pylance",
+				"ms-python.python",
+				"WallabyJs.quokka-vscode",
+				"meganrogge.template-string-converter",
+				"rangav.vscode-thunder-client",
+				"WallabyJs.wallaby-extension-pack",
+				"samverschueren.linter-xo",
+				"yzhang.markdown-all-in-one"
+			]
+		},
 		"settings": {
 			"terminal.integrated.profiles.linux": {
 				"frappe bash": {
@@ -72,14 +101,19 @@
 			"debug.node.autoAttach": "disabled"
 		}
 	},
+
+	"debug.node.autoAttach": "disabled",
 	"forwardPorts": [
 		5432,
 		8000,
 		9000,
 		6787
 	],
-	"privileged": true,
-	"postCreateCommand": "git config --global --add safe.directory /workspaces/ && bench init frappe-bench", // && SHELL=bash npm_config_yes=true npx @teambit/bvm install && pipx install ggshield",
-	// "postAttachCommand": "bench init frappe-bench && cd frappe-bench && bench start", //"ggshield auth login",
-	// "remoteUser": "frappe",
+	// "initializeCommand": "bash ./env_config.sh",
+	// "onCreateCommand": [
+	// 	// Create the site
+	// 	"bench set-config -g developer_mode 1 && bench new-site site1.localhost --db-root-password databasePassword --admin-password admin --set-default",
+	// 	// Install Frappe Modules
+	// 	"bench install-app erpnext && bench install-app it_management && bench install-app lending && bench install-app payments && bench install-app webshop && bench install-app lms && bench install-app fleet_management && bench install-app incident_management && bench install-app vetting && bench install-app eventiva_core && bench install-app healthcare && bench install-app control_centre && bench install-app custody && bench install-app justice && bench install-app gaming && bench install-app grand_theft_auto && bench install-app teamspeak_integration && bench install-app discord_integration && bench install-app segment_connect"
+	// ]
 }

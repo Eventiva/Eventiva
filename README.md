@@ -10,6 +10,7 @@
   - [Index](#index)
   - [Introduction](#introduction)
   - [Why do we exist?](#why-do-we-exist)
+  - [What is Eventiva Gaming](#what-is-eventiva-gaming)
   - [Why open-source?](#why-open-source)
   - [How to get support 👨‍👩‍👧‍👦](#how-to-get-support-)
   - [Contributing](#contributing)
@@ -18,14 +19,8 @@
     - [Backlog](#backlog)
     - [Running Locally \& Developing](#running-locally--developing)
       - [prerequisites](#prerequisites)
-      - [Manual Method](#manual-method)
       - [Codespaces Method (Recommended)](#codespaces-method-recommended)
       - [Devcontainer Method](#devcontainer-method)
-      - [Using Rush](#using-rush)
-          - [1. Avoid certain commands in a Rush repo](#1-avoid-certain-commands-in-a-rush-repo)
-          - [2. If you suspect your install is corrupted...](#2-if-you-suspect-your-install-is-corrupted)
-        - [Creating new projects](#creating-new-projects)
-        - [Achieving projects](#achieving-projects)
   - [Security](#security)
     - [Security Policy](#security-policy)
       - [Supported Versions](#supported-versions)
@@ -41,9 +36,16 @@ Welcome to the Eventiva repository. Eventiva is an open-source platform for Even
 
 When surveyed, the industry revealed that over fifty-five percent of events did not have a management tool of any form. The remaining forty percent are split across solutions designed and implemented for office environments. Software like Flock and Excel barely cover the toolset which managers require to be effective in the preproduction sections of their work. While fifty-five percent of events did not have management tools, a full eighty percent of individuals surveyed believed that schedulers, task lists and other management tools would be helpful to their ongoing operations.
 
+## What is Eventiva Gaming
+
+Eventiva Gaming is born out of the desire to create the best tools for our industry. While gaming is an unusual route, we believe that the gaming industry, specifically role play communities, is a perfect fit for testing, developing and improving our tools. Within the Role Play Communities, there are may teams which need to coordinate, manage and plan digital events with the exact same requirements as physical events. We believe that by working with these communities we can create a better product for everyone.
+
+For instance, the Eventiva Gaming team developed the initial version of the Fleet Management module. They designed it to manage the distribution, maintainance and deployment of vehicles within Emergency Service role play. Those same key features are now being used to manage the distribution, maintainance and deployment of vehicles within the events industry.
+
 ## Why open-source?
 
 We believe in the power of community development, while our tools are designed and marketted for event planning, they can be utilised by organisations planning all variations of projects, we believe that through keeping our tools open-source we can connect with amazing developers who can contribute in ways we simply cannot fathom.
+
 
 ## How to get support 👨‍👩‍👧‍👦
 
@@ -96,14 +98,11 @@ Our backlog can be found on either our [Github Project](https://github.com/orgs/
 
 ### Running Locally & Developing
 
+[This section is being re-written based on the new development environment and major changes to the repository]
+
 #### prerequisites
 
-We use [`@teambit/bvm`](https://bit.dev/docs/quick-start/) and highly suggest you utilise one of the supported [IDEs](https://bit.dev/docs/getting-started/installing-bit/editor-setup)!
-
 You can choose one of the following methods to get your development platform configured
-
-#### Manual Method
- - Follow the `@teambit/bvm` \(https://bit.dev/docs/quick-start\) specification for installation
 
 #### Codespaces Method (Recommended)
 
@@ -122,7 +121,7 @@ The Dev Container lets you use a Docker container as a full-featured development
 Simply install the [Dev containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), clone the repository to your local device, and choose the [`Open Devcontainer` option](https://code.visualstudio.com/docs/devcontainers/containers).
 
 
-#### Using Rush
+<!-- #### Using Rush
 
 Before we get started, a couple important points to keep in mind:
 
@@ -177,7 +176,7 @@ rush archive-project --package-name <your_package_name>
 4. Remove checkpoint branch information from checkpoint metadata file if it exists
 5. Move the code to project folder
 6. Restore project configuration into `rush.json`
-7. Delete metadata file and tarball
+7. Delete metadata file and tarball -->
 
 ## Security
 
