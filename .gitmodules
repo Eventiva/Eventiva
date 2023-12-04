@@ -50,3 +50,6 @@
 [submodule "projects/modules/vetting"]
 	path = projects/modules/vetting
 	url = git@github.com:Eventiva/vetting.git
+[submodule "projects/websites/Directory"]
+	path = projects/websites/Directory
+	url = git@github.com:Eventiva/Directory.git
