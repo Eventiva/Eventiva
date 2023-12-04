@@ -8,3 +8,6 @@
 [submodule "projects/awesome-frappe"]
 	path = projects/awesome-frappe
 	url = git@github.com:Eventiva/awesome-frappe.git
+[submodule "projects/contributors"]
+	path = projects/contributors
+	url = git@github.com:Eventiva/contributors.git
