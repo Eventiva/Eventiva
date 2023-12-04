@@ -23,3 +23,6 @@
 [submodule "projects/modules/discord_integration"]
 	path = projects/modules/discord_integration
 	url = git@github.com:Eventiva/discord_integration.git
+[submodule "projects/modules/eventiva_core"]
+	path = projects/modules/eventiva_core
+	url = git@github.com:Eventiva/eventiva_core.git
