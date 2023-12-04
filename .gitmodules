@@ -11,3 +11,6 @@
 [submodule "projects/contributors"]
 	path = projects/contributors
 	url = git@github.com:Eventiva/contributors.git
+[submodule "projects/frappe_docker"]
+	path = projects/frappe_docker
+	url = https://github.com/frappe/frappe_docker.git
