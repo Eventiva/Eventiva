@@ -17,3 +17,6 @@
 [submodule "projects/modules/Control-Centre"]
 	path = projects/modules/Control-Centre
 	url = git@github.com:Eventiva/Control-Centre.git
+[submodule "projects/modules/custody"]
+	path = projects/modules/custody
+	url = git@github.com:Eventiva/custody.git
