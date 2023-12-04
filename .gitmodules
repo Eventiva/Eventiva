@@ -44,3 +44,6 @@
 [submodule "projects/modules/Segment_Connect"]
 	path = projects/modules/Segment_Connect
 	url = git@github.com:Eventiva/Segment_Connect.git
+[submodule "projects/modules/Teamspeak_Integration"]
+	path = projects/modules/Teamspeak_Integration
+	url = git@github.com:Eventiva/Teamspeak-Integration.git
