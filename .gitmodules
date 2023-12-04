@@ -1,54 +1,55 @@
+# blank file
+[submodule "projects/bots/discord"]
+	path = projects/bots/discord
+	url = git@github.com:Eventiva/discord.git
 [submodule "projects/.github"]
 	path = projects/.github
-	url = https://github.com/Eventiva/.github.git
-	branch = develop
+	url = git@github.com:Eventiva/.github.git
+[submodule "projects/awesome-frappe"]
+	path = projects/awesome-frappe
+	url = git@github.com:Eventiva/awesome-frappe.git
 [submodule "projects/contributors"]
 	path = projects/contributors
-	url = https://github.com/Eventiva/contributors.git
-	branch = develop
-[submodule "projects/Directory"]
-	path = projects/website/Directory
-	url = https://github.com/Eventiva/Directory.git
-	branch = develop
-[submodule "projects/FMS"]
-	path = projects/FMS
-	url = git@github.com:Eventiva/FMS.git
+	url = git@github.com:Eventiva/contributors.git
 [submodule "projects/frappe_docker"]
 	path = projects/frappe_docker
-	url = git@github.com:frappe/frappe_docker.git
-[submodule "projects/discord"]
-	path = projects/bot/discord
-	url = git@github.com:Eventiva/discord.git
-[submodule "projects/vetting"]
-	path = projects/modules/vetting
-	url = git@github.com:Eventiva/vetting.git
-[submodule "projects/Teamspeak-Integration"]
-	path = projects/modules/teamspeak_integration
-	url = git@github.com:Eventiva/Teamspeak-Integration.git
-[submodule "projects/Segment_Connect"]
-	path = projects/modules/segment_connect
-	url = git@github.com:Eventiva/Segment_Connect.git
-[submodule "projects/justice"]
-	path = projects/modules/justice
-	url = git@github.com:Eventiva/justice.git
-[submodule "projects/incident_management"]
-	path = projects/modules/incident_management
-	url = git@github.com:Eventiva/incident_management.git
-[submodule "projects/grand_theft_auto"]
-	path = projects/modules/grand_theft_auto
-	url = git@github.com:Eventiva/grand_theft_auto.git
-[submodule "projects/gaming"]
-	path = projects/modules/gaming
-	url = git@github.com:Eventiva/gaming.git
-[submodule "projects/fleet_management"]
+	url = https://github.com/frappe/frappe_docker.git
+[submodule "projects/modules/Control-Centre"]
+	path = projects/modules/Control-Centre
+	url = git@github.com:Eventiva/Control-Centre.git
+[submodule "projects/modules/custody"]
+	path = projects/modules/custody
+	url = git@github.com:Eventiva/custody.git
+[submodule "projects/modules/discord_integration"]
+	path = projects/modules/discord_integration
+	url = git@github.com:Eventiva/discord_integration.git
+[submodule "projects/modules/eventiva_core"]
+	path = projects/modules/eventiva_core
+	url = git@github.com:Eventiva/eventiva_core.git
+[submodule "projects/modules/fleet_management"]
 	path = projects/modules/fleet_management
 	url = git@github.com:Eventiva/fleet_management.git
-[submodule "projects/discord_integration"]
-	path = projects/Modules/discord_integration
-	url = git@github.com:Eventiva/discord_integration.git
-[submodule "projects/custody"]
-	path = projects/Modules/custody
-	url = git@github.com:Eventiva/custody.git
-[submodule "projects/Control-Centre"]
-	path = projects/modules/control_centre
-	url = git@github.com:Eventiva/Control-Centre.git
+[submodule "projects/modules/gaming"]
+	path = projects/modules/gaming
+	url = git@github.com:Eventiva/gaming.git
+[submodule "projects/modules/grand_theft_auto"]
+	path = projects/modules/grand_theft_auto
+	url = git@github.com:Eventiva/grand_theft_auto.git
+[submodule "projects/modules/incident_management"]
+	path = projects/modules/incident_management
+	url = git@github.com:Eventiva/incident_management.git
+[submodule "projects/modules/justice"]
+	path = projects/modules/justice
+	url = git@github.com:Eventiva/justice.git
+[submodule "projects/modules/Segment_Connect"]
+	path = projects/modules/Segment_Connect
+	url = git@github.com:Eventiva/Segment_Connect.git
+[submodule "projects/modules/Teamspeak_Integration"]
+	path = projects/modules/Teamspeak_Integration
+	url = git@github.com:Eventiva/Teamspeak-Integration.git
+[submodule "projects/modules/vetting"]
+	path = projects/modules/vetting
+	url = git@github.com:Eventiva/vetting.git
+[submodule "projects/websites/Directory"]
+	path = projects/websites/Directory
+	url = git@github.com:Eventiva/Directory.git
