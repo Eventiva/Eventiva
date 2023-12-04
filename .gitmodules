@@ -53,3 +53,6 @@
 [submodule "projects/websites/Directory"]
 	path = projects/websites/Directory
 	url = git@github.com:Eventiva/Directory.git
+[submodule "projects/clients/radio"]
+	path = projects/clients/radio
+	url = git@github.com:Eventiva/radio.git
