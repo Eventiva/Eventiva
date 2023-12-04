@@ -14,3 +14,6 @@
 [submodule "projects/frappe_docker"]
 	path = projects/frappe_docker
 	url = https://github.com/frappe/frappe_docker.git
+[submodule "projects/modules/Control-Centre"]
+	path = projects/modules/Control-Centre
+	url = git@github.com:Eventiva/Control-Centre.git
