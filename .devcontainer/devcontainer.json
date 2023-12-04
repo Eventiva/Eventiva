@@ -101,6 +101,7 @@
 			"debug.node.autoAttach": "disabled"
 		}
 	},
+
 	"debug.node.autoAttach": "disabled",
 	"forwardPorts": [
 		5432,
