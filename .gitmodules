@@ -41,3 +41,6 @@
 [submodule "projects/modules/justice"]
 	path = projects/modules/justice
 	url = git@github.com:Eventiva/justice.git
+[submodule "projects/modules/Segment_Connect"]
+	path = projects/modules/Segment_Connect
+	url = git@github.com:Eventiva/Segment_Connect.git
