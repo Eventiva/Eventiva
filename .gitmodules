@@ -29,3 +29,6 @@
 [submodule "projects/modules/fleet_management"]
 	path = projects/modules/fleet_management
 	url = git@github.com:Eventiva/fleet_management.git
+[submodule "projects/modules/gaming"]
+	path = projects/modules/gaming
+	url = git@github.com:Eventiva/gaming.git
