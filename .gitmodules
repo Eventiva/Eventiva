@@ -47,3 +47,6 @@
 [submodule "projects/modules/Teamspeak_Integration"]
 	path = projects/modules/Teamspeak_Integration
 	url = git@github.com:Eventiva/Teamspeak-Integration.git
+[submodule "projects/modules/vetting"]
+	path = projects/modules/vetting
+	url = git@github.com:Eventiva/vetting.git
