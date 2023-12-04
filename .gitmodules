@@ -5,3 +5,6 @@
 [submodule "projects/.github"]
 	path = projects/.github
 	url = git@github.com:Eventiva/.github.git
+[submodule "projects/awesome-frappe"]
+	path = projects/awesome-frappe
+	url = git@github.com:Eventiva/awesome-frappe.git
