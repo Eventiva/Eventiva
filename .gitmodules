@@ -32,3 +32,6 @@
 [submodule "projects/modules/gaming"]
 	path = projects/modules/gaming
 	url = git@github.com:Eventiva/gaming.git
+[submodule "projects/modules/grand_theft_auto"]
+	path = projects/modules/grand_theft_auto
+	url = git@github.com:Eventiva/grand_theft_auto.git
