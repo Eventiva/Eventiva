@@ -41,7 +41,7 @@ name: "Change Report"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 01 * * 1,5" # Run every day at 01am
+    - cron: "0 01 * * 0/3" # Run every 3rd day at 01am
 
 jobs:
   change-report:
