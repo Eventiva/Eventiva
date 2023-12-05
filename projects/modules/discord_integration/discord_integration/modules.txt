@@ -1,1 +1,2 @@
 Discord Integration
+Discord Bot
