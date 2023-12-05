@@ -74,3 +74,6 @@
 [submodule "projects/modules/hrms"]
 	path = projects/modules/hrms
 	url = https://github.com/frappe/hrms.git
+[submodule "projects/modules/frappe"]
+	path = projects/modules/frappe
+	url = https://github.com/frappe/frappe.git
