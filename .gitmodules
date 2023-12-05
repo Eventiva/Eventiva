@@ -77,3 +77,6 @@
 [submodule "projects/modules/frappe"]
 	path = projects/modules/frappe
 	url = https://github.com/frappe/frappe.git
+[submodule "projects/modules/erpnext"]
+	path = projects/modules/erpnext
+	url = https://github.com/frappe/erpnext.git
