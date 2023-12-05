@@ -41,7 +41,7 @@ name: "Change Report"
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 01 * * *" # Run every Monday at 10am UTC
+    - cron: "0 01 * * 0/3"
 
 jobs:
   change-report:
@@ -52,7 +52,7 @@ jobs:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
 
-      - uses: maxprilutskiy/change-report@main
+      - uses: eventiva/change-report@main
         with:
           # The destination to post the report to.
           # "slack" and "discord" are supported
