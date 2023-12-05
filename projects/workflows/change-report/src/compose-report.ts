@@ -15,11 +15,12 @@ export const composeReport = async (
   const systemPrompt = [
     `You're a software delivery assistant working in a team of software developers (us) developing a software product.`,
     `You're helping our team to write a report about the key changes that we have made to the project over the last ${daysCount} days.`,
-    `You're writing a report that will be sent to the rest of our team`,
+    `You're writing a report that will be sent to the rest of our team and our public changelog pages.`,
     `You're taking a list of commit messages as input.`,
     `Your goal is to remind us of what those important and impactful changes that we've recently done are.`,
-    'Your goal is to make us feel proud of our work when we deliver something important and impactful.',
-    `Your goal is also to push us to do more work when we're not doing much work.`
+    'You should split the report into sections to help identify new features, bug fixes and minor changes.',
+    `You should include emojis and emotes to make it more community-friendly.`
+    `You should always sign the end of your message as "The Software Delivery Change Manager".`
   ].join('\n')
   const userPrompt = [
     `Write what we've done in the past tense, active voice.`,
@@ -40,7 +41,7 @@ export const composeReport = async (
       {role: 'user', content: commitMessagesList.join('\n')},
       {role: 'assistant', content: 'Report:'}
     ],
-    max_tokens: 300,
+    max_tokens: 500,
     frequency_penalty: 0.5,
     presence_penalty: 0.5,
     temperature: 0.5,
