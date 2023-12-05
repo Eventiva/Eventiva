@@ -56,3 +56,21 @@
 [submodule "projects/clients/radio"]
 	path = projects/clients/radio
 	url = git@github.com:Eventiva/radio.git
+[submodule "projects/modules/lending"]
+	path = projects/modules/lending
+	url = https://github.com/frappe/lending.git
+[submodule "projects/modules/health"]
+	path = projects/modules/health
+	url = https://github.com/frappe/health.git
+[submodule "projects/modules/payments"]
+	path = projects/modules/payments
+	url = https://github.com/frappe/payments.git
+[submodule "projects/modules/webshop"]
+	path = projects/modules/webshop
+	url = https://github.com/frappe/webshop.git
+[submodule "projects/modules/it_management"]
+	path = projects/modules/it_management
+	url = https://github.com/phamos-eu/it_management.git
+[submodule "projects/modules/hrms"]
+	path = projects/modules/hrms
+	url = https://github.com/frappe/hrms.git
