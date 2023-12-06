@@ -83,3 +83,6 @@
 [submodule "projects/modules/builder"]
 	path = projects/modules/builder
 	url = https://github.com/frappe/builder.git
+[submodule "projects/workflows/change-report"]
+	path = projects/workflows/change-report
+	url = git@github.com:Eventiva/change-report.git
