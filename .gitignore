@@ -75,3 +75,4 @@ common/autoinstallers/*/.npmrc
 # Visual Studio Code files
 .vscode/settings.json
 /pnpm-lock.yaml
+.pnpm-store
