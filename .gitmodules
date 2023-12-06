@@ -80,3 +80,6 @@
 [submodule "projects/modules/erpnext"]
 	path = projects/modules/erpnext
 	url = https://github.com/frappe/erpnext.git
+[submodule "projects/modules/builder"]
+	path = projects/modules/builder
+	url = https://github.com/frappe/builder.git
