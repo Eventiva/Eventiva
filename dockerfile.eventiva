@@ -46,10 +46,10 @@ RUN if [ ! -d "/home/frappe/frappe-bench/apps/lending" ] ; then bench get-app ht
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/healthcare" ] ; then bench get-app https://github.com/frappe/health.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/payments" ] ; then bench get-app https://github.com/frappe/payments.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/webshop" ] ; then bench get-app https://github.com/frappe/webshop.git ; fi
-RUN if [ ! -d "/home/frappe/frappe-bench/apps/vetting" ] ; then bench get-app https://github.com/eventiva/vetting.git ; fi
+RUN if [ ! -d "/home/frappe/frappe-bench/apps/it_management" ] ; then bench get-app https://github.com/phamos-eu/it_management.git ; fi
 
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/eventiva_core" ] ; then bench get-app https://github.com/Eventiva/eventiva_core.git ; fi
-RUN if [ ! -d "/home/frappe/frappe-bench/apps/it_management" ] ; then bench get-app https://github.com/phamos-eu/it_management.git ; fi
+RUN if [ ! -d "/home/frappe/frappe-bench/apps/vetting" ] ; then bench get-app https://github.com/eventiva/vetting.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/fleet_management" ] ; then bench get-app https://github.com/eventiva/fleet_management.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/gaming" ] ; then bench get-app https://github.com/eventiva/gaming.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/custody" ] ; then bench get-app https://github.com/eventiva/custody.git ; fi

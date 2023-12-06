@@ -2,9 +2,9 @@
 # @format
 # -----
 # Project: @eventiva/eventiva
-# File: compose.eventiva.yaml
-# Path: \.devcontainer\compose.eventiva.yaml
-# Created Date: Wednesday, October 18th 2023
+# File: compose.bot.discord.yaml
+# Path: \.devcontainer\compose.bot.discord.yaml
+# Created Date: Tuesday, December 5th 2023
 # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
 # -----
 # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -32,45 +32,24 @@
 #
 # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
 # -----
-# Last Modified: 24-11-2023
+# Last Modified: 05-12-2023
 # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
 # Current Version: 0.0.0
 ###
 
+# docker compose file for the discord bot found in workspace/projects/bots/discord which should be mounted and built in the dockerfile. The bot is built on nodejs and uses the pnpm package manager
+
 services:
-  backend:
-    build:
-      context: ../../
-      dockerfile: dockerfile.eventiva
+  discord:
+    # set the image to node js latest
+    image: node:latest
     volumes:
-      # bind the workspace to /home/frappe/frappe-bench/workspace
-      - ../../:/home/frappe/frappe-bench/workspace
-
-  db:
-    healthcheck:
-      test: mysqladmin ping -h localhost --password=databasePassword
-      interval: 1s
-      retries: 15
-    environment:
-      MYSQL_ROOT_PASSWORD: databasePassword
-
-  frontend:
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.frontend.loadbalancer.server.port=8080
-      - traefik.http.routers.frontend-http.entrypoints=websecure
-      - traefik.http.routers.frontend-http.tls.certresolver=main-resolver
-      - traefik.http.routers.frontend-http.rule=Host(`site1.localhost`)
-
-  proxy:
-    command:
-      - --providers.docker=true
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
-      - --entrypoints.web.http.redirections.entrypoint.to=websecure
-      - --entrypoints.web.http.redirections.entrypoint.scheme=https
-      - --entrypoints.websecure.address=:443
-      - --certificatesResolvers.main-resolver.acme.httpChallenge=true
-      - --certificatesResolvers.main-resolver.acme.httpChallenge.entrypoint=web
-      - --certificatesResolvers.main-resolver.acme.email=system@eventiva.co.uk
-      - --certificatesResolvers.main-resolver.acme.storage=/letsencrypt/acme.json
+      - ../../:/home/workspace
+    # post build commands to install pnpm and then install the bot and run watch:start
+    command: >
+      sh -c "
+        npm install -g pnpm &&
+        cd /home/workspace/projects/bots/discord &&
+        pnpm install &&
+        pnpm run watch:start
+      "
