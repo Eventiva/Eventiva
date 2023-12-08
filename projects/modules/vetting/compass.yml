@@ -1,0 +1,17 @@
+name: vetting
+id: ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/96bf40dd-704a-4efa-8a43-2d5a71172caa
+description: Vetting and Screening for security focused organisations
+configVersion: 1
+typeId: APPLICATION
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/Eventiva/vetting
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:python
+  - source:github
+customFields: null
