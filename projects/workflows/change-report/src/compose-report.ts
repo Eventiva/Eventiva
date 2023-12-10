@@ -84,7 +84,7 @@ export const composeReport = async (
       {role: 'user', content: commitMessagesList.join('\n')},
       {role: 'assistant', content: 'Report:'}
     ],
-    max_tokens: 500,
+    max_tokens: 450,
     frequency_penalty: 0.5,
     presence_penalty: 0.5,
     temperature: 0,
