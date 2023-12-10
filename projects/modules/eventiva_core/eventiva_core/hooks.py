@@ -1,3 +1,42 @@
+###
+# @format
+# -----
+# Project: eventiva_core
+# File: hooks.py
+# Path: /hooks.py
+# Created Date: Sunday, December 3rd 2023
+# Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+# -----
+# Contributing: Please read through our contributing guidelines. Included are directions for opening
+# issues, coding standards, and notes on development. These can be found at https://github.com/eventiva_core/blob/develop/CONTRIBUTING.md
+#
+# Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+# welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva_core/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2023 Resnovas - All Rights Reserved
+# LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+# -----
+# This program has been provided under confidence of the copyright holder and is
+# licensed for copying, distribution and modification under the terms of
+# the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+# or (at your option) any later version of this license.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Creative Commons Zero v1.0 Universal for more details.
+#
+# You should have received a copy of the Creative Commons Zero v1.0 Universal
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+#
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+# -----
+# Last Modified: 03-12-2023
+# By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
+# Current Version: <<projectversion>>
+###
+
 app_name = "eventiva_core"
 app_title = "Eventiva Core"
 app_publisher = "Eventiva"
@@ -46,7 +85,7 @@ app_license = "mit"
 
 # website user home page (by Role)
 # role_home_page = {
-#	"Role": "home_page"
+# 	"Role": "home_page"
 # }
 
 # Generators
@@ -54,14 +93,17 @@ app_license = "mit"
 
 # automatically create page for each record of this doctype
 # website_generators = ["Web Page"]
+fixtures = [
+    {"dt": "Custom Field", "filters": [["module", "like", "Eventiva Core%"]]},
+]
 
 # Jinja
 # ----------
 
 # add methods and filters to jinja environment
 # jinja = {
-#	"methods": "eventiva_core.utils.jinja_methods",
-#	"filters": "eventiva_core.utils.jinja_filters"
+# 	"methods": "eventiva_core.utils.jinja_methods",
+# 	"filters": "eventiva_core.utils.jinja_filters"
 # }
 
 # Installation
@@ -103,11 +145,11 @@ app_license = "mit"
 # Permissions evaluated in scripted ways
 
 # permission_query_conditions = {
-#	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
+# 	"Event": "frappe.desk.doctype.event.event.get_permission_query_conditions",
 # }
 #
 # has_permission = {
-#	"Event": "frappe.desk.doctype.event.event.has_permission",
+# 	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
 
 # DocType Class
@@ -115,7 +157,7 @@ app_license = "mit"
 # Override standard doctype classes
 
 # override_doctype_class = {
-#	"ToDo": "custom_app.overrides.CustomToDo"
+# 	"ToDo": "custom_app.overrides.CustomToDo"
 # }
 
 # Document Events
@@ -123,32 +165,32 @@ app_license = "mit"
 # Hook on document methods and events
 
 # doc_events = {
-#	"*": {
-#		"on_update": "method",
-#		"on_cancel": "method",
-#		"on_trash": "method"
-#	}
+# 	"*": {
+# 		"on_update": "method",
+# 		"on_cancel": "method",
+# 		"on_trash": "method"
+# 	}
 # }
 
 # Scheduled Tasks
 # ---------------
 
 # scheduler_events = {
-#	"all": [
-#		"eventiva_core.tasks.all"
-#	],
-#	"daily": [
-#		"eventiva_core.tasks.daily"
-#	],
-#	"hourly": [
-#		"eventiva_core.tasks.hourly"
-#	],
-#	"weekly": [
-#		"eventiva_core.tasks.weekly"
-#	],
-#	"monthly": [
-#		"eventiva_core.tasks.monthly"
-#	],
+# 	"all": [
+# 		"eventiva_core.tasks.all"
+# 	],
+# 	"daily": [
+# 		"eventiva_core.tasks.daily"
+# 	],
+# 	"hourly": [
+# 		"eventiva_core.tasks.hourly"
+# 	],
+# 	"weekly": [
+# 		"eventiva_core.tasks.weekly"
+# 	],
+# 	"monthly": [
+# 		"eventiva_core.tasks.monthly"
+# 	],
 # }
 
 # Testing
@@ -160,14 +202,14 @@ app_license = "mit"
 # ------------------------------
 #
 # override_whitelisted_methods = {
-#	"frappe.desk.doctype.event.event.get_events": "eventiva_core.event.get_events"
+# 	"frappe.desk.doctype.event.event.get_events": "eventiva_core.event.get_events"
 # }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps
 # override_doctype_dashboards = {
-#	"Task": "eventiva_core.task.get_dashboard_data"
+# 	"Task": "eventiva_core.task.get_dashboard_data"
 # }
 
 # exempt linked doctypes from being automatically cancelled
@@ -193,29 +235,29 @@ app_license = "mit"
 # --------------------
 
 # user_data_fields = [
-#	{
-#		"doctype": "{doctype_1}",
-#		"filter_by": "{filter_by}",
-#		"redact_fields": ["{field_1}", "{field_2}"],
-#		"partial": 1,
-#	},
-#	{
-#		"doctype": "{doctype_2}",
-#		"filter_by": "{filter_by}",
-#		"partial": 1,
-#	},
-#	{
-#		"doctype": "{doctype_3}",
-#		"strict": False,
-#	},
-#	{
-#		"doctype": "{doctype_4}"
-#	}
+# 	{
+# 		"doctype": "{doctype_1}",
+# 		"filter_by": "{filter_by}",
+# 		"redact_fields": ["{field_1}", "{field_2}"],
+# 		"partial": 1,
+# 	},
+# 	{
+# 		"doctype": "{doctype_2}",
+# 		"filter_by": "{filter_by}",
+# 		"partial": 1,
+# 	},
+# 	{
+# 		"doctype": "{doctype_3}",
+# 		"strict": False,
+# 	},
+# 	{
+# 		"doctype": "{doctype_4}"
+# 	}
 # ]
 
 # Authentication and authorization
 # --------------------------------
 
 # auth_hooks = [
-#	"eventiva_core.auth.validate"
+# 	"eventiva_core.auth.validate"
 # ]
