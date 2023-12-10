@@ -80,7 +80,7 @@ export const composeReport = async (
     messages: [
       {role: 'system', content: systemPrompt},
       {role: 'user', content: userPrompt},
-      {role: 'user', content: 'Project Name: ' + GITHUB_REPO_NAME + '\nCommit messages:'},
+      {role: 'user', content: 'Project Name: ' + GITHUB_REPO_NAME + `\nToday's Date: ${new Date().toDateString()}` + '\nCommit messages:'},
       {role: 'user', content: commitMessagesList.join('\n')},
       {role: 'assistant', content: 'Report:'}
     ],
