@@ -37,11 +37,11 @@
 # Current Version: 0.0.0
 ###
 
-name: "Change Report"
+name: 'Change Report'
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 01 * * 0/3"
+    - cron: '0 01 * * 1/2'
 
 jobs:
   change-report:
@@ -56,13 +56,13 @@ jobs:
         with:
           # The destination to post the report to.
           # "slack" and "discord" are supported
-          destination: "discord"
+          destination: 'discord'
           # Number of days to include into the report
-          days: 3
+          days: 2
           # Slack channel to post the report to.
           # For Slack it's the name of the channel, without the leading "#",
           # For Discord it's the channel ID
-          channel: "1181345448452182106"
+          channel: '1181345448452182106, 1175861376711925762'
         env:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
