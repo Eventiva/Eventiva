@@ -32,7 +32,7 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 09-12-2023
+ * Last Modified: 10-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * Current Version: 0.0.0
  */
@@ -63,10 +63,12 @@ export const sendDiscordMessage = async (
       content
     })
   )
-
+  
   // if discord message sent successfully and is type Discord.Message<true>
-  if (message?.crosspostable) {
+  try {
     await message.crosspost()
+  } catch (e) {
+    console.error(e)
   }
 
   discord.destroy()
