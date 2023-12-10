@@ -62,7 +62,7 @@ jobs:
           # Slack channel to post the report to.
           # For Slack it's the name of the channel, without the leading "#",
           # For Discord it's the channel ID
-          channel: "1181343964809396244"
+          channel: "1181343964809396244, 1175861376711925762"
         env:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
