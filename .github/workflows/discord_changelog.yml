@@ -37,11 +37,11 @@
 # Current Version: 0.0.0
 ###
 
-name: "Change Report"
+name: 'Change Report'
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 01 * * 0/3" # Run every 3rd day at 01am
+    - cron: '0 01 * * 1/2' # Run every 3rd day at 01am
 
 jobs:
   change-report:
@@ -56,13 +56,13 @@ jobs:
         with:
           # The destination to post the report to.
           # "slack" and "discord" are supported
-          destination: "discord"
+          destination: 'discord'
           # Number of days to include into the report
-          days: 3
+          days: 2
           # Slack channel to post the report to.
           # For Slack it's the name of the channel, without the leading "#",
           # For Discord it's the channel ID
-          channel: "1175861376711925762"
+          channel: '1175861376711925762'
         env:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -75,6 +75,7 @@ jobs:
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_REPO_NAME: ${{ github.repository }}
 
   frappe-report:
     runs-on: ubuntu-latest
@@ -82,13 +83,30 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/frappe"
+          repository: 'frappe/frappe'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181650952831385641"
+          destination: 'discord'
+          days: 2
+          channel: '1181650952831385641, 1175861376711925762'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+
+  human-resources-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 250
+          repository: 'frappe/hrms'
+
+      - uses: eventiva/change-report@main
+        with:
+          destination: 'discord'
+          days: 2
+          channel: '1183092847231119570, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -99,13 +117,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/erpnext"
+          repository: 'frappe/erpnext'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181651008410095617"
+          destination: 'discord'
+          days: 2
+          channel: '1181651008410095617, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -116,13 +134,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/lms"
+          repository: 'frappe/lms'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181651075158253728"
+          destination: 'discord'
+          days: 2
+          channel: '1181651075158253728, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -133,13 +151,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/lending"
+          repository: 'frappe/lending'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181651400955023360"
+          destination: 'discord'
+          days: 2
+          channel: '1181651400955023360, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -150,13 +168,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/health"
+          repository: 'frappe/health'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181651559214485556"
+          destination: 'discord'
+          days: 2
+          channel: '1181651559214485556, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -167,13 +185,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/health"
+          repository: 'frappe/health'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181651624893104188"
+          destination: 'discord'
+          days: 2
+          channel: '1181651624893104188, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -184,13 +202,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/health"
+          repository: 'frappe/health'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181651810570743878"
+          destination: 'discord'
+          days: 2
+          channel: '1181651810570743878, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -201,13 +219,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "phamos-eu/it_management"
+          repository: 'phamos-eu/it_management'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181652191023484938"
+          destination: 'discord'
+          days: 2
+          channel: '1181652191023484938, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
@@ -218,13 +236,13 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
-          repository: "frappe/builder"
+          repository: 'frappe/builder'
 
       - uses: eventiva/change-report@main
         with:
-          destination: "discord"
-          days: 3
-          channel: "1181657346812940328"
+          destination: 'discord'
+          days: 2
+          channel: '1181657346812940328, 1175861376711925762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
