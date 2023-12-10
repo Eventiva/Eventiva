@@ -32,7 +32,7 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 06-12-2023
+ * Last Modified: 10-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * Current Version: 0.0.0
  */
@@ -44,6 +44,7 @@ export const composeReport = async (
   commitMessagesList: string[]
 ): Promise<string> => {
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
+  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
 
   const openai = new OpenAIApi(
     new Configuration({
@@ -61,7 +62,8 @@ export const composeReport = async (
     `You should include emojis and emotes to make it more community-friendly.`,
     `You should always sign the end of your message as "The Software Delivery Change Manager".`,
     `Never make up points. Only use the information given to create your response.`,
-    `If a section is going to be empty, this is fine.`
+    `If a section is going to be empty, this is fine.`,
+    `Include within the title the name of the project, and the date range of the report.`,
   ].join('\n')
   const userPrompt = [
     `Write what we've done in the past tense, active voice.`,
@@ -78,7 +80,7 @@ export const composeReport = async (
     messages: [
       {role: 'system', content: systemPrompt},
       {role: 'user', content: userPrompt},
-      {role: 'user', content: 'Commit messages:'},
+      {role: 'user', content: 'Project Name: ' + GITHUB_REPO_NAME + '\nCommit messages:'},
       {role: 'user', content: commitMessagesList.join('\n')},
       {role: 'assistant', content: 'Report:'}
     ],
