@@ -2,8 +2,8 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: doc_review.yml
- # Path: \.github\ISSUE_TEMPLATE\doc_review.yml
+ # File: 4-doc_review.yml
+ # Path: \.github\ISSUE_TEMPLATE\4-doc_review.yml
  # Created Date: Monday, April 17th 2023
  # Author: Jonathan Stevens (Email: jonathan@Eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
@@ -14,11 +14,11 @@
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
  # Copyright (c) 2023 Eventiva - All Rights Reserved
- # LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+ # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
  # licensed for copying, distribution and modification under the terms of
- # the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+ # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
  # or (at your option) any later version of this license.
  # 
  # This program is distributed in the hope that it will be useful,
@@ -26,13 +26,13 @@
  # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  # Creative Commons Zero v1.0 Universal for more details.
  # 
- # You should have received a copy of the Creative Commons Zero v1.0 Universal
+ # You should have received a copy of the GNU General Public License v3.0 only
  # along with this program. If not, please write to: jonathan@Eventiva.co.uk,
- # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+ # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 08-05-2023
+ # Last Modified: 11-12-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
@@ -41,54 +41,52 @@
 name: Documentation review
 description: A review to highlight issues in documentation
 title: "docs([context]): "
-
+labels: ["Sweep"]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to fill out this review, we greatly appriciate it!
   - type: markdown
-    attributes: 
+    attributes:
       value: |
-        Please use [context] in title to describe the part of the mono-repo is related to this issue.
-        Context example: docs(components): {your title here}
-        Valid options are: 
-          - directory: The frontend website which displays our directory systems
-          - proxy: The api endpoint for proxied connections to private ERP instances
-          - image: The build image used when creating private ERP instances 
-          - terraform: The definition of our build processes
-          - ci/cd: The automations which run at issue create, pull request or push
-          - cli: The custom rush based cli, used to streamline development processes
-          - erp: The default module within our ERP instances
-          - frappe: The frappe ecosystem which our erp instances are built on
-          - payments: The payments module within our ERP instances
-          - tours: The tours module within our ERP instances
-          - logistics: The logistics module within our ERP instances
-          - banking: The banking module within our ERP instances
-          - tickets: The tickets module within our ERP instances
-          - marketing: The marketing module within our ERP instances
-          - hospitality: The hospitality module within our ERP instances
+        Please use [context] in title to describe the folder path which related to this issue.
+        Context example: docs(projects/modules/eventiva_core): {your title here}
   - type: dropdown
     attributes:
       label: Features
       description: What product or feature(s) affected?
       multiple: true
       options:
-        - "directory"
-        - "proxy"
-        - "image"
-        - "terraform"
-        - "ci/cd"
-        - "cli"
-        - "erp"
-        - "frappe"
-        - "payments"
-        - "tours"
-        - "logistics"
-        - "banking"
-        - "tickets"
-        - "marketing"
-        - "hospitality"
+        - "Bots - Discord - Client"
+        - "Bots - Discord - Tickets"
+        - "Bots - Discord - Helper"
+        - "Framework - Frappe"
+        - "Modules - Control Center"
+        - "Modules - Custody"
+        - "Modules - Discord Intergration"
+        - "Modules - Eventiva Core"
+        - "Modules - Fleet Management"
+        - "Modules - Gaming"
+        - "Modules - Incident Management"
+        - "Modules - Justice"
+        - "Modules - Segment Connect"
+        - "Modules - Teamspeak Integration"
+        - "Modules - Vetting & Screening"
+        - "Modules - ERPNext"
+        - "Modules - Human Resources"
+        - "Modules - Website Builder"
+        - "Modules - IT Management"
+        - "Modules - Webshop"
+        - "Modules - Payments"
+        - "Modules - Healthcare"
+        - "Modules - Lending"
+        - "Modules - Learning Management System"
+        - "Workflows - .github"
+        - "Workflows - Awesome Frappe"
+        - "Workflows - Change Report"
+        - "Workflows - Environments - Discord - Bot"
+        - "Workflows - Generators - Discord - Bot"
     validations:
       required: true
   - type: textarea
@@ -139,5 +137,5 @@ body:
         The Code of Conduct helps create a safe space for everyone. We require
         that everyone agrees to it.
       options:
-        - label: I agree to follow this project's [Code of Conduct](https://github.com/Eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md)
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/Eventiva/contributors/blob/develop/CODE_OF_CONDUCT.md)
           required: true
