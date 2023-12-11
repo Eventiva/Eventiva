@@ -1,7 +1,0 @@
-# blank file
-[submodule "projects/modules/eventiva_core"]
-	path = projects/modules/eventiva_core
-	url = git@github.com:Eventiva/eventiva_core.git
-[submodule "projects/modules/grand_theft_auto"]
-	path = projects/modules/grand_theft_auto
-	url = git@github.com:Eventiva/grand_theft_auto.git
