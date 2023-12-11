@@ -1,0 +1,4 @@
+[map "bf5d44d5-abd2-30bc-a5b9-fce3366aa652"]
+	object = 27ac9aa79b48d980d536313e0f765867ffbf4954
+	path = projects/workflows/awesome-frappe
+	type = expand module
