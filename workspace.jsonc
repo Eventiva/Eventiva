@@ -39,7 +39,7 @@
   "teambit.generator/generator": {
     "envs": [
       "eventiva.workflows/environments/discord/bot",
-      "teambit.node/node",
+      "teambit.node/node"
       //     "bitdev.react/react-env",
       //     "bitdev.vue/vue-env",
       //     "bitdev.angular/angular-env"
