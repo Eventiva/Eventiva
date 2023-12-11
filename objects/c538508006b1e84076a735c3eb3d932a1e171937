@@ -1,0 +1,4 @@
+[map "8983afb7-6d9c-3aef-8fa4-cf492f4273eb"]
+	object = 2e09e06e1e6e7f9d26e54456c27060c3575447bb
+	path = projects/workflows/.github
+	type = expand module
