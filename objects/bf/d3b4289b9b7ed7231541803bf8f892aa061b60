@@ -6,3 +6,7 @@
 	object = c7b9bab1bea3690923bc8e6277030e5ff6287481
 	path = projects/modules/control-centre
 	type = expand module
+[map "c8dcc4e4-aaf8-3a0c-ae22-8637a6f0080c"]
+	object = 292153abeffbc44a700aca971b6af6451b0e560f
+	path = projects/modules/control_centre
+	type = expand module

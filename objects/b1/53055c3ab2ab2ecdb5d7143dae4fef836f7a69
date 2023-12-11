@@ -1,0 +1,4 @@
+[map "6d82108c-eb19-3d0c-8b8f-37f687a5b14b"]
+	object = 24f70705d22ecfc6566da2c56fe28ce9473bf378
+	path = projects/modules/fleet_management
+	type = expand module

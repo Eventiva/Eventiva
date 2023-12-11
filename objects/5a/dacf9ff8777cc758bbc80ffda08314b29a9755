@@ -1,0 +1,180 @@
+[map "e03b45e4-1220-3e0e-b401-891d13910fb5"]
+	object = 27bcda09aa4b4dfe6e5a9102bdd4f536c5ba7784
+	path = projects/workflows/change-report
+	stage = sync
+	type = extract module
+[map "fe83d236-4c3c-3a34-826e-3771198924e8"]
+	object = 30e71789815abe6c72a85f431223f953d25b9c60
+	path = projects/modules/control-centre
+	stage = sync
+	type = extract module
+[map "ecb6188c-3cf7-3f34-a010-72c5eb0eb626"]
+	object = e8af3bfb07702469c93a4b42992ffd9248b0d27a
+	path = projects/modules/discord_integration
+	stage = sync
+	type = extract module
+[map "5f510abf-505e-3df7-b26c-b1b601342430"]
+	object = d2fc865ea671ed2130f76ff228b2e8650c0d9ca0
+	path = projects/modules/custody
+	stage = sync
+	type = extract module
+[map "892db73a-60bf-3161-b0b8-2a4ae56fba23"]
+	object = 6c8d0409f6a1d57c09569c37c6a6fb95bed0b7ea
+	path = projects/workflows/awesome-frappe
+	stage = sync
+	type = extract module
+[map "ef787bbf-cb7f-3383-8716-d5fe17f3336e"]
+	object = c538508006b1e84076a735c3eb3d932a1e171937
+	path = projects/workflows/.github
+	stage = sync
+	type = extract module
+[module "70b24280-0906-38ed-981c-4bb2230ac123"]
+	conflict = request-pull
+	path = projects/workflows/change-report
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/main
+	url = agnostic://gh/727498660
+[module "65323496-0557-3c7d-9765-1a2e2f44ea5b"]
+	conflict = request-pull
+	path = projects/modules/gaming
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721380299
+[module "0f8b297c-e993-399f-ab8f-ecb119b8bd3a"]
+	conflict = request-pull
+	path = projects/modules/control-centre
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721378060
+[module "6b5469c6-5622-3166-b542-6bd0c1e1f815"]
+	conflict = request-pull
+	path = projects/modules/incident_management
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721380808
+[module "8f2465fc-6a9d-3225-b296-c01b82dc32c2"]
+	conflict = request-pull
+	path = projects/modules/vetting
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721381414
+[module "646b264e-2d7c-3af6-a5bb-10c550679ea7"]
+	conflict = request-pull
+	path = projects/modules/control_centre
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721378060
+[module "e0468808-ae7f-309d-afdc-aaa15525e441"]
+	conflict = request-pull
+	path = projects/modules/discord_integration
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721379820
+[module "6d23cc99-fa53-3ede-b307-e07fef8efac8"]
+	conflict = request-pull
+	path = projects/modules/custody
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721379534
+[module "4ffc74be-973d-383c-8e12-4640f5eae15a"]
+	conflict = request-pull
+	path = projects/workflows/awesome-frappe
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/main
+	url = agnostic://gh/726832406
+[module "7d20d44b-26e3-3948-8196-057e49205575"]
+	conflict = request-pull
+	path = projects/workflows/.github
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/636665472
+[module "d74457a9-4f51-33bd-b437-37a7a0360ff3"]
+	conflict = request-pull
+	path = projects/modules/justice
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721380948
+[module "facba43a-1a35-3336-b2c2-20dfae024dfc"]
+	conflict = request-pull
+	path = projects/modules/segment_connect
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721381151
+[module "f688754e-5775-3f66-a324-b3cfa4a7b21f"]
+	conflict = request-pull
+	path = projects/modules/teamspeak_integration
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721381285
+[module "3fc3bcae-f060-39f2-9a57-c7ffc333725e"]
+	conflict = request-pull
+	path = projects/modules/eventiva_core
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/726643600
+[module "b997ab60-5089-39cc-928a-6cefe2ca4153"]
+	conflict = request-pull
+	path = projects/modules/fleet_management
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721380002
+[map "104e6940-64d7-3a8f-b84d-55339871e77d"]
+	object = 1d2eec2eca4ace67b3693a11211b0481f770be66
+	path = projects/modules/control_centre
+	stage = sync
+	type = extract module
+[map "4d0b5e52-85e8-3988-b2ba-9f4822ccbdcf"]
+	object = 87bf2c82b13f42924dcd56531a5de7f7d77b63b2
+	path = projects/modules/eventiva_core
+	stage = sync
+	type = extract module
+[map "02fcccaa-87d0-32ce-856b-95fc053782bd"]
+	object = b153055c3ab2ab2ecdb5d7143dae4fef836f7a69
+	path = projects/modules/fleet_management
+	stage = sync
+	type = extract module
+[map "b20b6c1c-2035-357e-829f-32cbda00517c"]
+	object = 24a40442bcb185917f5434ebafa2c89c84d3dee8
+	path = projects/modules/gaming
+	stage = sync
+	type = extract module
+[map "6bcfdfd3-8ce3-3f72-b1a8-cbdd2808a0f7"]
+	object = 8b45dd4883610eb389b63db555829934efb53318
+	path = projects/modules/incident_management
+	stage = sync
+	type = extract module
+[map "6ce9db47-d53d-3845-84ed-3e679f58498f"]
+	object = bd3a5dee411a78f59b23d43664057ac91eb837ea
+	path = projects/modules/justice
+	stage = sync
+	type = extract module
+[map "7217a8a5-03d7-3b65-87fb-47278357301f"]
+	object = 0f064a9026b1f2907427486a62f38d565cc7f3f1
+	path = projects/modules/segment_connect
+	stage = sync
+	type = extract module
+[map "390641d7-8f11-3352-ab28-8ba6c7f27d04"]
+	object = 5edafe7c428dde3974b342fc854bcb897dc82625
+	path = projects/modules/teamspeak_integration
+	stage = sync
+	type = extract module
+[map "451ac58d-730a-3f4c-b9d1-bfbf66469a40"]
+	object = 88179ad15ecb447f97aa48c692d24439a369dcf4
+	path = projects/modules/vetting
+	stage = sync
+	type = extract module

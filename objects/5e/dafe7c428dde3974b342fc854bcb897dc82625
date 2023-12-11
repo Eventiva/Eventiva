@@ -1,0 +1,4 @@
+[map "cd1d5112-e61e-3107-a2e5-c478d025d88b"]
+	object = 24f70705d22ecfc6566da2c56fe28ce9473bf378
+	path = projects/modules/teamspeak_integration
+	type = expand module

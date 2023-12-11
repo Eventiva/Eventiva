@@ -1,0 +1,4 @@
+[map "b5e75082-c058-3fb4-b9bd-237a8b2c8e36"]
+	object = ac604676fd0e4c0a50adabd4f612f44eab081697
+	path = projects/modules/eventiva_core
+	type = expand module

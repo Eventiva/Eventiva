@@ -1,0 +1,4 @@
+[map "22aa5aa4-5745-3bd0-9236-70a517a14832"]
+	object = 5f023a8bd053ac57c35728ed2e2172c45a76326f
+	path = projects/modules/vetting
+	type = expand module

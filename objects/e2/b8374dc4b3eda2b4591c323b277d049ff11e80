@@ -1,0 +1,4 @@
+[map "121e7299-91d9-372b-b707-9acdc1dbe033"]
+	object = 31da3c60cfd5a7834632977e042a7486def20993
+	path = projects/modules/segment_connect
+	type = expand module

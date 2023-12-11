@@ -1,0 +1,4 @@
+[map "40a8cdd4-3604-3aed-b81a-5f6aafd2f0be"]
+	object = b0db24eb3361c54a4bb4779ef1d7d3a96810beef
+	path = projects/modules/vetting
+	type = expand module

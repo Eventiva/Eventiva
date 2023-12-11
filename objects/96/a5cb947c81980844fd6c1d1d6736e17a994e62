@@ -1,0 +1,4 @@
+[map "dc52017a-c7bf-3125-a2a9-4b9c968a8be1"]
+	object = 80d69e15164c6eaf5c1bb5147aa7b2a12602e9fe
+	path = projects/modules/justice
+	type = expand module
