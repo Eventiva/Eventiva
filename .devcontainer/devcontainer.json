@@ -106,9 +106,10 @@
 		5432,
 		8000,
 		9000,
-		6787
+		6787,
+		4000
 	],
-	"initializeCommand": "git pull --recurse-submodules"
+	// "initializeCommand": "git pull --recurse-submodules"
 	// "initializeCommand": "bash ./env_config.sh",
 	// "onCreateCommand": [
 	// 	// Create the site
