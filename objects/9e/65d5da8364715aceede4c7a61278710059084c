@@ -1,0 +1,48 @@
+[map "892db73a-60bf-3161-b0b8-2a4ae56fba23"]
+	object = 6c8d0409f6a1d57c09569c37c6a6fb95bed0b7ea
+	path = projects/workflows/awesome-frappe
+	stage = sync
+	type = extract module
+[map "ef787bbf-cb7f-3383-8716-d5fe17f3336e"]
+	object = c538508006b1e84076a735c3eb3d932a1e171937
+	path = projects/workflows/.github
+	stage = sync
+	type = extract module
+[map "e03b45e4-1220-3e0e-b401-891d13910fb5"]
+	object = 27bcda09aa4b4dfe6e5a9102bdd4f536c5ba7784
+	path = projects/workflows/change-report
+	stage = sync
+	type = extract module
+[module "4ffc74be-973d-383c-8e12-4640f5eae15a"]
+	conflict = request-pull
+	path = projects/workflows/awesome-frappe
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/main
+	url = agnostic://gh/726832406
+[module "7d20d44b-26e3-3948-8196-057e49205575"]
+	conflict = request-pull
+	path = projects/workflows/.github
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/636665472
+[module "70b24280-0906-38ed-981c-4bb2230ac123"]
+	conflict = request-pull
+	path = projects/workflows/change-report
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/main
+	url = agnostic://gh/727498660
+[module "e2ad5773-4e63-3897-9152-3cd73f6a85d2"]
+	conflict = request-pull
+	path = projects/modules
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/721378060
+[map "9cfd9f0f-9460-3c4f-89df-fe63e2848bb5"]
+	object = 0bff9c61174b6f3017f0a77accaddd169dc78b92
+	path = projects/modules
+	stage = sync
+	type = extract module
