@@ -5,43 +5,5 @@
   "repository": "https://github.com/eventiva/eventiva",
   "keywords": [],
   "private": true,
-  "scripts": {
-    "preinstall": "node ./common/scripts/preroot.js",
-    "postinstall": "bit import && bit compile && bit link"
-  },
-  "xo": {
-    "rules": {
-      "semicolon": 0,
-      "import/extensions": 0,
-      "n/file-extension-in-import": [
-        "error",
-        "always",
-        {
-          ".js": "never",
-          ".mjs": "never",
-          ".tsx": "never"
-        }
-      ],
-      "import/no-cycle": [
-        2,
-        {
-          "maxDepth": 1
-        }
-      ]
-    }
-  },
-  "eslintConfig": {
-    "extends": [
-      "xo",
-      "xo-typescript"
-    ],
-    "rules": {
-      "no-trailing-spaces": [
-        "error",
-        {
-          "ignoreComments": true
-        }
-      ]
-    }
-  }
+  "license": "GPL-3.0"
 }

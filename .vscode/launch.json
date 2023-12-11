@@ -5,16 +5,18 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Run discord bot",
+			"name": "Run discord/client",
 			"request": "launch",
-			"localRoot": "${workspaceFolder}/projects/discord",
+			"localRoot": "${workspaceFolder}",
 			"runtimeArgs": [
-				"run-script",
-				"watch:start"
+				"app",
+				"run",
+				"client"
 			],
-			"runtimeExecutable": "npm",
+			"runtimeExecutable": "bit",
 			"trace": true,
-			"type": "node"
+			"type": "node",
+			"envFile": "${workspaceFolder}/projects/bots/discord/client/.env"
 		},
 		{
 			"name": "Launch Website",

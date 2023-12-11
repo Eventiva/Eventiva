@@ -60,3 +60,6 @@ RUN if [ ! -d "/home/frappe/frappe-bench/apps/discord_integration" ] ; then benc
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/control_centre" ] ; then bench get-app https://github.com/eventiva/Control-Centre.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/grand_theft_auto" ] ; then bench get-app https://github.com/eventiva/grand_theft_auto.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/segment_connect" ] ; then bench get-app https://github.com/eventiva/Segment_Connect.git ; fi
+
+# installl bit via bvm using npx @teambit/bvm install
+RUN npx @teambit/bvm install
