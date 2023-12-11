@@ -41,15 +41,17 @@
 
 services:
   discord:
-    # set the image to node js latest
-    image: node:latest
+    build:
+      context: ../../
+      dockerfile: dockerfile.eventiva
+    working_dir: /home/frappe/frappe-bench/workspace
+    ports:
+      - 4000:4000
     volumes:
-      - ../../:/home/workspace
-    # post build commands to install pnpm and then install the bot and run watch:start
+      # bind the workspace to /home/frappe/frappe-bench/workspace
+      - ../../:/home/frappe/frappe-bench/workspace
     command: >
       sh -c "
-        npm install -g pnpm &&
-        cd /home/workspace/projects/bots/discord &&
-        pnpm install &&
-        pnpm run watch:start
+        bit install &&
+        bit app run helper
       "
