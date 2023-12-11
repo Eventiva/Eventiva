@@ -2,3 +2,7 @@
 	object = c4d9e65e387d0383964ff5a535f0d1e1157337ac
 	path = projects/workflows/.github
 	type = expand module
+[map "7cf325ca-d3e8-3fd8-aad0-e8079385c6a2"]
+	object = f50eefbf109283c22892feef23774642e279dd9c
+	path = projects/workflows/.github
+	type = expand module

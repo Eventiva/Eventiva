@@ -1,0 +1,12 @@
+[module "7d20d44b-26e3-3948-8196-057e49205575"]
+	conflict = request-pull
+	path = projects/workflows/.github
+	pull = merge rebase
+	pull = squash never
+	ref = if refs/heads/develop sync refs/heads/develop
+	url = agnostic://gh/636665472
+[map "5072a31d-cee1-3ffb-a3e0-e6981710d750"]
+	object = d26fde6a0396f858b251e9ba7477d7c9c290ff91
+	path = projects/workflows/.github
+	stage = sync
+	type = extract module
