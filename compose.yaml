@@ -1,0 +1,114 @@
+###
+ # @format
+ # -----
+ # Project: @eventiva/eventiva
+ # File: compose.yaml
+ # Path: \compose.yaml
+ # Created Date: Monday, December 11th 2023
+ # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # -----
+ # Contributing: Please read through our contributing guidelines. Included are directions for opening
+ # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ # 
+ # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+ # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ # -----
+ # Copyright (c) 2023 Eventiva - All Rights Reserved
+ # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+ # -----
+ # This program has been provided under confidence of the copyright holder and is 
+ # licensed for copying, distribution and modification under the terms of
+ # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
+ # or (at your option) any later version of this license.
+ # 
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License v3.0 only for more details.
+ # 
+ # You should have received a copy of the GNU General Public License v3.0 only
+ # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
+ # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ # 
+ # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+ # -----
+ # Last Modified: 11-12-2023
+ # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ ###
+services:
+  configurator:
+    volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    entrypoint:
+      - bash
+      - -c
+    # add redis_socketio for backward compatibility
+    command:
+      - >
+        ls -1 apps > sites/apps.txt;
+        bench set-config -g db_host $$DB_HOST;
+        bench set-config -gp db_port $$DB_PORT;
+        bench set-config -g redis_cache "redis://$$REDIS_CACHE";
+        bench set-config -g redis_queue "redis://$$REDIS_QUEUE";
+        bench set-config -g redis_socketio "redis://$$REDIS_QUEUE";
+        bench set-config -gp socketio_port $$SOCKETIO_PORT;
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      REDIS_CACHE: ${REDIS_CACHE}
+      REDIS_QUEUE: ${REDIS_QUEUE}
+      SOCKETIO_PORT: 9000
+    depends_on: {}
+
+  backend:
+    volumes:
+    - sites:/home/frappe/frappe-bench/sites
+
+  frontend:
+    image: frappe/erpnext:${ERPNEXT_VERSION:?No ERPNext version set}
+    command:
+      - nginx-entrypoint.sh
+    environment:
+      BACKEND: backend:8000
+      SOCKETIO: websocket:9000
+      FRAPPE_SITE_NAME_HEADER: ${FRAPPE_SITE_NAME_HEADER:-$$host}
+      UPSTREAM_REAL_IP_ADDRESS: ${UPSTREAM_REAL_IP_ADDRESS:-127.0.0.1}
+      UPSTREAM_REAL_IP_HEADER: ${UPSTREAM_REAL_IP_HEADER:-X-Forwarded-For}
+      UPSTREAM_REAL_IP_RECURSIVE: ${UPSTREAM_REAL_IP_RECURSIVE:-off}
+      PROXY_READ_TIMOUT: ${PROXY_READ_TIMOUT:-120}
+      CLIENT_MAX_BODY_SIZE: ${CLIENT_MAX_BODY_SIZE:-50m}
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+    depends_on:
+      - backend
+      - websocket
+
+  websocket:
+    image: frappe/erpnext:${ERPNEXT_VERSION:?No ERPNext version set}
+    depends_on:
+      configurator:
+        condition: service_completed_successfully
+    command:
+      - node
+      - /home/frappe/frappe-bench/apps/frappe/socketio.js
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+
+  queue-short:
+    volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    command: bench worker --queue short,default
+
+  queue-long:
+    volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    command: bench worker --queue long,default,short
+
+  scheduler:
+    volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    command: bench schedule
+
+# ERPNext requires local assets access (Frappe does not)
+volumes:
+  sites:
