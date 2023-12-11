@@ -11,9 +11,8 @@
 {
     "discord/client": {
         "name": "discord/client",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.bots",
+        "scope": "eventiva.bots",
+        "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/discord/client",
         "config": {
@@ -39,9 +38,8 @@
     },
     "environments/discord/bot": {
         "name": "environments/discord/bot",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.workflows",
+        "scope": "eventiva.workflows",
+        "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/environments/discord/bot",
         "config": {
@@ -70,9 +68,8 @@
     },
     "generators/discord/bot": {
         "name": "generators/discord/bot",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.workflows",
+        "scope": "eventiva.workflows",
+        "version": "0.0.1",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/generators/discord/bot",
         "config": {
