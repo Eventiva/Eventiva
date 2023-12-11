@@ -72,3 +72,10 @@ jspm_packages/
 /pnpm-lock.yaml
 .pnpm-store
 artifacts/
+projects/workflows/environments/tsconfig.json
+projects/workflows/environments/.eslintrc.json
+projects/workflows/generators/.eslintrc.json
+projects/workflows/generators/tsconfig.json
+projects/bots/tsconfig.json
+projects/bots/.eslintrc.json
+.prettierrc.cjs
