@@ -1,49 +1,10 @@
-/*
- * @format
- * -----
- * Project: @eventiva/eventiva
- * File: devcontainer.json
- * Path: /.devcontainer/devcontainer.json
- * Created Date: Thursday, January 1st 1970
- * Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
- * -----
- * Contributing: Please read through our contributing guidelines. Included are directions for opening
- * issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- * 
- * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
- * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
- * -----
- * Copyright (c) 1970 - 2023 Resnovas - All Rights Reserved
- * LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
- * -----
- * This program has been provided under confidence of the copyright holder and is 
- * licensed for copying, distribution and modification under the terms of
- * the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
- * or (at your option) any later version of this license.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * Creative Commons Zero v1.0 Universal for more details.
- * 
- * You should have received a copy of the Creative Commons Zero v1.0 Universal
- * along with this program. If not, please write to: jonathan@resnovas.com,
- * or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
- * 
- * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
- * -----
- * Last Modified: 28-11-2023
- * By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
- * Current Version: 0.0.0
- */
 {
 	"name": "Eventiva Development Environment",
 	"dockerComposeFile": [
-		"../projects/frappe_docker/compose.yaml",
-		"../projects/frappe_docker/overrides/compose.mariadb.yaml",
-		// "../projects/frappe_docker/overrides/compose.mariadb-shared.yaml",
-		"../projects/frappe_docker/overrides/compose.redis.yaml",
-		"../projects/frappe_docker/overrides/compose.https.yaml",
+		"../compose.yaml",
+		"../overrides/compose.mariadb.yaml",
+		"../overrides/compose.redis.yaml",
+		"../overrides/compose.https.yaml",
 		"./compose.eventiva.yaml",
 		"./compose.bot.discord.yaml"
 	],
@@ -108,15 +69,5 @@
 		9000,
 		6787,
 		4000
-	],
-	// "initializeCommand": "git pull --recurse-submodules"
-	// "initializeCommand": "bash ./env_config.sh",
-	// "onCreateCommand": [
-	// 	// Create the site
-	// 	"bench set-config -g developer_mode 1 && bench new-site site1.localhost --db-root-password databasePassword --admin-password admin --set-default",
-	// 	// Install Frappe Modules
-	// 	"bench get-app hrms && bench install-app erpnext && bench install-app hrms",
-	//  // You need to restart at this point
-	//  "bench install-app it_management && bench install-app lending && bench install-app payments && bench install-app webshop && bench install-app lms && bench install-app fleet_management && bench install-app incident_management && bench install-app vetting && bench install-app eventiva_core && bench install-app healthcare && bench install-app control_centre && bench install-app custody && bench install-app justice && bench install-app gaming && bench install-app grand_theft_auto && bench install-app teamspeak_integration && bench install-app discord_integration && bench install-app segment_connect"
-	// ]
+	]
 }
