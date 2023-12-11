@@ -1,76 +1,7 @@
 # blank file
-[submodule "projects/.github"]
-	path = projects/.github
-	url = git@github.com:Eventiva/.github.git
-[submodule "projects/awesome-frappe"]
-	path = projects/awesome-frappe
-	url = git@github.com:Eventiva/awesome-frappe.git
-[submodule "projects/contributors"]
-	path = projects/contributors
-	url = git@github.com:Eventiva/contributors.git
-[submodule "projects/modules/Control-Centre"]
-	path = projects/modules/Control-Centre
-	url = git@github.com:Eventiva/Control-Centre.git
-[submodule "projects/modules/custody"]
-	path = projects/modules/custody
-	url = git@github.com:Eventiva/custody.git
-[submodule "projects/modules/discord_integration"]
-	path = projects/modules/discord_integration
-	url = git@github.com:Eventiva/discord_integration.git
 [submodule "projects/modules/eventiva_core"]
 	path = projects/modules/eventiva_core
 	url = git@github.com:Eventiva/eventiva_core.git
-[submodule "projects/modules/fleet_management"]
-	path = projects/modules/fleet_management
-	url = git@github.com:Eventiva/fleet_management.git
-[submodule "projects/modules/gaming"]
-	path = projects/modules/gaming
-	url = git@github.com:Eventiva/gaming.git
 [submodule "projects/modules/grand_theft_auto"]
 	path = projects/modules/grand_theft_auto
 	url = git@github.com:Eventiva/grand_theft_auto.git
-[submodule "projects/modules/incident_management"]
-	path = projects/modules/incident_management
-	url = git@github.com:Eventiva/incident_management.git
-[submodule "projects/modules/justice"]
-	path = projects/modules/justice
-	url = git@github.com:Eventiva/justice.git
-[submodule "projects/modules/Segment_Connect"]
-	path = projects/modules/Segment_Connect
-	url = git@github.com:Eventiva/Segment_Connect.git
-[submodule "projects/modules/Teamspeak_Integration"]
-	path = projects/modules/Teamspeak_Integration
-	url = git@github.com:Eventiva/Teamspeak-Integration.git
-[submodule "projects/modules/vetting"]
-	path = projects/modules/vetting
-	url = git@github.com:Eventiva/vetting.git
-[submodule "projects/modules/lending"]
-	path = projects/modules/lending
-	url = https://github.com/frappe/lending.git
-[submodule "projects/modules/health"]
-	path = projects/modules/health
-	url = https://github.com/frappe/health.git
-[submodule "projects/modules/payments"]
-	path = projects/modules/payments
-	url = https://github.com/frappe/payments.git
-[submodule "projects/modules/webshop"]
-	path = projects/modules/webshop
-	url = https://github.com/frappe/webshop.git
-[submodule "projects/modules/it_management"]
-	path = projects/modules/it_management
-	url = https://github.com/phamos-eu/it_management.git
-[submodule "projects/modules/hrms"]
-	path = projects/modules/hrms
-	url = https://github.com/frappe/hrms.git
-[submodule "projects/modules/frappe"]
-	path = projects/modules/frappe
-	url = https://github.com/frappe/frappe.git
-[submodule "projects/modules/erpnext"]
-	path = projects/modules/erpnext
-	url = https://github.com/frappe/erpnext.git
-[submodule "projects/modules/builder"]
-	path = projects/modules/builder
-	url = https://github.com/frappe/builder.git
-[submodule "projects/workflows/change-report"]
-	path = projects/workflows/change-report
-	url = git@github.com:Eventiva/change-report.git
