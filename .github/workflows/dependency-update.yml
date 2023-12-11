@@ -62,3 +62,4 @@ jobs:
         uses: bit-tasks/dependency-update@v1
         with:
           allow: "all"
+          branch: 'develop'
