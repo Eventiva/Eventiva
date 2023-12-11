@@ -1,4 +1,4 @@
-[map "7109fdf4-2113-3d82-98f1-2037819977d5"]
-	object = 24f70705d22ecfc6566da2c56fe28ce9473bf378
+[map "19ee90d3-3305-3764-bd77-e0aebc065c70"]
+	object = 25d0e1f6656c79e8bbaa3f71374b0bc68efaed80
 	path = projects/modules/discord_integration
 	type = expand module
