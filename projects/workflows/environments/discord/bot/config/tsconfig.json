@@ -1,0 +1,37 @@
+/**
+    * @see https://bit.dev/reference/typescript/typescript-config
+    */
+{
+  "extends": "@teambit/react.react-env/config/tsconfig.json",
+  "compilerOptions": {
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "ESNext",
+    "experimentalDecorators": true,
+    "declaration": true,
+    "sourceMap": true,
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "lib": [
+      "ESNext",
+    ],
+  },
+  "exclude": [
+    "artifacts",
+    "public",
+    "dist",
+    "node_modules",
+    "package.json",
+    "**/*.cjs"
+  ],
+  "include": [
+    "**/*",
+    "**/*.json",
+    ".mocharc.js",
+    ".mocharc.js"
+  ]
+}
