@@ -1,0 +1,4 @@
+[map "6b855611-231c-358e-81bd-dcc87b676983"]
+	object = 68dc2ff1c2b180127efbfa286a66a20deb599521
+	path = projects/modules/discord_integration
+	type = expand module
