@@ -1,6 +1,6 @@
 /**
  * this is the main configuration file of your bit workspace.
- * for full documentation, please see: https://bit.dev/docs/workspace/workspace-configuration
+ * for full documentation, please see: https://bit.dev/reference/workspace/workspace-json
  **/ {
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
   /**
@@ -27,8 +27,23 @@
     /**
      * default scope for all components in workspace.
      **/
-    "defaultScope": "eventiva.component",
-    "defaultOwner": "Eventiva"
+    "defaultScope": "eventiva.modules",
+    "defaultOwner": "Eventiva",
+    "resolveAspectsFromNodeModules": true,
+    "resolveEnvsFromRoots": true
+  },
+  /**
+   * comment in to include generator templates in your workspace.
+   * browse more dev environments: https://bit.dev/docs/getting-started/composing/dev-environments
+  **/
+  "teambit.generator/generator": {
+    "envs": [
+      "eventiva.workflows/environments/discord/bot",
+      "teambit.node/node",
+      //     "bitdev.react/react-env",
+      //     "bitdev.vue/vue-env",
+      //     "bitdev.angular/angular-env"
+    ]
   },
   /**
    * main configuration for component dependency resolution.
@@ -39,27 +54,26 @@
      */
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
-      "dependencies": {},
+      "dependencies": {
+        "@bitdev/node.node-app": "^0.0.6",
+        "@bitdev/node.node-env": "^0.0.4",
+        "@teambit/defender.eslint-linter": "^1.0.15",
+        "@teambit/defender.jest-tester": "^1.0.13",
+        "@teambit/defender.prettier-formatter": "^1.0.8",
+        "@teambit/dependencies.modules.packages-excluder": "^1.0.8",
+        "@teambit/react.react-env": "^1.0.32",
+        "@teambit/typescript.typescript-compiler": "^2.0.14",
+        "@types/lodash": "^4.14.201",
+        "express": "^4.18.2",
+        "lodash": "^4.17.21"
+      },
       "peerDependencies": {}
     },
-    "linkCoreAspects": true
+    "linkCoreAspects": true,
+    "rootComponents": true
   },
-  /**
-   * workspace variants allow to set different subsets of configuration for components in your
-   * workspace. this is extremely useful for upgrading, aligning and building components with a new
-   * set of dependencies. a rule can be a directory or a component-id/namespace, in which case,
-   * wrap the rule with curly brackets (e.g. `"{ui/*}": {}`)
-   * see https://bit.dev/docs/workspace/variants for more info.
-   **/
-  "teambit.workspace/variants": {
-    /**
-     * "*" is a special rule which applied on all components in the workspace.
-     **/
-    "*": {
-      /**
-       * uncomment to apply the chosen environment on all components.
-       **/
-      // "teambit.react/react": { }
-    }
-  }
+  "teambit.workspace/workspace-config-files": {
+    "enableWorkspaceConfigWrite": true
+  },
+  "eventiva.bots/discord/client": {}
 }
