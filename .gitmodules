@@ -1,7 +1,4 @@
 # blank file
-[submodule "projects/bots/discord"]
-	path = projects/bots/discord
-	url = git@github.com:Eventiva/discord.git
 [submodule "projects/.github"]
 	path = projects/.github
 	url = git@github.com:Eventiva/.github.git
@@ -53,9 +50,6 @@
 [submodule "projects/websites/Directory"]
 	path = projects/websites/Directory
 	url = git@github.com:Eventiva/Directory.git
-[submodule "projects/clients/radio"]
-	path = projects/clients/radio
-	url = git@github.com:Eventiva/radio.git
 [submodule "projects/modules/lending"]
 	path = projects/modules/lending
 	url = https://github.com/frappe/lending.git
