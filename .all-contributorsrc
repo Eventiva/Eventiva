@@ -42,6 +42,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/5614659?v=4",
       "profile": "https://github.com/maxprilutskiy",
       "contributions": ["code", "tool"]
+    },
+    {
+      "login": "atlassian-compass[bot]",
+      "name": "atlassian-compass[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/134145?v=4",
+      "profile": "https://github.com/apps/atlassian-compass",
+      "contributions": ["projectManagement"]
     }
   ],
   "contributorsPerLine": 7,
