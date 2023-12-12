@@ -4,6 +4,10 @@
 # documentation.
 #
 # Microsoft Security DevOps (MSDO) is a command line application which integrates static analysis tools into the development cycle.
+# Version: 1.0.0
+# Changelog:
+# - Major: Initial release of the defender-for-devops workflow. Author: Your Name
+
 # MSDO installs, configures and runs the latest versions of static analysis tools
 # (including, but not limited to, SDL/security and compliance tools).
 #
@@ -17,6 +21,9 @@
 # Read the official documentation here : https://learn.microsoft.com/en-us/azure/defender-for-cloud/quickstart-onboard-github
 
 name: "Microsoft Defender For Devops"
+
+# Changelog:
+# - Major: Initial release of the defender-for-devops workflow. Author: Your Name
 
 on:
   push:
