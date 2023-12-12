@@ -175,6 +175,19 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/25369014?v=4",
       "profile": "https://github.com/nextchamp-saqib",
       "contributions": ["doc"]
+    },
+    {
+      "login": "dependabot[bot]",
+      "name": "dependabot[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "profile": "https://github.com/apps/dependabot",
+      "contributions": [
+        "bug",
+        "code",
+        "maintenance",
+        "projectManagement",
+        "security"
+      ]
     }
   ],
   "contributorsPerLine": 7,
