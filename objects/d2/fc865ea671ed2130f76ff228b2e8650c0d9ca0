@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/custody
 	type = expand module
-[map "f3748dbc-bcc3-33a1-8856-859f9bcef157"]
-	object = 95e8982a89d12a6a3c8a6807337939c2052a1030
-	path = projects/modules/custody
-	type = expand module
-[map "4e36f2d0-6caa-3737-8b35-9d2441d8da86"]
-	object = b108cd83273b2ab2e69b1b6031a0a6f5ddd564b3
+[map "7bf42ae7-db82-33cf-adb4-22f84323bc35"]
+	object = e96dcd1b256690bb923fed380ff408f778474c94
 	path = projects/modules/custody
 	type = expand module

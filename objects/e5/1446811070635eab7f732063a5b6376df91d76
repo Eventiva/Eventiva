@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/gaming
 	type = expand module
-[map "d3468870-7814-3ac3-a4e1-d16f2fc5ba1e"]
-	object = 95e8982a89d12a6a3c8a6807337939c2052a1030
-	path = projects/modules/gaming
-	type = expand module
-[map "73c4ffd1-8932-3999-9295-89d31743c098"]
-	object = b108cd83273b2ab2e69b1b6031a0a6f5ddd564b3
+[map "323f7c28-7a49-3e2b-8c3a-6731d99fe1e6"]
+	object = e96dcd1b256690bb923fed380ff408f778474c94
 	path = projects/modules/gaming
 	type = expand module

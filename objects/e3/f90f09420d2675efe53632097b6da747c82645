@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/incident_management
 	type = expand module
-[map "4e3a64b3-30e3-3912-b69f-5fdb0eec029a"]
-	object = 95e8982a89d12a6a3c8a6807337939c2052a1030
-	path = projects/modules/incident_management
-	type = expand module
-[map "779e4143-e930-3cb0-aa83-fbe788e04dc1"]
-	object = b108cd83273b2ab2e69b1b6031a0a6f5ddd564b3
+[map "69d2492d-9ec3-372a-8d4b-16c656de7e5b"]
+	object = e96dcd1b256690bb923fed380ff408f778474c94
 	path = projects/modules/incident_management
 	type = expand module

@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/justice
 	type = expand module
-[map "08474b4b-53bd-3f61-81fc-6ebfae211b93"]
-	object = 95e8982a89d12a6a3c8a6807337939c2052a1030
-	path = projects/modules/justice
-	type = expand module
-[map "21f61ff6-6dc4-3f22-b339-3e6de33b35d0"]
-	object = b108cd83273b2ab2e69b1b6031a0a6f5ddd564b3
+[map "04ef2b10-54b0-3811-ac27-a68e9745e233"]
+	object = e96dcd1b256690bb923fed380ff408f778474c94
 	path = projects/modules/justice
 	type = expand module

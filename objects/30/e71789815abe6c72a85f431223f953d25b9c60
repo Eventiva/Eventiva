@@ -34,11 +34,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/control_centre
 	type = expand module
-[map "b85cf170-b4fa-32a7-84e2-effe97d40432"]
-	object = 95e8982a89d12a6a3c8a6807337939c2052a1030
-	path = projects/modules/control_centre
-	type = expand module
-[map "73e47297-3f56-362b-84d7-a223ecbf42b8"]
-	object = b108cd83273b2ab2e69b1b6031a0a6f5ddd564b3
+[map "1d9bcb51-0e4b-3c1c-a7aa-21e18a1157a9"]
+	object = e96dcd1b256690bb923fed380ff408f778474c94
 	path = projects/modules/control_centre
 	type = expand module
