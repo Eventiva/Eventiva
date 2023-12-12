@@ -6,7 +6,7 @@
 	object = 25d0e1f6656c79e8bbaa3f71374b0bc68efaed80
 	path = projects/modules/control-centre
 	type = expand module
-[map "887a79d1-f67f-3a9a-9012-4afa8c588975"]
-	object = d8c0f8c506eaf5710f0c30649c24b2dc7eec3e2c
+[map "21ddd7b1-7802-3069-9783-97c301406d8d"]
+	object = b246f8047dd674d79569d25593a297e42a0d5b77
 	path = projects/modules/control_centre
 	type = expand module
