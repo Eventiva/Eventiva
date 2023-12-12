@@ -1,4 +1,4 @@
-name: 'OpenCommit Action'
+name: !type string 'OpenCommit Action'
 
 on:
   push:
@@ -8,15 +8,15 @@ on:
 
 jobs:
   opencommit:
-    timeout-minutes: 10
-    name: OpenCommit
-    runs-on: ubuntu-latest
-    permissions: write-all
+    timeout-minutes: !type integer 10
+    name: !type string 'OpenCommit'
+    runs-on: !type string 'ubuntu-latest'
+    permissions: !type string 'write-all'
     steps:
-      - name: Setup Node.js Environment
+      - name: !type string 'Setup Node.js Environment'
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: !type string '16'
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -28,7 +28,7 @@ jobs:
           # set openAI api key in repo actions secrets,
           # for openAI keys go to: https://platform.openai.com/account/api-keys
           # for repo secret go to: <your_repo_url>/settings/secrets/actions
-          OCO_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OCO_EMOJI: true
-          OCO_LANGUAGE: en
-          OCO_PROMPT_MODULE: conventional-commit
+          OCO_OPENAI_API_KEY: !type string ${{ secrets.OPENAI_API_KEY }}
+          OCO_EMOJI: !type boolean true
+          OCO_LANGUAGE: !type string 'en'
+          OCO_PROMPT_MODULE: !type string 'conventional-commit'
