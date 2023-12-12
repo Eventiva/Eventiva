@@ -42,3 +42,7 @@
 	object = 8cc9a965e3f66f5cc3af259f614a39cfd22a2f6f
 	path = projects/modules/grand_theft_auto
 	type = expand module
+[map "3252902b-4978-3e23-91b3-2d7e534fab6c"]
+	object = 175f59df9aadc87c6d88bb866f23d82e3dc12e00
+	path = projects/modules/grand_theft_auto
+	type = expand module

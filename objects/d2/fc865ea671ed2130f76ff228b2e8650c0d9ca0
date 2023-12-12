@@ -42,3 +42,7 @@
 	object = 8cc9a965e3f66f5cc3af259f614a39cfd22a2f6f
 	path = projects/modules/custody
 	type = expand module
+[map "d89c82a6-fd91-399e-bec1-1db252077e0c"]
+	object = 175f59df9aadc87c6d88bb866f23d82e3dc12e00
+	path = projects/modules/custody
+	type = expand module
