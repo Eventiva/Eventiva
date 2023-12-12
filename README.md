@@ -86,6 +86,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nasirrr"><img src="https://avatars.githubusercontent.com/u/93313345?v=4?s=100" width="100px;" alt="nasirrr"/><br /><sub><b>nasirrr</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=nasirrr" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/ankush"><img src="https://avatars.githubusercontent.com/u/9079960?v=4?s=100" width="100px;" alt="Ankush Menat"/><br /><sub><b>Ankush Menat</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=ankush" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/kennethsequeira"><img src="https://avatars.githubusercontent.com/u/33246109?v=4?s=100" width="100px;" alt="Kenneth Sequeira"/><br /><sub><b>Kenneth Sequeira</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=kennethsequeira" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
