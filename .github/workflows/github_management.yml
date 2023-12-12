@@ -2,6 +2,12 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
+  - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+    run: |
+      npm config set '@bit:registry' https://node-registry.bit.cloud
+      npm config set '@teambit:registry' https://node-registry.bit.cloud
+      npm config set '@eventiva:registry' https://node-registry.bit.cloud
+      npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
  # File: github_management.yml
  # Path: \.github\workflows\github_management.yml
  # Created Date: Monday, April 17th 2023
@@ -15,6 +21,12 @@
  # -----
  # Copyright (c) 2023 Eventiva - All Rights Reserved
  # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Creative Commons Zero v1.0 Universal for more details.
+# You should have received a copy of the GNU General Public License v3.0 only
+# along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
  # -----
  # This program has been provided under confidence of the copyright holder and is 
  # licensed for copying, distribution and modification under the terms of
@@ -41,7 +53,7 @@
 name: Github Management
 on:
   issues:
-    types: [opened, edited, closed, reopened]
+    types: [opened, edited, closed, reopened, synchronize]
   pull_request:
     types: [opened, edited, closed, reopened, synchronize]
 
@@ -56,3 +68,9 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
           config: .github/config.json
           configRef: develop
+      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
