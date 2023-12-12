@@ -1,4 +1,7 @@
 # IMPORTANT!: ALL SECTIONS ARE MANDATORY
+[version]
+current = "0.1.0"
+
 [licenses]
 # This indicates which are the only licenses that Licensebat will accept.
 # The rest will be flagged as not allowed.
@@ -16,6 +19,12 @@ accepted = ["MIT", "MSC", "BSD", "GPL-3.0"]
 ignore_dev_dependencies = true
 # If set to true, Licensebat will ignore the optional dependencies.
 ignore_optional_dependencies = true
+
+[changelog]
+# Keep changelog entries sorted in reverse chronological order.
+# - type of change: major/minor/patch
+# - description: Brief description of the change
+# - author: Who made the change
 
 [behavior]
 # False by default, if true, it will only run the checks when one of the dependency files or the .licrc file has been modified.
