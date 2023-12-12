@@ -94,6 +94,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/systonium"><img src="https://avatars.githubusercontent.com/u/128922392?v=4?s=100" width="100px;" alt="systonium"/><br /><sub><b>systonium</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=systonium" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/NagariaHussain"><img src="https://avatars.githubusercontent.com/u/34810212?v=4?s=100" width="100px;" alt="Md Hussain Nagaria"/><br /><sub><b>Md Hussain Nagaria</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=NagariaHussain" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
