@@ -42,7 +42,6 @@ For instance, the Eventiva Gaming team developed the initial version of the Flee
 
 We believe in the power of community development, while our tools are designed and marketted for event planning, they can be utilised by organisations planning all variations of projects, we believe that through keeping our tools open-source we can connect with amazing developers who can contribute in ways we simply cannot fathom.
 
-
 ## How to get support 👨‍👩‍👧‍👦
 
 For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use **[our discussion page](https://github.com/Eventiva/Eventiva/discussions)** 🚑.
@@ -161,15 +160,14 @@ You can choose one of the following methods to get your development platform con
 GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
 
 #### Devcontainer Method
+
 The Dev Container lets you use a Docker container as a full-featured development environment. Whether you deploy to containers or not, containers make a great development environment because you can:
 
 - Develop with a consistent, easily reproducible toolchain on the same operating system you deploy to.
 - Quickly swap between different, separate development environments and safely make updates without worrying about impacting your local machine.
 - Try out new technologies or clone a copy of a code base without impacting your local setup.
 
-
 Simply install the [Dev containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), clone the repository to your local device, and choose the [`Open Devcontainer` option](https://code.visualstudio.com/docs/devcontainers/containers).
-
 
 <!-- #### Using Rush
 
@@ -197,7 +195,7 @@ If you suspect your install is corrupted, try running `rush update --purge`. Thi
 
 ##### Achieving projects
 
-To help keep the mono-repository clean, we have added the ability to achieve projects. 
+To help keep the mono-repository clean, we have added the ability to achieve projects.
 
 ```
 rush archive-project --package-name <your_package_name>
@@ -205,7 +203,7 @@ rush archive-project --package-name <your_package_name>
 
 > restoring your project by `rush unarchive-project --package-name <your_package_name>`
 
-**The automated archive process** 
+**The automated archive process**
 
 1. Find project configuration by Rush.js SDK
 2. Check whether there are projects depends on target project
@@ -218,7 +216,7 @@ rush archive-project --package-name <your_package_name>
 9. Remove project config from `rush.json`
 10. Delete project folder
 
-**The automated unarchive process** 
+**The automated unarchive process**
 
 1. Find the tarball by `packageName`
 2. Extract the tarball by running `tar xf <package_name>.tar.gz`
