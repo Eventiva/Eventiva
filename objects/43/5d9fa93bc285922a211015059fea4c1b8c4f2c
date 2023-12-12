@@ -14,3 +14,7 @@
 	object = e1280af50cae7c481aaf42d2a1487f61d3e5f216
 	path = projects/modules/vetting
 	type = expand module
+[map "34d2708f-6cd4-3139-a21e-2b4cd4b9658a"]
+	object = 9607a98c6342fcb3647634b70a05124ecb60294b
+	path = projects/modules/vetting
+	type = expand module
