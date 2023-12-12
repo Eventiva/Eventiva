@@ -12,90 +12,30 @@
     "discord/client": {
         "name": "discord/client",
         "scope": "eventiva.bots",
-        "version": "0.0.1",
+        "version": "78f6c8977c62de0106ba07d9a62b339e5a3f9e55",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/discord/client",
-        "config": {
-            "teambit.envs/envs": {
-                "env": "eventiva.workflows/environments/discord/bot"
-            },
-            "teambit.dependencies/dependency-resolver": {},
-            "teambit.harmony/application": {},
-            "teambit.component/dev-files": {},
-            "teambit.preview/preview": {},
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.pipelines/builder": {},
-            "teambit.component/renaming": {
-                "renamedFrom": {
-                    "scope": "eventiva.bots",
-                    "name": "discord/client-bot",
-                    "version": "0.0.1"
-                }
-            },
-            "eventiva.workflows/environments/discord/bot": {}
-        }
+        "rootDir": "projects/bots/discord/client"
     },
     "environments/discord/bot": {
         "name": "environments/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "0.0.1",
+        "version": "ba30982a75670dd28480d558370a8b86b0f08a17",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/environments/discord/bot",
-        "config": {
-            "teambit.envs/envs": {
-                "env": "teambit.envs/env"
-            },
-            "teambit.dependencies/dependency-resolver": {
-                "policy": {
-                    "dependencies": {}
-                }
-            },
-            "teambit.component/dev-files": {},
-            "teambit.preview/preview": {},
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.pipelines/builder": {},
-            "teambit.harmony/application": {},
-            "teambit.component/renaming": {
-                "renamedFrom": {
-                    "scope": "eventiva.workflows",
-                    "name": "discord-env",
-                    "version": "0.0.2"
-                }
-            }
-        }
+        "rootDir": "projects/workflows/environments/discord/bot"
     },
     "generators/discord/bot": {
         "name": "generators/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "0.0.1",
+        "version": "918dd54b70344ffa6961d7e13358faaba87f5bae",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/generators/discord/bot",
-        "config": {
-            "teambit.component/deprecation": {
-                "deprecate": false,
-                "newId": ""
-            },
-            "teambit.envs/envs": {
-                "env": "teambit.harmony/node"
-            },
-            "teambit.harmony/node": {},
-            "teambit.dependencies/dependency-resolver": {},
-            "teambit.harmony/application": {},
-            "teambit.component/dev-files": {},
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.preview/preview": {},
-            "teambit.pipelines/builder": {},
-            "teambit.component/forking": {
-                "forkedFrom": {
-                    "scope": "teambit.node",
-                    "name": "generator/node-templates",
-                    "version": "1.0.10"
-                }
-            }
-        }
+        "rootDir": "projects/workflows/generators/discord/bot"
     },
-    "$schema-version": "17.0.0"
+    "$schema-version": "17.0.0",
+    "_bit_lane": {
+        "id": {
+            "name": "pnpm",
+            "scope": "eventiva.modules"
+        },
+        "exported": true
+    }
 }
