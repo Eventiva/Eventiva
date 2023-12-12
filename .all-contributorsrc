@@ -98,6 +98,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/31538550?v=4",
       "profile": "https://midocean.tech/",
       "contributions": ["doc"]
+    },
+    {
+      "login": "zaid2229",
+      "name": "zaid",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60132555?v=4",
+      "profile": "https://github.com/zaid2229",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
