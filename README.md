@@ -155,7 +155,7 @@ You can choose one of the following methods to get your development platform con
 
 #### Codespaces Method (Recommended)
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/new/Eventiva/eventiva?quickstart=1)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
 GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
 
