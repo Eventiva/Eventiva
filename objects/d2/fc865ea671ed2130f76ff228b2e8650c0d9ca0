@@ -22,3 +22,7 @@
 	object = feb1a1cebff9ccd82a4793f57267e1907288a260
 	path = projects/modules/custody
 	type = expand module
+[map "b45e5b15-5bea-3f76-8a6f-f632db80b096"]
+	object = e74b7e0dc820afe0bcd91eca8e30a7b3c08d9a39
+	path = projects/modules/custody
+	type = expand module
