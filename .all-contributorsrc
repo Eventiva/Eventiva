@@ -112,6 +112,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/10146518?v=4",
       "profile": "https://github.com/mymi14s",
       "contributions": ["doc"]
+    },
+    {
+      "login": "systonium",
+      "name": "systonium",
+      "avatar_url": "https://avatars.githubusercontent.com/u/128922392?v=4",
+      "profile": "https://github.com/systonium",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
