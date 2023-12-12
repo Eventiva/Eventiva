@@ -74,11 +74,8 @@
         "rootDir": "projects/workflows/generators/discord/bot",
         "config": {
             "teambit.component/deprecation": {
-                "deprecate": true,
-                "newId": {
-                    "name": "generators/node-templates",
-                    "scope": "bitdev.node"
-                }
+                "deprecate": false,
+                "newId": ""
             },
             "teambit.envs/envs": {
                 "env": "teambit.harmony/node"
