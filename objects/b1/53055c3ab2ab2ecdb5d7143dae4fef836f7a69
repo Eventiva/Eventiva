@@ -30,3 +30,7 @@
 	object = 2cd38ba2f0dcdf852897c7b79cf8cd0e8f8612d3
 	path = projects/modules/fleet_management
 	type = expand module
+[map "0b58aa10-4c4a-3e85-a408-1b2c942925cc"]
+	object = 3f0f3ba7e7506c7909cdca9bbe8969648f7af16d
+	path = projects/modules/fleet_management
+	type = expand module

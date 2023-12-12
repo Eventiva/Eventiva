@@ -30,3 +30,7 @@
 	object = 2cd38ba2f0dcdf852897c7b79cf8cd0e8f8612d3
 	path = projects/modules/eventiva_core
 	type = expand module
+[map "925a6fa6-d768-38c1-877d-ec6b89cefbd1"]
+	object = 3f0f3ba7e7506c7909cdca9bbe8969648f7af16d
+	path = projects/modules/eventiva_core
+	type = expand module

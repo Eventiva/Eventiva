@@ -30,3 +30,7 @@
 	object = 2cd38ba2f0dcdf852897c7b79cf8cd0e8f8612d3
 	path = projects/workflows/change-report
 	type = expand module
+[map "40e17759-f273-3128-9335-30225c83ed11"]
+	object = 3f0f3ba7e7506c7909cdca9bbe8969648f7af16d
+	path = projects/workflows/change-report
+	type = expand module
