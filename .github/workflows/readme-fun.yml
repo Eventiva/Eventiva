@@ -2,9 +2,9 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: pull-request.yml
- # Path: \.github\workflows\pull-request.yml
- # Created Date: Thursday, December 7th 2023
+ # File: readme-fun.yml
+ # Path: \.github\workflows\readme-fun.yml
+ # Created Date: Tuesday, December 12th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -36,39 +36,40 @@
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: Bit Pull Request
+name: generate animation
+
 on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-permissions:
-  pull-requests: write
+  schedule:
+    - cron: "0 0 * * *" 
+  
+  # allows to manually run the job at any time
+  workflow_dispatch:
+  
+  # run on every push on the master branch
+  push:
+    branches:
+    - dev
+    
+  
+
 jobs:
-  build:
+  generate:
+    permissions: 
+      contents: write
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+    timeout-minutes: 5
+    
     steps:
-      - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@v1.8.7
-        with: 
-          github_token: ${{ secrets.BOT_TOKEN }}
-          comment_on_pr: true
-          theme: dark
-          proc_trace_sys_enable: true
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Initialize Bit
-        uses: bit-tasks/init@v1
-      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
-        run: |
-          npm config set '@bit:registry' https://node-registry.bit.cloud
-          npm config set '@teambit:registry' https://node-registry.bit.cloud
-          npm config set '@eventiva:registry' https://node-registry.bit.cloud
-          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }} 
-      - name: Bit Pull Request
-        uses: bit-tasks/pull-request@v1
+      # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
+      - name: generate github-contribution-grid-snake.svg
+        uses: Platane/snk/svg-only@v3
+        with:
+          github_user_name: EventivaLtd
+          outputs: |
+            .github/images/github-snake.svg
+            .github/images/github-snake-dark.svg?palette=github-dark
+      - name: Commit files
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: ".github/images/"
+          push: true

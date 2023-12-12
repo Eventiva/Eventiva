@@ -51,10 +51,23 @@ jobs:
       GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
       BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
     steps:
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN }}
+          comment_on_pr: true
+          theme: dark
+          proc_trace_sys_enable: true
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Initialize Bit
         uses: bit-tasks/init@v1
+      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
       - name: Bit Tag and Export
         uses: bit-tasks/tag-export@v1
       - name: Commit Bitmap
