@@ -12,14 +12,14 @@
     "discord/client": {
         "name": "discord/client",
         "scope": "eventiva.bots",
-        "version": "78f6c8977c62de0106ba07d9a62b339e5a3f9e55",
+        "version": "1.0.0",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/discord/client"
     },
     "environments/discord/bot": {
         "name": "environments/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "ba30982a75670dd28480d558370a8b86b0f08a17",
+        "version": "1.0.0",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/environments/discord/bot"
     },
