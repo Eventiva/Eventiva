@@ -67,7 +67,7 @@ jobs:
         with:
           path-to-signatures: "contributors.json"
           path-to-document: "https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md"
-          allowlist: ResnovasLtd, EventivaLtd, dependabot, dependabot[bot], bot*, restyled-io, atlassian-compass[bot], TMateSoft
+          allowlist: ResnovasLtd, EventivaLtd, dependabot, dependabot[bot], bot*, restyled-io, atlassian-compass[bot], TMateSoft, restyled-io[bot], trunk-io[bot], trunk-io, sweep-ai[bot], sweep-ai, restyled-commits, restyled-commits[bot]
           branch: "main"
           remote-organization-name: "Eventiva"
           remote-repository-name: "contributors"
