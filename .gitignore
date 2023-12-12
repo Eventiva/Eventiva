@@ -69,7 +69,6 @@ jspm_packages/
 
 # Visual Studio Code files
 .vscode/settings.json
-/pnpm-lock.yaml
 .pnpm-store
 artifacts/
 projects/workflows/environments/tsconfig.json
