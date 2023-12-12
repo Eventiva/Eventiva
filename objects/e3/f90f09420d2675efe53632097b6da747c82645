@@ -18,7 +18,7 @@
 	object = 2aae11b4d75b0955281aa73e626ef4db27cbbf23
 	path = projects/modules/incident_management
 	type = expand module
-[map "6cef53bb-dc72-39ca-bcff-562aa19367ba"]
-	object = 6258fe527734b7ed37a4268a57898d6541f11947
+[map "96215558-b34b-3db4-a355-57a0d0808fc2"]
+	object = d72c852849379b5a5b417aee3ae91138837672ca
 	path = projects/modules/incident_management
 	type = expand module
