@@ -91,6 +91,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/65077583?v=4",
       "profile": "https://restyled.io/",
       "contributions": ["code", "maintenance"]
+    },
+    {
+      "login": "sagar-bhogayata",
+      "name": "Sagar Bhogayata",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31538550?v=4",
+      "profile": "https://midocean.tech/",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
