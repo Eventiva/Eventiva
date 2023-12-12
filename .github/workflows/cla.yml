@@ -66,7 +66,7 @@ jobs:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.BOT_TOKEN }}
         with:
           path-to-signatures: "contributors.json"
-          path-to-document: "https://github.com/Eventiva/contributors/blob/develop/CODE_OF_CONDUCT.md"
+          path-to-document: "https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md"
           allowlist: ResnovasLtd, EventivaLtd, dependabot, dependabot[bot], bot*, restyled-io, atlassian-compass[bot], TMateSoft
           branch: "main"
           remote-organization-name: "Eventiva"
