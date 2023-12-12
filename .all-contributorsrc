@@ -35,6 +35,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/36654812?v=4",
       "profile": "https://github.com/gavindsouza",
       "contributions": ["doc", "tool"]
+    },
+    {
+      "login": "maxprilutskiy",
+      "name": "Max Prilutskiy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5614659?v=4",
+      "profile": "https://github.com/maxprilutskiy",
+      "contributions": ["code", "tool"]
     }
   ],
   "contributorsPerLine": 7,
