@@ -161,6 +161,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/13396535?v=4",
       "profile": "https://github.com/Alchez",
       "contributions": ["doc"]
+    },
+    {
+      "login": "yemikudaisi",
+      "name": "Yemi Kudaisi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3257276?v=4",
+      "profile": "https://www.linkedin.com/in/yemi-kudaisi-543bba88/",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,

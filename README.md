@@ -101,6 +101,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mohsinalimat"><img src="https://avatars.githubusercontent.com/u/973676?v=4?s=100" width="100px;" alt="MohsinAli"/><br /><sub><b>MohsinAli</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=mohsinalimat" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/Alchez"><img src="https://avatars.githubusercontent.com/u/13396535?v=4?s=100" width="100px;" alt="Rohan"/><br /><sub><b>Rohan</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=Alchez" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/yemi-kudaisi-543bba88/"><img src="https://avatars.githubusercontent.com/u/3257276?v=4?s=100" width="100px;" alt="Yemi Kudaisi"/><br /><sub><b>Yemi Kudaisi</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=yemikudaisi" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
 </table>
 
