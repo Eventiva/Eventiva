@@ -188,6 +188,13 @@
         "projectManagement",
         "security"
       ]
+    },
+    {
+      "login": "mergify[bot]",
+      "name": "mergify[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/10562?v=4",
+      "profile": "https://github.com/apps/mergify",
+      "contributions": ["review"]
     }
   ],
   "contributorsPerLine": 7,
