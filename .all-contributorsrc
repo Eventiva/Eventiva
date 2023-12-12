@@ -195,6 +195,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/in/10562?v=4",
       "profile": "https://github.com/apps/mergify",
       "contributions": ["review"]
+    },
+    {
+      "login": "TMateSoft",
+      "name": "TMateSoft",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60217584?v=4",
+      "profile": "https://github.com/TMateSoft",
+      "contributions": ["maintenance"]
     }
   ],
   "contributorsPerLine": 7,
