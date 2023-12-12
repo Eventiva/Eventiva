@@ -1,6 +1,6 @@
 /**
-    * @see https://bit.dev/reference/typescript/typescript-config
-    */
+ * @see https://bit.dev/reference/typescript/typescript-config
+ */
 {
   "extends": "@teambit/react.react-env/config/tsconfig.json",
   "compilerOptions": {
@@ -16,9 +16,7 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowJs": true,
-    "lib": [
-      "ESNext",
-    ],
+    "lib": ["ESNext"]
   },
   "exclude": [
     "artifacts",
@@ -28,10 +26,5 @@
     "package.json",
     "**/*.cjs"
   ],
-  "include": [
-    "**/*",
-    "**/*.json",
-    ".mocharc.js",
-    ".mocharc.js"
-  ]
+  "include": ["**/*", "**/*.json", ".mocharc.js", ".mocharc.js"]
 }
