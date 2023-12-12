@@ -1,4 +1,6 @@
 /**
+ * Initializes Bit and updates the system path.
+ *
  * @format
  * -----
  * Project: @eventiva/eventiva
@@ -38,6 +40,12 @@
 
 const { execSync } = require("child_process");
 
+/**
+ * Installs Bit, updates the system path, and sets up the Bit environment in the specified workspace directory.
+ *
+ * @param {string} wsdir - The working directory where Bit should be installed.
+ * @returns {void}
+ */
 const run = async (wsdir) => {
   const bitVersion = ""; // Leave empty for latest version
   await exec("npm i -g @teambit/bvm");
