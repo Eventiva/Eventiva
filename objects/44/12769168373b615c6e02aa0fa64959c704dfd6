@@ -6,3 +6,7 @@
 	object = 9fb85893a0625bd7d6cd3619952db0fddca92823
 	path = projects/modules/eventiva_core
 	type = expand module
+[map "242b9963-e340-3953-89be-5dd587c5c2d2"]
+	object = 19a4f67e9b4ff19734817c85bca5b6ac090ba6a0
+	path = projects/modules/eventiva_core
+	type = expand module

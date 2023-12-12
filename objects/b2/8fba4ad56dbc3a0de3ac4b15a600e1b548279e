@@ -6,3 +6,7 @@
 	object = 9fb85893a0625bd7d6cd3619952db0fddca92823
 	path = projects/modules/grand_theft_auto
 	type = expand module
+[map "6e435c77-cb56-31d0-b85b-3768bf15702e"]
+	object = 19a4f67e9b4ff19734817c85bca5b6ac090ba6a0
+	path = projects/modules/grand_theft_auto
+	type = expand module
