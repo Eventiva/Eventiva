@@ -103,6 +103,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     </tr>
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/yemi-kudaisi-543bba88/"><img src="https://avatars.githubusercontent.com/u/3257276?v=4?s=100" width="100px;" alt="Yemi Kudaisi"/><br /><sub><b>Yemi Kudaisi</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=yemikudaisi" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/nextchamp-saqib"><img src="https://avatars.githubusercontent.com/u/25369014?v=4?s=100" width="100px;" alt="Saqib Ansari"/><br /><sub><b>Saqib Ansari</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=nextchamp-saqib" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>
