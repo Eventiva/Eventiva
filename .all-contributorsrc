@@ -168,6 +168,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/3257276?v=4",
       "profile": "https://www.linkedin.com/in/yemi-kudaisi-543bba88/",
       "contributions": ["doc"]
+    },
+    {
+      "login": "nextchamp-saqib",
+      "name": "Saqib Ansari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25369014?v=4",
+      "profile": "https://github.com/nextchamp-saqib",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
