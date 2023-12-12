@@ -147,6 +147,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/6966715?v=4",
       "profile": "https://github.com/roquegv",
       "contributions": ["doc"]
+    },
+    {
+      "login": "mohsinalimat",
+      "name": "MohsinAli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/973676?v=4",
+      "profile": "https://github.com/mohsinalimat",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
