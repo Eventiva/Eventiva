@@ -18,3 +18,7 @@
 	object = 2aae11b4d75b0955281aa73e626ef4db27cbbf23
 	path = projects/workflows/awesome-frappe
 	type = expand module
+[map "8aaaeb6d-a09c-3e98-9bc0-d2926417e882"]
+	object = 55c06a39477afef9c7a72a3cae498375d718776e
+	path = projects/workflows/awesome-frappe
+	type = expand module

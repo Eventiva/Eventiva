@@ -18,3 +18,7 @@
 	object = 2aae11b4d75b0955281aa73e626ef4db27cbbf23
 	path = projects/modules/gaming
 	type = expand module
+[map "02061192-d103-3b30-b1a9-e5d06a7a46c5"]
+	object = 55c06a39477afef9c7a72a3cae498375d718776e
+	path = projects/modules/gaming
+	type = expand module
