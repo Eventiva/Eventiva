@@ -3,10 +3,7 @@
   "projectOwner": "Eventiva",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "files": [
-    "README.md",
-    "CONTRIBUTING.md"
-  ],
+  "files": ["README.md", "CONTRIBUTING.md"],
   "imageSize": 100,
   "commit": true,
   "commitConvention": "gitmoji",
@@ -30,14 +27,17 @@
       "name": "Chris Verringer",
       "avatar_url": "https://avatars.githubusercontent.com/u/23369223?v=4",
       "profile": "http://verringer.com/",
-      "contributions": [
-        "business",
-        "design",
-        "ideas",
-        "review"
-      ]
+      "contributions": ["business", "design", "ideas", "review"]
+    },
+    {
+      "login": "gavindsouza",
+      "name": "gavin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36654812?v=4",
+      "profile": "https://github.com/gavindsouza",
+      "contributions": ["doc", "tool"]
     }
   ],
   "contributorsPerLine": 7,
   "linkToUsage": false
 }
+
