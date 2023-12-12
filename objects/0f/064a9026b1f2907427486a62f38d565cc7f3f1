@@ -46,7 +46,7 @@
 	object = 58129438331d1dbb306e8f9667bf654e062dc4e7
 	path = projects/modules/segment_connect
 	type = expand module
-[map "6066ff64-e9fe-3f08-b2a0-dd2bc9cfb87a"]
-	object = 6df9ae8f1601902bcd443433a846dd1904c9c15c
+[map "fb1a76c3-8532-3094-8918-2d363cf0bbd6"]
+	object = e05190b5e66eb7b67cd1ff6fce96eac26f1d029d
 	path = projects/modules/segment_connect
 	type = expand module

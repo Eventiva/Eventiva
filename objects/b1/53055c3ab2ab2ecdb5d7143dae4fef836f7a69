@@ -46,7 +46,7 @@
 	object = 58129438331d1dbb306e8f9667bf654e062dc4e7
 	path = projects/modules/fleet_management
 	type = expand module
-[map "08d028df-0195-38af-828b-575c8344914f"]
-	object = 6df9ae8f1601902bcd443433a846dd1904c9c15c
+[map "cd0048b9-a6a3-3f15-8749-67a5f452e5a8"]
+	object = e05190b5e66eb7b67cd1ff6fce96eac26f1d029d
 	path = projects/modules/fleet_management
 	type = expand module

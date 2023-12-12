@@ -46,7 +46,7 @@
 	object = 58129438331d1dbb306e8f9667bf654e062dc4e7
 	path = projects/modules/eventiva_core
 	type = expand module
-[map "1ae2e973-5f4e-3bb5-9a52-86aaa26be5e9"]
-	object = 6df9ae8f1601902bcd443433a846dd1904c9c15c
+[map "0d65c516-8608-3192-a474-57578485eafa"]
+	object = e05190b5e66eb7b67cd1ff6fce96eac26f1d029d
 	path = projects/modules/eventiva_core
 	type = expand module
