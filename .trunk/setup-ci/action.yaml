@@ -6,7 +6,7 @@ runs:
   steps:
   - id: Initialize Bit
     shell: bash
-    run: ../../scripts/bit-init.sh
+    run: ./scripts/bit-init.sh
   - id: Verify and Build Bit
     shell: bash
-    run: ../../scripts/verify.sh
+    run: ./scripts/verify.sh
