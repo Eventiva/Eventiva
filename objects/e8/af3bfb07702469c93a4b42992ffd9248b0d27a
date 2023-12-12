@@ -6,7 +6,7 @@
 	object = 9fb85893a0625bd7d6cd3619952db0fddca92823
 	path = projects/modules/discord_integration
 	type = expand module
-[map "06d59aa5-3fee-3076-9216-6260b9ac9af4"]
-	object = 19a4f67e9b4ff19734817c85bca5b6ac090ba6a0
+[map "9a2ec7fa-8965-37b7-a260-f08dbacba5fb"]
+	object = a9d88719b22fb2dd958dca4015d645b1da535651
 	path = projects/modules/discord_integration
 	type = expand module
