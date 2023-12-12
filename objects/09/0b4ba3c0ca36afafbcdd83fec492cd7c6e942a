@@ -46,3 +46,7 @@
 	object = 58129438331d1dbb306e8f9667bf654e062dc4e7
 	path = projects/modules/justice
 	type = expand module
+[map "c122b7c6-fea2-39f2-b7fa-d5f935bcd7d9"]
+	object = 6df9ae8f1601902bcd443433a846dd1904c9c15c
+	path = projects/modules/justice
+	type = expand module
