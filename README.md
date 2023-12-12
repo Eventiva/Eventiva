@@ -104,6 +104,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/yemi-kudaisi-543bba88/"><img src="https://avatars.githubusercontent.com/u/3257276?v=4?s=100" width="100px;" alt="Yemi Kudaisi"/><br /><sub><b>Yemi Kudaisi</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=yemikudaisi" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/nextchamp-saqib"><img src="https://avatars.githubusercontent.com/u/25369014?v=4?s=100" width="100px;" alt="Saqib Ansari"/><br /><sub><b>Saqib Ansari</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=nextchamp-saqib" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/apps/dependabot"><img src="https://avatars.githubusercontent.com/in/29110?v=4?s=100" width="100px;" alt="dependabot[bot]"/><br /><sub><b>dependabot[bot]</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/issues?q=author%3Adependabot[bot]" title="Bug reports">🐛</a> <a href="https://github.com/Eventiva/eventiva/commits?author=dependabot[bot]" title="Code">💻</a> <a href="#maintenance-dependabot[bot]" title="Maintenance">🚧</a> <a href="#projectManagement-dependabot[bot]" title="Project Management">📆</a> <a href="#security-dependabot[bot]" title="Security">🛡️</a></td>
     </tr>
   </tbody>
 </table>
