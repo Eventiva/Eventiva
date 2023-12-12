@@ -92,6 +92,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/zaid2229"><img src="https://avatars.githubusercontent.com/u/60132555?v=4?s=100" width="100px;" alt="zaid"/><br /><sub><b>zaid</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=zaid2229" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://github.com/mymi14s"><img src="https://avatars.githubusercontent.com/u/10146518?v=4?s=100" width="100px;" alt="Anthony C. Emmanuel"/><br /><sub><b>Anthony C. Emmanuel</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=mymi14s" title="Documentation">📖</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/systonium"><img src="https://avatars.githubusercontent.com/u/128922392?v=4?s=100" width="100px;" alt="systonium"/><br /><sub><b>systonium</b></sub></a><br /><a href="https://github.com/Eventiva/eventiva/commits?author=systonium" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
 </table>
 
