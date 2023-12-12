@@ -30,3 +30,7 @@
 	object = e96dcd1b256690bb923fed380ff408f778474c94
 	path = projects/modules/vetting
 	type = expand module
+[map "c72df65b-4f7f-3f49-8512-8163c94713de"]
+	object = 8c3788ca0f439d1034679261607444682ae102b9
+	path = projects/modules/vetting
+	type = expand module
