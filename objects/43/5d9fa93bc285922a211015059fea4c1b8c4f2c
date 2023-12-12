@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/vetting
 	type = expand module
-[map "cf1d5d8f-f03a-38e7-a9a5-4dcdcc58e4ef"]
-	object = e96dcd1b256690bb923fed380ff408f778474c94
-	path = projects/modules/vetting
-	type = expand module
-[map "c72df65b-4f7f-3f49-8512-8163c94713de"]
-	object = 8c3788ca0f439d1034679261607444682ae102b9
+[map "22cb4898-7bd9-39aa-b22d-7ef1f22b836c"]
+	object = 2cd38ba2f0dcdf852897c7b79cf8cd0e8f8612d3
 	path = projects/modules/vetting
 	type = expand module

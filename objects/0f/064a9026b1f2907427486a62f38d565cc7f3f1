@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/segment_connect
 	type = expand module
-[map "132011a6-143e-3b36-964a-be8d97adb949"]
-	object = e96dcd1b256690bb923fed380ff408f778474c94
-	path = projects/modules/segment_connect
-	type = expand module
-[map "cb7ed99c-7b66-3d33-8153-535c1da9de52"]
-	object = 8c3788ca0f439d1034679261607444682ae102b9
+[map "f730438d-bd0a-30d0-b49a-d1c80650d508"]
+	object = 2cd38ba2f0dcdf852897c7b79cf8cd0e8f8612d3
 	path = projects/modules/segment_connect
 	type = expand module

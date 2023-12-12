@@ -26,11 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/workflows/change-report
 	type = expand module
-[map "4697b5e4-8712-34eb-81ed-559497ade589"]
-	object = e96dcd1b256690bb923fed380ff408f778474c94
-	path = projects/workflows/change-report
-	type = expand module
-[map "e07a6edf-2880-3384-8818-0b9c2d7842d1"]
-	object = 8c3788ca0f439d1034679261607444682ae102b9
+[map "96e8cc90-e51f-3b42-886c-aa749f0a93b1"]
+	object = 2cd38ba2f0dcdf852897c7b79cf8cd0e8f8612d3
 	path = projects/workflows/change-report
 	type = expand module
