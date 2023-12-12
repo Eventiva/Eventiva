@@ -10,3 +10,7 @@
 	object = a9d88719b22fb2dd958dca4015d645b1da535651
 	path = projects/modules/justice
 	type = expand module
+[map "f34e5d35-0790-36c5-ab97-13ae1e3c9bec"]
+	object = 45698d5e6300a3446da469bfbec0f75c2ce279f3
+	path = projects/modules/justice
+	type = expand module
