@@ -5,15 +5,16 @@ description: 'client bot'
 
 A client component. Provides a RESTful API for the platform.
 
-## Run the server 
+## Run the server
 
-Import the platform and use the it in your workspace: 
+Import the platform and use the it in your workspace:
 
 ```bash
 bit use client
 ```
 
 Run the server:
+
 ```bash
 bit run client
 ```
@@ -21,6 +22,7 @@ bit run client
 ## Compose to your platform
 
 You can compose the server to a Platform app. Use the platform application type in a Bit app `my-platform.bit-app.ts` and include your server:
+
 ```ts
 import { Platform } from '@bitdev/platforms.platform';
 
@@ -29,9 +31,7 @@ export const MyPlatform = Platform.from({
 
   backends: {
     main: new AcmeGateway(),
-    services: [
-      Client,
-    ]
+    services: [Client],
   },
 });
 ```

@@ -3,22 +3,22 @@
  * learn more: https://bit.cloud/bitdev/node/node-env
  */
 import { NodeEnv } from '@bitdev/node.node-env';
-import { Compiler } from "@teambit/compiler";
-import { EnvHandler } from "@teambit/envs";
+import { Compiler } from '@teambit/compiler';
+import { EnvHandler } from '@teambit/envs';
 import { Pipeline } from '@teambit/builder';
 import {
- TypescriptCompiler,
- resolveTypes,
- TypescriptTask,
-} from "@teambit/typescript.typescript-compiler";
-import { ESLintLinter, EslintTask } from "@teambit/defender.eslint-linter";
-import { JestTask, JestTester } from "@teambit/defender.jest-tester";
-import { PrettierFormatter } from "@teambit/defender.prettier-formatter";
-import { Tester } from "@teambit/tester";
+  TypescriptCompiler,
+  resolveTypes,
+  TypescriptTask,
+} from '@teambit/typescript.typescript-compiler';
+import { ESLintLinter, EslintTask } from '@teambit/defender.eslint-linter';
+import { JestTask, JestTester } from '@teambit/defender.jest-tester';
+import { PrettierFormatter } from '@teambit/defender.prettier-formatter';
+import { Tester } from '@teambit/tester';
 
 export class Bot extends NodeEnv {
   /* shorthand name for the environment */
-  name = "bot";
+  name = 'bot';
 
   /* the compiler to use during development */
   compiler(): EnvHandler<Compiler> {
@@ -61,15 +61,15 @@ export class Bot extends NodeEnv {
    */
   build() {
     return Pipeline.from([
-      TypescriptTask.from({
-        tsconfig: this.tsconfigPath,
-        types: resolveTypes(__dirname, [this.tsTypesPath]),
-      }),
       EslintTask.from({
         tsconfig: this.tsconfigPath,
         configPath: this.eslintConfigPath,
         pluginsPath: __dirname,
         extensions: this.eslintExtensions,
+      }),
+      TypescriptTask.from({
+        tsconfig: this.tsconfigPath,
+        types: resolveTypes(__dirname, [this.tsTypesPath]),
       }),
       // JestTask.from({ config: this.jestConfigPath }),
     ]);

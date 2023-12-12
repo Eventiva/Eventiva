@@ -7,6 +7,7 @@ A reusable development environment for NodeJS.
 Use the NodeJS environment to create new NodeJS modules, entities and apps.
 
 Features:
+
 - ▶️ TypeScript
 - 🧪 Mocha.
 - 🧑‍💻 Generator templates include [NodeJS Module](/), [Entity](/), [Express App](/), [Platform app](/) and a [native Bit app](/).
@@ -17,14 +18,12 @@ Features:
 
 ## Use in existing workspaces
 
-Add the development env to your generator configuration on `workspace.jsonc`.  
+Add the development env to your generator configuration on `workspace.jsonc`.
 
 ```json
 {
   "teambit.generator/generator": {
-    "envs": [
-      "eventiva.component/bot"
-    ]
+    "envs": ["eventiva.component/bot"]
   }
 }
 ```
@@ -33,12 +32,11 @@ You can see the generator templates in your workspace using `bit templates`.
 
 ## Use on an existing component
 
-Use this dev environment on your existing components, by running the following command: 
+Use this dev environment on your existing components, by running the following command:
 
 ```
 bit env set my-component eventiva.component/bot
 ```
-
 
 ## Create a NodeJS workspace
 
@@ -51,6 +49,7 @@ bit new node my-workspace --aspect eventiva.component/bot
 ## Compose your own env
 
 You can base on this env, and customize it to your needs. To create your env run this command:
+
 ```
 bit create node-env my-new-env
 ```
