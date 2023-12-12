@@ -26,7 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/workflows/change-report
 	type = expand module
-[map "1f516df2-6a1f-31cb-8d09-dc88b4301c8c"]
-	object = c29e05f44f0fe46949d9b659a4711ab463ba5198
+[map "a91b991e-1c36-3d9b-91b0-73856d18db8d"]
+	object = 95e8982a89d12a6a3c8a6807337939c2052a1030
 	path = projects/workflows/change-report
 	type = expand module
