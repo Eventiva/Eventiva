@@ -32,7 +32,7 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 11-12-2023
+ # Last Modified: 12-12-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
@@ -66,8 +66,8 @@ jobs:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.BOT_TOKEN }}
         with:
           path-to-signatures: "contributors.json"
-          path-To-document: "https://github.com/Resnovas/contributors/blob/main/CODE_OF_CONDUCT.md"
-          allowlist: ResnovasLtd, dependabot, dependabot[bot], bot*
+          path-to-document: "https://github.com/Eventiva/contributors/blob/develop/CODE_OF_CONDUCT.md"
+          allowlist: ResnovasLtd, EventivaLtd, dependabot, dependabot[bot], bot*, restyled-io, atlassian-compass[bot], TMateSoft
           branch: "main"
-          remote-organization-name: "Resnovas"
+          remote-organization-name: "Eventiva"
           remote-repository-name: "contributors"
