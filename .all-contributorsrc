@@ -49,6 +49,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/in/134145?v=4",
       "profile": "https://github.com/apps/atlassian-compass",
       "contributions": ["projectManagement"]
+    },
+    {
+      "login": "ChillarAnand",
+      "name": "Chillar Anand",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4463796?v=4",
+      "profile": "https://avilpage.com/",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
