@@ -57,18 +57,12 @@ description: |
   - For each change in the code, you must update the changelog with the type of change (major, minor, or patch), a description of the change, and the author who made the change
   - All modules should have a compass.yml file. This should follow the https://go.atlassian.com/compass-yml-format specification. The compass file should reference all relationships between modules, including the module's dependencies and dependents. If a module is missing a compass file, it should be added. If a compass file is missing a relationship, it should be added. In the compass file, the tier option is defined as the following; Tier 1 components are essential for an organizations software architecture to function. If they fail, they could seriously impact the organization and its customers. These could be things like login services, permission services, or API gateways. Tier 2 components are important to the organizations software architecture and if they fail, could degrade the customer experience. These could be things like search services, or order-fulfillment services. Tier 3 components, if they fail, have minor or difficult-to-notice impacts on an organization and its customers. These could be things like icon services, or recommendation services. Tier 4 components have no significant effect on the customer experience and do not significantly affect the organization. These could be things like experimental features, or analytical services. When updating the compass file, you should review the ~/.bitmap file and the package.json files to ensure all dependencies from within this project are included. If you need to find a dependancy ID for the compass file, find the folder in the projects directory with the source code for the module, and find the ID within that modules compass file.
   - All commits and pull requests should utilise the Semantic Versioning conventions preappended with a gitmoji as per the gitmoji specification. Semantic Options: bug, chore, opt, optimisation, style, maint, maintenance, ref, refactor, revert, dep, deprecated, removal, docs, documentation, feat, enhance, feature, enhancement, fix. Example bug fix: ':bug: fix(context): Fixing a bug in context'. Example chore: ':construction: chore(context): updating a workflow file'. Example style fix: ':lipstick: style(context): Fixing code style to match codebase'.
-  
+
   The following files are automatically generated and should never be edited manually: .bitmap, pnpm-lock.yaml, workspace.jsonc, techstack.yml, diagram.svg, .all-contributorsrc
   "
 draft: False
-blocked_dirs: [
-  ".github",
-  ".trunk",
-  ".devcontainer",
-  ".vscode",
-  "node_modules",
-  "scripts",
-]
+blocked_dirs:
+  [".github", ".trunk", ".devcontainer", ".vscode", "node_modules", "scripts"]
 docs: [
     # bit.dev is used for component first development,
     [
