@@ -5,7 +5,7 @@
  # File: config.yml
  # Path: \.github\ISSUE_TEMPLATE\config.yml
  # Created Date: Monday, April 17th 2023
- # Author: Jonathan Stevens (Email: jonathan@Eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -27,12 +27,12 @@
  # Creative Commons Zero v1.0 Universal for more details.
  # 
  # You should have received a copy of the GNU General Public License v3.0 only
- # along with this program. If not, please write to: jonathan@Eventiva.co.uk,
+ # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
  # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 11-12-2023
+ # Last Modified: 12-12-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
@@ -57,5 +57,5 @@ contact_links:
     url: https://github.com/Eventiva/eventiva/discussions/new?category=show-and-tell
     about: Showcase yourself
   - name: Contributor Code of Conduct
-    url: https://github.com/Eventiva/contributors/blob/develop/CODE_OF_CONDUCT.md
+    url: https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md
     about: Showcase yourself
