@@ -14,17 +14,13 @@
   - [Why open-source?](#why-open-source)
   - [How to get support 👨‍👩‍👧‍👦](#how-to-get-support-)
   - [Contributing](#contributing)
-    - [Contributors ✨](#contributors-)
     - [Visualisation of the codebase](#visualisation-of-the-codebase)
     - [Backlog](#backlog)
     - [Running Locally \& Developing](#running-locally--developing)
+    - [Contributors ✨](#contributors-)
       - [prerequisites](#prerequisites)
       - [Codespaces Method (Recommended)](#codespaces-method-recommended)
       - [Devcontainer Method](#devcontainer-method)
-  - [Security](#security)
-    - [Security Policy](#security-policy)
-      - [Supported Versions](#supported-versions)
-      - [Reporting a Vulnerability](#reporting-a-vulnerability)
 
 <!-- tocstop -->
 
@@ -59,11 +55,45 @@ Our extensive **documentation** can be found at **[here](https://github.com/Even
 
 ## Contributing
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="dist/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="dist/github-snake.svg" />
+  <img alt="github-snake" src="github-snake.svg" />
+</picture>
+
 Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
 
 This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud). You can find a example Pull Request, [here](https://github.com/Eventiva/eventiva/pull/36) which shows the standard flow for contributors.
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
+
+### Visualisation of the codebase
+
+eventiva/eventiva is built on the following main stack:
+
+- <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
+- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
+- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/3337/Q4L7Jncy.jpg' alt='ESLint'/> [ESLint](http://eslint.org/) – Code Review
+- <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- <img width='25' height='25' src='https://img.stackshare.io/service/5848/44mC-kJ3.jpg' alt='Yarn'/> [Yarn](https://yarnpkg.com/) – Front End Package Manager
+- <img width='25' height='25' src='https://img.stackshare.io/service/7035/default_66f265943abed56bcdbfca1c866a4261b1fbb063.jpg' alt='Prettier'/> [Prettier](https://prettier.io/) – Code Review
+- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- <img width='25' height='25' src='https://img.stackshare.io/service/48786/default_8b1119bcbb159cebebc2f6cfc9cd2e359b169d22.jpg' alt='OpenAI'/> [OpenAI](https://openai.com/) – Large Language Models
+- <img width='25' height='25' src='https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg' alt='LangChain'/> [LangChain](https://github.com/hwchase17/langchain) – Large Language Model Tools
+- <img width='25' height='25' src='https://img.stackshare.io/service/109221/default_b888cdf5617d936aa6aacf130911906955508639.png' alt='pgvector'/> [pgvector](https://github.com/pgvector/pgvector/) – Database Tools
+
+Full tech stack [here](/techstack.md)
+
+![Visualization of the codebase](./diagram.svg)
+
+### Backlog
+
+Our backlog can be found on either our [Github Project](https://github.com/orgs/Eventiva/projects/12)
+
+### Running Locally & Developing
 
 ### Contributors ✨
 
@@ -117,16 +147,6 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-### Visualisation of the codebase
-
-![Visualization of the codebase](./diagram.svg)
-
-### Backlog
-
-Our backlog can be found on either our [Github Project](https://github.com/orgs/Eventiva/projects/12)
-
-### Running Locally & Developing
 
 [This section is being re-written based on the new development environment and major changes to the repository]
 
@@ -207,25 +227,3 @@ rush archive-project --package-name <your_package_name>
 5. Move the code to project folder
 6. Restore project configuration into `rush.json`
 7. Delete metadata file and tarball -->
-
-## Security
-
-<details>
-    <summary><b>Current Status</b></summary>
-
-### Security Policy
-
-#### Supported Versions
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| < 1.0   | :white_check_mark: |
-
-#### Reporting a Vulnerability
-
-
-
-</details>
