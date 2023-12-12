@@ -49,6 +49,13 @@ jobs:
       GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
       BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
     steps:
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Initialize Bit
