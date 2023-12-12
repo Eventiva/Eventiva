@@ -32,7 +32,7 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 11-12-2023
+ # Last Modified: 12-12-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
@@ -172,5 +172,5 @@ body:
         The Code of Conduct helps create a safe space for everyone. We require
         that everyone agrees to it.
       options:
-        - label: I agree to follow this project's [Code of Conduct](https://github.com/Eventiva/contributors/blob/develop/CODE_OF_CONDUCT.md)
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md)
           required: true
