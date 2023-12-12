@@ -39,10 +39,23 @@
 # Sweep AI turns bugs & feature requests into code changes (https://sweep.dev)
 # For details on our config file, check out our docs at https://docs.sweep.dev/usage/config
 
-# This setting contains a list of rules that Sweep will check for. If any of these rules are broken in a new commit, Sweep will create an pull request to fix the broken rule.
 branch: "develop"
 gha_enabled: True
-description: "Eventiva/eventiva is a mono-repository built on a component first architecture. It is built using the Frappe Framework and uses MariaDB as the development database and Amazon Aurora as the production database. The repository is split into 4 tiers, with Tier 1 components being essential for an organizations software architecture to function, and Tier 4 components having no significant effect on the customer experience and do not significantly affect the organization. "
+description: |
+    "Eventiva/eventiva is a mono-repository built on a component first architecture. It is built using the Frappe Framework and uses MariaDB as the development database and Amazon Aurora as the production database. The repository is split into 4 tiers, with Tier 1 components being essential for an organizations software architecture to function, and Tier 4 components having no significant effect on the customer experience and do not significantly affect the organization. The folders are split int two main types of workflows.
+    
+    The main one is Frappe Framework Modules built with Python and javascript. These can be identified primarily by being within the modules folde, or by the python code located in the root of the module.
+    All code in these modules should be complete with docstrings. For Python, this means using docstrings.
+    In these frappe framework modules, testing is done the Frappe Framework's unit testing framework and Cypress for UI testing, the file should be named *_test.py. If a module is missing unit tests, they should be added. To write integration tests, create a .js file in the cypress/integration directory. 
+    
+    The second type is Typescript modules built on the Bit.Dev framework for modular components. These can be identified by the lack of python scripts.
+    All code in these modules should be complete with docstrings. For Typescript, this means using JSDoc.
+    In these typescript modules, testing is done via the bit.dev testing configuration, which by default runs Jest, the file should be named *.spec.ts.
+    
+    In general, the following should be adhered to as closely as possible: 
+    - Docstrings should be used to describe the purpose of the file, the purpose of each class, and the purpose of each function. They should also be used to describe the purpose of each parameter and return value. If a function is not self-explanatory, it should have a docstring explaining what it does and why it does it. It should also include the version of the code that it was added in, the date it was added, and the author who added it.
+    - For each change in the code, you must update the changelog with the type of change (major, minor, or patch), a description of the change, and the author who made the change
+    - All modules should have a compass.yml file. This should follow the https://go.atlassian.com/compass-yml-format specification. The compass file should reference all relationships between modules, including the module's dependencies and dependents. If a module is missing a compass file, it should be added. If a compass file is missing a relationship, it should be added. In the compass file, the tier option is defined as the following; Tier 1 components are essential for an organizations software architecture to function. If they fail, they could seriously impact the organization and its customers. These could be things like login services, permission services, or API gateways. Tier 2 components are important to the organizations software architecture and if they fail, could degrade the customer experience. These could be things like search services, or order-fulfillment services. Tier 3 components, if they fail, have minor or difficult-to-notice impacts on an organization and its customers. These could be things like icon services, or recommendation services. Tier 4 components have no significant effect on the customer experience and do not significantly affect the organization. These could be things like experimental features, or analytical services. When updating the compass file, you should review the ~/.bitmap file and the package.json files to ensure all dependencies from within this project are included. If you need to find a dependancy ID for the compass file, find the folder in the projects directory with the source code for the module, and find the ID within that modules compass file."
 draft: False
 blocked_dirs: []
 docs: [
@@ -107,16 +120,15 @@ docs: [
   ]
 rules:
   - "Leftover TODO, BUG, FIXME & ISSUE in the code should be handled."
-  - "All new business logic should have corresponding unit tests. For Typsecipt, the file should be named *.spec.ts. For Python, the file should be named *_test.py. For Typescript modules not utilising the frappe framework, we use Jest. For Python / frappe framework modules, we use the Frappe Framework's unit testing framework and Cypress for UI testing. If a module is missing unit tests, they should be added. To write integration tests, create a .js file in the cypress/integration directory."
+  - "All new business logic should have corresponding unit tests."
   - "Refactor large functions to be more modular and easier to read."
-  - "All files should be complete with type annotations/declarations. For Python, this means using type hints. For Typescript, this means using type declarations."
-  - "All files should be complete with docstrings. For Python, this means using docstrings. For Typescript, this means using JSDoc. These should be used to describe the purpose of the file, the purpose of each class, and the purpose of each function. They should also be used to describe the purpose of each parameter and return value. If a function is not self-explanatory, it should have a docstring explaining what it does and why it does it. It should also include the version of the code that it was added in, the date it was added, and the author who added it."
+  - "All files should be complete with type annotations/declarations."
+  - "All files should be complete with docstrings."
   - "Any clearly inefficient or repeated code should be optimized or refactored."
   - "Update the README.md file whenever a new feature is added. Make sure to include a description of the feature and any new commands."
   - "Remove any unused imports, variables, functions, or classes. If they are needed, add a 'KEEP:' comment explaining why they are needed and when they will be used."
-  - "You must use the Semantic Versioning standards for all versioning, including tags, releases, and changelogs. For each change in the code, you must update the changelog with the type of change (major, minor, or patch), a description of the change, and the author who made the change."
-  - "All modules should have a compass.yml file. This should follow the https://go.atlassian.com/compass-yml-format specification. The compass file should reference all relationships between modules, including the module's dependencies and dependents. If a module is missing a compass file, it should be added. If a compass file is missing a relationship, it should be added."
-  - "In the compass file, the tier option is defined as the following; Tier 1 components are essential for an organizations software architecture to function. If they fail, they could seriously impact the organization and its customers. These could be things like login services, permission services, or API gateways. Tier 2 components are important to the organizations software architecture and if they fail, could degrade the customer experience. These could be things like search services, or order-fulfillment services. Tier 3 components, if they fail, have minor or difficult-to-notice impacts on an organization and its customers. These could be things like icon services, or recommendation services. Tier 4 components have no significant effect on the customer experience and do not significantly affect the organization. These could be things like experimental features, or analytical services. If a compass file is incorrectly tiered, it should be updated."
+  - "You must use the Semantic Versioning standards for all versioning, including tags, releases, and changelogs."
+  - "All modules should have a compass.yml file which has the correct tiering and relationships."
 sandbox:
   install:
     #  install bit.dev
