@@ -68,7 +68,31 @@ For more information on contributing, please read the [contributing guidelines](
 
 ### Visualisation of the codebase
 
-eventiva/eventiva is built on the following main stack:
+## Bit Initialization Scripts
+
+Eventiva includes automation scripts to simplify the initial setup of Bit within the project. The `bit-init.js` and `bit-init.sh` scripts handle the installation and configuration of Bit, streamlining the process for developers.
+
+To run the `bit-init.js` script, use the command:
+
+```
+node scripts/bit-init.js
+```
+
+This script requires Node.js to be installed on your system.
+
+To run the `bit-init.sh` script, use the command:
+
+```
+bash scripts/bit-init.sh
+```
+
+Ensure that Bash is available on your system to execute the shell script.
+
+---
+
+### Visualisation of the codebase
+
+Eventiva/eventiva is built on the following main stack:
 
 - <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
