@@ -154,6 +154,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/973676?v=4",
       "profile": "https://github.com/mohsinalimat",
       "contributions": ["doc"]
+    },
+    {
+      "login": "Alchez",
+      "name": "Rohan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13396535?v=4",
+      "profile": "https://github.com/Alchez",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
