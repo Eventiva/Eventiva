@@ -55,6 +55,12 @@ jobs:
         uses: actions/checkout@v3
       - name: Initialize Bit
         uses: bit-tasks/init@v1
+      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
       - name: Bit Tag and Export
         uses: bit-tasks/tag-export@v1
       - name: Commit Bitmap
