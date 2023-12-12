@@ -2,7 +2,7 @@
 
 # arguments to the script
 WSDIR="$1"
-BIT_VERSION="0.2.8" # Leave empty for latest version
+BIT_VERSION="" # Leave empty for latest version
 
 # install bvm and bit
 npm i -g @teambit/bvm
