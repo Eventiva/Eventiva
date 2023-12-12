@@ -26,3 +26,7 @@
 	object = 7d72de0bb4ca2de7a243c40919f87088c1bf51f4
 	path = projects/modules/teamspeak_integration
 	type = expand module
+[map "b035f386-009a-3476-9daa-30881eb688a0"]
+	object = c29e05f44f0fe46949d9b659a4711ab463ba5198
+	path = projects/modules/teamspeak_integration
+	type = expand module
