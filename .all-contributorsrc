@@ -70,6 +70,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/93313345?v=4",
       "profile": "https://github.com/nasirrr",
       "contributions": ["doc"]
+    },
+    {
+      "login": "ankush",
+      "name": "Ankush Menat",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9079960?v=4",
+      "profile": "https://github.com/ankush",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
