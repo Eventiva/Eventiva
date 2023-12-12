@@ -50,3 +50,7 @@
 	object = e05190b5e66eb7b67cd1ff6fce96eac26f1d029d
 	path = projects/modules/vetting
 	type = expand module
+[map "8c5ff67c-a62d-34be-854f-95bcdafff9db"]
+	object = 5cd97a2cac6c19b44f5c8f72927b4286e243be9e
+	path = projects/modules/vetting
+	type = expand module
