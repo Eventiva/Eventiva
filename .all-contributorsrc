@@ -140,6 +140,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/74115869?v=4",
       "profile": "https://github.com/robproject",
       "contributions": ["doc"]
+    },
+    {
+      "login": "roquegv",
+      "name": "Roque Vera",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6966715?v=4",
+      "profile": "https://github.com/roquegv",
+      "contributions": ["doc"]
     }
   ],
   "contributorsPerLine": 7,
