@@ -33,9 +33,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "pnpm",
+            "name": "bit-init-scripts_1",
             "scope": "eventiva.modules"
         },
-        "exported": true
+        "exported": false
     }
 }
