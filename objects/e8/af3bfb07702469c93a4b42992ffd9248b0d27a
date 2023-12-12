@@ -14,7 +14,7 @@
 	object = e1280af50cae7c481aaf42d2a1487f61d3e5f216
 	path = projects/modules/discord_integration
 	type = expand module
-[map "c18d6249-b1c1-30f8-bdc0-a36fb5d9b6df"]
-	object = 9607a98c6342fcb3647634b70a05124ecb60294b
+[map "b3c77778-dce8-3c51-8656-72c55db8ab3d"]
+	object = 2aae11b4d75b0955281aa73e626ef4db27cbbf23
 	path = projects/modules/discord_integration
 	type = expand module
