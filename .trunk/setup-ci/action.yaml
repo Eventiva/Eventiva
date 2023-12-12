@@ -4,9 +4,11 @@ description: Set up dependencies for Trunk Check
 runs:
   using: composite
   steps:
-  - id: Initialize Bit
+  - id: init
+    name: Initialise Bit via SH
     shell: bash
     run: ./scripts/bit-init.sh
-  - id: Verify and Build Bit
+  - id: verify
+    name: Verify and Build Bit
     shell: bash
     run: ./scripts/verify.sh
