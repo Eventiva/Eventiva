@@ -1,5 +1,10 @@
 ###
- # @format
+###
+# CI Action Configuration
+# This YAML file configures the continuous integration action for setting up the Trunk Check.
+# It defines the environment and steps necessary to prepare the application for subsequent actions like testing or deployment.
+# Version: 1.0.0, Date: 2023-04-26, Author: Code Engineer
+# @format
  # -----
  # Project: @eventiva/eventiva
  # File: action.yaml
@@ -39,6 +44,7 @@
 name: Trunk Check setup
 description: Set up dependencies for Trunk Check
 
+# Defines that this composite action uses a series of steps in a sequence
 runs:
   using: composite
   steps:
