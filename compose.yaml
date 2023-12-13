@@ -32,13 +32,28 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: 11-12-2023
+ # Last Modified: 13-12-2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
+x-customizable-image: &customizable_image
+  # By default the image used only contains the `frappe` and `erpnext` apps.
+  # See https://github.com/frappe/frappe_docker/blob/main/docs/custom-apps.md
+  # about using custom images.
+  image: frappe/erpnext:${ERPNEXT_VERSION:?No ERPNext version set}
+
+x-depends-on-configurator: &depends_on_configurator
+  depends_on:
+    configurator:
+      condition: service_completed_successfully
+
+x-backend-defaults: &backend_defaults
+  <<: [*depends_on_configurator, *customizable_image]
+  volumes:
+    - sites:/home/frappe/frappe-bench/sites
+
 services:
   configurator:
-    volumes:
-    - sites:/home/frappe/frappe-bench/sites
+    <<: *backend_defaults
     entrypoint:
       - bash
       - -c
@@ -61,11 +76,10 @@ services:
     depends_on: {}
 
   backend:
-    volumes:
-    - sites:/home/frappe/frappe-bench/sites
+    <<: *backend_defaults
 
   frontend:
-    image: frappe/erpnext:${ERPNEXT_VERSION:?No ERPNext version set}
+    <<: *customizable_image
     command:
       - nginx-entrypoint.sh
     environment:
@@ -84,10 +98,7 @@ services:
       - websocket
 
   websocket:
-    image: frappe/erpnext:${ERPNEXT_VERSION:?No ERPNext version set}
-    depends_on:
-      configurator:
-        condition: service_completed_successfully
+    <<: [*depends_on_configurator, *customizable_image]
     command:
       - node
       - /home/frappe/frappe-bench/apps/frappe/socketio.js
@@ -95,18 +106,15 @@ services:
       - sites:/home/frappe/frappe-bench/sites
 
   queue-short:
-    volumes:
-    - sites:/home/frappe/frappe-bench/sites
+    <<: *backend_defaults
     command: bench worker --queue short,default
 
   queue-long:
-    volumes:
-    - sites:/home/frappe/frappe-bench/sites
+    <<: *backend_defaults
     command: bench worker --queue long,default,short
 
   scheduler:
-    volumes:
-    - sites:/home/frappe/frappe-bench/sites
+    <<: *backend_defaults
     command: bench schedule
 
 # ERPNext requires local assets access (Frappe does not)
