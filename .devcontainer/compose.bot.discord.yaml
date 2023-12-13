@@ -42,14 +42,14 @@
 services:
   discord:
     build:
-      context: ../../
+      context: ./
       dockerfile: dockerfile.eventiva
     working_dir: /home/frappe/frappe-bench/workspace
     ports:
       - 4000:4000
     volumes:
       # bind the workspace to /home/frappe/frappe-bench/workspace
-      - ../../:/home/frappe/frappe-bench/workspace
+      - ./:/home/frappe/frappe-bench/workspace
     command: >
       sh -c "
         bit install &&

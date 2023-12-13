@@ -40,11 +40,11 @@
 services:
   backend:
     build:
-      context: ../../
+      context: ./
       dockerfile: dockerfile.eventiva
     volumes:
       # bind the workspace to /home/frappe/frappe-bench/workspace
-      - ../../:/home/frappe/frappe-bench/workspace
+      - ./:/home/frappe/frappe-bench/workspace
 
   db:
     healthcheck:
