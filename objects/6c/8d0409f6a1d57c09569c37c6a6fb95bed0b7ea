@@ -50,7 +50,7 @@
 	object = e05190b5e66eb7b67cd1ff6fce96eac26f1d029d
 	path = projects/workflows/awesome-frappe
 	type = expand module
-[map "4095c090-9a13-3b12-a88f-5d4125c5fa3d"]
-	object = 5cd97a2cac6c19b44f5c8f72927b4286e243be9e
+[map "a1571784-9bee-30dc-950b-dd503f36edba"]
+	object = 84cbb7b0da4f0584709940b92555810084fa11c2
 	path = projects/workflows/awesome-frappe
 	type = expand module

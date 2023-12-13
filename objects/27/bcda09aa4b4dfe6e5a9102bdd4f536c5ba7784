@@ -50,7 +50,7 @@
 	object = e05190b5e66eb7b67cd1ff6fce96eac26f1d029d
 	path = projects/workflows/change-report
 	type = expand module
-[map "f8e58be8-d48d-3efe-a304-ddff15fddfd4"]
-	object = 5cd97a2cac6c19b44f5c8f72927b4286e243be9e
+[map "e06fced0-a535-309f-8de6-f54bde0253a4"]
+	object = 84cbb7b0da4f0584709940b92555810084fa11c2
 	path = projects/workflows/change-report
 	type = expand module
