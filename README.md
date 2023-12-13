@@ -5,6 +5,9 @@
 ## Index
 
 <!-- toc -->
+  - [New Feature](#new-feature)
+    - [Description](#description)
+    - [Commands](#commands)
 
 - [EVENTIVA](#eventiva)
   - [Index](#index)
@@ -24,7 +27,12 @@
 
 <!-- tocstop -->
 
-## Introduction
+## New Feature
+
+A new feature has been introduced in the `.trunk/setup-ci/action.yaml` file. This feature enables users to automatically initialize Bit using the `bit-init.sh` script as part of the Trunk Check setup. The feature was added to streamline the setup process and ensure that Bit is fully configured for Trunk Check. The addition of this feature enhances the project by automating an essential step in the setup process.
+
+### Commands
+- `bit-init.sh`: Initializes Bit via SH
 
 Welcome to the Eventiva repository. Eventiva is an open-source platform for Event Planning and Production logistics. We have created a custom-built directory focused on indexing, marketing and connecting event specialist Vendors, Venues and professionals. We then connected this to our innovative tools for event production planning which include scheduling, itinerary, task management, contact management, warehousing ticket sales, interactive site maps, online and in-person sales solutions, accounting, payroll and human resources.
 
