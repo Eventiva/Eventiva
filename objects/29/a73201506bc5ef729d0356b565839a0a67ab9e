@@ -1,8 +1,0 @@
-[map "04ee4440-2193-3906-87c4-d501a197f299"]
-	object = ea23c4732167c396a3acf9f7c8946c5904c669ff
-	path = projects/workflows/.github
-	type = expand module
-[map "37734011-5832-31a6-9b26-afc52dfa8bd0"]
-	object = 415d8e6523fc7f7d641649e8c4c49d51af848fca
-	path = projects/workflows/.github
-	type = expand module
