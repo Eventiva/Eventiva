@@ -12,14 +12,14 @@
     "discord/client": {
         "name": "discord/client",
         "scope": "eventiva.bots",
-        "version": "78f6c8977c62de0106ba07d9a62b339e5a3f9e55",
+        "version": "e1d4fc11cbfda1f5389f062ac6690e518f4d4c5a",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/discord/client"
     },
     "environments/discord/bot": {
         "name": "environments/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "ba30982a75670dd28480d558370a8b86b0f08a17",
+        "version": "fa66bd7c86910fb3ba40998194b661621aaecf8d",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/environments/discord/bot"
     },
@@ -33,9 +33,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "develop",
+            "name": "features",
             "scope": "eventiva.modules"
         },
-        "exported": false
+        "exported": true
     }
 }
