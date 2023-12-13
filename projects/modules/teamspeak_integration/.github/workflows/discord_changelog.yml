@@ -75,3 +75,4 @@ jobs:
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_REPO_NAME: ${{ github.repository }}
