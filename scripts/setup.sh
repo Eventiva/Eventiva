@@ -10,7 +10,8 @@ DB_HOST=db
 DB_PORT=3306
 REDIS_CACHE=redis-cache:6379
 REDIS_QUEUE=redis-queue:6379
-SITE_NAME=\`site1.localhost\`" >> .env
+LETSENCRYPT_EMAIL=system@eventiva.co.uk
+SITES=\`site1.localhost\`" >> .env
 
 fi
 
