@@ -69,7 +69,8 @@
 		9000,
 		6787,
 		4000
-	]
+	],
+	"initializeCommand": "bash ./scripts/setup.sh"
 	// "onCreateCommand": [
 	// 	// Create the site
 	// 	"bench set-config -g developer_mode 1 && bench new-site site1.localhost --db-root-password databasePassword --admin-password admin --set-default",
