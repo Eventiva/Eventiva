@@ -9,7 +9,8 @@ DB_PASSWORD=databasePassword
 DB_HOST=db
 DB_PORT=3306
 REDIS_CACHE=redis-cache:6379
-REDIS_QUEUE=redis-queue:6379" >> .env
+REDIS_QUEUE=redis-queue:6379
+SITE_NAME=\`site1.localhost\`" >> .env
 
 fi
 
