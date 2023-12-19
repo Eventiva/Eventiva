@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:Eventiva/vetting.git
+	branch = develop
+	commit = 28f975b62539f1cba89ca134d58391ebefd88293
+	parent = 0078b62ee3fc1ddd62c4479ae2040534699c0705
+	method = merge
+	cmdver = 0.4.6
