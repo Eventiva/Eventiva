@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:Eventiva/justice.git
+	branch = develop
+	commit = 039b68101df4945febdbd71c4b8555a4d53ca419
+	parent = 84a796b1af1d0529136f662951523b00da23c42d
+	method = merge
+	cmdver = 0.4.6
