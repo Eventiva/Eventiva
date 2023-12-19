@@ -77,5 +77,6 @@
   "teambit.workspace/workspace-config-files": {
     "enableWorkspaceConfigWrite": true
   },
-  "eventiva.bots/discord/client": {}
+  "eventiva.bots/discord/client": {},
+  "eventiva.workflows/git-subrepo": {}
 }
