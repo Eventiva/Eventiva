@@ -8,5 +8,5 @@
 	branch = develop
 	commit = 039b68101df4945febdbd71c4b8555a4d53ca419
 	parent = 84a796b1af1d0529136f662951523b00da23c42d
-	method = merge
+	method = rebase
 	cmdver = 0.4.6
