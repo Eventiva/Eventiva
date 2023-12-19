@@ -1,0 +1,17 @@
+name: incident_management
+id: ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/588a0b39-0e91-4f29-89c4-6460216669c4
+description: Manage Incidents and Investigations
+configVersion: 1
+typeId: APPLICATION
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/Eventiva/incident_management
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:python
+  - source:github
+customFields: null
