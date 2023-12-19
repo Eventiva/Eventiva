@@ -1,0 +1,78 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: discord_changelog.yml
+# Path: \.github\workflows\discord_changelog.yml
+# Created Date: Monday, December 4th 2023
+# Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+# -----
+# Contributing: Please read through our contributing guidelines. Included are directions for opening
+# issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+#
+# Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+# welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2023 Eventiva - All Rights Reserved
+# LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+# -----
+# This program has been provided under confidence of the copyright holder and is
+# licensed for copying, distribution and modification under the terms of
+# the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+# or (at your option) any later version of this license.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Creative Commons Zero v1.0 Universal for more details.
+#
+# You should have received a copy of the Creative Commons Zero v1.0 Universal
+# along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
+# or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+#
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+# -----
+# Last Modified: 04-12-2023
+# By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+# Current Version: 0.0.0
+###
+
+name: 'Change Report'
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 01 * * 1/2'
+
+jobs:
+  change-report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          # Use a large enough fetch depth to ensure the action can find the commit history to work with
+          fetch-depth: 250
+
+      - uses: eventiva/change-report@main
+        with:
+          # The destination to post the report to.
+          # "slack" and "discord" are supported
+          destination: 'discord'
+          # Number of days to include into the report
+          days: 2
+          # Slack channel to post the report to.
+          # For Slack it's the name of the channel, without the leading "#",
+          # For Discord it's the channel ID
+          channel: '1181345448452182106, 1175861376711925762'
+        env:
+          # Your OpenAI API key, used to generate the report
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Your Slack bot token, used to post the report on behalf of the bot.
+          # Only needed if you're posting to Slack
+          # SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          # Your Slack signing secret, used to verify the request is coming from Slack
+          # Only needed if you're posting to Slack
+          # SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          # Your Discord bot token, used to post the report on behalf of the bot.
+          # Only needed if you're posting to Discord
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_REPO_NAME: ${{ github.repository }}

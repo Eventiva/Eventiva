@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:Eventiva/grand_theft_auto.git
+	branch = develop
+	commit = 53b7911b01e45791eafb2763f50bcf02d7eccc9e
+	parent = da1f841e603a355f32c621bdbba65212d4db695e
+	method = merge
+	cmdver = 0.4.6
