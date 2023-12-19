@@ -65,6 +65,7 @@
         "@teambit/react.react-env": "^1.0.32",
         "@teambit/typescript.typescript-compiler": "^2.0.14",
         "@types/lodash": "^4.14.202",
+        "chalk": "^5.3.0",
         "express": "^4.18.2",
         "lodash": "^4.17.21"
       },

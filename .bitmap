@@ -63,6 +63,20 @@
             }
         }
     },
+    "git-subrepo": {
+        "name": "git-subrepo",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.workflows",
+        "mainFile": "index.ts",
+        "rootDir": "projects/workflows/git-subrepo",
+        "config": {
+            "teambit.harmony/aspect": {},
+            "teambit.envs/envs": {
+                "env": "teambit.harmony/aspect"
+            }
+        }
+    },
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
