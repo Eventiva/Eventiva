@@ -1,0 +1,17 @@
+name: custody
+id: ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/44383f9d-b9e7-4433-b56c-c644a5ced224
+description: Custody Management for police forces
+configVersion: 1
+typeId: APPLICATION
+fields:
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: https://github.com/Eventiva/custody
+relationships:
+  DEPENDS_ON: []
+labels:
+  - language:python
+  - source:github
+customFields: null
