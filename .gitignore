@@ -78,3 +78,5 @@ projects/workflows/generators/tsconfig.json
 projects/bots/tsconfig.json
 projects/bots/.eslintrc.json
 .prettierrc.cjs
+tsconfig.json
+.eslintrc.json
