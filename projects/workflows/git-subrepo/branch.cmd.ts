@@ -2,8 +2,8 @@
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: clone.cmd.ts
- * Path: \projects\workflows\git-subrepo\clone.cmd.ts
+ * File: branch.ts
+ * Path: \projects\workflows\git-subrepo\branch.ts
  * Created Date: Tuesday, December 19th 2023
  * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * -----
@@ -40,12 +40,12 @@ import { Command, CommandOptions } from '@teambit/cli';
 import chalk from 'chalk';
 import { GitSubrepoMain } from './git-subrepo.main.runtime';
 
-const COMMAND_NAME = 'clone';
+const COMMAND_NAME = 'branch';
 
-export class CloneCmd implements Command {
-  name = `${COMMAND_NAME} <repository> [<subdir>] [-b <branch>] [-f] [-m <msg>] [--file=<msg file>] [-e] [--method <merge|rebase>]`;
+export class BranchCmd implements Command {
+  name = `${COMMAND_NAME} <subdir>|--all [-f] [-F]`;
   alias = '';
-  description = `Clone a remote repository into a local subdirectory`;
+  description = `Create a branch with local subrepo commits.`;
   options = GitSubrepoMain.subrepoOptions;
   group = 'git';
   commands: Command[] = [];
@@ -54,11 +54,14 @@ export class CloneCmd implements Command {
 
   constructor(private subrepo: GitSubrepoMain) {}
 
-  async report([repository, subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.clone(repository, subdirectory, flags);
-    if (res) {
-      return chalk.green('git subrepo clone was successful');
+  async report([subdirectory]: string[], flags: string[]) {
+    if (!subdirectory) {
+      subdirectory = '--all';
     }
-    return chalk.red('git subrepo clone was unsuccessful');
+    const res = await this.subrepo.branch(subdirectory, flags);
+    if (res) {
+      return chalk.green('git subrepo branch was successful');
+    }
+    return chalk.red('git subrepo branch was unsuccessful');
   }
 }

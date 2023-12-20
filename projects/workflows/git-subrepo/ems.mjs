@@ -2,9 +2,9 @@
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: clone.cmd.ts
- * Path: \projects\workflows\git-subrepo\clone.cmd.ts
- * Created Date: Tuesday, December 19th 2023
+ * File: ems.mjs
+ * Path: \projects\workflows\git-subrepo\ems.mjs
+ * Created Date: Wednesday, December 20th 2023
  * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -24,7 +24,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * Creative Commons Zero v1.0 Universal for more details.
+ * GNU General Public License v3.0 only for more details.
  * 
  * You should have received a copy of the GNU General Public License v3.0 only
  * along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
@@ -32,33 +32,13 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 19-12-2023
+ * Last Modified: 20-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
-import { Command, CommandOptions } from '@teambit/cli';
-import chalk from 'chalk';
-import { GitSubrepoMain } from './git-subrepo.main.runtime';
+// eslint-disable-next-line import/no-unresolved
+import cjsModule from './index.js';
 
-const COMMAND_NAME = 'clone';
+export const GitSubrepoAspect = cjsModule.GitSubrepoAspect;
 
-export class CloneCmd implements Command {
-  name = `${COMMAND_NAME} <repository> [<subdir>] [-b <branch>] [-f] [-m <msg>] [--file=<msg file>] [-e] [--method <merge|rebase>]`;
-  alias = '';
-  description = `Clone a remote repository into a local subdirectory`;
-  options = GitSubrepoMain.subrepoOptions;
-  group = 'git';
-  commands: Command[] = [];
-  private = true;
-  helpUrl = 'https://github.com/ingydotnet/git-subrepo';
-
-  constructor(private subrepo: GitSubrepoMain) {}
-
-  async report([repository, subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.clone(repository, subdirectory, flags);
-    if (res) {
-      return chalk.green('git subrepo clone was successful');
-    }
-    return chalk.red('git subrepo clone was unsuccessful');
-  }
-}
+export default cjsModule;

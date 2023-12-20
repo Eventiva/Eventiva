@@ -32,7 +32,7 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 19-12-2023
+ * Last Modified: 20-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
@@ -42,6 +42,19 @@ import { WorkspaceAspect, Workspace, BitmapMergeOptions } from '@teambit/workspa
 import { RuntimeDefinition, Aspect } from '@teambit/harmony';
 import { execSync } from 'child_process';
 import { SubRepoCmd } from './git-subrepo.cmd';
+import { BranchCmd } from './branch.cmd';
+import { CleanCmd } from './clean.cmd';
+import { CloneCmd } from './clone.cmd';
+import { CommitCmd } from './commit.cmd';
+import { configCmd } from './config.cmd';
+import { FetchCmd } from './fetch.cmd';
+import { helpCmd } from './help.cmd';
+import { InitCmd } from './init.cmd';
+import { PullCmd } from './pull.cmd';
+import { PushCmd } from './push.cmd';
+import { StatusCmd } from './status.cmd';
+import { UpgradeCmd } from './upgrade.cmd';
+import { versionCmd } from './version.cmd';
 
 export class GitSubrepoMain {
   static slots = [];
@@ -79,14 +92,95 @@ export class GitSubrepoMain {
   static async provider([cli, workspace]: [CLIMain, Workspace]) {
     const subMain = new GitSubrepoMain(workspace);
     const subRepoCmd = new SubRepoCmd();
-    // subRepoCmd.commands = [new SetGitMergeDriverCmd(gitMain), new MergeBitmapsCmd(gitMain)];
+    subRepoCmd.commands = [new BranchCmd(subMain), new CleanCmd(subMain), new CloneCmd(subMain), new CommitCmd(subMain), new configCmd(subMain), new FetchCmd(subMain), new helpCmd(subMain), new InitCmd(subMain), new PullCmd(subMain), new PushCmd(subMain), new StatusCmd(subMain), new UpgradeCmd(subMain), new versionCmd(subMain)];
     cli.register(subRepoCmd);
     return subMain;
   }
 
-  async clone(repository: string, subdirectory: string) {
-    // exec git subrepo clone <repository> <subdirectory> with options
-    return execSync(`git subrepo clone ${repository} ${subdirectory}`);
+  getAspectDirectory() {
+    // get the local path to this aspect
+    return __dirname;
+  }
+
+  getWorkspaceRoot() {
+    // get the root path of the workspace
+    return this.workspace.path;
+  }
+
+  async runCommand(command: string, args: string[]) {
+    try {
+      const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(' ')}`;
+      const output = execSync(cmd, { stdio: 'inherit' });
+      console.log(output);
+    } catch (error) {
+      console.error(`Error running command "${command}":`, error);
+    }
+  }
+
+  async clone(repository: string, subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the clone command and the repository and subdirectory arguments
+    
+    return execSync(`clone ${repository} ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async init(subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the init command
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo init ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async pull(subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the pull command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo pull ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async push(subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the push command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo pu${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async fetch(subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the fetch command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo fetch ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async branch(subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the branch command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo branch ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async commit(subdirectory: string, flags: string[]) { 
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the commit command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo commit ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async status(subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the status command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo status ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+  
+  async clean (subdirectory: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the clean command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo clean ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async config(subdirectory: string, option: string, value: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the config command and the subdirectory argument
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo config ${this.getWorkspaceRoot}/${subdirectory} ${option} ${value} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async help(command: string, flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the help command
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo help ${command} ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async version(flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the version command
+    return execSync(`bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo version ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
+  }
+
+  async upgrade(flags: string[]) {
+    // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the upgrade command
+    return execSync(`${this.getAspectDirectory()}/cmd/lib/git-subrepo upgrade ${Array.isArray(flags) ? flags.join(' ') : ''}`, { stdio: 'inherit' });
   }
 }
 
