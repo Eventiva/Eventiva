@@ -1,19 +1,19 @@
 /**
  * @format
  * -----
- * Project: discord_server
+ * Project: Eventiva
  * File: discord_server.js
- * Path: /discord_server.js
+ * Path: /eventiva/discord_server.js
  * Created Date: Sunday, December 17th 2023
  * Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
- * issues, coding standards, and notes on development. These can be found at https://github.com/discord_server/blob/develop/CONTRIBUTING.md
+ * issues, coding standards, and notes on development. These can be found at https://github.com/Eventiva/blob/develop/CONTRIBUTING.md
  * 
- * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
- * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/discord_server/blob/develop/CODE_OF_CONDUCT.md
+ * Code of Conduct: Eventiva adheres to the Contributor Covenant, version 2.0. Please interact in a way that promotes an open,
+ * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/Eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2023 Resnovas - All Rights Reserved
+ * Copyright (c) 2023 Eventiva - All Rights Reserved
  * LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
  * -----
  * This program has been provided under confidence of the copyright holder and is 
@@ -32,7 +32,7 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 20-12-2023
+ * Last Modified: INSERT_LAST_MODIFIED_DATE_HERE
  * By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
  */
 
