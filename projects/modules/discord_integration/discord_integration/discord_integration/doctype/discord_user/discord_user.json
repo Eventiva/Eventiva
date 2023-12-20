@@ -21,7 +21,18 @@
   "section_break_rdzn",
   "discord_creation_date",
   "column_break_mcqz",
-  "column_break_lssw"
+  "column_break_lssw",
+  "servers_tab",
+  "servers_section",
+  "servers",
+  "moderation_tab",
+  "timeouts_section",
+  "timeouts",
+  "kicks_section",
+  "kicks",
+  "bans_section",
+  "bans",
+  "roles_tab"
  ],
  "fields": [
   {
@@ -99,11 +110,70 @@
   {
    "fieldname": "column_break_lssw",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "servers_tab",
+   "fieldtype": "Tab Break",
+   "label": "Servers"
+  },
+  {
+   "fieldname": "servers_section",
+   "fieldtype": "Section Break",
+   "label": "Servers"
+  },
+  {
+   "fieldname": "servers",
+   "fieldtype": "Table",
+   "label": "Servers",
+   "options": "Discord Server User"
+  },
+  {
+   "fieldname": "moderation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Moderation"
+  },
+  {
+   "fieldname": "timeouts_section",
+   "fieldtype": "Section Break",
+   "label": "Timeouts"
+  },
+  {
+   "fieldname": "timeouts",
+   "fieldtype": "Table",
+   "label": "Timeouts",
+   "options": "Discord Server Timeout"
+  },
+  {
+   "fieldname": "kicks_section",
+   "fieldtype": "Section Break",
+   "label": "Kicks"
+  },
+  {
+   "fieldname": "kicks",
+   "fieldtype": "Table",
+   "label": "Kicks",
+   "options": "Discord Server Kick"
+  },
+  {
+   "fieldname": "bans_section",
+   "fieldtype": "Section Break",
+   "label": "Bans"
+  },
+  {
+   "fieldname": "bans",
+   "fieldtype": "Table",
+   "label": "Bans",
+   "options": "Discord Server Ban"
+  },
+  {
+   "fieldname": "roles_tab",
+   "fieldtype": "Tab Break",
+   "label": "Roles"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-03 17:02:37.326928",
+ "modified": "2023-12-20 20:14:11.861560",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord User",
