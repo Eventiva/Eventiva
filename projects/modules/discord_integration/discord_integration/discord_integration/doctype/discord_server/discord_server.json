@@ -34,11 +34,21 @@
   "enabled",
   "description",
   "column_break_wohr",
+  "roles_tab",
   "fun_stuff_tab",
   "widget_tab",
-  "bans_tab",
-  "table_nymn",
-  "member_tab",
+  "timeouts_kicks_bans_tab",
+  "timeouts_section",
+  "timeouts_column",
+  "timeouts",
+  "section_break_xvgz",
+  "kicks_column",
+  "kicks",
+  "bans_section",
+  "bans",
+  "users_tab",
+  "users_section",
+  "users_column",
   "users"
  ],
  "fields": [
@@ -142,16 +152,6 @@
    "label": "Widget"
   },
   {
-   "fieldname": "bans_tab",
-   "fieldtype": "Tab Break",
-   "label": "Bans"
-  },
-  {
-   "fieldname": "member_tab",
-   "fieldtype": "Tab Break",
-   "label": "Members"
-  },
-  {
    "default": "0",
    "description": "Ticking this will allow users to join the discord without needing to have an associated employee account. This cannot be changed once saved.",
    "fieldname": "is_public",
@@ -210,12 +210,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "users",
-   "fieldtype": "Table",
-   "label": "Users",
-   "options": "Discord Server User"
-  },
-  {
    "fieldname": "safety_setup_section",
    "fieldtype": "Section Break",
    "label": "Safety Setup"
@@ -230,15 +224,115 @@
    "reqd": 1
   },
   {
-   "fieldname": "table_nymn",
+   "fieldname": "timeouts_kicks_bans_tab",
+   "fieldtype": "Tab Break",
+   "label": "Moderation"
+  },
+  {
+   "fieldname": "timeouts_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "timeouts",
+   "fieldtype": "Table",
+   "options": "Discord Server Timeout"
+  },
+  {
+   "fieldname": "section_break_xvgz",
+   "fieldtype": "Section Break",
+   "label": "Kicks"
+  },
+  {
+   "fieldname": "kicks_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "kicks",
+   "fieldtype": "Table",
+   "options": "Discord Server Kick"
+  },
+  {
+   "fieldname": "bans_section",
+   "fieldtype": "Section Break",
+   "label": "Bans"
+  },
+  {
+   "fieldname": "bans",
    "fieldtype": "Table",
    "options": "Discord Server Ban"
+  },
+  {
+   "fieldname": "users_tab",
+   "fieldtype": "Tab Break",
+   "label": "Users"
+  },
+  {
+   "fieldname": "users_column",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "timeouts_section",
+   "fieldtype": "Section Break",
+   "label": "Timeouts"
+  },
+  {
+   "fieldname": "users",
+   "fieldtype": "Table",
+   "label": "Users",
+   "options": "Discord Server User"
+  },
+  {
+   "fieldname": "users_section",
+   "fieldtype": "Section Break",
+   "label": "Users"
+  },
+  {
+   "fieldname": "roles_tab",
+   "fieldtype": "Tab Break",
+   "label": "Roles"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
- "links": [],
- "modified": "2023-12-03 22:59:04.276124",
+ "links": [
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Ban",
+   "link_fieldname": "discord_server",
+   "parent_doctype": "Discord Ban"
+  },
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Kick",
+   "link_fieldname": "discord_server"
+  },
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Timeout",
+   "link_fieldname": "discord_server"
+  },
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Role",
+   "link_fieldname": "discord_server"
+  },
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Rules",
+   "link_fieldname": "discord_server"
+  },
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Channel",
+   "link_fieldname": "discord_server"
+  },
+  {
+   "group": "Discord",
+   "link_doctype": "Discord Message",
+   "link_fieldname": "discord_server"
+  }
+ ],
+ "modified": "2023-12-20 20:14:37.789087",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Server",

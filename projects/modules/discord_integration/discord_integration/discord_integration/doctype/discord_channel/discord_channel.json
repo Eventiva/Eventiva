@@ -7,7 +7,7 @@
  "editable_grid": 1,
  "engine": "InnoDB",
  "field_order": [
-  "server",
+  "discord_server",
   "company",
   "channel_name",
   "channel_id",
@@ -194,13 +194,6 @@
    "options": "Company"
   },
   {
-   "fieldname": "server",
-   "fieldtype": "Link",
-   "label": "Server",
-   "options": "Discord Server",
-   "reqd": 1
-  },
-  {
    "depends_on": "eval:doc.channel_type===\"Voice\"||doc.channel_type===\"Stage\";",
    "fieldname": "voice_settings_section",
    "fieldtype": "Section Break",
@@ -240,12 +233,19 @@
   {
    "fieldname": "column_break_rrvi",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "discord_server",
+   "fieldtype": "Link",
+   "label": "Server",
+   "options": "Discord Server",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2023-12-03 22:16:02.817325",
+ "modified": "2023-12-20 19:48:42.016650",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Channel",
