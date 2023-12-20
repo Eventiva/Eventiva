@@ -9,6 +9,7 @@
 		"./compose.bot.discord.yaml"
 	],
 	"service": "backend",
+	"shutdownAction": "none",
 	"workspaceFolder": "/home/frappe/frappe-bench/",
 	"containerEnv": {
 		"ERPNEXT_VERSION": "v15.2.0",
@@ -70,7 +71,7 @@
 		6787,
 		4000
 	],
-	"initializeCommand": "bash ./scripts/setup.sh"
+	// "initializeCommand": "bash ./scripts/setup.sh"
 	// "onCreateCommand": [
 	// 	// Create the site
 	// 	"bench set-config -g developer_mode 1 && bench new-site site1.localhost --db-root-password databasePassword --admin-password admin --set-default",
