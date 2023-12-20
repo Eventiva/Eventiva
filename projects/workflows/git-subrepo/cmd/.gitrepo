@@ -8,5 +8,5 @@
 	branch = master
 	commit = 110b9eb13f259986fffcf11e8fb187b8cce50921
 	parent = 84bf8cbc4962b9d34aad1ea2a3b6637dfd4d050f
-	method = merge
+	method = rebase
 	cmdver = 0.4.6
