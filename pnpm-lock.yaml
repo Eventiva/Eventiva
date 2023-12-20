@@ -50,6 +50,9 @@ importers:
       core-js:
         specifier: ^3.34.0
         version: 3.34.0
+      cross-spawn:
+        specifier: ^7.0.3
+        version: 7.0.3
       discord.js:
         specifier: ^14.14.1
         version: 14.14.1
@@ -1192,23 +1195,6 @@ packages:
       '@babel/plugin-syntax-decorators': 7.23.3(@babel/core@7.20.2)
     dev: false
 
-  /@babel/plugin-proposal-decorators@7.20.2(@babel/core@7.23.6):
-    resolution: {integrity: sha512-nkBH96IBmgKnbHQ5gXFrcmez+Z9S2EIDKDQGp005ROqBigc88Tky4rzCnlP/lnlj245dCEQl4/YyV0V1kYh5dw==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': '*'
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-    dependencies:
-      '@babel/core': 7.23.6
-      '@babel/helper-create-class-features-plugin': 7.23.6(@babel/core@7.23.6)
-      '@babel/helper-plugin-utils': 7.22.5
-      '@babel/helper-replace-supers': 7.22.20(@babel/core@7.23.6)
-      '@babel/helper-split-export-declaration': 7.22.6
-      '@babel/plugin-syntax-decorators': 7.23.3(@babel/core@7.23.6)
-    dev: false
-
   /@babel/plugin-proposal-decorators@7.23.6(@babel/core@7.20.2):
     resolution: {integrity: sha512-D7Ccq9LfkBFnow3azZGJvZYgcfeqAw3I1e5LoTpj6UKIFQilh8yqXsIGcRIqbBdsPWIz+Ze7ZZfggSj62Qp+Fg==}
     engines: {node: '>=6.9.0'}
@@ -1225,6 +1211,24 @@ packages:
       '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/plugin-syntax-decorators': 7.23.3(@babel/core@7.20.2)
+    dev: false
+
+  /@babel/plugin-proposal-decorators@7.23.6(@babel/core@7.23.6):
+    resolution: {integrity: sha512-D7Ccq9LfkBFnow3azZGJvZYgcfeqAw3I1e5LoTpj6UKIFQilh8yqXsIGcRIqbBdsPWIz+Ze7ZZfggSj62Qp+Fg==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.6
+      '@babel/helper-create-class-features-plugin': 7.23.6(@babel/core@7.23.6)
+      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-replace-supers': 7.22.20(@babel/core@7.23.6)
+      '@babel/helper-skip-transparent-expression-wrappers': 7.22.5
+      '@babel/helper-split-export-declaration': 7.22.6
+      '@babel/plugin-syntax-decorators': 7.23.3(@babel/core@7.23.6)
     dev: false
 
   /@babel/plugin-proposal-nullish-coalescing-operator@7.18.6(@babel/core@7.23.6):
@@ -5121,8 +5125,8 @@ packages:
       '@babel/plugin-transform-typescript': 7.23.6(@babel/core@7.20.2)
     dev: false
 
-  /@babel/preset-typescript@7.22.15(@babel/core@7.23.6):
-    resolution: {integrity: sha512-HblhNmh6yM+cU4VwbBRpxFhxsTdfS1zsvH9W+gEjD0ARV9+8B4sNfpI6GuhePti84nuvhiwKS539jKPFHskA9A==}
+  /@babel/preset-typescript@7.23.3(@babel/core@7.23.6):
+    resolution: {integrity: sha512-17oIGVlqz6CchO9RFYn5U6ZpWRZIngayYCtrPRSgANSwC2V1Jb+iP74nVxzzXJte8b8BYxrL1yY96xfhTBrNNQ==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': '*'
@@ -6178,7 +6182,7 @@ packages:
     dependencies:
       '@types/istanbul-lib-coverage': 2.0.6
       '@types/istanbul-reports': 3.0.4
-      '@types/node': 12.20.55
+      '@types/node': 12.20.4
       '@types/yargs': 15.0.19
       chalk: 4.1.2
 
@@ -6834,7 +6838,7 @@ packages:
       '@babel/plugin-transform-react-constant-elements': 7.23.3(@babel/core@7.23.6)
       '@babel/preset-env': 7.22.15(@babel/core@7.23.6)
       '@babel/preset-react': 7.22.15(@babel/core@7.23.6)
-      '@babel/preset-typescript': 7.22.15(@babel/core@7.23.6)
+      '@babel/preset-typescript': 7.23.3(@babel/core@7.23.6)
       '@svgr/core': 8.1.0(typescript@5.3.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
       '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0)(typescript@5.3.3)
@@ -6851,7 +6855,7 @@ packages:
       '@babel/plugin-transform-react-constant-elements': 7.23.3(@babel/core@7.23.6)
       '@babel/preset-env': 7.22.15(@babel/core@7.23.6)
       '@babel/preset-react': 7.22.15(@babel/core@7.23.6)
-      '@babel/preset-typescript': 7.22.15(@babel/core@7.23.6)
+      '@babel/preset-typescript': 7.23.3(@babel/core@7.23.6)
       '@svgr/core': 8.1.0(typescript@5.1.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
       '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0)(typescript@5.1.3)
@@ -6868,7 +6872,7 @@ packages:
       '@babel/plugin-transform-react-constant-elements': 7.23.3(@babel/core@7.23.6)
       '@babel/preset-env': 7.22.15(@babel/core@7.23.6)
       '@babel/preset-react': 7.22.15(@babel/core@7.23.6)
-      '@babel/preset-typescript': 7.22.15(@babel/core@7.23.6)
+      '@babel/preset-typescript': 7.23.3(@babel/core@7.23.6)
       '@svgr/core': 8.1.0(typescript@5.3.3)
       '@svgr/plugin-jsx': 8.1.0(@svgr/core@8.1.0)
       '@svgr/plugin-svgo': 8.1.0(@svgr/core@8.1.0)(typescript@5.3.3)
@@ -9192,7 +9196,7 @@ packages:
       graphql-request: 4.3.0(graphql@15.8.0)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      use-deep-compare: 1.2.0(react@18.2.0)
+      use-deep-compare: 1.2.1(react@18.2.0)
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -9216,7 +9220,7 @@ packages:
       graphql-request: 4.3.0(graphql@16.8.1)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      use-deep-compare: 1.2.0(react@18.2.0)
+      use-deep-compare: 1.2.1(react@18.2.0)
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -12161,12 +12165,12 @@ packages:
   /@types/eslint-scope@3.7.7:
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
     dependencies:
-      '@types/eslint': 8.44.9
+      '@types/eslint': 8.56.0
       '@types/estree': 1.0.5
     dev: false
 
-  /@types/eslint@8.44.9:
-    resolution: {integrity: sha512-6yBxcvwnnYoYT1Uk2d+jvIfsuP4mb2EdIxFnrPABj5a/838qe5bGkNLFOiipX4ULQ7XVQvTxOh7jO+BTAiqsEw==}
+  /@types/eslint@8.56.0:
+    resolution: {integrity: sha512-FlsN0p4FhuYRjIxpbdXovvHQhtlG05O1GG/RNWvdAxTboR438IOTwmrY/vLA+Xfgg06BTkP045M3vpFwTMv1dg==}
     dependencies:
       '@types/estree': 1.0.5
       '@types/json-schema': 7.0.15
@@ -12289,7 +12293,6 @@ packages:
 
   /@types/node@12.20.4:
     resolution: {integrity: sha512-xRCgeE0Q4pT5UZ189TJ3SpYuX/QGl6QIAOAIeDSbAVAd2gX1NxSZup4jNVK7cxIeP8KDSbJgcckun495isP1jQ==}
-    dev: true
 
   /@types/node@12.20.55:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
@@ -13817,7 +13820,7 @@ packages:
     dependencies:
       '@babel/core': 7.23.6
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.23.6)
-      '@babel/plugin-proposal-decorators': 7.20.2(@babel/core@7.23.6)
+      '@babel/plugin-proposal-decorators': 7.23.6(@babel/core@7.23.6)
       '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.23.6)
       '@babel/plugin-proposal-numeric-separator': 7.18.6(@babel/core@7.23.6)
       '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.23.6)
@@ -13828,7 +13831,7 @@ packages:
       '@babel/plugin-transform-runtime': 7.23.6(@babel/core@7.23.6)
       '@babel/preset-env': 7.22.15(@babel/core@7.23.6)
       '@babel/preset-react': 7.22.15(@babel/core@7.23.6)
-      '@babel/preset-typescript': 7.22.15(@babel/core@7.23.6)
+      '@babel/preset-typescript': 7.23.3(@babel/core@7.23.6)
       '@babel/runtime': 7.23.6
       babel-plugin-macros: 3.1.0
       babel-plugin-transform-react-remove-prop-types: 0.4.24
@@ -14122,7 +14125,7 @@ packages:
   /caniuse-api@3.0.0:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       caniuse-lite: 1.0.30001570
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
@@ -20137,7 +20140,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       caniuse-api: 3.0.0
       colord: 2.9.3
       postcss: 8.4.32
@@ -20153,7 +20156,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       postcss: 8.4.32
       postcss-value-parser: 4.2.0
     dev: false
@@ -20468,7 +20471,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       caniuse-api: 3.0.0
       cssnano-utils: 4.0.1(postcss@8.4.32)
       postcss: 8.4.32
@@ -20512,7 +20515,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       cssnano-utils: 4.0.1(postcss@8.4.32)
       postcss: 8.4.32
       postcss-value-parser: 4.2.0
@@ -20737,7 +20740,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       postcss: 8.4.32
       postcss-value-parser: 4.2.0
     dev: false
@@ -20933,7 +20936,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       caniuse-api: 3.0.0
       postcss: 8.4.32
     dev: false
@@ -22682,7 +22685,7 @@ packages:
       postcss:
         optional: true
     dependencies:
-      browserslist: 4.22.2
+      browserslist: 4.21.4
       postcss: 8.4.32
       postcss-selector-parser: 6.0.13
     dev: false
@@ -23538,8 +23541,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /use-deep-compare@1.2.0(react@18.2.0):
-    resolution: {integrity: sha512-AemF4mbYpuCjOl0jIzeZA7kql3/94BPmfHA96wChnvNvFBjrYe8GVGDsb79wNMBCEQpQhnsUiblNNXqc2eoyjQ==}
+  /use-deep-compare@1.2.1(react@18.2.0):
+    resolution: {integrity: sha512-JTnOZAr0fq1ix6CQ4XANoWIh03xAiMFlP/lVAYDdAOZwur6nqBSdATn1/Q9PLIGIW+C7xmFZBCcaA4KLDcQJtg==}
     peerDependencies:
       react: '*'
     peerDependenciesMeta:
@@ -24723,6 +24726,7 @@ packages:
       '@teambit/harmony': 0.4.6
       chalk: 5.3.0
       core-js: 3.34.0
+      cross-spawn: 7.0.3
       react: 17.0.2
       react-dom: 17.0.2(react@17.0.2)
     dev: false
@@ -24744,6 +24748,7 @@ packages:
       '@teambit/harmony': 0.4.6
       chalk: 5.3.0
       core-js: 3.34.0
+      cross-spawn: 7.0.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false

@@ -2,8 +2,8 @@
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: clone.cmd.ts
- * Path: \projects\workflows\git-subrepo\clone.cmd.ts
+ * File: push.cmd.ts
+ * Path: \projects\workflows\git-subrepo\push.cmd.ts
  * Created Date: Tuesday, December 19th 2023
  * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * -----
@@ -32,7 +32,7 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 19-12-2023
+ * Last Modified: 20-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
@@ -40,12 +40,12 @@ import { Command, CommandOptions } from '@teambit/cli';
 import chalk from 'chalk';
 import { GitSubrepoMain } from './git-subrepo.main.runtime';
 
-const COMMAND_NAME = 'clone';
+const COMMAND_NAME = 'push';
 
-export class CloneCmd implements Command {
-  name = `${COMMAND_NAME} <repository> [<subdir>] [-b <branch>] [-f] [-m <msg>] [--file=<msg file>] [-e] [--method <merge|rebase>]`;
+export class PushCmd implements Command {
+  name = `${COMMAND_NAME} <subdir>|--all [<branch>] [-m msg] [--file=<msg file>] [-r <remote>] [-b <branch>] [-M|-R] [-u] [-f] [-s] [-N]`;
   alias = '';
-  description = `Clone a remote repository into a local subdirectory`;
+  description = `Turn a current subdirectory into a subrepo`;
   options = GitSubrepoMain.subrepoOptions;
   group = 'git';
   commands: Command[] = [];
@@ -54,11 +54,11 @@ export class CloneCmd implements Command {
 
   constructor(private subrepo: GitSubrepoMain) {}
 
-  async report([repository, subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.clone(repository, subdirectory, flags);
+  async report([subdirectory]: string[], flags: string[]) {
+    const res = await this.subrepo.push(subdirectory, flags);
     if (res) {
-      return chalk.green('git subrepo clone was successful');
+      return chalk.green('git subrepo push was successful');
     }
-    return chalk.red('git subrepo clone was unsuccessful');
+    return chalk.red('git subrepo push was unsuccessful');
   }
 }
