@@ -58,7 +58,7 @@ jobs:
         path: 'eventiva'
 
     - name: Move to eventiva directory
-      run: cd eventiva
+      working-directory: eventiva
 
     - name: setup git configuration
       run: |
