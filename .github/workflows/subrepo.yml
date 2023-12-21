@@ -57,13 +57,12 @@ jobs:
       with:
         path: 'eventiva'
 
-    - name: Move to eventiva directory
-      working-directory: eventiva
-
     - name: setup git configuration
+      working-directory: eventiva
       run: |
         git config user.name github-actions
         git config user.email github-actions@github.com
     
     - name: Update subrepo
+      working-directory: eventiva
       run: git subrepo push --all
