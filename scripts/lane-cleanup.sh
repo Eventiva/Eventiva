@@ -10,7 +10,7 @@ WSDIR="$4"
 cd ${WSDIR}
 
 # try to remove the bit lane
-bit lane remove ${ORG}.${SCOPE}/${LANE} --remote --silent --force 2> /dev/null
+bit lane remove ${ORG}.${SCOPE}/${LANE} --remote --silent --force 2>/dev/null
 if [ $? -ne 0 ]; then
-    echo "Error while removing bit lane. Lane may not exist"
+	echo "Error while removing bit lane. Lane may not exist"
 fi

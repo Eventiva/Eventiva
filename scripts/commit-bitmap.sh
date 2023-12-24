@@ -12,9 +12,9 @@ git config --global user.email "${GIT_USER_EMAIL}"
 git add .bitmap
 
 # try to commit the changes
-git commit -m "update .bitmap with new component versions (automated). [skip-ci]" 2> /dev/null
+git commit -m "update .bitmap with new component versions (automated). [skip-ci]" 2>/dev/null
 if [ $? -ne 0 ]; then
-    echo "Error while committing changes"
+	echo "Error while committing changes"
 fi
 
 git push
