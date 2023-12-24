@@ -36,7 +36,6 @@
 # By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
 # Current Version: <<projectversion>>
 ###
-
 import frappe
 from erpnext.setup.setup_wizard.operations.install_fixtures import \
     install as install_fixtures
