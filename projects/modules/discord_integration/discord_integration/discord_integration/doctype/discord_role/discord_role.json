@@ -11,6 +11,7 @@
   "sort",
   "display_role_members_seperately_from_online_members",
   "allow_anyone_to_mention_this_role",
+  "role_id",
   "column_break_llhd",
   "role_name",
   "color",
@@ -439,11 +440,17 @@
    "label": "Discord Server",
    "options": "Discord Server",
    "reqd": 1
+  },
+  {
+   "description": "Used to link the role on here to the role on discord. You can either use an existing role ID or the bot will automatically create a new role.",
+   "fieldname": "role_id",
+   "fieldtype": "Data",
+   "label": "Role ID"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2023-12-20 19:43:40.473041",
+ "modified": "2023-12-23 22:41:23.032031",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Role",
