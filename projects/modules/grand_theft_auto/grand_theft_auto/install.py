@@ -43,36 +43,78 @@ import frappe
 
 
 
+def create_tables():
+    """
+    Creates the necessary tables in the database.
+    """
+    # Code for creating tables goes here
+
+
+def setup_relationships():
+    """
+    Sets up the relationships between different database tables.
+    """
+    # Code for setting up relationships goes here
+
+
 def setup_database():
     """
-    This function sets up the database for the application.
-    It creates the necessary tables and relationships.
+    This function sets up the database for the application by calling individual functions to create tables and setup relationships.
     """
-    # Code for setting up the database goes here
+    create_tables()
+    setup_relationships()
+
+def set_initial_values():
+    """
+    Sets initial values for the application variables.
+    """
+    # Code for setting initial variable values goes here
+
 
 def initialize_variables():
     """
-    This function initializes the necessary variables for the application.
-    It sets the initial values for these variables.
+    This function initializes the necessary variables for the application by calling a function to set initial values.
     """
-    # Code for initializing variables goes here
+    set_initial_values()
+
+def setup_user_interface():
+    """
+    Sets up the user interface elements of the application.
+    """
+    # Code for setting up the user interface goes here
+
+
+def load_initial_data():
+    """
+    Loads initial data into the application.
+    """
+    # Code for loading initial data goes here
+
+
+def start_services():
+    """
+    Starts background services needed by the application.
+    """
+    # Code for starting services goes here
+
 
 def perform_setup_tasks():
     """
-    This function performs other setup tasks for the application.
-    These tasks could include things like setting up the user interface,
-    loading data, or starting services.
+    This function performs other setup tasks for the application by calling individual functions to setup different components like the user interface, loading data, and starting services.
     """
-    # Code for performing setup tasks goes here
+    setup_user_interface()
+    load_initial_data()
+    start_services()
 
 def after_install():
     """
-    This function is called after the application is installed.
-    It calls other functions to perform setup tasks.
+    This function is called after the application is installed. It orchestrates the overall setup by calling the setup functions.
     """
     setup_database()
     initialize_variables()
     perform_setup_tasks()
+
+
 
 
 
