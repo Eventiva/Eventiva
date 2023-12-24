@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/gaming.git
 	branch = develop
-	commit = b7099b2e4ce1294927add41296a9be22a9933377
-	parent = a1615b5a664bf3e42bf4c3e6bc0a6ef0626f85de
+	commit = 1.0.0
+	parent = 0.9.0
 	method = rebase
 	cmdver = 0.4.6
