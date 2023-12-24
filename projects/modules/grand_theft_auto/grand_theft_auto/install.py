@@ -76,6 +76,7 @@ def createChild(company: str):
 
     :param company: str:
     :param company: str:
+    :param company: str: 
 
     """
     child = frappe.new_doc("Company")
