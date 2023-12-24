@@ -3,7 +3,14 @@
 
 # import frappe
 from frappe.tests.utils import FrappeTestCase
+from .civilian import Civilian
 
 
 class TestCivilian(FrappeTestCase):
-	pass
+
+	def test_instance_creation(self):
+		"""
+		Test that a Civilian instance can be created.
+		"""
+		civilian = Civilian()
+		self.assertIsInstance(civilian, Civilian, "Civilian instance was not created successfully.")
