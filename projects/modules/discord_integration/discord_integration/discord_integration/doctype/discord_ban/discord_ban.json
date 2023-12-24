@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "hash",
  "beta": 1,
  "creation": "2023-12-03 23:14:36.029065",
  "doctype": "DocType",
@@ -44,7 +45,8 @@
    "in_list_view": 1,
    "label": "Discord Server",
    "options": "Discord Server",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -84,10 +86,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-03 23:48:26.010737",
+ "modified": "2023-12-23 22:47:12.977691",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Ban",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
