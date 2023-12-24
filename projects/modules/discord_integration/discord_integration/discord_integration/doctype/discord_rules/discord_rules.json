@@ -10,7 +10,6 @@
   "rule_name",
   "rule_details",
   "section_break_drid",
-  "discord_server",
   "column_break_ultx",
   "amended_from",
   "company",
@@ -51,12 +50,6 @@
    "fieldtype": "Section Break"
   },
   {
-   "fieldname": "discord_server",
-   "fieldtype": "Link",
-   "label": "Discord Server",
-   "options": "Discord Server"
-  },
-  {
    "fieldname": "column_break_ultx",
    "fieldtype": "Column Break"
   },
@@ -82,7 +75,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-03 23:07:56.804964",
+ "modified": "2023-12-23 23:01:39.012745",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Rules",
