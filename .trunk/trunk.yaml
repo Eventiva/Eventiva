@@ -2,9 +2,9 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: action.yaml
- # Path: \.trunk\setup-ci\action.yaml
- # Created Date: Tuesday, December 12th 2023
+ # File: trunk.yaml
+ # Path: \.trunk\trunk.yaml
+ # Created Date: Sunday, December 24th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -31,24 +31,64 @@
  # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
- # -----
- # Last Modified: Sun Dec 24 2023
- # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: Trunk Check setup
-description: Set up dependencies for Trunk Check
-
-runs:
-  using: composite
-  steps:
-  - id: init
-    name: Initialise Bit via SH
-    shell: bash
-    run: ./scripts/bit-init.sh
-    working-directory: ${{ github.workspace }} 
-  - id: verify
-    name: Verify and Build Bit
-    shell: bash
-    run: ./scripts/verify.sh
-    working-directory: ${{ github.workspace }} 
+# This file controls the behavior of Trunk: https://docs.trunk.io/cli
+# To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
+version: 0.1
+cli:
+  version: 1.18.1
+# Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)
+plugins:
+  sources:
+    - id: trunk
+      ref: v1.4.1
+      uri: https://github.com/trunk-io/plugins
+# Many linters and tools depend on runtimes - configure them here. (https://docs.trunk.io/runtimes)
+runtimes:
+  enabled:
+    - go@1.21.0
+    - node@18.12.1
+    - python@3.10.8
+# This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
+lint:
+  enabled:
+    - terraform@1.1.0
+    - tfsec@1.28.4
+    - nancy@1.0.45
+    - oxipng@9.0.0
+    - sort-package-json@2.6.0
+    - remark-lint@12.0.0
+    - semgrep@1.54.1
+    - rome@12.1.3
+    - stylelint@16.0.2
+    - circleci@0.1.29658
+    - codespell@2.2.6
+    - gitleaks@8.18.1
+    - actionlint@1.6.26
+    - bandit@1.7.6
+    - black@23.12.0
+    - checkov@3.1.42
+    - dotenv-linter@3.3.0
+    - eslint@8.56.0
+    - git-diff-check
+    - hadolint@2.12.0
+    - isort@5.13.2
+    - markdownlint@0.38.0
+    - osv-scanner@1.5.0
+    - prettier@3.1.1
+    - ruff@0.1.9
+    - shellcheck@0.9.0
+    - shfmt@3.6.0
+    - svgo@3.1.0
+    - taplo@0.8.1
+    - terrascan@1.18.11
+    - trivy@0.48.1
+    - trufflehog@3.63.5
+    - yamllint@1.33.0
+# actions:
+#   enabled:
+#     - trunk-announce
+#     - trunk-check-pre-push
+#     - trunk-fmt-pre-commit
+#     - trunk-upgrade-available
