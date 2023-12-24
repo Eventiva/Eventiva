@@ -68,6 +68,9 @@ def perform_setup_tasks():
 def after_install():
     """
     This function is called after the application is installed.
+    It performs the initial setup tasks by calling other functions such as setup_database(), initialize_variables(), and perform_setup_tasks().
+    """
+    This function is called after the application is installed.
     It calls other functions to perform setup tasks.
     """
     setup_database()
