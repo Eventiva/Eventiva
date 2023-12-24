@@ -38,7 +38,9 @@
 ###
 
 import frappe
-from erpnext.setup.setup_wizard.operations.install_fixtures import install as install_fixtures
+from erpnext.setup.setup_wizard.operations.install_fixtures import (
+    install as install_fixtures,
+)
 
 
 # This function creates the default content for Grand Theft Auto usage with Eventiva Gaming module
@@ -48,8 +50,7 @@ def after_install():
     if not frappe.db.exists("Company", "Gaming Community"):
         createParent()
 
-    companies = ["Police Constabulary",
-                 "Fire Rescue Service", "Ambulance Service"]
+    companies = ["Police Constabulary", "Fire Rescue Service", "Ambulance Service"]
     for company in companies:
         if not frappe.db.exists("Company", company):
             createChild(company)
