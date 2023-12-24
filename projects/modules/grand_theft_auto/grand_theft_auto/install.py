@@ -45,6 +45,7 @@ from erpnext.setup.setup_wizard.operations.install_fixtures import \
 # This is called after the app is installed and is only called once
 def after_install():
     """ """
+    created_companies = []  # List of created companies
     install_fixtures("United Kingdom")
     if not frappe.db.exists("Company", "Gaming Community"):
         createParent()
@@ -54,8 +55,9 @@ def after_install():
     ]
     for company in companies:
         if not frappe.db.exists("Company", company):
-            createChild(company)
-    pass
+            created_company = createChild(company)
+            created_companies.append(created_company)
+    return created_companies
 
 
 def createParent():
@@ -95,4 +97,4 @@ def createChild(company: str):
     child.set("existing_company", "Gaming Community")
     child.set("allow_account_creation_against_child_company", True)
     child.insert()
-    pass
+    return child
