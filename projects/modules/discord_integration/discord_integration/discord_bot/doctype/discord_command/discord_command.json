@@ -1,0 +1,138 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "beta": 1,
+ "creation": "2023-12-23 22:42:12.072319",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_j9ov",
+  "data_tpvu",
+  "command_description",
+  "command_version",
+  "lft",
+  "rgt",
+  "column_break_obhb",
+  "is_group",
+  "parent_discord_command",
+  "old_parent",
+  "amended_from",
+  "section_break_pvyi",
+  "discordjs_code"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_j9ov",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Discord Command",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "data_tpvu",
+   "fieldtype": "Data",
+   "label": "Command Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Group"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Old Parent",
+   "options": "Discord Command"
+  },
+  {
+   "fieldname": "parent_discord_command",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Parent Discord Command",
+   "options": "Discord Command"
+  },
+  {
+   "fieldname": "command_description",
+   "fieldtype": "Data",
+   "label": "Command Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "command_version",
+   "fieldtype": "Int",
+   "label": "Command Version",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_obhb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_pvyi",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "This is raw discord.js code as per the latest discord.js versioning noted within our documentation. All commands written on here can only be executed by a self hosted or paid version of the discord bot. To find documentation on the variables passed to your custom scripts, please see our documentation. This code is not compiled before execution typescript will not work.",
+   "fieldname": "discordjs_code",
+   "fieldtype": "Code",
+   "in_list_view": 1,
+   "label": "Discord.js code (Javascript)"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2023-12-23 23:22:25.944578",
+ "modified_by": "Administrator",
+ "module": "Discord Bot",
+ "name": "Discord Command",
+ "nsm_parent_field": "parent_discord_command",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}
