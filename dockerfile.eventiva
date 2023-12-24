@@ -63,3 +63,17 @@ RUN if [ ! -d "/home/frappe/frappe-bench/apps/segment_connect" ] ; then bench ge
 
 # installl bit via bvm using npx @teambit/bvm install
 RUN npx @teambit/bvm install
+
+#  Copy the ssh and gpg keys into the container
+COPY ./ssh /home/frappe/.ssh
+COPY ./gpg /home/frappe/.gnupg
+
+#  Set the permissions on the ssh and gpg keys
+RUN chmod 700 /home/frappe/.ssh
+RUN chmod 600 /home/frappe/.ssh/*
+RUN chmod 700 /home/frappe/.gnupg
+RUN chmod 600 /home/frappe/.gnupg/*
+
+#  Set the owner of the ssh and gpg keys
+RUN chown -R frappe:frappe /home/frappe/.ssh
+RUN chown -R frappe:frappe /home/frappe/.gnupg
