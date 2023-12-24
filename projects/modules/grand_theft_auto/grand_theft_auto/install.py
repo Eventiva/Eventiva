@@ -38,9 +38,8 @@
 ###
 
 import frappe
-from erpnext.setup.setup_wizard.operations.install_fixtures import (
-    install as install_fixtures,
-)
+from erpnext.setup.setup_wizard.operations.install_fixtures import \
+    install as install_fixtures
 
 
 # This function creates the default content for Grand Theft Auto usage with Eventiva Gaming module
