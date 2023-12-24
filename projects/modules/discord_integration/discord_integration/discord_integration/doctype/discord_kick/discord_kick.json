@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "hash",
  "beta": 1,
  "creation": "2023-12-03 23:05:51.480749",
  "doctype": "DocType",
@@ -47,7 +48,8 @@
    "in_standard_filter": 1,
    "label": "Discord Server",
    "options": "Discord Server",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -79,10 +81,11 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2023-12-03 23:47:14.389657",
+ "modified": "2023-12-23 22:46:53.336340",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Kick",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
