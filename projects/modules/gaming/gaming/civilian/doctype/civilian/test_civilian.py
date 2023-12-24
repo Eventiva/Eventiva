@@ -6,4 +6,6 @@ from frappe.tests.utils import FrappeTestCase
 
 
 class TestCivilian(FrappeTestCase):
-	pass
+    def test_dummy(self):
+        civilian = Civilian()
+        self.assertTrue(isinstance(civilian, Civilian), "Civilian object creation failed.")
