@@ -38,11 +38,13 @@
 ###
 
 import frappe
+from erpnext.setup.setup_wizard.operations.install_fixtures import install as install_fixtures
 
 
 # This function creates the default content for Grand Theft Auto usage with Eventiva Gaming module
 # This is called after the app is installed and is only called once
 def after_install():
+    install_fixtures("United Kingdom")
     if not frappe.db.exists("Company", "Gaming Community"):
         createParent()
 
