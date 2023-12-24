@@ -54,6 +54,24 @@ Our extensive **documentation** can be found at **[here](https://github.com/Even
 
 ## Contributing
 
+
+### New Features in install.py
+
+A number of new features have been introduced in the `install.py` script to enhance the setup and installation process for the Eventiva application. Here's an overview of what's new:
+
+- `setup_database()`: Configures the database required by the application, ensuring all tables and relationships are created.
+- `initialize_variables()`: Sets the initial values for various important variables within the application.
+- `perform_setup_tasks()`: Takes care of additional setup tasks necessary for the application, including user interface setup, data loading, and service initiation.
+- `after_install()`: This function is invoked post-application installation and is responsible for invoking other setup functions detailed above.
+
+To run these functions, make sure to follow the steps outlined in the installation guide of the Eventiva application. Navigate to the installation directory and execute:
+
+```bash
+python install.py
+```
+
+This will trigger the `after_install()` function, which sequentially calls the other functions to ensure a proper setup.
+
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="dist/github-snake-dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="dist/github-snake.svg" />
@@ -73,6 +91,7 @@ eventiva/eventiva is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
 - <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
+  - [New Features in install.py](#new-features-in-installpy)
 - <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/3337/Q4L7Jncy.jpg' alt='ESLint'/> [ESLint](http://eslint.org/) – Code Review
