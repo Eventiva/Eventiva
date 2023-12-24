@@ -80,10 +80,9 @@ def createParent():
 
 def createChild(company: str):
     """
-
-    :param company: str:
-    :param company: str:
-
+    This function creates child companies in the database if they do not already exist.
+    
+    :param company: str: The name of the child company to be created.
     """
     child = frappe.new_doc("Company")
     child.set("company_name", company)
