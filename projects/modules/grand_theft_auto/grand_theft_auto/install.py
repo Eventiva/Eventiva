@@ -37,62 +37,10 @@
 # Current Version: <<projectversion>>
 ###
 import frappe
-from erpnext.setup.setup_wizard.operations.install_fixtures import \
-    install as install_fixtures
 
 
-# This function creates the default content for Grand Theft Auto usage with Eventiva Gaming module
-# This is called after the app is installed and is only called once
-def after_install():
-    """ """
-    install_fixtures("United Kingdom")
-    if not frappe.db.exists("Company", "Gaming Community"):
-        createParent()
-
-    companies = [
-        "Police Constabulary", "Fire Rescue Service", "Ambulance Service"
-    ]
-    for company in companies:
-        if not frappe.db.exists("Company", company):
-            createChild(company)
-    pass
 
 
-def createParent():
-    """ """
-    #  check to see if the the company exists
-    parent = frappe.new_doc("Company")
-    parent.set("company_name", "Gaming Community")
-    parent.set("abbr", "GC")
-    parent.set("default_currency", "GBP")
-    parent.set("country", "United Kingdom")
-    parent.set("is_group", True)
-    parent.set("create_chart_of_accounts_based_on", "Standard Template")
-    parent.set("chart_of_accounts", "Standard with Numbers")
-    parent.insert()
-    pass
 
 
-def createChild(company: str):
-    """
 
-    :param company: str:
-    :param company: str:
-
-    """
-    child = frappe.new_doc("Company")
-    child.set("company_name", company)
-    # get a letter from each word in the company name
-    abbr = ""
-    for word in company.split():
-        abbr += word[0]
-
-    child.set("abbr", abbr)
-    child.set("default_currency", "GBP")
-    child.set("country", "United Kingdom")
-    child.set("parent_company", "Gaming Community")
-    child.set("create_chart_of_accounts_based_on", "Existing Company")
-    child.set("existing_company", "Gaming Community")
-    child.set("allow_account_creation_against_child_company", True)
-    child.insert()
-    pass
