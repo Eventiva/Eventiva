@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "hash",
+ "autoname": "field:message_id",
  "beta": 1,
  "creation": "2023-12-03 20:23:29.578054",
  "doctype": "DocType",
@@ -19,7 +19,8 @@
    "in_list_view": 1,
    "label": "Message ID",
    "reqd": 1,
-   "set_only_once": 1
+   "set_only_once": 1,
+   "unique": 1
   },
   {
    "allow_in_quick_entry": 1,
@@ -29,6 +30,7 @@
    "label": "Discord Server",
    "options": "Discord Server",
    "reqd": 1,
+   "search_index": 1,
    "set_only_once": 1
   },
   {
@@ -52,27 +54,15 @@
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
+ "istable": 1,
  "links": [],
- "modified": "2023-12-20 19:46:33.241907",
+ "modified": "2023-12-23 23:01:04.702527",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Message",
- "naming_rule": "Random",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
- "permissions": [
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "System Manager",
-   "share": 1,
-   "write": 1
-  }
- ],
+ "permissions": [],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
