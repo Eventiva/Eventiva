@@ -62,8 +62,10 @@ def after_install():
 
 
 def createParent():
-    """ """
-    #  check to see if the the company exists
+    """
+    This function creates a parent company in the database if it does not already exist.
+    """
+    # check to see if the the company exists
     parent = frappe.new_doc("Company")
     parent.set("company_name", "Gaming Community")
     parent.set("abbr", "GC")
