@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "format:{channel_name}-{#####}",
+ "autoname": "format:{discord_server}-{channel_name}",
  "beta": 1,
  "creation": "2023-12-03 19:10:04.548324",
  "doctype": "DocType",
@@ -239,13 +239,14 @@
    "fieldtype": "Link",
    "label": "Server",
    "options": "Discord Server",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2023-12-20 19:48:42.016650",
+ "modified": "2023-12-23 22:57:53.229025",
  "modified_by": "Administrator",
  "module": "Discord Integration",
  "name": "Discord Channel",
