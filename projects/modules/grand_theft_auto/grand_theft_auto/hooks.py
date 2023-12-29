@@ -193,7 +193,7 @@ after_install = "grand_theft_auto.install.after_install"
 # Testing
 # -------
 
-before_tests = "grand_theft_auto.install_test"
+
 
 # Overriding Methods
 # ------------------------------
