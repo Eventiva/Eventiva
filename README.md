@@ -225,3 +225,28 @@ rush archive-project --package-name <your_package_name>
 5. Move the code to project folder
 6. Restore project configuration into `rush.json`
 7. Delete metadata file and tarball -->
+
+## New Features & Commands
+
+### Feature: [Feature Name]
+
+The latest update introduces a significant feature with the implementation in the `dockerfile.eventiva`. This feature enhances the platform by providing:
+
+- **Functional Improvement 1** - Description of how this feature improves an aspect of the platform.
+- **Functional Improvement 2** - Explanation of another functionality that the feature introduces.
+
+This feature aims to facilitate better user experience and efficiency in event planning and management.
+
+### Commands
+
+- **Command Name**: `command [options]`
+  - *Description*: What the command does and the value it adds.
+  - *Options*:
+    - `--option1`: Description of what option1 does.
+    - `--option2`: Description of what option2 does.
+
+#### Usage Example
+
+```bash
+command --option1 value1 --option2 value2
+```
