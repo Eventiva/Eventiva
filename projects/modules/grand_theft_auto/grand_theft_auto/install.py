@@ -43,26 +43,29 @@ from erpnext.setup.setup_wizard.operations.install_fixtures import \
 
 
 def setup_database():
-    """
-    This function sets up the database for the application.
+    """This function sets up the database for the application.
     It creates the necessary tables and relationships.
+
+
     """
     # Code for setting up the database goes here
 
 
 def initialize_variables():
-    """
-    This function initializes the necessary variables for the application.
+    """This function initializes the necessary variables for the application.
     It sets the initial values for these variables.
+
+
     """
     # Code for initializing variables goes here
 
 
 def perform_setup_tasks():
-    """
-    This function performs other setup tasks for the application.
+    """This function performs other setup tasks for the application.
     These tasks could include things like setting up the user interface,
     loading data, or starting services.
+
+
     """
     # Code for performing setup tasks goes here
     install_fixtures("United Kingdom")
@@ -77,9 +80,10 @@ def perform_setup_tasks():
 
 
 def createParent():
-    """
-    This function creates the parent company for the application.
+    """This function creates the parent company for the application.
     This company will be used as the parent for all other companies.
+
+
     """
     parent = frappe.new_doc("Company")
     parent.set("company_name", "Gaming Community")
@@ -93,10 +97,12 @@ def createParent():
 
 
 def createChild(company: str):
-    """
-    This function creates a child company for the application.
+    """This function creates a child company for the application.
     For Grand Theft Auto, this will be the Police Constabulary, Fire Rescue Service, and Ambulance Service.
     These will be used as the main companies for the bulk of the application.
+
+    :param company: str: 
+
     """
     child = frappe.new_doc("Company")
     child.set("company_name", company)
@@ -116,9 +122,10 @@ def createChild(company: str):
 
 
 def after_install():
-    """
-    This function is called after the application is installed.
+    """This function is called after the application is installed.
     It calls other functions to perform setup tasks.
+
+
     """
     setup_database()
     initialize_variables()
