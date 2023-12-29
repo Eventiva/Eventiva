@@ -1,0 +1,20 @@
+id: bashplus
+name: Bashplus
+description: A bash library used in the git-subrepo workflow
+repository: https://github.com/eventiva/eventiva/tree/main/projects/workflows/git-subrepo/cmd/ext/bashplus
+ci: https://github.com/eventiva/eventiva/actions
+documentation: https://github.com/eventiva/eventiva/tree/main/projects/workflows/git-subrepo/cmd/ext/bashplus
+source: https://github.com/eventiva/eventiva/tree/main/projects/workflows/git-subrepo/cmd/ext/bashplus
+language: bash
+license: GPL-3.0
+issues: https://github.com/eventiva/eventiva/issues
+region: us-west-2
+lifecycle: production
+owner: Eventiva
+tier: 1
+tags:
+  - bash
+  - library
+  - git-subrepo
+dependencies: []
+dependents: []
