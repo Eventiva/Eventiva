@@ -90,7 +90,6 @@ lint:
   - linters: [ALL]
     paths:
       - .trunk
-      - artifacts
       - .all-contributorsrc
       - .bitmap
 # actions:
