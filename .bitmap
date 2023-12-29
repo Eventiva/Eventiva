@@ -42,9 +42,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "tech-stack-file",
+            "name": "expand-install",
             "scope": "eventiva.modules"
         },
-        "exported": true
+        "exported": false
     }
 }
