@@ -37,7 +37,7 @@
 # Current Version: 0.0.0
 ###
 
-name: Bit Dependency Update
+name: Components - Bit Dependency Update
 on:
   schedule:
     - cron: "0 0 * * *"

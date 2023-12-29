@@ -37,7 +37,7 @@
 # Current Version: 0.0.0
 ###
 
-name: Bit Branch Lane
+name: Components - Bit Branch Lane
 on:
   push:
     branches-ignore:

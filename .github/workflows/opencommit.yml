@@ -36,7 +36,7 @@
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: 'OpenCommit Action'
+name: Management - Commit Message Fix
 
 on:
   push:
