@@ -36,11 +36,9 @@
 # By: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
 # Current Version: <<projectversion>>
 ###
-import frappe
 
-
-
-
+import frappe # type: ignore
+from erpnext.setup.setup_wizard.operations.install_fixtures import install as install_fixtures # type: ignore
 
 
 def setup_database():
@@ -64,6 +62,54 @@ def perform_setup_tasks():
     loading data, or starting services.
     """
     # Code for performing setup tasks goes here
+    install_fixtures("United Kingdom")
+    if not frappe.db.exists("Company", "Gaming Community"):
+        createParent()
+
+    companies = ["Police Constabulary", "Fire Rescue Service", "Ambulance Service"]
+    for company in companies:
+        if not frappe.db.exists("Company", company):
+            createChild(company)
+    pass
+
+
+def createParent():
+    """
+    This function creates the parent company for the application.
+    This company will be used as the parent for all other companies.
+    """
+    parent = frappe.new_doc("Company")
+    parent.set("company_name", "Gaming Community")
+    parent.set("abbr", "GC")
+    parent.set("default_currency", "GBP")
+    parent.set("country", "United Kingdom")
+    parent.set("is_group", True)
+    parent.set("create_chart_of_accounts_based_on", "Standard Template")
+    parent.set("chart_of_accounts", "Standard with Numbers")
+    parent.insert()
+
+
+def createChild(company: str):
+    """
+    This function creates a child company for the application.
+    For Grand Theft Auto, this will be the Police Constabulary, Fire Rescue Service, and Ambulance Service.
+    These will be used as the main companies for the bulk of the application.
+    """
+    child = frappe.new_doc("Company")
+    child.set("company_name", company)
+    ## get a letter from each word in the company name
+    abbr = ""
+    for word in company.split():
+        abbr += word[0]
+
+    child.set("abbr", abbr)
+    child.set("default_currency", "GBP")
+    child.set("country", "United Kingdom")
+    child.set("parent_company", "Gaming Community")
+    child.set("create_chart_of_accounts_based_on", "Existing Company")
+    child.set("existing_company", "Gaming Community")
+    child.set("allow_account_creation_against_child_company", True)
+    child.insert()
 
 def after_install():
     """
@@ -73,10 +119,4 @@ def after_install():
     setup_database()
     initialize_variables()
     perform_setup_tasks()
-
-
-
-
-
-
 
