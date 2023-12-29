@@ -7,5 +7,5 @@
 	remote = https://github.com/Eventiva/grand_theft_auto
 	branch = develop
 	commit = 
-	method = rebase
+	method = merge
 	cmdver = 0.4.6
