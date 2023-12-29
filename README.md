@@ -14,13 +14,13 @@
   - [Why open-source?](#why-open-source)
   - [How to get support 👨‍👩‍👧‍👦](#how-to-get-support-)
   - [Contributing](#contributing)
-    - [Visualisation of the codebase](#visualisation-of-the-codebase)
     - [Backlog](#backlog)
     - [Running Locally \& Developing](#running-locally--developing)
-    - [Contributors ✨](#contributors-)
       - [prerequisites](#prerequisites)
       - [Codespaces Method (Recommended)](#codespaces-method-recommended)
       - [Devcontainer Method](#devcontainer-method)
+    - [Visualisation of the codebase](#visualisation-of-the-codebase)
+    - [Contributors ✨](#contributors-)
 
 <!-- tocstop -->
 
@@ -58,35 +58,63 @@ Thank you for taking an interst in contributing. We have created development con
 
 This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud). You can find a example Pull Request, [here](https://github.com/Eventiva/eventiva/pull/36) which shows the standard flow for contributors.
 
-For more information on contributing, please read the [contributing guidelines](./contributing.md).
+Eventiva is built on the following main stack:
 
-### Visualisation of the codebase
-
-eventiva/eventiva is built on the following main stack:
-
-- <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
+- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
+- <img width='25' height='25' src='https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg' alt='Bit'/> [Bit](https://www.bit.dev) – Code Collaboration & Version Control
 - <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
+- <img width='25' height='25' src='https://img.stackshare.io/service/1048/perl.png' alt='Perl'/> [Perl](http://www.perl.org/) – Languages
+- <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/3337/Q4L7Jncy.jpg' alt='ESLint'/> [ESLint](http://eslint.org/) – Code Review
+- <img width='25' height='25' src='https://img.stackshare.io/service/3511/cof_orange_hex.jpg' alt='Ubuntu'/> [Ubuntu](http://www.ubuntu.com/) – Operating Systems
 - <img width='25' height='25' src='https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png' alt='Shell'/> [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
 - <img width='25' height='25' src='https://img.stackshare.io/service/5848/44mC-kJ3.jpg' alt='Yarn'/> [Yarn](https://yarnpkg.com/) – Front End Package Manager
 - <img width='25' height='25' src='https://img.stackshare.io/service/7035/default_66f265943abed56bcdbfca1c866a4261b1fbb063.jpg' alt='Prettier'/> [Prettier](https://prettier.io/) – Code Review
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 - <img width='25' height='25' src='https://img.stackshare.io/service/48786/default_8b1119bcbb159cebebc2f6cfc9cd2e359b169d22.jpg' alt='OpenAI'/> [OpenAI](https://openai.com/) – Large Language Models
-- <img width='25' height='25' src='https://img.stackshare.io/service/48790/default_5b6c6b73f1ff3775c85d2a1ba954cb87e30cbf13.jpg' alt='LangChain'/> [LangChain](https://github.com/hwchase17/langchain) – Large Language Model Tools
-- <img width='25' height='25' src='https://img.stackshare.io/service/109221/default_b888cdf5617d936aa6aacf130911906955508639.png' alt='pgvector'/> [pgvector](https://github.com/pgvector/pgvector/) – Database Tools
+- <img width='25' height='25' src='https://img.stackshare.io/service/586/n4u37v9t_400x400.png' alt='Docker'/> [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
+- <img width='25' height='25' src='https://img.stackshare.io/service/460/Lu6cGu0z_400x400.png' alt='Travis CI'/> [Travis CI](http://travis-ci.com/) – Continuous Integration
 
 Full tech stack [here](/techstack.md)
 
-![Visualization of the codebase](./diagram.svg)
+For more information on contributing, please read the [contributing guidelines](./contributing.md).
 
 ### Backlog
 
 Our backlog can be found on either our [Github Project](https://github.com/orgs/Eventiva/projects/12)
 
 ### Running Locally & Developing
+
+[This section is being re-written based on the new development environment and major changes to the repository]
+
+#### prerequisites
+
+You can choose one of the following methods to get your development platform configured
+
+#### Codespaces Method (Recommended)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
+
+GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
+
+#### Devcontainer Method
+
+The Dev Container lets you use a Docker container as a full-featured development environment. Whether you deploy to containers or not, containers make a great development environment because you can:
+
+- Develop with a consistent, easily reproducible toolchain on the same operating system you deploy to.
+- Quickly swap between different, separate development environments and safely make updates without worrying about impacting your local machine.
+- Try out new technologies or clone a copy of a code base without impacting your local setup.
+
+Simply install the [Dev containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), clone the repository to your local device, and choose the [`Open Devcontainer` option](https://code.visualstudio.com/docs/devcontainers/containers).
+
+
+
+### Visualisation of the codebase
+
+![Visualization of the codebase](./diagram.svg)
 
 ### Contributors ✨
 
@@ -148,82 +176,3 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
-
-[This section is being re-written based on the new development environment and major changes to the repository]
-
-#### prerequisites
-
-You can choose one of the following methods to get your development platform configured
-
-#### Codespaces Method (Recommended)
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
-
-GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
-
-#### Devcontainer Method
-
-The Dev Container lets you use a Docker container as a full-featured development environment. Whether you deploy to containers or not, containers make a great development environment because you can:
-
-- Develop with a consistent, easily reproducible toolchain on the same operating system you deploy to.
-- Quickly swap between different, separate development environments and safely make updates without worrying about impacting your local machine.
-- Try out new technologies or clone a copy of a code base without impacting your local setup.
-
-Simply install the [Dev containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), clone the repository to your local device, and choose the [`Open Devcontainer` option](https://code.visualstudio.com/docs/devcontainers/containers).
-
-<!-- #### Using Rush
-
-Before we get started, a couple important points to keep in mind:
-
-###### 1. Avoid certain commands in a Rush repo
-
-Rush optimizes by installing all of your dependency packages in a central folder, and then uses [symlinks](https://en.wikipedia.org/wiki/Symbolic_link) to create the "node_modules" folder for each of your projects.
-
-**Avoid using package manager commands that install/link dependencies.** For example, `npm run` will work fine, but these commands will get confused by Rush's symlinks: `npm install`, `npm update`, `npm link`, `npm dedupe`, etc. (The same goes for other package managers: Avoid commands such as `pnpm install` or `yarn install`.) If you want to use those commands, first run `rush unlink` to delete the symlinks created by Rush.
-
-If you use `git clean -dfx` to clean up your folder, be aware that it handles symlinks poorly. To avoid trouble, always run `rush unlink` before using `git clean -dfx`.
-
-Afterwards you can run `rush update` to recreate the symlinks. (There is a standalone `rush link` command, but it's rarely needed.)
-
-###### 2. If you suspect your install is corrupted...
-
-Rush's package management commands are "incremental", which means they save time by skipping steps that appear to be unnecessary. Since Rush runs in automated build environments, we have many safeguards to ensure these checks are accurate. However when debugging or tinkering with packages on your local machine, sometimes your NPM "node_modules" folder can get into a bad state, causing strange errors.
-
-If you suspect your install is corrupted, try running `rush update --purge`. This will force a full reinstall of your packages, and usually get you back into a good state.
-
-##### Creating new projects
-
-\[coming soon\]
-
-##### Achieving projects
-
-To help keep the mono-repository clean, we have added the ability to achieve projects.
-
-```
-rush archive-project --package-name <your_package_name>
-```
-
-> restoring your project by `rush unarchive-project --package-name <your_package_name>`
-
-**The automated archive process**
-
-1. Find project configuration by Rush.js SDK
-2. Check whether there are projects depends on target project
-3. Run `git clean -xdf` under project folder
-4. Create a checkpoint branch with the name `${projectName}-checkpoint-${date}`
-5. Update checkpoint branch information in `common/_graveyard/projectCheckpoints.json` file
-6. Record project configuration into `rush-metadata.json` file
-7. Create a tarball by running `tar -czf <unscoped_package_name>.tar.gz -C <project_folder> .`
-8. Move the tarball to `common/_graveyard` folder
-9. Remove project config from `rush.json`
-10. Delete project folder
-
-**The automated unarchive process**
-
-1. Find the tarball by `packageName`
-2. Extract the tarball by running `tar xf <package_name>.tar.gz`
-3. Get project configuration by reading `rush-metadata.json`
-4. Remove checkpoint branch information from checkpoint metadata file if it exists
-5. Move the code to project folder
-6. Restore project configuration into `rush.json`
-7. Delete metadata file and tarball -->
