@@ -75,4 +75,4 @@ jobs:
       working-directory: eventiva
       run: |
         source projects/workflows/git-subrepo/cmd/.rc
-        git subrepo pull --all --branch develop
+        git subrepo pull --all
