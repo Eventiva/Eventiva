@@ -38,7 +38,8 @@
 ###
 
 import frappe  # type: ignore
-from erpnext.setup.setup_wizard.operations.install_fixtures import install as install_fixtures  # type: ignore
+from erpnext.setup.setup_wizard.operations.install_fixtures import \
+    install as install_fixtures  # type: ignore
 
 
 def setup_database():
