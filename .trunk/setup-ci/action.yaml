@@ -32,23 +32,23 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: Sun Dec 24 2023
+ # Last Modified: Fri Dec 29 2023
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: Trunk Check setup
-description: Set up dependencies for Trunk Check
+# name: Trunk Check setup
+# description: Set up dependencies for Trunk Check
 
-runs:
-  using: composite
-  steps:
-  - id: init
-    name: Initialise Bit via SH
-    shell: bash
-    run: ./scripts/bit-init.sh
-    working-directory: ${{ github.workspace }} 
-  - id: verify
-    name: Verify and Build Bit
-    shell: bash
-    run: ./scripts/verify.sh
-    working-directory: ${{ github.workspace }} 
+# runs:
+#   using: composite
+#   steps:
+#   - id: init
+#     name: Initialise Bit via SH
+#     shell: bash
+#     run: ./scripts/bit-init.sh
+#     working-directory: ${{ github.workspace }} 
+#   - id: verify
+#     name: Verify and Build Bit
+#     shell: bash
+#     run: ./scripts/verify.sh
+#     working-directory: ${{ github.workspace }} 
