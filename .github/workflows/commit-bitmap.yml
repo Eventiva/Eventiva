@@ -37,7 +37,7 @@
 # Current Version: 0.0.0
 ###
 
-name: Bit Commit Bitmap
+name: Components - Bit Commit Bitmap
 on:
   workflow_dispatch:
 permissions:

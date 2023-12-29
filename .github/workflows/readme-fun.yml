@@ -36,7 +36,7 @@
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: generate animation
+name: Chore - Generate Animation
 
 on:
   schedule:
@@ -60,6 +60,8 @@ jobs:
     timeout-minutes: 5
     
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
       # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
       - name: generate github-contribution-grid-snake.svg
         uses: Platane/snk/svg-only@v3

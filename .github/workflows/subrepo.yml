@@ -33,7 +33,7 @@
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  ###
 
-name: Subrepo
+name: Chore - Subrepo
 
 on:
   push:

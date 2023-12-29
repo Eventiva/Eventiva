@@ -37,7 +37,7 @@
 # Current Version: 0.0.0
 ###
 
-name: 'Change Report'
+name: Management - Change Report
 on:
   workflow_dispatch:
   schedule:
