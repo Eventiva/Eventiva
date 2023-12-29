@@ -54,12 +54,6 @@ Our extensive **documentation** can be found at **[here](https://github.com/Even
 
 ## Contributing
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="dist/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="dist/github-snake.svg" />
-  <img alt="github-snake" src="github-snake.svg" />
-</picture>
-
 Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
 
 This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud). You can find a example Pull Request, [here](https://github.com/Eventiva/eventiva/pull/36) which shows the standard flow for contributors.
@@ -97,6 +91,14 @@ Our backlog can be found on either our [Github Project](https://github.com/orgs/
 ### Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/images/github-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset=".github/images/github-snake.svg" />
+  <img alt="github-snake" src=".github/images/github-snake.svg" />
+</picture>
+</div>
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
