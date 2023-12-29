@@ -100,7 +100,7 @@ def createChild(company: str):
     For Grand Theft Auto, this will be the Police Constabulary, Fire Rescue Service, and Ambulance Service.
     These will be used as the main companies for the bulk of the application.
 
-    :param company: str: 
+    :param company: str:
 
     """
     child = frappe.new_doc("Company")
