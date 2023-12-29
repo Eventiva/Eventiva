@@ -6,6 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/segment_connect
 	branch = develop
-	commit = 
+	commit = 2b955d588837dd5f80a1b779dc12912b0519d630
 	method = merge
 	cmdver = 0.4.6
+	parent = 322cca8790a23b10675dec4d36ef43730c272deb
