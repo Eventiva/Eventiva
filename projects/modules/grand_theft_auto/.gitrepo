@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/grand_theft_auto.git
 	branch = develop
-	commit = dec97ae27d7b8c2353cc0d2dbac8a5138ec01f49
-	parent = c286307a1bddfa439965b2d038dfaef5abbd35e9
+	commit = feaa5ea2c5b75ad31fd854eb944db4209cd6d232
+	parent = feaa5ea2c5b75ad31fd854eb944db4209cd6d232
 	method = rebase
 	cmdver = 0.4.6
