@@ -9,13 +9,6 @@
  */
 
 {
-    "discord/client": {
-        "name": "discord/client",
-        "scope": "eventiva.bots",
-        "version": "599849846a33d529e9416cbe8d1d5fad20216b88",
-        "mainFile": "index.ts",
-        "rootDir": "projects/bots/discord/client"
-    },
     "environments/discord/bot": {
         "name": "environments/discord/bot",
         "scope": "eventiva.workflows",
