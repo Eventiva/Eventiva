@@ -37,8 +37,8 @@
 # Current Version: <<projectversion>>
 ###
 
-import frappe # type: ignore
-from erpnext.setup.setup_wizard.operations.install_fixtures import install as install_fixtures # type: ignore
+import frappe  # type: ignore
+from erpnext.setup.setup_wizard.operations.install_fixtures import install as install_fixtures  # type: ignore
 
 
 def setup_database():
@@ -48,12 +48,14 @@ def setup_database():
     """
     # Code for setting up the database goes here
 
+
 def initialize_variables():
     """
     This function initializes the necessary variables for the application.
     It sets the initial values for these variables.
     """
     # Code for initializing variables goes here
+
 
 def perform_setup_tasks():
     """
@@ -66,7 +68,8 @@ def perform_setup_tasks():
     if not frappe.db.exists("Company", "Gaming Community"):
         createParent()
 
-    companies = ["Police Constabulary", "Fire Rescue Service", "Ambulance Service"]
+    companies = ["Police Constabulary",
+                 "Fire Rescue Service", "Ambulance Service"]
     for company in companies:
         if not frappe.db.exists("Company", company):
             createChild(company)
@@ -97,7 +100,7 @@ def createChild(company: str):
     """
     child = frappe.new_doc("Company")
     child.set("company_name", company)
-    ## get a letter from each word in the company name
+    # get a letter from each word in the company name
     abbr = ""
     for word in company.split():
         abbr += word[0]
@@ -111,6 +114,7 @@ def createChild(company: str):
     child.set("allow_account_creation_against_child_company", True)
     child.insert()
 
+
 def after_install():
     """
     This function is called after the application is installed.
@@ -119,4 +123,3 @@ def after_install():
     setup_database()
     initialize_variables()
     perform_setup_tasks()
-
