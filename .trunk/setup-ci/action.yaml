@@ -36,12 +36,15 @@
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-# name: Trunk Check setup
-# description: Set up dependencies for Trunk Check
+name: Trunk Check setup
+description: Set up dependencies for Trunk Check
 
-# runs:
-#   using: composite
-#   steps:
+runs:
+  using: composite
+  steps:
+  - name: nosettup
+    run: echo "No Setup"
+    shell: bash
 #   - id: init
 #     name: Initialise Bit via SH
 #     shell: bash
