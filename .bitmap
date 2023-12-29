@@ -12,7 +12,7 @@
     "discord/client": {
         "name": "discord/client",
         "scope": "eventiva.bots",
-        "version": "0fc0042b2c58339e22937540112f7743269f98c1",
+        "version": "e1d4fc11cbfda1f5389f062ac6690e518f4d4c5a",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/discord/client"
     },
@@ -26,7 +26,7 @@
             "teambit.dependencies/dependency-resolver": {
                 "policy": {
                     "dependencies": {
-                        "core-js": "^3.34.0",
+                        "core-js": "^3.35.0",
                         "@babel/runtime": "7.23.6",
                         "react": "^18.2.0",
                         "react-dom": "^18.2.0",
@@ -34,7 +34,7 @@
                     },
                     "devDependencies": {
                         "@types/node": "12.20.55",
-                        "@types/react": "^17.0.72",
+                        "@types/react": "^17.0.74",
                         "@types/react-dom": "^17.0.25",
                         "@types/jest": "^26.0.24",
                         "@types/testing-library__jest-dom": "5.14.9"
@@ -46,7 +46,7 @@
     "generators/discord/bot": {
         "name": "generators/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "3e59ee48f8cc62035464cbd558ad42259f523040",
+        "version": "918dd54b70344ffa6961d7e13358faaba87f5bae",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/generators/discord/bot",
         "config": {
@@ -74,6 +74,21 @@
             "teambit.harmony/aspect": {},
             "teambit.envs/envs": {
                 "env": "teambit.harmony/aspect"
+            },
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "dependencies": {
+                        "core-js": "^3.35.0",
+                        "@babel/runtime": "7.23.6"
+                    },
+                    "devDependencies": {
+                        "@types/react": "^17.0.74",
+                        "@types/node": "12.20.55",
+                        "@types/react-dom": "^17.0.25",
+                        "@types/jest": "^26.0.24",
+                        "@types/testing-library__jest-dom": "5.14.9"
+                    }
+                }
             }
         }
     },
