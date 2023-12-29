@@ -14,7 +14,14 @@ jobs:
         os: [ubuntu-latest, macos-latest]
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/cache@v2
+        with:
+          path: |
+            **/*
+          key: ${{ runner.os }}-checkout-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-checkout-
+      - uses: actions/checkout@v2
     - if: startsWith(matrix.os, 'macos')
       run: brew install bash
     - run:
