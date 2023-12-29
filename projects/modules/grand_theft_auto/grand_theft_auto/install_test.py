@@ -20,13 +20,13 @@ class TestInstall(unittest.TestCase):
         self.assertTrue(initialize_variables())
 
     def test_perform_setup_tasks(self):
-        """
-        This test checks if the perform_setup_tasks function returns True for success.
-        """
         # Assume perform_setup_tasks() returns True for success
         self.assertTrue(perform_setup_tasks())
 
     def test_after_install(self):
+        """
+        This test checks if the after_install function returns True for success.
+        """
         # Assume after_install() returns True for success
         self.assertTrue(after_install())
 
