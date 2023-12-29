@@ -76,4 +76,4 @@ jobs:
       working-directory: eventiva
       run: |
         source projects/workflows/git-subrepo/cmd/.rc
-        git subrepo push --all
+        git subrepo push --all --verbose --debug
