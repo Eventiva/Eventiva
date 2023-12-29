@@ -508,14 +508,6 @@
             "comment": "This has been automatically marked as abandoned by the bot."
           }
         },
-        // "enforceConventions": {
-        //   "condition": [
-        //     {
-        //       "requires": 1,
-        //       "condition": "semanticEmoji"
-        //     }
-        //   ]
-        // },
         "labels": {
           "issue": {
             "requires": 1,
