@@ -101,7 +101,7 @@ def createChild(company: str):
     These will be used as the main companies for the bulk of the application.
 
     :param company: str:
-    :param company: str: 
+    :param company: str:
 
     """
     child = frappe.new_doc("Company")
