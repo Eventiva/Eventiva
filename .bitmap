@@ -42,7 +42,7 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "expand-install",
+            "name": "develop",
             "scope": "eventiva.modules"
         },
         "exported": false
