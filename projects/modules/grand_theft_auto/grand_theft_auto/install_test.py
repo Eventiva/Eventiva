@@ -6,6 +6,9 @@ from install import (after_install, initialize_variables, perform_setup_tasks,
 
 class TestInstall(unittest.TestCase):
     def test_setup_database(self):
+        """
+        This test checks if the setup_database function returns True for success.
+        """
         # Assume setup_database() returns True for success
         self.assertTrue(setup_database())
 
