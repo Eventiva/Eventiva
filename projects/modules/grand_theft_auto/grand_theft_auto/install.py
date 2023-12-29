@@ -37,8 +37,9 @@
 # Current Version: <<projectversion>>
 ###
 import frappe  # type: ignore
-from erpnext.setup.setup_wizard.operations.install_fixtures import \
-    install as install_fixtures  # type: ignore
+from erpnext.setup.setup_wizard.operations.install_fixtures import (
+    install as install_fixtures,
+)  # type: ignore
 
 
 def setup_database():
@@ -71,9 +72,7 @@ def perform_setup_tasks():
     if not frappe.db.exists("Company", "Gaming Community"):
         createParent()
 
-    companies = [
-        "Police Constabulary", "Fire Rescue Service", "Ambulance Service"
-    ]
+    companies = ["Police Constabulary", "Fire Rescue Service", "Ambulance Service"]
     for company in companies:
         if not frappe.db.exists("Company", company):
             createChild(company)
