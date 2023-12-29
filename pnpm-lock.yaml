@@ -385,6 +385,9 @@ importers:
       '@babel/runtime':
         specifier: 7.20.0
         version: 7.20.0
+      '@teambit/harmony':
+        specifier: 0.4.6
+        version: 0.4.6
       chalk:
         specifier: ^5.3.0
         version: 5.3.0

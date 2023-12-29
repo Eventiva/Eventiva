@@ -127,12 +127,9 @@ rules:
   - "Leftover TODO, BUG, FIXME & ISSUE in the code should be handled."
   - "All new business logic should have corresponding unit tests."
   - "Refactor large functions to be more modular and easier to read."
-  - "All code files should be complete with type annotations/declarations."
-  - "All code files should be complete with docstrings."
+  - "All code files should be complete with type annotations/declarations/docstrings."
   - "Any clearly inefficient or repeated code should be optimized or refactored."
-  - "Update the README.md file whenever a new feature is added. Make sure to include a description of the feature and any new commands."
   - "Remove any unused imports, variables, functions, or classes. If they are needed, add a 'KEEP:' comment explaining why they are needed and when they will be used."
-  - "You must use the Semantic Versioning standards for all versioning, including tags, releases, and changelogs."
   - "All modules should have a compass.yml file which has the correct tiering and relationships."
 sandbox:
   install:
