@@ -13,6 +13,9 @@ class TestInstall(unittest.TestCase):
         self.assertTrue(setup_database())
 
     def test_initialize_variables(self):
+        """
+        This test checks if the initialize_variables function returns True for success.
+        """
         # Assume initialize_variables() returns True for success
         self.assertTrue(initialize_variables())
 
