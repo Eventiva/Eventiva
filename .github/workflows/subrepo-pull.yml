@@ -2,8 +2,8 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: subrepo.yml
- # Path: \.github\workflows\subrepo.yml
+ # File: subrepo-pull.yml
+ # Path: \.github\workflows\subrepo-pull.yml
  # Created Date: Wednesday, December 20th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
@@ -33,26 +33,17 @@
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  ###
 
-name: Chore - Subrepo
+name: Chore - Sub Repo Pull
 
 on:
-  push:
-    branches:
-      - develop
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   subrepo:
     runs-on: ubuntu-latest
     steps:
-
-    - uses: actions/checkout@v3
-      with:
-        repository: 'ingydotnet/git-subrepo'
-        path: 'git-subrepo'
-
-    - name: Source git-subrepo
-      run: source $GITHUB_WORKSPACE/git-subrepo/.rc
-
     - uses: actions/checkout@v3
       with:
         path: 'eventiva'
@@ -65,4 +56,6 @@ jobs:
     
     - name: Update subrepo
       working-directory: eventiva
-      run: git subrepo push --all
+      run: |
+        source projects/workflows/git-subrepo/cmd/.rc
+        git subrepo pull --all
