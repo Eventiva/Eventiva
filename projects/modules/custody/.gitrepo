@@ -6,6 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/custody
 	branch = develop
-	commit = 
+	commit = c1d2a99bfde7e319cbc12885a0c539f158382743
 	method = merge
 	cmdver = 0.4.6
+	parent = 72004acdc69fa4047d13e28bfaae9a89a5ff6a03
