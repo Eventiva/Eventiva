@@ -45,6 +45,10 @@ services:
     volumes:
       # bind the workspace to /home/frappe/frappe-bench/workspace
       - ./:/home/frappe/frappe-bench/workspace
+      # copy ssh keys to /home/frappe/.ssh
+      - ~/.ssh:/home/frappe/.ssh
+      # copy gpg keys to /home/frappe/.gnupg
+      - ~/.gnupg:/home/frappe/.gnupg
 
   db:
     healthcheck:

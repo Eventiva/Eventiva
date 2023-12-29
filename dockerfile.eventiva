@@ -63,3 +63,7 @@ RUN if [ ! -d "/home/frappe/frappe-bench/apps/segment_connect" ] ; then bench ge
 
 # installl bit via bvm using npx @teambit/bvm install
 RUN npx @teambit/bvm install
+
+# install opencommit via npm globally
+RUN npm install -g opencommit
+
