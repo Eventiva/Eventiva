@@ -51,8 +51,13 @@ jobs:
     name: GitGuardian iac scan
     runs-on: ubuntu-latest
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@v1.8.7
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN }}
           comment_on_pr: false
@@ -60,12 +65,12 @@ jobs:
           proc_trace_sys_enable: true
           
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN }}"
       - name: GitGuardian iac scan
-        uses: GitGuardian/ggshield/actions/iac@main
+        uses: GitGuardian/ggshield/actions/iac@5a6f8a571defbaf3375993f0091799a9afdf5c20 # main
         with:
           args: ./terraform/ --minimum-severity CRITICAL # pass arguments to the action. If missing, will scan the current directory
         env:
