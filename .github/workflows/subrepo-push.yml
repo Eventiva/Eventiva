@@ -41,7 +41,7 @@ on:
       - develop
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   subrepo:
