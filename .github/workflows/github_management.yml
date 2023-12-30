@@ -49,6 +49,8 @@ jobs:
   release-mastermind:
     name: Release Mastermind
     runs-on: ubuntu-latest
+    env: 
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
@@ -66,6 +68,6 @@ jobs:
       - name: Release Mastermind
         uses: Resnovas/smartcloud@dd13ed741b701f384fc63cf806557d14cade574c # 1.0.0-beta.8
         with:
-          GITHUB_TOKEN: "${{ secrets.BOT_TOKEN }}"
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
           config: .github/config.json
           configRef: develop
