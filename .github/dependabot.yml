@@ -76,3 +76,23 @@ updates:
       prefix: ":arrow_up: maint"
       include: scope
     labels: []
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: daily
+
+  - package-ecosystem: npm
+    directory: /projects/workflows/change-report
+    schedule:
+      interval: daily
+
+  - package-ecosystem: docker
+    directory: /projects/workflows/git-subrepo/cmd/test
+    schedule:
+      interval: daily

@@ -48,20 +48,25 @@ jobs:
   get_data:
     runs-on: ubuntu-latest
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@v1.8.7
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN }}
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
       - name: Checkout code
-        uses: actions/checkout@master
+        uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
         with:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN }}"
       - name: Update diagram
-        uses: githubocto/repo-visualizer@main
+        uses: githubocto/repo-visualizer@a999615bdab757559bf94bda1fe6eef232765f85 # main
         with:
           excluded_paths: "ignore,.github"
           commit_message: ":building_construction: Update codebase visualization"

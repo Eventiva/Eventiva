@@ -52,6 +52,9 @@ on:
     
   
 
+permissions:
+  contents: read
+
 jobs:
   generate:
     permissions: 
@@ -60,18 +63,23 @@ jobs:
     timeout-minutes: 5
     
     steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
       # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
       - name: generate github-contribution-grid-snake.svg
-        uses: Platane/snk/svg-only@v3
+        uses: Platane/snk/svg-only@8b7b3e6acef87188f941ed83b47f9da0401b4d17 # v3.2.0
         with:
           github_user_name: EventivaLtd
           outputs: |
             .github/images/github-snake.svg
             .github/images/github-snake-dark.svg?palette=github-dark
       - name: Commit files
-        uses: EndBug/add-and-commit@v7
+        uses: EndBug/add-and-commit@8c12ff729a98cfbcd3fe38b49f55eceb98a5ec02 # v7.5.0
         with:
           add: ".github/images/"
           push: true
