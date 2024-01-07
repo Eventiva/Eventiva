@@ -13,7 +13,7 @@
  * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2023 Eventiva - All Rights Reserved
+ * Copyright (c) 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  * -----
  * This program has been provided under confidence of the copyright holder and is
@@ -32,14 +32,17 @@
  *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 11-12-2023
+ * Last Modified: Sat Jan 06 2024
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
 import { ComponentContext } from '@teambit/generator';
 
+/**
+ *
+ */
 export const DiscordBotFile = (context: ComponentContext) => {
-  const { name, namePascalCase: Name } = context;
+  const { name } = context;
 
   return {
     relativePath: `${name}.ts`,
