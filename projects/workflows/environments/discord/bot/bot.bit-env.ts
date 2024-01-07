@@ -16,11 +16,30 @@ import { JestTask, JestTester } from '@teambit/defender.jest-tester';
 import { PrettierFormatter } from '@teambit/defender.prettier-formatter';
 import { Tester } from '@teambit/tester';
 
+/**
+ * A class representing a bot that extends NodeEnv.
+ * @author Jonathan Stevens (@TGTGamer)
+ *
+ * @export
+ * @class Bot
+ * @typedef {Bot}
+ * @extends {NodeEnv}
+ */
 export class Bot extends NodeEnv {
-  /* shorthand name for the environment */
+  /**
+   * The name of the bot.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {string}
+   */
   name = 'bot';
 
-  /* the compiler to use during development */
+  /**
+   * Creates a new instance of TypescriptCompiler using the given tsconfigPath and tsTypesPath. The newly created TypescriptCompiler is wrapped in an EnvHandler and returned.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @returns {EnvHandler<Compiler>} This function returns an instance of the TypescriptCompiler class initialized with the provided tsconfig path and types.
+   */
   compiler(): EnvHandler<Compiler> {
     return TypescriptCompiler.from({
       tsconfig: this.tsconfigPath,
@@ -28,14 +47,24 @@ export class Bot extends NodeEnv {
     });
   }
 
-  /* the test runner to use during development */
-  // tester(): EnvHandler<Tester> {
-  //   return JestTester.from({
-  //     config: this.jestConfigPath,
-  //   });
-  // }
+  /**
+   * Creates an instance of a JestTester using the jest config path.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @returns {EnvHandler<Tester>} This function returns an instance of JestTester initialized with the Jest configuration file path.
+   */
+  tester(): EnvHandler<Tester> {
+    return JestTester.from({
+      config: this.jestConfigPath,
+    });
+  }
 
-  /* the linter to use during development */
+  /**
+   * Creates and returns an instance of the ESLint Linter by configuring it with the provided options. The options include the path to the TypeScript configuration file, the path to the ESLint configuration file, the path to the ESLint plugins, and the allowed file extensions for ESLint.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @returns {*} Creates an instance of the ESLintLinter class with the specified configuration.
+   */
   linter() {
     return ESLintLinter.from({
       tsconfig: this.tsconfigPath,
@@ -46,8 +75,10 @@ export class Bot extends NodeEnv {
   }
 
   /**
-   * the formatter to use during development
-   * (source files are not formatted as part of the components' build)
+   * Creates a PrettierFormatter instance using the provided configuration path.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @returns {*} Creates a PrettierFormatter instance using the specified configuration path.
    */
   formatter() {
     return PrettierFormatter.from({
@@ -56,8 +87,10 @@ export class Bot extends NodeEnv {
   }
 
   /**
-   * a set of processes to be performed before a component is snapped, during its build phase
-   * @see https://bit.dev/docs/node-env/build-pipelines
+   * Builds the pipeline by creating tasks for linting, typescript compilation, and Jest testing. Returns the built pipeline.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @returns {*} Builds a pipeline for linting, compiling TypeScript, and running Jest tests.
    */
   build() {
     return Pipeline.from([
@@ -71,7 +104,7 @@ export class Bot extends NodeEnv {
         tsconfig: this.tsconfigPath,
         types: resolveTypes(__dirname, [this.tsTypesPath]),
       }),
-      // JestTask.from({ config: this.jestConfigPath }),
+      JestTask.from({ config: this.jestConfigPath }),
     ]);
   }
 }
