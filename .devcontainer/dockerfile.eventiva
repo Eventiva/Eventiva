@@ -66,4 +66,3 @@ RUN npx @teambit/bvm install
 
 # This line of code installs the 'opencommit' package globally via npm. This package is necessary for version control and collaboration with commit-specific feedback.
 RUN npm install -g opencommit
-
