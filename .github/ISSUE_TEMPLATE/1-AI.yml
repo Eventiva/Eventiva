@@ -13,7 +13,7 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 Eventiva - All Rights Reserved
+ # Copyright (c) 2023 - 2024 Eventiva - All Rights Reserved
  # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
@@ -31,26 +31,31 @@
  # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
- # -----
- # Last Modified: 12-12-2023
- # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: Minor Issue
+name: Codebase Issue - Developer Suggestions & Reports
 title: 'Sweep: '
-description: For small bugs, features, refactors, and tests to be handled by Sweep, an AI-powered junior developer.
+description: Not for general user issue - For small bugs, features, refactors, and tests to be handled by Sweep, an AI-powered junior developer.
 labels: ["Sweep"]
 body:
   - type: markdown
     attributes:
       value: |
+        ** This is not for general user issues - please instead use the links found at [new issues](https://github.com/Eventiva/Eventiva/issues) **
+  - type: markdown
+    attributes:
+      value: |
+        ### Preamble
         Thank you for contributing your issue and suggestion. Our AI-powered junior developer, Sweep, will review your issue and make the necessary changes.
+
         This AI needs as much context as you can possibly provide to ensure that it can make the correct changes. Please provide as much detail as possible in all your answers.
+
         If you can be specific with line numbers, file names, and function names, that would be very helpful.
         Sweep can learn and improve based on your feedback. Please provide feedback on the changes that Sweep makes in comments on the pull requests. 
   - type: markdown
     attributes:
       value: |
+        ### Title your issue: 
         Please use [context] in title to describe the folder path which related to this issue.
         Context example: docs(projects/modules/eventiva_core): {your title here}
   - type: dropdown
