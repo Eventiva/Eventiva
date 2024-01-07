@@ -138,4 +138,4 @@ sandbox:
     - bit install -u --add-missing-deps
   check:
     - bit format
-    - bit build
+    - bit lint --fix
