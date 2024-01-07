@@ -9,56 +9,144 @@
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
  * issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- * 
+ *
  * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2023 Eventiva - All Rights Reserved
+ * Copyright (c) 2023 - 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  * -----
- * This program has been provided under confidence of the copyright holder and is 
+ * This program has been provided under confidence of the copyright holder and is
  * licensed for copying, distribution and modification under the terms of
  * the GNU General Public License v3.0 only (GPL-3.0) published as the License,
  * or (at your option) any later version of this license.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * Creative Commons Zero v1.0 Universal for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License v3.0 only
  * along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
  * or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
- * 
+ *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 20-12-2023
+ * Last Modified: Sat Jan 06 2024
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
-import { Command, CommandOptions } from '@teambit/cli';
+import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from './git-subrepo.main.runtime';
 
+/**
+ * The name of the command that is used to check the status.
+ * @author Jonathan Stevens (@TGTGamer)
+ *
+ * @type {"status"}
+ */
 const COMMAND_NAME = 'status';
 
+/**
+ * A class representing the status command for Git subrepos.
+ * @author Jonathan Stevens (@TGTGamer)
+ *
+ * @export
+ * @class StatusCmd
+ * @typedef {StatusCmd}
+ * @implements {Command}
+ */
 export class StatusCmd implements Command {
+  /**
+   * The name of the command, including options and arguments. It is a string that follows the format `${COMMAND_NAME} [<subdir>|--all|--ALL] [-F] [-q|-v]`. The value of `COMMAND_NAME` will be replaced with the actual name of the command when the command is executed. The `<subdir>` argument is optional and represents a directory path. The `--all` and `--ALL` options can be used to specify whether to perform the command on all subdirectories. The `-F` option is used to force the command to execute, ignoring any prompts or confirmations. The `-q` option is used for quiet mode, suppressing unnecessary output. The `-v` option is used for verbose mode, providing additional detailed output. The name is used as a unique identifier for the command.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {string}
+   */
   name = `${COMMAND_NAME} [<subdir>|--all|--ALL] [-F] [-q|-v]`;
+
+  /**
+   * The alias of an item, represented as a string.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {string}
+   */
   alias = '';
+
+  /**
+   * Get status of a subrepo (or all of them)
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {string}
+   */
   description = `Get status of a subrepo (or all of them)`;
-  options = GitSubrepoMain.subrepoOptions;
+
+  /**
+   * The `options` property is assigned the `subrepoOptions` property of the `subrepo` object.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {CommandOptions}
+   */
+  options = this.subrepo.subrepoOptions;
+
+  /**
+   * The group property represents the group of the git repository.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {string}
+   */
   group = 'git';
+
+  /**
+   * An array of commands. Each command is of type Command and can be executed.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {Command[]}
+   */
   commands: Command[] = [];
+
+  /**
+   * The private flag indicates whether the property is accessible outside of the class or not.
+   * By setting it to true, the property becomes inaccessible from outside the class.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {boolean}
+   */
   private = true;
+
+  /**
+   * The URL of the help documentation for the property. Visit this URL for more information and guidance.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @type {string}
+   */
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
+  /**
+   * Creates an instance of StatusCmd.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @constructor
+   * @param {GitSubrepoMain} subrepo The GitSubrepoMain object for managing the subrepository.
+   */
   constructor(private subrepo: GitSubrepoMain) {}
 
+  /**
+   * Reports the status of a git subrepo in a specified subdirectory using specified flags.
+   * If the subdirectory is not provided, it defaults to '--all'.
+   * Returns a message indicating the success or failure of the operation.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @async
+   * @param {string[]} param0 The subdirectories to report on.
+   * @param {*} param0.subdirectory The single subdirectory to report on, or '--all' to report on all subdirectories.
+   * @param {string[]} flags The flags to pass to the 'git subrepo status' command.
+   * @returns {unknown} This function asynchronously reports the status of a subdirectory using `git subrepo status` command. It takes a subdirectory path and an array of flags as arguments. If no subdirectory path is provided, it defaults to '--all'. The function returns a string indicating the success or failure of the status report.
+   */
   async report([subdirectory]: string[], flags: string[]) {
-    if (!subdirectory) {
-      subdirectory = '--all';
-    }
-    const res = await this.subrepo.status(subdirectory, flags);
+    const sub = subdirectory || '--all';
+    const res = await this.subrepo.status(sub, flags);
     if (res) {
       return chalk.green('git subrepo status was successful');
     }
