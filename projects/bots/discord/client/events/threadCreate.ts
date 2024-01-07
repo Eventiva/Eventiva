@@ -2,9 +2,9 @@
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: index.ts
- * Path: \projects\bots\discord\client\index.ts
- * Created Date: Tuesday, December 12th 2023
+ * File: threadCreate.ts
+ * Path: \projects\bots\discord\client\events\threadCreate.ts
+ * Created Date: Friday, January 5th 2024
  * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -13,7 +13,7 @@
  * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2023 - 2024 Eventiva - All Rights Reserved
+ * Copyright (c) 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  * -----
  * This program has been provided under confidence of the copyright holder and is
@@ -33,5 +33,23 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  */
 
-export { Client, ClientOptions } from './client.js';
-export { default as ClientApp } from './client.bit-app.js';
+import { Events } from 'discord.js';
+import type { Event } from '../client';
+
+/**
+ * The resource property represents an event for when a new thread is created. It is an object of type Event<T>, where T is the event type `ThreadCreate`.
+ * The `data` property contains the name of the event (`Events.ThreadCreate`), and the `execute` method is an asynchronous function that takes in `this` and `interaction` parameters.
+ * @author Jonathan Stevens (@TGTGamer)
+ *
+ * @type {Event<Events.ThreadCreate>}
+ */
+export const resource: Event<Events.ThreadCreate> = {
+  data: {
+    name: Events.ThreadCreate,
+  },
+  async execute(this, interaction) {
+    this.logger.debug(interaction);
+  },
+};
+
+export default resource;
