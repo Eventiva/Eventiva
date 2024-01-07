@@ -43,6 +43,9 @@ on:
   schedule:
     - cron: "0 01 * * 0/3" # Run every Monday at 10am UTC
 
+permissions:
+  contents: read
+
 jobs:
   change-report:
     runs-on: ubuntu-latest

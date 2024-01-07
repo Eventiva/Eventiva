@@ -42,6 +42,8 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 01 * * 1/2'
+permissions:
+  contents: read
 
 jobs:
   change-report:
