@@ -1,56 +1,27 @@
 {
 	"name": "Eventiva Development Environment",
 	"dockerComposeFile": [
-		"../compose.yaml",
-		"../overrides/compose.mariadb.yaml",
-		"../overrides/compose.redis.yaml",
-		"../overrides/compose.https.yaml",
+		"./compose.yaml",
+		"./overrides/compose.mariadb.yaml",
+		"./overrides/compose.redis.yaml",
+		"./overrides/compose.https.yaml",
 		"./compose.eventiva.yaml",
 		"./compose.bot.discord.yaml"
 	],
 	"service": "backend",
 	"shutdownAction": "none",
 	"workspaceFolder": "/home/frappe/frappe-bench/",
-	"containerEnv": {
-		"ERPNEXT_VERSION": "v15.2.0",
-		"DB_HOST": "db",
-		"DB_PORT": "3306",
-		"REDIS_CACHE": "redis-cache:6379",
-		"REDIS_QUEUE": "redis-queue:6379",
-		"SOCKETIO_PORT": "redis-socketio:6379",
-		"LETSENCRYPT_EMAIL": "system@eventiva.co.uk",
-		"SITE_ADMIN_PASS": "admin",
-		"DB_PASSWORD": "databasePassword",
-		"SITE_NAME": "site1.localhost"
-	},
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ms-python.black-formatter",
-				"ms-vscode-remote.remote-containers",
-				"benjaminbenais.copilot-theme",
-				"github.vscode-github-actions",
-				"GitHub.copilot",
-				"GitHub.copilot-chat",
-				"GitHub.copilot-labs",
-				"Massi.javascript-docstrings",
+				"bit.vscode-bit",
 				"crystal-spider.jsdoc-generator",
-				"bierner.jsdoc-markdown-highlighting",
-				"PKief.material-icon-theme",
-				"PKief.material-product-icons",
-				"ms-edgedevtools.vscode-edge-devtools",
-				"CodeStream.codestream",
-				"christian-kohler.npm-intellisense",
-				"codeandstuff.package-json-upgrade",
+				"Postman.postman-for-vscode",
 				"psioniq.psi-header",
-				"ms-python.vscode-pylance",
-				"ms-python.python",
-				"WallabyJs.quokka-vscode",
-				"meganrogge.template-string-converter",
-				"rangav.vscode-thunder-client",
-				"WallabyJs.wallaby-extension-pack",
-				"samverschueren.linter-xo",
-				"yzhang.markdown-all-in-one"
+				"pucelle.run-on-save",
+				"trunk.io",
+				"GitHub.copilot",
+				"GitHub.copilot-chat"
 			]
 		},
 		"settings": {
@@ -70,7 +41,7 @@
 		9000,
 		6787,
 		4000
-	],
+	]
 	// "initializeCommand": "bash ./scripts/setup.sh"
 	// "onCreateCommand": [
 	// 	// Create the site
