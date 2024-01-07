@@ -140,11 +140,7 @@
         "along with this program. If not, please write to: <<authoremail>>,",
         "or see <<licenseurl>>",
         "",
-        "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS",
-        "-----",
-        "Last Modified: <<dateformat('DD-MM-YYYY')>>",
-        "By: <<author>> (Email: <<authorEmail>>, Github: https://github.com/<<githubUser>>)",
-        "Current Version: <<projectversion>>"
+        "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS"
       ]
     }
   ],
