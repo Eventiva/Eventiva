@@ -40,6 +40,9 @@
 name: Components - Bit Init
 on:
   workflow_dispatch:
+permissions:
+  contents: write
+
 jobs:
   install:
     runs-on: ubuntu-latest

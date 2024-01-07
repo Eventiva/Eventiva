@@ -1,3 +1,38 @@
+###
+ # @format
+ # -----
+ # Project: @eventiva/eventiva
+ # File: security-snyk.yml
+ # Path: \.github\workflows\security-snyk.yml
+ # Created Date: Wednesday, January 3rd 2024
+ # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # -----
+ # Contributing: Please read through our contributing guidelines. Included are directions for opening
+ # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ # 
+ # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+ # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ # -----
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
+ # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+ # -----
+ # This program has been provided under confidence of the copyright holder and is 
+ # licensed for copying, distribution and modification under the terms of
+ # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
+ # or (at your option) any later version of this license.
+ # 
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License v3.0 only for more details.
+ # 
+ # You should have received a copy of the GNU General Public License v3.0 only
+ # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
+ # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ # 
+ # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+ ###
+
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
@@ -16,7 +51,7 @@
 # For more examples, including how to limit scans to only high-severity issues
 # and fail PR checks, see https://github.com/snyk/actions/
 
-name: Snyk Security
+name: Security - Snyk
 
 on:
   push:
@@ -43,16 +78,15 @@ jobs:
         # Snyk can be used to break the build when it detects security issues.
         # In this case we want to upload the SAST issues to GitHub Code Scanning
         uses: snyk/actions/setup@806182742461562b67788a64410098c9d9b96adb
-
+        env:
+          # This is where you will need to introduce the Snyk API token created with your Snyk account
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        
         # For Snyk Open Source you must first set up the development environment for your application's dependencies
         # For example for Node
         #- uses: actions/setup-node@v3
         #  with:
         #    node-version: 16
-
-        env:
-          # This is where you will need to introduce the Snyk API token created with your Snyk account
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
         # Runs Snyk Code (SAST) analysis and uploads result into GitHub.
         # Use || true to not fail the pipeline

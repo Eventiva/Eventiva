@@ -2,8 +2,8 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: defender-for-devops.yml
- # Path: \.github\workflows\defender-for-devops.yml
+ # File: security-defender-for-devops.yml
+ # Path: \.github\workflows\security-defender-for-devops.yml
  # Created Date: Tuesday, December 12th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
@@ -13,7 +13,7 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 Eventiva - All Rights Reserved
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
  # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
@@ -60,6 +60,10 @@ on:
     branches: [ "develop" ]
   schedule:
     - cron: '34 12 * * 0'
+
+permissions:
+  contents: read
+  security-events: write
 
 jobs:
   MSDO:
