@@ -9,35 +9,33 @@
  */
 
 {
+    "discord/client": {
+        "name": "discord/client",
+        "scope": "eventiva.bots",
+        "version": "0.0.2",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/discord/client"
+    },
     "environments/discord/bot": {
         "name": "environments/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "c0075cda1af1dadf4b692f07f9bcebc44fb98c73",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/environments/discord/bot"
     },
     "generators/discord/bot": {
         "name": "generators/discord/bot",
         "scope": "eventiva.workflows",
-        "version": "96ccf3527cc28510184a7d5a1303c0ea75d911bd",
+        "version": "0.0.2",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/generators/discord/bot"
     },
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",
-        "version": "f37ea4b01267c8d048becbf7c347f7db240b8833",
+        "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/git-subrepo",
-        "onLanesOnly": true,
-        "isAvailableOnCurrentLane": true
+        "rootDir": "projects/workflows/git-subrepo"
     },
-    "$schema-version": "17.0.0",
-    "_bit_lane": {
-        "id": {
-            "name": "develop",
-            "scope": "eventiva.modules"
-        },
-        "exported": false
-    }
+    "$schema-version": "17.0.0"
 }
