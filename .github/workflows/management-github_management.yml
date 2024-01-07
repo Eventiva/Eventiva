@@ -2,9 +2,9 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: secrets.yml
- # Path: \.github\workflows\secrets.yml
- # Created Date: Monday, May 8th 2023
+ # File: management-github_management.yml
+ # Path: \.github\workflows\management-github_management.yml
+ # Created Date: Monday, April 17th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -13,7 +13,7 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 Eventiva - All Rights Reserved
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
  # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
@@ -32,19 +32,29 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: Fri Dec 29 2023
+ # Last Modified: Sat Jan 06 2024
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
 
-name: Security - GitGuardian scan
 
-on: [push, pull_request]
+name: Management - Github Management
+on:
+  issues:
+    types: [opened, edited, closed, reopened]
+  pull_request:
+    types: [opened, edited, closed, reopened, synchronize]
+
+permissions:
+  pull-requests: write
+  issues: write
 
 jobs:
-  scanning:
-    name: GitGuardian scan
+  release-mastermind:
+    name: Release Mastermind
     runs-on: ubuntu-latest
+    env: 
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
@@ -58,17 +68,10 @@ jobs:
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
-      - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+          
+      - name: Release Mastermind
+        uses: Resnovas/smartcloud@dd13ed741b701f384fc63cf806557d14cade574c # 1.0.0-beta.8
         with:
-          fetch-depth: 0 # fetch all history so multiple commits can be scanned
-          submodules: 'recursive'
-          token: ${{ secrets.BOT_TOKEN }}
-      - name: GitGuardian scan
-        uses: GitGuardian/ggshield/actions/secret@5a6f8a571defbaf3375993f0091799a9afdf5c20 # main
-        env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          config: .github/config.json
+          configRef: develop

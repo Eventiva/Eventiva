@@ -2,9 +2,9 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: readme-fun.yml
- # Path: \.github\workflows\readme-fun.yml
- # Created Date: Tuesday, December 12th 2023
+ # File: components-verify.yml
+ # Path: \.github\workflows\components-verify.yml
+ # Created Date: Thursday, December 7th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -13,7 +13,7 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 Eventiva - All Rights Reserved
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
  # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
@@ -32,52 +32,45 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: Fri Dec 29 2023
+ # Last Modified: Sat Jan 06 2024
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
 
-name: Chore - Generate Animation
-
+name: Components - Bit Verify
 on:
-  schedule:
-    - cron: "0 0 * * *" 
-  
-  # allows to manually run the job at any time
   workflow_dispatch:
-  
-  # run on every push on the master branch
-  push:
-    branches:
-    - dev
-    
-  
-
 permissions:
   contents: write
-
 jobs:
-  generate:
+  release:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
-    
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
         with:
           egress-policy: audit
 
-      - name: Checkout repo
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
-      # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
-      - name: generate github-contribution-grid-snake.svg
-        uses: Platane/snk/svg-only@8b7b3e6acef87188f941ed83b47f9da0401b4d17 # v3.2.0
-        with:
-          github_user_name: EventivaLtd
-          outputs: |
-            .github/images/github-snake.svg
-            .github/images/github-snake-dark.svg?palette=github-dark
-      - name: Commit files
-        uses: EndBug/add-and-commit@8c12ff729a98cfbcd3fe38b49f55eceb98a5ec02 # v7.5.0
-        with:
-          add: ".github/images/"
-          push: true
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+      - name: Checkout repository
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: Initialize Bit
+        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
+      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
+      - name: Bit Verify
+        uses: bit-tasks/verify@a4decc636be1a7bda6e09d36f8bd21e4d1a87b39 # v1
