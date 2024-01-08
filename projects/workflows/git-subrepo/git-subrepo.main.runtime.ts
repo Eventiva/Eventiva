@@ -32,14 +32,14 @@
  *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: Sat Jan 06 2024
+ * Last Modified: Mon Jan 08 2024
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
 import { CLIAspect, CLIMain, MainRuntime, CommandOptions } from '@teambit/cli';
 import { WorkspaceAspect, Workspace } from '@teambit/workspace';
 import { RuntimeDefinition, Aspect } from '@teambit/harmony';
-import { execSync } from 'child_process';
+import { spawnSync } from 'child_process';
 import { GitSubrepoAspect } from './git-subrepo.aspect';
 import { SubRepoCmd } from './git-subrepo.cmd';
 import { BranchCmd } from './branch.cmd';
@@ -86,14 +86,8 @@ export class GitSubrepoMain {
    * @type {Aspect[]}
    */
   static dependencies: Aspect[] = [CLIAspect, WorkspaceAspect];
-  /**
-   *
-   * @author Jonathan Stevens (@TGTGamer)
-   */
-  /**
-   *
-   * @author Jonathan Stevens (@TGTGamer)
-   */
+
+
   /**
    * The runtime property represents the current runtime of the application.
    * @author Jonathan Stevens (@TGTGamer)
@@ -142,7 +136,7 @@ export class GitSubrepoMain {
    * @constructor
    * @param {Workspace} workspace The workspace object that represents the current workspace.
    */
-  constructor(private workspace: Workspace) {}
+  constructor(private workspace: Workspace) { }
 
   /**
    * Creates a provider function that registers a GitSubrepoMain instance with a CLI instance and returns the instance.
@@ -213,7 +207,7 @@ export class GitSubrepoMain {
       const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(
         ' '
       )}`;
-      const output = execSync(cmd, { stdio: 'inherit' });
+      const output = spawnSync(cmd, { stdio: 'inherit', shell: false });
       // eslint-disable-next-line no-console
       console.log(output);
     } catch (error) {
@@ -241,11 +235,10 @@ export class GitSubrepoMain {
   async clone(repository: string, subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the clone command and the repository and subdirectory arguments
 
-    return execSync(
-      `clone ${repository} ${this.getWorkspaceRoot}/${subdirectory} ${
-        Array.isArray(flags) ? flags.join(' ') : ''
+    return spawnSync(
+      `clone ${repository} ${this.getWorkspaceRoot}/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''
       }`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -260,11 +253,10 @@ export class GitSubrepoMain {
    */
   async init(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the init command
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo init ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo init ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -279,11 +271,10 @@ export class GitSubrepoMain {
    */
   async pull(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the pull command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo pull ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo pull ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -298,11 +289,10 @@ export class GitSubrepoMain {
    */
   async push(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the push command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo pu${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo pu${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -320,11 +310,10 @@ export class GitSubrepoMain {
    */
   async fetch(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the fetch command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo fetch ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo fetch ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -339,11 +328,10 @@ export class GitSubrepoMain {
    */
   async branch(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the branch command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo branch ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo branch ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -358,11 +346,10 @@ export class GitSubrepoMain {
    */
   async commit(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the commit command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo commit ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo commit ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -380,11 +367,10 @@ export class GitSubrepoMain {
    */
   async status(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the status command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo status ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo status ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -401,11 +387,10 @@ export class GitSubrepoMain {
    */
   async clean(subdirectory: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the clean command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo clean ${
-        this.getWorkspaceRoot
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo clean ${this.getWorkspaceRoot
       }/${subdirectory} ${Array.isArray(flags) ? flags.join(' ') : ''}`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -432,13 +417,11 @@ export class GitSubrepoMain {
     flags: string[]
   ) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the config command and the subdirectory argument
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo config ${
-        this.getWorkspaceRoot
-      }/${subdirectory} ${option} ${value} ${
-        Array.isArray(flags) ? flags.join(' ') : ''
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo config ${this.getWorkspaceRoot
+      }/${subdirectory} ${option} ${value} ${Array.isArray(flags) ? flags.join(' ') : ''
       }`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -455,11 +438,10 @@ export class GitSubrepoMain {
    */
   async help(command: string, flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the help command
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo help ${command} ${
-        Array.isArray(flags) ? flags.join(' ') : ''
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo help ${command} ${Array.isArray(flags) ? flags.join(' ') : ''
       }`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -476,11 +458,10 @@ export class GitSubrepoMain {
    */
   async version(flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the version command
-    return execSync(
-      `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo version ${
-        Array.isArray(flags) ? flags.join(' ') : ''
+    return spawnSync(
+      `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo version ${Array.isArray(flags) ? flags.join(' ') : ''
       }`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 
@@ -498,11 +479,10 @@ export class GitSubrepoMain {
    */
   async upgrade(flags: string[]) {
     // exec sync the sh file located at projects\workflows\git-subrepo\cmd\lib\git-subrepo with the upgrade command
-    return execSync(
-      `${this.getAspectDirectory()}/cmd/lib/git-subrepo upgrade ${
-        Array.isArray(flags) ? flags.join(' ') : ''
+    return spawnSync(
+      `${this.getAspectDirectory()}/cmd/lib/git-subrepo upgrade ${Array.isArray(flags) ? flags.join(' ') : ''
       }`,
-      { stdio: 'inherit' }
+      { stdio: 'inherit', shell: false }
     );
   }
 }
