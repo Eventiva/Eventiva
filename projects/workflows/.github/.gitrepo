@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/Eventiva/.github
+	branch = develop
+	commit = 9e79dc012537739f38200260ba7fbc6178f2694b
+	parent = 38215a28ce148f1736b53c0df158bbf716ce446d
+	method = merge
+	cmdver = 0.4.6
