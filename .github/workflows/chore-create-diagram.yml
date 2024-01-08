@@ -32,7 +32,7 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: Sat Jan 06 2024
+ # Last Modified: Mon Jan 08 2024
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
@@ -40,9 +40,13 @@
 name: Chore - Create Diagram
 on:
   workflow_dispatch: {}
+  # when the repository branch develop is pushed to but ignoring commits by repo-visualizer
   push:
     branches:
-      - "develop"
+      - develop
+    paths-ignore:
+      - 'diagram.svg'
+      - '.github/**'
 
 permissions:
   contents: write
