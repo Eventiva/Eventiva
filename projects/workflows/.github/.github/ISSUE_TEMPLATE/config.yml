@@ -1,0 +1,73 @@
+###
+ # @format
+ # -----
+ # Project: @eventiva/eventiva
+ # File: config.yml
+ # Path: \projects\workflows\.github\.github\ISSUE_TEMPLATE\config.yml
+ # Created Date: Monday, April 17th 2023
+ # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # -----
+ # Contributing: Please read through our contributing guidelines. Included are directions for opening
+ # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ # 
+ # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+ # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ # -----
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
+ # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+ # -----
+ # This program has been provided under confidence of the copyright holder and is 
+ # licensed for copying, distribution and modification under the terms of
+ # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
+ # or (at your option) any later version of this license.
+ # 
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # Creative Commons Zero v1.0 Universal for more details.
+ # 
+ # You should have received a copy of the GNU General Public License v3.0 only
+ # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
+ # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ # 
+ # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+ # -----
+ # Last Modified: Sun Jan 07 2024
+ # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # Current Version: 0.0.0
+ ###
+
+blank_issues_enabled: false
+
+contact_links:    
+  - name: Questions & Answers via Discord
+    url: https://www.answeroverflow.com/c/352754251434426368
+    about: Join the public discord to get help with your issue
+
+  - name: Technical Support
+    url: https://eventivaltd.atlassian.net/servicedesk/customer/portal/3/group/11/create/33
+    about: Need help installing, configuring, or troublesnooting? Select this to request assistance.
+
+  - name: Report a bug
+    url: https://eventivaltd.atlassian.net/servicedesk/customer/portal/3/group/11/create/38
+    about: Tell us the problems you're experiencing-
+
+  - name: Request Features
+    url: https://eventivaltd.atlassian.net/servicedesk/customer/portal/3/group/11/create/39
+    about: Suggest a new feature for our project
+  
+  - name: Suggest Improvements
+    url: https://eventivaltd.atlassian.net/servicedesk/customer/portal/3/group/11/create/40
+    about: See a place where we can do better? We're all ears.
+
+  - name: Maintenance Request
+    url: https://eventivaltd.atlassian.net/servicedesk/customer/portal/3/group/11/create/41
+    about: Found something that needs a bit of love? Let us know that we should review the Documentation, Styling, Refactoring, Optimisation, Deprecated or Removal of an existing feature.
+
+  - name: Code Discussion
+    url: https://github.com/Eventiva/eventiva/discussions/new
+    about: Start a discussion about our project's development
+
+  - name: Contributor Code of Conduct
+    url: https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md
+    about: Showcase yourself
