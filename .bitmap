@@ -33,9 +33,16 @@
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",
-        "version": "0.0.1",
+        "version": "ac561a48c70cf89c06babe4962d90235a1726238",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/git-subrepo"
     },
-    "$schema-version": "17.0.0"
+    "$schema-version": "17.0.0",
+    "_bit_lane": {
+        "id": {
+            "name": "develop",
+            "scope": "eventiva.modules"
+        },
+        "exported": true
+    }
 }
