@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/vetting
 	branch = develop
-	commit = c679afe63af06507e67bff52e6349177d47ddf48
+	commit = 8973a56cfc8cebe684223998f7695eaa22fe3fa2
 	method = merge
 	cmdver = 0.4.6
-	parent = 6850cfd082d1d08d3dc09e0a88982984222bb01a
+	parent = bc160b070f39a104d70f7573018f295e1c7b6d48
