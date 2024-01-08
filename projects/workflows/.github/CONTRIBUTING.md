@@ -24,6 +24,9 @@
 <!-- tocstop -->
 
 # Why the guidelines
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 First off, thank you for considering contributing to this project.
 
@@ -200,9 +203,11 @@ Please follow the branch name configuration defined as follows:
   - `automerge` - Automatically Merge this request
   - `good first issue` - What it says on the tin. This helps new people find stuff to work on, because [GitHub actively promotes it](https://help.github.com/articles/helping-new-contributors-find-your-project-with-labels/) and [initializes new repositories with that label](https://help.github.com/articles/about-labels/#using-default-labels).
 
+
 # Code review process
 
 [Coming soon - Please stand by]
+
 
 # Security
 
