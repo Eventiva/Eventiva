@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/fleet_management
 	branch = develop
-	commit = 9790c0f1c656bf886595985324c4b8e12688f450
+	commit = 62b284400e434ac062c9b57bbf9785ed7a322d05
 	method = merge
 	cmdver = 0.4.6
-	parent = e07bcecc2beb671f8499d74dbed135aa73d8c90d
+	parent = 2eb2b606c56a9dfe894a81f855634af12b733b88
