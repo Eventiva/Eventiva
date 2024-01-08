@@ -1,6 +1,9 @@
 /**
  * @format
  * -----
+ * Note: Before running this workflow, make sure to authenticate the `snyk` command by running `snyk auth`.
+ * This is required to access the necessary resources for generating the change report.
+ * -----
  * Project: change-report
  * File: main.ts
  * Path: \src\main.ts
