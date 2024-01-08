@@ -59,6 +59,9 @@ The report might look slightly differently in your case, as it depends on the co
 
 ### Usage example
 
+  # Note: Before running this workflow, make sure to authenticate the `snyk` command by running `snyk auth`.
+  # This is required to access the necessary resources for generating the change report.
+
 ```yml
 name: 'Change Report'
 on:
