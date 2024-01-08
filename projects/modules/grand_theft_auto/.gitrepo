@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/grand_theft_auto
 	branch = develop
-	commit = d976387e4c0848df76b568b16fab9e7ed933a19f
+	commit = dd5bf6506bb0449b1fe981619fae68503414e049
 	method = merge
 	cmdver = 0.4.6
-	parent = 7f0f25f692dc3129b10b9e22253e6fad2f6ec710
+	parent = f1c1df2aec3bd1967190427ce2f642cd94c7e2b2
