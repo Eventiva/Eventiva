@@ -44,6 +44,9 @@ branding:
   icon: 'align-left'
   color: 'blue'
 inputs:
+  BIT_CONFIG_USER_TOKEN:
+    required: true
+    description: 'The user token for BitBucket'
   destination:
     required: true
     description: 'destination to post the report to'
