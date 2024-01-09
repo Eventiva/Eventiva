@@ -62,3 +62,5 @@ inputs:
 runs:
   using: 'node16'
   main: 'dist/index.js'
+  env:
+    BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
