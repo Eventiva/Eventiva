@@ -40,7 +40,12 @@
 name: 'Run'
 on:
   workflow_dispatch:
-  push:
+  push: 
+    - name: Unprotect branch
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git branch --update-head-ok --no-edit --unprotect <branch-name>
     branches:
       - main
 
