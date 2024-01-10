@@ -37,7 +37,7 @@
 # Current Version: 0.0.0
 ###
 
-name: 'Run'
+name: 'Eventiva Event Workflow'
 on:
   workflow_dispatch:
   push:
@@ -66,11 +66,11 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           GITHUB_REPO_NAME: ${{ github.repository }}
 
-      - uses: ./
+      - uses: ./custom_action
         with:
           destination: discord
           days: 7
-          channel: '1105810974189043762, 1105810974189043762'
+          channel: '1105810974189043762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
