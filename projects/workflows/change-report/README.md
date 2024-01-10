@@ -1,7 +1,8 @@
 Change Report GitHub Action
 ---
 
-This action generates a report from the recent code changes and posts it to Slack or Discord.
+This action generates a report from the recent code changes, but before making pull requests, contributors are required to sign the Contributor License Agreement (CLA) to approve their contributions.
+**Note:** This repository is archived. Before making changes, contributors are required to sign the CLA. Ensure that the branch where signatures are stored is NOT protected.
 
 ### Demo
 > **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
@@ -77,8 +78,10 @@ jobs:
 
       - uses: maxprilutskiy/change-report@main
         with:
-          # The destination to post the report to. 
+          # The destination to post the report to.
           # "slack" and "discord" are supported
+          #
+          # **Note:** This repository is archived. Before making changes, contributors are required to sign the CLA. Ensure that the branch where signatures are stored is NOT protected.
           destination: 'slack'
           # Number of days to include into the report
           days: 7
@@ -108,3 +111,11 @@ jobs:
 ### Roadmap
 - [x] Slack integration
 - [x] Discord integration
+
+**Note:** This repository is archived. Before making changes, contributors are required to sign the CLA. Ensure that the branch where signatures are stored is NOT protected.
+
+**Note:** This repository is archived. Before making changes, contributors are required to sign the CLA. Ensure that the branch where signatures are stored is NOT protected.
+
+**Note:** This repository is archived. Before making changes, contributors are required to sign the CLA. Ensure that the branch where signatures are stored is NOT protected.
+
+**Note:** This repository is archived. Before making changes, contributors are required to sign the CLA. Ensure that the branch where signatures are stored is NOT protected.
