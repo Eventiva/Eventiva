@@ -71,7 +71,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
+        env:
+          # The destination to post the report to. 
+          # "slack" and "discord" are supported
+          destination: 'slack'
+          # Number of days to include in the report
+          days: 30
+          # Channel to post the report to. 
+          # For Slack, it's the name of the channel, without the leading "#",
+          # For Discord, it's the channel ID
+          channel: 'space-talks'
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
 
@@ -88,16 +97,16 @@ jobs:
           channel: 'general'
         env:
           # Your OpenAI API key, used to generate the report
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
+          OPENAI_API_KEY: YOUR_OPENAI_API_KEY_HERE 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
+          SLACK_BOT_TOKEN: YOUR_SLACK_BOT_TOKEN_HERE 
           # Your Slack signing secret, used to verify the request is coming from Slack
           # Only needed if you're posting to Slack
-          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          SLACK_SIGNING_SECRET: YOUR_SLACK_SIGNING_SECRET_HERE
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_BOT_TOKEN: YOUR_DISCORD_BOT_TOKEN_HERE
 ```
 
 ### Authors
