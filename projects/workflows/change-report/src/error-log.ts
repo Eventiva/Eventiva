@@ -1,11 +1,17 @@
 // File: error-log.ts
 // Path: projects/workflows/change-report/src/error-log.ts
 
-import { fetchErrorLogs } from 'github-actions-library'; // Replace with the actual library or API for fetching error logs
+import { ActualLibraryOrAPI } from 'actual-library-or-api'; // Replace with the actual library or API for fetching error logs
 
 /**
  * Retrieves the error logs from the GitHub Actions run.
- * @returns The error logs as a string or an array of strings.
+ * @returns The error logs as an array of strings. 
+ * 
+ * Retrieves the error logs from the GitHub Actions run using the specified API or library.
+ * 
+ * @since 1.0.0
+ * @date 2023-04-15
+ * @author John Doe
  */
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
@@ -15,7 +21,14 @@ export function retrieveErrorLogs(): string[] {
 
 /**
  * Formats the error logs for display or posting.
- * @param errorLogs - The retrieved error logs.
+ * @param errorLogs - The retrieved error logs as an array of strings.
+ * @returns The formatted error logs as a string.
+ * 
+ * Formats the error logs for display or posting, including line numbers. 
+ * 
+ * @since 1.0.0
+ * @date 2023-04-15
+ * @author John Doe
  * @returns The formatted error logs as a string.
  */
 export function formatErrorLogs(errorLogs: string[]): string {
