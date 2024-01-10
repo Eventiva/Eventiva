@@ -23,6 +23,8 @@ export function retrieveErrorLogs(): string[] {
  * Formats the error logs for display or posting.
  * @param errorLogs - The retrieved error logs as an array of strings.
  * @returns The formatted error logs as a string.
+ * @param errorLogs - The retrieved error logs as an array of strings.
+ * @returns The formatted error logs as a string.
  * 
  * Formats the error logs for display or posting, including line numbers. 
  * 
