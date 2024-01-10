@@ -54,7 +54,7 @@ inputs:
     required: true
     description: 'channel for error logs'
     required: true
-    description: 'number of days to include into the report'
+    description: 'number of days to include into the report'\n    required: false\n    description: 'number of days to include into the report''\n    required: false\n    description: 'number of days to include into the report''\n    required: false\n    description: 'number of days to include into the report''
     default: 7
   channel:
     required: true
