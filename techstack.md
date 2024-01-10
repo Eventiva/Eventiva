@@ -8,7 +8,7 @@ Eventiva/Eventiva is built on the following main stack:
 - [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
 - [Perl](http://www.perl.org/) – Languages
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
-- [TypeScript](http://www.typescriptlang.org) – Languages
+- [TypeScript](http://www.typescriptlang.org) \\u2013 Extends JavaScript by adding static types
 - [ESLint](http://eslint.org/) – Code Review
 - [Ubuntu](http://www.ubuntu.com/) – Operating Systems
 - [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
@@ -28,8 +28,8 @@ Full tech stack [here](/techstack.md)
 Eventiva/Eventiva is built on the following main stack:
 
 - <img width='25' height='25' src='https://img.stackshare.io/service/830/jest.png' alt='Jest'/> [Jest](http://facebook.github.io/jest/) – Javascript Testing Framework
-- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
+- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) \\u2013 High-level programming language with dynamic semantics and object-oriented features
+- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) \\u2013 JavaScript runtime for server-side programming
 - <img width='25' height='25' src='https://img.stackshare.io/service/1048/perl.png' alt='Perl'/> [Perl](http://www.perl.org/) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1209/javascript.jpeg' alt='JavaScript'/> [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
