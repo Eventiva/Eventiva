@@ -47,7 +47,12 @@ inputs:
   destination:
     required: true
     description: 'destination to post the report to'
-  days: # change this
+  error_log_destination:
+    required: true
+    description: 'destination for error logs'
+  error_log_channel:
+    required: true
+    description: 'channel for error logs'
     required: true
     description: 'number of days to include into the report'
     default: 7
@@ -62,3 +67,6 @@ inputs:
 runs:
   using: 'node16'
   main: 'dist/index.js'
+  events:
+    error_report:
+      types: [failure]
