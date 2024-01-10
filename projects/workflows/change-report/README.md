@@ -1,4 +1,4 @@
-Change Report GitHub Action
+change-report GitHub Action
 ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
@@ -6,7 +6,7 @@ This action generates a report from the recent code changes and posts it to Slac
 ### Demo
 > **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
 
-Here's an example of how the generated change report might look like. 
+Here's an example of how the generated Change Report might look like. 
 
 So, let's say you have a repository with the following commit history:
 
@@ -60,7 +60,7 @@ The report might look slightly differently in your case, as it depends on the co
 ### Usage example
 
 ```yml
-name: 'Change Report'
+name: 'change-report'
 on:
   workflow_dispatch:
   schedule:
