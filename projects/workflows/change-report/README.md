@@ -1,4 +1,9 @@
-Change Report GitHub Action
+Change Report
+on:
+    pull_request:
+        types:
+          - opened
+          - synchronize GitHub Action
 ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
