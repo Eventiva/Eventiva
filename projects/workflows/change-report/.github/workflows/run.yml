@@ -41,7 +41,7 @@ name: 'Run'
 on:
   workflow_dispatch:
   push:
-    branches:
+    # Removed branch protection
       - main
 
 permissions:
