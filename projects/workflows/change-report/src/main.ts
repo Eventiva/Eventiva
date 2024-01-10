@@ -38,7 +38,7 @@
  */
 
 import * as core from '@actions/core'
-import {fetchCommitMessages} from './fetch-commit-messages'
+import {fetchCommitMessages, checkCLASignature} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
 import {sendDiscordMessage} from './send-discord-message'
@@ -71,7 +71,7 @@ async function run(): Promise<void> {
       if (destination === 'slack') {
         await sendSlackMessage(channel, report)
       } else if (destination === 'discord') {
-        await sendDiscordMessage(channel, report)
+        await await sendDiscordMessage(channel, report)
       } else {
         throw new Error(`Unknown destination: ${destination}`)
       }
