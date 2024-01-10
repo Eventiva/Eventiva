@@ -1,7 +1,7 @@
 Change Report GitHub Action
 ---
 
-This action generates a report from the recent code changes and posts it to Slack or Discord.
+This action generates a report from the recent code changes and posts it to Slack or Discord. It also includes information about any error logs encountered during the GitHub Actions run. Descriptive commit messages are important for better functioning of this action. It also includes information about any error logs encountered during the GitHub Actions run.
 
 ### Demo
 > **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
