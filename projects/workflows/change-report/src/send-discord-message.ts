@@ -37,13 +37,13 @@
  * Current Version: 0.0.0
  */
 
-import Discord from 'discord.js'
+import { Client, Intents, MessagePayload } from 'discord.js'
 
 export const sendDiscordMessage = async (
   channel: string,
   content: string
 ): Promise<void> => {
-  const discord = new Discord.Client({
+  const discord = new Client({
     intents: []
   })
   await discord.login(process.env.DISCORD_BOT_TOKEN)
