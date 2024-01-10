@@ -58,6 +58,8 @@ jobs:
       - uses: ./
         with:
           destination: slack
+          env:
+            SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           days: 7
           channel: integrations-test
         env:
