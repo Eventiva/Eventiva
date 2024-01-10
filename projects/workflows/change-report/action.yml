@@ -38,8 +38,8 @@
 ###
 
 name: Change Report
-description: GitHub Action to generate a report from the recent code changes and post it to Slack or Discord
-author: Max Prilutskiy
+description: GitHub Action to generate a report from the recent code changes and post it to Slack or Discord. Requires BIT_CONFIG_USER_TOKEN and BIT_CLOUD_ACCESS_TOKEN environment variables.
+author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
 branding:
   icon: 'align-left'
   color: 'blue'
@@ -55,7 +55,13 @@ inputs:
     required: true
     description: 'channel to report'
     default: 'general'
-  crosspost:
+  BIT_CONFIG_USER_TOKEN:
+    required: true
+    description: 'Config user token for Bit'
+  BIT_CLOUD_ACCESS_TOKEN:
+    required: true
+    description: 'Access token for Bit Cloud'
+crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
