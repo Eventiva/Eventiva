@@ -10,10 +10,10 @@ Here's an example of how the generated change report might look like.
 
 So, let's say you have a repository with the following commit history:
 
-**Repository Read-Only and Protected Branch**\n\nThis repository is read-only, and the branch where signatures are stored is protected. Signatures must be added manually outside of the GitHub Actions workflow.\n\n```
+**Repository Read-Only and Protected Branch**\n\n\n\n```
 feat: Develop initial launch plan for SpaceX Internet satellites
 chore: Setup project repository for SpaceX Internet satellite launch
-The repository is read-only to contributors. The branch where signatures are stored is protected.
+
 docs: Add user manual for SpaceX Internet service
 fix: Correct satellite positioning for optimal Internet coverage
 test: Run system tests for satellite deployment and connectivity
