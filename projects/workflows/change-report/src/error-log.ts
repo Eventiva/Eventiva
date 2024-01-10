@@ -15,7 +15,7 @@ import { fetchErrorLogs } from 'actual-library-or-api'; // Replace with the actu
  */
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
-  const errorLogs = fetchErrorLogs();
+  const errorLogs = ActualLibraryOrAPI.fetchErrorLogs();
   return errorLogs;
 }
 
