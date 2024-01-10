@@ -54,10 +54,15 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
+      - run: snyk auth
+        env:
+          SNYK_API_KEY: ${{ secrets.SNYK_API_KEY }}
       - uses: ./
         with:
           destination: slack
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
           days: 7
           channel: integrations-test
         env:
@@ -73,5 +78,6 @@ jobs:
           channel: '1105810974189043762, 1105810974189043762'
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SNYK_API_KEY: ${{ secrets.SNYK_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           GITHUB_REPO_NAME: ${{ github.repository }}
