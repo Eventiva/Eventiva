@@ -5,11 +5,11 @@ import { fetchErrorLogs } from 'new-library'; // Replace with the actual library
 
 /**
  * Retrieves the error logs from the GitHub Actions run.
- * @returns The error logs as a string or an array of strings.
+ * @returns A promise that resolves to the error logs as an array of strings.
  */
-export function retrieveErrorLogs(): string[] {
+export function retrieveErrorLogs(): Promise<string[]> {
   // Use the appropriate API or library to fetch the error logs
-  const errorLogs = actualErrorLogFetchCall();
+  const errorLogs = fetchErrorLogs();
   return errorLogs;
 }
 
