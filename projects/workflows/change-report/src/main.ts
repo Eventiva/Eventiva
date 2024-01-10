@@ -34,7 +34,7 @@
  * -----
  * Last Modified: 09-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
- * Current Version: 0.0.0
+ * Current Version: 1.0.0
  */
 
 import * as core from '@actions/core'
