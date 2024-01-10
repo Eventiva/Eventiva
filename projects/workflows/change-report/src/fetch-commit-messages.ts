@@ -4,7 +4,7 @@ import {promisify} from 'util'
 const execAsync = promisify(exec)
 
 export const fetchCommitMessages = async (
-  daysCount: number
+  daysCount: number, repoPath: string
 ): Promise<string[]> => {
   const {stdout} = await execAsync(
     `git log --since="${daysCount} days ago" --pretty=format:"%s"`
