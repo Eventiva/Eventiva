@@ -40,8 +40,8 @@
 import * as core from '@actions/core'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
-import {sendSlackMessage} from './send-slack-message'
-import { sendDiscordMessage } from './utils/send-discord-message'
+import {sendSlackMessage} from 'discord.js'
+import { sendDiscordMessage } from '@slack/bolt'
 
 async function run(): Promise<void> {
   try {
@@ -65,7 +65,7 @@ async function run(): Promise<void> {
     }
 
     const destination = core.getInput('destination')
-    const channels = core.getInput('channel').split(/, ?/)
+    const channels = core.getInput('channels').split(/\s*,\s*/g).map(channel => channel.trim())
 
     channels.forEach(async (channel) => {
       if (destination === 'slack') {
