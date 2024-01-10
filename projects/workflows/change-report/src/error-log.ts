@@ -1,7 +1,7 @@
 // File: error-log.ts
 // Path: projects/workflows/change-report/src/error-log.ts
 
-import { fetchErrorLogs } from 'github-actions-library'; // Replace with the actual library or API for fetching error logs
+import { fetchErrorLogs } from './error-log-api'; // Replace with the actual library or API for fetching error logs
 
 /**
  * Retrieves the error logs from the GitHub Actions run.
@@ -9,6 +9,8 @@ import { fetchErrorLogs } from 'github-actions-library'; // Replace with the act
  */
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
+  const errorLogs = fetchErrorLogs();
+  return errorLogs.split('\n');
   const errorLogs = fetchErrorLogs();
   return errorLogs.split('\n');
 }
