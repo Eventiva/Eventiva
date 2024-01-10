@@ -1,4 +1,4 @@
-import {expect, test} from '@jest/globals'
+import main from '../main'
 
 test('ok', async () => {
   await expect(true).toBe(true)
