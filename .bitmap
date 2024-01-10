@@ -37,12 +37,5 @@
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/git-subrepo"
     },
-    "$schema-version": "17.0.0",
-    "_bit_lane": {
-        "id": {
-            "name": "develop",
-            "scope": "eventiva.modules"
-        },
-        "exported": true
-    }
+    "$schema-version": "17.0.0"
 }
