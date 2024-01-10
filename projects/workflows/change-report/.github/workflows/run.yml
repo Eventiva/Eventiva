@@ -55,9 +55,8 @@ jobs:
         with:
           fetch-depth: 250
 
-      - uses: ./
-        with:
-          destination: slack
+      # - uses: ./
+
           days: 7
           channel: integrations-test
         env:
@@ -66,9 +65,8 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           GITHUB_REPO_NAME: ${{ github.repository }}
 
-      - uses: ./
-        with:
-          destination: discord
+      # - uses: ./
+
           days: 7
           channel: '1105810974189043762, 1105810974189043762'
         env:
