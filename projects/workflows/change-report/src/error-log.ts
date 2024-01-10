@@ -18,7 +18,7 @@ export function retrieveErrorLogs(): string[] {
  * @param errorLogs - The retrieved error logs.
  * @returns The formatted error logs as a string.
  */
-export function formatErrorLogs(errorLogs: string[]): string {
+export function formatErrorLogs(errorLogs: string[][]): string {
   // Process the error logs and apply necessary formatting
   // For example, add line numbers or timestamps
   const formattedLogs = errorLogs.map((log, index) => `${index + 1}. ${log}`).join('\n');
