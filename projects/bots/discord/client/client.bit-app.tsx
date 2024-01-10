@@ -4,7 +4,7 @@
  * Project: @eventiva/eventiva
  * File: client.bit-app.tsx
  * Path: \projects\bots\discord\client\client.bit-app.tsx
- * Created Date: Sunday, December 10th 2023
+ * Created Date: Tuesday, December 12th 2023
  * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -13,7 +13,7 @@
  * Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2023 Eventiva - All Rights Reserved
+ * Copyright (c) 2023 - 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  * -----
  * This program has been provided under confidence of the copyright holder and is
@@ -31,10 +31,6 @@
  * or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
  *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
- * -----
- * Last Modified: 10-12-2023
- * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
- * Current Version: 0.0.0
  */
 
 import { NodeApp } from '@bitdev/node.node-app';

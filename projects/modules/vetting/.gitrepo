@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/vetting.git
+	remote = https://github.com/Eventiva/vetting
 	branch = develop
-	commit = 28f975b62539f1cba89ca134d58391ebefd88293
-	parent = 0078b62ee3fc1ddd62c4479ae2040534699c0705
-	method = rebase
+	commit = 8973a56cfc8cebe684223998f7695eaa22fe3fa2
+	method = merge
 	cmdver = 0.4.6
+	parent = bc160b070f39a104d70f7573018f295e1c7b6d48

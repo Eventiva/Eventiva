@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/incident_management.git
+	remote = https://github.com/Eventiva/incident_management
 	branch = develop
-	commit = 156e251fc22d157242273e0ce2c45f3b3226cc7d
-	parent = 94d5167f7c8b98ba9369f2cb697ad7f507998439
-	method = rebase
+	commit = 72c14c41c27ecb2bcc9263d53986043582fc8ca2
+	method = merge
 	cmdver = 0.4.6
+	parent = 95ba76b93624d9e2f18316e32b006288486c4432

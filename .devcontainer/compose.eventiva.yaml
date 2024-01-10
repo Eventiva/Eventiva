@@ -44,15 +44,19 @@ services:
       dockerfile: dockerfile.eventiva
     volumes:
       # bind the workspace to /home/frappe/frappe-bench/workspace
-      - ./:/home/frappe/frappe-bench/workspace
+      - ../:/home/frappe/frappe-bench/workspace
+      # copy ssh keys to /home/frappe/.ssh
+      - ~/.ssh:/home/frappe/.ssh
+      # copy gpg keys to /home/frappe/.gnupg
+      - ~/.gnupg:/home/frappe/.gnupg
 
   db:
     healthcheck:
-      test: mysqladmin ping -h localhost --password=databasePassword
+      test: mysqladmin ping -h localhost --password=$$DB_PASSWORD
       interval: 1s
       retries: 15
     environment:
-      MYSQL_ROOT_PASSWORD: databasePassword
+      MYSQL_ROOT_PASSWORD: $$DB_PASSWORD
 
   frontend:
     labels:

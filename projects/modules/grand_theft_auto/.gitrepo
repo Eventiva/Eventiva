@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/grand_theft_auto.git
+	remote = https://github.com/Eventiva/grand_theft_auto
 	branch = develop
-	commit = dec97ae27d7b8c2353cc0d2dbac8a5138ec01f49
-	parent = c286307a1bddfa439965b2d038dfaef5abbd35e9
-	method = rebase
+	commit = dd5bf6506bb0449b1fe981619fae68503414e049
+	method = merge
 	cmdver = 0.4.6
+	parent = f1c1df2aec3bd1967190427ce2f642cd94c7e2b2

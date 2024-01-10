@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/gaming.git
+	remote = https://github.com/Eventiva/gaming
 	branch = develop
-	commit = b7099b2e4ce1294927add41296a9be22a9933377
-	parent = a1615b5a664bf3e42bf4c3e6bc0a6ef0626f85de
-	method = rebase
+	commit = c3502abb7719359abe73d4c31db6dbbb280e76c9
+	method = merge
 	cmdver = 0.4.6
+	parent = 498205b1b50aab7d441802aa06527caf3b8acee1

@@ -2,7 +2,19 @@
   "recommendations": [
     "meganrogge.template-string-converter",
     "codestream.codestream",
-    "massi.javascript-docstrings"
+    "massi.javascript-docstrings",
+    "crystal-spider.jsdoc-generator",
+    "bierner.jsdoc-markdown-highlighting",
+    "pkief.material-icon-theme",
+    "pkief.material-product-icons",
+    "mylesmurphy.prettify-ts",
+    "psioniq.psi-header",
+    "wallabyjs.quokka-vscode",
+    "pucelle.run-on-save",
+    "trunk.io",
+    "wallabyjs.wallaby-extension-pack",
+    "github.copilot",
+    "github.copilot-chat"
   ],
   "unwantedRecommendations": []
 }

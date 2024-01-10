@@ -52,6 +52,7 @@ Full tech stack [here](/techstack.md)
 # Tech Stack File
 ![](https://img.stackshare.io/repo.svg "repo") [Eventiva/Eventiva](https://github.com/Eventiva/Eventiva)![](https://img.stackshare.io/public_badge.svg "public")
 <br/><br/>
+
 |27<br/>Tools used|01/05/24 <br/>Report generated|
 |------|------|
 </div>
@@ -229,6 +230,7 @@ Full tech stack [here](/techstack.md)
 
 </tr>
 </table>
+
 
 
 ## <img src='https://img.stackshare.io/group.svg' /> Open source packages (8)</h2>

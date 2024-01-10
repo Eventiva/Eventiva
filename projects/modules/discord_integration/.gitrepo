@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/discord_integration.git
+	remote = https://github.com/Eventiva/discord_integration
 	branch = develop
-	commit = f87a1bdb6c008404907edb95a7649cfbc26f070e
-	parent = a717f0294ab07289cf677f2015f4993c084e7633
-	method = rebase
+	commit = a17cf6c3aa2421fcdd5c4da05fce15d7b400e8d8
+	method = merge
 	cmdver = 0.4.6
+	parent = 41ffbb7d3311f8e1f6104db71758db146452879d

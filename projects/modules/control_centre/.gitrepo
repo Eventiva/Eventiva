@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/Control-Centre.git
+	remote = https://github.com/Eventiva/Control-Centre
 	branch = develop
-	commit = 8e8bf39eb90378f9d0d2581e1a0526ab3f5bae6a
-	parent = d4dbe8281fd580c9b9710c8216b995790bd03a88
-	method = rebase
+	commit = 5c7b18e31795030fba9602d59802fb612adee684
+	method = merge
 	cmdver = 0.4.6
+	parent = eeabbe4006c540426b9d4af21e33ea14088c9629

@@ -14,6 +14,7 @@
 				"client"
 			],
 			"runtimeExecutable": "bit",
+			"outputCapture": "std",
 			"trace": true,
 			"type": "node",
 			"envFile": "${workspaceFolder}/projects/bots/discord/client/.env"
@@ -27,9 +28,6 @@
 			],
 			"runtimeExecutable": "npm",
 			"localRoot": "${workspaceFolder}/projects/website",
-			"env": {
-				"BUILDER_PUBLIC_API_KEY": "7979abfc4d3e48f2860087d0c2af565a"
-			},
 			"skipFiles": [
 				"<node_internals>/**"
 			],

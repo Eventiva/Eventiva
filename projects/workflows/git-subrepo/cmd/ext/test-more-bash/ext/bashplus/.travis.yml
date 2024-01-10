@@ -2,5 +2,5 @@
 language: c
 
 script:
-- git submodule update --init --recursive
-- PROVEOPT=-v make test
+  - git submodule update --init --recursive
+  - PROVEOPT=-v make test

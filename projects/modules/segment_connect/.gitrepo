@@ -4,9 +4,9 @@
 ; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:Eventiva/Segment_Connect.git
+	remote = https://github.com/Eventiva/segment_connect
 	branch = develop
-	commit = 074e15fac8bb4eb5bfd73243ac6ff9aad0664204
-	parent = 4afa1062c7d8aff4e1275358fe1c8aa200edfe94
-	method = rebase
+	commit = 8d5594f5152bea2e8bb9b0ad9515de0b5b040e7b
+	method = merge
 	cmdver = 0.4.6
+	parent = 52db65fefd1a6a7ccf84f118d7e3392c0345d180
