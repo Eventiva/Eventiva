@@ -88,6 +88,14 @@ jobs:
           fetch-depth: 250
 
       - uses: maxprilutskiy/change-report@main
+        
+      - name: Provide environment variables
+        run: |
+          echo "Specify the necessary environment variables for the Change Report action"
+          echo "- OPENAI_API_KEY: Obtain your OpenAI API key from https://openai.com/"
+          echo "- SLACK_BOT_TOKEN: Obtain your Slack bot token from https://api.slack.com/bot-users"
+          echo "- SLACK_SIGNING_SECRET: Obtain your Slack signing secret from https://api.slack.com/authentication/verifying-requests-from-slack"
+          echo "- DISCORD_BOT_TOKEN: Obtain your Discord bot token from https://discord.com/developers/applications"
         with:
           # The destination to post the report to. 
           # "slack" and "discord" are supported
