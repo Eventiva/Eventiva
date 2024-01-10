@@ -139,10 +139,10 @@ export class HelpCmd implements Command {
    * @param {string[]} param0 The subcommand for the report
    * @param {*} param0.subcommand The subcommand as a string array
    * @param {string[]} flags The flags for the report
-   * @returns {unknown} Executes the `git subrepo help` command with the specified subcommand and flags.
+   * @returns {Promise<string>}
    * @param subcommand - The subcommand to execute with `git subrepo help`.
    * @param flags - The flags to use with the `git subrepo help` command.
-   * @returns A Promise that resolves to a success message if the `git subrepo help` command was successful, or an error message if it was unsuccessful.
+   * @returns A Promise that resolves to the specific error logs or a message describing the problem reported by the user.
    */
   async report([subcommand]: string[], flags: string[]) {
     const res = await this.subrepo.help(subcommand, flags);
