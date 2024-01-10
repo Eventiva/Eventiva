@@ -49,8 +49,8 @@ inputs:
     description: 'destination to post the report to'
   days: # change this
     required: true
-    description: 'number of days to include into the report'
-    default: 7
+    description: 'number of days to include in the report'
+    default: 7 # change this
   channel:
     required: true
     description: 'channel to report'
