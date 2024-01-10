@@ -53,6 +53,11 @@ Our extensive **documentation** can be found at **[here](https://github.com/Even
 <!-- Contributing -->
 
 ## Contributing
+- Reporting Issues and Requesting Support
+    - To report issues and request support, follow these steps:
+        1. Visit our [discussion page](https://github.com/Eventiva/Eventiva/discussions) and create a new topic under the **Questions & Answers** category.
+        2. Include detailed information about the problem, along with specific error logs or a description of the issue when reporting GitHub Actions-related problems.
+        3. Our team will promptly review your report and provide assistance.
 
 Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
 
