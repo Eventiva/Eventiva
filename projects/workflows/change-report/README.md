@@ -91,7 +91,8 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          description: 'Your Slack bot token, used to post the report on behalf of the bot'
           # Your Slack signing secret, used to verify the request is coming from Slack
           # Only needed if you're posting to Slack
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
