@@ -9,7 +9,7 @@ import { actualErrorLogFetcher } from 'actual-library'; // Replace with the actu
  */
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
-  const errorLogs = fetchErrorLogs();
+  const errorLogs = actualErrorLogFetcher();
   return errorLogs.split('\n');
 }
 
