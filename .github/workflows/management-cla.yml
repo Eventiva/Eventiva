@@ -2,8 +2,8 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: cla.yml
- # Path: \.github\workflows\cla.yml
+ # File: management-cla.yml
+ # Path: \.github\workflows\management-cla.yml
  # Created Date: Monday, April 17th 2023
  # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # -----
@@ -13,7 +13,7 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 Eventiva - All Rights Reserved
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
  # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
@@ -32,7 +32,7 @@
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  # -----
- # Last Modified: Fri Dec 29 2023
+ # Last Modified: Wed Jan 10 2024
  # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  # Current Version: 0.0.0
  ###
@@ -70,8 +70,8 @@ jobs:
           PERSONAL_ACCESS_TOKEN: ${{ secrets.BOT_TOKEN }}
         with:
           path-to-signatures: "contributors.json"
-          path-to-document: "https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md"
+          path-to-document: "https://github.com/Eventiva/.github?tab=coc-ov-file"
           allowlist: ResnovasLtd, EventivaLtd, dependabot, dependabot[bot], bot*, restyled-io, atlassian-compass[bot], TMateSoft, restyled-io[bot], trunk-io[bot], trunk-io, sweep-ai[bot], sweep-ai, restyled-commits, restyled-commits[bot]
           branch: "main"
           remote-organization-name: "Eventiva"
-          remote-repository-name: "contributors"
+          remote-repository-name: ".github"
