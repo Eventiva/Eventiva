@@ -9,7 +9,7 @@ import { fetchErrorLogs } from '../fetch-error-logs';
  */
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
-  const errorLogs = fetchErrorLogs();
+  const errorLogs = actualFetchErrorLogs();
   return errorLogs;
 }
 
