@@ -34,18 +34,24 @@
  * -----
  * Last Modified: 09-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
- * Current Version: 0.0.0
+ * Current Version: 1.0.0
  */
 
 import * as core from '@actions/core'
+import {fetchCommitMessages} from './fetch-commit-messages'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
 import {sendDiscordMessage} from './send-discord-message'
 
+/**
+ * Runs the main process.
+ * @returns {Promise<void>}
+ */
 async function run(): Promise<void> {
   try {
-    const daysCount = parseInt(core.getInput('days'))
+    const daysInput = core.getInput('days')
+const daysCount = parseInt(daysInput, 10)
     const commitMessagesList = await fetchCommitMessages(daysCount)
 
     core.info(`Fetched ${commitMessagesList.length} commit messages:`)
