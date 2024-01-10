@@ -15,8 +15,8 @@ export function retrieveErrorLogs(): Promise<string[]> {
 
 /**
  * Formats the error logs for display or posting.
- * @param errorLogs - The retrieved error logs.
- * @returns The formatted error logs as a string.
+ * @param errorLogs - The retrieved error logs as an array of strings.
+ * @returns The formatted error logs as an array of strings.
  */
 export function formatErrorLogs(errorLogs: string[]): string {
   // Process the error logs and apply necessary formatting
