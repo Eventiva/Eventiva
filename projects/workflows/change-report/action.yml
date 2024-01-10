@@ -49,7 +49,7 @@ inputs:
     description: 'destination to post the report to'
   days: # change this
     required: true
-    description: 'number of days to include into the report'
+    description: 'number of days to include in the report generated'
     default: 7
   channel:
     required: true
@@ -57,8 +57,11 @@ inputs:
     default: 'general'
   crosspost:
     required: false
+    description: 'If the message should be crossposted to all channels following'
+    required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
-  using: 'node16'
+  runs:
+  using: 'node16.13'
   main: 'dist/index.js'
