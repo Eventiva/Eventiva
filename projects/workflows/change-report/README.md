@@ -38,6 +38,11 @@ refactor: Optimize satellite power consumption to prolong battery life
 
 Then, the generated report might look like this:
 
+🚨 Error Logs:
+- 
+- 
+- 
+
 ```
 🚀 SpaceX Internet Satellite Launch Updates 🛰️
 
@@ -59,6 +64,11 @@ In the past 7 days, we've been working hard to improve our SpaceX Internet satel
 - Upgraded ground station hardware to improve signal processing
 - Optimized satellite orbit to minimize signal latency
 - Implemented machine learning algorithms to optimize bandwidth allocation
+
+🚨 Error Logs:
+- 
+- 
+- 
 
 🚀 Deployment:
 - Launched additional satellites to increase coverage area and redundancy 
@@ -111,6 +121,10 @@ jobs:
           # Only needed if you're posting to Discord
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
 ```
+
+🚨 Error Logs Format:
+  - Each error log entry is prefixed with a timestamp in the format: 'MMM DD YYYY HH:MM:SS GMT'
+  - Example: 'Jul 19 2023 22:13:42 GMT - Error log 1'
 
 ### Authors
 
