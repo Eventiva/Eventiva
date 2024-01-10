@@ -1,4 +1,4 @@
-= Comparing `submodule` and `subrepo`
+= Comparing `submodule` and `subrepo` and `subrepo`
 
 This document compares Git's `submodule` command to the new `subrepo` command,
 with examples and discussion of all the common operations. I'll use the term
@@ -14,6 +14,8 @@ as a submodule or a subrepo.
 As an owner or collaborator, you have decided to add a new External to your
 repo:
 
+- Submodule - git submodule :: `git submodule add git@github.com/user/external`
+- Subtree :: `git subtree --squash --prefix=external git@github.com/user/external`
 - Submodule :: `git submodule add git@github.com/user/external`
 - Subtree :: `git subtree --squash --prefix=external git@github.com/user/external`
 - Subrepo :: `git subrepo clone git@github.com/user/external`
@@ -32,4 +34,4 @@ repo:
 
 = Removing an External
 
-= Migration from One to the Other
+= Subrepo vs Submodule
