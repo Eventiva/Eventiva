@@ -5,7 +5,7 @@
  * File: compose-report.ts
  * Path: \src\compose-report.ts
  * Created Date: Wednesday, December 6th 2023
- * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, GitHub: https://github.com/TGTGamer)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
  * issues, coding standards, and notes on development. These can be found at https://github.com/change-report/blob/develop/CONTRIBUTING.md
@@ -32,7 +32,7 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 10-12-2023
+ * Last Modified: December 10th, 2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * Current Version: 0.0.0
  */
@@ -43,8 +43,8 @@ export const composeReport = async (
   daysCount: number,
   commitMessagesList: string[]
 ): Promise<string> => {
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
-  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
+  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME || ''
 
   const openai = new OpenAIApi(
     new Configuration({
