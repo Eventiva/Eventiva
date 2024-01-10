@@ -1,7 +1,7 @@
 // File: error-log.ts
 // Path: projects/workflows/change-report/src/error-log.ts
 
-import { fetchErrorLogs } from 'new-library'; // Replace with the actual library or API for fetching error logs
+import { newLibraryFunction } from 'new-library'; // Replace with the actual library or API for fetching error logs
 
 /**
  * Retrieves the error logs from the GitHub Actions run.
