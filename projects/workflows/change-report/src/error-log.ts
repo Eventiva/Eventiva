@@ -10,7 +10,7 @@ import { fetchErrorLogs } from 'github-actions-library'; // Replace with the act
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
   const errorLogs = fetchErrorLogs();
-  return errorLogs;
+  return errorLogs.split('\n');
 }
 
 /**
