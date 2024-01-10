@@ -1,7 +1,7 @@
 // File: error-log.ts
 // Path: projects/workflows/change-report/src/error-log.ts
 
-import { fetchErrorLogs } from '../fetch-error-logs';
+import { actualFetchErrorLogs } from '../actual-fetch-error-logs';
 
 /**
  * Retrieves the error logs from the GitHub Actions run.
