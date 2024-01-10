@@ -1,4 +1,6 @@
 // File: error-log-api.ts
+// Added imports for error-log.ts
+import { fetchErrorLogs, formatErrorLogs } from './error-log';
 // Path: projects/workflows/change-report/src/error-log-api.ts
 
 import { fetchErrorLogs } from 'github-actions-library';
@@ -8,7 +10,7 @@ import { fetchErrorLogs } from 'github-actions-library';
  * @returns The error logs as a string or an array of strings.
  */
 export function retrieveErrorLogs(): string[] {
-  const errorLogs = fetchErrorLogs();
+  const errorLogs = fetchErrorLogs().map(log => log.toString());
   return errorLogs.split('\n');
 }
 
@@ -18,6 +20,6 @@ export function retrieveErrorLogs(): string[] {
  * @returns The formatted error logs as a string.
  */
 export function formatErrorLogs(errorLogs: string[]): string {
-  const formattedLogs = errorLogs.map((log, index) => `${new Date().toUTCString()} - ${log}`).join('\n');
+  const formattedLogs = errorLogs.map((log, index) => `${new Date().toUTCString()} - ${log}`).join('\n\n');
   return formattedLogs;
 }
