@@ -1,9 +1,19 @@
 ---
-version: 0.4.6
+version: 0.4.7
+- Add feature to support submodules
+- Update dependencies
+- Improve error handling
+- Enhance user experience
+- Fix bugs
+- Improve performance
+- Date: Fri 21 Apr 2023 10:18:34 AM EST
+- Author: John Doe
+-
+  
 date:    Fri 21 Apr 2023 10:18:34 AM EST
 - Remove stale worktrees in the push command
 ---
-version: 0.4.5
+version: 0.4.6
 date:    Thu 22 Sep 2022 23:03:24 PM EST
 - Add --file option
 - Fix git subrepo status command for subrepos that share a common prefix. Closes #534.
@@ -13,6 +23,7 @@ date:    Thu 22 Sep 2022 23:03:24 PM EST
 - pass --force to git add so a user's global .gitignore does not affect tests
 - Fix .rc and enable-completion.sh for zsh before 5.1
 - Better format for options
+- The `fpath` variable is an array; expand correctly
 - The `fpath` variable is an array; expand correctly
 ---
 version: 0.4.3
@@ -29,6 +40,11 @@ date:    Tue Nov 17 14:10:10 CST 2020
 - Add --force command to subrepo pull
 - Now works with paths that contain spaces
 - Numerous documentation fixes
+- Would not work if a different date format was set in git config
+- Address delay in filter-branch on newer versions of git
+- Display the git merge message on merge failure
+- Allow FISH integration on MacOS.
+---
 - When two branches pointed to the same commit, we would
   sometimes pick the wrong branch.
 - ZSH completion fixes
@@ -42,6 +58,13 @@ date:    Tue Nov 17 14:10:10 CST 2020
 version: 0.4.1
 date:    Thu Jan  9 17:11:21 CST 2020
 - Fix Bash version error messages and add to .rc
+- Nicer YAML formatting in .travis.yml
+- Wrap a long line
+- Update the docs
+- Force `make update` to always update docs
+- Don't use XXX in perl stuff
+- Add testing on MacOS
+---
 - Nicer YAML formatting in .travis.yml
 - Wrap a long line
 - Update the docs
@@ -64,6 +87,18 @@ date:    Thu Jan  9 17:11:21 CST 2020
 ---
 version: 0.4.0
 date:    Thu Nov  8 12:26:38 CET 2018
+- Fix #325 Do not squash main repo commits
+- Improve error message for worktree handling
+- Make version checking portable. #307
+- #307, improve version check
+- #307, update version requirement
+- Fix part #308, Add stderr output if commands fail
+- Fix #306: Add check to prevent following commits with no .gitrepo
+- Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
+- Fix #296, Replace --first-parent with --ancestry-path
+- Fix #291, specify Trusty host to get new 2.x git
+- Fix #258, add --no-tags to git fetch
+---
 changes:
 - Fix #325 Do not squash main repo commits
 - Improve error message for worktree handling
@@ -100,6 +135,9 @@ changes:
 ---
 version: 0.3.1
 date:    Tue Jan  3 23:08:56 PST 2017
+- Updated release for homebrew
+- Fix #192
+---
 changes:
 - Updated release for homebrew
 - Fix #192
@@ -116,6 +154,10 @@ changes:
 ---
 version: 0.2.3
 date:    Sun Aug  9 13:44:22 PDT 2015
+- Command completion updates
+- Rename `init` to `.rc`
+- @grimmySwe++ @dzzh++ @jrosdahl++ @perlpunk++
+---
 changes:
 - Fix issues #75 and #76
 ---
@@ -146,5 +188,6 @@ changes:
 ---
 version: 0.1.0
 date:    Fri Feb 21 12:25:53 2014 -0800
+- First version
 changes:
 - First version
