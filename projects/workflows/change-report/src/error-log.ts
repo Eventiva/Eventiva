@@ -24,3 +24,11 @@ export function formatErrorLogs(errorLogs: string[]): string {
   const formattedLogs = errorLogs.map((log, index) => `${new Date().toISOString()}: ${log}`).join('\n');
   return formattedLogs;
 }
+// Check if the errorLogs array is empty and return an empty string if it is
+if (errorLogs.length === 0) {
+  return '';
+}
+// Check if the errorLogs array is empty and return an empty string if it is
+if (errorLogs.length === 0) {
+  return '';
+}
