@@ -21,8 +21,9 @@ export function retrieveErrorLogs(): string[] {
  * @returns The formatted error logs as a string.
  */
 export function formatErrorLogs(errorLogs: string[]): string {
-  // Process the error logs and apply necessary formatting
-  // For example, add line numbers or timestamps
+  // Process the error logs in the errorLogs parameter and apply necessary formatting.
+  // For example, add line numbers or timestamps to each log.
+  // Return the formatted error logs as a single string.
   const formattedLogs = errorLogs.map((log, index) => `${new Date().toUTCString()} - ${log}`).join('\n');
   return formattedLogs;
 }
