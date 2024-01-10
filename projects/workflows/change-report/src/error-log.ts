@@ -9,7 +9,7 @@ import { fetchErrorLogs } from './fetch-error-logs';
  */
 export function retrieveErrorLogs(): string[] {
   // Use the appropriate API or library to fetch the error logs
-  const errorLogs = actualFetchErrorLogs();
+  const formattedErrorLogs = actualFetchErrorLogs();
   return errorLogs;
 }
 
@@ -19,7 +19,7 @@ export function retrieveErrorLogs(): string[] {
  * @returns The formatted error logs as a string.
  */
 export function formatErrorLogs(errorLogs: string[]): string {
-  // Process the error logs and apply necessary formatting
+  
   // For example, add line numbers or timestamps
   const formattedLogs = errorLogs.map((log, index) => `${index + 1}. ${log}`).join('\n');
   return formattedLogs;
