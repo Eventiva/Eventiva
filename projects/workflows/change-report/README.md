@@ -89,6 +89,9 @@ jobs:
 
       - uses: maxprilutskiy/change-report@main
         with:
+          destination: 'slack'
+          channel: '#general'
+              with:
           # The destination to post the report to. 
           # "slack" and "discord" are supported
           destination: 'slack'
@@ -97,7 +100,12 @@ jobs:
           # Slack channel to post the report to. 
           # For Slack it's the name of the channel, without the leading "#",
           # For Discord it's the channel ID
-          channel: 'general'
+          channel: '#general'
+        env:
+          # Your OpenAI API key, used to generate the report
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # Your Slack bot token, used to post the report on behalf of the bot.
+          # Only needed if you're posting to Slack
         env:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
@@ -109,7 +117,7 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+                    DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
 ```
 
 ### Authors
