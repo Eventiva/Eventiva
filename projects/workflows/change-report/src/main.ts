@@ -32,12 +32,13 @@
  * 
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  * -----
- * Last Modified: 09-12-2023
+ * Last Modified: 09-13-2023 (Updated)
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * Current Version: 0.0.0
  */
 
 import * as core from '@actions/core'
+import * as github from '@actions/github'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
@@ -60,7 +61,7 @@ async function run(): Promise<void> {
     core.info('Generated report:')
     core.info(report)
 
-    if (!report) {
+    if (!report.trim()) {
       throw new Error('Failed to generate report')
     }
 
