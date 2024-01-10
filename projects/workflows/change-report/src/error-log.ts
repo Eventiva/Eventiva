@@ -1,15 +1,15 @@
 // File: error-log.ts
 // Path: projects/workflows/change-report/src/error-log.ts
 
-import { newLibraryFunction } from 'new-library'; // Replace with the actual library or API for fetching error logs
+import { fetchErrorLogs } from 'new-library'; // Replace with the actual library or API for fetching error logs
 
 /**
  * Retrieves the error logs from the GitHub Actions run.
  * @returns A promise that resolves to the error logs as an array of strings.
  */
-export function retrieveErrorLogs(): Promise<string[]> {
+export async function retrieveErrorLogsFromApi(): Promise<string[]> {
   // Use the appropriate API or library to fetch the error logs
-  const errorLogs = fetchErrorLogs();
+  const errorLogs = await retrieveErrorLogsFromApi();
   return errorLogs;
 }
 
