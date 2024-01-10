@@ -18,6 +18,20 @@ Eventiva/Eventiva is built on the following main stack:
 - [OpenAI](https://openai.com/) – Large Language Models
 - [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
 - [Travis CI](http://travis-ci.com/) – Continuous Integration
+- [Python](https://www.python.org) – Languages
+- [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
+- [Perl](http://www.perl.org/) – Languages
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) – Languages
+- [TypeScript](http://www.typescriptlang.org) – Languages
+- [ESLint](http://eslint.org/) – Code Review
+- [Ubuntu](http://www.ubuntu.com/) – Operating Systems
+- [Shell](https://en.wikipedia.org/wiki/Shell_script) – Shells
+- [Yarn](https://yarnpkg.com/) – Front End Package Manager
+- [Prettier](https://prettier.io/) – Code Review
+- [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- [OpenAI](https://openai.com/) – Large Language Models
+- [Docker](https://www.docker.com/) – Virtual Machine Platforms & Containers
+- [Travis CI](http://travis-ci.com/) – Continuous Integration
 
 Full tech stack [here](/techstack.md)
 
@@ -239,6 +253,15 @@ Full tech stack [here](/techstack.md)
 |:------|:------|:------|:------|:------|:------|
 |[@types/node](https://www.npmjs.com/@types/node)|v20.10.3|05/09/23|maxprilutskiy |MIT|N/A|
 |[@typescript-eslint/parser](https://www.npmjs.com/@typescript-eslint/parser)|v5.62.0|05/09/23|maxprilutskiy |BSD-2-Clause|N/A|
+|[eslint-plugin-jest](https://www.npmjs.com/eslint-plugin-jest)|v27.6.0|05/09/23|maxprilutskiy |MIT|N/A|
+|[js-yaml](https://www.npmjs.com/js-yaml)|v3.14.1|05/09/23|maxprilutskiy |MIT|N/A|
+|[openai](https://www.npmjs.com/openai)|v3.3.0|05/09/23|maxprilutskiy |N/A|N/A|
+|[simple-git](https://www.npmjs.com/simple-git)|v3.21.0|05/09/23|maxprilutskiy |MIT|N/A|
+|[ts-jest](https://www.npmjs.com/ts-jest)|v29.1.1|05/09/23|maxprilutskiy |MIT|N/A|
+|[js-yaml](https://www.npmjs.com/js-yaml)|v3.14.1|05/09/23|maxprilutskiy |MIT|N/A|
+|[openai](https://www.npmjs.com/openai)|v3.3.0|05/09/23|maxprilutskiy |N/A|N/A|
+|[simple-git](https://www.npmjs.com/simple-git)|v3.21.0|05/09/23|maxprilutskiy |MIT|N/A|
+|[ts-jest](https://www.npmjs.com/ts-jest)|v29.1.1|05/09/23|maxprilutskiy |MIT|N/A|
 |[eslint-plugin-jest](https://www.npmjs.com/eslint-plugin-jest)|v27.6.0|05/09/23|maxprilutskiy |MIT|N/A|
 |[js-yaml](https://www.npmjs.com/js-yaml)|v3.14.1|05/09/23|maxprilutskiy |MIT|N/A|
 |[openai](https://www.npmjs.com/openai)|v3.3.0|05/09/23|maxprilutskiy |N/A|N/A|
