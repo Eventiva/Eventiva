@@ -37,7 +37,7 @@
  * Current Version: 0.0.0
  */
 
-import Discord from 'discord.js'
+import * as Discord from 'discord.js'
 
 export const sendDiscordMessage = async (
   channel: string,
@@ -54,7 +54,7 @@ export const sendDiscordMessage = async (
     throw new Error(`Discord channel ${channel} not found`)
   }
 
-  if (!discordChannel.isTextBased()) {
+  if (discordChannel.type !== 'text') {
     throw new Error(`Discord channel ${channel} is not text-based`)
   }
 
