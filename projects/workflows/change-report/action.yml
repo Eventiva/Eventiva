@@ -55,6 +55,8 @@ inputs:
     required: true
     description: 'channel to report'
     default: 'general'
+    env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
