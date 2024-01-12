@@ -74,6 +74,9 @@ jobs:
         with:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
+        env:
+          # Your environment variables. Replace the values with actual environment variables and add description on how to obtain these.
+          fetch-depth: 250
 
       - uses: maxprilutskiy/change-report@main
         with:
@@ -106,5 +109,5 @@ jobs:
 
 
 ### Roadmap
-- [x] Slack integration
-- [x] Discord integration
+- [x] Slack integration - Obtain a Slack bot token from your Slack workspace and add it as the value for SLACK_BOT_TOKEN.
+- [x] Discord integration - Obtain a Discord bot token from your Discord server and add it as the value for DISCORD_BOT_TOKEN.
