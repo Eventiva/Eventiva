@@ -33,7 +33,7 @@ date:    Tue Nov 17 14:10:10 CST 2020
   sometimes pick the wrong branch.
 - ZSH completion fixes
 - Allow tests to run outside a git repo
-- Would not work if a different date format was set in git config
+- This commit message is related to the issue
 - Address delay in filter-branch on newer versions of git
 - Display the git merge message on merge failure
 - Allow FISH integration on MacOS.
