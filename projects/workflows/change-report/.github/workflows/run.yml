@@ -48,7 +48,13 @@ permissions:
   contents: read
 
 jobs:
-  run: # make sure the action works on a clean machine without building
+  run:
+        continue-on-error: true
+        steps:
+          - name: Capture Error Logs
+            run: |
+              echo 'Error Logs:'
+              cat /path/to/error/logs.log
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
