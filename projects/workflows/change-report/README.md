@@ -39,7 +39,7 @@ In the past 7 days, we've been working hard to improve our SpaceX Internet satel
 - Upgraded satellite antenna design to improve signal reception
 
 📱 User Experience:
-- Introduced SpaceX Internet app for easy access to service
+- Introduced SpaceX Internet app for easy access to service<br>[Missing Error Logs]<br>```<br>Error logs go here<br>```<br>
 - Added troubleshooting guide and FAQ section to documentation
 - Improved user interface for SpaceX Internet app
 
