@@ -1,0 +1,9 @@
+import fs from 'fs';
+
+const createErrorLogsFile = (filePath: string) => {
+  const errorLogs = `Error logs from the failed GitHub Actions run`;
+
+  fs.writeFileSync(filePath, errorLogs);
+};
+
+export default createErrorLogsFile;
