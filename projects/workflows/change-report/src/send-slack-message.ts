@@ -18,7 +18,7 @@ export const sendSlackMessage = async (
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: message
+          text: 'Codebase changes summary'
         }
       }
     ]
