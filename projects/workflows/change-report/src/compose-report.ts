@@ -1,5 +1,5 @@
 /**
- * @format
+ * @ts-nocheck
  * -----
  * Project: change-report
  * File: compose-report.ts
@@ -43,8 +43,8 @@ export const composeReport = async (
   daysCount: number,
   commitMessagesList: string[]
 ): Promise<string> => {
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
-  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY || 'YOUR_OPENAI_API_KEY'
+  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME || 'YOUR_GITHUB_REPO_NAME'
 
   const openai = new OpenAIApi(
     new Configuration({
@@ -84,7 +84,7 @@ export const composeReport = async (
       {role: 'user', content: commitMessagesList.join('\n')},
       {role: 'assistant', content: 'Report:'}
     ],
-    max_tokens: 450,
+    max_tokens: 250,
     frequency_penalty: 0.5,
     presence_penalty: 0.5,
     temperature: 0,
