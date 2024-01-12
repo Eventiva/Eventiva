@@ -57,6 +57,9 @@ inputs:
     default: 'general'
     env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
   crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
