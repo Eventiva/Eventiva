@@ -132,7 +132,7 @@ export class HelpCmd implements Command {
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously reports the help message for the given subcommand and flags using the subrepo. If the help message is received successfully, it returns a green success message. Otherwise, it returns a red error message.
+   * Asynchronously reports the help message for the given subcommand and flags using the subrepo. If the help message is received successfully, it returns a green success message. If the `git subrepo help` command encounters an error, it returns an error message with details on handling the error logs.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
