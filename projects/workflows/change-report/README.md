@@ -6,7 +6,7 @@ This action generates a report from the recent code changes and posts it to Slac
 ### Demo
 > **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
 
-Here's an example of how the generated change report might look like. 
+Please include the error logs from the failed GitHub Actions run in the issue description. This will help us identify the cause of the failure and provide a solution. 
 
 So, let's say you have a repository with the following commit history:
 
