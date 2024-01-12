@@ -72,7 +72,9 @@ jobs:
     steps:
       - name: Add error logs to the issue description
         run: |
-          echo "Add the error logs here"
+          echo "The GitHub Actions run failed with the following error logs:
+
+- Error: Unable to fetch commit history. Make sure the repository has commit history available for at least the past 7 days."
       steps:
         - uses: actions/checkout@v3
           with:
