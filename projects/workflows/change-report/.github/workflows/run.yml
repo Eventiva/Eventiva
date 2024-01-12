@@ -39,13 +39,16 @@
 
 name: 'Run'
 on:
-  workflow_dispatch:
+  workflow_dispatch: 
+    branches:
+      - main
   push:
     branches:
       - main
 
 permissions:
   contents: read
+  repository: read
 
 jobs:
   run: # make sure the action works on a clean machine without building
@@ -55,9 +58,26 @@ jobs:
         with:
           fetch-depth: 250
 
-      - uses: ./
+      - uses: Eventiva/change-report-action@v1
         with:
           destination: slack
+          days: 7
+          channel: integrations-test
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          GITHUB_REPO_NAME: ${{ github.repository }}
+
+      - uses: Eventiva/change-report-action@v1
+        with:
+          destination: discord
+          days: 7
+          channel: '1105810974189043762, 1105810974189043762'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_REPO_NAME: ${{ github.repository }}
           days: 7
           channel: integrations-test
         env:
