@@ -52,8 +52,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: 'recursive'
       - if: startsWith(matrix.os, 'macos')
         run: brew install bash
       - run: git config --global user.email "you@example.com";
           git config --global user.name "Your Name";
-      - run: make test
+      - run: git subrepo clone projects/workflows
+      - run: git subrepo clone cmd/.github/workflows
+      - run: git subrepo pull projects/workflows
+      - run: git subrepo pull cmd/.github/workflows
+      - run: git subrepo push projects/workflows
+      - run: git subrepo push cmd/.github/workflows
