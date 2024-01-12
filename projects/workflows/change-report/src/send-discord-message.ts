@@ -41,7 +41,7 @@ import Discord from 'discord.js'
 
 export const sendDiscordMessage = async (
   channel: string,
-  content: string
+  summary: string
 ): Promise<void> => {
   const discord = new Discord.Client({
     intents: []
