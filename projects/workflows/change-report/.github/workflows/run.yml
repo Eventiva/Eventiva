@@ -55,7 +55,11 @@ jobs:
         with:
           fetch-depth: 250
 
-      - uses: ./
+      -       - name: CLA Signing
+        uses: actions/cla-assistant-action@v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          sign-cla-command: sign
         with:
           destination: slack
           days: 7
