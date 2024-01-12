@@ -200,6 +200,7 @@ export class GitSubrepoMain {
    * @async
    * @param {string} command The command to be executed.
    * @param {string[]} args The arguments for the command.
+   * @returns {Promise<void>} A Promise that resolves when the command is executed, or rejects if an error occurs.
    * @returns {*} Runs a command with arguments using the git-subrepo library
    */
   async runCommand(command: string, args: string[]) {
