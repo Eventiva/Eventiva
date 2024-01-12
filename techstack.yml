@@ -1,6 +1,6 @@
 repo_name: Eventiva/Eventiva
 report_id: 245cf2591b15db3e378b4d29e97bbd4e
-version: 0.1
+version: 0.2
 repo_type: Public
 timestamp: '2023-12-27T19:51:59+00:00'
 requested_by: sweep-ai[bot]
@@ -18,7 +18,7 @@ tools:
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1209/javascript.jpeg
   detection_source: Repo Metadata
-- name: Perl
+- name: Perl-2
   description: Highly capable, feature-rich programming language with over 26 years
     of development
   website_url: http://www.perl.org/
@@ -28,7 +28,7 @@ tools:
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1048/perl.png
   detection_source: Repo Metadata
-- name: Python
+- name: Python-2
   description: A clear and powerful object-oriented programming language, comparable
     to Perl, Ruby, Scheme, or Java.
   website_url: https://www.python.org
@@ -48,7 +48,7 @@ tools:
   sub_category: Languages
   image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
   detection_source: Repo Metadata
-- name: Node.js
+- name: Node.js-2
   description: A platform built on Chrome's JavaScript runtime for easily building
     fast, scalable network applications
   website_url: http://nodejs.org/
