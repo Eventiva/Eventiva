@@ -5,7 +5,7 @@
  * File: main.ts
  * Path: \src\main.ts
  * Created Date: Wednesday, December 6th 2023
- * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ * Author: Eventiva Team (Email: team@eventiva.co.uk, Github: https://github.com/Eventiva)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
  * issues, coding standards, and notes on development. These can be found at https://github.com/change-report/blob/develop/CONTRIBUTING.md
@@ -69,9 +69,9 @@ async function run(): Promise<void> {
 
     channels.forEach(async (channel) => {
       if (destination === 'slack') {
-        await sendSlackMessage(channel, report)
+        await postToSlack(channel, report)
       } else if (destination === 'discord') {
-        await sendDiscordMessage(channel, report)
+        await postToDiscord(channel, report)
       } else {
         throw new Error(`Unknown destination: ${destination}`)
       }
