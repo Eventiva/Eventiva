@@ -38,10 +38,15 @@
  */
 
 import * as core from '@actions/core'
+import { captureErrorLogs } from './error-logs'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
 import {sendDiscordMessage} from './send-discord-message'
+
+async function captureErrorLogs(errorLogs: string): string {
+  // Add logic to capture and format error logs
+}
 
 async function run(): Promise<void> {
   try {
@@ -56,11 +61,13 @@ async function run(): Promise<void> {
       return
     }
 
-    const report = await composeReport(daysCount, commitMessagesList)
+    const errorLogs = 'Sample error log';
+const formattedErrorLogs = captureErrorLogs(errorLogs);
+const report = await composeReport(daysCount, commitMessagesList, formattedErrorLogs)
     core.info('Generated report:')
     core.info(report)
 
-    if (!report) {
+    if (!report || !formattedErrorLogs) {
       throw new Error('Failed to generate report')
     }
 
