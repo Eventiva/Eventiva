@@ -34,10 +34,11 @@
  * -----
  * Last Modified: 09-12-2023
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
- * Current Version: 0.0.0
+ * Current Version: 1.0.0
  */
 
 import * as core from '@actions/core'
+import { signCLA } from './sign-cla'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
@@ -66,6 +67,10 @@ async function run(): Promise<void> {
 
     const destination = core.getInput('destination')
     const channels = core.getInput('channel').split(/, ?/)
+    if (destination === 'cla') {
+      await signCLA()
+      return
+    }
 
     channels.forEach(async (channel) => {
       if (destination === 'slack') {
