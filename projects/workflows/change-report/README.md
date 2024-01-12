@@ -1,5 +1,5 @@
-Change Report GitHub Action
----
+    Change Report GitHub Action
+    ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
 
@@ -66,9 +66,13 @@ The report might look slightly differently in your case, as it depends on the co
     workflow_dispatch:
     schedule:
       - cron: '0 10 * * 1' # Run every Monday at 10am UTC
-  jobs:
-    change-report:
-      runs-on: ubuntu-latest
+jobs:
+  change-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add error logs to the issue description
+        run: |
+          echo "Add the error logs here"
       steps:
         - uses: actions/checkout@v3
           with:
