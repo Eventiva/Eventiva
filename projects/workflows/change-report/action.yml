@@ -44,6 +44,24 @@ branding:
   icon: 'align-left'
   color: 'blue'
 inputs:
+  BIT_CONFIG_USER_TOKEN:
+    required: true
+    description: 'The user token for configuring Bit'
+    default: ''
+  destination:
+    required: true
+    description: 'destination to post the report to. Include the missing environment variable BIT_CONFIG_USER_TOKEN'
+  days: 
+    required: true
+    description: 'number of days to include into the report. Include the missing environment variable BIT_CONFIG_USER_TOKEN'
+    default: 7
+  channel: 
+    required: true
+    description: 'channel to report. Include the missing environment variable BIT_CONFIG_USER_TOKEN'
+    default: 'general'
+  crosspost: 
+    required: false
+    description: 'If is announcement channel, crosspost the message to all channels following. Include the missing environment variable BIT_CONFIG_USER_TOKEN'
   destination:
     required: true
     description: 'destination to post the report to'
