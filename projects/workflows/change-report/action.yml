@@ -55,6 +55,14 @@ inputs:
     required: true
     description: 'channel to report'
     default: 'general'
+  BIT_CONFIG_USER_TOKEN:
+    required: true
+    description: 'Environment variable for Bit Config User Token'
+    default: ''
+  BIT_CLOUD_ACCESS_TOKEN:
+    required: true
+    description: 'Environment variable for Bit Cloud Access Token'
+    default: ''
   crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
