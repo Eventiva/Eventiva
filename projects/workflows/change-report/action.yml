@@ -57,10 +57,21 @@ inputs:
     default: 'general'
     env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  crosspost:
+    capture-logs:
+    runs:
+      using: 'bash'
+      main: |
+        echo "$(<path/to/error/logs.txt)" > error_logs.txt
+    id: capture-logs
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
-  using: 'node16'
+    - name: Upload Error Logs
+      uses: actions/upload-artifact@v2
+      with:
+        name: Error Logs
+        path: error_logs.txt
+  using: 'bash'
+      - capture-logs
   main: 'dist/index.js'
