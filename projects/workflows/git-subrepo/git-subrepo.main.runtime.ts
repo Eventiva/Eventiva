@@ -209,6 +209,11 @@ export class GitSubrepoMain {
         ' '
       )}`;
       const output = spawnSync(cmd, { stdio: 'inherit', shell: false });
+      if (output.error && (output.error.message.includes('Branch main not found') || output.error.message.includes('Make sure the branch where signatures are stored is NOT protected'))) {
+        console.error(`Error running command "${command}": The "main" branch is not found or is protected. Please ensure that the branch is available and not protected.`);
+      } else {
+        console.error(`Error running command "${command}":`, output.error);
+      }
       const output = spawnSync(cmd, { stdio: 'inherit', shell: false });
     if (output.error && (output.error.message.includes('Branch main not found') || output.error.message.includes('Make sure the branch where signatures are stored is NOT protected'))) {
       console.error(`Error running command "${command}": The "main" branch is not found or is protected. Please ensure that the branch is available and not protected.`);
