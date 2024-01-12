@@ -1,4 +1,4 @@
-Change Report GitHub Action
+Change Report GitHub Action with Detailed Instructions and Examples
 ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
@@ -88,7 +88,16 @@ jobs:
           channel: 'general'
         env:
           # Your OpenAI API key, used to generate the report
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  # Your Slack bot token, used to post the report on behalf of the bot.
+  # Only needed if you're posting to Slack
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  # Your Slack signing secret, used to verify the request is coming from Slack
+  # Only needed if you're posting to Slack
+  SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+  # Your Discord bot token, used to post the report on behalf of the bot.
+  # Only needed if you're posting to Discord
+  DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
@@ -105,6 +114,14 @@ jobs:
 * **Max Prilutskiy** - [@maxprilutskiy](https://twitter.com/maxprilutskiy)
 
 
-### Roadmap
-- [x] Slack integration
-- [x] Discord integration
+### Troubleshooting
+
+If you encounter any issues with the change-report workflow, here are the common issues and errors you may face, along with the possible solutions to resolve them:
+
+1. **Report Not Generated**: If the report is not generated as expected, ensure that the commit messages in your repository are descriptive enough to capture the changes.
+
+2. **Incorrect Report Destination**: If the report is not posted to the intended destination (Slack or Discord), verify that the destination configuration is correct.
+
+3. **Environment Variables Error**: If there is an error related to the environment variables, double-check the setup of your OpenAI API key, Slack bot token, Slack signing secret, and Discord bot token.
+
+4. **Workflow Scheduling**: If the workflow is not running as scheduled, review the workflow configuration and ensure that the scheduling settings are correct.
