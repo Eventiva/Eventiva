@@ -1,5 +1,5 @@
 /**
- * @format
+ * @changelog Updated docstrings for HelpCmd class and its methods
  * -----
  * Project: @eventiva/eventiva
  * File: help.cmd.ts
@@ -132,7 +132,7 @@ export class HelpCmd implements Command {
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously reports the help message for the given subcommand and flags using the subrepo. If the help message is received successfully, it returns a green success message. Otherwise, it returns a red error message.
+   * Asynchronously reports the help message for the given subcommand and flags using the subrepo. If the help message is received successfully, it returns a green success message. Otherwise, it returns a red error message and logs the error.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
@@ -140,9 +140,9 @@ export class HelpCmd implements Command {
    * @param {*} param0.subcommand The subcommand as a string array
    * @param {string[]} flags The flags for the report
    * @returns {unknown} Executes the `git subrepo help` command with the specified subcommand and flags.
-   * @param subcommand - The subcommand to execute with `git subrepo help`.
-   * @param flags - The flags to use with the `git subrepo help` command.
-   * @returns A Promise that resolves to a success message if the `git subrepo help` command was successful, or an error message if it was unsuccessful.
+   * @param {string[]} subcommand - The subcommand for the report
+   * @param {string[]} flags - The flags for the report
+   * @returns {Promise<string> } A Promise that resolves to a success message if the `git subrepo help` command was successful, or an error message if it was unsuccessful
    */
   async report([subcommand]: string[], flags: string[]) {
     const res = await this.subrepo.help(subcommand, flags);
