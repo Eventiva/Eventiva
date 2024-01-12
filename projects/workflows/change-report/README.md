@@ -60,6 +60,32 @@ The report might look slightly differently in your case, as it depends on the co
 ### Usage example
 
 ```yml
+# Configure the Change Report workflow - Post to Slack
+- name: Change Report
+  on:
+    workflow_dispatch:
+    schedule:
+      - cron: '0 10 * * 1' # Run every Monday at 10am UTC
+  jobs:
+    change-report:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 250
+        - uses: maxprilutskiy/change-report@main
+          with:
+            destination: 'slack'
+            days: 7
+            channel: 'general'
+          with:
+            destination: 'slack'
+            days: 7
+            channel: 'general'
+          env:
+            OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+            SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+            SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
 name: 'Change Report'
 on:
   workflow_dispatch:
