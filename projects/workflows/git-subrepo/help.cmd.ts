@@ -36,7 +36,9 @@
  * By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  */
 
-import { Command } from '@teambit/cli';
+import { Command,
+  createErrorLogsFile } from '@teambit/cli';
+import * as fs from 'fs';
 import chalk from 'chalk';
 import type { GitSubrepoMain } from './git-subrepo.main.runtime';
 
