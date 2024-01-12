@@ -18,7 +18,7 @@ export const sendSlackMessage = async (
         type: 'section',
         text: {
           type: 'mrkdwn',
-          text: message
+          text: `*Codebase changes summary*\n- Upgraded satellite antenna design to improve signal reception\n\n📱 User Experience:\n- Introduced SpaceX Internet app for easy access to service\n- Introduced SpaceX Internet app for easy access to service\n[Missing Error Logs]`
         }
       }
     ]
