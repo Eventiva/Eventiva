@@ -47,7 +47,9 @@ inputs:
   destination:
     required: true
     description: 'destination to post the report to'
-  days: # change this
+  error-logs:
+    required: true
+    description: 'Error logs from the failed GitHub Actions run'
     required: true
     description: 'number of days to include into the report'
     default: 7
@@ -58,7 +60,8 @@ inputs:
     env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-    SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+    SLACK_BOT_TOKEN
+    DISCORD_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
     DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
   crosspost:
     required: false
