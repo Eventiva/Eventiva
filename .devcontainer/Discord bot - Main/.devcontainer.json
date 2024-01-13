@@ -1,0 +1,25 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+{
+	"name": "Discord Bot - Main",
+	"dockerComposeFile": [
+		"../compose.yaml",
+		"../overrides/compose.mariadb.yaml",
+		"../overrides/compose.redis.yaml",
+		"../overrides/compose.https.yaml",
+		"../compose.eventiva.yaml"
+	],
+	"service": "discord",
+	"shutdownAction": "none",
+	"features": {
+		"ghcr.io/trunk-io/devcontainer-feature/trunk:1": {}
+	},
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"terminal.integrated.shell.linux": "/bin/bash"
+			}
+		}
+	},
+	// "postCreateCommand": "npx your-package"
+}
