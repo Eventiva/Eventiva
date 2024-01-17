@@ -52,12 +52,18 @@ inputs:
     required: true
     description: 'number of days to include into the report'
     default: 7
-    required: true
-    description: 'number of days to include into the report'
-    default: 7
   channel:
     required: true
     description: 'channel to report'
+    default: 'general'
+  crosspost:
+    required: false
+    description: 'If is announcement channel, crosspost the message to all channels following'
+    default: true
+  protected_branch:
+    required: false
+    description: 'The branch where signatures are stored'
+    default: 'main'
     default: 'general'
     required: true
     description: 'channel to report'
