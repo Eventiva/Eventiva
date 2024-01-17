@@ -1,4 +1,4 @@
-Change Report GitHub Action
+Change Report and Commit Messages
 ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
