@@ -8,6 +8,17 @@ This action generates a report from the recent code changes and posts it to Slac
 
 Here's an example of how the generated change report might look like. 
 
+### CLA-Related Changes
+
+#### Contributors
+- 
+
+#### Updates
+- 
+
+#### Actions Required
+-  
+
 So, let's say you have a repository with the following commit history:
 
 ```
