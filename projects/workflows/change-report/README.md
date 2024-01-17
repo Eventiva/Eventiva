@@ -11,7 +11,8 @@ Here's an example of how the generated change report might look like.
 ### CLA-Related Changes
 
 #### Contributors
-- 
+
+- The GitHub action now includes a check for CLA completion and branch protection. If the CLA is not completed, an error is thrown, and if the branch where the signatures are stored is protected, an error is thrown as well.
 
 #### Updates
 - 
@@ -76,6 +77,14 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '0 10 * * 1' # Run every Monday at 10am UTC
+
+```yml
+          # Provide instructions on how to configure the CLA Assistant GitHub Action with the necessary branch and CLA signing requirements
+          # Example: 
+          # - branch: main
+          #   signature_not_required: true
+          #   contributors: maxprilutskiy, johndoe, janedoe
+```
 
 jobs:
   change-report:
