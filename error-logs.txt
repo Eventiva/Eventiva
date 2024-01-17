@@ -1,0 +1,9 @@
+import fs from 'fs';
+
+const fileName = 'error-logs.txt';
+
+// Write the error logs to the file
+fs.writeFileSync(fileName, errorLogs);
+
+// Close the file
+fs.closeSync(fileName);
