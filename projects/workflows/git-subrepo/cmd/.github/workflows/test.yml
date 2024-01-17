@@ -56,4 +56,5 @@ jobs:
         run: brew install bash
       - run: git config --global user.email "you@example.com";
           git config --global user.name "Your Name";
-      - run: make test
+      - - run: make install 
+      - - run: make check
