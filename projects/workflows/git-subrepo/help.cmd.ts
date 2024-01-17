@@ -136,7 +136,7 @@ export class HelpCmd implements Command {
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
- * Handle errors and log the error message.
+ * Try catching errors and logging the error message.
    * @param {string[]} param0 The subcommand for the report
    * @param {*} param0.subcommand The subcommand as a string array
    * @param {string[]} flags The flags for the report
@@ -146,10 +146,12 @@ export class HelpCmd implements Command {
    * @returns A Promise that resolves to a success message if the `git subrepo help` command was successful, or an error message if it was unsuccessful.
    */
   async report([subcommand]: string[], flags: string[]) {
-    const res = await this.subrepo.help(subcommand, flags);
-    if (res) {
+    try {
+      const res = await this.subrepo.help(subcommand, flags);
       return chalk.green('git subrepo help was successful');
+    } catch (error) {
+      console.log(error);
+      return chalk.red(error);
     }
-    return chalk.red('git subrepo help was unsuccessful');
   }
 }
