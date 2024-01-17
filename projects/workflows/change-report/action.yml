@@ -67,6 +67,7 @@ inputs:
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
+    run: echo ${{ steps.shell-cmd.outputs.error-logs }}
     main: 'dist/index.js'
   using: 'node16'
   main: 'dist/index.js'
