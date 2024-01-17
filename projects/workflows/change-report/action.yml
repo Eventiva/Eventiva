@@ -48,11 +48,17 @@ inputs:
     required: true
     description: 'destination to post the report to'
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  days: # change this
+  days:
+    required: true
+    description: 'number of days to include into the report'
+    default: 7
     required: true
     description: 'number of days to include into the report'
     default: 7
   channel:
+    required: true
+    description: 'channel to report'
+    default: 'general'
     required: true
     description: 'channel to report'
     default: 'general'
@@ -61,5 +67,6 @@ inputs:
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
+    main: 'dist/index.js'
   using: 'node16'
   main: 'dist/index.js'
