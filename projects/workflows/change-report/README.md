@@ -1,4 +1,16 @@
-Change Report GitHub Action
+Change Report - GitHub Actions Workflow
+---
+This action generates a report from the recent code changes and posts it to Slack or Discord.
+
+### Demo
+> **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
+
+Here's an example of how the generated change report might look like. 
+
+### CLA-Related Changes
+
+#### Contributors
+- The GitHub action now includes a check for CLA completion and branch protection. If the CLA is not completed, an error is thrown, and if the branch where the signatures are stored is protected, an error is thrown as well.
 ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
@@ -156,6 +168,8 @@ jobs:
 * **Max Prilutskiy** - [@maxprilutskiy](https://twitter.com/maxprilutskiy)
 
 
-### Roadmap
+### Entities
+- `cla-assistant/github-action`
+- `cla-assistant.ts`
 - [x] Slack integration
 - [x] Discord integration
