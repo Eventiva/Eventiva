@@ -43,11 +43,14 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
+name: 'Eventiva Event Management'
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  run: # make sure the action works on a clean machine without building
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -55,7 +58,7 @@ jobs:
           fetch-depth: 0
 
         - uses: actions/setup-node@v2
-          with:
+            with:
             node-version: '14'
         with:
           destination: slack
