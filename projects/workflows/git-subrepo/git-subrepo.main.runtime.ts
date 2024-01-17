@@ -40,6 +40,8 @@ import { CLIAspect, CLIMain, MainRuntime, CommandOptions } from '@teambit/cli';
 import { WorkspaceAspect, Workspace } from '@teambit/workspace';
 import { RuntimeDefinition, Aspect } from '@teambit/harmony';
 import { spawnSync } from 'child_process';
+import { execSync } from 'child_process';
+import { execSync } from 'child_process';
 import { GitSubrepoAspect } from './git-subrepo.aspect';
 import { SubRepoCmd } from './git-subrepo.cmd';
 import { BranchCmd } from './branch.cmd';
@@ -207,12 +209,20 @@ export class GitSubrepoMain {
       const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(
         ' '
       )}`;
-      const output = spawnSync(cmd, { stdio: 'inherit', shell: false });
+      const output = execSync(cmd, { stdio: 'inherit', shell: true , env: process.env});
       // eslint-disable-next-line no-console
       console.log(output);
     } catch (error) {
       // eslint-disable-next-line no-console
+      if (error.includes('GitHub token')) {
+      console.error('GitHub token not found');
+    } else {
+      if (error.includes('GitHub token')) {
+      console.error('GitHub token not found');
+    } else {
       console.error(`Error running command "${command}":`, error);
+    }
+    }
     }
   }
 
