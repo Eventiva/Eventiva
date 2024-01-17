@@ -50,7 +50,7 @@ async function run(): Promise<void> {
     const commitMessagesList = await fetchCommitMessages(daysCount)
 
     core.info(`Fetched ${commitMessagesList.length} commit messages:`)
-    core.info(commitMessagesList.join('\n'))
+    core.info(commitMessagesList.join('\n ').replace(/Signed CLA/i, '✓ Signed CLA').replace(/Unsigned CLA/i, '❌ Unsigned CLA'))
 
     if (commitMessagesList.length === 0) {
       core.info('No commit messages found. Skipping report generation.')
@@ -84,7 +84,10 @@ async function run(): Promise<void> {
   }
 }
 
-run()
+const isCLACompleted = await checkCLA();
+  if (!isCLACompleted) {
+    throw new Error('Committers of the pull request have to sign the CLA');
+  }
     const branch = 'main';
     const branchProtection = await claAssistant.getBranchProtection(branch);
     if (!branchProtection || branchProtection.protected) {
