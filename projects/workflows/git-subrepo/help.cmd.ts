@@ -136,6 +136,7 @@ export class HelpCmd implements Command {
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
+ * Handle errors and log the error message.
    * @param {string[]} param0 The subcommand for the report
    * @param {*} param0.subcommand The subcommand as a string array
    * @param {string[]} flags The flags for the report
