@@ -28,6 +28,11 @@
 #
 # You should have received a copy of the Creative Commons Zero v1.0 Universal
 # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
+  GITHUB_TOKEN: your-github-token
+
+# Contributor information:
+#   Name: John Doe
+#   Email: johndoe@example.com
 # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
 #
 # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
@@ -47,7 +52,27 @@ inputs:
   destination:
     required: true
     description: 'destination to post the report to'
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Run action
+        id: shell-cmd
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node dist/index.js
+        continue-on-error: true
   days:
     required: true
     description: 'number of days to include into the report'
