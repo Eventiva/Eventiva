@@ -52,9 +52,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 250
+          fetch-depth: 0
 
-      - uses: ./
+        - uses: actions/setup-node@v2
+          with:
+            node-version: '14'
         with:
           destination: slack
           days: 7
@@ -65,7 +67,9 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           GITHUB_REPO_NAME: ${{ github.repository }}
 
-      - uses: ./
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
         with:
           destination: discord
           days: 7
