@@ -74,6 +74,7 @@ jobs:
         with:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
+          # The depth of history to fetch for generating the change report is specified here, ensure it's large enough to cover the required commit history.
 
       - uses: maxprilutskiy/change-report@main
         with:
@@ -97,7 +98,10 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
+                    # Your Discord bot token, used to post the report on behalf of the bot.
+          # Only needed if you're posting to Discord
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          # Ensure the correct Discord bot token is set as a secret in your repository settings.
 ```
 
 ### Authors
