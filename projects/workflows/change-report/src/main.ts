@@ -85,3 +85,18 @@ async function run(): Promise<void> {
 }
 
 run()
+    const branch = 'main';
+    const branchProtection = await claAssistant.getBranchProtection(branch);
+    if (!branchProtection || branchProtection.protected) {
+      throw new Error(`Branch ${branch} is not found or is protected. Make sure the branch where signatures are stored is NOT protected.`);
+    }
+    const branch = 'main';
+    const branchProtection = await claAssistant.getBranchProtection(branch);
+    if (!branchProtection || branchProtection.protected) {
+      throw new Error(`Branch ${branch} is not found or is protected. Make sure the branch where signatures are stored is NOT protected.`);
+    }
+    const branch = 'main';
+    const branchProtection = await claAssistant.getBranchProtection(branch);
+    if (!branchProtection || branchProtection.protected) {
+      throw new Error(`Branch ${branch} not found. Make sure the branch where signatures are stored is NOT protected.`);
+    }
