@@ -4,7 +4,7 @@ export async function checkCLA(pullRequestNumber: number, committers: string[]):
   const apiClient = new CLAApiClient();
   
   try {
-    const signatures = await apiClient.getSignatures(pullRequestNumber);
+    const signatures = await apiClient.getSignatures(pullRequestNumber, branchName);
     
     for (const committer of committers) {
       if (!signatures.includes(committer)) {
