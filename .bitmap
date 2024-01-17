@@ -33,14 +33,14 @@
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",
-        "version": "f30e914c72e18ac5d6d7741884536ba713cdbc74",
+        "version": "a3941366807c6c3ceab4545388ea751ccaf2070f",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/git-subrepo"
     },
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "develop",
+            "name": "sweep_gha_fix_the_github_actions_run_fai_23127",
             "scope": "eventiva.modules"
         },
         "exported": true
