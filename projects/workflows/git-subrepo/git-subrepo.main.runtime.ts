@@ -202,7 +202,7 @@ export class GitSubrepoMain {
    * @param {string[]} args The arguments for the command.
    * @returns {*} Runs a command with arguments using the git-subrepo library
    */
-  async runCommand(command: string, args: string[]) {
+  async runCommand(command: string, args: string[]) { try { const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(' ')}`; const output = spawnSync(cmd, { stdio: 'inherit', shell: false }); console.log(output); } catch (error) { if (error.message.includes('Branch main not found')) { console.error('Error: The "main" branch was not found. Make sure the branch where signatures are stored is NOT protected.'); } else { console.error(`Error running command "${command}":`, error); }}
     try {
       const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(
         ' '
