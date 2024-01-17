@@ -67,6 +67,8 @@
  */
 
 import * as core from '@actions/core'
+import { sendSlackMessage } from './send-slack-message'
+import { sendDiscordMessage } from './send-discord-message'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {sendReportToSlackOrDiscord} from './send-report-to-slack-or-discord'
 import {composeReport} from './compose-report'
@@ -94,7 +96,7 @@ async function run(): Promise<void> {
       throw new Error('Failed to generate report')
     }
 
-    const destination = core.getInput('destination')
+    const destination = core.getInput('destination') || 'slack'
     const channels = core.getInput('channel').split(/, ?/)
 
     for (const channel of channels) {
