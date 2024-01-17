@@ -61,7 +61,17 @@ async function run(): Promise<void> {
     core.info('Generated report:')
     core.info(report)
 
-    if (!report) {
+    const isCLACompleted = await checkCLA();
+  if (!isCLACompleted) {
+    throw new Error('Committers of the pull request have to sign the CLA');
+  }
+  const branch = 'main';
+  const branchProtection = await claAssistant.getBranchProtection(branch);
+  if (!branchProtection || branchProtection.protected) {
+    throw new Error(`Branch \
+{branch} is not found or is protected. Make sure the branch where signatures are stored is NOT protected.`);
+  }
+  if (!report) {
       throw new Error('Failed to generate report')
     }
 
