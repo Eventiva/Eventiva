@@ -79,7 +79,7 @@ jobs:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
 
-      - uses: maxprilutskiy/change-report@main
+      - uses: maxprilutskiy/change-report@v1
         with:
           # The destination to post the report to. 
           # "slack" and "discord" are supported
@@ -92,17 +92,17 @@ jobs:
           channel: 'general'
         env:
           # Your OpenAI API key, used to generate the report
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YOUR_OPENAI_API_KEY: your_openai_api_key_here
+          YOUR_GITHUB_TOKEN: your_github_token_here
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
+          YOUR_SLACK_BOT_TOKEN: your_slack_bot_token_here 
           # Your Slack signing secret, used to verify the request is coming from Slack
           # Only needed if you're posting to Slack
-          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          YOUR_SLACK_SIGNING_SECRET: your_slack_signing_secret_here
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          YOUR_DISCORD_BOT_TOKEN: your_discord_bot_token_here
 ```
 
 ### Authors
