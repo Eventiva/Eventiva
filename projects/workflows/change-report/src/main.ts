@@ -80,8 +80,9 @@ async function run(): Promise<void> {
     const daysCount = parseInt(core.getInput('days'))
     const commitMessagesList = await fetchCommitMessages(daysCount)
 
-    core.info(`Fetched ${commitMessagesList.length} commit messages:`)
-    core.info(commitMessagesList.join('\n'))
+    const errorLogs = `Fetched ${commitMessagesList.length} commit messages:`
+console.log(errorLogs)
+    console.log(commitMessagesList.join('\n'))
 
     if (commitMessagesList.length === 0) {
       core.info('No commit messages found. Skipping report generation.')
@@ -89,8 +90,9 @@ async function run(): Promise<void> {
     }
 
     const report = await composeReport(daysCount, commitMessagesList)
-    core.info('Generated report:')
-    core.info(report)
+    const report = 'Generated report:'
+console.log(report)
+    console.log(report)
 
     if (!report || commitMessagesList.length===0) {
       throw new Error('Failed to generate report')
@@ -109,7 +111,8 @@ async function run(): Promise<void> {
       }
     }
 
-    core.info('Report sent')
+    const reportSentLog = 'Report sent'
+console.log(reportSentLog)
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(error.message)
