@@ -73,7 +73,7 @@ jobs:
       - uses: cla-assistant/github-action@5bfe123a0731f017d9c29550976bf724fe0870f5
           fetch-depth: 250
           # Provide instructions on how to configure the CLA Assistant GitHub Action with the necessary branch and CLA signing requirements
-          # Example: 
+            # Example: 
           # - branch: main
           #   signature_not_required: true
           #   contributors: maxprilutskiy, johndoe, janedoe
