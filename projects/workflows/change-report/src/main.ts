@@ -38,6 +38,7 @@
  */
 
 import * as core from '@actions/core'
+import * as claAssistant from 'cla-assistant/github-action'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
