@@ -39,6 +39,7 @@
 
 import * as core from '@actions/core'
 import {fetchCommitMessages} from './fetch-commit-messages'
+import {sendReportToSlackOrDiscord} from './send-report-to-slack-or-discord'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
 import {sendDiscordMessage} from './send-discord-message'
@@ -60,7 +61,7 @@ async function run(): Promise<void> {
     core.info('Generated report:')
     core.info(report)
 
-    if (!report) {
+    if (!report || commitMessagesList.length===0) {
       throw new Error('Failed to generate report')
     }
 
