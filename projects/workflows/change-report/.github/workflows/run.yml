@@ -58,7 +58,14 @@ jobs:
       - uses: ./
         with:
           destination: slack
+          destination: <desired_slack_channel>
           days: 7
+          channel: integrations-test
+          env:
+            OPENAI_API_KEY: <correct_openai_api_key>
+            SLACK_BOT_TOKEN: <correct_slack_bot_token>
+            SLACK_SIGNING_SECRET: <correct_slack_signing_secret>
+            GITHUB_REPO_NAME: ${{ github.repository }}
           channel: integrations-test
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -69,8 +76,13 @@ jobs:
       - uses: ./
         with:
           destination: discord
+          destination: <desired_discord_channel>
           days: 7
           channel: '1105810974189043762, 1105810974189043762'
+          env:
+            OPENAI_API_KEY: <correct_openai_api_key>
+            DISCORD_BOT_TOKEN: <correct_discord_bot_token>
+            GITHUB_REPO_NAME: ${{ github.repository }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
