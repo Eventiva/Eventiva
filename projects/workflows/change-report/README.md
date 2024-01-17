@@ -70,12 +70,42 @@ jobs:
   change-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          # Use a large enough fetch depth to ensure the action can find the commit history to work with
+      - uses: cla-assistant/github-action@5bfe123a0731f017d9c29550976bf724fe0870f5
           fetch-depth: 250
+          # Provide instructions on how to configure the CLA Assistant GitHub Action with the necessary branch and CLA signing requirements
+          # Example: 
+          # - branch: main
+          #   signature_not_required: true
+          #   contributors: maxprilutskiy, johndoe, janedoe
 
       - uses: maxprilutskiy/change-report@main
+        with:
+          # The destination to post the report to. 
+          # "slack" and "discord" are supported
+          destination: 'slack'
+          # Number of days to include into the report
+          days: 7
+          # Slack channel to post the report to. 
+          # For Slack it's the name of the channel, without the leading "#",
+          # For Discord it's the channel ID
+          channel: 'general'
+        env:
+          # Your OpenAI API key, used to generate the report
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Your Slack bot token, used to post the report on behalf of the bot.
+          # Only needed if you're posting to Slack
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
+          # Your Slack signing secret, used to verify the request is coming from Slack
+          # Only needed if you're posting to Slack
+          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          # Your Discord bot token, used to post the report on behalf of the bot.
+          # Only needed if you're posting to Discord
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          # Guidance on obtaining the required tokens:
+          # - Obtain OpenAI API key from https://openai.com
+          # - Obtain Slack bot token and signing secret from the Slack API
+          # - Obtain Discord bot token from the Discord API
         with:
           # The destination to post the report to. 
           # "slack" and "discord" are supported
