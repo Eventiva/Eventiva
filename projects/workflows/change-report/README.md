@@ -65,9 +65,9 @@ name: 'Change Report'
 ### Setting up GitHub Token
 ```yml
 - name: Set up GitHub token
-  uses: actions/setup-python@v2
+    uses: actions/setup-node@v2
   with:
-    python-version: '3.x'
+    node-version: '14'
     # Set up the GitHub token
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -94,15 +94,14 @@ jobs:
           destination: 'discord'
           # Number of days to include into the report
           days: 30
-          # Slack channel to post the report to. 
-          # For Slack it's the name of the channel, without the leading "#",
+          # Discord channel to post the report to. 
           # For Discord it's the channel ID
-          channel: 'DISCORD_CHANNEL_ID'
+          channel: 'YOUR_DISCORD_CHANNEL_ID'
         env:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-             # Add your GitHub token here 
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN} 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
            
