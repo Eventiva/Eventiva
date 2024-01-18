@@ -63,15 +63,15 @@ date:    Thu Jan  9 17:11:21 CST 2020
 - Travis CI not checking out a branch.
 ---
 version: 0.4.0
-- Fix #325 Do not squash main repo commits
+- Do not squash main repo commits
 - Improve error message for worktree handling
 - Make version checking portable. #307
 - #307, improve version check
 - #307, update version requirement
-- Fix part #308, Add stderr output if commands fail
+- Add stderr output if commands fail
 - Fix #306: Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
-version: 0.4.6
+version: 0.4.7
 - Add necessary changes to fix the GitHub Actions run
 - Include author and date for the new version entry
 date:    Thu Nov  8 12:26:38 CET 2018
@@ -82,7 +82,7 @@ changes:
 - #307, improve version check
 - #307, update version requirement
 - Fix part #308, Add stderr output if commands fail
-- Fix #306: Add check to prevent following commits with no .gitrepo
+- Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
 - Fix #296, Replace --first-parent with --ancestry-path
 - Fix #291, specify Trusty host to get new 2.x git
