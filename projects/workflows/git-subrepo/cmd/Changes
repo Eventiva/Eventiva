@@ -71,11 +71,12 @@ version: 0.4.0
 - Fix part #308, Add stderr output if commands fail
 - Fix #306: Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
-version: 0.4.8
+version: 0.4.9
 - Add necessary changes to fix the GitHub Actions run
-- Fix issue with branch 'main' not being found
+- Add a new entry to describe the fix for the failed GitHub Actions run
 - Add necessary changes to fix the GitHub Actions run
 - Include author and date for the new version entry
+- Include the author and date for the new version entry
 date:    Fri Oct 20 15:00:00 GMT 2023
 - Include author and date for the new version entry
 changes:
