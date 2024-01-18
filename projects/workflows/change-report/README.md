@@ -101,10 +101,10 @@ jobs:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}   # Add your GitHub token here 
+             # Add your GitHub token here 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }} 
+           
           # Your Slack signing secret, used to verify the request is coming from Slack
           # Only needed if you're posting to Slack
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
