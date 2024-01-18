@@ -85,6 +85,8 @@ name: 'Change Report'
 on:
   workflow_dispatch:
   schedule:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - cron:
   workflow_dispatch:
     
