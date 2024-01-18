@@ -37,7 +37,7 @@
  * Current Version: 0.0.0
  */
 
-import Discord from 'discord.js'
+import { Client, MessagePayload } from 'discord.js'
 
 export const sendDiscordMessage = async (
   channel: string,
