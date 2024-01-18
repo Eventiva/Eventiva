@@ -38,10 +38,10 @@
  */
 
 import * as core from '@actions/core'
-import {fetchCommitMessages} from './fetch-commit-messages'
-import {composeReport} from './compose-report'
-import {sendSlackMessage} from './send-slack-message'
-import {sendDiscordMessage} from './send-discord-message'
+import { fetchCommitMessages } from './fetch-commit-messages'
+import { composeReport } from './compose-report'
+import { sendSlackMessage } from './send-slack-message'
+import { sendDiscordMessage } from './send-discord-message'
 
 async function run(): Promise<void> {
   try {
