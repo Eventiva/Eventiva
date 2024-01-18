@@ -194,7 +194,7 @@ export class GitSubrepoMain {
   }
 
   /**
-   * Executes a command with the given arguments using git-subrepo. The command is executed in a bash shell and the output is logged to the console. If an error occurs, it is logged to the console as well.
+   * Executes a command with the given arguments using git-subrepo.       const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(' ')} main`;
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
