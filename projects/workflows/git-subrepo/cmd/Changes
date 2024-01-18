@@ -72,23 +72,23 @@ version: 0.4.0
 - Fix #306: Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
 version: 0.4.8
-- Add necessary changes to fix the GitHub Actions run
+- Fix the GitHub Actions run
 - Add necessary changes to fix the GitHub Actions run
 - Include author and date for the new version entry
 date:    {date}
 - Include author and date for the new version entry
 changes:
-* The changes to prevent squashing main repo commits have been implemented
-* Error messages for worktree handling have been improved
-* Version checking has been made portable
-* Version check improvements for #307 have been implemented
-* Version requirement updates for #307 have been applied
-* Stderr output has been added if commands fail for #308
-* A check has been added to prevent following commits with no .gitrepo for issue #306
-* The dry-run flag has been removed as it was not implemented, and branch --force delete worktree has been ensured
-- Fix #296, Replace --first-parent with --ancestry-path
-- Fix #291, specify Trusty host to get new 2.x git
-- Fix #258, add --no-tags to git fetch
+* Prevent squashing main repo commits
+* Improve error messages for worktree handling
+* Make version checking portable
+* Implement version check improvements
+* Update version requirements
+* Add stderr output if commands fail
+* Add a check to prevent following commits with no .gitrepo
+* Ensure branch --force delete worktree is working correctly
+- Fix issues related to --first-parent
+- Specify Trusty host for new 2.x git
+- Add --no-tags to git fetch
 - Test that no remotes are created during clone
 - #257 Remove remote creation to avoid problems with fetch --all
 - (origin/issue/150_to_0.4.0) Fix remove-worktree, remove unused parameters
