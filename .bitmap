@@ -40,9 +40,13 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
+<<<<<<< HEAD
             "name": "sweep_gha_fix_the_github_actions_run_fai_8e280",
+=======
+            "name": "sweep_gha_fix_the_github_actions_run_fai_638d3",
+>>>>>>> origin/sweep/sweep_gha_fix_the_github_actions_run_fai_638d3
             "scope": "eventiva.modules"
         },
-        "exported": true
+        "exported": false
     }
 }
