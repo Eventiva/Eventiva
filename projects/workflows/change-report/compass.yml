@@ -48,6 +48,14 @@ links:
     url: 'https://github.com/Eventiva/change-report'
 relationships:
   DEPENDS_ON:
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/5ef5f151-96f3-465f-b419-2c95162207f5'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/e940ba01-5ea1-487c-8c8e-9f918c07d042'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a-3f-8df0-34dde1d6974d/6581f375-b755-4773-b36d-b019b0b94f55'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/XXXX'
+        - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/XXXX'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/5ef5f151-96f3-465f-b419-2c95162207f5'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/e940ba01-5ea1-487c-8c8e-9f918c07d042'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/6581f375-b755-4773-b36d-b019b0b94f55'
     - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/e940ba01-5ea1-487c-8c8e-9f918c07d042'
     - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/6581f375-b755-4773-b36d-b019b0b94f55'
 labels: null
