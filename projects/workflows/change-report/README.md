@@ -1,4 +1,4 @@
-Change Report GitHub Action
+Fix GitHub Actions Run Failure
 ---
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
@@ -60,7 +60,7 @@ The report might look slightly differently in your case, as it depends on the co
 ### Usage example
 
 ```yml
-name: 'Change Report'
+name: 'Fix GitHub Actions Run Failure'
 
 ### Setting up GitHub Token
 ```yml
