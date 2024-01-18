@@ -204,7 +204,7 @@ export class GitSubrepoMain {
    */
   async runCommand(command: string, args: string[]) {
     try {
-      const cmd = `bash ${this.getAspectDirectory()}/cmd/lib/git-subrepo ${command} ${args.join(
+      const cmd = `'/usr/local/bin/git-subrepo' ${command} ${args.join(
         ' '
       )}`;
       const output = spawnSync(cmd, { stdio: 'inherit', shell: false });
