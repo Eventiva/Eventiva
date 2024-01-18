@@ -87,16 +87,16 @@ jobs:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
 
-      - uses: maxprilutskiy/change-report@main
+      - uses: maxprilutskiy/change-report@v1
         with:
           # The destination to post the report to. 
           # "slack" and "discord" are supported
-          destination: 'discord'
+          destination: 'slack'
           # Number of days to include into the report
           days: 30
           # Discord channel to post the report to. 
           # For Discord it's the channel ID
-          channel: 'YOUR_DISCORD_CHANNEL_ID'
+          channel: 'YOUR_SLACK_CHANNEL_ID'
         env:
           # Your OpenAI API key, used to generate the report
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -110,7 +110,7 @@ jobs:
 
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
 ```
 
 ### Authors
