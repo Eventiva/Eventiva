@@ -83,6 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
 
