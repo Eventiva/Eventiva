@@ -11,8 +11,9 @@ Here's an example of how the generated change report might look like.
 So, let's say you have a repository with the following commit history:
 
 ```
-feat: Develop initial launch plan for SpaceX Internet satellites
-chore: Setup project repository for SpaceX Internet satellite launch
+feat: Implemented user authentication and authorization
+fix: Resolved database connection issue
+chore: Optimized database structure and improved query performance
 refactor: Update satellite design to improve stability and reduce weight
 docs: Add user manual for SpaceX Internet service
 fix: Correct satellite positioning for optimal Internet coverage
