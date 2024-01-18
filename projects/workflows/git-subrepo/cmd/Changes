@@ -71,21 +71,21 @@ version: 0.4.0
 - Fix part #308, Add stderr output if commands fail
 - Fix #306: Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
-version: 0.4.7
+version: 0.4.8
 - Add necessary changes to fix the GitHub Actions run
 - Add necessary changes to fix the GitHub Actions run
 - Include author and date for the new version entry
 date:    {date}
 - Include author and date for the new version entry
 changes:
-- Fix #325 Do not squash main repo commits
-- Improve error message for worktree handling
-- Make version checking portable. #307
-- #307, improve version check
-- #307, update version requirement
-- Fix part #308, Add stderr output if commands fail
-- Fix #306: Add check to prevent following commits with no .gitrepo
-- Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
+* The changes to prevent squashing main repo commits have been implemented
+* Error messages for worktree handling have been improved
+* Version checking has been made portable
+* Version check improvements for #307 have been implemented
+* Version requirement updates for #307 have been applied
+* Stderr output has been added if commands fail for #308
+* A check has been added to prevent following commits with no .gitrepo for issue #306
+* The dry-run flag has been removed as it was not implemented, and branch --force delete worktree has been ensured
 - Fix #296, Replace --first-parent with --ancestry-path
 - Fix #291, specify Trusty host to get new 2.x git
 - Fix #258, add --no-tags to git fetch
