@@ -58,11 +58,13 @@ date:    Thu Jan  9 17:11:21 CST 2020
 - Simplify finding subrepos
 - Ask git to find the .gitrepo files
 - Doc: fix sentence repetition
-- Fix typos
+- Type: Bug Fix
+  Description: Update version to 0.4.7
+  Author: Your Name
 - Fixed typo
 - Travis CI not checking out a branch.
 ---
-version: 0.4.0
+version: 0.4.7
 - Fix #325 Do not squash main repo commits
 - Improve error message for worktree handling
 - Make version checking portable. #307
@@ -78,6 +80,9 @@ version: 0.4.7
 date:    {date}
 - Include author and date for the new version entry
 changes:
+- Type: Bug Fix
+  Description: Fix GitHub Actions run fail
+  Author: Your Name
 - Fix #325 Do not squash main repo commits
 - Improve error message for worktree handling
 - Make version checking portable. #307
