@@ -108,7 +108,7 @@ jobs:
            
           # Your Slack signing secret, used to verify the request is coming from Slack
           # Only needed if you're posting to Slack
-          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
