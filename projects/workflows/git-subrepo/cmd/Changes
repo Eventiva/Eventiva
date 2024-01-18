@@ -71,10 +71,12 @@ version: 0.4.0
 - Fix part #308, Add stderr output if commands fail
 - Fix #306: Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
-version: 0.4.6
+version: 0.4.7
+- Add necessary changes to fix the GitHub Actions run
 - Add necessary changes to fix the GitHub Actions run
 - Include author and date for the new version entry
-date:    Thu Nov  8 12:26:38 CET 2018
+date:    {date}
+- Include author and date for the new version entry
 changes:
 - Fix #325 Do not squash main repo commits
 - Improve error message for worktree handling
