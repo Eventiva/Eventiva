@@ -37,7 +37,7 @@
  * Current Version: 0.0.0
  */
 
-import {OpenAIApi, Configuration} from 'openai'
+import { OpenAIApi, Configuration } from '@openai/api'
 
 export const composeReport = async (
   daysCount: number,
