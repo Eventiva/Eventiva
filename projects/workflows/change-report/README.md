@@ -43,7 +43,7 @@ In the past 7 days, we've been working hard to improve our SpaceX Internet satel
 - Added troubleshooting guide and FAQ section to documentation
 - Improved user interface for SpaceX Internet app
 
-💻 Technical Improvements:
+💻 Technical optimizations:
 - Upgraded ground station hardware to improve signal processing
 - Optimized satellite orbit to minimize signal latency
 - Implemented machine learning algorithms to optimize bandwidth allocation
