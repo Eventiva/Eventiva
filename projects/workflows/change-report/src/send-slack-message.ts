@@ -1,4 +1,4 @@
-import {App} from '@slack/bolt'
+import { App, ChatPostMessageArguments } from '@slack/bolt'
 
 export const sendSlackMessage = async (
   channel: string,
