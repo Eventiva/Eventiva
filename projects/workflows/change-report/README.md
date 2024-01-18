@@ -61,6 +61,17 @@ The report might look slightly differently in your case, as it depends on the co
 
 ```yml
 name: 'Change Report'
+
+### Setting up GitHub Token
+```yml
+- name: Set up GitHub token
+  uses: actions/setup-python@v2
+  with:
+    python-version: '3.x'
+    # Set up the GitHub token
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
 on:
   workflow_dispatch:
   schedule:
@@ -88,7 +99,8 @@ jobs:
           channel: 'general'
         env:
           # Your OpenAI API key, used to generate the report
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # Add your GitHub token here 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
