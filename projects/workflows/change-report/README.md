@@ -75,7 +75,7 @@ name: 'Change Report'
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 10 * * 1' # Run every Monday at 10am UTC
+    - cron: '0 9 * * 1' # Run every Monday at 9am UTC
 
 jobs:
   change-report:
