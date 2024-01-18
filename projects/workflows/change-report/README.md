@@ -90,7 +90,7 @@ jobs:
         with:
           # The destination to post the report to. 
           # "slack" and "discord" are supported
-          destination: 'slack'
+          destination: 'discord'
           # Number of days to include into the report
           days: 7
           # Slack channel to post the report to. 
@@ -103,7 +103,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}   # Add your GitHub token here 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }} 
           # Your Slack signing secret, used to verify the request is coming from Slack
           # Only needed if you're posting to Slack
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
