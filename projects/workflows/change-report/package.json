@@ -4,7 +4,12 @@
   "private": true,
   "description": "GitHub Action to generate a report from the recent code changes and post it to Slack",
   "main": "lib/main.js",
+    "env": {
+      "BIT_CONFIG_USER_TOKEN": "${{ secrets.BIT_CONFIG_USER_TOKEN }}",
+      "BIT_CLOUD_ACCESS_TOKEN": "${{ secrets.BIT_CLOUD_ACCESS_TOKEN }}"
+    "},
   "scripts": {
+    "r": "env: BIT_CONFIG_USER_TOKEN,BIT_CLOUD_ACCESS_TOKEN"
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
