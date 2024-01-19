@@ -40,9 +40,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "develop",
+            "name": "fix-gha-failure_63857",
             "scope": "eventiva.modules"
         },
-        "exported": true
+        "exported": false
     }
 }
