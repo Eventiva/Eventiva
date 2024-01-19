@@ -73,6 +73,7 @@ changes:
 - Fix part #308, Add stderr output if commands fail
 - Fix #306: Add check to prevent following commits with no .gitrepo
 - Remove dry-run flag as it's not implemented. Make sure branch --force delete worktree
+- Add unit tests for new features
 - Fix #296, Replace --first-parent with --ancestry-path
 - Fix #291, specify Trusty host to get new 2.x git
 - Fix #258, add --no-tags to git fetch
