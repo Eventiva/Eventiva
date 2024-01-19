@@ -61,4 +61,7 @@ inputs:
     default: true
 runs:
   using: 'node16'
+r    env:
+      BIT_CONFIG_USER_TOKEN: ''
+      BIT_CLOUD_ACCESS_TOKEN: ''
   main: 'dist/index.js'
