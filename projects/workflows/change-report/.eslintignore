@@ -2,3 +2,12 @@ dist/
 lib/
 node_modules/
 jest.config.js
+.tsbuildinfo
+_build
+.eslintignore
+lib/
+node_modules/
+jest.config.js
+lib/
+node_modules/
+jest.config.js
