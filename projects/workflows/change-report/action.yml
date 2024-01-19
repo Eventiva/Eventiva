@@ -47,7 +47,7 @@ inputs:
   destination:
     required: true
     description: 'destination to post the report to'
-  days: # change this
+  timeout: # change this
     required: true
     description: 'number of days to include into the report'
     default: 7
@@ -60,5 +60,5 @@ inputs:
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  runs-on: ubuntu-latest
+  main: 'src/index.js'
