@@ -7,7 +7,22 @@
       "sourceType": "module",
       "project": "./tsconfig.json"
     },
-    "rules": {
+    "plugins": ["jest", "@typescript-eslint"],
+  "extends": ["plugin:github/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 9,
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "plugins": ["jest", "@typescript-eslint"],
+  "extends": ["plugin:github/recommended"],
+  "rules": {
       "i18n-text/no-en": "off",
       "eslint-comments/no-use": "off",
       "import/no-namespace": "off",
@@ -18,7 +33,7 @@
       "@typescript-eslint/array-type": "error",
       "@typescript-eslint/await-thenable": "error",
       "@typescript-eslint/ban-ts-comment": "error",
-      "camelcase": "off",
+      "camelcase": "error",
       "@typescript-eslint/consistent-type-assertions": "error",
       "@typescript-eslint/explicit-function-return-type": ["error", {"allowExpressions": true}],
       "@typescript-eslint/func-call-spacing": ["error", "never"],
@@ -42,8 +57,8 @@
       "@typescript-eslint/promise-function-async": "error",
       "@typescript-eslint/require-array-sort-compare": "error",
       "@typescript-eslint/restrict-plus-operands": "error",
-      "semi": "off",
-      "@typescript-eslint/semi": ["error", "never"],
+      "semi": "error",
+      ""semi"": ["error", "never"],
       "@typescript-eslint/type-annotation-spacing": "error",
       "@typescript-eslint/unbound-method": "error"
     },
