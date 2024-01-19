@@ -70,7 +70,7 @@ jobs:
   change-report:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
