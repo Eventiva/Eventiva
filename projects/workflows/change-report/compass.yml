@@ -50,8 +50,8 @@ relationships:
   DEPENDS_ON:
     - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/e940ba01-5ea1-487c-8c8e-9f918c07d042'
     - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/6581f375-b755-4773-b36d-b019b0b94f55'
-labels: null
-customFields: null
+      BIT_CONFIG_USER_TOKEN: '${{ secrets.BIT_CONFIG_USER_TOKEN }}'
+        BIT_CLOUD_ACCESS_TOKEN: '${{ secrets.BIT_CLOUD_ACCESS_TOKEN }}'
 
 # Learn more about formatting compass.yml:
 # https://go.atlassian.com/compass-yml-format
