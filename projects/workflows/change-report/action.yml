@@ -44,20 +44,24 @@ branding:
   icon: 'align-left'
   color: 'blue'
 inputs:
-  destination:
+  BIT_CLOUD_ACCESS_TOKEN:
+    required: true
+    description: 'Bit Cloud access token'
+    default: ''
+destination:
     required: true
     description: 'destination to post the report to'
   days: # change this
     required: true
-    description: 'number of days to include into the report'
+    description: 'Number of days to include into the report'
     default: 7
   channel:
     required: true
-    description: 'channel to report'
+    description: 'Channel to report'
     default: 'general'
   crosspost:
     required: false
-    description: 'If is announcement channel, crosspost the message to all channels following'
+    description: 'If it is an announcement channel, crosspost the message to all channels following'
     default: true
 runs:
   using: 'node16'
