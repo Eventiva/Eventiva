@@ -64,5 +64,5 @@ destination:
     description: 'If it is an announcement channel, crosspost the message to all channels following'
     default: true
 runs:
-  using: 'node16'
+  using: 'node16' # node16
   main: 'dist/index.js'
