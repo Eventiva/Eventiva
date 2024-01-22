@@ -54,7 +54,7 @@ inputs:
   channel:
     required: true
     description: 'channel to report'
-    default: 'general'
+    default: 'notifications'
   crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
