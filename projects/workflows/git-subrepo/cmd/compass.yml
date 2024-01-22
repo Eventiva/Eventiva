@@ -1,0 +1,7 @@
+---
+name: git-subrepo
+dependencies:
+  - dependent_module_1
+  - dependent_module_2
+tier: 2
+---
