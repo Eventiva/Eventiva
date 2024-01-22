@@ -60,5 +60,7 @@ inputs:
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
+  env:
+    BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
   using: 'node16'
   main: 'dist/index.js'
