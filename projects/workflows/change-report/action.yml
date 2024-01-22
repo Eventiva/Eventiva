@@ -58,7 +58,7 @@ inputs:
   crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
-    default: true
+    default: false
 runs:
   env:
     BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
