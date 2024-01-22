@@ -38,6 +38,8 @@
  */
 
 import {OpenAIApi, Configuration} from 'openai'
+import * as core from '@actions/core'
+import {retry} from '@actions/core'
 
 export const composeReport = async (
   daysCount: number,
