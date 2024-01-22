@@ -50,7 +50,7 @@ inputs:
   days: # change this
     required: true
     description: 'number of days to include into the report'
-    default: 7
+    default: 30
   channel:
     required: true
     description: 'channel to report'
