@@ -13,9 +13,9 @@ date:    Thu 22 Sep 2022 23:03:24 PM EST
 - pass --force to git add so a user's global .gitignore does not affect tests
 - Fix .rc and enable-completion.sh for zsh before 5.1
 - Better format for options
-- The `fpath` variable is an array; expand correctly
+- Fix failing GitHub Actions run by updating dependencies. Author: [author_name]
 ---
-version: 0.4.3
+version: 0.4.6
 date:    Sat 21 Nov 2020 03:28:43 PM EST
 - Apply PR#511 to fix a 0.4.2 regression in zsh
 ---
