@@ -2,10 +2,10 @@
  # @format
  # -----
  # Project: @eventiva/eventiva
- # File: test.yml
+ # File: git-subrepo.yml (GitHub Actions)
  # Path: \projects\workflows\git-subrepo\cmd\.github\workflows\test.yml
  # Created Date: Tuesday, December 19th 2023
- # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # Author: Jonathan Stevens (Email: [author_name])
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -44,7 +44,7 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  git-subrepo-test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
