@@ -40,9 +40,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "develop",
+            "name": "gha-missing-env-variable_ab118",
             "scope": "eventiva.modules"
         },
-        "exported": true
+        "exported": false
     }
 }
