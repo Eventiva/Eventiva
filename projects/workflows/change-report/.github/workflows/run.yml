@@ -53,7 +53,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 250
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./
         with:
