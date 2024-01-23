@@ -47,7 +47,13 @@ inputs:
   destination:
     required: true
     description: 'destination to post the report to'
-  days: # change this
+  days:
+    required: true
+    description: 'number of days to include into the report'
+    default: 7
+  BIT_CLOUD_ACCESS_TOKEN:
+    required: true
+    description: 'Access token for Bit cloud services'
     required: true
     description: 'number of days to include into the report'
     default: 7
