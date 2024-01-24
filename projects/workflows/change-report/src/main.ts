@@ -38,6 +38,7 @@
  */
 
 import * as core from '@actions/core'
+import * as fs from 'fs'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
@@ -45,7 +46,7 @@ import {sendDiscordMessage} from './send-discord-message'
 
 async function run(): Promise<void> {
   try {
-    const daysCount = parseInt(core.getInput('days'))
+    const daysCount = parseInt(core.getInput('days') || '7')
     const commitMessagesList = await fetchCommitMessages(daysCount)
 
     core.info(`Fetched ${commitMessagesList.length} commit messages:`)
@@ -65,7 +66,7 @@ async function run(): Promise<void> {
     }
 
     const destination = core.getInput('destination')
-    const channels = core.getInput('channel').split(/, ?/)
+    const channels = core.getInput('channel').split(/, ?/).map(c => c.trim())
 
     channels.forEach(async (channel) => {
       if (destination === 'slack') {
