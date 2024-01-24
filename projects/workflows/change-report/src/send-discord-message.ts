@@ -46,7 +46,7 @@ export const sendDiscordMessage = async (
   const discord = new Discord.Client({
     intents: []
   })
-  await discord.login(process.env.DISCORD_BOT_TOKEN)
+  await discord.login(process.env.DISCORD_API_TOKEN)
 
   const discordChannel = await discord.channels.fetch(String(channel))
 
