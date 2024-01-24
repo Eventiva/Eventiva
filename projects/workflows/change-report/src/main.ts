@@ -65,7 +65,7 @@ async function run(): Promise<void> {
     }
 
     const destination = core.getInput('destination')
-    const channels = core.getInput('channel').split(/, ?/)
+    const channels = [core.getInput('channel')]
 
     channels.forEach(async (channel) => {
       if (destination === 'slack') {
