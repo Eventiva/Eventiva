@@ -43,10 +43,11 @@ export const composeReport = async (
   daysCount: number,
   commitMessagesList: string[]
 ): Promise<string> => {
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
-  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY_GH_SECRET
+  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME_GH_SECRET
 
-  const openai = new OpenAIApi(
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY_GH_SECRET
+const openai = new OpenAIApi(
     new Configuration({
       apiKey: OPENAI_API_KEY
     })
