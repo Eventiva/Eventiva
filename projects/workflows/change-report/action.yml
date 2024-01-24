@@ -47,6 +47,8 @@ inputs:
   destination:
     required: true
     description: 'destination to post the report to'
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   days: # change this
     required: true
     description: 'number of days to include into the report'
