@@ -39,10 +39,9 @@
 
 name: 'Run'
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main
+      - develop
 
 permissions:
   contents: read
@@ -58,7 +57,7 @@ jobs:
       - uses: ./
         with:
           destination: slack
-          days: 7
+
           channel: integrations-test
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
