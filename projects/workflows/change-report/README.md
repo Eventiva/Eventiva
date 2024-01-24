@@ -1,7 +1,27 @@
 Change Report GitHub Action
 ---
 
-This action generates a report from the recent code changes and posts it to Slack or Discord.
+This action generates a report from the recent code changes and posts it to Slack or Discord. 
+
+### Configuration and Troubleshooting
+1. **Configuring the Workflow**: Follow the example below to configure the `change-report` workflow in your repository.
+
+```yml
+<configure_workflow_example>
+```
+
+2. **Troubleshooting**: If the action fails, ensure that the following environment variables are properly set:
+   - `OPENAI_API_KEY` 
+   - `SLACK_BOT_TOKEN` (for Slack integration) 
+   - `SLACK_SIGNING_SECRET` (for Slack integration) 
+   - `DISCORD_BOT_TOKEN` (for Discord integration)
+
+### Dependencies
+- actions/checkout@v3
+
+### Potential Issues
+- Make sure that the required environment variables are set and valid.
+- Ensure that the necessary secrets are properly configured in the repository's settings.
 
 ### Demo
 > **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
