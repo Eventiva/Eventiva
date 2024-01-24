@@ -51,7 +51,7 @@ async function run(): Promise<void> {
     core.info(`Fetched ${commitMessagesList.length} commit messages:`)
     core.info(commitMessagesList.join('\n'))
 
-    if (commitMessagesList.length === 0) {
+    if (commitMessagesList.length === 0 && !core.isDebug()) {
       core.info('No commit messages found. Skipping report generation.')
       return
     }
