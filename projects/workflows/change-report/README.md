@@ -81,7 +81,7 @@ jobs:
           # "slack" and "discord" are supported
           destination: 'slack'
           # Number of days to include into the report
-          days: 7
+          days: 2
           # Slack channel to post the report to. 
           # For Slack it's the name of the channel, without the leading "#",
           # For Discord it's the channel ID
