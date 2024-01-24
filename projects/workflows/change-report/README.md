@@ -100,7 +100,17 @@ jobs:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
 ```
 
-### Authors
+### Instructions for Running GitHub Actions and Verifying Success
+
+To run the GitHub Actions, follow these steps:
+1. Ensure that the `.github/workflows/run.yml` file has been properly configured with the destination, interval, and channel.
+2. Make sure that the OpenAI API key, Slack bot token, and Slack signing secret are set as secrets in your GitHub repository.
+3. Once the actions are set up, push the changes to the `develop` branch.
+
+To verify the success of the GitHub Actions:
+1. Check the specified Slack channel or Discord server for the generated change report.
+2. Look for the details of recent code changes, connectivity improvements, user experience enhancements, and technical improvements in the report.
+3. If the report is successfully posted to the destination, the GitHub Actions have run successfully.
 
 * **Max Prilutskiy** - [@maxprilutskiy](https://twitter.com/maxprilutskiy)
 
