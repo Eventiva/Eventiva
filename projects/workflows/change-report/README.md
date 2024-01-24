@@ -88,7 +88,7 @@ jobs:
           channel: 'general'
         env:
           # Your OpenAI API key, used to generate the report
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} 
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY_GH_SECRET }} 
           # Your Slack bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Slack
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }} 
@@ -97,7 +97,7 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           # Your Discord bot token, used to post the report on behalf of the bot.
           # Only needed if you're posting to Discord
-          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN_GH_SECRET }}
 ```
 
 ### Authors
