@@ -118,8 +118,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@teambit/node.node':
-        specifier: 1.0.33
-        version: 1.0.33(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)(@types/react@17.0.74)
+        specifier: 1.0.34
+        version: 1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)(@types/react@17.0.74)
       '@types/jest':
         specifier: 26.0.20
         version: 26.0.20
@@ -534,8 +534,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@teambit/node.node':
-        specifier: 1.0.33
-        version: 1.0.33(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)(@types/react@17.0.74)
+        specifier: 1.0.34
+        version: 1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)(@types/react@17.0.74)
       '@types/jest':
         specifier: ^29.2.2
         version: 29.5.11
@@ -7752,6 +7752,7 @@ packages:
       - node-notifier
       - supports-color
       - ts-node
+    dev: false
 
   /@teambit/defender.jest-tester@1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4):
     resolution: {integrity: sha512-pcpEey/t11Em0AErq87UycEX/Y6LaOFUT0XeNenAZa1WvBBpcKXvcqA29ofhEqRHYFwtK7aN+5g68nKz+Z4CEg==}
@@ -7790,6 +7791,87 @@ packages:
       - node-notifier
       - supports-color
       - ts-node
+    dev: false
+
+  /@teambit/defender.jest-tester@1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4):
+    resolution: {integrity: sha512-rBYYgPXwURf5Rn7bMFKY4VcPqqa16eZgT6bBJyYcnyMuht4T6MBnTBxzeySCMqoKI7lGywPrig3wiACzImE4VQ==}
+    peerDependencies:
+      '@teambit/legacy': '*'
+    peerDependenciesMeta:
+      '@teambit/legacy':
+        optional: true
+    dependencies:
+      '@babel/core': 7.20.2
+      '@babel/plugin-proposal-decorators': 7.23.7(@babel/core@7.20.2)
+      '@babel/plugin-transform-class-properties': 7.22.5(@babel/core@7.20.2)
+      '@babel/plugin-transform-modules-commonjs': 7.19.6(@babel/core@7.20.2)
+      '@babel/plugin-transform-object-rest-spread': 7.22.15(@babel/core@7.20.2)
+      '@babel/preset-env': 7.22.15(@babel/core@7.20.2)
+      '@babel/preset-typescript': 7.22.15(@babel/core@7.20.2)
+      '@jest/test-result': 29.3.1
+      '@teambit/defender.tester-task': 1.0.6(@teambit/legacy@node_modules+@teambit+legacy)
+      '@teambit/legacy': link:node_modules/@teambit/legacy
+      '@teambit/tests-results': 1.0.0
+      babel-plugin-transform-typescript-metadata: 0.3.2(@babel/core@7.20.2)
+      babel-preset-jest: 29.2.0(@babel/core@7.20.2)
+      camelcase: 7.0.0
+      comlink: 4.3.1
+      flatted: 3.2.7
+      fs-extra: 10.1.0
+      identity-obj-proxy: 3.0.0
+      jest: 29.3.1(@types/node@12.20.4)
+      jest-message-util: 29.3.1
+      lodash: 4.17.21
+      minimatch: 5.1.0
+      normalize-path: 3.0.0
+    transitivePeerDependencies:
+      - '@babel/traverse'
+      - '@types/node'
+      - babel-plugin-macros
+      - node-notifier
+      - supports-color
+      - ts-node
+    dev: true
+
+  /@teambit/defender.jest-tester@1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4):
+    resolution: {integrity: sha512-rBYYgPXwURf5Rn7bMFKY4VcPqqa16eZgT6bBJyYcnyMuht4T6MBnTBxzeySCMqoKI7lGywPrig3wiACzImE4VQ==}
+    peerDependencies:
+      '@teambit/legacy': '*'
+    peerDependenciesMeta:
+      '@teambit/legacy':
+        optional: true
+    dependencies:
+      '@babel/core': 7.20.2
+      '@babel/plugin-proposal-decorators': 7.23.7(@babel/core@7.20.2)
+      '@babel/plugin-transform-class-properties': 7.22.5(@babel/core@7.20.2)
+      '@babel/plugin-transform-modules-commonjs': 7.19.6(@babel/core@7.20.2)
+      '@babel/plugin-transform-object-rest-spread': 7.22.15(@babel/core@7.20.2)
+      '@babel/preset-env': 7.22.15(@babel/core@7.20.2)
+      '@babel/preset-typescript': 7.22.15(@babel/core@7.20.2)
+      '@jest/test-result': 29.3.1
+      '@teambit/defender.tester-task': 1.0.6(@teambit/legacy@node_modules+@teambit+legacy)
+      '@teambit/legacy': link:node_modules/@teambit/legacy
+      '@teambit/tests-results': 1.0.0
+      babel-plugin-transform-typescript-metadata: 0.3.2(@babel/core@7.20.2)
+      babel-preset-jest: 29.2.0(@babel/core@7.20.2)
+      camelcase: 7.0.0
+      comlink: 4.3.1
+      flatted: 3.2.7
+      fs-extra: 10.1.0
+      identity-obj-proxy: 3.0.0
+      jest: 29.3.1(@types/node@18.19.4)
+      jest-message-util: 29.3.1
+      lodash: 4.17.21
+      minimatch: 5.1.0
+      normalize-path: 3.0.0
+    transitivePeerDependencies:
+      - '@babel/traverse'
+      - '@types/node'
+      - babel-plugin-macros
+      - node-notifier
+      - supports-color
+      - ts-node
+    dev: true
 
   /@teambit/defender.linter-task@1.0.4:
     resolution: {integrity: sha512-0ikRaYMpeH97nJGIes08oAJQ30lgYDCos+/UxlaOSXotgAIsKqf3QQWcejvm/mC8YnUgh3KlbFdzoKrwaT8yBA==}
@@ -9370,8 +9452,8 @@ packages:
     dependencies:
       comment-json: 4.2.3
 
-  /@teambit/node.generator.node-templates@1.0.11:
-    resolution: {integrity: sha512-C0JxGON57UXZvrq1gYes2KfUv9hUXEoKNo4eBstJQ78/injp/ObfxtnuREVEtoCbySOWKvnesYJnKYnOWLDOZw==}
+  /@teambit/node.generator.node-templates@1.0.13:
+    resolution: {integrity: sha512-Pfmno+xjR/s6hCkWzOMgSkpvSIadsVWj36JkNLlyAhFjl1+thsV8+cXqxDn0Zir3cS6QnrqBXqDgCc96uocwkw==}
     deprecated: No longer maintained, use bitdev.node/generators/node-templates
     dependencies:
       lodash: 4.17.21
@@ -9463,8 +9545,8 @@ packages:
       - webpack-plugin-serve
     dev: false
 
-  /@teambit/node.node@1.0.33(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)(@types/react@17.0.74):
-    resolution: {integrity: sha512-sMHdAg9g/3n0kQxZ37ewjgdvOZkAcbWTR5WWlCP3hIOs6ZXQ6q45Ui/FT3NwBNGVrMgEr2QTbwU2TjYINGwo7Q==}
+  /@teambit/node.node@1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)(@types/react@17.0.74):
+    resolution: {integrity: sha512-qcUxdKw2JFgu+kX7mzAHiJZ3c4VEhEgw5DyZKebAZjhUDcNdZhaRVPOgfTLoFKx6xB7BYt+bhGbfMLewlEDMug==}
     dependencies:
       '@babel/plugin-proposal-decorators': 7.20.2
       '@babel/plugin-transform-class-properties': 7.22.5
@@ -9474,15 +9556,15 @@ packages:
       '@babel/runtime': 7.20.0
       '@mdx-js/react': 1.6.22(react@18.2.0)
       '@teambit/defender.eslint-linter': 1.0.16(@teambit/legacy@node_modules+@teambit+legacy)
-      '@teambit/defender.jest-tester': 1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
+      '@teambit/defender.jest-tester': 1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
       '@teambit/defender.prettier-formatter': 1.0.8(@teambit/legacy@node_modules+@teambit+legacy)
       '@teambit/dependencies.modules.packages-excluder': 1.0.8(react@18.2.0)
       '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/node.generator.node-starters': 1.0.0
-      '@teambit/node.generator.node-templates': 1.0.11
+      '@teambit/node.generator.node-templates': 1.0.13
       '@teambit/preview.react-preview': 1.0.23(@teambit/legacy@node_modules+@teambit+legacy)(@types/react@17.0.74)(react-dom@18.2.0)(react@18.2.0)
       '@teambit/react.mounter': 1.0.3
-      '@teambit/react.react-env': 1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
+      '@teambit/react.react-env': 1.0.35(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
       '@teambit/typescript.typescript-compiler': 2.0.15(@teambit/legacy@node_modules+@teambit+legacy)
       babel-plugin-transform-typescript-metadata: 0.3.2(@babel/core@7.20.2)
       core-js: 3.35.0
@@ -9542,8 +9624,8 @@ packages:
       - webpack-plugin-serve
     dev: true
 
-  /@teambit/node.node@1.0.33(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)(@types/react@17.0.74):
-    resolution: {integrity: sha512-sMHdAg9g/3n0kQxZ37ewjgdvOZkAcbWTR5WWlCP3hIOs6ZXQ6q45Ui/FT3NwBNGVrMgEr2QTbwU2TjYINGwo7Q==}
+  /@teambit/node.node@1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)(@types/react@17.0.74):
+    resolution: {integrity: sha512-qcUxdKw2JFgu+kX7mzAHiJZ3c4VEhEgw5DyZKebAZjhUDcNdZhaRVPOgfTLoFKx6xB7BYt+bhGbfMLewlEDMug==}
     dependencies:
       '@babel/plugin-proposal-decorators': 7.20.2
       '@babel/plugin-transform-class-properties': 7.22.5
@@ -9553,15 +9635,15 @@ packages:
       '@babel/runtime': 7.20.0
       '@mdx-js/react': 1.6.22(react@18.2.0)
       '@teambit/defender.eslint-linter': 1.0.16(@teambit/legacy@node_modules+@teambit+legacy)
-      '@teambit/defender.jest-tester': 1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
+      '@teambit/defender.jest-tester': 1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
       '@teambit/defender.prettier-formatter': 1.0.8(@teambit/legacy@node_modules+@teambit+legacy)
       '@teambit/dependencies.modules.packages-excluder': 1.0.8(react@18.2.0)
       '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/node.generator.node-starters': 1.0.0
-      '@teambit/node.generator.node-templates': 1.0.11
+      '@teambit/node.generator.node-templates': 1.0.13
       '@teambit/preview.react-preview': 1.0.23(@teambit/legacy@node_modules+@teambit+legacy)(@types/react@17.0.74)(react-dom@18.2.0)(react@18.2.0)
       '@teambit/react.mounter': 1.0.3
-      '@teambit/react.react-env': 1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
+      '@teambit/react.react-env': 1.0.35(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
       '@teambit/typescript.typescript-compiler': 2.0.15(@teambit/legacy@node_modules+@teambit+legacy)
       babel-plugin-transform-typescript-metadata: 0.3.2(@babel/core@7.20.2)
       core-js: 3.35.0
@@ -10124,6 +10206,7 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: false
 
   /@teambit/react.jest.react-jest@1.0.12(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4):
     resolution: {integrity: sha512-9fNmGo2jWbOYVWUAbTSQP4R7UqPRqziODf4NkGbjA8FseSHU3mdpS5Ek6qzcl3B8Sg1bJp8P8fxb1OdRvyEuVA==}
@@ -10145,6 +10228,51 @@ packages:
       - supports-color
       - ts-node
       - utf-8-validate
+    dev: false
+
+  /@teambit/react.jest.react-jest@1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4):
+    resolution: {integrity: sha512-oGmULcjjsmpx/Bzdr5D2IZULUjXKgNvnZUH1BgtOWIQyIZ4nnWZQylfb8WaD7k5DDLM5JUtZVuclk1eSKVt08w==}
+    dependencies:
+      '@babel/preset-react': 7.22.15
+      '@teambit/defender.jest-tester': 1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
+      '@testing-library/jest-dom': 5.16.5
+      jest-environment-jsdom: 29.3.1
+      react-app-polyfill: 3.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@babel/traverse'
+      - '@teambit/legacy'
+      - '@types/node'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - node-notifier
+      - supports-color
+      - ts-node
+      - utf-8-validate
+    dev: true
+
+  /@teambit/react.jest.react-jest@1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4):
+    resolution: {integrity: sha512-oGmULcjjsmpx/Bzdr5D2IZULUjXKgNvnZUH1BgtOWIQyIZ4nnWZQylfb8WaD7k5DDLM5JUtZVuclk1eSKVt08w==}
+    dependencies:
+      '@babel/preset-react': 7.22.15
+      '@teambit/defender.jest-tester': 1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
+      '@testing-library/jest-dom': 5.16.5
+      jest-environment-jsdom: 29.3.1
+      react-app-polyfill: 3.0.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@babel/traverse'
+      - '@teambit/legacy'
+      - '@types/node'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - node-notifier
+      - supports-color
+      - ts-node
+      - utf-8-validate
+    dev: true
 
   /@teambit/react.mounter@1.0.3:
     resolution: {integrity: sha512-iNEVfoJLwyVd4O94tcgekdr6pNbf2aC0zqBuDLcMoCEDJyTpD/rIhB6/ZlhpaKzoLWlM3HJ2TNkDP1aj9/6Wig==}
@@ -10471,6 +10599,7 @@ packages:
       - webpack-dev-server
       - webpack-hot-middleware
       - webpack-plugin-serve
+    dev: false
 
   /@teambit/react.react-env@1.0.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4):
     resolution: {integrity: sha512-0J6N3AsjL0+XFSbXDihKofFuc/beiqK3T7ixXlKjiptKV2SUE0LBqNBapfM/VhXeqJa6TDsizTVkrHMzquq4nw==}
@@ -10550,6 +10679,167 @@ packages:
       - webpack-dev-server
       - webpack-hot-middleware
       - webpack-plugin-serve
+    dev: false
+
+  /@teambit/react.react-env@1.0.35(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4):
+    resolution: {integrity: sha512-pUbMuwEMYsqcxio5J7RJkUyF9Rwww9QK4FDJBTj1dRHNvzCEKa5DH3sC9xsnNk4MFzlSBCQmeFtnZkWmYIWdZg==}
+    dependencies:
+      '@babel/runtime': 7.20.0
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/defender.eslint-linter': 1.0.16(@teambit/legacy@node_modules+@teambit+legacy)
+      '@teambit/defender.jest-tester': 1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
+      '@teambit/defender.prettier-formatter': 1.0.8(@teambit/legacy@node_modules+@teambit+legacy)
+      '@teambit/dependencies.modules.packages-excluder': 1.0.8(react@18.2.0)
+      '@teambit/docs.docs-template': 1.0.4(@types/react@18.2.47)(graphql@15.8.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@teambit/preview.react-preview': 1.0.23(@teambit/legacy@node_modules+@teambit+legacy)(@types/react@18.2.47)(eslint@7.32.0)(graphql@15.8.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@teambit/react.apps.react-app-types': 1.0.19(@teambit/legacy@node_modules+@teambit+legacy)(@types/react@18.2.47)(eslint@7.32.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@teambit/react.eslint-config-bit-react': 1.0.46(@teambit/legacy@node_modules+@teambit+legacy)(eslint-plugin-import@2.22.1)(eslint-plugin-jsx-a11y@6.4.1)(eslint-plugin-react-hooks@4.2.0)(eslint-plugin-react@7.22.0)(eslint@7.32.0)(typescript@5.3.3)
+      '@teambit/react.generator.react-starters': 1.0.8
+      '@teambit/react.generator.react-templates': 1.0.10
+      '@teambit/react.jest.react-jest': 1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)
+      '@teambit/react.mounter': 1.0.3
+      '@teambit/typescript.typescript-compiler': 2.0.15(@teambit/legacy@node_modules+@teambit+legacy)
+      '@testing-library/jest-dom': 5.16.5
+      '@types/react': 18.2.47
+      '@types/react-dom': 18.2.18
+      browserslist: 4.21.4
+      core-js: 3.35.0
+      eslint: 7.32.0
+      eslint-plugin-import: 2.22.1(eslint@7.32.0)
+      eslint-plugin-jest: 24.1.5(eslint@7.32.0)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.4.1(eslint@7.32.0)
+      eslint-plugin-mdx: 1.13.0(eslint@7.32.0)
+      eslint-plugin-react: 7.22.0(eslint@7.32.0)
+      eslint-plugin-react-hooks: 4.2.0(eslint@7.32.0)
+      graphql: 15.8.0
+      jest: 29.3.1(@types/node@12.20.4)
+      pino-pretty: 4.5.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@babel/traverse'
+      - '@parcel/css'
+      - '@swc/core'
+      - '@swc/css'
+      - '@teambit/legacy'
+      - '@testing-library/react'
+      - '@types/express'
+      - '@types/node'
+      - '@types/webpack'
+      - '@typescript-eslint/parser'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - clean-css
+      - csso
+      - debug
+      - encoding
+      - esbuild
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - fibers
+      - html-webpack-plugin
+      - less
+      - lightningcss
+      - node-notifier
+      - node-sass
+      - puppeteer
+      - sass-embedded
+      - sockjs-client
+      - supports-color
+      - ts-node
+      - type-fest
+      - uglify-js
+      - utf-8-validate
+      - vue-template-compiler
+      - webpack-cli
+      - webpack-dev-server
+      - webpack-hot-middleware
+      - webpack-plugin-serve
+    dev: true
+
+  /@teambit/react.react-env@1.0.35(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4):
+    resolution: {integrity: sha512-pUbMuwEMYsqcxio5J7RJkUyF9Rwww9QK4FDJBTj1dRHNvzCEKa5DH3sC9xsnNk4MFzlSBCQmeFtnZkWmYIWdZg==}
+    dependencies:
+      '@babel/runtime': 7.20.0
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/defender.eslint-linter': 1.0.16(@teambit/legacy@node_modules+@teambit+legacy)
+      '@teambit/defender.jest-tester': 1.0.15(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
+      '@teambit/defender.prettier-formatter': 1.0.8(@teambit/legacy@node_modules+@teambit+legacy)
+      '@teambit/dependencies.modules.packages-excluder': 1.0.8(react@18.2.0)
+      '@teambit/docs.docs-template': 1.0.4(@types/react@18.2.47)(graphql@15.8.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@teambit/preview.react-preview': 1.0.23(@teambit/legacy@node_modules+@teambit+legacy)(@types/react@18.2.47)(eslint@7.32.0)(graphql@15.8.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@teambit/react.apps.react-app-types': 1.0.19(@teambit/legacy@node_modules+@teambit+legacy)(@types/react@18.2.47)(eslint@7.32.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.3.3)
+      '@teambit/react.eslint-config-bit-react': 1.0.46(@teambit/legacy@node_modules+@teambit+legacy)(eslint-plugin-import@2.22.1)(eslint-plugin-jsx-a11y@6.4.1)(eslint-plugin-react-hooks@4.2.0)(eslint-plugin-react@7.22.0)(eslint@7.32.0)(typescript@5.3.3)
+      '@teambit/react.generator.react-starters': 1.0.8
+      '@teambit/react.generator.react-templates': 1.0.10
+      '@teambit/react.jest.react-jest': 1.0.13(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.4)
+      '@teambit/react.mounter': 1.0.3
+      '@teambit/typescript.typescript-compiler': 2.0.15(@teambit/legacy@node_modules+@teambit+legacy)
+      '@testing-library/jest-dom': 5.16.5
+      '@types/react': 18.2.47
+      '@types/react-dom': 18.2.18
+      browserslist: 4.21.4
+      core-js: 3.35.0
+      eslint: 7.32.0
+      eslint-plugin-import: 2.22.1(eslint@7.32.0)
+      eslint-plugin-jest: 24.1.5(eslint@7.32.0)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.4.1(eslint@7.32.0)
+      eslint-plugin-mdx: 1.13.0(eslint@7.32.0)
+      eslint-plugin-react: 7.22.0(eslint@7.32.0)
+      eslint-plugin-react-hooks: 4.2.0(eslint@7.32.0)
+      graphql: 15.8.0
+      jest: 29.3.1(@types/node@18.19.4)
+      pino-pretty: 4.5.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      typescript: 5.3.3
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@babel/traverse'
+      - '@parcel/css'
+      - '@swc/core'
+      - '@swc/css'
+      - '@teambit/legacy'
+      - '@testing-library/react'
+      - '@types/express'
+      - '@types/node'
+      - '@types/webpack'
+      - '@typescript-eslint/parser'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - clean-css
+      - csso
+      - debug
+      - encoding
+      - esbuild
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - fibers
+      - html-webpack-plugin
+      - less
+      - lightningcss
+      - node-notifier
+      - node-sass
+      - puppeteer
+      - sass-embedded
+      - sockjs-client
+      - supports-color
+      - ts-node
+      - type-fest
+      - uglify-js
+      - utf-8-validate
+      - vue-template-compiler
+      - webpack-cli
+      - webpack-dev-server
+      - webpack-hot-middleware
+      - webpack-plugin-serve
+    dev: true
 
   /@teambit/react.rendering.ssr@1.0.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha1-Wt4Y5BoIxJgeVaeJ16DRz1aojcc=}
