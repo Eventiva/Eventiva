@@ -1,0 +1,69 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: .coderabbit.yaml
+# Project: @eventiva/eventiva
+# File: .coderabbit.yaml
+# Path: \.coderabbit.yaml
+# Github: https://github.com/TGTGamer)
+# Author: Jonathan Stevens (Email: jonathan@resnovas.com
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+# is licensed for copying, distribution and modification under the terms of
+# the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+# or (at your option) any later version of this license.
+# the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# Creative Commons Zero v1.0 Universal for more details.
+# You should have received a copy of the Creative Commons Zero v1.0 Universal
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# You should have received a copy of the Creative Commons Zero v1.0 Universal
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+###
+
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/coderabbit-overrides.v2.json
+# https://docs.coderabbit.ai/guides/customize-coderabbit
+
+language: "en"
+early_access: true
+reviews:
+    request_changes_workflow: true
+    high_level_summary: true
+    poem: true
+    review_status: true
+    collapse_walkthrough: true
+    # path_filters:
+    #     - "!**/.xml"
+    # path_instructions:
+    #     - path: "**/*.js"
+    #       instructions: "Review the JavaScript code for conformity with the Google JavaScript style guide, highlighting any deviations."
+    #     - path: "tests/**/*"
+    #       instructions: |
+    #           "Assess the unit test code employing the Mocha testing framework. Confirm that:
+    #           - The tests adhere to Mocha's established best practices.
+    #           - Test descriptions are sufficiently detailed to clarify the purpose of each test."
+    auto_review:
+        enabled: true
+        ignore_title_keywords:
+            - "WIP"
+            - "DO NOT MERGE"
+            - "SWEEP"
+        drafts: false
+
+chat:
+    auto_reply: true
