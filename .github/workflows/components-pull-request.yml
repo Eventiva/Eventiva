@@ -43,10 +43,12 @@ on:
       - opened
       - synchronize
 permissions:
-  pull-requests: write
+  pull-requests: read
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
       GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}

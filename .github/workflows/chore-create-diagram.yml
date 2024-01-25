@@ -47,13 +47,15 @@ on:
     paths-ignore:
       - 'diagram.svg'
       - '.github/**'
-
-permissions:
-  contents: write
   
+permissions:
+  contents: read
+
 jobs:
   get_data:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
