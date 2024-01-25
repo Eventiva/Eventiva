@@ -1,0 +1,134 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: sweep.yaml
+# Path: \projects\workflows\.trunk\sweep.yaml
+# Created Date: Monday, December 11th 2023
+# Author: Jonathan Stevens (Email: jonathan@resnovas.com
+# -----
+# Contributing: Please read through our contributing guidelines. Included are directions for opening
+# issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+#
+# Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+# welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+# -----
+# This program has been provided under confidence of the copyright holder and is
+# licensed for copying, distribution and modification under the terms of
+# the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+# or (at your option) any later version of this license.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v3.0 only for more details.
+#
+# You should have received a copy of the Creative Commons Zero v1.0 Universal
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+#
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+# -----
+# Last Modified: Thu Jan 25 2024
+# By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+###
+
+# Sweep AI turns bugs & feature requests into code changes (https://sweep.dev)
+# For details on our config file, check out our docs at https://docs.sweep.dev/usage/config
+
+branch: "develop"
+gha_enabled: True
+description: |
+  "This repository is a subrepo of Eventiva/eventiva, that is a mono-repository built on a component first architecture. It is built using the Frappe Framework and uses MariaDB as the development database and Amazon Aurora as the production database. The repository is split into 4 tiers, with Tier 1 components being essential for an organizations software architecture to function, and Tier 4 components having no significant effect on the customer experience and do not significantly affect the organization. The folders are split int two main types of workflows.
+
+  The main one is Frappe Framework Modules built with Python and javascript. These can be identified primarily by being within the modules folde, or by the python code located in the root of the module.
+  All code in these modules should be complete with docstrings. For Python, this means using docstrings.
+  In these frappe framework modules, testing is done the Frappe Framework's unit testing framework and Cypress for UI testing, the file should be named *_test.py. If a module is missing unit tests, they should be added. To write integration tests, create a .js file in the cypress/integration directory.
+
+  The second type is Typescript modules built on the Bit.Dev framework for modular components. These can be identified by the lack of python scripts.
+  All code in these modules should be complete with docstrings. For Typescript, this means using JSDoc.
+  In these typescript modules, testing is done via the bit.dev testing configuration, which by default runs Jest, the file should be named *.spec.ts.
+
+  In general, the following should be adhered to as closely as possible:
+  - Docstrings should be used to describe the purpose of the file, the purpose of each class, and the purpose of each function. They should also be used to describe the purpose of each parameter and return value. If a function is not self-explanatory, it should have a docstring explaining what it does and why it does it. It should also include the version of the code that it was added in, the date it was added, and the author who added it.
+  - For each change in the code, you must update the changelog with the type of change (major, minor, or patch), a description of the change, and the author who made the change
+  - All modules should have a compass.yml file. This should follow the https://go.atlassian.com/compass-yml-format specification. The compass file should reference all relationships between modules, including the module's dependencies and dependents. If a module is missing a compass file, it should be added. If a compass file is missing a relationship, it should be added. In the compass file, the tier option is defined as the following; Tier 1 components are essential for an organizations software architecture to function. If they fail, they could seriously impact the organization and its customers. These could be things like login services, permission services, or API gateways. Tier 2 components are important to the organizations software architecture and if they fail, could degrade the customer experience. These could be things like search services, or order-fulfillment services. Tier 3 components, if they fail, have minor or difficult-to-notice impacts on an organization and its customers. These could be things like icon services, or recommendation services. Tier 4 components have no significant effect on the customer experience and do not significantly affect the organization. These could be things like experimental features, or analytical services. When updating the compass file, you should review the ~/.bitmap file and the package.json files to ensure all dependencies from within this project are included. If you need to find a dependancy ID for the compass file, find the folder in the projects directory with the source code for the module, and find the ID within that modules compass file.
+  - All commits and pull requests should utilise the Semantic Versioning conventions preappended with a gitmoji as per the gitmoji specification. Semantic Options: bug, chore, opt, optimisation, style, maint, maintenance, ref, refactor, revert, dep, deprecated, removal, docs, documentation, feat, enhance, feature, enhancement, fix. Example bug fix: ':bug: fix(context): Fixing a bug in context'. Example chore: ':construction: chore(context): updating a workflow file'. Example style fix: ':lipstick: style(context): Fixing code style to match codebase'.
+
+  The following files are automatically generated and should never be edited manually: .bitmap, pnpm-lock.yaml, workspace.jsonc, techstack.yml, diagram.svg, .all-contributorsrc
+  "
+draft: False
+blocked_dirs:
+  [".github", ".trunk", ".devcontainer", ".vscode", "node_modules", "scripts"]
+docs: [
+    # bit.dev is used for component first development,
+    [
+      "https://bit.dev/docs/quick-start/hello-world",
+      "We use bit.dev create and share components across our projects",
+    ],
+    [
+      "https://bit.dev/docs/backend-intro",
+      "We use bit.dev to develop modular backend components",
+    ],
+    #  Discord JS is used for our discord bots
+    [
+      "https://discord.js.org/#/docs/main/stable/general/welcome",
+      "We use discord.js to develop our discord bot",
+    ],
+    # Discord APIs are used for our discord bots
+    [
+      "https://discord.com/developers/docs/intro",
+      "We use the discord API to develop our discord bot",
+    ],
+    #  Express is used for our backend API
+    [
+      "https://expressjs.com/en/starter/installing.html",
+      "We use express to develop our backend API",
+    ],
+    #  Frappe Framework is used as the underlying framework
+    [
+      "https://frappeframework.com/docs/user/en",
+      "We use the Frappe Framework to develop our modules",
+    ],
+    # MariaDB is used as the development database
+    [
+      "https://mariadb.com/kb/en/getting-started-with-the-mariadb-database-server/",
+      "We use MariaDB as the development database",
+    ],
+    # Amazon Aurora is used as the production database
+    [
+      "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_GettingStartedAurora.CreatingConnecting.Aurora.html",
+      "We use Amazon Aurora as the production database",
+    ],
+    # GitMoji is used for our commit messages
+    ["https://gitmoji.dev/", "We use gitmoji to create our commit messages"],
+    # Semantic Versioning is used for our versioning
+    ["https://semver.org/", "We use semantic versioning for our versioning"],
+    #  Compass is used to document our architecture
+    [
+      "https://go.atlassian.com/compass-yml-format",
+      "We use compass to document our architecture",
+    ],
+    # Frappe Framework is used for our unit testing
+    [
+      "https://frappeframework.com/docs/user/en/testing",
+      "We use the frappe framework for unit testing python modules",
+    ],
+    # Cypress is used for unit testing frappe modules
+    [
+      "https://frappeframework.com/docs/user/en/ui-testing",
+      "We use cypress for unit testing frappe modules",
+    ],
+  ]
+rules:
+  - "Leftover TODO, BUG, FIXME & ISSUE in the code should be handled."
+  - "All new business logic should have corresponding unit tests."
+  - "Refactor large functions to be more modular and easier to read."
+  - "All code files should be complete with type annotations/declarations/docstrings."
+  - "Any clearly inefficient or repeated code should be optimized or refactored."
+  - "Remove any unused imports, variables, functions, or classes. If they are needed, add a 'KEEP:' comment explaining why they are needed and when they will be used."
+  - "All modules should have a compass.yml file which has the correct tiering and relationships."
+
