@@ -44,9 +44,15 @@ branding:
   icon: 'align-left'
   color: 'blue'
 inputs:
+  bitCloudAccessToken:
+    required: false
+    description: 'BIT_CLOUD_ACCESS_TOKEN environment variable'
   destination:
     required: true
     description: 'destination to post the report to'
+  bitCloudAccessToken:
+    required: false
+    description: 'BIT_CLOUD_ACCESS_TOKEN environment variable'
   days: # change this
     required: true
     description: 'number of days to include into the report'
@@ -60,5 +66,8 @@ inputs:
     description: 'If is announcement channel, crosspost the message to all channels following'
     default: true
 runs:
+  env:
+    BIT_CLOUD_ACCESS_TOKEN: ${{ secrets.BIT_CLOUD_ACCESS_TOKEN }}
+  shell: 'node'
   using: 'node16'
   main: 'dist/index.js'
