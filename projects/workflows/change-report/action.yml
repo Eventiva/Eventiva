@@ -5,7 +5,7 @@
 # File: action.yml
 # Path: \action.yml
 # Created Date: Wednesday, December 6th 2023
-# Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+# Author: Max Prilutskiy (Email: max.prilutskiy@eventiva.co.uk, Github: https://github.com/maxprilutskiy)
 # -----
 # Contributing: Please read through our contributing guidelines. Included are directions for opening
 # issues, coding standards, and notes on development. These can be found at https://github.com/change-report/blob/develop/CONTRIBUTING.md
@@ -57,7 +57,7 @@ inputs:
     required: true
     description: 'number of days to include into the report'
     default: 7
-  channel:
+  report_channel:
     required: true
     description: 'channel to report'
     default: 'general'
@@ -69,5 +69,5 @@ runs:
   env:
     BIT_CLOUD_ACCESS_TOKEN: ${{ secrets.BIT_CLOUD_ACCESS_TOKEN }}
   shell: 'node'
-  using: 'node16'
+  using: 'node18'
   main: 'dist/index.js'
