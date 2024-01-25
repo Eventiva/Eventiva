@@ -63,12 +63,14 @@ on:
 
 permissions:
   contents: read
-  security-events: write
+  security-events: read
 
 jobs:
   MSDO:
     # currently only windows latest is supported
     runs-on: windows-latest
+    permissions:
+      security-events: write
 
     steps:
     - name: Harden Runner

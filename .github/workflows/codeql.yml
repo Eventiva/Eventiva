@@ -41,7 +41,7 @@
 #
 # ******** NOTE ********
 # We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
+# the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
 # supported CodeQL languages.
 #
 name: Security - CodeQL
@@ -56,13 +56,15 @@ on:
     - cron: "0 0 * * 1"
 
 permissions:
-  actions: read
   contents: read
-  security-events: write
   
 
 jobs:
   analyze:
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
     name: Analyze
     runs-on: ubuntu-latest
     

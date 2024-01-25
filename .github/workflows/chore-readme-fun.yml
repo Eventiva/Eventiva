@@ -51,10 +51,12 @@ on:
     - dev
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   generate:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 5
     
