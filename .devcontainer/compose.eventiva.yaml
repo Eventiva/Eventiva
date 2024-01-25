@@ -43,67 +43,38 @@ services:
       context: ./
       dockerfile: dockerfile
       args:
-        ERPNEXT_VERSION: $$ERPNEXT_VERSION
+        ERPNEXT_VERSION: ${ERPNEXT_VERSION:?No ERPNext version set}
     volumes:
       # bind the workspace to /home/frappe/frappe-bench/workspace
-      - ../../:/home/frappe/frappe-bench/workspace
-      - ../../projects/modules/eventiva_core:/home/frappe/frappe-bench/apps/eventiva_core
-      - ../../projects/modules/vetting:/home/frappe/frappe-bench/apps/vetting
-      - ../../projects/modules/fleet_management:/home/frappe/frappe-bench/apps/fleet_management
-      - ../../projects/modules/gaming:/home/frappe/frappe-bench/apps/gaming
-      - ../../projects/modules/custody:/home/frappe/frappe-bench/apps/custody
-      - ../../projects/modules/justice:/home/frappe/frappe-bench/apps/justice
-      - ../../projects/modules/incident_management:/home/frappe/frappe-bench/apps/incident_management
-      - ../../projects/modules/teamspeak_integration:/home/frappe/frappe-bench/apps/teamspeak_integration
-      - ../../projects/modules/discord_integration:/home/frappe/frappe-bench/apps/discord_integration
-      - ../../projects/modules/control_centre:/home/frappe/frappe-bench/apps/control_centre
-      - ../../projects/modules/grand_theft_auto:/home/frappe/frappe-bench/apps/grand_theft_auto
-      - ../../projects/modules/segment_connect:/home/frappe/frappe-bench/apps/segment_connect
+      - ../:/home/frappe/frappe-bench/workspace
+      # - ../projects/modules/eventiva_core:/home/frappe/frappe-bench/apps/eventiva_core
+      # - ../projects/modules/vetting:/home/frappe/frappe-bench/apps/vetting
+      # - ../projects/modules/fleet_management:/home/frappe/frappe-bench/apps/fleet_management
+      # - ../projects/modules/gaming:/home/frappe/frappe-bench/apps/gaming
+      # - ../projects/modules/custody:/home/frappe/frappe-bench/apps/custody
+      # - ../projects/modules/justice:/home/frappe/frappe-bench/apps/justice
+      # - ../projects/modules/incident_management:/home/frappe/frappe-bench/apps/incident_management
+      # - ../projects/modules/teamspeak_integration:/home/frappe/frappe-bench/apps/teamspeak_integration
+      # - ../projects/modules/discord_integration:/home/frappe/frappe-bench/apps/discord_integration
+      # - ../projects/modules/control_centre:/home/frappe/frappe-bench/apps/control_centre
+      # - ../projects/modules/grand_theft_auto:/home/frappe/frappe-bench/apps/grand_theft_auto
+      # - ../projects/modules/segment_connect:/home/frappe/frappe-bench/apps/segment_connect
       # copy ssh keys to /home/frappe/.ssh
       - ~/.ssh:/home/frappe/.ssh
       # copy gpg keys to /home/frappe/.gnupg
       - ~/.gnupg:/home/frappe/.gnupg
-
-  db:
-    healthcheck:
-      test: mysqladmin ping -h localhost --password=$$DB_PASSWORD
-      interval: 1s
-      retries: 15
-    environment:
-      MYSQL_ROOT_PASSWORD: $$DB_PASSWORD
-
-  frontend:
-    labels:
-      - traefik.enable=true
-      - traefik.http.services.frontend.loadbalancer.server.port=8080
-      - traefik.http.routers.frontend-http.entrypoints=websecure
-      - traefik.http.routers.frontend-http.tls.certresolver=main-resolver
-      - traefik.http.routers.frontend-http.rule=Host(`site1.localhost`)
-
-  proxy:
-    command:
-      - --providers.docker=true
-      - --providers.docker.exposedbydefault=false
-      - --entrypoints.web.address=:80
-      - --entrypoints.web.http.redirections.entrypoint.to=websecure
-      - --entrypoints.web.http.redirections.entrypoint.scheme=https
-      - --entrypoints.websecure.address=:443
-      - --certificatesResolvers.main-resolver.acme.httpChallenge=true
-      - --certificatesResolvers.main-resolver.acme.httpChallenge.entrypoint=web
-      - --certificatesResolvers.main-resolver.acme.email=system@eventiva.co.uk
-      - --certificatesResolvers.main-resolver.acme.storage=/letsencrypt/acme.json
   
-  discord:
-    build:
-      context: ./
-      dockerfile: dockerfile.eventiva
-    ports:
-      - 4000:4000
-    volumes:
-      # bind the workspace
-      - ../../:/workspace
-    # command: >
-    #   sh -c "
-    #     bit install &&
-    #     bit app run helper
-    #   "
+  # discord:
+  #   build:
+  #     context: ./
+  #     dockerfile: dockerfile
+  #   ports:
+  #     - 4000:4000
+  #   volumes:
+  #     # bind the workspace
+  #     - ../../:/workspace
+  #   # command: >
+  #   #   sh -c "
+  #   #     bit install &&
+  #   #     bit app run helper
+  #   #   "

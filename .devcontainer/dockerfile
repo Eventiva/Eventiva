@@ -5,7 +5,7 @@
  # File: dockerfile
  # Path: \.devcontainer\dockerfile
  # Created Date: Friday, December 29th 2023
- # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -13,12 +13,12 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 - 2024 Eventiva - All Rights Reserved
- # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+ # Copyright (c) 2024 Resnovas - All Rights Reserved
+ # LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
  # licensed for copying, distribution and modification under the terms of
- # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
+ # the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
  # or (at your option) any later version of this license.
  # 
  # This program is distributed in the hope that it will be useful,
@@ -26,14 +26,17 @@
  # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  # GNU General Public License v3.0 only for more details.
  # 
- # You should have received a copy of the GNU General Public License v3.0 only
- # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
- # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ # You should have received a copy of the Creative Commons Zero v1.0 Universal
+ # along with this program. If not, please write to: jonathan@resnovas.com,
+ # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
  ###
 
-FROM frappe/erpnext:${ERPNEXT_VERSION} AS base
+ # Use the frappe/erpnext image with a customisable version using a passed in argument from the compose file
+ARG ERPNEXT_VERSION
+FROM frappe/erpnext:${ERPNEXT_VERSION}
+
 
 WORKDIR /home/frappe/frappe-bench/
 # check to see if the lms folder already exists and if it doesn't then clone the repo
@@ -43,16 +46,15 @@ RUN if [ ! -d "/home/frappe/frappe-bench/apps/healthcare" ] ; then bench get-app
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/payments" ] ; then bench get-app https://github.com/frappe/payments.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/webshop" ] ; then bench get-app https://github.com/frappe/webshop.git ; fi
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/it_management" ] ; then bench get-app https://github.com/phamos-eu/it_management.git ; fi
-RUN if [ ! -d "/home/frappe/frappe-bench/apps/hrms" ] ; then bench get-app https://github.com/frappe/hrms ; fi
 
-RUN bench install-app erpnext
-RUN bench install-app hrms
-RUN bench install-app it_management
-RUN bench install-app lending
-RUN bench install-app payments
-RUN bench install-app webshop
-RUN bench install-app lms
-RUN bench install-app healthcare
+# RUN bench install-app erpnext
+# RUN bench install-app hrms
+# RUN bench install-app it_management
+# RUN bench install-app lending
+# RUN bench install-app payments
+# RUN bench install-app webshop
+# RUN bench install-app lms
+# RUN bench install-app healthcare
 
 # installl bit via bvm using npx @teambit/bvm install
 RUN npx @teambit/bvm install

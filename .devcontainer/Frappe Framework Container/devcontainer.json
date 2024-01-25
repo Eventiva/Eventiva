@@ -1,5 +1,5 @@
 {
-	"name": "Frappe x Eventiva Development Environment",
+	"name": "Frappe x Eventiva Deployment",
 	"dockerComposeFile": [
 		"../compose.yaml",
 		"../overrides/compose.mariadb.yaml",
@@ -41,5 +41,5 @@
 		6787,
 		4000
 	],
-	"postCreateCommand": "bench install-app fleet_management && bench install-app incident_management && bench install-app vetting && bench install-app eventiva_core && bench install-app control_centre && bench install-app custody && bench install-app justice && bench install-app gaming && bench install-app grand_theft_auto && bench install-app teamspeak_integration && bench install-app discord_integration && bench install-app segment_connect && bench migrate"
+	// "postCreateCommand": "bench install-app fleet_management && bench install-app incident_management && bench install-app vetting && bench install-app eventiva_core && bench install-app control_centre && bench install-app custody && bench install-app justice && bench install-app gaming && bench install-app grand_theft_auto && bench install-app teamspeak_integration && bench install-app discord_integration && bench install-app segment_connect && bench migrate"
 }
