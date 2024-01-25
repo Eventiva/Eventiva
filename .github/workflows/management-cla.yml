@@ -71,8 +71,8 @@ jobs:
       - name: CLA Assistant
         uses: cla-assistant/github-action@5bfe123a0731f017d9c29550976bf724fe0870f5 # v2.3.0
         env:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
         with:
           path-to-signatures: "contributors.json"
           path-to-document: "https://github.com/Eventiva/.github?tab=coc-ov-file"

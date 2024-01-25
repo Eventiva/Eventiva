@@ -62,7 +62,7 @@ jobs:
       - name: Workflow Telemetry
         uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
         with: 
-          github_token: ${{ secrets.BOT_TOKEN }}
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
@@ -71,7 +71,7 @@ jobs:
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           submodules: 'recursive'
-          token: "${{ secrets.BOT_TOKEN }}"
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
       - name: GitGuardian iac scan
         uses: GitGuardian/ggshield/actions/iac@5a6f8a571defbaf3375993f0091799a9afdf5c20 # main
         with:
