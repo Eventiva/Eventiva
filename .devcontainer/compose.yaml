@@ -4,8 +4,8 @@
  # Project: @eventiva/eventiva
  # File: compose.yaml
  # Path: \.devcontainer\compose.yaml
- # Created Date: Monday, December 11th 2023
- # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # Created Date: Sunday, January 14th 2024
+ # Author: Jonathan Stevens (Email: jonathan@resnovas.com, Github: https://github.com/TGTGamer)
  # -----
  # Contributing: Please read through our contributing guidelines. Included are directions for opening
  # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -13,28 +13,27 @@
  # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
  # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  # -----
- # Copyright (c) 2023 - 2024 Eventiva - All Rights Reserved
- # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+ # Copyright (c) 2024 Resnovas - All Rights Reserved
+ # LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
  # -----
  # This program has been provided under confidence of the copyright holder and is 
  # licensed for copying, distribution and modification under the terms of
- # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
+ # the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
  # or (at your option) any later version of this license.
  # 
  # This program is distributed in the hope that it will be useful,
  # but WITHOUT ANY WARRANTY; without even the implied warranty of
  # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- # GNU General Public License v3.0 only for more details.
+ # Creative Commons Zero v1.0 Universal for more details.
  # 
- # You should have received a copy of the GNU General Public License v3.0 only
- # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
- # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ # You should have received a copy of the Creative Commons Zero v1.0 Universal
+ # along with this program. If not, please write to: jonathan@resnovas.com,
+ # or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
  # 
  # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
- # -----
- # Last Modified: Sat Jan 13 2024
- # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  ###
+
+
 x-customizable-image: &customizable_image
   # By default the image used only contains the `frappe` and `erpnext` apps.
   # See https://github.com/frappe/frappe_docker/blob/main/docs/custom-apps.md
@@ -46,14 +45,43 @@ x-depends-on-configurator: &depends_on_configurator
     configurator:
       condition: service_completed_successfully
 
+x-restart-defaults: &restart_defaults
+  deploy:
+    restart_policy:
+      condition: on-failure
+
+
+x-env-defaults: &env_defaults
+  environment:
+    BACKEND: backend:8000
+    SOCKETIO: websocket:${SOCKETIO_PORT:-9000}
+    SOCKETIO_PORT: ${SOCKETIO_PORT:-9000}
+    ADMIN_PASSWORD: ${ADMIN_PASSWORD:-adminPassword}
+    DB_HOST: ${DB_HOST:-db}
+    DB_PORT: ${DB_PORT:-3306}
+    DB_PASSWORD: ${DB_PASSWORD:-databasePassword}
+    SITE: ${SITE:-site1.localhost}
+    FRAPPE_SITE_NAME_HEADER: ${FRAPPE_SITE_NAME_HEADER:-$$host}
+    UPSTREAM_REAL_IP_ADDRESS: ${UPSTREAM_REAL_IP_ADDRESS:-127.0.0.1}
+    UPSTREAM_REAL_IP_HEADER: ${UPSTREAM_REAL_IP_HEADER:-X-Forwarded-For}
+    UPSTREAM_REAL_IP_RECURSIVE: ${UPSTREAM_REAL_IP_RECURSIVE:-off}
+    PROXY_READ_TIMOUT: ${PROXY_READ_TIMOUT:-120}
+    CLIENT_MAX_BODY_SIZE: ${CLIENT_MAX_BODY_SIZE:-50m}
+    REDIS_CACHE: ${REDIS_CACHE:-redis-cache:6379}
+    REDIS_QUEUE: ${REDIS_QUEUE:-redis-queue:6379}
+
 x-backend-defaults: &backend_defaults
-  <<: [*depends_on_configurator, *customizable_image]
+  <<: [*depends_on_configurator, *customizable_image, *restart_defaults, *env_defaults]
   volumes:
     - sites:/home/frappe/frappe-bench/sites
+    - logs:/home/frappe/frappe-bench/logs
 
 services:
   configurator:
-    <<: *backend_defaults
+    <<: [*customizable_image, *env_defaults]
+    deploy:
+      restart_policy:
+        condition: none
     entrypoint:
       - bash
       - -c
@@ -67,43 +95,55 @@ services:
         bench set-config -g redis_queue "redis://$$REDIS_QUEUE";
         bench set-config -g redis_socketio "redis://$$REDIS_QUEUE";
         bench set-config -gp socketio_port $$SOCKETIO_PORT;
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_PORT: ${DB_PORT}
-      REDIS_CACHE: ${REDIS_CACHE}
-      REDIS_QUEUE: ${REDIS_QUEUE}
-      SOCKETIO_PORT: 9000
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
     depends_on: {}
+
+  create-site:
+    <<: *backend_defaults
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
+    entrypoint:
+      - bash
+      - -c
+    command:
+      - >
+        wait-for-it -t 120 $$DB_HOST:$$DB_PORT;
+        wait-for-it -t 120 $$REDIS_CACHE;
+        wait-for-it -t 120 $$REDIS_QUEUE;
+        export start=`date +%s`;
+        until [[ -n `grep -hs ^ sites/common_site_config.json | jq -r ".db_host // empty"` ]] && \
+          [[ -n `grep -hs ^ sites/common_site_config.json | jq -r ".redis_cache // empty"` ]] && \
+          [[ -n `grep -hs ^ sites/common_site_config.json | jq -r ".redis_queue // empty"` ]];
+        do
+          echo "Waiting for sites/common_site_config.json to be created";
+          sleep 5;
+          if (( `date +%s`-start > 120 )); then
+            echo "could not find sites/common_site_config.json with required keys";
+            exit 1
+          fi
+        done;
+        echo "sites/common_site_config.json found";
+        bench set-config -g developer_mode 1;
+        bench get-app https://github.com/frappe/hrms;
+        if [ ! -d "/home/frappe/frappe-bench/sites/$$SITE" ] || [ -z "$(ls -A /home/frappe/frappe-bench/sites/$$SITE)" ]; then
+          bench new-site $$SITE --no-mariadb-socket --admin-password=$$ADMIN_PASSWORD --install-app erpnext --db-root-password=$$DB_PASSWORD --install-app=ERPNext --install-app=hrms;
+        fi
 
   backend:
     <<: *backend_defaults
 
   frontend:
-    <<: *customizable_image
+    <<: [*customizable_image, *restart_defaults, *env_defaults]
     command:
       - nginx-entrypoint.sh
-    environment:
-      BACKEND: backend:8000
-      SOCKETIO: websocket:9000
-      FRAPPE_SITE_NAME_HEADER: ${FRAPPE_SITE_NAME_HEADER:-$$host}
-      UPSTREAM_REAL_IP_ADDRESS: ${UPSTREAM_REAL_IP_ADDRESS:-127.0.0.1}
-      UPSTREAM_REAL_IP_HEADER: ${UPSTREAM_REAL_IP_HEADER:-X-Forwarded-For}
-      UPSTREAM_REAL_IP_RECURSIVE: ${UPSTREAM_REAL_IP_RECURSIVE:-off}
-      PROXY_READ_TIMOUT: ${PROXY_READ_TIMOUT:-120}
-      CLIENT_MAX_BODY_SIZE: ${CLIENT_MAX_BODY_SIZE:-50m}
     volumes:
       - sites:/home/frappe/frappe-bench/sites
     depends_on:
       - backend
       - websocket
-
-  websocket:
-    <<: [*depends_on_configurator, *customizable_image]
-    command:
-      - node
-      - /home/frappe/frappe-bench/apps/frappe/socketio.js
-    volumes:
-      - sites:/home/frappe/frappe-bench/sites
 
   queue-short:
     <<: *backend_defaults
@@ -112,11 +152,27 @@ services:
   queue-long:
     <<: *backend_defaults
     command: bench worker --queue long,default,short
+  
+  websocket:
+    <<: *backend_defaults
+    command:
+      - node
+      - /home/frappe/frappe-bench/apps/frappe/socketio.js
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
 
   scheduler:
     <<: *backend_defaults
     command: bench schedule
+    volumes:
+      - sites:/home/frappe/frappe-bench/sites
+      - logs:/home/frappe/frappe-bench/logs
 
 # ERPNext requires local assets access (Frappe does not)
 volumes:
+  db-data:
+  redis-queue-data:
+  redis-cache-data:
   sites:
+  logs:
