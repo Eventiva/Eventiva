@@ -1,0 +1,24 @@
+{
+  "name": "git-subrepo",
+  "version": "1.0.0",
+  "description": "A tool for managing git subrepositories",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "git",
+    "subrepo",
+    "subrepository"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "dependency1": "^2.0.0",
+    "dependency2": "^1.5.0",
+    "dependency3": "^3.2.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.0"
+  }
+}
