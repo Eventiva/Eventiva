@@ -45,13 +45,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Update Welcome
+      - name: Update channels
         uses: luludotdev/discord-welcome-action@v1
         with:
           content: ./discord
-          discord-token: ${{ secrets.DISCORD_BOT_TOKEN }}
-      - name: Update Welcome
-        uses: luludotdev/discord-welcome-action@v1
-        with:
-          content: ./
           discord-token: ${{ secrets.DISCORD_BOT_TOKEN }}
