@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/.github
 	branch = develop
-	commit = 865b56709e2fab3d97edbc0dbdf935a1454a97fc
-	parent = b341e588328c1404becabbed1284d2af55a606e9
+	commit = 1412fca675eca08f8b8405cad8344d033d8e9467
+	parent = 03ca2c5c8eedfea921ddbb97e9c105e909d860f9
 	method = merge
 	cmdver = 0.4.6
