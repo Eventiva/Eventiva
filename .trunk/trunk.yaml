@@ -79,10 +79,7 @@ lint:
     - linters: [ALL]
       paths:
       - projects/workflows/git-subrepo/cmd/**
-actions:
-  enabled:
-    - trunk-announce
-    - trunk-upgrade-available
+      - .all-contributorsrc
 tools:
   runtimes:
     - node
