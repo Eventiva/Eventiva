@@ -14,7 +14,7 @@
  * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/change-report/blob/develop/CODE_OF_CONDUCT.md
  * -----
  * Copyright (c) 2023 Eventiva - All Rights Reserved
- * LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+ * LICENSE: MIT
  * -----
  * This program has been provided under confidence of the copyright holder and is 
  * licensed for copying, distribution and modification under the terms of
@@ -54,7 +54,7 @@ export const sendDiscordMessage = async (
     throw new Error(`Discord channel ${channel} not found`)
   }
 
-  if (!discordChannel.isTextBased()) {
+    if (!discordChannel.isTextBased()) {
     throw new Error(`Discord channel ${channel} is not text-based`)
   }
 
