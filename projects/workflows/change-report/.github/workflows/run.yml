@@ -40,6 +40,11 @@
 name: 'Run'
 on:
   workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to run the workflow on'
+        required: false
+        default: 'main':
   push:
     branches:
       - main
@@ -51,6 +56,8 @@ jobs:
   run: # make sure the action works on a clean machine without building
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
@@ -61,7 +68,7 @@ jobs:
           days: 7
           channel: integrations-test
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OA_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           GITHUB_REPO_NAME: ${{ github.repository }}
