@@ -4,6 +4,8 @@ channel: '1201190391270101012'
 
 # Security Policy
 
+Please find below the Security Policy as it pertains to our projects and modules.
+
 ## Supported Versions
 
 All versions are currently supported for security updates and maintainance. Please note this may change after the project reaches version 1.0.0.
