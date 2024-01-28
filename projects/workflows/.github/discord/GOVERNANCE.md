@@ -2,7 +2,9 @@
 channel: '1201190332730196089'
 ---
 
-# Project Governance
+# Project Governance 
+
+Please find below the Governance which we utilise across all our projects.
 
 ## Overview
 

@@ -4,6 +4,8 @@ channel: '1201190064332472351'
 
 # Contributor Covenant Code of Conduct
 
+Please find below the Contributor Covenant Code of Conduct which we utilise across all our projects.
+
 ## Our Pledge
 
 We as members, contributors, and leaders pledge to make participation in our
