@@ -4,7 +4,7 @@
  * Project: change-report
  * File: main.ts
  * Path: \src\main.ts
- * Created Date: Wednesday, December 6th 2023
+ * Created Date: Thursday, December 7th 2023
  * Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
  * -----
  * Contributing: Please read through our contributing guidelines. Included are directions for opening
@@ -60,7 +60,7 @@ async function run(): Promise<void> {
     core.info('Generated report:')
     core.info(report)
 
-    if (!report) {
+    if (!report || report.length === 0) {
       throw new Error('Failed to generate report')
     }
 
