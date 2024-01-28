@@ -37,13 +37,13 @@
  * Current Version: 0.0.0
  */
 
-import {OpenAIApi, Configuration} from 'openai'
+import {OpenAIApi, OpenAI} from 'openai'
 
 export const composeReport = async (
   daysCount: number,
   commitMessagesList: string[]
 ): Promise<string> => {
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
+  const OPENAI_API_KEY = process.env.OA_API_KEY
   const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
 
   const openai = new OpenAIApi(
@@ -61,7 +61,7 @@ export const composeReport = async (
     'You should split the report into sections to help identify new features, bug fixes and minor changes.',
     `You should include emojis and emotes to make it more community-friendly.`,
     `You should always sign the end of your message as "The Software Delivery Change Manager".`,
-    `Never make up points. Only use the information given to create your response.`,
+    `Never make up points. Only use the information given to create your response. Only use the information given to create your response.`,
     `If a section is going to be empty, this is fine.`,
     `Include within the title the name of the project, and the date range of the report.`,
   ].join('\n')
