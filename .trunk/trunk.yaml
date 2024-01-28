@@ -79,7 +79,6 @@ lint:
     - linters: [ALL]
       paths:
       - projects/workflows/git-subrepo/cmd/**
-      - dockerfile.eventiva
 actions:
   enabled:
     - trunk-announce
