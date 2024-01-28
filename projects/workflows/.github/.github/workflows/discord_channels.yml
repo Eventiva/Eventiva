@@ -50,3 +50,8 @@ jobs:
         with:
           content: ./discord
           discord-token: ${{ secrets.DISCORD_BOT_TOKEN }}
+      - name: Update Welcome
+        uses: luludotdev/discord-welcome-action@v1
+        with:
+          content: ./
+          discord-token: ${{ secrets.DISCORD_BOT_TOKEN }}
