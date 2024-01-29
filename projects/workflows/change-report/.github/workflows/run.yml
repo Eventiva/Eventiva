@@ -5,7 +5,44 @@
 # File: run.yml
 # Path: \.github\workflows\run.yml
 # Created Date: Wednesday, December 6th 2023
-# Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+# name: 'Run'
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  run: # make sure the action works on a clean machine without building
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 250
+
+      - uses: ./
+        with:
+          destination: slack
+          days: 7
+          channel: integrations-test
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+          GITHUB_REPO_NAME: ${{ github.repository }}
+
+      - uses: ./
+        with:
+          destination: discord
+          days: 7
+          channel: '1105810974189043762, 1105810974189043762'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          GITHUB_REPO_NAME: ${{ github.repository }} (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
 # -----
 # Contributing: Please read through our contributing guidelines. Included are directions for opening
 # issues, coding standards, and notes on development. These can be found at https://github.com/change-report/blob/develop/CONTRIBUTING.md
@@ -42,7 +79,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - develop
 
 permissions:
   contents: read
