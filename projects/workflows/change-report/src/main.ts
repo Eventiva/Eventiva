@@ -60,7 +60,7 @@ async function run(): Promise<void> {
     core.info('Generated report:')
     core.info(report)
 
-    if (!report) {
+    if (!report || report.length === 0) {
       throw new Error('Failed to generate report')
     }
 
@@ -79,7 +79,7 @@ async function run(): Promise<void> {
 
     core.info('Report sent')
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    core.setFailed(`Error occurred: ${error.message}`)
   }
 }
 
