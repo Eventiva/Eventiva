@@ -1,0 +1,13 @@
+---
+module: git-subrepo
+dependencies:
+  - module: dependency1
+    tier: 2
+  - module: dependency2
+    tier: 3
+dependents:
+  - module: dependent1
+    tier: 2
+  - module: dependent2
+    tier: 3
+---
