@@ -38,6 +38,7 @@
  */
 
 import * as core from '@actions/core'
+import { setTimeout } from 'timers'
 import {fetchCommitMessages} from './fetch-commit-messages'
 import {composeReport} from './compose-report'
 import {sendSlackMessage} from './send-slack-message'
