@@ -59,6 +59,9 @@ jobs:
         with:
           destination: slack
           days: 7
+          retry-max: 3
+          retry-delay: 5s
+          retry-when: ${{ contains(steps.<step_id>.outputs.<output_name>, 'Request failed with status code 429') }}
           channel: integrations-test
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -71,6 +74,9 @@ jobs:
           destination: discord
           days: 7
           channel: '1105810974189043762, 1105810974189043762'
+          retry-max: 3
+          retry-delay: 5s
+          retry-when: ${{ contains(steps.<step_id>.outputs.<output_name>, 'Request failed with status code 429') }}
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
