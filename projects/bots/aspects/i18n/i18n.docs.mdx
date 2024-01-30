@@ -1,0 +1,34 @@
+---
+description: 'A plugable I18N aspect. Can be used to provider a UI and API.'
+labels: ['aspect', 'composition', 'extendability']
+---
+
+A plugable I18N aspect. Used to maintain I18N across the platform.
+
+## Get started
+
+Compose the aspect into your Harmony platform:
+
+```ts
+import { PlatformAspect } from '@bitdev/harmony.aspects.platform-aspect';
+
+/**
+ * compose the wayne.com platform.
+ */    
+export const MyPlatform = HarmonyPlatform.from({
+  name: 'my-platform',
+
+  platform: PlatformAspect,
+
+  runtimes: [
+    new BrowserRuntime(),
+    new NodeJSRuntime()
+  ],
+
+  aspects: [
+    I18NAspect,
+  ]
+});
+
+export default MyPlatform;
+```

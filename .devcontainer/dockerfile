@@ -38,6 +38,7 @@ ARG ERPNEXT_VERSION
 FROM frappe/erpnext:${ERPNEXT_VERSION}
 
 
+USER frappe
 WORKDIR /home/frappe/frappe-bench/
 # check to see if the lms folder already exists and if it doesn't then clone the repo
 RUN if [ ! -d "/home/frappe/frappe-bench/apps/lms" ] ; then bench get-app https://github.com/frappe/lms.git ; fi
