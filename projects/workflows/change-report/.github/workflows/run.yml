@@ -42,10 +42,10 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - develop
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   run: # make sure the action works on a clean machine without building
@@ -57,7 +57,7 @@ jobs:
 
       - uses: ./
         with:
-          destination: slack
+          destination: slack-notify
           days: 7
           channel: integrations-test
         env:
