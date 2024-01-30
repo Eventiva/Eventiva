@@ -61,9 +61,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "gha-failing-actions_78468",
+            "name": "sweep_gha_fix_the_github_actions_run_fai_a4386",
             "scope": "eventiva.modules"
         },
-        "exported": true
+        "exported": false
     }
 }
