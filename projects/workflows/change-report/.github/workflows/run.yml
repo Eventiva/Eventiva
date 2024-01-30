@@ -49,15 +49,15 @@ permissions:
 
 jobs:
   run: # make sure the action works on a clean machine without building
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 250
 
-      - uses: ./
+      - uses: actions/checkout@v2/
         with:
-          destination: slack
+          destination: github/slack
           days: 7
           channel: integrations-test
         env:
@@ -66,9 +66,9 @@ jobs:
           SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
           GITHUB_REPO_NAME: ${{ github.repository }}
 
-      - uses: ./
+      - uses: actions/checkout@v2/
         with:
-          destination: discord
+          destination: github/discord
           days: 7
           channel: '1105810974189043762, 1105810974189043762'
         env:
