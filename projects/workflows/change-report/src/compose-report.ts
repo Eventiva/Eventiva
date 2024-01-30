@@ -43,8 +43,8 @@ export const composeReport = async (
   daysCount: number,
   commitMessagesList: string[]
 ): Promise<string> => {
-  const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
-  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY || ''
+  const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME || 'MyRepo'
 
   const openai = new OpenAIApi(
     new Configuration({
@@ -82,6 +82,7 @@ export const composeReport = async (
       {role: 'user', content: userPrompt},
       {role: 'user', content: 'Project Name: ' + GITHUB_REPO_NAME + `\nToday's Date: ${new Date().toDateString()}` + '\nCommit messages:'},
       {role: 'user', content: commitMessagesList.join('\n')},
+      {role: 'user', content: ''},
       {role: 'assistant', content: 'Report:'}
     ],
     max_tokens: 450,
