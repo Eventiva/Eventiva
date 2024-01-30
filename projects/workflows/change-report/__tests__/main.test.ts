@@ -1,5 +1,5 @@
 import {expect, test} from '@jest/globals'
 
 test('ok', async () => {
-  await expect(true).toBeTruthy()
-})
+  await expect(true).toBeTruthy();
+});
