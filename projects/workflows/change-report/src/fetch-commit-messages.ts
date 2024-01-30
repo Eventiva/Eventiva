@@ -9,5 +9,5 @@ export const fetchCommitMessages = async (
   const {stdout} = await execAsync(
     `git log --since="${daysCount} days ago" --pretty=format:"%s"`
   )
-  return stdout.split('\n').filter(message => message !== '')
+  return stdout.split('\n').filter(message => message !== '').filter(message => message.trim() !== '')
 }
