@@ -5,19 +5,19 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Run discord/client",
+			"name": "Discord Support Bot",
 			"request": "launch",
 			"localRoot": "${workspaceFolder}",
 			"runtimeArgs": [
 				"app",
 				"run",
-				"client"
+				"eventiva.bots/support"
 			],
 			"runtimeExecutable": "bit",
 			"outputCapture": "std",
 			"trace": true,
 			"type": "node",
-			"envFile": "${workspaceFolder}/projects/bots/discord/client/.env"
+			"envFile": "${workspaceFolder}/projects/bots/support/.env",
 		},
 		{
 			"name": "Launch Website",
