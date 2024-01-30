@@ -47,7 +47,7 @@
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",
-        "version": "cc4e86408c61887b9e8e7aa0b258196f2ecac5d8",
+        "version": "8cb9055268cf97443f21d2b51af437ae8d99ee0a",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/git-subrepo"
     },
@@ -58,5 +58,12 @@
         "mainFile": "index.ts",
         "rootDir": "projects/bots/support"
     },
-    "$schema-version": "17.0.0"
+    "$schema-version": "17.0.0",
+    "_bit_lane": {
+        "id": {
+            "name": "gha-failing-actions_78468",
+            "scope": "eventiva.modules"
+        },
+        "exported": true
+    }
 }
