@@ -43,10 +43,13 @@ export const sendDiscordMessage = async (
   channel: string,
   content: string
 ): Promise<void> => {
-  const discord = new Discord.Client({
+  const discordIntents = new Discord.Intents({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] })
+const discord = new Discord.Client({ intents: discordIntents })({
     intents: []
   })
-  await discord.login(process.env.DISCORD_BOT_TOKEN)
+  await await discord.login(process.env.DISCORD_BOT_TOKEN).catch(err => {
+    console.error('Error while logging into Discord:', err)
+  })
 
   const discordChannel = await discord.channels.fetch(String(channel))
 
