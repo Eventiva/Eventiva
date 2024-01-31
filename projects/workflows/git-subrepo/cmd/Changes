@@ -21,8 +21,8 @@ date:    Sat 21 Nov 2020 03:28:43 PM EST
 ---
 version: 0.4.2
 date:    Tue Nov 17 14:10:10 CST 2020
-- Covert to GitHub Actions for testing
-- Add docker support to test multiple git/bash versions together
+- Convert to GitHub Actions for testing
+- Add GitHub Actions support to test multiple git/bash versions together
 - Require Bash 4.0+
 - Use shellcheck as linter and address issues discovered
 - Discovered bug in git where @ is not a valid workspace name
