@@ -44,21 +44,24 @@ branding:
   icon: 'align-left'
   color: 'blue'
 inputs:
-  destination:
+  destination: 'slack',
     required: true
     description: 'destination to post the report to'
   days: # change this
     required: true
     description: 'number of days to include into the report'
     default: 7
-  channel:
+  channel: 'general'
     required: true
     description: 'channel to report'
     default: 'general'
   crosspost:
     required: false
     description: 'If is announcement channel, crosspost the message to all channels following'
-    default: true
+    OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+  SLACK_SIGNING_SECRET: ${{ secrets.SLACK_SIGNING_SECRET }}
+  DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
 runs:
   using: 'node16'
   main: 'dist/index.js'
