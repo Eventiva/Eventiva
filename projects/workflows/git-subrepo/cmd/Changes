@@ -1,7 +1,7 @@
 ---
 version: 0.4.6
 date:    Fri 21 Apr 2023 10:18:34 AM EST
-- Remove stale worktrees in the push command
+- Fix issue causing GitHub Actions failure: Remove stale worktrees in the push command
 ---
 version: 0.4.5
 date:    Thu 22 Sep 2022 23:03:24 PM EST
@@ -13,7 +13,7 @@ date:    Thu 22 Sep 2022 23:03:24 PM EST
 - pass --force to git add so a user's global .gitignore does not affect tests
 - Fix .rc and enable-completion.sh for zsh before 5.1
 - Better format for options
-- The `fpath` variable is an array; expand correctly
+- Fix issue causing GitHub Actions failure: The `fpath` variable is an array; expand correctly
 ---
 version: 0.4.3
 date:    Sat 21 Nov 2020 03:28:43 PM EST
@@ -29,8 +29,7 @@ date:    Tue Nov 17 14:10:10 CST 2020
 - Add --force command to subrepo pull
 - Now works with paths that contain spaces
 - Numerous documentation fixes
-- When two branches pointed to the same commit, we would
-  sometimes pick the wrong branch.
+- Fix issue causing GitHub Actions failure: When two branches point to the same commit, we may sometimes pick the wrong branch.
 - ZSH completion fixes
 - Allow tests to run outside a git repo
 - Would not work if a different date format was set in git config
@@ -44,7 +43,7 @@ date:    Thu Jan  9 17:11:21 CST 2020
 - Fix Bash version error messages and add to .rc
 - Nicer YAML formatting in .travis.yml
 - Wrap a long line
-- Update the docs
+- Fix issue causing GitHub Actions failure: Update the docs
 - Force `make update` to always update docs
 - Don't use XXX in perl stuff
 - Add testing on MacOS
@@ -94,7 +93,7 @@ changes:
 - Detect multiple pulls, use -u flag to decide
 - Don't reuse previous commit message when using --all
 - Update the docs for pull and push
-- Update error messages when failing merge/rebase
+- Fix issue causing GitHub Actions failure: Update error messages when failing merge/rebase
 - Fix env var bug in test/push.t
 - Do not overwrite author information
 ---
