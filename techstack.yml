@@ -106,8 +106,8 @@ tools:
 - name: GitHub Actions
   description: Automate your workflow from idea to production
   website_url: https://github.com/features/actions
-  open_source: true
-  hosted_saas: false
+  open_source: false
+  hosted_saas: true
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
