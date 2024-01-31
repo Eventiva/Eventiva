@@ -83,23 +83,15 @@ Full tech stack [here](/techstack.md)
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
 
 ### Running Locally & Developing
- \
- \
-You can run and troubleshoot the GitHub Actions workflow using the following steps:
+
 
 Our backlog can be found on either our [Github Project](https://github.com/orgs/Eventiva/projects/12)
 
 ### Running Locally & Developing
 
-[This section is being re-written based on the new development environment and major changes to the repository]
+To set up your development platform and run the GitHub Actions workflow locally for troubleshooting, please follow these steps based on your preferred environment:
 
-#### prerequisites
 
-You can choose one of the following methods to get your development platform configured
-
-#### Codespaces Method (Recommended)
-
-You can run and troubleshoot the GitHub Actions workflow using the following steps:
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
