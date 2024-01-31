@@ -37,8 +37,8 @@
 */
 
 import { DiscordjsAspect } from './discordjs.aspect.js';
-
 export type { DiscordjsNode } from './discordjs.node.runtime.js';
+export type { Event } from './event.js'
+export type { Command } from './command.js'
 
-export default DiscordjsAspect;
-export { DiscordjsAspect };
+export default DiscordjsAspect;export { DiscordjsAspect };

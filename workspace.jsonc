@@ -38,7 +38,6 @@
   **/
   "teambit.generator/generator": {
     "envs": [
-      "eventiva.workflows/environments/discord/bot",
       "bitdev.harmony/harmony-env",
       "bitdev.node/node-env"
     ]

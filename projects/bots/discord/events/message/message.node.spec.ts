@@ -2,9 +2,9 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: logging.node.runtime.ts
-* Path: \projects\bots\aspects\logging\logging.node.runtime.ts
-* Created Date: Monday, January 29th 2024
+* File: message.node.spec.ts
+* Path: \projects\bots\discord\events\message\message.node.spec.ts
+* Created Date: Tuesday, January 30th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
 * -----
@@ -36,39 +36,14 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import pino from 'pino';
-import pinoCaller from 'pino-caller';
-import pretty from 'pino-pretty';
-import type { LoggingConfig } from './logging-config.js';
+import { loadAspect } from '@bitdev/harmony.testing.load-aspect';
+import type { MessageNode } from './message.node.runtime.js';
+import { MessageAspect } from './message.aspect.js';
 
-export class LoggingNode {
-  stream = pretty({
-    colorize: true
-  })
-  // @ts-expect-error Typeguarding 
-  console: pino.Logger<"alert" | "emergency"> = process.env.NODE_ENV === 'development' ? pinoCaller(pino(this.config, this.stream)) : pino(this.config, this.stream);
+it('should retrieve the aspect', async () => {
+  const message = await loadAspect<MessageNode>(MessageAspect, {
+    runtime: 'node',
+  });
 
-  constructor(
-    private config: LoggingConfig,
-  ) { }
-
-  static dependencies = [];
-
-  static defaultConfig: LoggingConfig = {
-    level: 'debug',
-    customLevels: {
-      alert: 70,
-      emergency: 80 
-    }
-  };
-
-  static async provider(
-    deps: [],
-    config: LoggingConfig,
-  ) {
-    const logging = new LoggingNode(config);
-    return logging;
-  }
-}
-
-export default LoggingNode;
+  expect(message).toBeTruthy();
+});    

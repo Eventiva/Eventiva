@@ -11,7 +11,7 @@
 			"runtimeArgs": [
 				"app",
 				"run",
-				"eventiva.bots/support"
+				"Support"
 			],
 			"runtimeExecutable": "bit",
 			"outputCapture": "std",
