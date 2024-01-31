@@ -57,3 +57,7 @@ jobs:
       - run: git config --global user.email "you@example.com";
           git config --global user.name "Your Name";
       - run: make test
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          ENV: production
+          DEBUG: false
