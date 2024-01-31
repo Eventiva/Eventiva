@@ -37,7 +37,9 @@
  * Current Version: 0.0.0
  */
 
-import {OpenAIApi, Configuration} from 'openai'
+import axios from 'axios'
+import { OpenAIApi, Configuration } from 'openai'
+import axiosRetry from 'axios-retry'
 
 export const composeReport = async (
   daysCount: number,
@@ -46,6 +48,7 @@ export const composeReport = async (
   const OPENAI_API_KEY = process.env.OPENAI_API_KEY!
   const GITHUB_REPO_NAME = process.env.GITHUB_REPO_NAME
 
+  axiosRetry(axios, { retries: 3 })
   const openai = new OpenAIApi(
     new Configuration({
       apiKey: OPENAI_API_KEY
