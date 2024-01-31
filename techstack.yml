@@ -106,8 +106,8 @@ tools:
 - name: GitHub Actions
   description: Automate your workflow from idea to production
   website_url: https://github.com/features/actions
-  open_source: false
-  hosted_saas: true
+  open_source: true
+  hosted_saas: false
   category: Build, Test, Deploy
   sub_category: Continuous Integration
   image_url: https://img.stackshare.io/service/11563/actions.png
@@ -117,7 +117,7 @@ tools:
 - name: Jest
   description: Painless JavaScript Unit Testing
   website_url: http://facebook.github.io/jest/
-  version: 29.7.0
+  version: 3.3.0
   license: MIT
   open_source: true
   hosted_saas: false
