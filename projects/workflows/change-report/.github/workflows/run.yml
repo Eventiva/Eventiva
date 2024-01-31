@@ -58,7 +58,7 @@ jobs:
       - uses: ./
         with:
           destination: slack
-          days: 7
+          days: 3
           channel: integrations-test
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
