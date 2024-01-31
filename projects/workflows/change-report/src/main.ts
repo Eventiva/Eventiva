@@ -44,6 +44,7 @@ import {sendSlackMessage} from './send-slack-message'
 import {sendDiscordMessage} from './send-discord-message'
 
 async function run(): Promise<void> {
+  import * as core from '@actions/core';
   try {
     const daysCount = parseInt(core.getInput('days'))
     const commitMessagesList = await fetchCommitMessages(daysCount)
@@ -52,7 +53,8 @@ async function run(): Promise<void> {
     core.info(commitMessagesList.join('\n'))
 
     if (commitMessagesList.length === 0) {
-      core.info('No commit messages found. Skipping report generation.')
+      core.info('No commit messages found. Skipping report generation.');
+      return;
       return
     }
 
@@ -61,6 +63,8 @@ async function run(): Promise<void> {
     core.info(report)
 
     if (!report) {
+  core.error('Failed to generate report');
+      return;
       throw new Error('Failed to generate report')
     }
 
