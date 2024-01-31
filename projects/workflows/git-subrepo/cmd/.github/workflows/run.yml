@@ -11,16 +11,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Install bash
-        if: startsWith(matrix.os, 'macos')
+      - name: Install bash on macOS
+        if: runner.os == 'macOS'
         run: brew install bash || true
 
-      - name: Configure git user
+      - name: Configure git user (if necessary)
+        if: needs.git-config
         run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "you@example.com" && git config --global user.name "Your Name"
 
       - name: Run git-subrepo commands
         run: |
