@@ -3,7 +3,9 @@ Change Report GitHub Action
 
 This action generates a report from the recent code changes and posts it to Slack or Discord.
 
-### Demo
+### Troubleshooting and Error Messages
+
+This section provides guidance on troubleshooting and fixing potential issues with the workflow, including common error messages and their possible causes.
 > **Important:** The report is created by taking the commit messages in your repository as input. This means that the more descriptive you are when committing changes, the better this action will work for you 😉. 
 
 Here's an example of how the generated change report might look like. 
@@ -57,7 +59,9 @@ In the past 7 days, we've been working hard to improve our SpaceX Internet satel
 
 The report might look slightly differently in your case, as it depends on the commit messages.
 
-### Usage example
+### Common Error Messages and Resolution
+
+Here are some common error messages that may occur with the workflow, along with their possible causes and steps to resolve them.
 
 ```yml
 name: 'Change Report'
