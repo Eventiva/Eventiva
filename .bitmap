@@ -44,6 +44,34 @@
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/support-platform"
     },
+    "discord/events/message": {
+        "name": "discord/events/message",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.bots",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/discord/events/message",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.49": {},
+            "teambit.envs/envs": {
+                "env": "bitdev.harmony/harmony-env"
+            }
+        }
+    },
+    "discord/events/ready": {
+        "name": "discord/events/ready",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.bots",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/discord/events/ready",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.49": {},
+            "teambit.envs/envs": {
+                "env": "bitdev.harmony/harmony-env"
+            }
+        }
+    },
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",

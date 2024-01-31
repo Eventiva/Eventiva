@@ -42,8 +42,8 @@ import { BrowserRuntime } from '@bitdev/harmony.runtimes.browser-runtime';
 import { SupportPlatformAspect } from '@eventiva/bots.aspects.support-platform';
 import { AtlassianCustomerSupportAspect } from '@eventiva/bots.aspects.atlassian-customer-support';
 import { DiscordjsAspect } from '@eventiva/bots.aspects.discordjs';
-import {LoggingAspect} from '@eventiva/bots.aspects.logging';
-import {I18NAspect} from '@eventiva/bots.aspects.i18n';
+import { LoggingAspect } from '@eventiva/bots.aspects.logging';
+import { I18NAspect } from '@eventiva/bots.aspects.i18n';
 
 /**
   * platform composition of the support platform.

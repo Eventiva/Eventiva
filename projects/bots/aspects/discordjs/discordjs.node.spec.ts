@@ -41,7 +41,11 @@ import type { DiscordjsNode } from './discordjs.node.runtime.js';
 import { DiscordjsAspect } from './discordjs.aspect.js';
 
 it('should retrieve the aspect', async () => {
-  const discordjs = await loadAspect<DiscordjsNode>(DiscordjsAspect, {
+  const discordjs = await loadAspect<DiscordjsNode>([DiscordjsAspect, {
+    token: "test",
+    clientId: "test",
+    clientSecret: "test"
+  }], {
     runtime: 'node',
   });
 

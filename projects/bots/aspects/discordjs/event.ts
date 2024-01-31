@@ -38,9 +38,20 @@
 
 import {
   type ClientEvents,
-  type Awaitable,
+  type Awaitable, Events as DiscordEvents
 } from 'discord.js';
 import type { SlotRegistry } from '@bitdev/harmony.harmony';
+
+
+export interface ExtendedClientEvents extends ClientEvents {
+  debug: [message: string];
+  trace: [message: string];
+  info: [message: string];
+  warn: [message: string];
+  fatal: [message: string];
+  alert: [message: string];
+  emergency: [message: string];
+}
 
 /**
  * A generic event type that corresponds to a specific event key from the `ClientEvents` interface.
@@ -53,11 +64,12 @@ import type { SlotRegistry } from '@bitdev/harmony.harmony';
  * @typedef {Event}
  * @template {keyof ClientEvents} E The type of event
  */
-export type Event<E extends keyof ClientEvents> = {
+export type Event<E extends keyof ExtendedClientEvents> = {
   name: E;
   once?: boolean;
   // make this the same as the discordjs event on and once methods
-  execute: (...args: ClientEvents[E]) => Awaitable<void>;
+  execute: (...args: ExtendedClientEvents[E]) => Awaitable<void>;
 };
 
-export type EventSlot<E extends keyof ClientEvents> = SlotRegistry<Event<E>[]>;
+export type EventSlot<E extends keyof ExtendedClientEvents> = SlotRegistry<Event<E>[]>;
+

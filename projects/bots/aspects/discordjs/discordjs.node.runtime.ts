@@ -37,47 +37,66 @@
 */
 import {
   Client,
-  Events,
   GatewayIntentBits,
-  type ClientEvents,
 } from 'discord.js';
 import type { DiscordjsConfig } from './discordjs-config.js';
-import { Event, EventSlot } from './event.js';
+import { Event, EventSlot, ExtendedClientEvents } from './event.js';
 import { Command, CommandSlot } from './command.js';
-import {LoggingAspect, LoggingNode} from '@eventiva/bots.aspects.logging';
+import {LoggingAspect, LoggingNode, LogLevels} from '@eventiva/bots.aspects.logging';
+import { LogEvents, LogEventsTypes } from './logEvents.js';
 
 export class DiscordjsNode {
-  private client: Client
+  protected client: Client
+
   constructor(
     private config: DiscordjsConfig,
-    private eventSlot: EventSlot<any>,
-    private commandSlot: CommandSlot,
-    private logging: LoggingNode
+    protected eventSlot: EventSlot<any>,
+    protected commandSlot: CommandSlot,
+    protected logging?: LoggingNode
   ) {
-    if (!config.token) {
-      throw new Error('token is missing');
+    if (logging) { 
+      this.logging.console.trace(`Checking token exists on configuration`)
+      if (!config.token) this.logging.console.warn(`No token found on config`)
+      else this.logging.console.trace(`Token found.`)
+      
+      this.logging.console.trace(`Checking clientId exists on configuration`)
+      if (!config.clientId) this.logging.console.warn(`No clientId found on config`)
+      else this.logging.console.trace(`clientId found.`)
+      
+      this.logging.console.trace(`Checking clientSecret exists on configuration`)
+      if (!config.clientSecret) this.logging.console.warn(`No clientSecret found on config`)
+      else this.logging.console.trace(`clientSecret found.`)
+      
+      this.logging.console.trace(`Creating new client.`)
     }
-    if (!config.clientId) {
-      throw new Error('clientId is missing');
-    }
-    if (!config.clientSecret) {
-      throw new Error('clientSecret is missing');
-    }
+
     this.client = new Client(config)
+    if (logging) this.logging.console.trace(`Client created.`)
   }
   
   /**
    * register a list of event.
    */
-  registerEvent<E extends keyof ClientEvents>(events: Event<E>[]) {
-    this.logging.console.debug(`Registering events. ${events.length} events to be loaded. `)
+  registerEvent<E extends keyof ExtendedClientEvents>(events: Event<E>[]) {
+    this.logging.console.trace(`Registering events. ${events.length} events to be loaded.`)
     this.eventSlot.register(events);
+    this.logging.console.trace(`Events registered against EventSlot. Now hosting ${this.eventSlot.length} events`)
+    
     for (const event of events){
-      console.debug(`Registering once event handler for ${event.name}`);
-      if (event.once) this.client.once(event.name, event.execute)
-      else this.client.on(event.name, event.execute)
+      this.logging.console.trace(`Registering Event - ${event.name} - on ${event.once ? "Once" : "repeat"} emitter.`)
+      if (event.once) this.client.once(event.name as string, event.execute.bind(this))
+      else this.client.on(event.name as string, event.execute.bind(this))
+      this.logging.console.info(`Registered Event - ${event.name}`)
     }
     return this;
+  }
+
+  /**
+   * register default logging event.
+   */
+  registerLoggingEvents() {
+    if (!this.logging) throw new Error("Can not create default logging events without logging module")
+    return this.registerEvent<LogEventsTypes>(LogEvents)
   }
 
   /**
@@ -91,7 +110,9 @@ export class DiscordjsNode {
    * register a list of command.
    */
   registerCommand(commands: Command[]) {
+    this.logging.console.trace(`Registering commands. ${commands.length} commands to be loaded.`)
     this.commandSlot.register(commands);
+    this.logging.console.trace(`commands registered against commandSlot. Now hosting ${this.commandSlot.length} commands`)
     return this;
   }
 
@@ -137,18 +158,22 @@ export class DiscordjsNode {
   };
 
   static async provider(
-    [logging]: [LoggingNode],
+    [logging]: [LoggingNode|undefined],
     config: DiscordjsConfig,
     [eventSlot, commandSlot]: [EventSlot<any>, CommandSlot]
   ) {
+  
     const discordjs = new DiscordjsNode(config, eventSlot, commandSlot, logging);
-    logging.console.debug(`Registering logging events...`);
-    discordjs.client.on(Events.ClientReady, () => logging.console.info('The bot is online'));
-    discordjs.client.on(Events.Debug, (m) => logging.console.debug(m));
-    discordjs.client.on(Events.Warn, (m) => logging.console.warn(m));
-    discordjs.client.on(Events.Error, (m) => logging.console.error(m));
+
+    if (logging) {
+      logging.console.trace(`Registering logging events...`);
+      await discordjs.registerLoggingEvents()
+    }
+    
+    if (logging) logging.console.trace(`loggin into client...`);
     await discordjs.client.login(config.token)
-    logging.console.debug(`Logged in`);
+    
+    if (logging) logging.console.trace(`Logged in`);
 
     return discordjs;
   }

@@ -43,3 +43,13 @@ export type LoggingConfig = {
 
 } & LoggerOptions;
 
+export enum LogLevels {
+  Debug = 'debug',
+  Trace = 'trace',
+  Info = 'info',
+  Warn = 'warn',
+  Error = 'error',
+  Fatal = 'fatal',
+  Alert = 'alert',
+  Emergency = 'emergency',
+}

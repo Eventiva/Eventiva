@@ -2,9 +2,9 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: logging.node.runtime.ts
-* Path: \projects\bots\aspects\logging\logging.node.runtime.ts
-* Created Date: Monday, January 29th 2024
+* File: message.node.runtime.ts
+* Path: \projects\bots\discord\events\message\message.node.runtime.ts
+* Created Date: Tuesday, January 30th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
 * -----
@@ -36,39 +36,28 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import pino from 'pino';
-import pinoCaller from 'pino-caller';
-import pretty from 'pino-pretty';
-import type { LoggingConfig } from './logging-config.js';
+import DiscordjsAspect, { DiscordjsNode } from '@eventiva/bots.aspects.discordjs';
+import type { MessageConfig } from './message-config.js';
 
-export class LoggingNode {
-  stream = pretty({
-    colorize: true
-  })
-  // @ts-expect-error Typeguarding 
-  console: pino.Logger<"alert" | "emergency"> = process.env.NODE_ENV === 'development' ? pinoCaller(pino(this.config, this.stream)) : pino(this.config, this.stream);
-
+export class MessageNode {
   constructor(
-    private config: LoggingConfig,
-  ) { }
+    private discordjs: DiscordjsNode,
+    private config: MessageConfig,
+  ) {}
+  
+  static dependencies = [DiscordjsAspect];
 
-  static dependencies = [];
-
-  static defaultConfig: LoggingConfig = {
-    level: 'debug',
-    customLevels: {
-      alert: 70,
-      emergency: 80 
-    }
-  };
+  static defaultConfig: MessageConfig = {};
 
   static async provider(
-    deps: [],
-    config: LoggingConfig,
+    [discordjs]: [DiscordjsNode|undefined],
+    config: MessageConfig,
   ) {
-    const logging = new LoggingNode(config);
-    return logging;
+    if (!discordjs) throw new Error("DiscordJS not in dependancies")
+    const message = new MessageNode(discordjs, config);
+
+    return message;
   }
 }
 
-export default LoggingNode;
+export default MessageNode;
