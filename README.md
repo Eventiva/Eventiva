@@ -82,7 +82,10 @@ Full tech stack [here](/techstack.md)
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
 
-### Backlog
+### Running Locally & Developing
+ \
+ \
+You can run and troubleshoot the GitHub Actions workflow using the following steps:
 
 Our backlog can be found on either our [Github Project](https://github.com/orgs/Eventiva/projects/12)
 
@@ -96,9 +99,11 @@ You can choose one of the following methods to get your development platform con
 
 #### Codespaces Method (Recommended)
 
+You can run and troubleshoot the GitHub Actions workflow using the following steps:
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
-GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
+GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. The GitHub Actions workflow can be run using these environments. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension [here](https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces).
 
 #### Devcontainer Method
 
