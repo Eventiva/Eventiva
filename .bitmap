@@ -14,49 +14,70 @@
         "scope": "eventiva.bots",
         "version": "a5d0ff328ce845338b271842471d7ba79d2c2f84",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/atlassian-customer-support"
+        "rootDir": "projects/bots/aspects/atlassian-customer-support",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.52": {}
+        }
     },
     "aspects/discordjs": {
         "name": "aspects/discordjs",
         "scope": "eventiva.bots",
         "version": "490e4fae127190cc23ab8d9081ff0556d4de97a2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/discordjs"
+        "rootDir": "projects/bots/aspects/discordjs",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.52": {}
+        }
     },
     "aspects/i18n": {
         "name": "aspects/i18n",
         "scope": "eventiva.bots",
         "version": "9c94c2d9c19039f2dbadd981e555d4aa54724311",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/i18n"
+        "rootDir": "projects/bots/aspects/i18n",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.52": {}
+        }
     },
     "aspects/logging": {
         "name": "aspects/logging",
         "scope": "eventiva.bots",
         "version": "412e54bf7ef80119c7b16f980dc4ebfbadad0c52",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/logging"
+        "rootDir": "projects/bots/aspects/logging",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.52": {}
+        }
     },
     "aspects/support-platform": {
         "name": "aspects/support-platform",
         "scope": "eventiva.bots",
         "version": "2d4d8b48a2d71e5393fa02ffa55c1e7cd2bfa466",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/support-platform"
+        "rootDir": "projects/bots/aspects/support-platform",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.52": {}
+        }
     },
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",
         "version": "cc4e86408c61887b9e8e7aa0b258196f2ecac5d8",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/git-subrepo"
+        "rootDir": "projects/workflows/git-subrepo",
+        "config": {
+            "teambit.node/node@1.0.37": {}
+        }
     },
     "support": {
         "name": "support",
         "scope": "eventiva.bots",
         "version": "87e13dff339d38bb464e85c7f35acbf8f4dc4a89",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/support"
+        "rootDir": "projects/bots/support",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.52": {}
+        }
     },
     "$schema-version": "17.0.0"
 }
