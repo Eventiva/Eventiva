@@ -37,15 +37,11 @@
 */
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect';
-import type { DiscordjsNode } from './discordjs.node.runtime.js';
 import { DiscordjsAspect } from './discordjs.aspect.js';
+import type { DiscordjsNode } from './discordjs.node.runtime';
 
 it('should retrieve the aspect', async () => {
-  const discordjs = await loadAspect<DiscordjsNode>([DiscordjsAspect, {
-    token: "test",
-    clientId: "test",
-    clientSecret: "test"
-  }], {
+  const discordjs = await loadAspect<DiscordjsNode>(DiscordjsAspect, {
     runtime: 'node',
   });
 
