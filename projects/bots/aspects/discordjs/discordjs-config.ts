@@ -36,10 +36,16 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import {type ClientOptions} from 'discord.js'
+import type { ClientOptions } from 'discord.js'
 
-// use this type for your aspect config.
-export type DiscordjsConfig = {
+/**
+ * This type is used for the configuration of the Discord.js aspect. It has properties including 'token', 'clientId', 'clientSecret', and 'guildId', all of type string. Additionally, it extends the 'ClientOptions' type.
+ * @author Jonathan Stevens (@TGTGamer)
+ *
+ * @export
+ * @typedef {DiscordjsConfig}
+ */
+export type DiscordjsConfig = { 
     token: string;
     clientId: string;
     clientSecret: string;
