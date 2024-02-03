@@ -38,8 +38,15 @@
 
 import { Aspect } from '@bitdev/harmony.harmony';
 
+/**
+ * The DiscordjsAspect property represents a Discord.js aspect that can be used in Eventiva bots. It is created with the Aspect.create() method and requires an id parameter.
+ * @author Jonathan Stevens (@TGTGamer)
+ *
+ * @type {*}
+ */
 export const DiscordjsAspect = Aspect.create({
   id: 'eventiva.bots/aspects/discordjs'
 });
 
 export default DiscordjsAspect;
+ 
