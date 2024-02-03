@@ -36,14 +36,34 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
+import {Events} from 'discord.js'
 import DiscordjsAspect, { DiscordjsNode } from '@eventiva/bots.aspects.discordjs';
 import type { MessageConfig } from './message-config.js';
+import { Event } from '@eventiva/bots.aspects.discordjs';
+import { LogLevels } from '@eventiva/bots.aspects.logging';
+
 
 export class MessageNode {
   constructor(
     private discordjs: DiscordjsNode,
     private config: MessageConfig,
   ) {}
+
+  resource: Event<Events.MessageCreate> = {
+    name: Events.MessageCreate,
+    once: true,
+    async execute(this: DiscordjsNode, message) {
+      this.client.emit(LogLevels.Debug, `Message recieved: ${message.content}`)
+      this.client.emit(LogLevels.Trace, message)
+      this.client.emit(LogLevels.Trace, `Checking if message is from a bot: ${message.author.bot}`)
+      if (message.author.bot) return;
+      this.client.emit(LogLevels.Trace, "Message is not from a bot. Continuing.")
+
+      if (message.content === 'ping') {
+        await message.reply({ content: 'pong' });
+      }
+    }
+  }
   
   static dependencies = [DiscordjsAspect];
 
