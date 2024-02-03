@@ -17,7 +17,20 @@
 			"outputCapture": "std",
 			"trace": true,
 			"type": "node",
-			"envFile": "${workspaceFolder}/projects/bots/support/.env",
+			"envFile": "${workspaceFolder}/.env",
+		},
+		{
+			"name": "Build Support Bot",
+			"request": "launch",
+			"localRoot": "${workspaceFolder}",
+			"runtimeArgs": [
+				"build",
+			],
+			"runtimeExecutable": "bit",
+			"outputCapture": "std",
+			// "trace": true,
+			"type": "node",
+			"envFile": "${workspaceFolder}/.env",
 		},
 		{
 			"name": "Launch Website",
