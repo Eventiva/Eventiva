@@ -36,9 +36,11 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
+export { DiscordJsModule, type Resources } from './module.js'
 import { DiscordjsAspect } from './discordjs.aspect.js';
-export type { DiscordjsNode } from './discordjs.node.runtime.js';
-export type { Event } from './event.js'
-export type { Command } from './command.js'
+export type { DiscordjsNode } from './discordjs.node.runtime';
+export type { Event } from './event'
+export type { Command } from './command'
 
-export default DiscordjsAspect;export { DiscordjsAspect };
+export default DiscordjsAspect;
+export { DiscordjsAspect }; 
