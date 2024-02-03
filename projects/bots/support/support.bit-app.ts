@@ -44,10 +44,12 @@ import { AtlassianCustomerSupportAspect } from '@eventiva/bots.aspects.atlassian
 import { DiscordjsAspect } from '@eventiva/bots.aspects.discordjs';
 import { LoggingAspect } from '@eventiva/bots.aspects.logging';
 import { I18NAspect } from '@eventiva/bots.aspects.i18n';
+import { ReadyAspect } from '@eventiva/bots.discord.events.ready';
 
 /**
-  * platform composition of the support platform.
-  */    
+ * Support is a property that encapsulates the configuration for the Harmony Platform support. It specifies the name of the support, the support platform aspect, the runtimes required for the support, and the aspects that should be enabled for the support.
+ * @author Jonathan Stevens (@TGTGamer)
+ */
 export const Support = HarmonyPlatform.from({
   name: 'Support',
   
@@ -66,7 +68,8 @@ export const Support = HarmonyPlatform.from({
     LoggingAspect,
     I18NAspect,
     DiscordjsAspect,
-    AtlassianCustomerSupportAspect
+    AtlassianCustomerSupportAspect,
+    ReadyAspect,
   ],
 });
 
