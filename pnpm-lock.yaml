@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@apollo/gateway':
         specifier: ^2.7.1
@@ -24,23 +24,23 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@bitdev/harmony.harmony-platform':
-        specifier: ^1.0.54
+        specifier: ^1.0.56
         version: 1.0.56(@bitdev/harmony.harmony@1.0.9)
       '@bitdev/harmony.runtimes.browser-runtime':
         specifier: ^0.0.35
         version: 0.0.35(react@18.2.0)(typescript@5.3.3)
       '@bitdev/harmony.runtimes.nodejs-runtime':
-        specifier: ^1.0.59
+        specifier: ^1.0.61
         version: 1.0.61
       '@bitdev/harmony.testing.load-aspect':
         specifier: 0.0.14
         version: 0.0.14
       '@bitdev/node.node-app':
-        specifier: ^1.0.15
-        version: 1.0.16
+        specifier: ^1.0.17
+        version: 1.0.17
       '@bitdev/node.node-env':
-        specifier: ^1.0.15
-        version: 1.0.16(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(@types/react@18.2.23)(jsdom@23.2.0)(typescript@5.3.3)
+        specifier: ^1.0.17
+        version: 1.0.17(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(@types/react@18.2.23)(jsdom@23.2.0)(typescript@5.3.3)
       '@coobaha/typed-fastify':
         specifier: ^2.1.3
         version: 2.1.3(fastify@4.26.0)
@@ -57,13 +57,16 @@ importers:
         specifier: 1.6.22
         version: 1.6.22(react@18.2.0)
       '@prisma/client':
-        specifier: ^5.8.1
+        specifier: ^5.9.1
         version: 5.9.1
+      '@teambit/component-id':
+        specifier: ^1.2.0
+        version: 1.2.0
       '@teambit/defender.eslint-linter':
-        specifier: ^1.0.16
+        specifier: ^1.0.17
         version: 1.0.17(@teambit/legacy@node_modules+@teambit+legacy)
       '@teambit/defender.jest-tester':
-        specifier: ^1.0.15
+        specifier: ^1.0.16
         version: 1.0.16(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)
       '@teambit/defender.prettier-formatter':
         specifier: ^1.0.8
@@ -75,13 +78,13 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(@types/react@18.2.23)(react@18.2.0)
       '@teambit/react.react-env':
-        specifier: ^1.0.35
+        specifier: ^1.0.38
         version: 1.0.38(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)
       '@teambit/toolbox.network.get-port':
         specifier: ^1.0.6
         version: 1.0.6
       '@teambit/typescript.typescript-compiler':
-        specifier: ^2.0.15
+        specifier: ^2.0.16
         version: 2.0.16(@teambit/legacy@node_modules+@teambit+legacy)
       '@types/lodash':
         specifier: ^4.14.202
@@ -90,7 +93,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       axe:
         specifier: ^12.2.3
@@ -111,7 +114,7 @@ importers:
         specifier: ^4.18.2
         version: 4.18.2
       fastify:
-        specifier: ^4.25.2
+        specifier: ^4.26.0
         version: 4.26.0
       fastify-allow:
         specifier: ^2.0.0
@@ -123,7 +126,7 @@ importers:
         specifier: ^16.8.1
         version: 16.8.1
       i18next:
-        specifier: ^23.7.20
+        specifier: ^23.8.2
         version: 23.8.2
       i18next-http-middleware:
         specifier: ^3.5.0
@@ -135,13 +138,13 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
       pino:
-        specifier: ^8.17.2
+        specifier: ^8.18.0
         version: 8.18.0
       pino-caller:
         specifier: ^3.4.0
@@ -149,14 +152,17 @@ importers:
       pino-pretty:
         specifier: ^10.3.1
         version: 10.3.1
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
       react:
-        specifier: '>=18.0.0 <19.0.0'
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: '>=18.0.0 <19.0.0'
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       typescript:
         specifier: ^5.3.3
@@ -165,20 +171,23 @@ importers:
         specifier: 1.2.1
         version: 1.2.1(@types/node@18.19.14)(jsdom@23.2.0)(sass@1.70.0)
     devDependencies:
+      '@babel/runtime':
+        specifier: 7.20.0
+        version: 7.20.0
       '@teambit/node.node':
         specifier: 1.0.31
         version: 1.0.31(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(@types/react@18.2.23)(graphql@16.8.1)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
   node_modules/.bit_roots/bitdev.harmony_harmony-env@1.0.49:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
@@ -195,6 +204,9 @@ importers:
       '@eventiva/bots.aspects.discordjs':
         specifier: workspace:*
         version: file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.harmony-bot-generators':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/harmony-bot-generators
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
         version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
@@ -204,12 +216,9 @@ importers:
       '@eventiva/bots.aspects.support-platform':
         specifier: workspace:*
         version: file:projects/bots/aspects/support-platform(@apollo/client@3.9.2)(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)(react-dom@18.2.0)(react-router-dom@6.22.0)(react@18.2.0)
-      '@eventiva/bots.discord.events.message':
+      '@eventiva/bots.packages.default_logging':
         specifier: workspace:*
-        version: file:projects/bots/discord/events/message(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
-      '@eventiva/bots.discord.events.ready':
-        specifier: workspace:*
-        version: file:projects/bots/discord/events/ready(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+        version: file:projects/bots/packages/default_logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
       '@eventiva/bots.support':
         specifier: workspace:*
         version: file:projects/bots/support(@types/node@18.19.14)(typescript@5.3.3)
@@ -226,7 +235,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
@@ -235,16 +244,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -254,15 +263,15 @@ importers:
         injected: true
       '@eventiva/bots.aspects.discordjs':
         injected: true
+      '@eventiva/bots.aspects.harmony-bot-generators':
+        injected: true
       '@eventiva/bots.aspects.i18n':
         injected: true
       '@eventiva/bots.aspects.logging':
         injected: true
       '@eventiva/bots.aspects.support-platform':
         injected: true
-      '@eventiva/bots.discord.events.message':
-        injected: true
-      '@eventiva/bots.discord.events.ready':
+      '@eventiva/bots.packages.default_logging':
         injected: true
       '@eventiva/bots.support':
         injected: true
@@ -272,19 +281,19 @@ importers:
   node_modules/.bit_roots/eventiva.bots_support:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
         version: 1.0.9
       '@bitdev/harmony.harmony-platform':
-        specifier: ^1.0.54
+        specifier: ^1.0.56
         version: 1.0.56(@bitdev/harmony.harmony@1.0.9)
       '@bitdev/harmony.runtimes.browser-runtime':
         specifier: ^0.0.35
         version: 0.0.35(react@18.2.0)(typescript@5.3.3)
       '@bitdev/harmony.runtimes.nodejs-runtime':
-        specifier: ^1.0.59
+        specifier: ^1.0.61
         version: 1.0.61
       '@bitdev/harmony.testing.load-aspect':
         specifier: 0.0.14
@@ -295,6 +304,9 @@ importers:
       '@eventiva/bots.aspects.discordjs':
         specifier: workspace:*
         version: file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.harmony-bot-generators':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/harmony-bot-generators
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
         version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
@@ -304,12 +316,9 @@ importers:
       '@eventiva/bots.aspects.support-platform':
         specifier: workspace:*
         version: file:projects/bots/aspects/support-platform(@apollo/client@3.9.2)(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)(react-dom@18.2.0)(react-router-dom@6.22.0)(react@18.2.0)
-      '@eventiva/bots.discord.events.message':
+      '@eventiva/bots.packages.default_logging':
         specifier: workspace:*
-        version: file:projects/bots/discord/events/message(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
-      '@eventiva/bots.discord.events.ready':
-        specifier: workspace:*
-        version: file:projects/bots/discord/events/ready(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+        version: file:projects/bots/packages/default_logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
       '@eventiva/bots.support':
         specifier: workspace:*
         version: file:projects/bots/support(@types/node@18.19.14)(typescript@5.3.3)
@@ -326,7 +335,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
@@ -335,16 +344,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -354,15 +363,17 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
     dependenciesMeta:
       '@eventiva/bots.aspects.atlassian-customer-support':
         injected: true
       '@eventiva/bots.aspects.discordjs':
+        injected: true
+      '@eventiva/bots.aspects.harmony-bot-generators':
         injected: true
       '@eventiva/bots.aspects.i18n':
         injected: true
@@ -370,9 +381,56 @@ importers:
         injected: true
       '@eventiva/bots.aspects.support-platform':
         injected: true
-      '@eventiva/bots.discord.events.message':
+      '@eventiva/bots.packages.default_logging':
         injected: true
-      '@eventiva/bots.discord.events.ready':
+      '@eventiva/bots.support':
+        injected: true
+      '@eventiva/workflows.git-subrepo':
+        injected: true
+
+  node_modules/.bit_roots/teambit.harmony_node:
+    dependencies:
+      '@eventiva/bots.aspects.atlassian-customer-support':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/atlassian-customer-support(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.discordjs':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.harmony-bot-generators':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/harmony-bot-generators
+      '@eventiva/bots.aspects.i18n':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.logging':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.support-platform':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/support-platform(@apollo/client@3.9.2)(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)(react-dom@18.2.0)(react-router-dom@6.22.0)(react@18.2.0)
+      '@eventiva/bots.packages.default_logging':
+        specifier: workspace:*
+        version: file:projects/bots/packages/default_logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.support':
+        specifier: workspace:*
+        version: file:projects/bots/support(@types/node@18.19.14)(typescript@5.3.3)
+      '@eventiva/workflows.git-subrepo':
+        specifier: workspace:*
+        version: file:projects/workflows/git-subrepo(@types/node@18.19.14)
+    dependenciesMeta:
+      '@eventiva/bots.aspects.atlassian-customer-support':
+        injected: true
+      '@eventiva/bots.aspects.discordjs':
+        injected: true
+      '@eventiva/bots.aspects.harmony-bot-generators':
+        injected: true
+      '@eventiva/bots.aspects.i18n':
+        injected: true
+      '@eventiva/bots.aspects.logging':
+        injected: true
+      '@eventiva/bots.aspects.support-platform':
+        injected: true
+      '@eventiva/bots.packages.default_logging':
         injected: true
       '@eventiva/bots.support':
         injected: true
@@ -387,6 +445,9 @@ importers:
       '@eventiva/bots.aspects.discordjs':
         specifier: workspace:*
         version: file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.aspects.harmony-bot-generators':
+        specifier: workspace:*
+        version: file:projects/bots/aspects/harmony-bot-generators
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
         version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
@@ -396,12 +457,9 @@ importers:
       '@eventiva/bots.aspects.support-platform':
         specifier: workspace:*
         version: file:projects/bots/aspects/support-platform(@apollo/client@3.9.2)(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)(react-dom@18.2.0)(react-router-dom@6.22.0)(react@18.2.0)
-      '@eventiva/bots.discord.events.message':
+      '@eventiva/bots.packages.default_logging':
         specifier: workspace:*
-        version: file:projects/bots/discord/events/message(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
-      '@eventiva/bots.discord.events.ready':
-        specifier: workspace:*
-        version: file:projects/bots/discord/events/ready(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+        version: file:projects/bots/packages/default_logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
       '@eventiva/bots.support':
         specifier: workspace:*
         version: file:projects/bots/support(@types/node@18.19.14)(typescript@5.3.3)
@@ -421,15 +479,17 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     dependenciesMeta:
       '@eventiva/bots.aspects.atlassian-customer-support':
         injected: true
       '@eventiva/bots.aspects.discordjs':
+        injected: true
+      '@eventiva/bots.aspects.harmony-bot-generators':
         injected: true
       '@eventiva/bots.aspects.i18n':
         injected: true
@@ -437,9 +497,7 @@ importers:
         injected: true
       '@eventiva/bots.aspects.support-platform':
         injected: true
-      '@eventiva/bots.discord.events.message':
-        injected: true
-      '@eventiva/bots.discord.events.ready':
+      '@eventiva/bots.packages.default_logging':
         injected: true
       '@eventiva/bots.support':
         injected: true
@@ -449,7 +507,7 @@ importers:
   projects/bots/aspects/atlassian-customer-support:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
@@ -467,7 +525,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
@@ -476,16 +534,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -495,16 +553,16 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
   projects/bots/aspects/discordjs:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
@@ -522,7 +580,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       discord.js:
         specifier: ^14.14.1
@@ -534,16 +592,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -553,16 +611,41 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
+
+  projects/bots/aspects/harmony-bot-generators:
+    dependencies:
+      '@teambit/component-id':
+        specifier: ^1.2.0
+        version: 1.2.0
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+      prompts:
+        specifier: ^2.4.2
+        version: 2.4.2
+    devDependencies:
+      '@babel/runtime':
+        specifier: 7.20.0
+        version: 7.20.0
+      '@types/jest':
+        specifier: 26.0.20
+        version: 26.0.20
+      '@types/lodash':
+        specifier: ^4.14.202
+        version: 4.14.202
+      '@types/node':
+        specifier: 12.20.4
+        version: 12.20.4
 
   projects/bots/aspects/i18n:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
@@ -580,28 +663,28 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
         version: 16.8.1
       i18next:
-        specifier: ^23.7.20
+        specifier: ^23.8.2
         version: 23.8.2
       jest:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -611,16 +694,16 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
   projects/bots/aspects/logging:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
@@ -638,7 +721,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
@@ -647,10 +730,10 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       pino:
-        specifier: ^8.17.2
+        specifier: ^8.18.0
         version: 8.18.0
       pino-caller:
         specifier: ^3.4.0
@@ -659,13 +742,13 @@ importers:
         specifier: ^10.3.1
         version: 10.3.1
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -675,16 +758,16 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
   projects/bots/aspects/support-platform:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@apollo/gateway':
         specifier: ^2.7.1
@@ -711,7 +794,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
@@ -720,16 +803,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -739,16 +822,16 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
-  projects/bots/discord/events/message:
+  projects/bots/packages/default_logging:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
@@ -766,11 +849,8 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
-      discord.js:
-        specifier: ^14.14.1
-        version: 14.14.1
       graphql:
         specifier: ^16.8.1
         version: 16.8.1
@@ -778,16 +858,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -797,86 +877,28 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
-        version: 18.19.14
-
-  projects/bots/discord/events/ready:
-    dependencies:
-      '@apollo/client':
-        specifier: ^3.8.8
-        version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
-      '@bitdev/harmony.harmony':
-        specifier: 1.0.9
-        version: 1.0.9
-      '@bitdev/harmony.testing.load-aspect':
-        specifier: 0.0.14
-        version: 0.0.14
-      '@mdx-js/react':
-        specifier: 1.6.22
-        version: 1.6.22(react@18.2.0)
-      '@teambit/mdx.ui.mdx-scope-context':
-        specifier: 1.0.0
-        version: 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      '@types/react':
-        specifier: 18.2.23
-        version: 18.2.23
-      '@types/react-dom':
-        specifier: ^18.2.5
-        version: 18.2.18
-      discord.js:
-        specifier: ^14.14.1
-        version: 14.14.1
-      graphql:
-        specifier: ^16.8.1
-        version: 16.8.1
-      jest:
-        specifier: 29.3.1
-        version: 29.3.1(@types/node@18.19.14)
-      jsdom:
-        specifier: ^23.0.1
-        version: 23.2.0
-      react:
-        specifier: ^18.0.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.0.0
-        version: 18.2.0(react@18.2.0)
-      react-router-dom:
-        specifier: ^6.16.0
-        version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
-      vitest:
-        specifier: 1.2.1
-        version: 1.2.1(@types/node@18.19.14)(jsdom@23.2.0)(sass@1.70.0)
-    devDependencies:
-      '@bitdev/harmony.harmony-env':
-        specifier: 1.0.49
-        version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
-      '@types/jest':
-        specifier: ^29.2.2
-        version: 29.5.12
-      '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
   projects/bots/support:
     dependencies:
       '@apollo/client':
-        specifier: ^3.8.8
+        specifier: ^3.9.2
         version: 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony':
         specifier: 1.0.9
         version: 1.0.9
       '@bitdev/harmony.harmony-platform':
-        specifier: ^1.0.54
+        specifier: ^1.0.56
         version: 1.0.56(@bitdev/harmony.harmony@1.0.9)
       '@bitdev/harmony.runtimes.browser-runtime':
         specifier: ^0.0.35
         version: 0.0.35(react@18.2.0)(typescript@5.3.3)
       '@bitdev/harmony.runtimes.nodejs-runtime':
-        specifier: ^1.0.59
+        specifier: ^1.0.61
         version: 1.0.61
       '@bitdev/harmony.testing.load-aspect':
         specifier: 0.0.14
@@ -891,7 +913,7 @@ importers:
         specifier: 18.2.23
         version: 18.2.23
       '@types/react-dom':
-        specifier: ^18.2.5
+        specifier: ^18.2.18
         version: 18.2.18
       graphql:
         specifier: ^16.8.1
@@ -900,16 +922,16 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       jsdom:
-        specifier: ^23.0.1
+        specifier: ^23.2.0
         version: 23.2.0
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
       react-router-dom:
-        specifier: ^6.16.0
+        specifier: ^6.22.0
         version: 6.22.0(react-dom@18.2.0)(react@18.2.0)
       vitest:
         specifier: 1.2.1
@@ -919,10 +941,10 @@ importers:
         specifier: 1.0.49
         version: 1.0.49(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
   projects/workflows/git-subrepo:
@@ -943,20 +965,20 @@ importers:
         specifier: 29.3.1
         version: 29.3.1(@types/node@18.19.14)
       react:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0
       react-dom:
-        specifier: ^18.0.0
+        specifier: ^18.2.0
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@teambit/node.node':
         specifier: 1.0.31
         version: 1.0.31(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(@types/react@18.2.23)(graphql@16.8.1)(typescript@5.3.3)
       '@types/jest':
-        specifier: ^29.2.2
+        specifier: ^29.5.12
         version: 29.5.12
       '@types/node':
-        specifier: ^18.11.9
+        specifier: ^18.19.14
         version: 18.19.14
 
 packages:
@@ -1179,7 +1201,7 @@ packages:
       '@graphql-tools/schema': 9.0.19(graphql@16.8.1)
       '@josephg/resolvable': 1.0.1
       '@types/express': 4.17.21
-      '@types/express-serve-static-core': 4.17.42
+      '@types/express-serve-static-core': 4.17.43
       '@types/node-fetch': 2.6.11
       async-retry: 1.3.3
       cors: 2.8.5
@@ -1400,7 +1422,7 @@ packages:
       '@babel/parser': 7.23.9
       '@babel/template': 7.23.9
       '@babel/traverse': 7.23.9
-      '@babel/types': 7.23.9
+      '@babel/types': 7.22.3
       convert-source-map: 1.9.0
       debug: 4.3.4
       gensync: 1.0.0-beta.2
@@ -1612,6 +1634,23 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.20.2
+      '@babel/helper-compilation-targets': 7.23.6
+      '@babel/helper-plugin-utils': 7.22.5
+      debug: 4.3.4
+      lodash.debounce: 4.0.8
+      resolve: 1.22.8
+    transitivePeerDependencies:
+      - supports-color
+
+  /@babel/helper-define-polyfill-provider@0.4.4(@babel/core@7.23.9):
+    resolution: {integrity: sha512-QcJMILQCu2jm5TFPGA3lCpJJTeEP+mqeXooG/NZbg/h5FTFi6V0+99ahlRsW8/kRLyb24LZVCCiclDedhLKcBA==}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.9
       '@babel/helper-compilation-targets': 7.23.6
       '@babel/helper-plugin-utils': 7.22.5
       debug: 4.3.4
@@ -2142,7 +2181,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.11.6
-      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-plugin-utils': 7.10.4
       '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.11.6)
       '@babel/plugin-transform-parameters': 7.23.3(@babel/core@7.11.6)
 
@@ -2156,7 +2195,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-plugin-utils': 7.10.4
       '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.12.9)
       '@babel/plugin-transform-parameters': 7.23.3(@babel/core@7.12.9)
 
@@ -2622,7 +2661,7 @@ packages:
         optional: true
     dependencies:
       '@babel/core': 7.12.9
-      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-plugin-utils': 7.10.4
 
   /@babel/plugin-syntax-jsx@7.23.3(@babel/core@7.19.6):
     resolution: {integrity: sha512-EB2MELswq55OHUoRZLGg/zC7QWUKfNLpE57m/S2yr1uEneIgsTgrSzXP3NXEsMkVn76OlaVVnzN+ugObuYGwhg==}
@@ -3234,6 +3273,19 @@ packages:
     dependencies:
       '@babel/core': 7.20.2
       '@babel/helper-create-class-features-plugin': 7.23.10(@babel/core@7.20.2)
+      '@babel/helper-plugin-utils': 7.22.5
+
+  /@babel/plugin-transform-class-properties@7.22.5(@babel/core@7.23.9):
+    resolution: {integrity: sha512-nDkQ0NfkOhPTq8YCLiWNxp1+f9fCobEjCb0n8WdbNUBc4IB5V7P1QnX9IjpSoquKrXF5SKojHleVNs2vGeHCHQ==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.9
+      '@babel/helper-create-class-features-plugin': 7.23.10(@babel/core@7.23.9)
       '@babel/helper-plugin-utils': 7.22.5
 
   /@babel/plugin-transform-class-properties@7.23.3:
@@ -4234,6 +4286,22 @@ packages:
       '@babel/helper-plugin-utils': 7.22.5
       '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.20.2)
       '@babel/plugin-transform-parameters': 7.23.3(@babel/core@7.20.2)
+
+  /@babel/plugin-transform-object-rest-spread@7.22.15(@babel/core@7.23.9):
+    resolution: {integrity: sha512-fEB+I1+gAmfAyxZcX1+ZUwLeAuuf8VIg67CTznZE0MqVFumWkh8xWtn58I4dxdVf080wn7gzWoF8vndOViJe9Q==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/compat-data': 7.23.5
+      '@babel/core': 7.23.9
+      '@babel/helper-compilation-targets': 7.23.6
+      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-parameters': 7.23.3(@babel/core@7.23.9)
 
   /@babel/plugin-transform-object-rest-spread@7.23.4:
     resolution: {integrity: sha512-9x9K1YyeQVw0iOXJlIzwm8ltobIIv7j2iLyP2jIhEbqPRQ7ScNgwQufU2I0Gq11VjyG4gI4yMXt2VFags+1N3g==}
@@ -5460,6 +5528,99 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /@babel/preset-env@7.22.15(@babel/core@7.23.9):
+    resolution: {integrity: sha512-tZFHr54GBkHk6hQuVA8w4Fmq+MSPsfvMG0vPnOYyTnJpyfMqybL8/MbNCPRT9zc2KBO2pe4tq15g6Uno4Jpoag==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/compat-data': 7.23.5
+      '@babel/core': 7.23.9
+      '@babel/helper-compilation-targets': 7.23.6
+      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-validator-option': 7.23.5
+      '@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-proposal-private-property-in-object': 7.21.0-placeholder-for-preset-env.2(@babel/core@7.23.9)
+      '@babel/plugin-syntax-async-generators': 7.8.4(@babel/core@7.23.9)
+      '@babel/plugin-syntax-class-properties': 7.12.13(@babel/core@7.23.9)
+      '@babel/plugin-syntax-class-static-block': 7.14.5(@babel/core@7.23.9)
+      '@babel/plugin-syntax-dynamic-import': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-export-namespace-from': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-import-assertions': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-import-attributes': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-import-meta': 7.10.4(@babel/core@7.23.9)
+      '@babel/plugin-syntax-json-strings': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-logical-assignment-operators': 7.10.4(@babel/core@7.23.9)
+      '@babel/plugin-syntax-nullish-coalescing-operator': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-numeric-separator': 7.10.4(@babel/core@7.23.9)
+      '@babel/plugin-syntax-object-rest-spread': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-optional-catch-binding': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-optional-chaining': 7.8.3(@babel/core@7.23.9)
+      '@babel/plugin-syntax-private-property-in-object': 7.14.5(@babel/core@7.23.9)
+      '@babel/plugin-syntax-top-level-await': 7.14.5(@babel/core@7.23.9)
+      '@babel/plugin-syntax-unicode-sets-regex': 7.18.6(@babel/core@7.23.9)
+      '@babel/plugin-transform-arrow-functions': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-async-generator-functions': 7.23.9(@babel/core@7.23.9)
+      '@babel/plugin-transform-async-to-generator': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-block-scoped-functions': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-block-scoping': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-class-properties': 7.22.5(@babel/core@7.23.9)
+      '@babel/plugin-transform-class-static-block': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-classes': 7.23.8(@babel/core@7.23.9)
+      '@babel/plugin-transform-computed-properties': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-destructuring': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-dotall-regex': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-duplicate-keys': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-dynamic-import': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-exponentiation-operator': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-export-namespace-from': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-for-of': 7.23.6(@babel/core@7.23.9)
+      '@babel/plugin-transform-function-name': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-json-strings': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-literals': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-logical-assignment-operators': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-member-expression-literals': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-modules-amd': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-modules-commonjs': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-modules-systemjs': 7.23.9(@babel/core@7.23.9)
+      '@babel/plugin-transform-modules-umd': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-named-capturing-groups-regex': 7.22.5(@babel/core@7.23.9)
+      '@babel/plugin-transform-new-target': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-nullish-coalescing-operator': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-numeric-separator': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-object-rest-spread': 7.22.15(@babel/core@7.23.9)
+      '@babel/plugin-transform-object-super': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-optional-catch-binding': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-optional-chaining': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-parameters': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-private-methods': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-private-property-in-object': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-property-literals': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-regenerator': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-reserved-words': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-shorthand-properties': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-spread': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-sticky-regex': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-template-literals': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-typeof-symbol': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-unicode-escapes': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-unicode-property-regex': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-unicode-regex': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-unicode-sets-regex': 7.23.3(@babel/core@7.23.9)
+      '@babel/preset-modules': 0.1.6-no-external-plugins(@babel/core@7.23.9)
+      '@babel/types': 7.23.9
+      babel-plugin-polyfill-corejs2: 0.4.8(@babel/core@7.23.9)
+      babel-plugin-polyfill-corejs3: 0.8.7(@babel/core@7.23.9)
+      babel-plugin-polyfill-regenerator: 0.5.5(@babel/core@7.23.9)
+      core-js-compat: 3.35.1
+      semver: 6.3.1
+    transitivePeerDependencies:
+      - supports-color
+
   /@babel/preset-env@7.23.9:
     resolution: {integrity: sha512-3kBGTNBBk9DQiPoXYS0g0BYlwTQYUTifqgKTjxUwEUkduRT2QOa0FPGBJ+NROQhGyYO5BuTJwGvBnqKDykac6A==}
     engines: {node: '>=6.9.0'}
@@ -5701,6 +5862,23 @@ packages:
       '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.19.6)
       '@babel/plugin-transform-react-pure-annotations': 7.23.3(@babel/core@7.19.6)
 
+  /@babel/preset-react@7.22.15(@babel/core@7.23.9):
+    resolution: {integrity: sha512-Csy1IJ2uEh/PecCBXXoZGAZBeCATTuePzCSB7dLYWS0vOEj6CNpjxIhW4duWwZodBNueH7QO14WbGn8YyeuN9w==}
+    engines: {node: '>=6.9.0'}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.9
+      '@babel/helper-plugin-utils': 7.22.5
+      '@babel/helper-validator-option': 7.23.5
+      '@babel/plugin-transform-react-display-name': 7.23.3(@babel/core@7.23.9)
+      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.23.9)
+      '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.23.9)
+      '@babel/plugin-transform-react-pure-annotations': 7.23.3(@babel/core@7.23.9)
+
   /@babel/preset-react@7.23.3:
     resolution: {integrity: sha512-tbkHOS9axH6Ysf2OUEqoSZ6T3Fa2SrNH6WTWSPBboxKzdxNc9qOICeLXkNG0ZEwbQ1HY8liwOce4aN/Ceyuq6w==}
     engines: {node: '>=6.9.0'}
@@ -5802,6 +5980,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       regenerator-runtime: 0.14.1
+    dev: false
 
   /@babel/template@7.23.9:
     resolution: {integrity: sha512-+xrD2BWLpvHKNmX2QbpdpsBaWnRxahMwJjO+KZk2JOElj5nSmKezyS1B4u+QbHMTX69t4ukm6hh9lsYQ7GHCKA==}
@@ -6092,8 +6271,8 @@ packages:
       import-meta-resolve: 4.0.0
       lodash-es: 4.17.21
 
-  /@bitdev/node.generators.node-starters@0.0.5:
-    resolution: {integrity: sha512-vF6m0eyUXl5fZ3N9iU0VwPk29AmxOMFxA5dFxvehFTU2rTZDYEv36akbUAnv63EY6ahyQK8nF0ZDRKJv93+pkg==}
+  /@bitdev/node.generators.node-starters@0.0.6:
+    resolution: {integrity: sha512-Hf4hAokfY96EUVdim4CFEwVzuHJ4UtJ2Fu2fvFLZfxWQXNt3w6oOAO2tpmDbe646E8RVcb0c36BmZoAClOy0SQ==}
     dependencies:
       '@teambit/component-id': 1.2.0
       '@teambit/git.modules.git-ignore': 1.0.2
@@ -6111,8 +6290,8 @@ packages:
       lodash: 4.17.21
     dev: false
 
-  /@bitdev/node.node-app@1.0.16:
-    resolution: {integrity: sha512-yUcVtU8Db4vNJloVVxqo4Xrn48CooFVGUAlIEFI8Wb5kIc1w1hAvyLl8q0hjSm3q922Xd259VqR2rplt9cmK2g==}
+  /@bitdev/node.node-app@1.0.17:
+    resolution: {integrity: sha512-RYPNwulzktWw189Ty/KTdWRlprHZU5X6Ig/2oMEPfqmoeeW0a0KRY9acuCa+yMGkpaalH2Gi7wjsscImktfA9g==}
     dependencies:
       esbuild: 0.19.12
     dev: false
@@ -6210,8 +6389,8 @@ packages:
       - webpack-hot-middleware
       - webpack-plugin-serve
 
-  /@bitdev/node.node-env@1.0.16(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(@types/react@18.2.23)(jsdom@23.2.0)(typescript@5.3.3):
-    resolution: {integrity: sha512-IdBjIqr2Bor4TbmkIuylkrmhtWViTloFYJenSBOYpWFwQPe7oOz8wG+P3uPu52BPDrzf622OlvcaTzojK1bq6w==}
+  /@bitdev/node.node-env@1.0.17(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)(@types/react@18.2.23)(jsdom@23.2.0)(typescript@5.3.3):
+    resolution: {integrity: sha512-HjtaeL+nJ5OXpH4RYcdgcIzcgIdeJLfWQ1cX1YU7TkC0SYzsPEclpcymITUUjexGaFaEkIHA2uFO94ul2mWcNQ==}
     dependencies:
       '@babel/plugin-proposal-decorators': 7.20.2
       '@babel/plugin-transform-class-properties': 7.22.5(@babel/core@7.19.6)
@@ -6219,7 +6398,7 @@ packages:
       '@babel/preset-env': 7.22.15
       '@babel/preset-typescript': 7.22.15
       '@babel/runtime': 7.20.0
-      '@bitdev/node.generators.node-starters': 0.0.5
+      '@bitdev/node.generators.node-starters': 0.0.6
       '@bitdev/node.generators.node-templates': 1.0.9
       '@bitdev/react.eslint.eslint-config-bit-react': 0.0.1(@teambit/legacy@node_modules+@teambit+legacy)(eslint-plugin-import@2.22.1)(eslint-plugin-jsx-a11y@6.4.1)(eslint-plugin-react-hooks@4.2.0)(eslint-plugin-react@7.22.0)(typescript@5.3.3)
       '@bitdev/react.react-env': 1.1.34(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.14)
@@ -7987,6 +8166,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /@jest/types@26.6.2:
+    resolution: {integrity: sha512-fC6QCp7Sc5sX6g8Tvbmj4XUTbyrik0akgRy03yjXbQaBWWNWGE7SGtJk98m0N8nzegD/7SggrUlivxo5ax4KWQ==}
+    engines: {node: '>= 10.14.2'}
+    dependencies:
+      '@types/istanbul-lib-coverage': 2.0.6
+      '@types/istanbul-reports': 3.0.4
+      '@types/node': 12.20.4
+      '@types/yargs': 15.0.19
+      chalk: 4.1.2
+    dev: true
+
   /@jest/types@29.6.3:
     resolution: {integrity: sha512-u3UPsIilWKOM3F9CXtrG8LEJmNxwoCQC/XVj4IKYXvvpx7QIi/Kg1LI5uDmDpKlac62NUtX7eLjRh+jVZcLOzw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -8956,7 +9146,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -8972,7 +9162,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -8989,7 +9179,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/base-ui.elements.dots-loader': 1.0.3(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9005,7 +9195,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9037,7 +9227,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/base-ui.layout.breakpoints': 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9102,7 +9292,7 @@ packages:
       '@teambit/base-ui.css-components.elevation': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.css-components.roundness': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.surfaces.background': 1.0.1(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9119,7 +9309,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/base-ui.surfaces.split-pane.splitter': 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9151,7 +9341,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/base-ui.surfaces.split-pane.layout': 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9170,7 +9360,7 @@ packages:
       '@teambit/base-ui.surfaces.split-pane.layout': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.surfaces.split-pane.pane': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.surfaces.split-pane.splitter': 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9186,7 +9376,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9219,7 +9409,7 @@ packages:
     dependencies:
       '@teambit/base-ui.text.text-sizes': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.theme.sizes': 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -9250,7 +9440,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10189,7 +10379,7 @@ packages:
     dependencies:
       '@teambit/base-ui.elements.icon': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.input.button': 1.0.5(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10425,7 +10615,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/documenter.ui.linked-heading': 4.1.8(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10553,7 +10743,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10570,7 +10760,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/evangelist.elements.icon': 1.0.5(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10587,7 +10777,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/evangelist.elements.icon': 1.0.5(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10603,7 +10793,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10619,7 +10809,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10636,7 +10826,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/documenter.ui.copied-message': 4.1.6(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       copy-to-clipboard: 3.3.3
       core-js: 3.35.1
       react: 18.2.0
@@ -10654,7 +10844,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10671,7 +10861,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/base-ui.text.heading': 1.0.4(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10688,7 +10878,7 @@ packages:
         optional: true
     dependencies:
       '@teambit/base-ui.text.heading': 1.0.4(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10704,7 +10894,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10720,7 +10910,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10736,7 +10926,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10754,7 +10944,7 @@ packages:
     dependencies:
       '@teambit/documenter.ui.anchor': 4.0.6(react-dom@18.2.0)(react@18.2.0)
       '@teambit/documenter.ui.heading': 4.1.4(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10772,7 +10962,7 @@ packages:
     dependencies:
       '@teambit/documenter.ui.anchor': 4.0.8(react-dom@18.2.0)(react@18.2.0)
       '@teambit/documenter.ui.heading': 4.1.6(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10788,7 +10978,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10806,7 +10996,7 @@ packages:
     dependencies:
       '@teambit/base-ui.text.paragraph': 1.0.3(react-dom@18.2.0)(react@18.2.0)
       '@teambit/base-ui.theme.sizes': 1.0.0(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10858,7 +11048,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10874,7 +11064,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10890,7 +11080,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10903,7 +11093,7 @@ packages:
       react:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       react: 18.2.0
 
   /@teambit/documenter.ui.table-heading-column@4.0.8(react@18.2.0):
@@ -10914,7 +11104,7 @@ packages:
       react:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       react: 18.2.0
 
   /@teambit/documenter.ui.table-heading-row@4.0.11(react-dom@18.2.0)(react@18.2.0):
@@ -10927,7 +11117,7 @@ packages:
     dependencies:
       '@teambit/base-ui.layout.grid-component': 1.0.2(react-dom@18.2.0)(react@18.2.0)
       '@teambit/documenter.ui.table-heading-column': 4.0.8(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       react: 18.2.0
     transitivePeerDependencies:
       - react-dom
@@ -10960,7 +11150,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10976,7 +11166,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -10992,7 +11182,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -11007,7 +11197,7 @@ packages:
     dependencies:
       '@teambit/documenter.ui.table-heading-row': 4.0.11(react-dom@18.2.0)(react@18.2.0)
       '@teambit/documenter.ui.table-row': 4.1.13(react-dom@18.2.0)(react@18.2.0)
-      classnames: 2.3.1
+      classnames: 2.2.6
       react: 18.2.0
     transitivePeerDependencies:
       - react-dom
@@ -11023,7 +11213,7 @@ packages:
       react-dom:
         optional: true
     dependencies:
-      classnames: 2.3.1
+      classnames: 2.2.6
       core-js: 3.35.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -14460,7 +14650,7 @@ packages:
     engines: {node: '>=8', npm: '>=6', yarn: '>=1'}
     dependencies:
       '@adobe/css-tools': 4.3.3
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       '@types/testing-library__jest-dom': 5.14.9
       aria-query: 5.3.0
       chalk: 3.0.0
@@ -14537,7 +14727,7 @@ packages:
   /@types/connect-history-api-fallback@1.5.4:
     resolution: {integrity: sha512-n6Cr2xS1h4uAulPRdlw6Jl6s1oG8KrVilPN2yUITEs+K48EzMJJ3W1xy8K5eWuFvjp3R74AOIGSmp2UfBJ8HFw==}
     dependencies:
-      '@types/express-serve-static-core': 4.17.42
+      '@types/express-serve-static-core': 4.17.43
       '@types/node': 18.19.14
 
   /@types/connect@3.4.38:
@@ -14570,8 +14760,8 @@ packages:
   /@types/estree@1.0.5:
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
-  /@types/express-serve-static-core@4.17.42:
-    resolution: {integrity: sha512-ckM3jm2bf/MfB3+spLPWYPUH573plBFwpOhqQ2WottxYV85j1HQFlxmnTq57X1yHY9awZPig06hL/cLMgNWHIQ==}
+  /@types/express-serve-static-core@4.17.43:
+    resolution: {integrity: sha512-oaYtiBirUOPQGSWNGPWnzyAFJ0BP3cwvN4oWZQY+zUBwpVIGsKUkpBpSztp74drYcjavs7SKFZ4DX1V2QeN8rg==}
     dependencies:
       '@types/node': 18.19.14
       '@types/qs': 6.9.11
@@ -14582,7 +14772,7 @@ packages:
     resolution: {integrity: sha512-ejlPM315qwLpaQlQDTjPdsUFSc6ZsP4AN6AlWnogPjQ7CVi7PYF3YVz+CY3jE2pwYf7E/7HlDAN0rV2GxTG0HQ==}
     dependencies:
       '@types/body-parser': 1.19.5
-      '@types/express-serve-static-core': 4.17.42
+      '@types/express-serve-static-core': 4.17.43
       '@types/qs': 6.9.11
       '@types/serve-static': 1.15.5
 
@@ -14629,6 +14819,13 @@ packages:
     dependencies:
       '@types/istanbul-lib-report': 3.0.3
 
+  /@types/jest@26.0.20:
+    resolution: {integrity: sha512-9zi2Y+5USJRxd0FsahERhBwlcvFh6D2GLQnY2FH2BzK8J9s9omvNHIbvABwIluXa0fD8XVKMLTO0aOEuUfACAA==}
+    dependencies:
+      jest-diff: 26.6.2
+      pretty-format: 26.6.2
+    dev: true
+
   /@types/jest@29.5.12:
     resolution: {integrity: sha512-eDC8bTvT/QhYdxJAulQikueigY5AsdBRH2yDKW3yveW7svY3+DzN84/2NUgkw10RTiJbWqZrTtoGVdYlvFJdLw==}
     dependencies:
@@ -14657,7 +14854,6 @@ packages:
 
   /@types/lodash@4.14.202:
     resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
-    dev: false
 
   /@types/long@4.0.2:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
@@ -14696,6 +14892,10 @@ packages:
     resolution: {integrity: sha512-FQx220y22OKNTqaByeBGqHWYz4cl94tpcxeFdvBo3wjG6XPBuZ0BNgNZRV5J5TFmmcsJ4IzsLkmGRiQbnYsBEQ==}
     dependencies:
       '@types/node': 18.19.14
+
+  /@types/node@12.20.4:
+    resolution: {integrity: sha512-xRCgeE0Q4pT5UZ189TJ3SpYuX/QGl6QIAOAIeDSbAVAd2gX1NxSZup4jNVK7cxIeP8KDSbJgcckun495isP1jQ==}
+    dev: true
 
   /@types/node@16.18.79:
     resolution: {integrity: sha512-Qd7jdLR5zmnIyMhfDrfPqN5tUCvreVpP3Qrf2oSM+F7SNzlb/MwHISGUkdFHtevfkPJ3iAGyeQI/jsbh9EStgQ==}
@@ -14803,6 +15003,12 @@ packages:
 
   /@types/yargs-parser@21.0.3:
     resolution: {integrity: sha512-I4q9QU9MQv4oEOz4tAHJtNz1cwuLxn2F3xcc2iV5WdqLPpUnj30aUuxt1mAxYTG+oe8CZMV/+6rU4S4gRDzqtQ==}
+
+  /@types/yargs@15.0.19:
+    resolution: {integrity: sha512-2XUaGVmyQjgyAZldf0D0c14vvo/yv0MhQBSTJcejMMaitsn3nxCB6TmH4G0ZQf+uxROOa9mpanoSm8h6SG/1ZA==}
+    dependencies:
+      '@types/yargs-parser': 21.0.3
+    dev: true
 
   /@types/yargs@17.0.32:
     resolution: {integrity: sha512-xQ67Yc/laOG5uMfX/093MRlGGCIBzZMarVa+gfNKJxWAIgykYpVGkBdbqEzGDDfCrVUj6Hiff4mTZ5BA6TmAog==}
@@ -15997,7 +16203,7 @@ packages:
     resolution: {integrity: sha512-o/HelwhuKpTj/frsOsbNLNgnNGVIFsVP/SW2BSF14gVl7kAfMOJ6/8wUAUvG1R1NHKrfG+2sHZTu0yauT1qBrA==}
     engines: {node: '>=6.0'}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       '@babel/runtime-corejs3': 7.23.9
 
   /aria-query@5.3.0:
@@ -16005,11 +16211,12 @@ packages:
     dependencies:
       dequal: 2.0.3
 
-  /array-buffer-byte-length@1.0.0:
-    resolution: {integrity: sha512-LPuwb2P+NrQw3XhxGc36+XSvuBPopovXYTR9Ew++Du9Yb/bx5AzBfrIsBoj0EZUifjQU+sHL21sseZ3jerWO/A==}
+  /array-buffer-byte-length@1.0.1:
+    resolution: {integrity: sha512-ahC5W1xgou+KTXix4sAO8Ki12Q+jf4i0+tmk3sC+zgcynshkHxzpXdImBehiUYKKKDwvfFiJl1tZt6ewscS1Mg==}
+    engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.5
-      is-array-buffer: 3.0.2
+      is-array-buffer: 3.0.4
 
   /array-flatten@1.1.1:
     resolution: {integrity: sha512-PCVAQswWemu6UdxsDFFX/+gVeYqKAod3D3UVm91jHwynguOwAvYPhx8nNlM++NqRcK6CxxpUafjmhIdKiHibqg==}
@@ -16021,7 +16228,7 @@ packages:
       call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.3
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       is-string: 1.0.7
 
   /array-timsort@1.0.3:
@@ -16053,12 +16260,12 @@ packages:
     resolution: {integrity: sha512-yMBKppFur/fbHu9/6USUe03bZ4knMYiwFBcyiaXB8Go0qNehwX6inYPzK9U0NeQvGxKthcmHcaR8P5MStSRBAw==}
     engines: {node: '>= 0.4'}
     dependencies:
-      array-buffer-byte-length: 1.0.0
+      array-buffer-byte-length: 1.0.1
       call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.3
-      get-intrinsic: 1.2.2
-      is-array-buffer: 3.0.2
+      get-intrinsic: 1.2.3
+      is-array-buffer: 3.0.4
       is-shared-array-buffer: 1.0.2
 
   /asap@2.0.6:
@@ -16343,7 +16550,7 @@ packages:
     resolution: {integrity: sha512-Cg7TFGpIr01vOQNODXOOaGz2NpCU5gl8x1qJFbb6hbZxR7XrcE2vtbAsTAbJ7/xwJtUuJEw8K8Zr/AE0LHlesg==}
     engines: {node: '>=10', npm: '>=6'}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       cosmiconfig: 7.1.0
       resolve: 1.22.8
 
@@ -16416,6 +16623,20 @@ packages:
     dependencies:
       '@babel/core': 7.20.2
       '@babel/helper-define-polyfill-provider': 0.4.4(@babel/core@7.20.2)
+      core-js-compat: 3.35.1
+    transitivePeerDependencies:
+      - supports-color
+
+  /babel-plugin-polyfill-corejs3@0.8.7(@babel/core@7.23.9):
+    resolution: {integrity: sha512-KyDvZYxAzkC0Aj2dAPyDzi2Ym15e5JKZSK+maI7NAwSqofvuFglbSsxE7wUOvTg9oFVnHMzVzBKcqEb4PJgtOA==}
+    peerDependencies:
+      '@babel/core': '*'
+    peerDependenciesMeta:
+      '@babel/core':
+        optional: true
+    dependencies:
+      '@babel/core': 7.23.9
+      '@babel/helper-define-polyfill-provider': 0.4.4(@babel/core@7.23.9)
       core-js-compat: 3.35.1
     transitivePeerDependencies:
       - supports-color
@@ -16587,10 +16808,10 @@ packages:
       '@babel/plugin-transform-flow-strip-types': 7.23.3(@babel/core@7.23.9)
       '@babel/plugin-transform-react-display-name': 7.23.3(@babel/core@7.23.9)
       '@babel/plugin-transform-runtime': 7.23.9(@babel/core@7.23.9)
-      '@babel/preset-env': 7.23.9(@babel/core@7.23.9)
-      '@babel/preset-react': 7.23.3(@babel/core@7.23.9)
+      '@babel/preset-env': 7.22.15(@babel/core@7.23.9)
+      '@babel/preset-react': 7.22.15(@babel/core@7.23.9)
       '@babel/preset-typescript': 7.23.3(@babel/core@7.23.9)
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       babel-plugin-macros: 3.1.0
       babel-plugin-transform-react-remove-prop-types: 0.4.24
     transitivePeerDependencies:
@@ -16865,7 +17086,7 @@ packages:
     resolution: {integrity: sha512-C3nQxfFZxFRVoJoGKKI8y3MOEo129NQ+FgQ08iye+Mk4zNZZGdjfs06bVTr+DBSlA66Q2VEcMki/cUCP4SercQ==}
     dependencies:
       function-bind: 1.1.2
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       set-function-length: 1.2.0
 
   /callsites@3.1.0:
@@ -17595,12 +17816,12 @@ packages:
       webpack:
         optional: true
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.33)
-      postcss: 8.4.33
-      postcss-modules-extract-imports: 3.0.0(postcss@8.4.33)
-      postcss-modules-local-by-default: 4.0.4(postcss@8.4.33)
-      postcss-modules-scope: 3.1.1(postcss@8.4.33)
-      postcss-modules-values: 4.0.0(postcss@8.4.33)
+      icss-utils: 5.1.0(postcss@8.4.19)
+      postcss: 8.4.19
+      postcss-modules-extract-imports: 3.0.0(postcss@8.4.19)
+      postcss-modules-local-by-default: 4.0.4(postcss@8.4.19)
+      postcss-modules-scope: 3.1.1(postcss@8.4.19)
+      postcss-modules-values: 4.0.0(postcss@8.4.19)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
       webpack: 5.84.1(esbuild@0.14.29)
@@ -17614,12 +17835,12 @@ packages:
       webpack:
         optional: true
     dependencies:
-      icss-utils: 5.1.0(postcss@8.4.33)
-      postcss: 8.4.33
-      postcss-modules-extract-imports: 3.0.0(postcss@8.4.33)
-      postcss-modules-local-by-default: 4.0.4(postcss@8.4.33)
-      postcss-modules-scope: 3.1.1(postcss@8.4.33)
-      postcss-modules-values: 4.0.0(postcss@8.4.33)
+      icss-utils: 5.1.0(postcss@8.4.19)
+      postcss: 8.4.19
+      postcss-modules-extract-imports: 3.0.0(postcss@8.4.19)
+      postcss-modules-local-by-default: 4.0.4(postcss@8.4.19)
+      postcss-modules-scope: 3.1.1(postcss@8.4.19)
+      postcss-modules-values: 4.0.0(postcss@8.4.19)
       postcss-value-parser: 4.2.0
       semver: 7.5.4
       webpack: 5.90.1(esbuild@0.14.29)
@@ -18074,12 +18295,12 @@ packages:
     resolution: {integrity: sha512-ZIwpnevOurS8bpT4192sqAowWM76JDKSHYzMLty3BZGSswgq6pBaH3DhCSW5xVAZICZyKdOBPjwww5wfgT/6PA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      array-buffer-byte-length: 1.0.0
+      array-buffer-byte-length: 1.0.1
       call-bind: 1.0.5
       es-get-iterator: 1.1.3
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       is-arguments: 1.1.1
-      is-array-buffer: 3.0.2
+      is-array-buffer: 3.0.4
       is-date-object: 1.0.5
       is-regex: 1.1.4
       is-shared-array-buffer: 1.0.2
@@ -18111,7 +18332,7 @@ packages:
     resolution: {integrity: sha512-E7uGkTzkk1d0ByLeSc6ZsFS79Axg+m1P/VsgYsxHgiuc3tFSj+MjMIwe90FC4lOAZzNBdY7kkO2P2wKdsQ1vgQ==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
 
@@ -18193,6 +18414,11 @@ packages:
     resolution: {integrity: sha512-RWmIqhcFf1lRYBvNmr7qTNuyCt/7/ns2jbpp1+PalgE/rDQcBT0fioSMUpJ93irlUhC5hrg4cYqe6U+0ImW0rA==}
     dependencies:
       dequal: 2.0.3
+
+  /diff-sequences@26.6.2:
+    resolution: {integrity: sha512-Mv/TDa3nZ9sbc5soK+OoA74BsS3mL37yixCvUAQkiuA4Wz6YtwP/K47n2rv2ovzHZvoiQeA5FTQOschKkEwB0Q==}
+    engines: {node: '>= 10.14.2'}
+    dev: true
 
   /diff-sequences@29.6.3:
     resolution: {integrity: sha512-EjePK1srD3P08o2j4f0ExnylqRs5B9tJjcp9t1krH2qRi8CCdsYfwe9JgSLurFBWwq4uOlipzfk5fHNvwFKr8Q==}
@@ -18448,14 +18674,14 @@ packages:
     resolution: {integrity: sha512-eiiY8HQeYfYH2Con2berK+To6GrK2RxbPawDkGq4UiCQQfZHb6wX9qQqkbpPqaxQFcl8d9QzZqo0tGE0VcrdwA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      array-buffer-byte-length: 1.0.0
+      array-buffer-byte-length: 1.0.1
       arraybuffer.prototype.slice: 1.0.2
       available-typed-arrays: 1.0.6
       call-bind: 1.0.5
       es-set-tostringtag: 2.0.2
       es-to-primitive: 1.2.1
       function.prototype.name: 1.1.6
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       get-symbol-description: 1.0.0
       globalthis: 1.0.3
       gopd: 1.0.1
@@ -18464,7 +18690,7 @@ packages:
       has-symbols: 1.0.3
       hasown: 2.0.0
       internal-slot: 1.0.6
-      is-array-buffer: 3.0.2
+      is-array-buffer: 3.0.4
       is-callable: 1.2.7
       is-negative-zero: 2.0.2
       is-regex: 1.1.4
@@ -18488,11 +18714,15 @@ packages:
       unbox-primitive: 1.0.2
       which-typed-array: 1.1.14
 
+  /es-errors@1.0.0:
+    resolution: {integrity: sha512-yHV74THqMJUyFKkHyN7hyENcEZM3Dj2a2IrdClY+IT4BFQHkIVwlh8s6uZfjsFydMdNHv0F5mWgAA3ajFbsvVQ==}
+    engines: {node: '>= 0.4'}
+
   /es-get-iterator@1.1.3:
     resolution: {integrity: sha512-sPZmqHBe6JIiTfN5q2pEi//TwxmAFHwj/XEuYjTuse78i8KxaqMTTzxPoFKuzRpDpTJ+0NAbpfenkmH2rePtuw==}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       has-symbols: 1.0.3
       is-arguments: 1.1.1
       is-map: 2.0.2
@@ -18509,7 +18739,7 @@ packages:
     resolution: {integrity: sha512-BuDyupZt65P9D2D2vA/zqcI3G5xRsklm5N3xCwuiy+/vKy8i0ifdsQP1sLgO4tZDSCaQUSnmC48khknGMV3D2Q==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       has-tostringtag: 1.0.2
       hasown: 2.0.0
 
@@ -19077,7 +19307,7 @@ packages:
       eslint:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       aria-query: 4.2.2
       array-includes: 3.1.7
       ast-types-flow: 0.0.7
@@ -20035,9 +20265,11 @@ packages:
   /get-func-name@2.0.2:
     resolution: {integrity: sha512-8vXOvuE167CtIc3OyItco7N/dpRtBbYOsPsXCz7X/PMnlGjYjSGuZJgM1Y7mmew7BKf9BqvLX2tnOVy1BBUsxQ==}
 
-  /get-intrinsic@1.2.2:
-    resolution: {integrity: sha512-0gSo4ml/0j98Y3lngkFEot/zhiCeWsbYIlZ+uZOVgzLyLaUw7wxUL+nCTP0XJvJg1AXulJRI3UJi8GsbDuxdGA==}
+  /get-intrinsic@1.2.3:
+    resolution: {integrity: sha512-JIcZczvcMVE7AUOP+X72bh8HqHBRxFdz5PDHYtNG/lE3yk9b3KZBJlwFcTyPYjg3L4RLLmZJzvjxhaZVapxFrQ==}
+    engines: {node: '>= 0.4'}
     dependencies:
+      es-errors: 1.0.0
       function-bind: 1.1.2
       has-proto: 1.0.1
       has-symbols: 1.0.3
@@ -20060,7 +20292,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
 
   /get-tsconfig@4.2.0:
     resolution: {integrity: sha512-X8u8fREiYOE6S8hLbq99PeykTDoLVnxvF4DjWKJmz9xy2nNRdUcV8ZN9tniJFeKyTU3qnC9lL8n4Chd6LmVKHg==}
@@ -20155,7 +20387,7 @@ packages:
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
 
   /graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
@@ -20248,7 +20480,7 @@ packages:
   /has-property-descriptors@1.0.1:
     resolution: {integrity: sha512-VsX8eaIewvas0xnvinAe9bw4WfIeODpGYikiWYLH+dma0Jw6KHYqWiWfhQlgOVK8D6PvjubK5Uc4P0iIhIcNVg==}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
 
   /has-proto@1.0.1:
     resolution: {integrity: sha512-7qE+iP+O+bgF9clE5+UoBFzE65mlBiVj3tKCrlNQ0Ogwm0BjpT/gK4SlLYDMybDh5I3TCTKnPPa0oMG7JDYrhg==}
@@ -20733,6 +20965,17 @@ packages:
     dependencies:
       safer-buffer: 2.1.2
 
+  /icss-utils@5.1.0(postcss@8.4.19):
+    resolution: {integrity: sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: '*'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+    dependencies:
+      postcss: 8.4.19
+
   /icss-utils@5.1.0(postcss@8.4.33):
     resolution: {integrity: sha512-soFhflCVWLfRNOPU3iv5Z9VUdT44xFRbzjLsEzSr5AQmgqPMTHdU3PMT1Cf1ssx8fLNJDA1juftYl+PUcv3MqA==}
     engines: {node: ^10 || ^12 || >= 14}
@@ -20818,7 +21061,7 @@ packages:
     resolution: {integrity: sha512-Xj6dv+PsbtwyPpEflsejS+oIZxmMlV44zAhG479uYu89MsjcYOhCFnNyKrkJrihbsiasQyY0afoCl/9BLR65bg==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       hasown: 2.0.0
       side-channel: 1.0.4
 
@@ -20867,12 +21110,12 @@ packages:
       call-bind: 1.0.5
       has-tostringtag: 1.0.2
 
-  /is-array-buffer@3.0.2:
-    resolution: {integrity: sha512-y+FyyR/w8vfIRq4eQcM1EYgSTnmHXPqaF+IgzgraytCFq5Xh8lllDVmAZolPJiZttZLeFSINPYMaEJ7/vWUa1w==}
+  /is-array-buffer@3.0.4:
+    resolution: {integrity: sha512-wcjaerHw0ydZwfhiKbXJWLDY8A7yV7KhjQOpb83hGgGfId/aQa4TOvwyzn2PuswW2gPCYEL/nEAiSVpdOj1lXw==}
+    engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
-      is-typed-array: 1.1.13
+      get-intrinsic: 1.2.3
 
   /is-arrayish@0.2.1:
     resolution: {integrity: sha512-zz06S8t0ozoDXMG+ube26zeCTNXcKIPJZJi8hBrF4idCLms4CG9QtK7qBl1boi5ODzFpjswb5JPmHCbMpjaYzg==}
@@ -21076,7 +21319,7 @@ packages:
     resolution: {integrity: sha512-t2yVvttHkQktwnNNmBQ98AhENLdPUTDTE21uPqAQ0ARwQfGeQKRVS0NNurH7bTf7RrvcVn1OOge45CnBeHCSmg==}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
     dev: false
 
   /is-whitespace-character@1.0.4:
@@ -21280,6 +21523,16 @@ packages:
       - babel-plugin-macros
       - supports-color
 
+  /jest-diff@26.6.2:
+    resolution: {integrity: sha512-6m+9Z3Gv9wN0WFVasqjCL/06+EFCMTqDEUl/b87HYK2rAPTyfz4ZIuSlPhY51PIQRWx5TaxeF1qmXKe9gfN3sA==}
+    engines: {node: '>= 10.14.2'}
+    dependencies:
+      chalk: 4.1.2
+      diff-sequences: 26.6.2
+      jest-get-type: 26.3.0
+      pretty-format: 26.6.2
+    dev: true
+
   /jest-diff@29.7.0:
     resolution: {integrity: sha512-LMIgiIrhigmPrs03JHpxUh2yISK3vLFPkAodPeo0+BuF7wA2FoQbkEg1u8gBYBThncu7e1oEDUfIXVuTqLRUjw==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -21337,6 +21590,11 @@ packages:
       '@types/node': 18.19.14
       jest-mock: 29.7.0
       jest-util: 29.7.0
+
+  /jest-get-type@26.3.0:
+    resolution: {integrity: sha512-TpfaviN1R2pQWkIihlfEanwOXK0zcxrKEE4MlU6Tn7keoXdN6/3gK/xl0yEh8DOunn5pOVGKf8hB4R9gVh04ig==}
+    engines: {node: '>= 10.14.2'}
+    dev: true
 
   /jest-get-type@29.6.3:
     resolution: {integrity: sha512-zrteXnqYxfQh7l5FHyL38jL39di8H8rHoecLH3JNxH3BwOrBsNeabdap5e0I23lD4HHI8W5VFBZqG4Eaq5LNcw==}
@@ -23313,7 +23571,7 @@ packages:
       debug: 4.3.4
       fast-safe-stringify: 2.1.1
       http-headers: 3.0.2
-      is-array-buffer: 3.0.2
+      is-array-buffer: 3.0.4
       is-buffer: 2.0.5
       is-stream: 2.0.1
       is-uuid: 1.0.2
@@ -24257,6 +24515,17 @@ packages:
       postcss: 8.4.33
       postcss-selector-parser: 6.0.15
 
+  /postcss-modules-extract-imports@3.0.0(postcss@8.4.19):
+    resolution: {integrity: sha512-bdHleFnP3kZ4NYDhuGlVK+CMrQ/pqUm8bx/oGL93K6gVwiclvX5x0n76fYMKuIGKzlABOy13zsvqjb0f92TEXw==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: '*'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+    dependencies:
+      postcss: 8.4.19
+
   /postcss-modules-extract-imports@3.0.0(postcss@8.4.33):
     resolution: {integrity: sha512-bdHleFnP3kZ4NYDhuGlVK+CMrQ/pqUm8bx/oGL93K6gVwiclvX5x0n76fYMKuIGKzlABOy13zsvqjb0f92TEXw==}
     engines: {node: ^10 || ^12 || >= 14}
@@ -24267,6 +24536,20 @@ packages:
         optional: true
     dependencies:
       postcss: 8.4.33
+
+  /postcss-modules-local-by-default@4.0.4(postcss@8.4.19):
+    resolution: {integrity: sha512-L4QzMnOdVwRm1Qb8m4x8jsZzKAaPAgrUF1r/hjDR2Xj7R+8Zsf97jAlSQzWtKx5YNiNGN8QxmPFIc/sh+RQl+Q==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: '*'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.19)
+      postcss: 8.4.19
+      postcss-selector-parser: 6.0.15
+      postcss-value-parser: 4.2.0
 
   /postcss-modules-local-by-default@4.0.4(postcss@8.4.33):
     resolution: {integrity: sha512-L4QzMnOdVwRm1Qb8m4x8jsZzKAaPAgrUF1r/hjDR2Xj7R+8Zsf97jAlSQzWtKx5YNiNGN8QxmPFIc/sh+RQl+Q==}
@@ -24282,6 +24565,18 @@ packages:
       postcss-selector-parser: 6.0.15
       postcss-value-parser: 4.2.0
 
+  /postcss-modules-scope@3.1.1(postcss@8.4.19):
+    resolution: {integrity: sha512-uZgqzdTleelWjzJY+Fhti6F3C9iF1JR/dODLs/JDefozYcKTBCdD8BIl6nNPbTbcLnGrk56hzwZC2DaGNvYjzA==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: '*'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+    dependencies:
+      postcss: 8.4.19
+      postcss-selector-parser: 6.0.15
+
   /postcss-modules-scope@3.1.1(postcss@8.4.33):
     resolution: {integrity: sha512-uZgqzdTleelWjzJY+Fhti6F3C9iF1JR/dODLs/JDefozYcKTBCdD8BIl6nNPbTbcLnGrk56hzwZC2DaGNvYjzA==}
     engines: {node: ^10 || ^12 || >= 14}
@@ -24293,6 +24588,18 @@ packages:
     dependencies:
       postcss: 8.4.33
       postcss-selector-parser: 6.0.15
+
+  /postcss-modules-values@4.0.0(postcss@8.4.19):
+    resolution: {integrity: sha512-RDxHkAiEGI78gS2ofyvCsu7iycRv7oqw5xMWn9iMoR0N/7mf9D50ecQqUo5BZ9Zh2vH4bCUR/ktCqbB9m8vJjQ==}
+    engines: {node: ^10 || ^12 || >= 14}
+    peerDependencies:
+      postcss: '*'
+    peerDependenciesMeta:
+      postcss:
+        optional: true
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.19)
+      postcss: 8.4.19
 
   /postcss-modules-values@4.0.0(postcss@8.4.33):
     resolution: {integrity: sha512-RDxHkAiEGI78gS2ofyvCsu7iycRv7oqw5xMWn9iMoR0N/7mf9D50ecQqUo5BZ9Zh2vH4bCUR/ktCqbB9m8vJjQ==}
@@ -24579,7 +24886,7 @@ packages:
       '@csstools/postcss-trigonometric-functions': 1.0.2(postcss@8.4.19)
       '@csstools/postcss-unset-value': 1.0.2(postcss@8.4.19)
       autoprefixer: 10.4.17(postcss@8.4.19)
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       css-blank-pseudo: 3.0.3(postcss@8.4.19)
       css-has-pseudo: 3.0.4(postcss@8.4.19)
       css-prefers-color-scheme: 6.0.3(postcss@8.4.19)
@@ -24845,6 +25152,16 @@ packages:
       lodash: 4.17.21
       renderkid: 3.0.0
 
+  /pretty-format@26.6.2:
+    resolution: {integrity: sha512-7AeGuCYNGmycyQbCqd/3PWH4eOoX/OiCa0uphp57NVTeAGdJGaAliecxwBDHYQCIvrW7aDBZCYeNTP/WX69mkg==}
+    engines: {node: '>= 10'}
+    dependencies:
+      '@jest/types': 26.6.2
+      ansi-regex: 5.0.1
+      ansi-styles: 4.3.0
+      react-is: 17.0.2
+    dev: true
+
   /pretty-format@29.7.0:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
@@ -25074,7 +25391,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.23.5
       address: 1.2.2
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chalk: 4.1.2
       cross-spawn: 7.0.3
       detect-port-alt: 1.1.6
@@ -25117,7 +25434,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.23.5
       address: 1.2.2
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chalk: 4.1.2
       cross-spawn: 7.0.3
       detect-port-alt: 1.1.6
@@ -25160,7 +25477,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.23.5
       address: 1.2.2
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chalk: 4.1.2
       cross-spawn: 7.0.3
       detect-port-alt: 1.1.6
@@ -25203,7 +25520,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.23.5
       address: 1.2.2
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chalk: 4.1.2
       cross-spawn: 7.0.3
       detect-port-alt: 1.1.6
@@ -25253,7 +25570,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       react: 18.2.0
 
   /react-error-overlay@6.0.11:
@@ -25264,6 +25581,10 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-is@17.0.2:
+    resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
+    dev: true
 
   /react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
@@ -25327,7 +25648,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       highlight.js: 10.7.3
       lowlight: 1.20.0
       prismjs: 1.29.0
@@ -25342,7 +25663,7 @@ packages:
       react:
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
       highlight.js: 10.7.3
       lowlight: 1.20.0
       prismjs: 1.29.0
@@ -25524,7 +25845,7 @@ packages:
   /regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
     dependencies:
-      '@babel/runtime': 7.23.9
+      '@babel/runtime': 7.20.0
 
   /regex-parser@2.3.0:
     resolution: {integrity: sha512-TVILVSz2jY5D47F4mA4MppkBrafEaiUWJO/TcZHEIuI13AqoZMkK1WMA4Om1YkYbTx+9Ki1/tSUXbceyr9saRg==}
@@ -25768,7 +26089,7 @@ packages:
       adjust-sourcemap-loader: 4.0.0
       convert-source-map: 1.9.0
       loader-utils: 2.0.4
-      postcss: 8.4.33
+      postcss: 8.4.19
       source-map: 0.6.1
 
   /resolve.exports@2.0.2:
@@ -25856,7 +26177,7 @@ packages:
     engines: {node: '>=0.4'}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       has-symbols: 1.0.3
       isarray: 2.0.5
 
@@ -25871,7 +26192,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       is-regex: 1.1.4
 
   /safe-regex2@2.0.0:
@@ -26138,7 +26459,7 @@ packages:
     dependencies:
       define-data-property: 1.1.1
       function-bind: 1.1.2
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
 
@@ -26189,7 +26510,7 @@ packages:
     resolution: {integrity: sha512-q5XPytqFEIKHkGdiMIrY10mvLRvnQh42/+GoBlFW3b2LXLE2xxJpZFdm94we0BaoV3RwJyGqg5wS7epxTv0Zvw==}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       object-inspect: 1.13.1
 
   /siginfo@2.0.0:
@@ -26484,7 +26805,7 @@ packages:
       call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.3
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       has-symbols: 1.0.3
       internal-slot: 1.0.6
       regexp.prototype.flags: 1.5.1
@@ -27355,7 +27676,7 @@ packages:
     engines: {node: '>= 0.4'}
     dependencies:
       call-bind: 1.0.5
-      get-intrinsic: 1.2.2
+      get-intrinsic: 1.2.3
       is-typed-array: 1.1.13
 
   /typed-array-byte-length@1.0.0:
@@ -27485,7 +27806,7 @@ packages:
       extend: 3.0.2
       is-plain-obj: 2.1.0
       trough: 1.0.5
-      vfile: 4.2.1
+      vfile: 4.2.0
 
   /unified@9.2.0:
     resolution: {integrity: sha512-vx2Z0vY+a3YoTj8+pttM3tiJHCwY5UFbYdiWrwBEbHmK8pvsPj2rtAX2BFfgXen8T39CJWblWRDT4L5WGXtDdg==}
@@ -28286,7 +28607,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.11.3
       acorn-import-assertions: 1.9.0(acorn@8.11.3)
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
       es-module-lexer: 1.4.1
@@ -28325,7 +28646,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.11.3
       acorn-import-assertions: 1.9.0(acorn@8.11.3)
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
       es-module-lexer: 1.4.1
@@ -28364,7 +28685,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.11.3
       acorn-import-assertions: 1.9.0(acorn@8.11.3)
-      browserslist: 4.22.3
+      browserslist: 4.21.4
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.15.0
       es-module-lexer: 1.4.1
@@ -28848,6 +29169,15 @@ packages:
       - utf-8-validate
     dev: false
 
+  file:projects/bots/aspects/harmony-bot-generators:
+    resolution: {directory: projects/bots/aspects/harmony-bot-generators, type: directory}
+    name: '@eventiva/bots.aspects.harmony-bot-generators'
+    dependencies:
+      '@teambit/component-id': 1.2.0
+      lodash: 4.17.21
+      prompts: 2.4.2
+    dev: false
+
   file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14):
     resolution: {directory: projects/bots/aspects/i18n, type: directory}
     id: file:projects/bots/aspects/i18n
@@ -29122,6 +29452,57 @@ packages:
       - utf-8-validate
     dev: false
 
+  file:projects/bots/packages/default_logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14):
+    resolution: {directory: projects/bots/packages/default_logging, type: directory}
+    id: file:projects/bots/packages/default_logging
+    name: '@eventiva/bots.packages.default_logging'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
+    peerDependenciesMeta:
+      '@bitdev/harmony.harmony':
+        optional: true
+      '@bitdev/harmony.testing.load-aspect':
+        optional: true
+    dependencies:
+      '@apollo/client': 3.9.2(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@bitdev/harmony.harmony': 1.0.9
+      '@bitdev/harmony.testing.load-aspect': 0.0.14
+      '@eventiva/bots.aspects.discordjs': file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.18
+      graphql: 16.8.1
+      jest: 29.3.1(@types/node@18.19.14)
+      jsdom: 23.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.22.0(react-dom@18.2.0)(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.14)(jsdom@23.2.0)(sass@1.70.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - graphql-ws
+      - happy-dom
+      - less
+      - lightningcss
+      - node-notifier
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - utf-8-validate
+    dev: false
+
   file:projects/bots/support(@types/node@18.19.14)(typescript@5.3.3):
     resolution: {directory: projects/bots/support, type: directory}
     id: file:projects/bots/support
@@ -29140,6 +29521,7 @@ packages:
       '@eventiva/bots.aspects.support-platform': file:projects/bots/aspects/support-platform(@apollo/client@3.9.2)(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)(react-dom@18.2.0)(react-router-dom@6.22.0)(react@18.2.0)
       '@eventiva/bots.discord.events.message': file:projects/bots/discord/events/message(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
       '@eventiva/bots.discord.events.ready': file:projects/bots/discord/events/ready(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
+      '@eventiva/bots.packages.default_logging': file:projects/bots/packages/default_logging(@bitdev/harmony.harmony@1.0.9)(@bitdev/harmony.testing.load-aspect@0.0.14)(@types/node@18.19.14)
       '@mdx-js/react': 1.6.22(react@18.2.0)
       '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@types/react': 18.2.23
