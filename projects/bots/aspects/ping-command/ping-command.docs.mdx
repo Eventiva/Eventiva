@@ -1,0 +1,34 @@
+---
+description: 'A plugable PingCommand aspect. Can be used to provider a UI and API.'
+labels: ['aspect', 'composition', 'extendability']
+---
+
+A plugable PingCommand aspect. Used to maintain PingCommand across the platform.
+
+## Get started
+
+Compose the aspect into your Harmony platform:
+
+```ts
+import { PlatformAspect } from '@bitdev/harmony.aspects.platform-aspect';
+
+/**
+ * compose the wayne.com platform.
+ */    
+export const MyPlatform = HarmonyPlatform.from({
+  name: 'my-platform',
+
+  platform: PlatformAspect,
+
+  runtimes: [
+    new BrowserRuntime(),
+    new NodeJSRuntime()
+  ],
+
+  aspects: [
+    PingCommandAspect,
+  ]
+});
+
+export default MyPlatform;
+```
