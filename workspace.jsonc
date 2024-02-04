@@ -39,7 +39,8 @@
   "teambit.generator/generator": {
     "envs": [
       "bitdev.harmony/harmony-env",
-      "bitdev.node/node-env"
+      "bitdev.node/node-env",
+      "eventiva.bots/aspects/harmony-bot-generators"
     ]
   },
   /**
@@ -64,6 +65,7 @@
         "@fastify/sensible": "^5.5.0",
         "@joggr/fastify-prisma": "^1.2.2",
         "@prisma/client": "^5.8.1",
+        "@teambit/component-id": "^1.2.0",
         "@teambit/defender.eslint-linter": "^1.0.16",
         "@teambit/defender.jest-tester": "^1.0.15",
         "@teambit/defender.prettier-formatter": "^1.0.8",
@@ -89,6 +91,7 @@
         "pino": "^8.17.2",
         "pino-caller": "^3.4.0",
         "pino-pretty": "^10.3.1",
+        "prompts": "^2.4.2",
         "typescript": "^5.3.3"
       },
       "peerDependencies": {}

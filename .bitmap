@@ -12,30 +12,51 @@
     "aspects/atlassian-customer-support": {
         "name": "aspects/atlassian-customer-support",
         "scope": "eventiva.bots",
-        "version": "a5d0ff328ce845338b271842471d7ba79d2c2f84",
+        "version": "82d1a37d7bd7dad2fefde142e10f0756d04dfbbe",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/atlassian-customer-support"
     },
     "aspects/discordjs": {
         "name": "aspects/discordjs",
         "scope": "eventiva.bots",
-        "version": "490e4fae127190cc23ab8d9081ff0556d4de97a2",
+        "version": "d4affda3d2d25b0f9c65a60134b08fceca224f50",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/discordjs"
+    },
+    "aspects/harmony-bot-generators": {
+        "name": "aspects/harmony-bot-generators",
+        "scope": "eventiva.bots",
+        "version": "6ba0ae0e3891f8c98730bf64efb85a5f6771d6b5",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/aspects/harmony-bot-generators"
     },
     "aspects/i18n": {
         "name": "aspects/i18n",
         "scope": "eventiva.bots",
-        "version": "9c94c2d9c19039f2dbadd981e555d4aa54724311",
+        "version": "38c940fe9b68d540182bd005ab297123b0cf6ecd",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/i18n"
     },
     "aspects/logging": {
         "name": "aspects/logging",
         "scope": "eventiva.bots",
-        "version": "412e54bf7ef80119c7b16f980dc4ebfbadad0c52",
+        "version": "3d0cb71629736422ae304994ba27549823a95e21",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/logging"
+    },
+    "aspects/ping-command": {
+        "name": "aspects/ping-command",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.bots",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/aspects/ping-command",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.49": {},
+            "teambit.envs/envs": {
+                "env": "bitdev.harmony/harmony-env"
+            }
+        }
     },
     "aspects/support-platform": {
         "name": "aspects/support-platform",
@@ -44,34 +65,6 @@
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/support-platform"
     },
-    "discord/events/message": {
-        "name": "discord/events/message",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.bots",
-        "mainFile": "index.ts",
-        "rootDir": "projects/bots/discord/events/message",
-        "config": {
-            "bitdev.harmony/harmony-env@1.0.49": {},
-            "teambit.envs/envs": {
-                "env": "bitdev.harmony/harmony-env"
-            }
-        }
-    },
-    "discord/events/ready": {
-        "name": "discord/events/ready",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.bots",
-        "mainFile": "index.ts",
-        "rootDir": "projects/bots/discord/events/ready",
-        "config": {
-            "bitdev.harmony/harmony-env@1.0.49": {},
-            "teambit.envs/envs": {
-                "env": "bitdev.harmony/harmony-env"
-            }
-        }
-    },
     "git-subrepo": {
         "name": "git-subrepo",
         "scope": "eventiva.workflows",
@@ -79,10 +72,17 @@
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/git-subrepo"
     },
+    "packages/default_logging": {
+        "name": "packages/default_logging",
+        "scope": "eventiva.bots",
+        "version": "eff2ffa949e2b58c640083f3c1eed34cb1368684",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/packages/default_logging"
+    },
     "support": {
         "name": "support",
         "scope": "eventiva.bots",
-        "version": "87e13dff339d38bb464e85c7f35acbf8f4dc4a89",
+        "version": "8f50619830a8a7f291c27bad0169b13fcdcebbe4",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/support"
     },
