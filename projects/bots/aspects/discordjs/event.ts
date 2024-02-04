@@ -19,26 +19,35 @@
 * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
 * -----
 * Copyright (c) 2024 Resnovas - All Rights Reserved
-* LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+* LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
 * -----
 * This program has been provided under confidence of the copyright holder and
-* is licensed for copying, distribution and modification under the terms of
-* the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+* is licensed for copying, distribution and modification under the terms
+* of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
 * or (at your option) any later version of this license.
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* Creative Commons Zero v1.0 Universal for more details.
-* You should have received a copy of the Creative Commons Zero v1.0 Universal
+* GNU General Public License v2.0 or later for more details.
+* You should have received a copy of the GNU General Public License v2.0 or later
 * along with this program. If not, please write to: jonathan@resnovas.com,
-* or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+* or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+* -----
+* This project abides by the GPL Cooperation Commitment.
+* Before filing or continuing to prosecute any legal proceeding or claim
+* (other than a Defensive Action) arising from termination of a Covered
+* License, we commit to extend to the person or entity ('you') accused
+* of violating the Covered License the following provisions regarding
+* cure and reinstatement, taken from GPL version 3.
+* For further details on the GPL Cooperation Commitment please visit
+* the official website: https://gplcc.github.io/gplcc/
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import type { ClientEvents, Awaitable } from 'discord.js';
-import type { DiscordjsNode } from './discordjs.node.runtime';
+import { ClientEvents, type Awaitable } from "discord.js";
 import type { SlotRegistry } from '@bitdev/harmony.harmony';
+import { DiscordJsModule } from "./module.js";
 
 
 /**
@@ -100,6 +109,12 @@ export interface ExtendedClientEvents extends ClientEvents {
    * @type {[message: string]}
    */
   emergency: [message: string];
+
+  /**
+   * The moduleRegistered property represents the registered module in DiscordJsModule format.
+   * @author Jonathan Stevens (@TGTGamer)
+   */
+  moduleRegistered: [module: DiscordJsModule, reload?: true]
 }
 
 /**
@@ -130,12 +145,6 @@ export interface Event<E extends keyof ExtendedClientEvents> {
    * @type {?boolean}
    */
   once?: boolean;
-
-  /**
-   * A module key which gets defined when you register the module
-   * @author Jonathan Stevens (@TGTGamer)
-   */
-  module?: string
   
   /**
    * A method that executes a given function with the provided arguments. The function is determined by the event type, 'E', from the 'ExtendedClientEvents' object. The arguments are passed as parameters to the function. The return value is an 'Awaitable' Promise that resolves to 'void'.
@@ -143,7 +152,7 @@ export interface Event<E extends keyof ExtendedClientEvents> {
    *
    * @type {(...args: ExtendedClientEvents[E]) => Awaitable<void>}
    */
-  execute: (this: DiscordjsNode, ...args: ExtendedClientEvents[E]) => Awaitable<void>;
+  execute: (this: DiscordJsModule, ...args: ExtendedClientEvents[E]) => Awaitable<void>;
 };
 
 /**
