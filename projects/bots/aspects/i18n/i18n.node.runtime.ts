@@ -19,36 +19,39 @@
 * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
 * -----
 * Copyright (c) 2024 Resnovas - All Rights Reserved
-* LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+* LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
 * -----
 * This program has been provided under confidence of the copyright holder and
-* is licensed for copying, distribution and modification under the terms of
-* the Creative Commons Zero v1.0 Universal (CC0-1.0) published as the License,
+* is licensed for copying, distribution and modification under the terms
+* of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
 * or (at your option) any later version of this license.
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* Creative Commons Zero v1.0 Universal for more details.
-* You should have received a copy of the Creative Commons Zero v1.0 Universal
+* GNU General Public License v2.0 or later for more details.
+* You should have received a copy of the GNU General Public License v2.0 or later
 * along with this program. If not, please write to: jonathan@resnovas.com,
-* or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+* or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+* -----
+* This project abides by the GPL Cooperation Commitment.
+* Before filing or continuing to prosecute any legal proceeding or claim
+* (other than a Defensive Action) arising from termination of a Covered
+* License, we commit to extend to the person or entity ('you') accused
+* of violating the Covered License the following provisions regarding
+* cure and reinstatement, taken from GPL version 3.
+* For further details on the GPL Cooperation Commitment please visit
+* the official website: https://gplcc.github.io/gplcc/
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
+
 import { I18NConfig } from './i18n-config.js';
-import { Resource, ResourceSlot } from './resource.js';
+import { Resource, ResourceSlot } from './resource.js'
 import i18next, {i18n} from 'i18next';
 import {common as enCommon} from './locales/en/common.js';
 import {common as esCommon} from './locales/es/common.js';
 import LoggingAspect, { Log, LoggingNode } from '@eventiva/bots.aspects.logging';
-
-/**
- * The default namespace for the object. It is set to 'common' by default.
- * @author Jonathan Stevens (@TGTGamer)
- */
-export const defaultNS = 'common';
-
 
 /**
  * export class I18NNode {
@@ -99,7 +102,7 @@ export class I18NNode {
     private resourceSlot: ResourceSlot,
     protected logging?: LoggingNode
   ) {
-    this.log = logging ? logging.registerLogger([{name: "i18n", options: {level: "trace"}}]).getLogger("i18n").logger : console
+    this.log = logging ? logging.registerLogger([{name: "i18n", options: this.config.logger}]).getLogger("i18n").logger : console
     this.log.trace(`Logging module ${logging ? "found. Using logging module." : "not found. Using Console module."}`)
     
     this.init();
@@ -168,7 +171,7 @@ export class I18NNode {
    * @param name The name of the resource to retrieve.
    * @returns Get the resource with the specified name.
    */
-  getRecource(name: string) {
+  getResource(name: string) {
     return this.resourceSlot.get(name);
   }
 
@@ -201,6 +204,9 @@ export class I18NNode {
       es: {
         common: esCommon
       }
+    },
+    logger: {
+      level: "trace"
     }
   };
 
