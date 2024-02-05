@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/discord_integration
 	branch = develop
-	commit = 3b3d5e6edb97e3c84d613371dd2f9080fb0b6aea
+	commit = 293db5471c593fc399a052be26bb543879969bf7
 	method = merge
 	cmdver = 0.4.6
-	parent = 13f6ea77819fed02f96bde24a93d5116ca840a84
+	parent = 8b75010d8c22fe788840a67d4b97325493746e78
