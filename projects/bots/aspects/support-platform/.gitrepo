@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/bots-aspects-support-platform.git
 	branch = develop
-	commit = 
+	commit = 16fd9aee4e2b222913c8254bad7e1d4f16a8dbf9
 	method = merge
 	cmdver = 0.4.6
+	parent = 1cee1a4cabad3c008b1eb4ce48209f22f40eafc0
