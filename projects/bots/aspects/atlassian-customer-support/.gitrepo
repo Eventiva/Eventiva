@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/bots-aspects-atlassian-customer-support.git
 	branch = develop
-	commit = 
+	commit = 86ea549aea9524d66f2fb2dd286907296b7d2fc5
 	method = merge
 	cmdver = 0.4.6
+	parent = 42a5ec46f0b37fe41155587e4e9b31a24c055292
