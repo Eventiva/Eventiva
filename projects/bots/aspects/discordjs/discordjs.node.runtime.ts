@@ -197,7 +197,7 @@ export class DiscordjsNode {
    * @param events An array of events to register
    * @returns Registers multiple events to be handled by the client.
    */
-  public registerEvent(module: DiscordJsModule, events: Event<any>[]) {
+  public async registerEvent(module: DiscordJsModule, events: Event<any>[]) {
     if (events.length === 0) return this;
     this.log.trace(this.i18n.t("discord:events.multi.registering", {count: events.length}))
     this.log.trace(this.i18n.t("discord:events.multi.registerEventSlot"))
@@ -206,8 +206,8 @@ export class DiscordjsNode {
       if (!event) continue;
       this.log.trace(this.i18n.t("discord:events.single.registering", {name: event.name, type: event.once ? "Once" : "repeat"}))
       this.log.trace(`Getting the event from EventSlot using getByName ${JSON.stringify(this.eventSlot.getByName(event.name))}`)
-      if (event.once) this.client.once(event.name as string, event.execute.bind(module))
-      else this.client.on(event.name as string, event.execute.bind(module))
+      if (event.once) this.client.once(event.name as string, await event.execute.bind(module))
+      else this.client.on(event.name as string, await event.execute.bind(module))
       this.log.info(this.i18n.t("discord:events.single.registered", {name: event.name, type: event.once ? "Once" : "repeat"}))
     }
     this.log.trace(this.i18n.t("discord:events.multi.registered", {count: this.eventSlot.length}))
