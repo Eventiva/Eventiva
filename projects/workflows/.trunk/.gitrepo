@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/.trunk.git
 	branch = main
-	commit = 5e6c061a65ec6a754388466dc1a08d86e11626f6
-	parent = eaf62f1eb899f96a10e9a66e2b37845329bf8805
+	commit = 793eb64d6a248c7842fd8e0afe710dfaa2100bec
+	parent = cf939fb95d7f2bb1a2a9e3570dd014eff5a205a6
 	method = merge
 	cmdver = 0.4.6
