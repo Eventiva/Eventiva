@@ -45,7 +45,7 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import { defaultNS } from '@eventiva/bots.aspects.logging';
+import { defaultNS } from '@eventiva/bots.aspects.i18n';
 import discord from '../locales/en/discord';
 import errors from '../locales/en/errors';
 
