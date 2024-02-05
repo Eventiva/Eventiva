@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/bots-packages-default_logging.git
 	branch = develop
-	commit = 
+	commit = ad315880bceda063106d8851d6c8861d153fe1fc
 	method = merge
 	cmdver = 0.4.6
+	parent = 5334d4e9feb3981f046e2f8b61bfc3ccf2659c74
