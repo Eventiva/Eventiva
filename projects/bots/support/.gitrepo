@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/bots-support.git
 	branch = develop
-	commit = 
+	commit = 70c4c5b00492b261c23d42d2cb6091c9cd5c60be
 	method = merge
 	cmdver = 0.4.6
+	parent = 67b4732ee5fe4bf38e62e59ae23de4c6d7918dbc
