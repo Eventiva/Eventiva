@@ -147,6 +147,18 @@ export class DiscordJsModule<C extends ModuleConfig = {
   }
 
   /**
+   * Registers a locale for the bot. If the 'reload' parameter is provided and set to 'true', the locale resources will be reloaded.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @public
+   * @param [reload]
+   */
+  public registerLocales(reload?: true) {
+    // TODO add a locale file loader method using file system
+    this.discord.i18nModule.registerResource()
+  }
+
+  /**
    * Get the configuration object.
    * @author Jonathan Stevens (@TGTGamer)
    *
