@@ -48,6 +48,7 @@
 
 import { I18NAspect } from './i18n.aspect.js';
 export { I18NNode } from './i18n.node.runtime.js';
+export { Resource } from './resource.js';
 /**
  * The default namespace for the i18n is 'common'.
  * @author Jonathan Stevens (@TGTGamer)
