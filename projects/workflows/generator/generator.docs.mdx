@@ -1,0 +1,41 @@
+---
+labels: ['module', templates, templates]
+description: 'Generator templates for Harmony development'
+---
+
+Official Bit component generator templates for Harmony. It includes the following templates:
+
+- Aspect
+- Platform aspect
+- Harmony env
+- Bit app
+- Express app
+
+## Use in your dev environment
+
+Use these templates in your dev environment by composing this component to your custom `bit-env` file:
+
+```ts
+import { HarmonyEnv } from '@bitdev/harmony.harmony-env';
+import { Generator } from '@bitdev/node/generator/node-templates';
+
+class MyEnv extends HarmonyEnv {
+  generators() {
+    return Generator();
+  }
+}
+```
+
+## Options
+
+You can pass options to control variaty of aspects in the Harmony templates.
+
+## Fork the templates
+
+You can fork these templates to create your own customized NodeJS generator templates:
+
+```
+bit fork bitdev.node/generators/node-templates
+```
+
+After forking the component, make sure the use the new package name in your [custom dev environment](#use-in-your-dev-environment).
