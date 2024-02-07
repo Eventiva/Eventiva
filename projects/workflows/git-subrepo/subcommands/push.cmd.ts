@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: commit.cmd.ts
-* Path: \projects\workflows\git-subrepo\commit.cmd.ts
+* File: push.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\push.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -45,38 +45,51 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
+
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command constant used for the commit command.
+ * The name of the command 'push'.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"commit"}
+ * @type {"push"}
  */
-const COMMAND_NAME = 'commit';
+const COMMAND_NAME = 'push';
 
 /**
- * Add subrepo branch to current history as a single commit.
+ * Turn a current subdirectory into a subrepo
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class CommitCmd
- * @typedef {CommitCmd}
+ * @class PushCmd
+ * @typedef {PushCmd}
  * @implements {Command}
  */
-export class CommitCmd implements Command {
+export class PushCmd implements Command {
   /**
-   * The name property represents the command name and its corresponding arguments. It includes the command name, followed by an optional <subdir> argument, an optional [<subrepo-ref>] argument, and several optional flags. The available flags are: -m <msg>, --file=<msg file>, -e, -f, and -F.
+   * The name property specifies the name of the command. It is a template string that includes various options and placeholders. The available options include:
+   * - `<subdir>`: Specifies the subdirectory for the command.
+   * - `--all`: Specifies that the command should be applied to all branches.
+   * - `[<branch>]`: Specifies an optional branch.
+   * - `-m msg`: Specifies a commit message.
+   * - `--file=<msg file>`: Specifies a file containing a commit message.
+   * - `-r <remote>`: Specifies a remote repository.
+   * - `-b <branch>`: Specifies a branch.
+   * - `-M|-R`: Specifies a merge or rebase command.
+   * - `-u`: Specifies an upstream repository.
+   * - `-f`: Specifies a force flag.
+   * - `-s`: Specifies a squash flag.
+   * - `-N`: Specifies a no commit flag.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} <subdir> [<subrepo-ref>] [-m <msg>] [--file=<msg file>] [-e] [-f] [-F]`;
+  name = `${COMMAND_NAME} <subdir>|--all [<branch>] [-m msg] [--file=<msg file>] [-r <remote>] [-b <branch>] [-M|-R] [-u] [-f] [-s] [-N]`;
 
   /**
-   * The alias property represents the name or nickname given to a certain object or entity. It is of type string and can be empty or contain a string value.
+   * The alias for the property.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -84,15 +97,15 @@ export class CommitCmd implements Command {
   alias = '';
 
   /**
-   * Add subrepo branch to current history as a single commit.
+   * Turn a current subdirectory into a subrepo
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Add subrepo branch to current history as a single commit.`;
+  description = `Turn a current subdirectory into a subrepo`;
 
   /**
-   * The `options` property contains the subrepo options for the current instance of the `subrepo` class.
+   * The options for the subrepo, obtained from this.subrepo.subrepoOptions.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {CommandOptions}
@@ -100,7 +113,7 @@ export class CommitCmd implements Command {
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group to which the property belongs. In this case, it is 'git'.
+   * The group property represents the name of the group assigned to the element. This property is used in the context of git, indicating the group to which the element belongs.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -108,7 +121,7 @@ export class CommitCmd implements Command {
   group = 'git';
 
   /**
-   * An array of commands. Each command is represented as an instance of the Command type.
+   * An array of commands. Each command is an instance of the Command class.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -116,7 +129,7 @@ export class CommitCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * The private flag indicates whether the property is private or not. When the private flag is set to true, it means the property is private and cannot be accessed or modified from outside of the class or object.
+   * The property is marked as private.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -124,7 +137,7 @@ export class CommitCmd implements Command {
   private = true;
 
   /**
-   * The URL to the help page for the property. This URL points to the GitHub repository for git-subrepo.
+   * The URL to the help page for git-subrepo on GitHub.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -132,32 +145,32 @@ export class CommitCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of CommitCmd.
+   * Creates an instance of PushCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The subrepo for the constructor
+   * @param {GitSubrepoMain} subrepo The subrepo object passed to the constructor.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously commits changes to a git subrepo.
-   * @param subdirectory - A string array representing the subdirectory path(s) within the main repository.
-   * @param flags - A string array representing the additional command-line flags to be passed to the commit command.
-   * @returns A Promise that resolves to a string indicating the status of the commit operation.
+   * Asynchronously reports the result of pushing a subdirectory to a subrepo.
+   * @param subdirectory - The subdirectory to push.
+   * @param flags - The flags to use when pushing.
+   * @returns A string indicating the success of the push.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
    * @param {string[]} param0 An array of strings representing subdirectories
-   * @param {*} param0.subdirectory The subdirectory to commit
+   * @param {*} param0.subdirectory The subdirectory to push to the subrepo
    * @param {string[]} flags An array of strings representing flags
-   * @returns {unknown} Asynchronously performs a git subrepo commit on the specified subdirectories with the given flags. Returns a string indicating the success or failure of the commit.
+   * @returns {unknown} This function asynchronously pushes changes in the subdirectory to the subrepository using git. It takes two parameters: an array of subdirectories and an array of flags. It returns a string indicating the success or failure of the operation.
    */
   async report([subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.commit(subdirectory, flags);
+    const res = await this.subrepo.push(subdirectory, flags);
     if (res) {
-      return chalk.green('git subrepo commit was successful');
+      return chalk.green('git subrepo push was successful');
     }
-    return chalk.red('git subrepo commit was unsuccessful');
+    return chalk.red('git subrepo push was unsuccessful');
   }
 }

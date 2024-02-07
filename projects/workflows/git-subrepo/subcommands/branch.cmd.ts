@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: help.cmd.ts
-* Path: \projects\workflows\git-subrepo\help.cmd.ts
+* File: branch.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\branch.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -47,36 +47,36 @@
 
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command used to display the help information.
+ * The name of the command to create a new branch.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"help"}
+ * @type {"branch"}
  */
-const COMMAND_NAME = 'help';
+const COMMAND_NAME = 'branch';
 
 /**
- * This class represents the help command in the application. It implements the Command interface.
+ * The BranchCmd class represents a command for creating a branch with local subrepo commits.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class helpCmd
- * @typedef {HelpCmd}
+ * @class BranchCmd
+ * @typedef {BranchCmd}
  * @implements {Command}
  */
-export class HelpCmd implements Command {
+export class BranchCmd implements Command {
   /**
-   * The name of the command. It is a string that consists of the `COMMAND_NAME` variable followed by an optional `<command>` argument or `--all` flag.
+   * The name of the command. It is a string that should be in the format `${COMMAND_NAME} <subdir>|--all [-f] [-F]`.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} [<command>|--all]`;
+  name = `${COMMAND_NAME} <subdir>|--all [-f] [-F]`;
 
   /**
-   * The alias for the property.
+   * The alias property represents the specified alias for a value. It is a string type and initially set to an empty string.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -84,23 +84,23 @@ export class HelpCmd implements Command {
   alias = '';
 
   /**
-   * Same as git help subrepo. Will launch the manpage. For the shorter usage, use git subrepo -h.
+   * Create a branch with local subrepo commits.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Same as git help subrepo. Will launch the manpage. For the shorter usage, use git subrepo -h.`;
+  description = `Create a branch with local subrepo commits.`;
 
   /**
-   * The options for the subrepo. This property gives access to the subrepoOptions object.
+   * The options for the GitSubrepoMain subrepo. These options dictate how the subrepo behaves and interacts with the parent repo.
    * @author Jonathan Stevens (@TGTGamer)
    *
-   * @type {CommandOptions}
+   * @type {*}
    */
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group of the git property. It determines the category or classification that the git property belongs to.
+   * The group property represents the group to which the object belongs. In this case, it represents the git group.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -108,7 +108,7 @@ export class HelpCmd implements Command {
   group = 'git';
 
   /**
-   * An array that stores the available commands. It is initially an empty array.
+   * An array of commands. Initially set to an empty array.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -116,7 +116,7 @@ export class HelpCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * The property is private and can only be accessed within the class or module.
+   * Specifies that the property is private.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -124,7 +124,7 @@ export class HelpCmd implements Command {
   private = true;
 
   /**
-   * The URL to the help documentation for the property. This URL points to the GitHub repository where the documentation for using git-subrepo is located.
+   * The URL for the help documentation of the property. You can find more information about this property at the following link: 'https://github.com/ingydotnet/git-subrepo'.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -132,32 +132,34 @@ export class HelpCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of helpCmd.
+   * Creates an instance of BranchCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The Git subrepository main instance.
+   * @param {GitSubrepoMain} subrepo The subrepo object for this class.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously reports the help message for the given subcommand and flags using the subrepo. If the help message is received successfully, it returns a green success message. Otherwise, it returns a red error message.
+   * Asynchronously reports the result of executing the 'git subrepo branch' command.
+   * - `subdirectory` (optional): A string array specifying the subdirectory where the 'git subrepo branch' command should be executed.
+   * - `flags`: A string array specifying the flags/options to be passed to the 'git subrepo branch' command.
+   * If `subdiectory` is not provided, the command will be executed in the entire repository.
+   * Returns a Promise that resolves with a string indicating the result of the command execution.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 The subcommand for the report
-   * @param {*} param0.subcommand The subcommand as a string array
-   * @param {string[]} flags The flags for the report
-   * @returns {unknown} Executes the `git subrepo help` command with the specified subcommand and flags.
-   * @param subcommand - The subcommand to execute with `git subrepo help`.
-   * @param flags - The flags to use with the `git subrepo help` command.
-   * @returns A Promise that resolves to a success message if the `git subrepo help` command was successful, or an error message if it was unsuccessful.
+   * @param {string[]} param0 An array of subdirectories
+   * @param {*} param0.subdirectory The subdirectory to branch from
+   * @param {string[]} flags An array of flags to pass to the branch command
+   * @returns {unknown} Reports the result of a Git subrepo branch operation.
    */
-  async report([subcommand]: string[], flags: string[]) {
-    const res = await this.subrepo.help(subcommand, flags);
+  async report([subdirectory]: string[], flags: string[]) {
+    const sub = subdirectory || '--all';
+    const res = await this.subrepo.branch(sub, flags);
     if (res) {
-      return chalk.green('git subrepo help was successful');
+      return chalk.green('git subrepo branch was successful');
     }
-    return chalk.red('git subrepo help was unsuccessful');
+    return chalk.red('git subrepo branch was unsuccessful');
   }
 }

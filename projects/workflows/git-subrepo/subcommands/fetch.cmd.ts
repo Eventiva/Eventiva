@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: push.cmd.ts
-* Path: \projects\workflows\git-subrepo\push.cmd.ts
+* File: fetch.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\fetch.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -45,51 +45,38 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command 'push'.
+ * The command name for the fetch command.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"push"}
+ * @type {"fetch"}
  */
-const COMMAND_NAME = 'push';
+const COMMAND_NAME = 'fetch';
 
 /**
- * Turn a current subdirectory into a subrepo
+ * FetchCmd class represents a command that fetches the remote/upstream content for a subrepo.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class PushCmd
- * @typedef {PushCmd}
+ * @class FetchCmd
+ * @typedef {FetchCmd}
  * @implements {Command}
  */
-export class PushCmd implements Command {
+export class FetchCmd implements Command {
   /**
-   * The name property specifies the name of the command. It is a template string that includes various options and placeholders. The available options include:
-   * - `<subdir>`: Specifies the subdirectory for the command.
-   * - `--all`: Specifies that the command should be applied to all branches.
-   * - `[<branch>]`: Specifies an optional branch.
-   * - `-m msg`: Specifies a commit message.
-   * - `--file=<msg file>`: Specifies a file containing a commit message.
-   * - `-r <remote>`: Specifies a remote repository.
-   * - `-b <branch>`: Specifies a branch.
-   * - `-M|-R`: Specifies a merge or rebase command.
-   * - `-u`: Specifies an upstream repository.
-   * - `-f`: Specifies a force flag.
-   * - `-s`: Specifies a squash flag.
-   * - `-N`: Specifies a no commit flag.
+   * The name of the command. It is a template string that includes placeholders for specifying the command name, the desired subdirectory, and optional parameters such as the remote and branch names. The placeholders are surrounded by curly braces and their corresponding values are provided when invoking the command.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} <subdir>|--all [<branch>] [-m msg] [--file=<msg file>] [-r <remote>] [-b <branch>] [-M|-R] [-u] [-f] [-s] [-N]`;
+  name = `${COMMAND_NAME} <subdir>|--all [-r <remote>] [-b <branch>]`;
 
   /**
-   * The alias for the property.
+   * The alias property is a string that represents an alternative name for something.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -97,15 +84,15 @@ export class PushCmd implements Command {
   alias = '';
 
   /**
-   * Turn a current subdirectory into a subrepo
+   * Fetch the remote/upstream content for a subrepo.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Turn a current subdirectory into a subrepo`;
+  description = `Fetch the remote/upstream content for a subrepo.`;
 
   /**
-   * The options for the subrepo, obtained from this.subrepo.subrepoOptions.
+   * The options for the subrepository. It contains the subrepository options to be used.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {CommandOptions}
@@ -113,7 +100,7 @@ export class PushCmd implements Command {
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group property represents the name of the group assigned to the element. This property is used in the context of git, indicating the group to which the element belongs.
+   * The group that a git repository belongs to.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -121,7 +108,7 @@ export class PushCmd implements Command {
   group = 'git';
 
   /**
-   * An array of commands. Each command is an instance of the Command class.
+   * An array of Command objects representing the commands available to be executed.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -129,7 +116,7 @@ export class PushCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * The property is marked as private.
+   * The property is set to true when it is private.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -137,7 +124,7 @@ export class PushCmd implements Command {
   private = true;
 
   /**
-   * The URL to the help page for git-subrepo on GitHub.
+   * The URL for the help documentation of the property. It points to the GitHub repository where the documentation can be found.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -145,32 +132,35 @@ export class PushCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of PushCmd.
+   * Creates an instance of FetchCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The subrepo object passed to the constructor.
+   * @param {GitSubrepoMain} subrepo The subrepository being used
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously reports the result of pushing a subdirectory to a subrepo.
-   * @param subdirectory - The subdirectory to push.
-   * @param flags - The flags to use when pushing.
-   * @returns A string indicating the success of the push.
+   * Asynchronously reports the result of fetching a subdirectory from a subrepo using git subrepo fetch.
+   * If no subdirectory is provided, fetches all subdirectories.
+   * Parameters:
+   * - subdirectory: An optional string array representing the subdirectory to fetch.
+   * - flags: A string array representing the flags to be passed to git subrepo fetch.
+   * Returns a promise that resolves to a string indicating the result of the fetch operation.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 An array of strings representing subdirectories
-   * @param {*} param0.subdirectory The subdirectory to push to the subrepo
-   * @param {string[]} flags An array of strings representing flags
-   * @returns {unknown} This function asynchronously pushes changes in the subdirectory to the subrepository using git. It takes two parameters: an array of subdirectories and an array of flags. It returns a string indicating the success or failure of the operation.
+   * @param {string[]} param0 An array of strings representing subdirectories.
+   * @param {*} param0.subdirectory The subdirectory to fetch from. If not provided, '--all' will be used.
+   * @param {string[]} flags An array of strings representing command line flags.
+   * @returns {unknown} Asynchronously reports the result of fetching a subrepo in git.
    */
   async report([subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.push(subdirectory, flags);
+    const sub = subdirectory || '--all';
+    const res = await this.subrepo.fetch(sub, flags);
     if (res) {
-      return chalk.green('git subrepo push was successful');
+      return chalk.green('git subrepo fetch was successful');
     }
-    return chalk.red('git subrepo push was unsuccessful');
+    return chalk.red('git subrepo fetch was unsuccessful');
   }
 }

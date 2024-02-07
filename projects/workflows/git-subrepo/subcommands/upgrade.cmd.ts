@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: clone.cmd.ts
-* Path: \projects\workflows\git-subrepo\clone.cmd.ts
+* File: upgrade.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\upgrade.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -47,36 +47,36 @@
 
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command for cloning a repository.
+ * The name of the command to perform an upgrade operation.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"clone"}
+ * @type {"upgrade"}
  */
-const COMMAND_NAME = 'clone';
+const COMMAND_NAME = 'upgrade';
 
 /**
- * CloneCmd is a class that represents a command for cloning a remote repository into a local subdirectory.
+ * UpgradeCmd class represents a command to upgrade the git-subrepo software itself.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class CloneCmd
- * @typedef {CloneCmd}
+ * @class UpgradeCmd
+ * @typedef {UpgradeCmd}
  * @implements {Command}
  */
-export class CloneCmd implements Command {
+export class UpgradeCmd implements Command {
   /**
-   * The name of the command string. It includes the COMMAND_NAME followed by the repository argument, an optional subdir argument, and various optional flags and parameters. The repository argument is required, while the subdir argument, branch flag and parameter, message flag and parameter, file flag and parameter, and method flag are all optional.
+   * The name of the command.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} <repository> [<subdir>] [-b <branch>] [-f] [-m <msg>] [--file=<msg file>] [-e] [--method <merge|rebase>]`;
+  name = `${COMMAND_NAME}`;
 
   /**
-   * The alias for this property. It is an empty string by default.
+   * The alias for a particular entity. It is a string value.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -84,15 +84,15 @@ export class CloneCmd implements Command {
   alias = '';
 
   /**
-   * Clone a remote repository into a local subdirectory
+   * Upgrade the git-subrepo software itself.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Clone a remote repository into a local subdirectory`;
+  description = `Upgrade the git-subrepo software itself. `;
 
   /**
-   * The options for the subrepo, accessed through `this.subrepo.subrepoOptions`.
+   * The `options` property is a reference to the `subrepoOptions` object of the `subrepo` submodule.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {CommandOptions}
@@ -100,7 +100,7 @@ export class CloneCmd implements Command {
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group to which the item belongs (e.g., 'git', 'database', 'network').
+   * The group name for the 'git' repository.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -108,7 +108,7 @@ export class CloneCmd implements Command {
   group = 'git';
 
   /**
-   * An array of commands. The commands can be of type Command, which represents a set of instructions to be executed.
+   * An array of Command objects. Represents the list of commands.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -116,7 +116,7 @@ export class CloneCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * This property indicates whether an item is private or not.
+   * Boolean flag indicating if the property is private or not.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -124,7 +124,7 @@ export class CloneCmd implements Command {
   private = true;
 
   /**
-   * The URL to the help documentation for the property.
+   * The URL to the help page for the property. It should point to the documentation or guide related to the usage of the property.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -132,35 +132,28 @@ export class CloneCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of CloneCmd.
+   * Creates an instance of UpgradeCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The git subrepo.
+   * @param {GitSubrepoMain} subrepo The GitSubrepoMain object representing the subrepository.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Clones a subrepository using git subrepo.
-   * Resolves with a success message if the clone was successful, or with an error message if the clone was unsuccessful.
-   * @param repository - The URL of the repository to clone.
-   * @param subdirectory - The subdirectory in which to clone the repository.
-   * @param flags - Optional flags to pass to the git subrepo command.
-   * @return A promise that resolves with a message indicating the success or failure of the clone operation.
+   * Upgrades the subrepo with the given flags and returns a colored message indicating the success or failure.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 An array containing the repository and subdirectory to clone
-   * @param {*} param0.repository The URL of the repository to clone
-   * @param {*} param0.subdirectory The subdirectory where the repository will be cloned
-   * @param {string[]} flags An array of flags to pass to the clone command
-   * @returns {unknown} Asynchronously clones a git subrepo from a given repository and subdirectory with the specified flags. Returns a string indicating the success or failure of the clone operation.
+   * @param {string[]} param0 An array of strings
+   * @param {string[]} flags An array of strings
+   * @returns {unknown} This function reports the result of upgrading a subrepository using git subrepo upgrade. It takes an array of strings as the first argument, and an array of strings as the second argument representing the flags to be used in the upgrade command. The function returns a string indicating the success or failure of the upgrade.
    */
-  async report([repository, subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.clone(repository, subdirectory, flags);
+  async report(flags: string[]) {
+    const res = await this.subrepo.upgrade(flags);
     if (res) {
-      return chalk.green('git subrepo clone was successful');
+      return chalk.green('git subrepo upgrade was successful');
     }
-    return chalk.red('git subrepo clone was unsuccessful');
+    return chalk.red('git subrepo upgrade was unsuccessful');
   }
 }

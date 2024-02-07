@@ -3,7 +3,7 @@
 * -----
 * Project: @eventiva/eventiva
 * File: init.cmd.ts
-* Path: \projects\workflows\git-subrepo\init.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\init.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -48,7 +48,7 @@
 
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
  * The name of the command to initialize a project.

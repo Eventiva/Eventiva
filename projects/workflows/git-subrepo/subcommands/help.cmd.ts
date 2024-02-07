@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: fetch.cmd.ts
-* Path: \projects\workflows\git-subrepo\fetch.cmd.ts
+* File: help.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\help.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -47,36 +47,36 @@
 
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The command name for the fetch command.
+ * The name of the command used to display the help information.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"fetch"}
+ * @type {"help"}
  */
-const COMMAND_NAME = 'fetch';
+const COMMAND_NAME = 'help';
 
 /**
- * FetchCmd class represents a command that fetches the remote/upstream content for a subrepo.
+ * This class represents the help command in the application. It implements the Command interface.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class FetchCmd
- * @typedef {FetchCmd}
+ * @class helpCmd
+ * @typedef {HelpCmd}
  * @implements {Command}
  */
-export class FetchCmd implements Command {
+export class HelpCmd implements Command {
   /**
-   * The name of the command. It is a template string that includes placeholders for specifying the command name, the desired subdirectory, and optional parameters such as the remote and branch names. The placeholders are surrounded by curly braces and their corresponding values are provided when invoking the command.
+   * The name of the command. It is a string that consists of the `COMMAND_NAME` variable followed by an optional `<command>` argument or `--all` flag.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} <subdir>|--all [-r <remote>] [-b <branch>]`;
+  name = `${COMMAND_NAME} [<command>|--all]`;
 
   /**
-   * The alias property is a string that represents an alternative name for something.
+   * The alias for the property.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -84,15 +84,15 @@ export class FetchCmd implements Command {
   alias = '';
 
   /**
-   * Fetch the remote/upstream content for a subrepo.
+   * Same as git help subrepo. Will launch the manpage. For the shorter usage, use git subrepo -h.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Fetch the remote/upstream content for a subrepo.`;
+  description = `Same as git help subrepo. Will launch the manpage. For the shorter usage, use git subrepo -h.`;
 
   /**
-   * The options for the subrepository. It contains the subrepository options to be used.
+   * The options for the subrepo. This property gives access to the subrepoOptions object.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {CommandOptions}
@@ -100,7 +100,7 @@ export class FetchCmd implements Command {
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group that a git repository belongs to.
+   * The group of the git property. It determines the category or classification that the git property belongs to.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -108,7 +108,7 @@ export class FetchCmd implements Command {
   group = 'git';
 
   /**
-   * An array of Command objects representing the commands available to be executed.
+   * An array that stores the available commands. It is initially an empty array.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -116,7 +116,7 @@ export class FetchCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * The property is set to true when it is private.
+   * The property is private and can only be accessed within the class or module.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -124,7 +124,7 @@ export class FetchCmd implements Command {
   private = true;
 
   /**
-   * The URL for the help documentation of the property. It points to the GitHub repository where the documentation can be found.
+   * The URL to the help documentation for the property. This URL points to the GitHub repository where the documentation for using git-subrepo is located.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -132,35 +132,32 @@ export class FetchCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of FetchCmd.
+   * Creates an instance of helpCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The subrepository being used
+   * @param {GitSubrepoMain} subrepo The Git subrepository main instance.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously reports the result of fetching a subdirectory from a subrepo using git subrepo fetch.
-   * If no subdirectory is provided, fetches all subdirectories.
-   * Parameters:
-   * - subdirectory: An optional string array representing the subdirectory to fetch.
-   * - flags: A string array representing the flags to be passed to git subrepo fetch.
-   * Returns a promise that resolves to a string indicating the result of the fetch operation.
+   * Asynchronously reports the help message for the given subcommand and flags using the subrepo. If the help message is received successfully, it returns a green success message. Otherwise, it returns a red error message.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 An array of strings representing subdirectories.
-   * @param {*} param0.subdirectory The subdirectory to fetch from. If not provided, '--all' will be used.
-   * @param {string[]} flags An array of strings representing command line flags.
-   * @returns {unknown} Asynchronously reports the result of fetching a subrepo in git.
+   * @param {string[]} param0 The subcommand for the report
+   * @param {*} param0.subcommand The subcommand as a string array
+   * @param {string[]} flags The flags for the report
+   * @returns {unknown} Executes the `git subrepo help` command with the specified subcommand and flags.
+   * @param subcommand - The subcommand to execute with `git subrepo help`.
+   * @param flags - The flags to use with the `git subrepo help` command.
+   * @returns A Promise that resolves to a success message if the `git subrepo help` command was successful, or an error message if it was unsuccessful.
    */
-  async report([subdirectory]: string[], flags: string[]) {
-    const sub = subdirectory || '--all';
-    const res = await this.subrepo.fetch(sub, flags);
+  async report([subcommand]: string[], flags: string[]) {
+    const res = await this.subrepo.help(subcommand, flags);
     if (res) {
-      return chalk.green('git subrepo fetch was successful');
+      return chalk.green('git subrepo help was successful');
     }
-    return chalk.red('git subrepo fetch was unsuccessful');
+    return chalk.red('git subrepo help was unsuccessful');
   }
 }

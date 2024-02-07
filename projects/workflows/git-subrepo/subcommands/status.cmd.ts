@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: pull.cmd.ts
-* Path: \projects\workflows\git-subrepo\pull.cmd.ts
+* File: status.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\status.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -45,39 +45,38 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command to pull data.
+ * The name of the command that is used to check the status.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"pull"}
+ * @type {"status"}
  */
-const COMMAND_NAME = 'pull';
+const COMMAND_NAME = 'status';
 
 /**
- * Update the subrepo subdir with the latest upstream changes.
+ * A class representing the status command for Git subrepos.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class PullCmd
- * @typedef {PullCmd}
+ * @class StatusCmd
+ * @typedef {StatusCmd}
  * @implements {Command}
  */
-export class PullCmd implements Command {
+export class StatusCmd implements Command {
   /**
-   * The name property specifies the command name and its available options in a string format. The command name is dynamically generated using the constant COMMAND_NAME and can be followed by an optional <subdir> argument. The available options are specified using various flags and their corresponding values. These flags include: --all, which includes all files and folders; -M, which includes modified files; -R, which includes renamed files; -f, which includes files; -m, which specifies a custom message for the commit; --file=<msg file>, which specifies a file containing the commit message; -e, which indicates that an empty commit should be made; -b <branch>, which specifies the branch where the commit should be made; -r <remote>, which specifies the remote repository; and -u, which updates the current branch to the latest commit before committing.
+   * The name of the command, including options and arguments. It is a string that follows the format `${COMMAND_NAME} [<subdir>|--all|--ALL] [-F] [-q|-v]`. The value of `COMMAND_NAME` will be replaced with the actual name of the command when the command is executed. The `<subdir>` argument is optional and represents a directory path. The `--all` and `--ALL` options can be used to specify whether to perform the command on all subdirectories. The `-F` option is used to force the command to execute, ignoring any prompts or confirmations. The `-q` option is used for quiet mode, suppressing unnecessary output. The `-v` option is used for verbose mode, providing additional detailed output. The name is used as a unique identifier for the command.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} <subdir>|--all [-M|-R|-f] [-m <msg>] [--file=<msg file>] [-e] [-b <branch>] [-r <remote>] [-u]`;
+  name = `${COMMAND_NAME} [<subdir>|--all|--ALL] [-F] [-q|-v]`;
 
   /**
-   * The alias for the property.
+   * The alias of an item, represented as a string.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -85,23 +84,23 @@ export class PullCmd implements Command {
   alias = '';
 
   /**
-   * Update the subrepo subdir with the latest upstream changes.
+   * Get status of a subrepo (or all of them)
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Update the subrepo subdir with the latest upstream changes.`;
+  description = `Get status of a subrepo (or all of them)`;
 
   /**
-   * The options property is a reference to the subrepoOptions property of the GitSubrepoMain class, which contains various options and settings for the subrepo.
+   * The `options` property is assigned the `subrepoOptions` property of the `subrepo` object.
    * @author Jonathan Stevens (@TGTGamer)
    *
-   * @type {*}
+   * @type {CommandOptions}
    */
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group property specifies the name of the git group.
+   * The group property represents the group of the git repository.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -109,7 +108,7 @@ export class PullCmd implements Command {
   group = 'git';
 
   /**
-   * An array of Command objects. This property stores a list of commands that can be executed.
+   * An array of commands. Each command is of type Command and can be executed.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -117,7 +116,8 @@ export class PullCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * Specifies that the property is private.
+   * The private flag indicates whether the property is accessible outside of the class or not.
+   * By setting it to true, the property becomes inaccessible from outside the class.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -125,7 +125,7 @@ export class PullCmd implements Command {
   private = true;
 
   /**
-   * The URL to the help documentation for this property.
+   * The URL of the help documentation for the property. Visit this URL for more information and guidance.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -133,32 +133,32 @@ export class PullCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of PullCmd.
+   * Creates an instance of StatusCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The subrepo object
+   * @param {GitSubrepoMain} subrepo The GitSubrepoMain object for managing the subrepository.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Asynchronously reports the result of pulling a git subrepo.
-   * - `subdirectory`: An optional string array specifying the subdirectories to pull.
-   * - `flags`: An array of strings specifying the flags to be passed to the `subrepo.pull` function.
-   * Returns a promise that resolves to a string indicating the result of the pull operation.
+   * Reports the status of a git subrepo in a specified subdirectory using specified flags.
+   * If the subdirectory is not provided, it defaults to '--all'.
+   * Returns a message indicating the success or failure of the operation.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 An array of strings representing the subdirectories
-   * @param {*} param0.subdirectory A string representing the subdirectory
-   * @param {string[]} flags An array of strings representing the flags
-   * @returns {unknown} Asynchronously pulls the specified subdirectories using git subrepo and returns a success message if the pull operation was successful, otherwise returns an error message.
+   * @param {string[]} param0 The subdirectories to report on.
+   * @param {*} param0.subdirectory The single subdirectory to report on, or '--all' to report on all subdirectories.
+   * @param {string[]} flags The flags to pass to the 'git subrepo status' command.
+   * @returns {unknown} This function asynchronously reports the status of a subdirectory using `git subrepo status` command. It takes a subdirectory path and an array of flags as arguments. If no subdirectory path is provided, it defaults to '--all'. The function returns a string indicating the success or failure of the status report.
    */
   async report([subdirectory]: string[], flags: string[]) {
-    const res = await this.subrepo.pull(subdirectory, flags);
+    const sub = subdirectory || '--all';
+    const res = await this.subrepo.status(sub, flags);
     if (res) {
-      return chalk.green('git subrepo pull was successful');
+      return chalk.green('git subrepo status was successful');
     }
-    return chalk.red('git subrepo pull was unsuccessful');
+    return chalk.red('git subrepo status was unsuccessful');
   }
 }
