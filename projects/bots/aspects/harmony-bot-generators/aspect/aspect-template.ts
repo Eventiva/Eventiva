@@ -80,7 +80,7 @@ export type AspectTemplateOptions = {
   options?: HarmonyBotGeneratorsOptions,
   interactive?: boolean,
   env?: string
-}; 
+};
 
 /**
  * The AspectTemplate class is a component template that allows you to create an aspect and compose it to your harmony platform.
@@ -133,7 +133,7 @@ export class AspectTemplate implements ComponentTemplate {
       ? await this.prompt(context.componentId, runtimeNames)
       : {};
 
-    const runtimes = !userInput.runtimes 
+    const runtimes = !userInput.runtimes
       ? configRuntimes
       : configRuntimes.filter((runtime) => {
         return userInput.runtimes!.includes(runtime.name);
