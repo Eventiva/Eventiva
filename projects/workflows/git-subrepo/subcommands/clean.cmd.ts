@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: upgrade.cmd.ts
-* Path: \projects\workflows\git-subrepo\upgrade.cmd.ts
+* File: clean.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\clean.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -47,36 +47,36 @@
 
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command to perform an upgrade operation.
+ * The name of the command to clean a project.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"upgrade"}
+ * @type {"clean"}
  */
-const COMMAND_NAME = 'upgrade';
+const COMMAND_NAME = 'clean';
 
 /**
- * UpgradeCmd class represents a command to upgrade the git-subrepo software itself.
+ * Remove artifacts created by fetch and branch commands.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class UpgradeCmd
- * @typedef {UpgradeCmd}
+ * @class CleanCmd
+ * @typedef {CleanCmd}
  * @implements {Command}
  */
-export class UpgradeCmd implements Command {
+export class CleanCmd implements Command {
   /**
-   * The name of the command.
+   * The name of the command, which is a string that represents the command name followed by an optional argument. The command name is defined by the `COMMAND_NAME` constant and the argument can be a path to a subdirectory, the `--all` flag, the `--ALL` flag, or the `-f` flag.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME}`;
+  name = `${COMMAND_NAME} <subdir>|--all|--ALL [-f]`;
 
   /**
-   * The alias for a particular entity. It is a string value.
+   * The alias of the property. It can be used to give a shorter or alternate name to the property.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -84,15 +84,15 @@ export class UpgradeCmd implements Command {
   alias = '';
 
   /**
-   * Upgrade the git-subrepo software itself.
+   * Remove artifacts created by fetch and branch commands.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Upgrade the git-subrepo software itself. `;
+  description = `Remove artifacts created by fetch and branch commands.`;
 
   /**
-   * The `options` property is a reference to the `subrepoOptions` object of the `subrepo` submodule.
+   * The options property represents the subrepo options of the current instance.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {CommandOptions}
@@ -100,7 +100,7 @@ export class UpgradeCmd implements Command {
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group name for the 'git' repository.
+   * The group to which the property belongs. Its value is 'git'.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -108,7 +108,7 @@ export class UpgradeCmd implements Command {
   group = 'git';
 
   /**
-   * An array of Command objects. Represents the list of commands.
+   * An array of Command objects representing the commands that can be executed.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -116,7 +116,7 @@ export class UpgradeCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * Boolean flag indicating if the property is private or not.
+   * The property 'private' is a boolean value indicating whether the item is private or not.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -124,7 +124,7 @@ export class UpgradeCmd implements Command {
   private = true;
 
   /**
-   * The URL to the help page for the property. It should point to the documentation or guide related to the usage of the property.
+   * The URL that provides help or documentation for the property. It should point to the GitHub repository for git-subrepo.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -132,28 +132,32 @@ export class UpgradeCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of UpgradeCmd.
+   * Creates an instance of CleanCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The GitSubrepoMain object representing the subrepository.
+   * @param {GitSubrepoMain} subrepo The GitSubrepoMain instance for the subrepository.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Upgrades the subrepo with the given flags and returns a colored message indicating the success or failure.
+   * Reports the result of cleaning the subdirectory using git subrepo clean command. If successful, returns 'git subrepo clean was successful', otherwise returns 'git subrepo clean was unsuccessful'.
+   * @param subdirectory The subdirectory to clean. If not provided, all subdirectories will be cleaned.
+   * @param flags An array of flags to pass to the git subrepo clean command.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 An array of strings
-   * @param {string[]} flags An array of strings
-   * @returns {unknown} This function reports the result of upgrading a subrepository using git subrepo upgrade. It takes an array of strings as the first argument, and an array of strings as the second argument representing the flags to be used in the upgrade command. The function returns a string indicating the success or failure of the upgrade.
+   * @param {string[]} param0 An array containing the subdirectories to be cleaned
+   * @param {*} param0.subdirectory The subdirectory to be cleaned (optional, default is '--all')
+   * @param {string[]} flags An array of flags to pass to the clean command
+   * @returns {unknown} Reports the result of the git subrepo clean operation.
    */
-  async report(flags: string[]) {
-    const res = await this.subrepo.upgrade(flags);
+  async report([subdirectory]: string[], flags: string[]) {
+    const sub = subdirectory || '--all';
+    const res = await this.subrepo.clean(sub, flags);
     if (res) {
-      return chalk.green('git subrepo upgrade was successful');
+      return chalk.green('git subrepo clean was successful');
     }
-    return chalk.red('git subrepo upgrade was unsuccessful');
+    return chalk.red('git subrepo clean was unsuccessful');
   }
 }

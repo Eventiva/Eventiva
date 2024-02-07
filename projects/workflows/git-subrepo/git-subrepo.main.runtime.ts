@@ -50,20 +50,20 @@ import { WorkspaceAspect, Workspace } from '@teambit/workspace';
 import { RuntimeDefinition, Aspect } from '@teambit/harmony';
 import { spawnSync } from 'child_process';
 import { GitSubrepoAspect } from './git-subrepo.aspect';
-import { SubRepoCmd } from './git-subrepo.cmd';
-import { BranchCmd } from './branch.cmd';
-import { CleanCmd } from './clean.cmd';
-import { CloneCmd } from './clone.cmd';
-import { CommitCmd } from './commit.cmd';
-import { ConfigCmd } from './config.cmd';
-import { FetchCmd } from './fetch.cmd';
-import { HelpCmd } from './help.cmd';
-import { InitCmd } from './init.cmd';
-import { PullCmd } from './pull.cmd';
-import { PushCmd } from './push.cmd';
-import { StatusCmd } from './status.cmd';
-import { UpgradeCmd } from './upgrade.cmd';
-import { VersionCmd } from './version.cmd';
+import { SubRepoCmd } from './subcommands/git-subrepo.cmd';
+import { BranchCmd } from './subcommands/branch.cmd';
+import { CleanCmd } from './subcommands/clean.cmd';
+import { CloneCmd } from './subcommands/clone.cmd';
+import { CommitCmd } from './subcommands/commit.cmd';
+import { ConfigCmd } from './subcommands/config.cmd';
+import { FetchCmd } from './subcommands/fetch.cmd';
+import { HelpCmd } from './subcommands/help.cmd';
+import { InitCmd } from './subcommands/init.cmd';
+import { PullCmd } from './subcommands/pull.cmd';
+import { PushCmd } from './subcommands/push.cmd';
+import { StatusCmd } from './subcommands/status.cmd';
+import { UpgradeCmd } from './subcommands/upgrade.cmd';
+import { VersionCmd } from './subcommands/version.cmd';
 
 /**
  * This class represents the main entry point for the Git Subrepo aspect. It provides various methods for managing subrepositories, such as cloning, initializing, pulling, pushing, fetching, branching, committing, checking status, cleaning, configuring, showing help, showing version, and upgrading.

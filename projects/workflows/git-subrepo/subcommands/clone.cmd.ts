@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: clean.cmd.ts
-* Path: \projects\workflows\git-subrepo\clean.cmd.ts
+* File: clone.cmd.ts
+* Path: \projects\workflows\git-subrepo\subcommands\clone.cmd.ts
 * Created Date: Monday, January 29th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -47,36 +47,36 @@
 
 import { Command } from '@teambit/cli';
 import chalk from 'chalk';
-import type { GitSubrepoMain } from './git-subrepo.main.runtime';
+import type { GitSubrepoMain } from '../git-subrepo.main.runtime';
 
 /**
- * The name of the command to clean a project.
+ * The name of the command for cloning a repository.
  * @author Jonathan Stevens (@TGTGamer)
  *
- * @type {"clean"}
+ * @type {"clone"}
  */
-const COMMAND_NAME = 'clean';
+const COMMAND_NAME = 'clone';
 
 /**
- * Remove artifacts created by fetch and branch commands.
+ * CloneCmd is a class that represents a command for cloning a remote repository into a local subdirectory.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class CleanCmd
- * @typedef {CleanCmd}
+ * @class CloneCmd
+ * @typedef {CloneCmd}
  * @implements {Command}
  */
-export class CleanCmd implements Command {
+export class CloneCmd implements Command {
   /**
-   * The name of the command, which is a string that represents the command name followed by an optional argument. The command name is defined by the `COMMAND_NAME` constant and the argument can be a path to a subdirectory, the `--all` flag, the `--ALL` flag, or the `-f` flag.
+   * The name of the command string. It includes the COMMAND_NAME followed by the repository argument, an optional subdir argument, and various optional flags and parameters. The repository argument is required, while the subdir argument, branch flag and parameter, message flag and parameter, file flag and parameter, and method flag are all optional.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  name = `${COMMAND_NAME} <subdir>|--all|--ALL [-f]`;
+  name = `${COMMAND_NAME} <repository> [<subdir>] [-b <branch>] [-f] [-m <msg>] [--file=<msg file>] [-e] [--method <merge|rebase>]`;
 
   /**
-   * The alias of the property. It can be used to give a shorter or alternate name to the property.
+   * The alias for this property. It is an empty string by default.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -84,15 +84,15 @@ export class CleanCmd implements Command {
   alias = '';
 
   /**
-   * Remove artifacts created by fetch and branch commands.
+   * Clone a remote repository into a local subdirectory
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
    */
-  description = `Remove artifacts created by fetch and branch commands.`;
+  description = `Clone a remote repository into a local subdirectory`;
 
   /**
-   * The options property represents the subrepo options of the current instance.
+   * The options for the subrepo, accessed through `this.subrepo.subrepoOptions`.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {CommandOptions}
@@ -100,7 +100,7 @@ export class CleanCmd implements Command {
   options = this.subrepo.subrepoOptions;
 
   /**
-   * The group to which the property belongs. Its value is 'git'.
+   * The group to which the item belongs (e.g., 'git', 'database', 'network').
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -108,7 +108,7 @@ export class CleanCmd implements Command {
   group = 'git';
 
   /**
-   * An array of Command objects representing the commands that can be executed.
+   * An array of commands. The commands can be of type Command, which represents a set of instructions to be executed.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {Command[]}
@@ -116,7 +116,7 @@ export class CleanCmd implements Command {
   commands: Command[] = [];
 
   /**
-   * The property 'private' is a boolean value indicating whether the item is private or not.
+   * This property indicates whether an item is private or not.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {boolean}
@@ -124,7 +124,7 @@ export class CleanCmd implements Command {
   private = true;
 
   /**
-   * The URL that provides help or documentation for the property. It should point to the GitHub repository for git-subrepo.
+   * The URL to the help documentation for the property.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @type {string}
@@ -132,32 +132,35 @@ export class CleanCmd implements Command {
   helpUrl = 'https://github.com/ingydotnet/git-subrepo';
 
   /**
-   * Creates an instance of CleanCmd.
+   * Creates an instance of CloneCmd.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param {GitSubrepoMain} subrepo The GitSubrepoMain instance for the subrepository.
+   * @param {GitSubrepoMain} subrepo The git subrepo.
    */
   constructor(private subrepo: GitSubrepoMain) {}
 
   /**
-   * Reports the result of cleaning the subdirectory using git subrepo clean command. If successful, returns 'git subrepo clean was successful', otherwise returns 'git subrepo clean was unsuccessful'.
-   * @param subdirectory The subdirectory to clean. If not provided, all subdirectories will be cleaned.
-   * @param flags An array of flags to pass to the git subrepo clean command.
+   * Clones a subrepository using git subrepo.
+   * Resolves with a success message if the clone was successful, or with an error message if the clone was unsuccessful.
+   * @param repository - The URL of the repository to clone.
+   * @param subdirectory - The subdirectory in which to clone the repository.
+   * @param flags - Optional flags to pass to the git subrepo command.
+   * @return A promise that resolves with a message indicating the success or failure of the clone operation.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @async
-   * @param {string[]} param0 An array containing the subdirectories to be cleaned
-   * @param {*} param0.subdirectory The subdirectory to be cleaned (optional, default is '--all')
-   * @param {string[]} flags An array of flags to pass to the clean command
-   * @returns {unknown} Reports the result of the git subrepo clean operation.
+   * @param {string[]} param0 An array containing the repository and subdirectory to clone
+   * @param {*} param0.repository The URL of the repository to clone
+   * @param {*} param0.subdirectory The subdirectory where the repository will be cloned
+   * @param {string[]} flags An array of flags to pass to the clone command
+   * @returns {unknown} Asynchronously clones a git subrepo from a given repository and subdirectory with the specified flags. Returns a string indicating the success or failure of the clone operation.
    */
-  async report([subdirectory]: string[], flags: string[]) {
-    const sub = subdirectory || '--all';
-    const res = await this.subrepo.clean(sub, flags);
+  async report([repository, subdirectory]: string[], flags: string[]) {
+    const res = await this.subrepo.clone(repository, subdirectory, flags);
     if (res) {
-      return chalk.green('git subrepo clean was successful');
+      return chalk.green('git subrepo clone was successful');
     }
-    return chalk.red('git subrepo clean was unsuccessful');
+    return chalk.red('git subrepo clone was unsuccessful');
   }
 }
