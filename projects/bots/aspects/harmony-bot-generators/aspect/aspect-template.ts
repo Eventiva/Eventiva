@@ -107,8 +107,8 @@ export class AspectTemplate implements ComponentTemplate {
    */
   constructor(
     private logger: Logger,
-    readonly name = 'aspect',
-    readonly description = 'create an aspect, and compose to your harmony platform',
+    readonly name = 'discordjs-module',
+    readonly description = 'create an discord.js module',
     readonly hidden = false,
     readonly env?: string,
     readonly options: HarmonyBotGeneratorsOptions = {},
@@ -136,7 +136,7 @@ export class AspectTemplate implements ComponentTemplate {
     const runtimes = !userInput.runtimes 
       ? configRuntimes
       : configRuntimes.filter((runtime) => {
-        return userInput.runtimes.includes(runtime.name);
+        return userInput.runtimes!.includes(runtime.name);
       });
 
     const userRuntimeNames = runtimes.map((runtime) => {

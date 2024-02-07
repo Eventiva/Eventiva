@@ -62,17 +62,13 @@ function generateSlot(slots: string[]) {
   const methods = slots.map((slot) => {
     const { pascalCase, camelCaseSlot, camelCase, displayName } = generateName(slot);
 
-    return `\n  /**
-   * register a list of ${displayName}.
-   */
+    return `\n
   register${pascalCase}(${camelCase}s: ${pascalCase}[]) {
     this.${camelCaseSlot}.register(${camelCase}s);
     return this;
   }
 
-  /**
-   * list all ${displayName}.
-   */
+
   list${pascalCase}s() {
     return this.${camelCaseSlot}.flatValues();
   }
@@ -197,9 +193,8 @@ export function runtimeFile(
   slots: string[],
 ) {
   const runtimeSuffix = upperFirst(runtime.name);
-  const deps = runtime.dependencies?.map((dep) => ComponentID.fromString(dep));
+  const deps = runtime.dependencies?.map((dep) => ComponentID.fromString(dep)) || [];
   const depNames = deps?.map((dep) => dep.name);
-  depNames?.push('Discordjs');
   const depImports = generateDepImports(deps, runtime.name);
   const userImports = runtime.imports ? runtime.imports(context).join('\n'): '';
   const runtimeIdentifier = `${context.namePascalCase}${runtimeSuffix}`;
@@ -215,13 +210,18 @@ export function runtimeFile(
     relativePath: `${context.name}.${runtime.name}.runtime.${runtime?.extension || 'ts'}`,
     content: `${depImports}import type { ${configIdentifier} } from './${context.name}-config.js';
 ${imports}${userImports}
-import DiscordjsAspect, { Event, Command, DiscordJsModule, DiscordjsNode, Resources } from '@eventiva/bots.aspects.discordjs';
+
+import { DiscordJsModule } from '@eventiva/bots.aspects.discordjs';
+import type { Event, Command, Resources } from '@eventiva/bots.aspects.discordjs';
+import { DiscordJsModule } from '@eventiva/bots.aspects.discordjs';
+import type { Event, Command, Resources } from '@eventiva/bots.aspects.discordjs';
 
 
 export class ${runtimeIdentifier} extends DiscordJsModule<${configIdentifier}>  {
   constructor(
+    public discord: DiscordjsNode,
     private config: ${configIdentifier},${constructorProps}
-  ) {}
+  ) {super(discord, config)}
   ${slots.length ? methods : ''}${userMethods}
   static dependencies = ${generateStaticDeps(depNames)};
   public resources: Resources = {}
