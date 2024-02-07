@@ -59,6 +59,7 @@ import type { Command } from "./command.js";
 import type { ExtendedClientEvents } from "./event.js";
 import { I18NAspect } from "@eventiva/bots.aspects.i18n";
 import { LoggingAspect } from "@eventiva/bots.aspects.logging";
+import { Resource } from "@eventiva/bots.aspects.i18n";
 
 /**
  * A class representing the DiscordjsNode.
@@ -127,23 +128,22 @@ export class DiscordjsNode {
     while (!i18nModule.i18next.isInitialized) {}
     this.isInitialised = true
     this.log.trace("Registering i18nModule resources")
-
-    i18nModule.registerResource([{name: "discord", lng: "en", ns: "discord", resources: discord}, {name: "errors", lng: "en", ns: "errors", resources: errors}])
+    this.registerLocale([{name: "discord", lng: "en", ns: "discord", resources: discord}, {name: "errors", lng: "en", ns: "errors", resources: errors}])
     
     this.i18n = i18nModule.i18next
     this.log.trace(this.i18n.t("discord:init.logging.module", {context: logging ? undefined : 'notFound', defaultValue: ""}))
 
-    this.log.trace(this.i18n.t("discord:checks", {context: "searching", defaultValue: "", key: "token"}))
+    this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "token"}))
     if (!config.token) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "token"}))
-    else this.log.trace(this.i18n.t("discord:checks", {context: "found", defaultValue: "", key: "token"}))
+    else this.log.trace(this.i18n.t("discord:checks", {context: "found", key: "token"}))
     
-    this.log.trace(this.i18n.t("discord:checks", {context: "searching", defaultValue: "", key: "clientId"}))
+    this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "clientId"}))
     if (!config.clientId) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "clientId"}))
-    else this.log.trace(this.i18n.t("discord:checks", {context: "found", defaultValue: "", key: "clientId"}))
+    else this.log.trace(this.i18n.t("discord:checks", {context: "found", key: "clientId"}))
     
-    this.log.trace(this.i18n.t("discord:checks", {context: "searching", defaultValue: "", key: "clientSecret"}))
+    this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "clientSecret"}))
     if (!config.clientSecret) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "clientSecret"}))
-    else this.log.trace(this.i18n.t("discord:checks", {context: "found", defaultValue: "", key: "clientSecret"}))
+    else this.log.trace(this.i18n.t("discord:checks", {context: "found", key: "clientSecret"}))
   
     this.log.trace(this.i18n.t("discord:client.creating"));
 
@@ -158,6 +158,19 @@ export class DiscordjsNode {
         else this.log.warn(this.i18n.t("discord:init.faked"));
         this.log.trace(this.i18n.t("discord:init.loggedIn"));
     }, config.startDelay);
+  }
+
+  /**
+   * Registers the given resources as locales. Logs the registration of locales before and after registering the resources.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @public
+   * @param resources An array of resources
+   */
+  public registerLocale(resources: Resource[]) {
+    this.log.trace(this.i18n.t("discord:registeringLocales", {count: resources.length}))
+    this.i18nModule.registerResource(resources)
+    this.log.trace(this.i18n.t("discord:registeredLocales", {count: resources.length}))
   }
   
   /**
@@ -175,10 +188,11 @@ export class DiscordjsNode {
       const log = this.logging.registerLogger([{name: `discord:${module.name}`, options: {level: "trace", ...module.getConfig().logger}}]).getLogger(`discord:${module.name}`).logger
       module.setLog(log)
     }
-    this.log.trace(this.i18n.t("discord:modules.init", {context: "start", defaultValue: "", name: module.name}))
+    this.log.trace(this.i18n.t("discord:modules.init", {context: "start", name: module.name}))
     module.registerCommands(reload)
     module.registerEvents(reload)
-    this.log.trace(this.i18n.t("discord:modules.init", {context: "complete", defaultValue: "", name: module.name}))
+    module.registerLocales(reload)
+    this.log.trace(this.i18n.t("discord:modules.init", {context: "complete", name: module.name}))
 
     this.client.emit("moduleRegistered", module, reload)
 
