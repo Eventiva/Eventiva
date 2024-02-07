@@ -38,9 +38,9 @@
   **/
   "teambit.generator/generator": {
     "envs": [
-      "bitdev.harmony/harmony-env",
+      // "bitdev.harmony/harmony-env",
       "bitdev.node/node-env",
-      "eventiva.bots/aspects/harmony-bot-generators"
+      "eventiva.workflows/discord/env"
     ]
   },
   /**
@@ -55,6 +55,7 @@
       "dependencies": {
         "@apollo/gateway": "^2.7.1",
         "@apollo/server": "^4.10.0",
+        "@bitdev/harmony.generators.harmony-templates": "^0.0.28",
         "@bitdev/harmony.harmony-platform": "^1.0.54",
         "@bitdev/harmony.runtimes.browser-runtime": "^0.0.35",
         "@bitdev/harmony.runtimes.nodejs-runtime": "^1.0.59",
@@ -64,17 +65,26 @@
         "@fastify/helmet": "^11.1.1",
         "@fastify/sensible": "^5.5.0",
         "@joggr/fastify-prisma": "^1.2.2",
+        "@learnbit/extending-bit.metadata.component-todos.entities.todos": "^0.0.1",
+        "@learnbit/extending-bit.metadata.component-todos.modules.get-todos": "^0.0.1",
+        "@learnbit/extending-bit.metadata.component-todos.ui.todo-list": "^0.0.2",
+        "@mdx-js/rollup": "^3.0.0",
         "@prisma/client": "^5.8.1",
+        "@teambit/base-react.navigation.link": "^2.0.27",
         "@teambit/component-id": "^1.2.0",
         "@teambit/defender.eslint-linter": "^1.0.16",
         "@teambit/defender.jest-tester": "^1.0.15",
         "@teambit/defender.prettier-formatter": "^1.0.8",
         "@teambit/dependencies.modules.packages-excluder": "^1.0.8",
+        "@teambit/design.ui.heading": "^1.0.19",
+        "@teambit/docs.ui.zoomable-image": "^1.97.5",
         "@teambit/mdx.ui.mdx-scope-context": "1.0.7",
         "@teambit/react.react-env": "^1.0.35",
         "@teambit/toolbox.network.get-port": "^1.0.6",
         "@teambit/typescript.typescript-compiler": "^2.0.15",
+        "@teambit/vite.vitest-tester": "^0.0.33",
         "@types/lodash": "^4.14.202",
+        "@vitejs/plugin-react": "^4.2.1",
         "axe": "^12.2.3",
         "cabin": "^13.2.5",
         "chalk": "^5.3.0",
@@ -87,12 +97,14 @@
         "i18next": "^23.7.20",
         "i18next-http-middleware": "^3.5.0",
         "jira.js": "^3.0.2",
+        "leasot": "^12.0.0",
         "lodash": "^4.17.21",
         "pino": "^8.17.2",
         "pino-caller": "^3.4.0",
         "pino-pretty": "^10.3.1",
         "prompts": "^2.4.2",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "vite": "^5.0.12"
       },
       "peerDependencies": {}
     },
