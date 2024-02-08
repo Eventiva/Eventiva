@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/teamspeak_integration
 	branch = develop
-	commit = 50288399c2ea5c107deecb60cb89a0b0b2d27c21
+	commit = 08e1c96f0dff8e2e7bb1625e6767686dd215773c
 	method = merge
 	cmdver = 0.4.6
-	parent = bd669ca1645580021e6075216aa6b1bae812c8a4
+	parent = a06164dad72a98f20b95ff35199ecb5285af8761
