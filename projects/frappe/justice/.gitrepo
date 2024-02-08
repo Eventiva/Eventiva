@@ -6,7 +6,7 @@
 [subrepo]
 	remote = https://github.com/Eventiva/justice
 	branch = develop
-	commit = 67499d8ff53d9f1a41e54cf1137e621975d5bbed
+	commit = 57cc174ee5ce5a8225ff955f5762cd5904d8516d
 	method = merge
 	cmdver = 0.4.6
-	parent = 5585fb84394f677fecdffec942b79ba50a7eccb7
+	parent = 332bb61b112cdb0a3f597544beb995c5eecd5de0
