@@ -6,7 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/bots-aspects-discordjs.git
 	branch = develop
-	commit = f943c74b91325e3ee6ebe0895a21e16dc1e0d0a6
+	commit = 7dba13382a8268df53d2cb9e96ebc912125223b0
 	method = merge
 	cmdver = 0.4.6
-	parent = b62015aa55d4305db1a5fe44f6b8b60b3afe3223
+	parent = 5af9661881db194b6ff191c63fb7e64a35b420f1
