@@ -3,224 +3,183 @@
     ".": {
       "package-name": "@eventiva/eventiva",
       "component": "eventiva",
-      "changelog-path": "CHANGELOG.md",
       "release-type": "node",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "eventiva"
     },
     "projects/bots/aspects/atlassian-customer-support": {
       "package-name": "@eventiva/bots.aspects.atlassian-customer-support",
       "component": "bots/atlassian-customer-support",
-      "changelog-path": "packages/bot/atlassian-customer-support/CHANGELOG.md",
-      "version-file": "packages/bot/atlassian-customer-support/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Atlassian"
     },
     "projects/bots/aspects/discordjs": {
       "package-name": "@eventiva/bots.aspects.discordjs",
       "component": "bots/discord",
-      "changelog-path": "packages/bot/discordjs/CHANGELOG.md",
-      "version-file": "packages/bot/discordjs/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
     "projects/bots/aspects/i18n": {
       "package-name": "@eventiva/bots.aspects.i18n",
       "component": "bots/i18n",
-      "changelog-path": "packages/bot/i18n/CHANGELOG.md",
-      "version-file": "packages/bot/i18n/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Internationalization"
     },
     "projects/bots/aspects/logging": {
       "package-name": "@eventiva/bots.aspects.logging",
       "component": "bots/logging",
-      "changelog-path": "packages/bot/logging/CHANGELOG.md",
-      "version-file": "packages/bot/logging/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Logging"
     },
     "projects/bots/aspects/ping-command": {
       "package-name": "@eventiva/bots.aspects.ping-command",
       "component": "bot/commands/ping",
-      "changelog-path": "packages/bot/ping-command/CHANGELOG.md",
-      "version-file": "packages/bot/ping-command/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
     "projects/bots/aspects/support-platform": {
       "package-name": "@eventiva/bots.aspects.support-platform",
       "component": "discord/platforms/support",
-      "changelog-path": "packages/bot/support-platform/CHANGELOG.md",
-      "version-file": "packages/bot/support-platform/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
     "projects/bots/package/default-logging": {
       "package-name": "@eventiva/bots.package.default-logging",
       "component": "bots/packages/logging",
-      "changelog-path": "packages/bot/default-logging/CHANGELOG.md",
-      "version-file": "packages/bot/default-logging/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
     "projects/bots/support": {
       "package-name": "@eventiva/bots.support",
       "component": "discord/support",
-      "changelog-path": "packages/bot/support/CHANGELOG.md",
-      "version-file": "packages/bot/support/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
     "projects/frappe/control_centre": {
       "package-name": "@eventiva/frappe.control_centre",
       "component": "module/control_centre",
-      "changelog-path": "packages/frappe/control_centre/CHANGELOG.md",
-      "version-file": "packages/frappe/control_centre/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "control_centre/__init__.py"
+      ],
+      "scope": "Control Centre"
     },
     "projects/frappe/custody": {
       "package-name": "@eventiva/frappe.custody",
       "component": "module/custody",
-      "changelog-path": "packages/frappe/custody/CHANGELOG.md",
-      "version-file": "packages/frappe/custody/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "custody/__init__.py"
+      ],
+      "scope": "Custody"
     },
     "projects/frappe/discord_integration": {
       "package-name": "@eventiva/frappe.discord_integration",
       "component": "module/discord_integration",
-      "changelog-path": "packages/frappe/discord_integration/CHANGELOG.md",
-      "version-file": "packages/frappe/discord_integration/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "discord_integration/__init__.py"
+      ],
+      "scope": "Discord"
     },
     "projects/frappe/eventiva_core": {
       "package-name": "@eventiva/frappe.eventiva_core",
       "component": "module/eventiva_core",
-      "changelog-path": "packages/frappe/eventiva_core/CHANGELOG.md",
-      "version-file": "packages/frappe/eventiva_core/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "eventiva_core/__init__.py"
+      ],
+      "scope": "Core"
     },
     "projects/frappe/fleet_management": {
       "package-name": "@eventiva/frappe.fleet_management",
       "component": "module/fleet_management",
-      "changelog-path": "packages/frappe/fleet_management/CHANGELOG.md",
-      "version-file": "packages/frappe/fleet_management/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "fleet_management/__init__.py"
+      ],
+      "scope": "Fleet"
     },
     "projects/frappe/gaming": {
       "package-name": "@eventiva/frappe.gaming",
       "component": "module/gaming",
-      "changelog-path": "packages/frappe/gaming/CHANGELOG.md",
-      "version-file": "packages/frappe/gaming/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "gaming/__init__.py"
+      ],
+      "scope": "Gaming"
     },
     "projects/frappe/grand_theft_auto": {
       "package-name": "@eventiva/frappe.grand_theft_auto",
       "component": "module/grand_theft_auto",
-      "changelog-path": "packages/frappe/grand_theft_auto/CHANGELOG.md",
-      "version-file": "packages/frappe/grand_theft_auto/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "grand_theft_auto/__init__.py"
+      ],
+      "scope": "Gaming"
     },
     "projects/frappe/incident_management": {
       "package-name": "@eventiva/frappe.incident_management",
       "component": "module/incident_management",
-      "changelog-path": "packages/frappe/incident_management/CHANGELOG.md",
-      "version-file": "packages/frappe/incident_management/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "incident_management/__init__.py"
+      ],
+      "scope": "Incident"
     },
     "projects/frappe/justice": {
       "package-name": "@eventiva/frappe.justice",
       "component": "module/justice",
-      "changelog-path": "packages/frappe/justice/CHANGELOG.md",
-      "version-file": "packages/frappe/justice/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "justice/__init__.py"
+      ],
+      "scope": "Justice"
     },
     "projects/frappe/segment_connect": {
       "package-name": "@eventiva/frappe.segment_connect",
       "component": "module/segment_connect",
-      "changelog-path": "packages/frappe/segment_connect/CHANGELOG.md",
-      "version-file": "packages/frappe/segment_connect/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "segment_connect/__init__.py"
+      ],
+      "scope": "Integrations"
     },
     "projects/frappe/teamspeak_integration": {
       "package-name": "@eventiva/frappe.teamspeak_integration",
       "component": "module/teamspeak_integration",
-      "changelog-path": "packages/frappe/teamspeak_integration/CHANGELOG.md",
-      "version-file": "packages/frappe/teamspeak_integration/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "teamspeak_integration/__init__.py"
+      ],
+      "scope": "Teamspeak"
     },
     "projects/frappe/vetting": {
       "package-name": "@eventiva/frappe.vetting",
       "component": "module/vetting",
-      "changelog-path": "packages/frappe/vetting/CHANGELOG.md",
-      "version-file": "packages/frappe/vetting/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "extra-files": [
+        "vetting/__init__.py"
+      ],
+      "scope": "Vetting"
     },
     "projects/workflows/bit/todo": {
       "package-name": "@eventiva/workflows.bit.todo",
       "component": "workflows/bit/todo",
-      "changelog-path": "packages/workflows/bit/todo/CHANGELOG.md",
-      "version-file": "packages/workflows/bit/todo/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Bit.dev"
     },
     "projects/workflows/discord/env": {
       "package-name": "@eventiva/workflows.discord.env",
       "component": "workflows/discord/env",
-      "changelog-path": "packages/workflows/discord/env/CHANGELOG.md",
-      "version-file": "packages/workflows/discord/env/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
-    "projects/workflows/discord/generator": {
+    "projects/workflows/discord/generator/module": {
       "package-name": "@eventiva/workflows.discord.generator",
       "component": "workflows/discord/generator",
-      "changelog-path": "packages/workflows/discord/generator/CHANGELOG.md",
-      "version-file": "packages/workflows/discord/generator/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Discord"
     },
     "projects/workflows/frappe/python-env": {
       "package-name": "@eventiva/workflows.frappe.python-env",
       "component": "workflows/frappe/python-env",
-      "changelog-path": "packages/workflows/frappe/python-env/CHANGELOG.md",
-      "version-file": "packages/workflows/frappe/python-env/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Frappe"
     },
     "projects/workflows/generator": {
       "package-name": "@eventiva/workflows.generator",
       "component": "workflows/generator",
-      "changelog-path": "packages/workflows/generator/CHANGELOG.md",
-      "version-file": "packages/workflows/generator/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Bit.dev"
     },
     "projects/workflows/git-subrepo": {
       "package-name": "@eventiva/workflows.git-subrepo",
       "component": "workflows/git-subrepo",
-      "changelog-path": "packages/workflows/git-subrepo/CHANGELOG.md",
-      "version-file": "packages/workflows/git-subrepo/version.txt",
-      "versioning": "prerelease",
-      "prerelease": true
+      "scope": "Bit.dev"
     }
   },
+  "pull-request-footer": "This PR was generated by [Release-Please](https://github.com/googleapis/release-please), and approved by the Eventiva Software Delivery Change Manager.",
   "separate-pull-requests": true,
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
-  "release-type": "simple",
+  "sequential-calls": true,
+  "prerelease": true,
   "versioning": "prerelease",
+  "release-type": "simple",
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
