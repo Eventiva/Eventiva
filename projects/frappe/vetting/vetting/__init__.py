@@ -3,7 +3,7 @@
 # -----
 # Project: @eventiva/eventiva
 # File: __init__.py
-# Path: \projects\modules\vetting\vetting\__init__.py
+# Path: \projects\frappe\vetting\vetting\__init__.py
 # Created Date: Sunday, January 14th 2024
 # Author: Jonathan Stevens, jonathan@resnovas.com
 # Github: https://github.com/TGTGamer
@@ -46,6 +46,6 @@
 ###
 
 
-__version__ = '0.0.1'
+__version__ = '0.0.1' # x-release-please-version
 
  
