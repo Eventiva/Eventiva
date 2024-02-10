@@ -2,10 +2,9 @@
 
 ## 1.0.0 (2024-02-10)
 
-
 ### Bug Fixes
 
-* release please process ([#320](https://github.com/Eventiva/Eventiva/issues/320)) ([57371e2](https://github.com/Eventiva/Eventiva/commit/57371e2d2391bf729d491ff9b1ce90107a45a4c5))
+- release please process ([#320](https://github.com/Eventiva/Eventiva/issues/320)) ([57371e2](https://github.com/Eventiva/Eventiva/commit/57371e2d2391bf729d491ff9b1ce90107a45a4c5))
 
 ## Changelog
 
