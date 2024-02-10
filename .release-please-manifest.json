@@ -22,7 +22,7 @@
   "projects/frappe/vetting": "0.0.0",
   "projects/workflows/bit/todo": "1.0.0",
   "projects/workflows/discord/env": "1.0.0",
-  "projects/workflows/discord/generator": "1.0.0",
+  "projects/workflows/discord/generator": "1.1.0",
   "projects/workflows/frappe/python-env": "0.0.0",
   "projects/workflows/generator": "0.0.0",
   "projects/workflows/git-subrepo": "1.0.0"
