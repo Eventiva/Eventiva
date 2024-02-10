@@ -2,15 +2,13 @@
 
 ## 1.0.0 (2024-02-10)
 
-
 ### Features
 
-* discord env ([fa0025a](https://github.com/Eventiva/Eventiva/commit/fa0025a0d9f9863cf5efae0c9db60188047d8219))
-
+- discord env ([fa0025a](https://github.com/Eventiva/Eventiva/commit/fa0025a0d9f9863cf5efae0c9db60188047d8219))
 
 ### Bug Fixes
 
-* release please process ([#320](https://github.com/Eventiva/Eventiva/issues/320)) ([57371e2](https://github.com/Eventiva/Eventiva/commit/57371e2d2391bf729d491ff9b1ce90107a45a4c5))
+- release please process ([#320](https://github.com/Eventiva/Eventiva/issues/320)) ([57371e2](https://github.com/Eventiva/Eventiva/commit/57371e2d2391bf729d491ff9b1ce90107a45a4c5))
 
 ## Changelog
 
