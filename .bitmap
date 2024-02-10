@@ -14,175 +14,334 @@
         "scope": "eventiva.bots",
         "version": "c5c9499ecfb7de33bdf1c2f14907c03863f08992",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/atlassian-customer-support"
+        "rootDir": "projects/bots/aspects/atlassian-customer-support",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "aspects/discordjs": {
         "name": "aspects/discordjs",
         "scope": "eventiva.bots",
         "version": "6391d2e5438f768b31017262a55148557cb68a9a",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/discordjs"
+        "rootDir": "projects/bots/aspects/discordjs",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "aspects/i18n": {
         "name": "aspects/i18n",
         "scope": "eventiva.bots",
         "version": "2143e6dfa61220cac06988f4bc088f52cc999201",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/i18n"
+        "rootDir": "projects/bots/aspects/i18n",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "aspects/logging": {
         "name": "aspects/logging",
         "scope": "eventiva.bots",
         "version": "387b661c7ef4a84195b72061f1c70f35d60a1006",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/logging"
+        "rootDir": "projects/bots/aspects/logging",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "aspects/ping-command": {
         "name": "aspects/ping-command",
         "scope": "eventiva.bots",
         "version": "2bee9d122dd5defcbd77b441679fdcabb0ffbeab",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/ping-command"
+        "rootDir": "projects/bots/aspects/ping-command",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "aspects/support-platform": {
         "name": "aspects/support-platform",
         "scope": "eventiva.bots",
         "version": "5b00c1c8d956d9080f3718d8806f148c62c1f4e7",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/support-platform"
+        "rootDir": "projects/bots/aspects/support-platform",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "bit/todo": {
         "name": "bit/todo",
         "scope": "eventiva.workflows",
         "version": "c18d3114b466e94a197538ca54ba555285d52695",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/bit/todo"
+        "rootDir": "projects/workflows/bit/todo",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "peerDependencies": {
+                        "@apollo/client": "^3.6.9",
+                        "graphql": "^14.3.0"
+                    },
+                    "devDependencies": {
+                        "@types/jest": "26.0.24",
+                        "@types/node": "12.20.55",
+                        "@types/testing-library__jest-dom": "5.14.9"
+                    },
+                    "dependencies": {
+                        "@babel/runtime": "7.23.9",
+                        "core-js": "^3.35.1",
+                        "@types/react": "^17.0.75",
+                        "@types/react-dom": "^17.0.25"
+                    }
+                }
+            }
+        }
     },
     "control_centre": {
         "name": "control_centre",
         "scope": "eventiva.frappe",
         "version": "c51e192ffdccdab3ce8bc5009fee942c93b107c3",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/control_centre"
+        "rootDir": "projects/frappe/control_centre",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "custody": {
         "name": "custody",
         "scope": "eventiva.frappe",
         "version": "4be928bb58bb564c2f351193e3e6c930a6d14294",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/custody"
+        "rootDir": "projects/frappe/custody",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "discord/env": {
         "name": "discord/env",
         "scope": "eventiva.workflows",
         "version": "ed009262b03b223965e66c30bf04bba1209d7f1b",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/discord/env"
+        "rootDir": "projects/workflows/discord/env",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "devDependencies": {
+                        "@types/jest": "26.0.24",
+                        "@types/node": "12.20.55",
+                        "@types/testing-library__jest-dom": "5.14.9"
+                    },
+                    "dependencies": {
+                        "@babel/runtime": "7.23.9",
+                        "core-js": "^3.35.1",
+                        "@types/react": "^17.0.75",
+                        "@types/react-dom": "^17.0.25",
+                        "react": "^18.2.0",
+                        "react-dom": "^18.2.0",
+                        "vitest": "1.2.2",
+                        "react-router-dom": "^6.22.0",
+                        "@apollo/client": "^3.9.4",
+                        "jest": "29.7.0",
+                        "jsdom": "^23.2.0"
+                    }
+                }
+            }
+        }
     },
     "discord/generator/module": {
         "name": "discord/generator/module",
         "scope": "eventiva.workflows",
         "version": "af737a005a2c72b12c186af540a8b279b64a4c83",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/discord/generator/module"
+        "rootDir": "projects/workflows/discord/generator/module",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "devDependencies": {
+                        "@types/jest": "26.0.24",
+                        "@types/node": "12.20.55",
+                        "@types/testing-library__jest-dom": "5.14.9"
+                    },
+                    "dependencies": {
+                        "@babel/runtime": "7.23.9",
+                        "core-js": "^3.35.1",
+                        "@types/react": "^17.0.75",
+                        "@types/react-dom": "^17.0.25"
+                    }
+                }
+            }
+        }
     },
     "discord_integration": {
         "name": "discord_integration",
         "scope": "eventiva.frappe",
         "version": "d75ad388788ec788d58457588e450576b9cd4ece",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/discord_integration"
+        "rootDir": "projects/frappe/discord_integration",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "eventiva_core": {
         "name": "eventiva_core",
         "scope": "eventiva.frappe",
         "version": "4daeb6dd89f0bec94d2aefbff412d629bba724a5",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/eventiva_core"
+        "rootDir": "projects/frappe/eventiva_core",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "fleet_management": {
         "name": "fleet_management",
         "scope": "eventiva.frappe",
         "version": "47fc78b98674fa5758ace4304b303b5738066e7f",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/fleet_management"
+        "rootDir": "projects/frappe/fleet_management",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "frappe/python-env": {
         "name": "frappe/python-env",
         "scope": "eventiva.workflows",
         "version": "906f157ca5356f188bb420d311efa285fe6ae51c",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/frappe/python-env"
+        "rootDir": "projects/workflows/frappe/python-env",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "devDependencies": {
+                        "@types/jest": "26.0.24",
+                        "@types/node": "12.20.55",
+                        "@types/testing-library__jest-dom": "5.14.9"
+                    },
+                    "dependencies": {
+                        "@babel/runtime": "7.23.9",
+                        "core-js": "^3.35.1",
+                        "@types/react": "^17.0.75",
+                        "@types/react-dom": "^17.0.25",
+                        "react": "^18.2.0",
+                        "react-dom": "^18.2.0",
+                        "vitest": "1.2.2",
+                        "react-router-dom": "^6.22.0",
+                        "@apollo/client": "^3.9.4",
+                        "jest": "29.7.0",
+                        "jsdom": "^23.2.0"
+                    }
+                }
+            }
+        }
     },
     "gaming": {
         "name": "gaming",
         "scope": "eventiva.frappe",
         "version": "60672da8f04450b5907386ee1214481194b73dd4",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/gaming"
+        "rootDir": "projects/frappe/gaming",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "generator": {
         "name": "generator",
         "scope": "eventiva.workflows",
         "version": "0af91ab4de2dbfbe6d4eaafe510fd34b9b99b070",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/generator"
+        "rootDir": "projects/workflows/generator",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "devDependencies": {
+                        "@types/jest": "26.0.24",
+                        "@types/node": "12.20.55"
+                    },
+                    "dependencies": {
+                        "@babel/runtime": "7.23.9"
+                    }
+                }
+            }
+        }
     },
     "grand_theft_auto": {
         "name": "grand_theft_auto",
         "scope": "eventiva.frappe",
         "version": "155b692ed6f4bc7991355876afce31589d1b4d53",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/grand_theft_auto"
+        "rootDir": "projects/frappe/grand_theft_auto",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "incident_management": {
         "name": "incident_management",
         "scope": "eventiva.frappe",
         "version": "fbedce30421002a91ce7c00477ae98e0db4b4796",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/incident_management"
+        "rootDir": "projects/frappe/incident_management",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "justice": {
         "name": "justice",
         "scope": "eventiva.frappe",
         "version": "371cf666a25065ba9cbc258542e13c23ddd5ede9",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/justice"
+        "rootDir": "projects/frappe/justice",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "packages/default_logging": {
         "name": "packages/default_logging",
         "scope": "eventiva.bots",
         "version": "a9790957091f7dd28e9ed3e8edc9a3ab87b58439",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/packages/default_logging"
+        "rootDir": "projects/bots/packages/default_logging",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "segment_connect": {
         "name": "segment_connect",
         "scope": "eventiva.frappe",
         "version": "5a18c2639c2a0bc1a37dfb074fd7474269e7c765",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/segment_connect"
+        "rootDir": "projects/frappe/segment_connect",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "support": {
         "name": "support",
         "scope": "eventiva.bots",
         "version": "bb98e0ba7d63f89ee50be437fef52176b2b2f2f6",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/support"
+        "rootDir": "projects/bots/support",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.56": {}
+        }
     },
     "teamspeak_integration": {
         "name": "teamspeak_integration",
         "scope": "eventiva.frappe",
         "version": "da1d6bcd51579ec88aee600b48b198249e5e034a",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/teamspeak_integration"
+        "rootDir": "projects/frappe/teamspeak_integration",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "vetting": {
         "name": "vetting",
         "scope": "eventiva.frappe",
         "version": "3a55343d033aecdbef4b92136467ca9b49eaddb5",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/vetting"
+        "rootDir": "projects/frappe/vetting",
+        "config": {
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "$schema-version": "17.0.0"
 }
