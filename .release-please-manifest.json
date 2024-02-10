@@ -20,7 +20,7 @@
   "projects/frappe/segment_connect": "0.0.0",
   "projects/frappe/teamspeak_integration": "0.0.0",
   "projects/frappe/vetting": "0.0.0",
-  "projects/workflows/bit/todo": "1.0.0",
+  "projects/workflows/bit/todo": "1.1.0",
   "projects/workflows/discord/env": "1.0.0",
   "projects/workflows/discord/generator": "1.0.0",
   "projects/workflows/frappe/python-env": "0.0.0",
