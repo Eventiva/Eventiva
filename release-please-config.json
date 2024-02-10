@@ -14,7 +14,7 @@
       "version-file": "packages/bot/atlassian-customer-support/version.txt",
       "prerelease": true
     },
-    "projects/bots/aspects/discordjs":{
+    "projects/bots/aspects/discordjs": {
       "package-name": "@eventiva/bots.aspects.discordjs",
       "component": "bots/discord",
       "changelog-path": "packages/bot/discordjs/CHANGELOG.md",
@@ -105,7 +105,7 @@
       "version-file": "packages/frappe/gaming/version.txt",
       "prerelease": true
     },
-    "projects/frappe/grand_theft_auto":{
+    "projects/frappe/grand_theft_auto": {
       "package-name": "@eventiva/frappe.grand_theft_auto",
       "component": "module/grand_theft_auto",
       "changelog-path": "packages/frappe/grand_theft_auto/CHANGELOG.md",
