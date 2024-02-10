@@ -53,7 +53,7 @@ on:
 permissions:
   contents: read
 
-name: release-please
+name: Management - Release Workflow
 
 jobs:
   release-please:
@@ -109,28 +109,28 @@ jobs:
 
       # tag major and minor versions
 
-      - name: tag major and minor versions
-        run: |
-          # Parse the paths_released output into an array
-          paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+      # - name: tag major and minor versions
+      #   run: |
+      #     # Parse the paths_released output into an array
+      #     paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
 
-          git remote add gh-token "https://${{ secrets.BOT_TOKEN }}@github.com/eventiva/eventiva.git"
+      #     git remote add gh-token "https://${{ secrets.BOT_TOKEN }}@github.com/eventiva/eventiva.git"
 
-          # Loop over the paths
-          for path in "${paths_released[@]}"; do
-            # Extract the project name from the path
-            project=${path#projects/}
-            project=${project%%/*}
+      #     # Loop over the paths
+      #     for path in "${paths_released[@]}"; do
+      #       # Extract the project name from the path
+      #       project=${path#projects/}
+      #       project=${project%%/*}
 
-            git tag -d v${{ steps.release.outputs[project~'--major'] }} || true
-            git tag -d v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} || true
-            git push origin :v${{ steps.release.outputs[project~'--major'] }} || true
-            git push origin :v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} || true
-            git tag -a v${{ steps.release.outputs[project~'--major'] }} -m "Release v${{ steps.release.outputs[project~'--major'] }}"
-            git tag -a v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} -m "Release v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }}"
-            git push origin v${{ steps.release.outputs[project~'--major'] }}
-            git push origin v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }}
-          done
+      #       git tag -d v${{ steps.release.outputs[project~'--major'] }} || true
+      #       git tag -d v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} || true
+      #       git push origin :v${{ steps.release.outputs[project~'--major'] }} || true
+      #       git push origin :v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} || true
+      #       git tag -a v${{ steps.release.outputs[project~'--major'] }} -m "Release v${{ steps.release.outputs[project~'--major'] }}"
+      #       git tag -a v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} -m "Release v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }}"
+      #       git push origin v${{ steps.release.outputs[project~'--major'] }}
+      #       git push origin v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }}
+      #     done
       
       - name: Initialize Bit
         uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
@@ -142,17 +142,17 @@ jobs:
           npm config set '@eventiva:registry' https://node-registry.bit.cloud
           npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
         
-      - name: Bit tag for each path released
-        run: |
-          # Parse the paths_released output into an array
-          paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+      # - name: Bit tag for each path released
+      #   run: |
+      #     # Parse the paths_released output into an array
+      #     paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
 
-          # Loop over the paths
-          for path in "${paths_released[@]}"; do
-            # Extract the project name from the path
-            project=${path#projects/}
-            project=${project%%/*}
+      #     # Loop over the paths
+      #     for path in "${paths_released[@]}"; do
+      #       # Extract the project name from the path
+      #       project=${path#projects/}
+      #       project=${project%%/*}
 
-            # Call bit tag with the version from release-please
-            bit tag eventiva.$project --ver ${{ steps.release.outputs[project~'--tag_name'] }} --message "Release ${{ steps.release.outputs[project~'--tag_name'] }}"
-          done
+      #       # Call bit tag with the version from release-please
+      #       bit tag eventiva.$project --ver ${{ steps.release.outputs[project~'--tag_name'] }} --message "Release ${{ steps.release.outputs[project~'--tag_name'] }}"
+      #     done
