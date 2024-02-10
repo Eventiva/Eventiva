@@ -93,6 +93,6 @@ jobs:
           # for openAI keys go to: https://platform.openai.com/account/api-keys
           # for repo secret go to: <your_repo_url>/settings/secrets/actions
           OCO_OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OCO_EMOJI: true
+          OCO_EMOJI: false
           OCO_LANGUAGE: en
           OCO_PROMPT_MODULE: conventional-commit
