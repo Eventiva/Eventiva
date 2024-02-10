@@ -60,6 +60,10 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
+    env:
+      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -79,7 +83,8 @@ jobs:
         with:
           token: ${{ secrets.BOT_TOKEN }}
           config-file: release-please-config.json
-          target-branch: main
+          manifest-file: .release-please-manifest.json
+          target-branch: ${{ github.ref_name }}
           include-component-in-tag: true
       
       # checks out the repository
@@ -106,31 +111,6 @@ jobs:
           git config --global user.name ${{secrets.GIT_USER_NAME}}
           git config --global user.email ${{secrets.GIT_USER_EMAIL}}
           git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
-
-      # tag major and minor versions
-
-      # - name: tag major and minor versions
-      #   run: |
-      #     # Parse the paths_released output into an array
-      #     paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
-
-      #     git remote add gh-token "https://${{ secrets.BOT_TOKEN }}@github.com/eventiva/eventiva.git"
-
-      #     # Loop over the paths
-      #     for path in "${paths_released[@]}"; do
-      #       # Extract the project name from the path
-      #       project=${path#projects/}
-      #       project=${project%%/*}
-
-      #       git tag -d v${{ steps.release.outputs[project~'--major'] }} || true
-      #       git tag -d v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} || true
-      #       git push origin :v${{ steps.release.outputs[project~'--major'] }} || true
-      #       git push origin :v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} || true
-      #       git tag -a v${{ steps.release.outputs[project~'--major'] }} -m "Release v${{ steps.release.outputs[project~'--major'] }}"
-      #       git tag -a v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }} -m "Release v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }}"
-      #       git push origin v${{ steps.release.outputs[project~'--major'] }}
-      #       git push origin v${{ steps.release.outputs[project~'--major'] }}.${{ steps.release.outputs[project~'--minor'] }}
-      #     done
       
       - name: Initialize Bit
         uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
