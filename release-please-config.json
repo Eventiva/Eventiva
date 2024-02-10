@@ -195,14 +195,5 @@
   "bump-minor-pre-major": true,
   "bump-patch-for-minor-pre-major": true,
   "release-type": "simple",
-  "plugins": [
-    {
-      "type": "linked-versions",
-      "groupName": "my group",
-      "components": [
-        "pkgA", "pkgB"
-      ]
-    }
-  ],
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
