@@ -49,23 +49,23 @@
 
 name: gaming
 id: 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/8a2e55fb-0650-4ad3-b11f-591b22c4db19'
-description: Adds gaming specific features to all Eventiva modules
+description: Provides gaming functionalities for Eventiva users
 configVersion: 1
 typeId: CAPABILITY
 ownerId: 'ari:cloud:teams::team/db55f935-b44d-4ecd-a400-84bc7c32f69a'
 fields:
-  tier: 2
+  tier: 3
   lifecycle: Pre-release
 links:
   - name: null
     type: REPOSITORY
-    url: 'https://github.com/Eventiva/gaming'
+    url: 'https://github.com/Eventiva/eventiva_gaming'
 relationships:
   DEPENDS_ON:
     - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/7d64729c-bff0-4735-a216-194aca7474d1'
     - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/f15a5e9c-bb79-4de3-a0df-ea6dfc51db5f'
 labels:
-  - 'language:python'
+  - 'language:python3'
   - 'source:github'
 customFields: null
 
