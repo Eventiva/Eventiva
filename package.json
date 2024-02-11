@@ -4,6 +4,9 @@
   "description": "Imagine a place where you can find all your event vendors, venues and professionals, alongside all the tools you require to be successful within the live events market. ",
   "repository": "https://github.com/eventiva/eventiva",
   "keywords": [],
-  "private": true,
-  "license": "GPL-2.0-or-later"
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "email": "support@eventiva.co.uk",
+    "url": "https://github.com/Eventiva/Eventiva/issues/new/choose"
+  }
 }
