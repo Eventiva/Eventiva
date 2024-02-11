@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/incident_management.git
 	branch = master
-	commit = 
+	commit = bfda4eefe8488c008652f2fb29fbef659d497376
 	method = merge
 	cmdver = 0.4.6
+	parent = 0b04992f274f0ec90bb09b3d43c973e3b86ec4ec
