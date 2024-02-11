@@ -115,5 +115,25 @@
     "enableWorkspaceConfigWrite": true
   },
   "bitdev.harmony/harmony-env": {},
-  "eventiva.bots/support": {}
+  "eventiva.bots/support": {},
+  "teambit.workspace/variants": {
+    "*": {
+      "teambit.pkg/pkg": {
+        "packageManagerPublishArgs": ["--access=public"],
+        "packageJson": {
+          "license": "GPL-2.0-or-later",
+          "bugs": {
+            "email": "support@eventiva.co.uk",
+            "url": "https://github.com/Eventiva/Eventiva/issues/new/choose"
+          },
+          "repository":"https://github.com/eventiva/eventiva",
+          "private": false,
+          "publishConfig": {
+            "scope": "@eventiva",
+            "registry": "https://npm.pkg.github.com"
+          }
+        }
+      }
+    }
+  }
 }
