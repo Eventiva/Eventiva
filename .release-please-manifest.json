@@ -9,7 +9,7 @@
   "projects/bots/package/default-logging": "0.0.0",
   "projects/bots/support": "0.0.0",
   "projects/frappe/control_centre": "0.0.0",
-  "projects/frappe/custody": "0.0.0",
+  "projects/frappe/custody": "1.0.0",
   "projects/frappe/discord_integration": "0.0.0",
   "projects/frappe/eventiva_core": "0.0.0",
   "projects/frappe/fleet_management": "0.0.0",
