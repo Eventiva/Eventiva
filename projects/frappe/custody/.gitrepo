@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/custody.git
 	branch = master
-	commit = 
+	commit = 3a05d2d4d90ba3adca58183339538d5a00e29459
 	method = merge
 	cmdver = 0.4.6
+	parent = 541367c0e98a4dfdcd217f7509f7cf0b69cc9b18
