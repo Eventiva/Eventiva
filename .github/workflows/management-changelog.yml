@@ -162,11 +162,12 @@ jobs:
           for path in "${paths_released[@]}"; do
             # Extract the project name from the path
             project=${path#projects/}
-            project=${project%%/*}
+            bitProject=${project%%/*}
             echo "PROJECT=$project" >> $GITHUB_ENV
 
             # Call bit tag with the version from release-please
-            bit tag eventiva.$project --ver ${{ format(steps.release.outputs['{0}--tag_name'], project) }} --message "Release ${{ format(steps.release.outputs['{0}--tag_name'], project) }}"
+            tag_name=$(echo "${{ steps.release.outputs }}" | jq -r ".${bitProject}--tag_name")
+            bit tag eventiva.$project --ver $tag_name --message "Release $tag_name"
           done
         
         
