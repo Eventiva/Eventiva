@@ -49,7 +49,7 @@
 
 name: Teamspeak-Integration
 id: ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/ce02c8ad-d3e1-4980-82d9-b2cecc85ee32
-description: Integrate Teamspeak into Eventiva Modules
+description: Provides Teamspeak integration for Eventiva modules
 configVersion: 1
 typeId: CAPABILITY
 ownerId: ari:cloud:teams::team/eea00c10-41a4-4d18-8a20-576dda5fdf73 # Automation & Robotics
