@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Eventiva/Eventiva/compare/workflows/generator-v1.0.0...workflows/generator-v1.1.0) (2024-02-11)
+
+
+### Features
+
+* release please process ([#320](https://github.com/Eventiva/Eventiva/issues/320)) ([1c38119](https://github.com/Eventiva/Eventiva/commit/1c381194c332e6142c3ccfcda630fcea494efb4b))
+
 ## 1.0.0 (2024-02-11)
 
 
