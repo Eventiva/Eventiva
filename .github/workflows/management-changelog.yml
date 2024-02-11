@@ -56,7 +56,7 @@ permissions:
 name: Management - Release Workflow
 
 jobs:
-  release-please:
+  release:
     permissions:
       contents: write
       pull-requests: write
@@ -87,10 +87,36 @@ jobs:
           target-branch: ${{ github.ref_name }}
           include-component-in-tag: true
       
+      # - name: tag major and minor versions
+      #   run: |
+      #     # Parse the paths_released output into an array
+      #     paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+
+      #     git remote add gh-token "https://${{ secrets.BOT_TOKEN }}@github.com/eventiva/eventiva.git"
+
+      #     # Loop over the paths
+      #     for path in "${paths_released[@]}"; do
+      #       # Extract the project name from the path
+      #       project=${path#projects/}
+      #       project=${project%%/*}
+      #       echo "PROJECT=$project" >> $GITHUB_ENV
+
+      #       git tag -d v${{ format(steps.release.outputs['{0}--major'], project) }} || true
+      #       git tag -d v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}} || true
+      #       git push origin :v${{ format(steps.release.outputs['{0}--major'], project) }} || true
+      #       git push origin :v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}} || true
+      #       git tag -a v${{ format(steps.release.outputs['{0}--major'], project) }} -m "Release v${{ format(steps.release.outputs['{0}--major'], project) }}"
+      #       git tag -a v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}} -m "Release v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}}"
+      #       git push origin v${{ format(steps.release.outputs['{0}--major'], project) }}
+      #       git push origin v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}}
+      #     done
+      
       # checks out the repository
       - uses: actions/checkout@v4
+        if: steps.release.outputs.releases_created
 
       - name: Create SSH key
+        if: steps.release.outputs.releases_created
         run: |
           mkdir -p ~/.ssh/
           echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
@@ -100,6 +126,7 @@ jobs:
 
       # ensure git is using the ssh key
       - name: Ensure git is using the SSH key
+        if: steps.release.outputs.releases_created
         run: |
           eval "$(ssh-agent -s)"
           ssh-add ~/.ssh/id_rsa
@@ -107,32 +134,39 @@ jobs:
 
       # setup git to use the ssh key
       - name: Setup git
+        if: steps.release.outputs.releases_created
         run: |
           git config --global user.name ${{secrets.GIT_USER_NAME}}
           git config --global user.email ${{secrets.GIT_USER_EMAIL}}
           git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
       
       - name: Initialize Bit
+        if: steps.release.outputs.releases_created
         uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
       
       - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        if: steps.release.outputs.releases_created
         run: |
           npm config set '@bit:registry' https://node-registry.bit.cloud
           npm config set '@teambit:registry' https://node-registry.bit.cloud
           npm config set '@eventiva:registry' https://node-registry.bit.cloud
           npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
         
-      # - name: Bit tag for each path released
-      #   run: |
-      #     # Parse the paths_released output into an array
-      #     paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+      - name: Bit tag for each path released
+        if: steps.release.outputs.releases_created
+        run: |
+          # Parse the paths_released output into an array
+          paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
 
-      #     # Loop over the paths
-      #     for path in "${paths_released[@]}"; do
-      #       # Extract the project name from the path
-      #       project=${path#projects/}
-      #       project=${project%%/*}
+          # Loop over the paths
+          for path in "${paths_released[@]}"; do
+            # Extract the project name from the path
+            project=${path#projects/}
+            project=${project%%/*}
+            echo "PROJECT=$project" >> $GITHUB_ENV
 
-      #       # Call bit tag with the version from release-please
-      #       bit tag eventiva.$project --ver ${{ steps.release.outputs[project~'--tag_name'] }} --message "Release ${{ steps.release.outputs[project~'--tag_name'] }}"
-      #     done
+            # Call bit tag with the version from release-please
+            bit tag eventiva.$project --ver ${{ format(steps.release.outputs['{0}--tag_name'], project) }} --message "Release ${{ format(steps.release.outputs['{0}--tag_name'], project) }}"
+          done
+        
+        
