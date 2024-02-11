@@ -6,6 +6,7 @@
 [subrepo]
 	remote = git@github.com:Eventiva/control_centre.git
 	branch = master
-	commit = 
+	commit = a78856ce9bda141aa43c13cc8c782366cb168fe8
 	method = merge
 	cmdver = 0.4.6
+	parent = 7ab51fcd7a4daf83d089d7240d57ee95d12128b4
