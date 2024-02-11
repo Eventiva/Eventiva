@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.1](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.0...eventiva-v0.1.1) (2024-02-11)
+
+
+### Features
+
+* **management-changelog.yml:** add Bit initialization step to initialize Bit for the workflow ([5ae39dc](https://github.com/Eventiva/Eventiva/commit/5ae39dc8e85173894b851816066bdf356329c7f0))
+
+
+### Bug Fixes
+
+* **chore-subrepo-push.yml:** update the version of the 'Harden Runner' action to v2.6.1 to ensure the latest security fixes are applied ([0ba507b](https://github.com/Eventiva/Eventiva/commit/0ba507b5cab27fd5fbef6185a237e260cfade366))
+* **components-pull-request.yml:** move the initialization of Bit before resolving component packages to ensure proper setup ([c4a76bd](https://github.com/Eventiva/Eventiva/commit/c4a76bde3697b99afa11e79e8e168da4975b6ef9))
+* **management-changelog.yml:** fix command to extract tag_name from steps.release.outputs using jq ([3de8155](https://github.com/Eventiva/Eventiva/commit/3de815529d98ea271fe43811ddf6692d56d53868))
+* **management-changelog.yml:** fix variable name for project to improve clarity and readability ([3de8155](https://github.com/Eventiva/Eventiva/commit/3de815529d98ea271fe43811ddf6692d56d53868))
+
 ## 0.1.0 (2024-02-11)
 
 
