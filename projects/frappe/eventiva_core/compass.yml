@@ -44,6 +44,17 @@
 # -----
 # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 ###
+name: eventiva_core
+id: 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/7d64729c-bff0-4735-a216-194aca7474d1'
+description: Provides Eventiva integration into ERPNext and all base functionality utilised across modules
+configVersion: 1
+typeId: CAPABILITY
+ownerId: 'ari:cloud:teams::team/9d2ecc3f-3428-4f14-96fb-bbcb544adea1'
+fields:
+  tier: 2
+  lifecycle: Pre-release
+links:
+  - name: null
 
 
 
@@ -59,6 +70,7 @@ fields:
 links:
   - name: null
     type: REPOSITORY
+    url: 'https://github.com/Eventiva/eventiva_core'
     url: 'https://github.com/Eventiva/eventiva_core'
 relationships:
   DEPENDS_ON:
