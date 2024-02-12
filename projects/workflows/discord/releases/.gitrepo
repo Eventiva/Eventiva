@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/Eventiva/discord-releases.git
+	branch = main
+	commit = b57c2716a0cfebb367515144bf6f077c35b88330
+	parent = 4de789fedc185ac19cc555419ced0ff23aa12de1
+	method = merge
+	cmdver = 0.4.6
