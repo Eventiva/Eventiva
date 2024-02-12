@@ -47,7 +47,7 @@
 
 
 import pino from 'pino';
-import type { SlotRegistry } from '@bitdev/harmony.harmony';
+
 import { LoggingConfig } from './logging-config';
 /**
  * Represents a logger object for logging messages. The type parameter specifies the log levels that the logger supports.
@@ -55,7 +55,7 @@ import { LoggingConfig } from './logging-config';
  *
  * @export
  */
-export type Log = pino.Logger<"alert" | "emergency">
+
 /**
  * The Logger type represents a logger instance.
  * Properties:
@@ -77,4 +77,4 @@ export type Logger = {
  *
  * @export
  */
-export type LoggerSlot = SlotRegistry<Logger>;
+
