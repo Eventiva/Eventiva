@@ -50,7 +50,7 @@ import { loadTestAspect } from '@bitdev/harmony.testing.load-aspect';
 import type { LoggingNode } from './logging.node.runtime.js';
 import { LoggingAspect } from './logging.aspect.js';
 
-it('should create a Logger instance with name and options', async () => {
+it('should register a logger with a name and logger instance', async () => {
   const logging = await loadAspect<LoggingNode>(LoggingAspect, {
     runtime: 'node',
   });
