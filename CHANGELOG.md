@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.1.2](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.1...eventiva-v0.1.2) (2024-02-12)
+
+
+### Features
+
+* **release-please:** add release-please configuration files ([6ee24ef](https://github.com/Eventiva/Eventiva/commit/6ee24efcfed3d9807a1fc92ca620db38005c84f3))
+* **runtime-options:** add runtime-options module ([d247a4b](https://github.com/Eventiva/Eventiva/commit/d247a4ba98605277f10f6cebdd6d24545e8face5))
+* **runtime-options:** add runtime-options module ([dd436dd](https://github.com/Eventiva/Eventiva/commit/dd436dde683ba7c2c4ef0437bb300c29c6e95f37))
+
+
+### Bug Fixes
+
+* **discordjs.node.runtime.ts:** add null checks before binding message method in registerCommands method ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** add null checks before binding message method in registerCommands method ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **discordjs.node.runtime.ts:** add null checks before returning defaultConfig values to handle missing environment variables ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** add null checks before returning defaultConfig values to handle missing environment variables ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **discordjs.node.runtime.ts:** add null checks before returning event and command in getEventByName and getCommandByName methods ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** add null checks before returning event and command in getEventByName and getCommandByName methods ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **discordjs.node.runtime.ts:** comment out unnecessary log statements in registerLocale and registerLocales methods ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** comment out unnecessary log statements in registerLocale and registerLocales methods ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **generator:** update import path for GeneratorOptions in generator.ts file ([69c1d99](https://github.com/Eventiva/Eventiva/commit/69c1d99b29d52bc884846860a6bf4ad565134cd8))
+* **generator:** update import path for GeneratorOptions in generator.ts file ([d2af81d](https://github.com/Eventiva/Eventiva/commit/d2af81db638921d0e5121624da4c05b0737f589a))
+* **generator:** update import paths for RuntimeOptions in default-runtimes.ts and aspect-runtime.ts ([64ce041](https://github.com/Eventiva/Eventiva/commit/64ce041fedaea018b98070247ec8e7d6459f3efb))
+* **generator:** update import paths for RuntimeOptions in default-runtimes.ts and aspect-runtime.ts ([22e31b7](https://github.com/Eventiva/Eventiva/commit/22e31b7d52ac96c8142b9803b79ce96d6d44ecf1))
+* **logger.ts:** make logger property required in Logger type to ensure it is always present ([da5a6e4](https://github.com/Eventiva/Eventiva/commit/da5a6e4ec33c452c5917815162aeffb9f32bd2ba))
+* **logger.ts:** make logger property required in Logger type to ensure it is always present ([dacd8b1](https://github.com/Eventiva/Eventiva/commit/dacd8b130b121b5e028fd06470d3da8a06ad2028))
+* **logging.node.runtime.ts:** update getLogger method to throw an error if logger for specified module is not found ([da5a6e4](https://github.com/Eventiva/Eventiva/commit/da5a6e4ec33c452c5917815162aeffb9f32bd2ba))
+* **logging.node.runtime.ts:** update getLogger method to throw an error if logger for specified module is not found ([dacd8b1](https://github.com/Eventiva/Eventiva/commit/dacd8b130b121b5e028fd06470d3da8a06ad2028))
+* **logging.node.runtime.ts:** update registerLogger method to accept Partial&lt;Logger&gt;[] instead of Logger[] to allow for optional properties in Logger objects ([da5a6e4](https://github.com/Eventiva/Eventiva/commit/da5a6e4ec33c452c5917815162aeffb9f32bd2ba))
+* **logging.node.runtime.ts:** update registerLogger method to accept Partial&lt;Logger&gt;[] instead of Logger[] to allow for optional properties in Logger objects ([dacd8b1](https://github.com/Eventiva/Eventiva/commit/dacd8b130b121b5e028fd06470d3da8a06ad2028))
+* **management-changelog.yml:** add the --build flag to the bit tag command to trigger a build after tagging the release ([61c1f6a](https://github.com/Eventiva/Eventiva/commit/61c1f6a4ebca38e4ed91fad17ab30719fdb5d973))
+* **management-changelog.yml:** add the --build flag to the bit tag command to trigger a build after tagging the release ([96d7602](https://github.com/Eventiva/Eventiva/commit/96d7602c59543e999160799c4da292c681e8e96b))
+
 ## [0.1.1](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.0...eventiva-v0.1.1) (2024-02-12)
 
 
