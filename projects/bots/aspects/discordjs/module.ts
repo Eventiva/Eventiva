@@ -153,10 +153,10 @@ export class DiscordJsModule<C extends ModuleConfig = {
    * @public
    * @param [reload]
    */
-  public registerLocales(reload?: true) {
-    // TODO add a locale file loader method using file system
-    this.discord.i18nModule.registerResource()
-  }
+  // public registerLocales(reload?: true) {
+  //   // TODO add a locale file loader method using file system
+  //   this.discord.i18nModule.registerResource()
+  // }
 
   /**
    * Get the configuration object.
