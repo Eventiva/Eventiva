@@ -49,7 +49,6 @@ on:
   push:
     branches:
     - main
-    - develop
 
 permissions:
   contents: read
