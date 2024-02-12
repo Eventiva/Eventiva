@@ -48,7 +48,7 @@
 # Sweep AI turns bugs & feature requests into code changes (https://sweep.dev)
 # For details on our config file, check out our docs at https://docs.sweep.dev/usage/config
 
-branch: "develop"
+branch: "main"
 gha_enabled: True
 description: |
   "This repository is a subrepo of Eventiva/eventiva, that is a mono-repository built on a component first architecture. It is built using the Frappe Framework and uses MariaDB as the development database and Amazon Aurora as the production database. The repository is split into 4 tiers, with Tier 1 components being essential for an organizations software architecture to function, and Tier 4 components having no significant effect on the customer experience and do not significantly affect the organization. The folders are split int two main types of workflows.

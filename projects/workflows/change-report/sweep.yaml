@@ -1,11 +1,11 @@
 ###
 # @format
 # -----
-# Project: @eventiva/eventiva
+# Project: change-report
 # File: sweep.yaml
-# Path: \projects\workflows\.trunk\sweep.yaml
+# Path: \sweep.yaml
 # Created Date: Monday, December 11th 2023
-# Author: Jonathan Stevens (Email: jonathan@resnovas.com
+# Author: Jonathan Stevens, jonathan@resnovas.com
 # -----
 # Contributing: Please read through our contributing guidelines. Included are directions for opening
 # issues, coding standards, and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -14,7 +14,7 @@
 # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
 # -----
 # Copyright (c) 2024 Resnovas - All Rights Reserved
-# LICENSE: Creative Commons Zero v1.0 Universal (CC0-1.0)
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
 # -----
 # This program has been provided under confidence of the copyright holder and is
 # licensed for copying, distribution and modification under the terms of
@@ -26,20 +26,20 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License v3.0 only for more details.
 #
-# You should have received a copy of the Creative Commons Zero v1.0 Universal
+# You should have received a copy of the GNU General Public License v2.0 or later
 # along with this program. If not, please write to: jonathan@resnovas.com,
-# or see https://creativecommons.org/publicdomain/zero/1.0/legalcode
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
 #
 # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
 # -----
-# Last Modified: Thu Jan 25 2024
+# Last Modified: Sun Feb 11 2024
 # By: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
 ###
 
 # Sweep AI turns bugs & feature requests into code changes (https://sweep.dev)
 # For details on our config file, check out our docs at https://docs.sweep.dev/usage/config
 
-branch: "develop"
+branch: "main"
 gha_enabled: True
 description: |
   "This repository is a subrepo of Eventiva/eventiva, that is a mono-repository built on a component first architecture. It is built using the Frappe Framework and uses MariaDB as the development database and Amazon Aurora as the production database. The repository is split into 4 tiers, with Tier 1 components being essential for an organizations software architecture to function, and Tier 4 components having no significant effect on the customer experience and do not significantly affect the organization. The folders are split int two main types of workflows.

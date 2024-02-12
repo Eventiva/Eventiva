@@ -3,7 +3,7 @@
 # -----
 # Project: @eventiva/eventiva
 # File: ci.yml
-# Path: \projects\modules\grand_theft_auto\.github\workflows\ci.yml
+# Path: \projects\frappe\grand_theft_auto\.github\workflows\ci.yml
 # Created Date: Sunday, January 14th 2024
 # Author: Jonathan Stevens, jonathan@resnovas.com
 # Github: https://github.com/TGTGamer
@@ -50,7 +50,7 @@ name: CI
 on:
   push:
     branches:
-      - develop
+      - main
   pull_request:
 
 concurrency:
