@@ -84,9 +84,10 @@ jobs:
         id: release
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          config-file: ${{ github.ref_name == 'develop' && 'release-develop-config.json' || 'release-main-config.json' }}
+          # config-file: $ {{ github.ref_name == 'develop' && 'release-develop-config.json' || 'release-main-config.json' }}
+          config-file: 'release-please-config.json'
           manifest-file: .release-please-manifest.json
-          target-branch: ${{ github.ref_name }}
+          target-branch: ${{ github.ref_name == 'develop' && 'main' || github.ref_name }} 
           include-component-in-tag: true
       
       # - name: tag major and minor versions
