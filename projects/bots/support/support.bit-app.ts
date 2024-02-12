@@ -65,6 +65,7 @@ export const Support = HarmonyPlatform.from({
     name: 'Support',
     slogan: 'Platform',
     logo: 'https://static.bit.dev/extensions-icons/wayne.svg',
+    domain: 'https://support.discord.dh1.eventiva.co.uk'
   }],
 
   runtimes: [
