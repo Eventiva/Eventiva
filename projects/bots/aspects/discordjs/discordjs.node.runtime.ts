@@ -168,9 +168,9 @@ export class DiscordjsNode {
    * @param resources An array of resources
    */
   public registerLocale(resources: Resource[]) {
-    this.log.trace(this.i18n.t("discord:registeringLocales", {count: resources.length}))
-    this.i18nModule.registerResource(resources)
-    this.log.trace(this.i18n.t("discord:registeredLocales", {count: resources.length}))
+    // this.log.trace(this.i18n.t("discord:registeringLocales", {count: resources.length}))
+    return this.i18nModule.registerResource(resources)
+    // this.log.trace(this.i18n.t("discord:registeredLocales", {count: resources.length}))
   }
   
   /**
@@ -191,7 +191,7 @@ export class DiscordjsNode {
     this.log.trace(this.i18n.t("discord:modules.init", {context: "start", name: module.name}))
     module.registerCommands(reload)
     module.registerEvents(reload)
-    module.registerLocales(reload)
+    // module.registerLocales(reload)
     this.log.trace(this.i18n.t("discord:modules.init", {context: "complete", name: module.name}))
 
     this.client.emit("moduleRegistered", module, reload)
@@ -253,7 +253,9 @@ export class DiscordjsNode {
     this.log.trace(this.i18n.t("discord:events.single.getting", {name, module}))
     const event = this.eventSlot.getByName(name)
     this.log.trace(this.i18n.t("discord:events.single.got", {name, event: JSON.stringify(event)}))
-    return event
+    if (event) return event
+    this.log.trace(this.i18n.t("discord:events.single.notFound", {name}))
+    throw new Error(this.i18n.t("discord:events.single.notFound", {name}))
   }
 
   /**
@@ -270,7 +272,7 @@ export class DiscordjsNode {
       if (!command) continue;
       this.log.trace(this.i18n.t("discord:commands.single.binding", {name: command.name}))
       command.execute = command.execute.bind(module)
-      if ('message' in command) command.message = command.message.bind(module)
+      if ('message' in command) command.message = command.message?.bind(module)
       this.log.trace(this.i18n.t("discord:commands.single.bound", {name: command.name}))
     }
     this.commandSlot.register(commands);
@@ -303,7 +305,9 @@ export class DiscordjsNode {
     this.log.trace(this.i18n.t("discord:commands.single.getting", {name}))
     const command = this.commandSlot.getByName(name)
     this.log.trace(this.i18n.t("discord:commands.single.got", {name, command: JSON.stringify(command)}))
-    return command
+    if (command) return command
+    this.log.trace(this.i18n.t("discord:commands.single.notFound", {name}))
+    throw new Error(this.i18n.t("discord:commands.single.notFound", {name}))
   }
 
 
@@ -323,14 +327,14 @@ export class DiscordjsNode {
    * @static
    */
   static defaultConfig: DiscordjsConfig = {
-    token: process.env.TOKEN,
+    token: process.env.TOKEN!,
     startDelay: 30000,
     // The client ID of the bot
-    clientId: process.env.CLIENT_ID,
+    clientId: process.env.CLIENT_ID!,
     // The client secret of the bot
-    clientSecret: process.env.CLIENT_SECRET,
+    clientSecret: process.env.CLIENT_SECRET!,
     // The guild ID to use for the bot as the development guild
-    guildId: process.env.GUILD_ID,
+    guildId: process.env.GUILD_ID!,
     // The list of intents to use for the bot
     intents: [
       GatewayIntentBits.AutoModerationConfiguration,
