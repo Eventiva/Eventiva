@@ -44,6 +44,44 @@
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
+import { describe, expect, it } from '@jest/globals';
+
+describe('LoggingNode', () => {
+  it('should register loggers', () => {
+    const loggerSlot = new LoggerSlot();
+    const loggingNode = new LoggingNode({}, loggerSlot);
+    const loggers = [
+      { name: 'logger1', options: { level: 'debug' } },
+      { name: 'logger2', options: { level: 'info' } },
+    ];
+    loggingNode.registerLogger(loggers);
+    expect(loggerSlot.length).toBe(2);
+  });
+
+  it('should list loggers', () => {
+    const loggerSlot = new LoggerSlot();
+    const loggingNode = new LoggingNode({}, loggerSlot);
+    const loggers = [
+      { name: 'logger1', options: { level: 'debug' } },
+      { name: 'logger2', options: { level: 'info' } },
+    ];
+    loggingNode.registerLogger(loggers);
+    const listedLoggers = loggingNode.listLoggers();
+    expect(listedLoggers.length).toBe(2);
+  });
+
+  it('should get logger by module', () => {
+    const loggerSlot = new LoggerSlot();
+    const loggingNode = new LoggingNode({}, loggerSlot);
+    const loggers = [
+      { name: 'logger1', options: { level: 'debug' } },
+      { name: 'logger2', options: { level: 'info' } },
+    ];
+    loggingNode.registerLogger(loggers);
+    const logger = loggingNode.getLogger('logger1');
+    expect(logger.name).toBe('logger1');
+  });
+});
 
 
 import pino from 'pino';
