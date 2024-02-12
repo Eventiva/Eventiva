@@ -46,4 +46,3 @@
 */
 
 export { Generator } from './generator.js';
-export type { GeneratorOptions, RuntimeOptions } from './generator-options.js';

@@ -50,7 +50,7 @@ import { compact } from 'lodash';
 import { TemplateList } from '@teambit/generator';
 import { HarmonyPlatformTemplate } from '@bitdev/harmony.generators.harmony-templates';
 import { HarmonyRuntimeTemplate } from '@bitdev/harmony.generators.harmony-templates';
-import { GeneratorOptions } from './generator-options.js';
+import { GeneratorOptions } from '@eventiva/workflows.bit.runtime-options'
 import { AspectTemplate } from '@bitdev/harmony.generators.harmony-templates';
 import { PlatformAspectTemplate } from '@bitdev/harmony.generators.harmony-templates';
 import { HarmonyEnvTemplate } from '@bitdev/harmony.generators.harmony-templates';
