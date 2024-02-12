@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.1](https://github.com/Eventiva/Eventiva/compare/bots/discord-v0.1.0...bots/discord-v0.1.1) (2024-02-12)
+
+
+### Bug Fixes
+
+* **discordjs.node.runtime.ts:** add null checks before binding message method in registerCommands method ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **discordjs.node.runtime.ts:** add null checks before returning defaultConfig values to handle missing environment variables ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **discordjs.node.runtime.ts:** add null checks before returning event and command in getEventByName and getCommandByName methods ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+* **discordjs.node.runtime.ts:** comment out unnecessary log statements in registerLocale and registerLocales methods ([72a10d2](https://github.com/Eventiva/Eventiva/commit/72a10d2727f8fb54c26e5307922f292d572aa6a7))
+
 ## 0.1.0 (2024-02-11)
 
 
