@@ -1,29 +1,74 @@
 {
   "name": "change-report",
-  "version": "0.0.0",
-  "private": true,
   "description": "GitHub Action to generate a report from the recent code changes and post it to Slack",
+  "version": "0.0.0",
+  "author": "maxprilutskiy",
+  "contributors": [
+    "TGTGamer", 
+    "Eventiva Ltd"
+  ],
+  "private": true,
   "main": "lib/main.js",
-  "scripts": {
-    "build": "tsc",
-    "format": "prettier --write '**/*.ts'",
-    "format-check": "prettier --check '**/*.ts'",
-    "lint": "eslint src/**/*.ts",
-    "package": "ncc build --source-map --license licenses.txt",
-    "test": "jest",
-    "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
-  },
+  "homepage": "https://github.com/maxprilutskiy/change-report",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/maxprilutskiy/change-report.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maxprilutskiy/change-report/issues"
   },
   "keywords": [
     "actions",
     "node",
     "setup"
   ],
-  "author": "",
-  "license": "MIT",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "bundle": "npm run format:write && npm run package",
+    "ci-test": "jest",
+    "coverage": "make-coverage-badge --output-path ./badges/coverage.svg",
+    "format:write": "prettier --write **/*.ts",
+    "format:check": "prettier --check **/*.ts",
+    "lint": "npx eslint . -c ./.github/linters/.eslintrc.yml",
+    "package": "ncc build src/index.ts --license licenses.txt",
+    "package:watch": "npm run package -- --watch",
+    "test": "jest",
+    "all": "npm run format:write && npm run lint && npm run test && npm run coverage && npm run package"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "verbose": true,
+    "clearMocks": true,
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+      "js",
+      "ts"
+    ],
+    "testMatch": [
+      "**/*.test.ts"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ],
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov"
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "./src/**"
+    ]
+  },
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@octokit/action": "^5.0.2",
@@ -44,6 +89,12 @@
     "js-yaml": "^4.1.0",
     "prettier": "^2.8.8",
     "ts-jest": "^29.1.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "eslint-plugin-jsonc": "^2.13.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "make-coverage-badge": "^1.2.0",
+    "prettier-eslint": "^16.3.0"
   }
 }
