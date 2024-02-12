@@ -49,7 +49,7 @@ import { upperFirst, camelCase } from 'lodash';
 import { ComponentID } from '@teambit/component-id';
 import { ComponentContext } from '@teambit/generator';
 import { generateName } from './slot-template.js';
-import { RuntimeOptions } from '@eventiva/workflows.generator';
+import type { RuntimeOptions } from "@eventiva/workflows.bit.runtime-options";;
 
 /**
  * Generates the JSDoc for the `generateSlot` function.
