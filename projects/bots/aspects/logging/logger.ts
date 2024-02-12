@@ -69,7 +69,7 @@ export type Log = pino.Logger<"alert" | "emergency">
 export type Logger = {
     name: string,
     options?: Omit<LoggingConfig, "customLevels">
-    logger?: pino.Logger<"alert" | "emergency">
+    logger: pino.Logger<"alert" | "emergency">
 }
 /**
  * A type that represents a slot in which a collection of loggers can be registered.

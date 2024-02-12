@@ -114,14 +114,14 @@ export class LoggingNode {
      * @param {Logger[]} loggers An array of Logger objects.
      * @returns {this} Registers an array of loggers and adds them to the logger slot.
      */
-    registerLogger(loggers: Logger[]) {
+    registerLogger(loggers: Partial<Logger>[]) {
       // create a new child logger on each logger arg
       if(this.log) this.log.debug(`Registering loggers. ${loggers.length} loggers to be loaded.`)
       for (let logger of loggers) {
-        if(this.log) this.log.debug(`Registering logger ${logger.name}, with level: ${logger.options.level}.`)
-        logger.logger = this.console.child({module: logger.name}, {...logger.options, msgPrefix: `[${logger.name}] `})
+        if(this.log) this.log.debug(`Registering logger ${logger.name}, with level: ${logger.options?.level}.`)
+        logger.logger = this.console.child({module: logger.name})
         if (this.log) this.log.debug(`Registering logger ${logger.name} against LoggerSlot`)
-        this.loggerSlot.register(logger)
+        this.loggerSlot.register(logger as Logger)
         if(this.log) this.log.debug(`Logger ${logger.name} registered.`)
       }
       if(this.log) this.log.debug(`Loggers registered against LoggerSlot. Now hosting ${this.loggerSlot.length} Loggers`)
@@ -146,8 +146,11 @@ export class LoggingNode {
      * @param {string} module The name of the module from which to get the logger
      * @returns {*} This function takes a module name as input and returns a logger for that module.
      */
-    getLogger(module: string) {
-      return this.loggerSlot.getByName(module)
+    getLogger(module: string): Logger {
+      const logger = this.loggerSlot.getByName(module)
+      if (logger) return logger
+      this.log.error(`Logger ${module} not found. Returning default logger.`)
+      throw new Error(`Logger ${module} not found. Returning default logger.`)
     }
 
   /**
