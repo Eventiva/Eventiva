@@ -53,7 +53,7 @@ on:
   # when the repository branch develop is pushed to but ignoring commits by repo-visualizer
   push:
     branches:
-      - develop
+      - main
     paths-ignore:
       - 'diagram.svg'
       - '.github/**'
