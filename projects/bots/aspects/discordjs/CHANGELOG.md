@@ -10,6 +10,20 @@
 * **discordjs.node.runtime.ts:** add null checks before returning event and command in getEventByName and getCommandByName methods ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
 * **discordjs.node.runtime.ts:** comment out unnecessary log statements in registerLocale and registerLocales methods ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
 
+## New Features
+
+* **Added unit tests for discordjs.node.spec.ts, logger.ts, and logging.node.runtime.ts**
+  - Unit tests have been added to cover the new features and bug fixes mentioned in the code diff for the respective files.
+  - Authors: Jonathan Stevens
+
+
+### Bug Fixes
+
+* **discordjs.node.runtime.ts:** add null checks before binding message method in registerCommands method ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** add null checks before returning defaultConfig values to handle missing environment variables ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** add null checks before returning event and command in getEventByName and getCommandByName methods ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+* **discordjs.node.runtime.ts:** comment out unnecessary log statements in registerLocale and registerLocales methods ([85c6d01](https://github.com/Eventiva/Eventiva/commit/85c6d01abdba2377fe7feb3d8cbaafc27e0337a5))
+
 ## 0.1.0 (2024-02-11)
 
 
