@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Eventiva/Eventiva/compare/workflows/discord/generator-v0.1.0...workflows/discord/generator-v0.1.1) (2024-02-12)
+
+
+### Bug Fixes
+
+* **generator:** update import paths for RuntimeOptions in default-runtimes.ts and aspect-runtime.ts ([22e31b7](https://github.com/Eventiva/Eventiva/commit/22e31b7d52ac96c8142b9803b79ce96d6d44ecf1))
+
 ## 0.1.0 (2024-02-11)
 
 
