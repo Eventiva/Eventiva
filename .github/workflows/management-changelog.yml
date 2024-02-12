@@ -166,7 +166,7 @@ jobs:
 
             # Call bit tag with the version from release-please
             tag_name=$(echo "${{ steps.release.outputs }}" | jq -r ".${bitProject}--tag_name")
-            bit tag eventiva.$project --ver $tag_name --message "Release $tag_name"
+            bit tag eventiva.$project --ver $tag_name --message "Release $tag_name" --build
           done
         
         
