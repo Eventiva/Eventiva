@@ -47,6 +47,7 @@
 
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect';
+import { DiscordjsNode } from './discordjs.node.runtime';
 import type { DiscordjsNode } from './discordjs.node.runtime.js';
 import { DiscordjsAspect } from './discordjs.aspect.js';
 
