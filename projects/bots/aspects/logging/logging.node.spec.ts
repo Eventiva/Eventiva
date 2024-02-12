@@ -46,7 +46,7 @@
 */
 
 
-import { loadAspect } from '@bitdev/harmony.testing.load-aspect';
+import { loadTestAspect } from '@bitdev/harmony.testing.load-aspect';
 import type { LoggingNode } from './logging.node.runtime.js';
 import { LoggingAspect } from './logging.aspect.js';
 
