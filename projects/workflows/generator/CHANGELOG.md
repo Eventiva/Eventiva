@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Eventiva/Eventiva/compare/workflows/generator-v0.1.0...workflows/generator-v0.1.1) (2024-02-12)
+
+
+### Bug Fixes
+
+* **generator:** update import path for GeneratorOptions in generator.ts file ([69c1d99](https://github.com/Eventiva/Eventiva/commit/69c1d99b29d52bc884846860a6bf4ad565134cd8))
+
 ## [0.1.0](https://github.com/eventiva/eventiva/compare/workflows/generator-v1.0.0...workflows/generator-v0.1.0) (2024-02-11)
 
 
