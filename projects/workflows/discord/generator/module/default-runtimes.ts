@@ -45,7 +45,7 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */ 
 
-import { RuntimeOptions } from "@eventiva/workflows.generator";
+import type { RuntimeOptions } from "@eventiva/workflows.bit.runtime-options";
 
 /**
  * An array of default runtime options. Each runtime option has a name property.
