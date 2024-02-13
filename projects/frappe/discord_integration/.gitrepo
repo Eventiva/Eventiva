@@ -6,6 +6,7 @@
 [subrepo]
 	remote = https://github.com/eventiva/discord_integration.git
 	branch = main
-	commit = 
+	commit = 5610607a39ac8e61cb6dde0fffb2d6e867ebffd2
 	method = merge
 	cmdver = 0.4.6
+	parent = c850c02b6a5a3961fa9e96e12ae1a3a1fc0ff262
