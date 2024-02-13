@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.3](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.2...eventiva-v0.1.3) (2024-02-13)
+
+
+### Features
+
+* **cspell.config.yaml:** add cspell configuration file ([404774f](https://github.com/Eventiva/Eventiva/commit/404774f6c03f2705963ec3180a9c245cf590638d))
+* **release:** add release manifest and config files ([d05f763](https://github.com/Eventiva/Eventiva/commit/d05f763263299756710beee0560c6cf93f2cd8e3))
+* **release:** add release manifest and config files for the develop branch ([dfe3754](https://github.com/Eventiva/Eventiva/commit/dfe3754ec3a5fc8f463e902345dc3bab0c0d6f1d))
+
+
+### Bug Fixes
+
+* build steps ([#449](https://github.com/Eventiva/Eventiva/issues/449)) ([c2dbf6e](https://github.com/Eventiva/Eventiva/commit/c2dbf6ed88d8e71b96a670bd564a1bb30e384072))
+
 ## [0.1.2](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.1...eventiva-v0.1.2) (2024-02-12)
 
 
