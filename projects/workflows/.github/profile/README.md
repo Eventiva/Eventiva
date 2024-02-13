@@ -36,3 +36,6 @@ ventiva is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
+- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
+- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
+- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
