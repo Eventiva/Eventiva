@@ -143,6 +143,5 @@
         "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS"
       ]
     }
-  ],
-  "gitlens.experimental.generateCommitMessagePrompt": "Commit messages must have a short description that is less than 40 chars followed by a newline and a more detailed description. Write concisely using an informal tone and avoid specific names from the code. You must use the Semantic Versioning standards for your commit messages. For example, if you are fixing a bug in the file index.ts, your commit message should look like this: \"bug(index.ts): details of the bug\". You must prefix your first like with the gitmoji specified emoji. For example, if you are fixing a bug in the file index.ts, your commit message must look like this: \":bug: fix(index.ts): details of the bug\". You can find the list of gitmojis: https://gitmoji.dev/. If this commit is likely to break backwards compatibility, after the context (in the example, \"(index.ts)\") you should include a \"!\" before the \":\".",
+  ]
 }
