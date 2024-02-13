@@ -4,7 +4,11 @@
       "package-name": "@eventiva/eventiva",
       "component": "eventiva",
       "release-type": "node",
-      "scope": "eventiva"
+      "scope": "eventiva",
+      "extraFiles": [
+        "README.md",
+        "projects/workflows/.github/profile/README.md"
+      ]
     },
     "projects/bots/aspects/atlassian-customer-support": {
       "package-name": "@eventiva/bots.aspects.atlassian-customer-support",
@@ -181,5 +185,6 @@
   "prerelease": true,
   "versioning": "prerelease",
   "release-type": "simple",
+  "signoff": "Eventiva Ltd <github@eventiva.co.uk>",
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
