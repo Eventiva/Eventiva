@@ -2,9 +2,9 @@
 # @format
 # -----
 # Project: @eventiva/eventiva
-# File: chore-create-diagram.yml
-# Path: \.github\workflows\chore-create-diagram.yml
-# Created Date: Sunday, January 14th 2024
+# File: cspell.config.yaml
+# Path: \cspell.config.yaml
+# Created Date: Tuesday, February 13th 2024
 # Author: Jonathan Stevens, jonathan@resnovas.com
 # Github: https://github.com/TGTGamer
 # -----
@@ -22,8 +22,8 @@
 # LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
 # -----
 # This program has been provided under confidence of the copyright holder and
-# is licensed for copying, distribution and modification under the terms of
-# the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# is licensed for copying, distribution and modification under the terms
+# of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
 # or (at your option) any later version of this license.
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -45,47 +45,19 @@
 # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 ###
 
-
-
-name: Chore - Create Diagram
-on:
-  workflow_dispatch: {}
-  # when the repository branch develop is pushed to but ignoring commits by repo-visualizer
-  push:
-    branches:
-      - develop
-    paths-ignore:
-      - 'diagram.svg'
-      - '.github/**'
-  
-permissions:
-  contents: read
-
-jobs:
-  get_data:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
-        with:
-          egress-policy: audit
-
-      - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
-        with: 
-          github_token: ${{ secrets.BOT_TOKEN || github.token }}
-          comment_on_pr: false
-          theme: dark
-          proc_trace_sys_enable: true
-      - name: Checkout code
-        uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
-        with:
-          submodules: 'recursive'
-          token: "${{ secrets.BOT_TOKEN || github.token }}"
-      - name: Update diagram
-        uses: githubocto/repo-visualizer@a999615bdab757559bf94bda1fe6eef232765f85 # main
-        with:
-          excluded_paths: "ignore,.github"
-          commit_message: ":building_construction: Update codebase visualization"
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - coobaha
+  - Eventiva
+  - fastify
+  - learnbit
+  - joggr
+  - todos
+  - zoomable
+  - leasot
+  - pino
+ignoreWords: []
+import: []

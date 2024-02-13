@@ -49,6 +49,8 @@ on:
   push:
     branches:
     - main
+    - develop
+    - release/*
 
 permissions:
   contents: read
@@ -82,8 +84,8 @@ jobs:
         id: release
         with:
           token: ${{ secrets.BOT_TOKEN }}
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
+          config-file: ${{ github.ref_name == 'develop' && '.github/releases/release-develop-config.json' || '.github/releases/release-main-config.json' }}
+          manifest-file: ${{ github.ref_name == 'develop' && '.github/releases/.release-develop-manifest.json' || '.github/releases/.release-main-manifest.json' }}
           target-branch: ${{ github.ref_name }}
           include-component-in-tag: true
       
