@@ -68,7 +68,34 @@ jobs:
         with:
           egress-policy: audit
 
-      - name: 'Checkout Repository'
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+
+      # checks out the repository
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
+
+      - name: Enable GPG
+        uses: creshpay/action-gpg@v2
+        with:
+            gpg-passphrase: "${{ secrets.BOT_GPG_PASS }}"
+            gpg-sign-key: "${{ secrets.BOT_GPG_KEY }}"
+            git-email: "${{ secrets.GIT_USER_EMAIL }}"
+            git-username: "${{ secrets.GIT_USER_NAME }}"
+
+      - name: Setup NPM Registry
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@0efb1d1d84fc9633afcdaad14c485cbbc90ef46c # v2.5.1

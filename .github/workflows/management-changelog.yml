@@ -62,10 +62,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    env:
-      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+    
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
@@ -117,39 +114,24 @@ jobs:
       - uses: actions/checkout@v4
         if: steps.release.outputs.releases_created
 
-      - name: Create SSH key
-        if: steps.release.outputs.releases_created
-        run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
-
-      # ensure git is using the ssh key
-      - name: Ensure git is using the SSH key
-        if: steps.release.outputs.releases_created
-        run: |
-          eval "$(ssh-agent -s)"
-          ssh-add ~/.ssh/id_rsa
-          ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" || (echo "Failed to add SSH key" && exit 1)
-
-      # setup git to use the ssh key
-      - name: Setup git
-        if: steps.release.outputs.releases_created
-        run: |
-          git config --global user.name ${{secrets.GIT_USER_NAME}}
-          git config --global user.email ${{secrets.GIT_USER_EMAIL}}
-          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
-      
+      - name: Enable GPG
+        uses: creshpay/action-gpg@v2
+        with:
+            gpg-passphrase: "${{ secrets.BOT_GPG_PASS }}"
+            gpg-sign-key: "${{ secrets.BOT_GPG_KEY }}"
+            git-email: "${{ secrets.GIT_USER_EMAIL }}"
+            git-username: "${{ secrets.GIT_USER_NAME }}"
+        
       - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        if: steps.release.outputs.releases_created
         run: |
           npm config set '@bit:registry' https://node-registry.bit.cloud
           npm config set '@teambit:registry' https://node-registry.bit.cloud
           npm config set '@eventiva:registry' https://node-registry.bit.cloud
-          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
+          npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: Initialize Bit
+        if: steps.release.outputs.releases_created
         uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
         
       - name: Bit tag for each path released
