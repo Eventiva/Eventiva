@@ -48,7 +48,7 @@
 
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Route as RouteType } from './route'; 
+import { Route as RouteType } from './route.js'; 
 
 export type SupportPlatformAppProps = {
   /**
