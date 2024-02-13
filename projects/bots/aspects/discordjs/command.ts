@@ -55,7 +55,7 @@ import type {
   Message
 } from 'discord.js';
 import type { SlotRegistry } from '@bitdev/harmony.harmony';
-import type { DiscordjsNode } from './discordjs.node.runtime';
+import type { DiscordjsNode } from './discordjs.node.runtime.js';
 
 
 /**
