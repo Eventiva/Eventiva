@@ -48,7 +48,7 @@
 
 import pino from 'pino';
 import type { SlotRegistry } from '@bitdev/harmony.harmony';
-import { LoggingConfig } from './logging-config';
+import { LoggingConfig } from './logging-config.js';
 /**
  * Represents a logger object for logging messages. The type parameter specifies the log levels that the logger supports.
  * @author Jonathan Stevens (@TGTGamer)
