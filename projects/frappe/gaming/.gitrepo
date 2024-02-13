@@ -6,6 +6,7 @@
 [subrepo]
 	remote = https://github.com/eventiva/gaming.git
 	branch = main
-	commit = 
+	commit = ae01a3c3ecc190410f51486af0e4e291be473145
 	method = merge
 	cmdver = 0.4.6
+	parent = 05ee1eb4af7bb3f91e3ea2a248aa20773baa8ebf
