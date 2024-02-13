@@ -7,6 +7,13 @@
 
 * build steps ([#449](https://github.com/Eventiva/Eventiva/issues/449)) ([c2dbf6e](https://github.com/Eventiva/Eventiva/commit/c2dbf6ed88d8e71b96a670bd564a1bb30e384072))
 
+## [0.1.2](https://github.com/Eventiva/Eventiva/compare/bots/logging-v0.1.1...bots/logging-v0.1.2) (2024-02-13)
+
+
+### Bug Fixes
+
+* build steps ([#449](https://github.com/Eventiva/Eventiva/issues/449)) ([c2dbf6e](https://github.com/Eventiva/Eventiva/commit/c2dbf6ed88d8e71b96a670bd564a1bb30e384072))
+
 ## [0.1.1](https://github.com/Eventiva/Eventiva/compare/bots/logging-v0.1.0...bots/logging-v0.1.1) (2024-02-12)
 
 
