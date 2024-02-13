@@ -136,12 +136,9 @@ docs: [
   ]
 rules:
   - "Leftover TODO, BUG, FIXME & ISSUE in the code should be handled."
-  - "All new business logic should have corresponding unit tests."
   - "Refactor large functions to be more modular and easier to read."
-  - "All code files should be complete with type annotations/declarations/docstrings."
   - "Any clearly inefficient or repeated code should be optimized or refactored."
   - "Remove any unused imports, variables, functions, or classes. If they are needed, add a 'KEEP:' comment explaining why they are needed and when they will be used."
-  - "All modules should have a compass.yml file which has the correct tiering and relationships."
 sandbox:
   install:
     #  install bit.dev
