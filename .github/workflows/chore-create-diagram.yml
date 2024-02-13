@@ -79,11 +79,21 @@ jobs:
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
-      - name: Checkout code
-        uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
+
+      # checks out the repository
+      - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN || github.token }}"
+
+      - name: Enable GPG
+        uses: creshpay/action-gpg@v2
+        with:
+            gpg-passphrase: "${{ secrets.BOT_GPG_PASS }}"
+            gpg-sign-key: "${{ secrets.BOT_GPG_KEY }}"
+            git-email: "${{ secrets.GIT_USER_EMAIL }}"
+            git-username: "${{ secrets.GIT_USER_NAME }}"
+
       - name: Update diagram
         uses: githubocto/repo-visualizer@a999615bdab757559bf94bda1fe6eef232765f85 # main
         with:

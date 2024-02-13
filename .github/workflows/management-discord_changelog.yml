@@ -250,7 +250,7 @@ jobs:
       - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
           fetch-depth: 250
-          repository: 'frappe/health'
+          repository: 'frappe/payments'
 
       - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
         with:
@@ -268,7 +268,7 @@ jobs:
       - name: Harden Runner
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
         with:
-          egress-policy: audit
+          egress-policy: webshop
 
       - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
         with:
