@@ -8,5 +8,6 @@
   "bugs": {
     "email": "support@eventiva.co.uk",
     "url": "https://github.com/Eventiva/Eventiva/issues/new/choose"
-  }
+  },
+  "type": "module"
 }
