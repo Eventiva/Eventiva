@@ -1,0 +1,102 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: chore-subrepo-pull.yml
+# Path: \.github\workflows\chore-subrepo-pull.yml
+# Created Date: Sunday, January 14th 2024
+# Author: Jonathan Stevens, jonathan@resnovas.com
+# Github: https://github.com/TGTGamer
+# -----
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+# -----
+# This program has been provided under confidence of the copyright holder and
+# is licensed for copying, distribution and modification under the terms of
+# the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# or (at your option) any later version of this license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v2.0 or later for more details.
+# You should have received a copy of the GNU General Public License v2.0 or later
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+# -----
+# This project abides by the GPL Cooperation Commitment.
+# Before filing or continuing to prosecute any legal proceeding or claim
+# (other than a Defensive Action) arising from termination of a Covered
+# License, we commit to extend to the person or entity ('you') accused
+# of violating the Covered License the following provisions regarding
+# cure and reinstatement, taken from GPL version 3.
+# For further details on the GPL Cooperation Commitment please visit
+# the official website: https://gplcc.github.io/gplcc/
+# -----
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+###
+
+
+name: Chore - Sub Repo Pull
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  subrepo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+      with:
+        egress-policy: audit
+
+    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      with:
+        path: 'eventiva'
+        fetch-depth: '0'
+      
+    # create the ssh key from the secrets
+    - name: Create SSH key
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
+
+    # ensure git is using the ssh key
+    - name: Ensure git is using the SSH key
+      run: |
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
+        ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" || (echo "Failed to add SSH key" && exit 1)
+
+    # setup git to use the ssh key
+    - name: Setup git
+      run: |
+        git config --global user.name "Eventiva"
+        git config --global user.email "github@eventiva.co.uk"
+        git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
+    
+    - name: Update subrepo
+      working-directory: eventiva
+      run: |
+        source projects/workflows/git-subrepo/cmd/.rc
+        git subrepo pull --all --verbose --debug

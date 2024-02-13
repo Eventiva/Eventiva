@@ -1,17 +1,210 @@
 {
-  "projectName": "Eventiva",
-  "projectOwner": "Resnovas",
+  "projectName": "eventiva",
+  "projectOwner": "Eventiva",
   "repoType": "github",
   "repoHost": "https://github.com",
-  "commitConvention": "gitmoji",
-  "files": [
-    "README.md"
-  ],
+  "files": ["README.md", "CONTRIBUTING.md"],
   "imageSize": 100,
-  "contributorsPerLine": 7,
-  "contributorsSortAlphabetically": true,
-  "skipCi": true,
   "commit": true,
-  "linkToUsage": false,
-  "contributors": []
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "login": "TGTGamer",
+      "name": "Jonathan S",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11413796?v=4",
+      "profile": "https://jonathanstevens.org/",
+      "contributions": [
+        "business",
+        "code",
+        "doc",
+        "financial",
+        "ideas",
+        "research"
+      ]
+    },
+    {
+      "login": "Verringer",
+      "name": "Chris Verringer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/23369223?v=4",
+      "profile": "http://verringer.com/",
+      "contributions": ["business", "design", "ideas", "review"]
+    },
+    {
+      "login": "gavindsouza",
+      "name": "gavin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36654812?v=4",
+      "profile": "https://github.com/gavindsouza",
+      "contributions": ["doc", "tool"]
+    },
+    {
+      "login": "maxprilutskiy",
+      "name": "Max Prilutskiy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5614659?v=4",
+      "profile": "https://github.com/maxprilutskiy",
+      "contributions": ["code", "tool"]
+    },
+    {
+      "login": "atlassian-compass[bot]",
+      "name": "atlassian-compass[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/134145?v=4",
+      "profile": "https://github.com/apps/atlassian-compass",
+      "contributions": ["projectManagement"]
+    },
+    {
+      "login": "ChillarAnand",
+      "name": "Chillar Anand",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4463796?v=4",
+      "profile": "https://avilpage.com/",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "FHenry",
+      "name": "HENRY Florian",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1050053?v=4",
+      "profile": "https://github.com/FHenry",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "nasirrr",
+      "name": "nasirrr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93313345?v=4",
+      "profile": "https://github.com/nasirrr",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "ankush",
+      "name": "Ankush Menat",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9079960?v=4",
+      "profile": "https://github.com/ankush",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "kennethsequeira",
+      "name": "Kenneth Sequeira",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33246109?v=4",
+      "profile": "https://github.com/kennethsequeira",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "restyled-commits",
+      "name": "Restyled Commits",
+      "avatar_url": "https://avatars.githubusercontent.com/u/65077583?v=4",
+      "profile": "https://restyled.io/",
+      "contributions": ["code", "maintenance"]
+    },
+    {
+      "login": "sagar-bhogayata",
+      "name": "Sagar Bhogayata",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31538550?v=4",
+      "profile": "https://midocean.tech/",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "zaid2229",
+      "name": "zaid",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60132555?v=4",
+      "profile": "https://github.com/zaid2229",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "mymi14s",
+      "name": "Anthony C. Emmanuel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/10146518?v=4",
+      "profile": "https://github.com/mymi14s",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "systonium",
+      "name": "systonium",
+      "avatar_url": "https://avatars.githubusercontent.com/u/128922392?v=4",
+      "profile": "https://github.com/systonium",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "NagariaHussain",
+      "name": "Md Hussain Nagaria",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34810212?v=4",
+      "profile": "https://github.com/NagariaHussain",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "HUMENTH",
+      "name": "Himanshu Shivhare",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4609678?v=4",
+      "profile": "https://github.com/HUMENTH",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "robproject",
+      "name": "Robert Duncan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/74115869?v=4",
+      "profile": "https://github.com/robproject",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "roquegv",
+      "name": "Roque Vera",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6966715?v=4",
+      "profile": "https://github.com/roquegv",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "mohsinalimat",
+      "name": "MohsinAli",
+      "avatar_url": "https://avatars.githubusercontent.com/u/973676?v=4",
+      "profile": "https://github.com/mohsinalimat",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "Alchez",
+      "name": "Rohan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13396535?v=4",
+      "profile": "https://github.com/Alchez",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "yemikudaisi",
+      "name": "Yemi Kudaisi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3257276?v=4",
+      "profile": "https://www.linkedin.com/in/yemi-kudaisi-543bba88/",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "nextchamp-saqib",
+      "name": "Saqib Ansari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25369014?v=4",
+      "profile": "https://github.com/nextchamp-saqib",
+      "contributions": ["doc"]
+    },
+    {
+      "login": "dependabot[bot]",
+      "name": "dependabot[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/29110?v=4",
+      "profile": "https://github.com/apps/dependabot",
+      "contributions": [
+        "bug",
+        "code",
+        "maintenance",
+        "projectManagement",
+        "security"
+      ]
+    },
+    {
+      "login": "mergify[bot]",
+      "name": "mergify[bot]",
+      "avatar_url": "https://avatars.githubusercontent.com/in/10562?v=4",
+      "profile": "https://github.com/apps/mergify",
+      "contributions": ["review"]
+    },
+    {
+      "login": "TMateSoft",
+      "name": "TMateSoft",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60217584?v=4",
+      "profile": "https://github.com/TMateSoft",
+      "contributions": ["maintenance"]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "linkToUsage": false
 }
+

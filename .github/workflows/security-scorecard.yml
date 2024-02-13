@@ -1,0 +1,113 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: security-scorecard.yml
+# Path: \.github\workflows\security-scorecard.yml
+# Created Date: Sunday, January 14th 2024
+# Author: Jonathan Stevens, jonathan@resnovas.com
+# Github: https://github.com/TGTGamer
+# -----
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+# -----
+# This program has been provided under confidence of the copyright holder and
+# is licensed for copying, distribution and modification under the terms
+# of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# or (at your option) any later version of this license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v2.0 or later for more details.
+# You should have received a copy of the GNU General Public License v2.0 or later
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+# -----
+# This project abides by the GPL Cooperation Commitment.
+# Before filing or continuing to prosecute any legal proceeding or claim
+# (other than a Defensive Action) arising from termination of a Covered
+# License, we commit to extend to the person or entity ('you') accused
+# of violating the Covered License the following provisions regarding
+# cure and reinstatement, taken from GPL version 3.
+# For further details on the GPL Cooperation Commitment please visit
+# the official website: https://gplcc.github.io/gplcc/
+# -----
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+###
+
+# This workflow uses actions that are not certified by GitHub. They are provided
+# by a third-party and are governed by separate terms of service, privacy
+# policy, and support documentation.
+
+name: Security - Scorecard supply-chain security
+on:
+  # For Branch-Protection check. Only the default branch is supported. See
+  # https://github.com/ossf/scorecard/blob/main/docs/checks.md#branch-protection
+  branch_protection_rule:
+  # To guarantee Maintained check is occasionally updated. See
+  # https://github.com/ossf/scorecard/blob/main/docs/checks.md#maintained
+  schedule:
+    - cron: '21 9 * * 6'
+  push:
+    branches: [ develop ]
+
+# Declare default permissions as read only.
+permissions: 
+ contents: read
+
+jobs:
+  analysis:
+    name: Scorecard analysis
+    runs-on: ubuntu-latest
+    permissions:
+      # Needed to upload the results to code-scanning dashboard.
+      security-events: write
+      # Needed to publish results and get a badge (see publish_results below).
+      id-token: write
+      # Uncomment the permissions below if installing in a private repository.
+      # contents: read
+      # actions: read
+
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
+      - name: "Checkout code"
+        uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
+        with:
+          persist-credentials: false
+
+      - name: "Run analysis"
+        uses: ossf/scorecard-action@e38b1902ae4f44df626f11ba0734b14fb91f8f86 # v2.1.2
+        with:
+          results_file: results.sarif
+          results_format: sarif
+          repo_token: ${{ secrets.BOT_TOKEN || github.token }}
+          publish_results: true
+
+      # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
+      # format to the repository Actions tab.
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@3cea5372237819ed00197afe530f5a7ea3e805c8 # v3.1.0
+        with:
+          name: SARIF file
+          path: results.sarif
+          retention-days: 5
+
+      # Upload the results to GitHub's code scanning dashboard.
+      - name: "Upload to code-scanning"
+        uses: github/codeql-action/upload-sarif@17573ee1cc1b9d061760f3a006fc4aac4f944fd5 # v2.2.4
+        with:
+          sarif_file: results.sarif

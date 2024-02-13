@@ -1,0 +1,367 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: techstack.yml
+# Path: \techstack.yml
+# Created Date: Sunday, January 14th 2024
+# Author: Jonathan Stevens, jonathan@resnovas.com
+# Github: https://github.com/TGTGamer
+# -----
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+# -----
+# This program has been provided under confidence of the copyright holder and
+# is licensed for copying, distribution and modification under the terms
+# of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# or (at your option) any later version of this license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v2.0 or later for more details.
+# You should have received a copy of the GNU General Public License v2.0 or later
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+# -----
+# This project abides by the GPL Cooperation Commitment.
+# Before filing or continuing to prosecute any legal proceeding or claim
+# (other than a Defensive Action) arising from termination of a Covered
+# License, we commit to extend to the person or entity ('you') accused
+# of violating the Covered License the following provisions regarding
+# cure and reinstatement, taken from GPL version 3.
+# For further details on the GPL Cooperation Commitment please visit
+# the official website: https://gplcc.github.io/gplcc/
+# -----
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+###
+
+repo_name: Eventiva/Eventiva
+report_id: 245cf2591b15db3e378b4d29e97bbd4e
+version: 0.1
+repo_type: Public
+timestamp: '2023-12-27T19:51:59+00:00'
+requested_by: sweep-ai[bot] 
+provider: github
+branch: develop
+detected_tools_count: 26
+tools:
+- name: JavaScript
+  description: Lightweight, interpreted, object-oriented language with first-class
+    functions
+  website_url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1209/javascript.jpeg
+  detection_source: Repo Metadata
+- name: Perl
+  description: Highly capable, feature-rich programming language with over 26 years
+    of development
+  website_url: http://www.perl.org/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1048/perl.png
+  detection_source: Repo Metadata
+- name: Python
+  description: A clear and powerful object-oriented programming language, comparable
+    to Perl, Ruby, Scheme, or Java.
+  website_url: https://www.python.org
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/993/pUBY5pVj.png
+  detection_source: Repo Metadata
+- name: TypeScript
+  description: A superset of JavaScript that compiles to clean JavaScript output
+  website_url: http://www.typescriptlang.org
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/1612/bynNY5dJ.jpg
+  detection_source: Repo Metadata
+- name: Node.js
+  description: A platform built on Chrome's JavaScript runtime for easily building
+    fast, scalable network applications
+  website_url: http://nodejs.org/
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: Docker
+  description: Enterprise Container Platform for High-Velocity Innovation.
+  website_url: https://www.docker.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Virtual Machine Platforms & Containers
+  image_url: https://img.stackshare.io/service/586/n4u37v9t_400x400.png
+  detection_source: Repo Metadata
+- name: Dotenv
+  description: Loads environment variables from .env for Nodejs projects
+  website_url: https://github.com/motdotla/dotenv
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Server Configuration and Automation
+  image_url: https://img.stackshare.io/service/8067/default_90dcb1286af7685c68df319c764b80704df1155b.png
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: ESLint
+  description: The fully pluggable JavaScript code quality tool
+  website_url: http://eslint.org/
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/3337/Q4L7Jncy.jpg
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
+- name: GitHub Actions
+  description: Automate your workflow from idea to production
+  website_url: https://github.com/features/actions
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/11563/actions.png
+  detection_source: ".github/workflows/bit-init.yml"
+  last_updated_by: Jonathan Stevens
+  last_updated_on: 2023-12-12 21:20:10.000000000 Z
+- name: Jest
+  description: Painless JavaScript Unit Testing
+  website_url: http://facebook.github.io/jest/
+  version: 29.7.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Javascript Testing Framework
+  image_url: https://img.stackshare.io/service/830/jest.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: Prettier
+  description: 'Prettier is an opinionated code formatter. '
+  website_url: https://prettier.io/
+  version: 2.8.8
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Code Review
+  image_url: https://img.stackshare.io/service/7035/default_66f265943abed56bcdbfca1c866a4261b1fbb063.jpg
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: Travis CI
+  description: A hosted continuous integration service for open source and private
+    projects
+  website_url: http://travis-ci.com/
+  open_source: false
+  hosted_saas: true
+  category: Build, Test, Deploy
+  sub_category: Continuous Integration
+  image_url: https://img.stackshare.io/service/460/Lu6cGu0z_400x400.png
+  detection_source: projects/workflows/git-subrepo/cmd/ext/bashplus/.travis.yml
+  last_updated_by: Jonathan Stevens
+  last_updated_on: 2023-12-19 22:09:14.000000000 Z
+- name: Yarn
+  description: A new package manager for JavaScript
+  website_url: https://yarnpkg.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/5848/44mC-kJ3.jpg
+  detection_source: projects/workflows/change-report/yarn.lock
+  last_updated_by: Jonathan Stevens
+  last_updated_on: 2023-12-05 02:07:11.000000000 Z
+- name: npm
+  description: The package manager for JavaScript.
+  website_url: https://www.npmjs.com/
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Front End Package Manager
+  image_url: https://img.stackshare.io/service/1120/lejvzrnlpb308aftn31u.png
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: Discord.js
+  description: Discord.js is a powerful node.js module that allows you to interact
+    with the Discord API very easily.
+  website_url: https://discord.js.org/
+  open_source: false
+  hosted_saas: false
+  image_url: https://img.stackshare.io/service/8403/logo-square.png
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-10 12:31:39.000000000 Z
+- name: OpenAI
+  description: Creating safe AGI that benefits all
+  website_url: https://openai.com/
+  version: 3.3.0
+  open_source: false
+  hosted_saas: false
+  category: Communications
+  sub_category: Large Language Models
+  image_url: https://img.stackshare.io/service/48786/default_8b1119bcbb159cebebc2f6cfc9cd2e359b169d22.jpg
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: Shell
+  description: A shell is a text-based terminal, used for manipulating programs and
+    files. Shell scripts typically manage program execution.
+  website_url: https://en.wikipedia.org/wiki/Shell_script
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png
+  detection_source: Repo Metadata
+- name: Ubuntu
+  description: The leading OS for PC, tablet, phone and cloud
+  website_url: http://www.ubuntu.com/
+  open_source: false
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Operating Systems
+  image_url: https://img.stackshare.io/service/3511/cof_orange_hex.jpg
+  detection_source: projects/workflows/git-subrepo/cmd/test/Dockerfile
+  last_updated_by: Jonathan Stevens
+  last_updated_on: 2023-12-19 22:09:14.000000000 Z
+- name: "@types/node"
+  description: TypeScript definitions for Node.js
+  package_url: https://www.npmjs.com/@types/node
+  version: 20.10.3
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15809/default_5e5e8ac63beda29f31f1844df64d4b8247570a66.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: "@typescript-eslint/parser"
+  description: An ESLint custom parser which leverages TypeScript ESTree
+  package_url: https://www.npmjs.com/@typescript-eslint/parser
+  version: 5.62.0
+  license: BSD-2-Clause
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15980/default_732016a20524708efe7a4c77497fe9bfeea19ba6.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:53:07.000000000 Z
+- name: eslint-plugin-jest
+  description: Eslint rules for Jest
+  package_url: https://www.npmjs.com/eslint-plugin-jest
+  version: 27.6.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15996/default_7a88bebb451873cc63bd99007de5bd3bb8ef85de.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: js-yaml
+  description: YAML 1.2 parser and serializer
+  package_url: https://www.npmjs.com/js-yaml
+  version: 3.14.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15997/default_f8be85789693a9901dbcfa43c135c60525ae49a1.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: openai
+  description: The official TypeScript library for the OpenAI API
+  package_url: https://www.npmjs.com/openai
+  version: 3.3.0
+  open_source: false
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Package Managers
+  image_url: https://img.stackshare.io/package/npm/image.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: simple-git
+  description: Simple GIT interface for node.js
+  package_url: https://www.npmjs.com/simple-git
+  version: 3.21.0
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/16567/default_d6ff16957d0b119d673d5ec0eb21b08d8d5008f4.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z
+- name: ts-jest
+  description: A preprocessor with source maps support to help use TypeScript with
+    Jest
+  package_url: https://www.npmjs.com/ts-jest
+  version: 29.1.1
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: npm Packages
+  image_url: https://img.stackshare.io/package/15864/default_6743ba96cf149a3c3c68a185199f9705d6eff80e.png
+  detection_source_url: https://github.com/Eventiva/Eventiva/blob/develop/projects/workflows/change-report/yarn.lock
+  detection_source: projects/workflows/change-report/package.json
+  last_updated_by: maxprilutskiy
+  last_updated_on: 2023-05-09 22:33:17.000000000 Z

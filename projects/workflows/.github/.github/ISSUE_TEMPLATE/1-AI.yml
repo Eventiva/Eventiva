@@ -1,0 +1,207 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: 1-AI.yml
+# Path: \projects\workflows\.github\.github\ISSUE_TEMPLATE\1-AI.yml
+# Created Date: Sunday, January 14th 2024
+# Author: Jonathan Stevens, jonathan@resnovas.com
+# Github: https://github.com/TGTGamer
+# -----
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+# -----
+# This program has been provided under confidence of the copyright holder and
+# is licensed for copying, distribution and modification under the terms
+# of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# or (at your option) any later version of this license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v2.0 or later for more details.
+# You should have received a copy of the GNU General Public License v2.0 or later
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+# -----
+# This project abides by the GPL Cooperation Commitment.
+# Before filing or continuing to prosecute any legal proceeding or claim
+# (other than a Defensive Action) arising from termination of a Covered
+# License, we commit to extend to the person or entity ('you') accused
+# of violating the Covered License the following provisions regarding
+# cure and reinstatement, taken from GPL version 3.
+# For further details on the GPL Cooperation Commitment please visit
+# the official website: https://gplcc.github.io/gplcc/
+# -----
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+###
+
+
+
+name: Codebase Issue - Developer Suggestions & Reports
+title: 'Sweep: '
+description: Not for general user issue - For small bugs, features, refactors, and tests to be handled by Sweep, an AI-powered junior developer.
+labels: ["Sweep"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ** This is not for general user issues - please instead use the links found at [new issues](https://github.com/Eventiva/Eventiva/issues) **
+  - type: markdown
+    attributes:
+      value: |
+        ### Preamble
+        Thank you for contributing your issue and suggestion. Our AI-powered junior developer, Sweep, will review your issue and make the necessary changes.
+
+        This AI needs as much context as you can possibly provide to ensure that it can make the correct changes. Please provide as much detail as possible in all your answers.
+
+        If you can be specific with line numbers, file names, and function names, that would be very helpful.
+        Sweep can learn and improve based on your feedback. Please provide feedback on the changes that Sweep makes in comments on the pull requests. 
+  - type: markdown
+    attributes:
+      value: |
+        ### Title your issue: 
+        Please use [context] in title to describe the folder path which related to this issue.
+        Context example: docs(projects/modules/eventiva_core): {your title here}
+  - type: dropdown
+    attributes:
+      label: Features
+      description: What product or feature(s) affected?
+      multiple: true
+      options:
+        - "Bots - Discord - Client"
+        - "Bots - Discord - Tickets"
+        - "Bots - Discord - Helper"
+        - "Framework - Frappe"
+        - "Modules - Control Center"
+        - "Modules - Custody"
+        - "Modules - Discord Intergration"
+        - "Modules - Eventiva Core"
+        - "Modules - Fleet Management"
+        - "Modules - Gaming"
+        - "Modules - Incident Management"
+        - "Modules - Justice"
+        - "Modules - Segment Connect"
+        - "Modules - Teamspeak Integration"
+        - "Modules - Vetting & Screening"
+        - "Modules - ERPNext"
+        - "Modules - Human Resources"
+        - "Modules - Website Builder"
+        - "Modules - IT Management"
+        - "Modules - Webshop"
+        - "Modules - Payments"
+        - "Modules - Healthcare"
+        - "Modules - Lending"
+        - "Modules - Learning Management System"
+        - "Workflows - .github"
+        - "Workflows - Awesome Frappe"
+        - "Workflows - Change Report"
+        - "Workflows - Environments - Discord - Bot"
+        - "Workflows - Generators - Discord - Bot"
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Describe the issue
+      description: A clear and concise description of what the issue is.
+      placeholder: |
+        Bugs: I am getting the following error <ERROR>. Here are the logs: ...
+        Unit Tests: Write unit tests for <FILE>. Test each function in the file. Make sure to test edge cases.
+        Documentation: The documentation for <FILE> is missing the following information: ...
+        Performance: The endpoint <ENDPOINT> is slow. Here are the logs: ...
+        Language: The language used in <FILE> is incorrect and miss translated. Here is the correct translation: ...
+        Style: The style used in <FILE> is not consistent with the rest of the codebase.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Where is the issue?
+      description: Tell Sweep where and what to edit. Provide enough context for a new developer to the codebase. If you can be specific with line numbers, file names, and function names, that would be very helpful.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the issue you are encountering!
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+
+  - type: input
+    attributes:
+      label: Platform
+      description: e.g. macOS, Google Cloud, ubuntu 18.04
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Browser
+      description: e.g. Safari, chrome, edge, firefox
+  - type: input
+    attributes:
+      label: Node Version
+      description: e.g. v16.8.0
+  - type: input
+    attributes:
+      label: Python Version
+      description: e.g. v3.12.0
+  - type: input
+    attributes:
+      label: Pnpm Version
+      description: e.g. v1.22.4
+  - type: input
+    attributes:
+      label: BVM Version
+      description: e.g. v1.0.0
+  - type: input
+    attributes:
+      label: Bit Version
+      description: e.g. v1.5.29
+  - type: input
+    attributes:
+      label: Docker Version
+      description: e.g. 19.03.12, build 48a66213fe
+
+  - type: markdown
+    attributes:
+      value: |
+        Please be honest here, we don't mind if you haven't done all these steps; 
+        however, we need to know where has been tested and how extensively we need to test it ourselves.
+
+        We would appreciate it if you could maintain this section cleanly and clearly.
+  - type: checkboxes
+    attributes:
+      label: issue Checklist
+      options:
+        - label: I have reproduced on my application version
+          required: false
+        - label: I have reproduced on a clean installation
+          required: false
+        - label: I have reproduced on a development build
+          required: false
+        - label: I have included logs or screenshots
+          required: false
+        - label: I have contacted support via the official website
+          required: false
+        - label: I have asked the community for guidance
+          required: false
+        - label: I have linked any related issues
+          required: false
+  - type: checkboxes
+    attributes:
+      label: Code of Conduct
+      description:
+        The Code of Conduct helps create a safe space for everyone. We require
+        that everyone agrees to it.
+      options:
+        - label: I agree to follow this project's [Code of Conduct](https://github.com/Eventiva/contributors/blob/main/CODE_OF_CONDUCT.md)
+          required: true

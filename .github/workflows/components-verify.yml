@@ -1,0 +1,86 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: components-verify.yml
+# Path: \.github\workflows\components-verify.yml
+# Created Date: Sunday, January 14th 2024
+# Author: Jonathan Stevens, jonathan@resnovas.com
+# Github: https://github.com/TGTGamer
+# -----
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+# -----
+# This program has been provided under confidence of the copyright holder and
+# is licensed for copying, distribution and modification under the terms
+# of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# or (at your option) any later version of this license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v2.0 or later for more details.
+# You should have received a copy of the GNU General Public License v2.0 or later
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+# -----
+# This project abides by the GPL Cooperation Commitment.
+# Before filing or continuing to prosecute any legal proceeding or claim
+# (other than a Defensive Action) arising from termination of a Covered
+# License, we commit to extend to the person or entity ('you') accused
+# of violating the Covered License the following provisions regarding
+# cure and reinstatement, taken from GPL version 3.
+# For further details on the GPL Cooperation Commitment please visit
+# the official website: https://gplcc.github.io/gplcc/
+# -----
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+###
+
+name: Components - Bit Verify
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
+      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+      - name: Checkout repository
+        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: Initialize Bit
+        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
+      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
+      - name: Bit Verify
+        uses: bit-tasks/verify@a4decc636be1a7bda6e09d36f8bd21e4d1a87b39 # v1

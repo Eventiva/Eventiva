@@ -1,6 +1,11 @@
 {
-  "$schema": "https://raw.githubusercontent.com/resnovas/smartcloud/main/schema.json",
+  "$schema": "https://raw.githubusercontent.com/Eventiva/smartcloud/main/schema.json",
   "labels": {
+    "sweep": {
+      "name": "sweep",
+      "color": "CFD3D7",
+      "description": "This issue/pull request is being handled by Sweep, an AI-powered junior developer"
+    },
     "abandoned": {
       "name": "Status - Abandoned",
       "color": "CFD3D7",
@@ -502,14 +507,6 @@
             "label": "abandoned",
             "comment": "This has been automatically marked as abandoned by the bot."
           }
-        },
-        "enforceConventions": {
-          "condition": [
-            {
-              "requires": 1,
-              "condition": "semanticEmoji"
-            }
-          ]
         },
         "labels": {
           "issue": {

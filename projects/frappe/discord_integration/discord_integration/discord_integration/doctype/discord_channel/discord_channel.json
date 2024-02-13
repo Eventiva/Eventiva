@@ -1,0 +1,274 @@
+{
+ "actions": [],
+ "autoname": "format:{discord_server}-{channel_name}",
+ "beta": 1,
+ "creation": "2023-12-03 19:10:04.548324",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "discord_server",
+  "company",
+  "channel_name",
+  "channel_id",
+  "parent_discord_channel",
+  "channel_type",
+  "channel_topic",
+  "hide_after_inactivity",
+  "slowmode",
+  "is_group",
+  "age_restricted_channel",
+  "column_break_uvvu",
+  "voice_settings_section",
+  "2",
+  "user_limit",
+  "video_quality",
+  "column_break_rrvi",
+  "forum_settings_section",
+  "default_layout",
+  "default_reaction",
+  "slowmode_posts",
+  "slowmode_messages",
+  "sort_order",
+  "tags",
+  "column_break_zmlh",
+  "post_guidelines",
+  "lft",
+  "rgt",
+  "old_parent"
+ ],
+ "fields": [
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "channel_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Channel Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "channel_topic",
+   "fieldtype": "Data",
+   "label": "Channel Topic",
+   "length": 1000
+  },
+  {
+   "fieldname": "hide_after_inactivity",
+   "fieldtype": "Select",
+   "label": "Hide After Inactivity",
+   "options": "1 Hour\n24 Hours\n3 Days\n1 Week"
+  },
+  {
+   "fieldname": "column_break_uvvu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Text",
+   "depends_on": "eval:!doc.is_group;",
+   "fieldname": "channel_type",
+   "fieldtype": "Select",
+   "label": "Channel Type",
+   "options": "Text\nVoice\nForum\nAnnouncement\nStage"
+  },
+  {
+   "default": "0",
+   "description": "Users will need to confirm they are of over legal age to view in the content in this channel Age-restricted channels are exempt from the explicit content filter",
+   "fieldname": "age_restricted_channel",
+   "fieldtype": "Check",
+   "label": "Age Restricted Channel",
+   "mandatory_depends_on": "eval:!doc.is_group;"
+  },
+  {
+   "depends_on": "eval:doc.channel_type===\"Forum\";",
+   "fieldname": "forum_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Forum Settings"
+  },
+  {
+   "default": "List View",
+   "fieldname": "default_layout",
+   "fieldtype": "Select",
+   "label": "Default Layout",
+   "options": "List View\nGallery View"
+  },
+  {
+   "default": ":+1:",
+   "fieldname": "default_reaction",
+   "fieldtype": "Data",
+   "label": "Default Reaction"
+  },
+  {
+   "default": "Off",
+   "description": "Members will be restricted to creating one post per this interval, unless they have Manage Channel or Manage\nMessages permissions.",
+   "fieldname": "slowmode_posts",
+   "fieldtype": "Select",
+   "hide_days": 1,
+   "label": "Slowmode Posts",
+   "options": "Off\n5s\n10s\n15s\n30s\n1m\n2m\n5m\n10m\n15m\n30m\n1h\n2h\n6h"
+  },
+  {
+   "default": "Off",
+   "description": "Members will be limited to one message per this interval for any new posts, unless they have Manage Channel\nor Manage Messages permissions.",
+   "fieldname": "slowmode_messages",
+   "fieldtype": "Select",
+   "hide_days": 1,
+   "label": "Slowmode Messages",
+   "options": "Off\n5s\n10s\n15s\n30s\n1m\n2m\n5m\n10m\n15m\n30m\n1h\n2h\n6h"
+  },
+  {
+   "fieldname": "column_break_zmlh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "post_guidelines",
+   "fieldtype": "Text",
+   "label": "Post Guidelines",
+   "length": 4096
+  },
+  {
+   "default": "Recent Activity",
+   "fieldname": "sort_order",
+   "fieldtype": "Select",
+   "label": "Sort Order",
+   "options": "Recent Activity\nCreation Time"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Left",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "hidden": 1,
+   "label": "Right",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "Is Category"
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Old Parent",
+   "options": "Discord Channel"
+  },
+  {
+   "depends_on": "eval:!doc.is_group;",
+   "fieldname": "parent_discord_channel",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Category",
+   "options": "Discord Channel"
+  },
+  {
+   "fieldname": "channel_id",
+   "fieldtype": "Data",
+   "label": "Channel ID",
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "tags",
+   "fieldtype": "Table",
+   "label": "Tags",
+   "options": "Discord Tag"
+  },
+  {
+   "fetch_from": "server.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_filter": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "depends_on": "eval:doc.channel_type===\"Voice\"||doc.channel_type===\"Stage\";",
+   "fieldname": "voice_settings_section",
+   "fieldtype": "Section Break",
+   "label": "Voice/Stage Settings"
+  },
+  {
+   "default": "64",
+   "fieldname": "2",
+   "fieldtype": "Int",
+   "label": "Bitrate",
+   "non_negative": 1
+  },
+  {
+   "default": "-1",
+   "description": "-1 for unlimted. Limits the number of users that can connect to this voice channel Users With the Move Members permission ignore this limit and can move other users into the channel. ",
+   "fieldname": "user_limit",
+   "fieldtype": "Int",
+   "label": "User Limit"
+  },
+  {
+   "default": "Auto",
+   "fieldname": "video_quality",
+   "fieldtype": "Select",
+   "label": "Video Quality",
+   "options": "Auto\n720p"
+  },
+  {
+   "default": "Off",
+   "depends_on": "eval:doc.channel_type!==\"Forum\" && doc.channel_type!==\"Announcement\";",
+   "description": "Members will be restricted to sending one message and creating one thread per this interval, unless they have\nManage Channel or Manage Messages permissions.",
+   "fieldname": "slowmode",
+   "fieldtype": "Select",
+   "hide_days": 1,
+   "label": "Slowmode",
+   "options": "Off\n5s\n10s\n15s\n30s\n1m\n2m\n5m\n10m\n15m\n30m\n1h\n2h\n6h"
+  },
+  {
+   "fieldname": "column_break_rrvi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "discord_server",
+   "fieldtype": "Link",
+   "label": "Server",
+   "options": "Discord Server",
+   "reqd": 1,
+   "search_index": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_tree": 1,
+ "links": [],
+ "modified": "2023-12-23 22:57:53.229025",
+ "modified_by": "Administrator",
+ "module": "Discord Integration",
+ "name": "Discord Channel",
+ "naming_rule": "Expression",
+ "nsm_parent_field": "parent_discord_channel",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

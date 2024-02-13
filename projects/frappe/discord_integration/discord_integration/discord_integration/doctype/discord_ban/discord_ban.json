@@ -1,0 +1,115 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "hash",
+ "beta": 1,
+ "creation": "2023-12-03 23:14:36.029065",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_f6tl",
+  "grievence",
+  "discord_user",
+  "discord_server",
+  "reason",
+  "reason_other",
+  "company",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_f6tl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Discord Ban",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "discord_user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Discord User",
+   "options": "Discord User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "discord_server",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Discord Server",
+   "options": "Discord Server",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "reason",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Reason",
+   "options": "Suspicious or spam account\nCompromised or hacked account\nBreaking server rules\nOther",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.reason===\"Other\";",
+   "fieldname": "reason_other",
+   "fieldtype": "Small Text",
+   "label": "Reason Other",
+   "mandatory_depends_on": "eval:doc.reason===\"Other\";"
+  },
+  {
+   "fetch_from": "discord_server.company",
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_filter": 1,
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "grievence",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Grievence",
+   "options": "Employee Grievance",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2023-12-23 22:47:12.977691",
+ "modified_by": "Administrator",
+ "module": "Discord Integration",
+ "name": "Discord Ban",
+ "naming_rule": "Random",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "track_seen": 1,
+ "track_views": 1
+}

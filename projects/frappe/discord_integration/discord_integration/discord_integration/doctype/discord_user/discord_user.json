@@ -1,0 +1,201 @@
+{
+ "actions": [],
+ "allow_events_in_timeline": 1,
+ "allow_rename": 1,
+ "autoname": "field:discord_username",
+ "beta": 1,
+ "creation": "2023-12-03 16:36:53.651540",
+ "description": "Discord user information and respective data ",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "account_details_tab",
+  "discord_username",
+  "user",
+  "discord_id",
+  "column_break_wwik",
+  "company",
+  "employee",
+  "column_break_yirg",
+  "discord_image",
+  "section_break_rdzn",
+  "discord_creation_date",
+  "column_break_mcqz",
+  "column_break_lssw",
+  "servers_tab",
+  "servers_section",
+  "servers",
+  "moderation_tab",
+  "timeouts_section",
+  "timeouts",
+  "kicks_section",
+  "kicks",
+  "bans_section",
+  "bans",
+  "roles_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "account_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Account Details"
+  },
+  {
+   "allow_in_quick_entry": 1,
+   "fieldname": "discord_username",
+   "fieldtype": "Data",
+   "in_global_search": 1,
+   "in_list_view": 1,
+   "label": "Discord Username",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "User",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_wwik",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "column_break_yirg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "discord_image",
+   "fieldtype": "Attach Image",
+   "label": "Discord Image"
+  },
+  {
+   "fieldname": "discord_id",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "in_global_search": 1,
+   "label": "Discord ID",
+   "reqd": 1,
+   "set_only_once": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "section_break_rdzn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "discord_creation_date",
+   "fieldtype": "Datetime",
+   "label": "Discord Creation Date"
+  },
+  {
+   "fieldname": "column_break_mcqz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_lssw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "servers_tab",
+   "fieldtype": "Tab Break",
+   "label": "Servers"
+  },
+  {
+   "fieldname": "servers_section",
+   "fieldtype": "Section Break",
+   "label": "Servers"
+  },
+  {
+   "fieldname": "servers",
+   "fieldtype": "Table",
+   "label": "Servers",
+   "options": "Discord Server User"
+  },
+  {
+   "fieldname": "moderation_tab",
+   "fieldtype": "Tab Break",
+   "label": "Moderation"
+  },
+  {
+   "fieldname": "timeouts_section",
+   "fieldtype": "Section Break",
+   "label": "Timeouts"
+  },
+  {
+   "fieldname": "timeouts",
+   "fieldtype": "Table",
+   "label": "Timeouts",
+   "options": "Discord Server Timeout"
+  },
+  {
+   "fieldname": "kicks_section",
+   "fieldtype": "Section Break",
+   "label": "Kicks"
+  },
+  {
+   "fieldname": "kicks",
+   "fieldtype": "Table",
+   "label": "Kicks",
+   "options": "Discord Server Kick"
+  },
+  {
+   "fieldname": "bans_section",
+   "fieldtype": "Section Break",
+   "label": "Bans"
+  },
+  {
+   "fieldname": "bans",
+   "fieldtype": "Table",
+   "label": "Bans",
+   "options": "Discord Server Ban"
+  },
+  {
+   "fieldname": "roles_tab",
+   "fieldtype": "Tab Break",
+   "label": "Roles"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-12-20 20:14:11.861560",
+ "modified_by": "Administrator",
+ "module": "Discord Integration",
+ "name": "Discord User",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_name_in_global_search": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

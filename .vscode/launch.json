@@ -5,7 +5,35 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
-			"name": "Launch directory (npm start)",
+			"name": "Discord Support Bot",
+			"request": "launch",
+			"localRoot": "${workspaceFolder}",
+			"runtimeArgs": [
+				"app",
+				"run",
+				"Support"
+			],
+			"runtimeExecutable": "bit",
+			"outputCapture": "std",
+			"trace": true,
+			"type": "node",
+			"envFile": "${workspaceFolder}/.env",
+		},
+		{
+			"name": "Build Support Bot",
+			"request": "launch",
+			"localRoot": "${workspaceFolder}",
+			"runtimeArgs": [
+				"build",
+			],
+			"runtimeExecutable": "bit",
+			"outputCapture": "std",
+			// "trace": true,
+			"type": "node",
+			"envFile": "${workspaceFolder}/.env",
+		},
+		{
+			"name": "Launch Website",
 			"request": "launch",
 			"runtimeArgs": [
 				"run-script",
@@ -13,13 +41,120 @@
 			],
 			"runtimeExecutable": "npm",
 			"localRoot": "${workspaceFolder}/projects/website",
-			"env": {
-				"BUILDER_PUBLIC_API_KEY": "7979abfc4d3e48f2860087d0c2af565a"
-			},
 			"skipFiles": [
 				"<node_internals>/**"
 			],
 			"type": "node"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "Bit Debugger",
+			"program": "${workspaceFolder}/node_modules/@teambit/bit/dist/app.js",
+			"args": "${input:bitCommand}",
+			"outFiles": [
+				"${workspaceFolder}/**/*.js",
+				"dist/**/*.js"
+			],
+			"console": "integratedTerminal",
+			"sourceMaps": true,
+			"internalConsoleOptions": "neverOpen",
+			"cwd": "${workspaceFolder}"
+		},
+		{
+			"name": "Bench Web",
+			"type": "python",
+			"request": "launch",
+			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
+			"args": [
+				"frappe",
+				"serve",
+				"--port",
+				"8000",
+				"--noreload",
+				"--nothreading"
+			],
+			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
+			"cwd": "${workspaceFolder}/frappe-bench/sites",
+			"env": {
+				"DEV_SERVER": "1"
+			}
+		},
+		{
+			"name": "Bench Default Worker",
+			"type": "python",
+			"request": "launch",
+			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
+			"args": [
+				"frappe",
+				"worker",
+				"--queue",
+				"default"
+			],
+			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
+			"cwd": "${workspaceFolder}/frappe-bench/sites",
+			"env": {
+				"DEV_SERVER": "1"
+			}
+		},
+		{
+			"name": "Bench Short Worker",
+			"type": "python",
+			"request": "launch",
+			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
+			"args": [
+				"frappe",
+				"worker",
+				"--queue",
+				"short"
+			],
+			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
+			"cwd": "${workspaceFolder}/frappe-bench/sites",
+			"env": {
+				"DEV_SERVER": "1"
+			}
+		},
+		{
+			"name": "Bench Long Worker",
+			"type": "python",
+			"request": "launch",
+			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
+			"args": [
+				"frappe",
+				"worker",
+				"--queue",
+				"long"
+			],
+			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
+			"cwd": "${workspaceFolder}/frappe-bench/sites",
+			"env": {
+				"DEV_SERVER": "1"
+			}
+		},
+		{
+			"name": "Honcho SocketIO Watch Schedule Worker",
+			"type": "python",
+			"request": "launch",
+			"program": "/home/frappe/.local/bin/honcho",
+			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
+			"cwd": "${workspaceFolder}/frappe-bench",
+			"console": "internalConsole",
+			"args": [
+				"start",
+				"socketio",
+				"watch",
+				"schedule",
+				"worker_short",
+				"worker_long",
+				"worker_default"
+			]
+		}
+	],
+	"inputs": [
+		{
+			"id": "bitCommand",
+			"type": "promptString",
+			"description": "Enter the command without the 'bit' prefix"
 		}
 	]
 }

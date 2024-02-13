@@ -63,11 +63,20 @@ jspm_packages/
 .idea/
 *.iml
 
-# Rush temporary files
-common/deploy/
-common/temp/
-common/autoinstallers/*/.npmrc
-**/.rush/temp/
 
 # Heft temporary files
 .heft
+
+# Visual Studio Code files
+.vscode/settings.json
+.pnpm-store
+artifacts/
+projects/workflows/environments/tsconfig.json
+projects/workflows/environments/.eslintrc.json
+projects/workflows/generators/.eslintrc.json
+projects/workflows/generators/tsconfig.json
+projects/bots/tsconfig.json
+projects/bots/.eslintrc.json
+.prettierrc.cjs
+tsconfig.json
+.eslintrc.json

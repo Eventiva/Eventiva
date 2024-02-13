@@ -1,0 +1,194 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{forname}-{surname}",
+ "creation": "2023-12-24 00:07:34.980736",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "identification_section",
+  "forname",
+  "surname",
+  "date_of_birth",
+  "national_insurance_id",
+  "column_break_dpsi",
+  "identification_picture",
+  "corraspondance_section",
+  "primary_residence",
+  "corraspondance_address",
+  "column_break_ayws",
+  "primary_vehicle",
+  "employeer",
+  "section_break_apkh",
+  "country_of_residence",
+  "citizenship",
+  "country_of_birth",
+  "column_break_wvmj",
+  "visa_type",
+  "visa_expiry",
+  "visa_issue_date",
+  "licenses_section",
+  "table_vgig",
+  "section_break_ehlp",
+  "signature",
+  "column_break_futb"
+ ],
+ "fields": [
+  {
+   "fieldname": "identification_section",
+   "fieldtype": "Section Break",
+   "label": "Identification"
+  },
+  {
+   "fieldname": "forname",
+   "fieldtype": "Data",
+   "label": "Forname"
+  },
+  {
+   "fieldname": "surname",
+   "fieldtype": "Data",
+   "label": "Surname"
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "Date of Birth"
+  },
+  {
+   "fieldname": "national_insurance_id",
+   "fieldtype": "Data",
+   "label": "National Insurance ID",
+   "unique": 1
+  },
+  {
+   "fieldname": "column_break_dpsi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "identification_picture",
+   "fieldtype": "Attach Image",
+   "label": "Identification Picture"
+  },
+  {
+   "fieldname": "corraspondance_section",
+   "fieldtype": "Section Break",
+   "label": "Corraspondance"
+  },
+  {
+   "fieldname": "primary_residence",
+   "fieldtype": "Link",
+   "label": "Primary Residence",
+   "options": "Address"
+  },
+  {
+   "fieldname": "corraspondance_address",
+   "fieldtype": "Link",
+   "label": "Corraspondance Address",
+   "options": "Address"
+  },
+  {
+   "fieldname": "column_break_ayws",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "primary_vehicle",
+   "fieldtype": "Link",
+   "label": "Primary Vehicle",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "employeer",
+   "fieldtype": "Data",
+   "label": "Employeer"
+  },
+  {
+   "fieldname": "section_break_apkh",
+   "fieldtype": "Section Break",
+   "label": "Citizenship"
+  },
+  {
+   "fieldname": "country_of_residence",
+   "fieldtype": "Data",
+   "label": "Country of Residence"
+  },
+  {
+   "fieldname": "citizenship",
+   "fieldtype": "Select",
+   "label": "Citizenship",
+   "options": "Full Citizenship (National)\nOverseas Territories\nVisa / Permit\nNone"
+  },
+  {
+   "fieldname": "country_of_birth",
+   "fieldtype": "Data",
+   "label": "Country of Birth"
+  },
+  {
+   "fieldname": "column_break_wvmj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ehlp",
+   "fieldtype": "Section Break",
+   "label": "Miscellaneous"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Signature",
+   "label": "Signature"
+  },
+  {
+   "fieldname": "column_break_futb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "visa_type",
+   "fieldtype": "Select",
+   "label": "Visa Type"
+  },
+  {
+   "fieldname": "visa_expiry",
+   "fieldtype": "Date",
+   "label": "Visa Expiry"
+  },
+  {
+   "fieldname": "visa_issue_date",
+   "fieldtype": "Date",
+   "label": "Visa Issue Date"
+  },
+  {
+   "fieldname": "licenses_section",
+   "fieldtype": "Section Break",
+   "label": "Licenses"
+  },
+  {
+   "fieldname": "table_vgig",
+   "fieldtype": "Table",
+   "options": "License"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-12-24 01:13:50.614886",
+ "modified_by": "Administrator",
+ "module": "Civilian",
+ "name": "Civilian",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

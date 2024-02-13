@@ -1,0 +1,171 @@
+###
+# @format
+# -----
+# Project: @eventiva/eventiva
+# File: management-changelog.yml
+# Path: \.github\workflows\management-changelog.yml
+# Created Date: Saturday, February 10th 2024
+# Author: Jonathan Stevens, jonathan@resnovas.com
+# Github: https://github.com/TGTGamer
+# -----
+# Contributing: Please read through our contributing guidelines.
+# Included are directions for opening issues, coding standards,
+# and notes on development. These can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+# -----
+# Code of Conduct: This project abides by the Contributor Covenant, v2.0
+# Please interact in ways that contribute to an open, welcoming, diverse,
+# inclusive, and healthy community. Our Code of Conduct can be found at
+# https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+# -----
+# Copyright (c) 2024 Resnovas - All Rights Reserved
+# LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+# -----
+# This program has been provided under confidence of the copyright holder and
+# is licensed for copying, distribution and modification under the terms
+# of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+# or (at your option) any later version of this license.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License v2.0 or later for more details.
+# You should have received a copy of the GNU General Public License v2.0 or later
+# along with this program. If not, please write to: jonathan@resnovas.com,
+# or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+# -----
+# This project abides by the GPL Cooperation Commitment.
+# Before filing or continuing to prosecute any legal proceeding or claim
+# (other than a Defensive Action) arising from termination of a Covered
+# License, we commit to extend to the person or entity ('you') accused
+# of violating the Covered License the following provisions regarding
+# cure and reinstatement, taken from GPL version 3.
+# For further details on the GPL Cooperation Commitment please visit
+# the official website: https://gplcc.github.io/gplcc/
+# -----
+# DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+###
+
+on:
+  push:
+    branches:
+    - main
+
+permissions:
+  contents: read
+
+name: Management - Release Workflow
+
+jobs:
+  release:
+    permissions:
+      contents: write
+      pull-requests: write
+    env:
+      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
+      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
+      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
+
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+      
+      - uses: google-github-actions/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          target-branch: ${{ github.ref_name }}
+          include-component-in-tag: true
+      
+      # - name: tag major and minor versions
+      #   run: |
+      #     # Parse the paths_released output into an array
+      #     paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+
+      #     git remote add gh-token "https://${{ secrets.BOT_TOKEN }}@github.com/eventiva/eventiva.git"
+
+      #     # Loop over the paths
+      #     for path in "${paths_released[@]}"; do
+      #       # Extract the project name from the path
+      #       project=${path#projects/}
+      #       project=${project%%/*}
+      #       echo "PROJECT=$project" >> $GITHUB_ENV
+
+      #       git tag -d v${{ format(steps.release.outputs['{0}--major'], project) }} || true
+      #       git tag -d v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}} || true
+      #       git push origin :v${{ format(steps.release.outputs['{0}--major'], project) }} || true
+      #       git push origin :v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}} || true
+      #       git tag -a v${{ format(steps.release.outputs['{0}--major'], project) }} -m "Release v${{ format(steps.release.outputs['{0}--major'], project) }}"
+      #       git tag -a v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}} -m "Release v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}}"
+      #       git push origin v${{ format(steps.release.outputs['{0}--major'], project) }}
+      #       git push origin v${{ format(steps.release.outputs['{0}--major'], project) }}.${{ format(steps.release.outputs['{0}--minor'], project)}}
+      #     done
+      
+      # checks out the repository
+      - uses: actions/checkout@v4
+        if: steps.release.outputs.releases_created
+
+      - name: Create SSH key
+        if: steps.release.outputs.releases_created
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # ensure git is using the ssh key
+      - name: Ensure git is using the SSH key
+        if: steps.release.outputs.releases_created
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" || (echo "Failed to add SSH key" && exit 1)
+
+      # setup git to use the ssh key
+      - name: Setup git
+        if: steps.release.outputs.releases_created
+        run: |
+          git config --global user.name ${{secrets.GIT_USER_NAME}}
+          git config --global user.email ${{secrets.GIT_USER_EMAIL}}
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
+      
+      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
+
+      - name: Initialize Bit
+        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
+        
+      - name: Bit tag for each path released
+        if: steps.release.outputs.releases_created
+        run: |
+          # Parse the paths_released output into an array
+          paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+
+          # Loop over the paths
+          for path in "${paths_released[@]}"; do
+            # Extract the project name from the path
+            project=${path#projects/}
+            bitProject=${project%%/*}
+            echo "PROJECT=$project" >> $GITHUB_ENV
+
+            # Call bit tag with the version from release-please
+            tag_name=$(echo "${{ steps.release.outputs }}" | jq -r ".${bitProject}--tag_name")
+            bit tag eventiva.$project --ver $tag_name --message "Release $tag_name" --build
+          done
+        
+        

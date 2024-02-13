@@ -1,0 +1,57 @@
+###
+ # @format
+ # -----
+ # Project: change-report
+ # File: compass.yml
+ # Path: \compass.yml
+ # Created Date: Sunday, January 7th 2024
+ # Author: Jonathan Stevens (Email: jonathan.stevens@eventiva.co.uk, Github: https://github.com/TGTGamer)
+ # -----
+ # Contributing: Please read through our contributing guidelines. Included are directions for opening
+ # issues, coding standards, and notes on development. These can be found at https://github.com/change-report/blob/develop/CONTRIBUTING.md
+ # 
+ # Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,
+ # welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/change-report/blob/develop/CODE_OF_CONDUCT.md
+ # -----
+ # Copyright (c) 2024 Eventiva - All Rights Reserved
+ # LICENSE: GNU General Public License v3.0 only (GPL-3.0)
+ # -----
+ # This program has been provided under confidence of the copyright holder and is 
+ # licensed for copying, distribution and modification under the terms of
+ # the GNU General Public License v3.0 only (GPL-3.0) published as the License,
+ # or (at your option) any later version of this license.
+ # 
+ # This program is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License v3.0 only for more details.
+ # 
+ # You should have received a copy of the GNU General Public License v3.0 only
+ # along with this program. If not, please write to: jonathan.stevens@eventiva.co.uk,
+ # or see https://www.gnu.org/licenses/gpl-3.0-standalone.html
+ # 
+ # DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS
+ ###
+
+name: Github Actions - Discord Change Report
+id: 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/5ef5f151-96f3-465f-b419-2c95162207f5'
+description: Uses GPT to create a changelog from the git commits and post it to discord
+configVersion: 1
+typeId: APPLICATION
+ownerId: 'ari:cloud:teams::team/faac0a87-40fd-484f-96ae-5150a04af337'
+fields:
+  lifecycle: Active
+  tier: 4
+links:
+  - name: null
+    type: REPOSITORY
+    url: 'https://github.com/Eventiva/change-report'
+relationships:
+  DEPENDS_ON:
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/e940ba01-5ea1-487c-8c8e-9f918c07d042'
+    - 'ari:cloud:compass:2e15fee5-391d-40a0-b7d5-cea6ad3f4f53:component/2f4672a7-62fa-4a3f-8df0-34dde1d6974d/6581f375-b755-4773-b36d-b019b0b94f55'
+labels: null
+customFields: null
+
+# Learn more about formatting compass.yml:
+# https://go.atlassian.com/compass-yml-format

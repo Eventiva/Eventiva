@@ -1,0 +1,148 @@
+{
+  "material-icon-theme.activeIconPack": "qwik",
+  "emmet.includeLanguages": {
+    "typescriptreact": "html"
+  },
+  "emmet.preferences": {
+    // to ensure closing tags are used (e.g. <img/> not just <img> like in HTML)
+    // https://github.com/microsoft/vscode/commit/083bf9020407ea5a91199eb1f0b373859df8d600#diff-88456bc9b7caa2f8126aea0107b4671db0f094961aaf39a7c689f890e23aaaba
+    "output.selfClosingStyle": "xhtml"
+  },
+  "psi-header.variables": [
+    [
+      "githubUser",
+      "YourUsernameHere"
+    ],
+    [
+      "branch",
+      "main"
+    ]
+  ],
+  "psi-header.config": {
+    "forceToTop": true,
+    "blankLinesAfter": 1,
+    "author": "",
+    "company": "Eventiva",
+    "initials": "",
+    "authorEmail": "email@eventiva.co.uk",
+    "creationDateZero": "asIs",
+    "hostname": "localhost"
+  },
+  "psi-header.changes-tracking": {
+    "isActive": true,
+    "modAuthor": "By:",
+    "modDate": "Last Modified:",
+    "modDateFormat": "dd/MM/yyyy hh:nn:ss",
+    "exclude": [
+      "markdown",
+      "json",
+      "jsonc",
+      "shellscript",
+      "plaintext",
+      "ignore",
+      "git-commit",
+      "git-rebase"
+    ],
+    "autoHeader": "autoSave",
+    "enforceHeader": true,
+    "replace": [
+      "Project:",
+      "File:",
+      "Path:",
+      "issues",
+      "welcoming",
+      "Copyright",
+      "LICENSE:",
+      "the",
+      "See the",
+      "You should",
+      "or see",
+      "Current Version:",
+    ],
+    "updateLicenseVariables": true
+  },
+  "psi-header.lang-config": [
+    {
+      "language": "javascript",
+      "begin": "/**",
+      "prefix": " * ",
+      "suffix": "",
+      "lineLength": 80,
+      "end": " */",
+      "forceToTop": true,
+      "blankLinesAfter": 1,
+      "beforeHeader": [],
+      "afterHeader": [],
+      "rootDirFileName": "package.json"
+    },
+    {
+      "language": "yaml",
+      "begin": "###",
+      "prefix": " # ",
+      "suffix": "",
+      "lineLength": 80,
+      "end": " ###",
+      "forceToTop": true,
+      "blankLinesAfter": 1,
+      "beforeHeader": [],
+      "afterHeader": [],
+      "rootDirFileName": "package.json"
+    },
+    {
+      "language": "typescript",
+      "mapTo": "javascript"
+    },
+    {
+      "language": "typescriptreact",
+      "mapTo": "javascript"
+    },
+    {
+      "language": "github-actions-workflow",
+      "mapTo": "yaml"
+    },
+    {
+      "language": "dockerfile",
+      "mapTo": "yaml"
+    }
+  ],
+  "psi-header.templates": [
+    {
+      "language": "*",
+      "template": [
+        "@format",
+        "-----",
+        "Project: <<projectname>>",
+        "File: <<filename>>",
+        "Path: <<filerelativepath>>",
+        "Created Date: <<filecreated('dddd, MMMM Do YYYY')>>",
+        "Author: <<author>> (Email: <<authorEmail>>, Github: https://github.com/<<githubUser>>)",
+        "-----",
+        "Contributing: Please read through our contributing guidelines. Included are directions for opening",
+        "issues, coding standards, and notes on development. These can be found at https://github.com/<<projectslug>>/blob/<<branch>>/CONTRIBUTING.md",
+        "",
+        "Code of Conduct: This project abides by the Contributor Covenant, version 2.0. Please interact in ways that contribute to an open,",
+        "welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at https://github.com/<<projectslug>>/blob/<<branch>>/CODE_OF_CONDUCT.md",
+        "-----",
+        "Copyright (c) <<yeartoyear(fc, now)>> <<company>> - All Rights Reserved",
+        "LICENSE: <<licensename>> (<<spdxid>>)",
+        "-----",
+        "This program has been provided under confidence of the copyright holder and is ",
+        "licensed for copying, distribution and modification under the terms of",
+        "the <<licensename>> (<<spdxid>>) published as the License,",
+        "or (at your option) any later version of this license.",
+        "",
+        "This program is distributed in the hope that it will be useful,",
+        "but WITHOUT ANY WARRANTY; without even the implied warranty of",
+        "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the",
+        "<<licensename>> for more details.",
+        "",
+        "You should have received a copy of the <<licensename>>",
+        "along with this program. If not, please write to: <<authoremail>>,",
+        "or see <<licenseurl>>",
+        "",
+        "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE - PLEASE SEE THE LICENSE FILE FOR DETAILS"
+      ]
+    }
+  ],
+  "gitlens.experimental.generateCommitMessagePrompt": "Commit messages must have a short description that is less than 40 chars followed by a newline and a more detailed description. Write concisely using an informal tone and avoid specific names from the code. You must use the Semantic Versioning standards for your commit messages. For example, if you are fixing a bug in the file index.ts, your commit message should look like this: \"bug(index.ts): details of the bug\". You must prefix your first like with the gitmoji specified emoji. For example, if you are fixing a bug in the file index.ts, your commit message must look like this: \":bug: fix(index.ts): details of the bug\". You can find the list of gitmojis: https://gitmoji.dev/. If this commit is likely to break backwards compatibility, after the context (in the example, \"(index.ts)\") you should include a \"!\" before the \":\".",
+}

@@ -1,0 +1,475 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2023-12-04 20:42:00.618061",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_dtqq",
+  "designation",
+  "discord_server",
+  "sort",
+  "display_role_members_seperately_from_online_members",
+  "allow_anyone_to_mention_this_role",
+  "role_id",
+  "column_break_llhd",
+  "role_name",
+  "color",
+  "icon",
+  "section_break_ggzp",
+  "general_server_permissions_column",
+  "view_channels",
+  "manage_channels",
+  "manage_roles",
+  "create_expressions",
+  "view_audit_long",
+  "view_server_insights",
+  "manage_webhooks",
+  "manage_server",
+  "administrator",
+  "membership_permissions_column",
+  "create_invite",
+  "change_nickname",
+  "manage_nicknames",
+  "kick_members",
+  "ban_members",
+  "timeout_members",
+  "stage_and_events_permissions_column",
+  "request_to_speak",
+  "create_events",
+  "manage_events",
+  "permissions_section",
+  "text_channel_permissions_column",
+  "send_messages",
+  "send_messages_in_threads",
+  "create_public_threads",
+  "embed_links",
+  "attach_files",
+  "add_reactions",
+  "use_external_emoji",
+  "use_external_stickers",
+  "manage_messages",
+  "manage_threads",
+  "read_message_history",
+  "send_text_to_speech_messages",
+  "use_application_commands",
+  "send_voice_messages",
+  "voice_channel_permissions_column",
+  "connect",
+  "speak",
+  "video",
+  "use_activities",
+  "use_soundboard",
+  "use_external_sounds",
+  "use_voice_activity",
+  "priority_speaker",
+  "mute_members",
+  "deafen_members",
+  "move_members",
+  "set_voice_channel_status",
+  "column_break_zamz",
+  "user_tab"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_dtqq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "This is the role which is assigned to the employee. E.g. Police Constuble",
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "description": "The order of which the roles will display and be ordered. 0 is highest. So if you had Admin sorted at 3 and Member sorted at 0, your member rank would be the higher one and therefore would use colours and icons from the member role.",
+   "fieldname": "sort",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Sort",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "display_role_members_seperately_from_online_members",
+   "fieldtype": "Check",
+   "label": "Display role members seperately from online members"
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_anyone_to_mention_this_role",
+   "fieldtype": "Check",
+   "label": "Allow anyone to @mention this role"
+  },
+  {
+   "fieldname": "column_break_llhd",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "This is the role name as should be displayed on Discord. ",
+   "fieldname": "role_name",
+   "fieldtype": "Data",
+   "label": "Role Name",
+   "length": 100,
+   "reqd": 1
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Color",
+   "label": "Color"
+  },
+  {
+   "description": "Upload an image under 256KB or pick a custom emoji from this server. We recommend at least 64x64 pixels. Members will see the icon for their\nhighest role if they have multiple roles.",
+   "fieldname": "icon",
+   "fieldtype": "Attach Image",
+   "label": "Icon"
+  },
+  {
+   "fieldname": "section_break_ggzp",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "general_server_permissions_column",
+   "fieldtype": "Column Break",
+   "label": "General Server Permissions"
+  },
+  {
+   "default": "0",
+   "fieldname": "view_channels",
+   "fieldtype": "Check",
+   "label": "View Channels"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_channels",
+   "fieldtype": "Check",
+   "label": "Manage Channels"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_roles",
+   "fieldtype": "Check",
+   "label": "Manage Roles"
+  },
+  {
+   "default": "0",
+   "fieldname": "create_expressions",
+   "fieldtype": "Check",
+   "label": "Create Expressions"
+  },
+  {
+   "default": "0",
+   "fieldname": "view_audit_long",
+   "fieldtype": "Check",
+   "label": "View Audit Long "
+  },
+  {
+   "default": "0",
+   "fieldname": "view_server_insights",
+   "fieldtype": "Check",
+   "label": "View Server Insights"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_webhooks",
+   "fieldtype": "Check",
+   "label": "Manage Webhooks"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_server",
+   "fieldtype": "Check",
+   "label": "Manage Server"
+  },
+  {
+   "default": "0",
+   "fieldname": "administrator",
+   "fieldtype": "Check",
+   "label": "Administrator"
+  },
+  {
+   "fieldname": "membership_permissions_column",
+   "fieldtype": "Column Break",
+   "label": "Membership Permissions"
+  },
+  {
+   "default": "0",
+   "fieldname": "create_invite",
+   "fieldtype": "Check",
+   "label": "Create Invite"
+  },
+  {
+   "default": "0",
+   "fieldname": "change_nickname",
+   "fieldtype": "Check",
+   "label": "Change Nickname"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_nicknames",
+   "fieldtype": "Check",
+   "label": "Manage Nicknames"
+  },
+  {
+   "default": "0",
+   "fieldname": "kick_members",
+   "fieldtype": "Check",
+   "label": "Kick Members"
+  },
+  {
+   "default": "0",
+   "fieldname": "ban_members",
+   "fieldtype": "Check",
+   "label": "Ban Members"
+  },
+  {
+   "default": "0",
+   "fieldname": "timeout_members",
+   "fieldtype": "Check",
+   "label": "Timeout Members"
+  },
+  {
+   "fieldname": "stage_and_events_permissions_column",
+   "fieldtype": "Column Break",
+   "label": "Stage and Events Permissions"
+  },
+  {
+   "default": "0",
+   "fieldname": "request_to_speak",
+   "fieldtype": "Check",
+   "label": "Request to speak"
+  },
+  {
+   "default": "0",
+   "fieldname": "create_events",
+   "fieldtype": "Check",
+   "label": "Create Events"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_events",
+   "fieldtype": "Check",
+   "label": "Manage Events"
+  },
+  {
+   "fieldname": "permissions_section",
+   "fieldtype": "Section Break",
+   "label": "Permissions"
+  },
+  {
+   "fieldname": "text_channel_permissions_column",
+   "fieldtype": "Column Break",
+   "label": "Text Channel Permissions"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_messages",
+   "fieldtype": "Check",
+   "label": "Send Messages"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_messages_in_threads",
+   "fieldtype": "Check",
+   "label": "Send Messages in Threads"
+  },
+  {
+   "default": "0",
+   "fieldname": "create_public_threads",
+   "fieldtype": "Check",
+   "label": "Create Public Threads"
+  },
+  {
+   "default": "0",
+   "fieldname": "embed_links",
+   "fieldtype": "Check",
+   "label": "Embed Links"
+  },
+  {
+   "default": "0",
+   "fieldname": "attach_files",
+   "fieldtype": "Check",
+   "label": "Attach Files"
+  },
+  {
+   "default": "0",
+   "fieldname": "add_reactions",
+   "fieldtype": "Check",
+   "label": "Add Reactions"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_external_emoji",
+   "fieldtype": "Check",
+   "label": "Use External Emoji"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_external_stickers",
+   "fieldtype": "Check",
+   "label": "Use External Stickers"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_messages",
+   "fieldtype": "Check",
+   "label": "Manage Messages"
+  },
+  {
+   "default": "0",
+   "fieldname": "manage_threads",
+   "fieldtype": "Check",
+   "label": "Manage Threads"
+  },
+  {
+   "default": "0",
+   "fieldname": "read_message_history",
+   "fieldtype": "Check",
+   "label": "Read Message History"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_text_to_speech_messages",
+   "fieldtype": "Check",
+   "label": "Send Text To Speech Messages"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_application_commands",
+   "fieldtype": "Check",
+   "label": "Use Application Commands"
+  },
+  {
+   "default": "0",
+   "fieldname": "send_voice_messages",
+   "fieldtype": "Check",
+   "label": "Send Voice Messages"
+  },
+  {
+   "fieldname": "voice_channel_permissions_column",
+   "fieldtype": "Column Break",
+   "label": "Voice Channel Permissions"
+  },
+  {
+   "default": "0",
+   "fieldname": "connect",
+   "fieldtype": "Check",
+   "label": "Connect"
+  },
+  {
+   "default": "0",
+   "fieldname": "speak",
+   "fieldtype": "Check",
+   "label": "Speak"
+  },
+  {
+   "default": "0",
+   "fieldname": "video",
+   "fieldtype": "Check",
+   "label": "Video"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_activities",
+   "fieldtype": "Check",
+   "label": "Use Activities"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_soundboard",
+   "fieldtype": "Check",
+   "label": "Use Soundboard"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_external_sounds",
+   "fieldtype": "Check",
+   "label": "Use External Sounds"
+  },
+  {
+   "default": "0",
+   "fieldname": "use_voice_activity",
+   "fieldtype": "Check",
+   "label": "Use Voice Activity"
+  },
+  {
+   "default": "0",
+   "fieldname": "priority_speaker",
+   "fieldtype": "Check",
+   "label": "Priority Speaker"
+  },
+  {
+   "default": "0",
+   "fieldname": "mute_members",
+   "fieldtype": "Check",
+   "label": "Mute Members"
+  },
+  {
+   "default": "0",
+   "fieldname": "deafen_members",
+   "fieldtype": "Check",
+   "label": "Deafen Members"
+  },
+  {
+   "default": "0",
+   "fieldname": "move_members",
+   "fieldtype": "Check",
+   "label": "Move Members"
+  },
+  {
+   "default": "0",
+   "fieldname": "set_voice_channel_status",
+   "fieldtype": "Check",
+   "label": "Set Voice Channel Status"
+  },
+  {
+   "fieldname": "column_break_zamz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "user_tab",
+   "fieldtype": "Tab Break",
+   "label": "User"
+  },
+  {
+   "fieldname": "discord_server",
+   "fieldtype": "Link",
+   "label": "Discord Server",
+   "options": "Discord Server",
+   "reqd": 1
+  },
+  {
+   "description": "Used to link the role on here to the role on discord. You can either use an existing role ID or the bot will automatically create a new role.",
+   "fieldname": "role_id",
+   "fieldtype": "Data",
+   "label": "Role ID"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2023-12-23 22:41:23.032031",
+ "modified_by": "Administrator",
+ "module": "Discord Integration",
+ "name": "Discord Role",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
