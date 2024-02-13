@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.1](https://github.com/Eventiva/Eventiva/compare/bots/logging-v0.1.0...bots/logging-v0.1.1) (2024-02-13)
+
+
+### Bug Fixes
+
+* **logger.ts:** make logger property required in Logger type to ensure it is always present ([da5a6e4](https://github.com/Eventiva/Eventiva/commit/da5a6e4ec33c452c5917815162aeffb9f32bd2ba))
+* **logger.ts:** make logger property required in Logger type to ensure it is always present ([dacd8b1](https://github.com/Eventiva/Eventiva/commit/dacd8b130b121b5e028fd06470d3da8a06ad2028))
+* **logging.node.runtime.ts:** update getLogger method to throw an error if logger for specified module is not found ([da5a6e4](https://github.com/Eventiva/Eventiva/commit/da5a6e4ec33c452c5917815162aeffb9f32bd2ba))
+* **logging.node.runtime.ts:** update getLogger method to throw an error if logger for specified module is not found ([dacd8b1](https://github.com/Eventiva/Eventiva/commit/dacd8b130b121b5e028fd06470d3da8a06ad2028))
+* **logging.node.runtime.ts:** update registerLogger method to accept Partial&lt;Logger&gt;[] instead of Logger[] to allow for optional properties in Logger objects ([da5a6e4](https://github.com/Eventiva/Eventiva/commit/da5a6e4ec33c452c5917815162aeffb9f32bd2ba))
+* **logging.node.runtime.ts:** update registerLogger method to accept Partial&lt;Logger&gt;[] instead of Logger[] to allow for optional properties in Logger objects ([dacd8b1](https://github.com/Eventiva/Eventiva/commit/dacd8b130b121b5e028fd06470d3da8a06ad2028))
+
 ## 0.1.0 (2024-02-11)
 
 
