@@ -59,8 +59,7 @@ on:
   # run on every push on the master branch
   push:
     branches:
-    - devolop
-    - main
+    - develop
 
 permissions:
   contents: read
