@@ -75,6 +75,14 @@ jobs:
         with:
           egress-policy: audit
 
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+
       - name: CLA Assistant
         uses: cla-assistant/github-action@5bfe123a0731f017d9c29550976bf724fe0870f5 # v2.3.0
         env:
