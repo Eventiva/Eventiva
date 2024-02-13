@@ -47,12 +47,14 @@
 
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect';
-import { I18NNode } from './i18n.node.runtime.ts';
+import { I18NNode, I18NConfig, ResourceSlot, LoggingAspect, Log, LoggingNode, common as enCommon, common as esCommon } from './i18n.node.runtime';
 import { I18NAspect } from './i18n.aspect.js';
 
 it('should test_bug_fix', async () => {
   // Write unit tests to cover the bug fixes mentioned in the CHANGELOG.md file.
   const i18N = await loadAspect<I18NNode>(I18NAspect, {
+  // Write unit tests to cover the bug fixes mentioned in the CHANGELOG.md file.
+  // Add your additional unit tests here
     runtime: 'node',
   });
 
