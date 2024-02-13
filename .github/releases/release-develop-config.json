@@ -1,0 +1,185 @@
+{
+  "packages": {
+    ".": {
+      "package-name": "@eventiva/eventiva",
+      "component": "eventiva",
+      "release-type": "node",
+      "scope": "eventiva"
+    },
+    "projects/bots/aspects/atlassian-customer-support": {
+      "package-name": "@eventiva/bots.aspects.atlassian-customer-support",
+      "component": "bots/atlassian-customer-support",
+      "scope": "Atlassian"
+    },
+    "projects/bots/aspects/discordjs": {
+      "package-name": "@eventiva/bots.aspects.discordjs",
+      "component": "bots/discord",
+      "scope": "Discord"
+    },
+    "projects/bots/aspects/i18n": {
+      "package-name": "@eventiva/bots.aspects.i18n",
+      "component": "bots/i18n",
+      "scope": "Internationalization"
+    },
+    "projects/bots/aspects/logging": {
+      "package-name": "@eventiva/bots.aspects.logging",
+      "component": "bots/logging",
+      "scope": "Logging"
+    },
+    "projects/bots/aspects/ping-command": {
+      "package-name": "@eventiva/bots.aspects.ping-command",
+      "component": "bot/commands/ping",
+      "scope": "Discord"
+    },
+    "projects/bots/aspects/support-platform": {
+      "package-name": "@eventiva/bots.aspects.support-platform",
+      "component": "discord/platforms/support",
+      "scope": "Discord"
+    },
+    "projects/bots/package/default-logging": {
+      "package-name": "@eventiva/bots.package.default-logging",
+      "component": "bots/packages/logging",
+      "scope": "Discord"
+    },
+    "projects/bots/support": {
+      "package-name": "@eventiva/bots.support",
+      "component": "discord/support",
+      "scope": "Discord"
+    },
+    "projects/frappe/control_centre": {
+      "package-name": "@eventiva/frappe.control_centre",
+      "component": "module/control_centre",
+      "extra-files": [
+        "control_centre/__init__.py"
+      ],
+      "scope": "Control Centre"
+    },
+    "projects/frappe/custody": {
+      "package-name": "@eventiva/frappe.custody",
+      "component": "module/custody",
+      "extra-files": [
+        "custody/__init__.py"
+      ],
+      "scope": "Custody"
+    },
+    "projects/frappe/discord_integration": {
+      "package-name": "@eventiva/frappe.discord_integration",
+      "component": "module/discord_integration",
+      "extra-files": [
+        "discord_integration/__init__.py"
+      ],
+      "scope": "Discord"
+    },
+    "projects/frappe/eventiva_core": {
+      "package-name": "@eventiva/frappe.eventiva_core",
+      "component": "module/eventiva_core",
+      "extra-files": [
+        "eventiva_core/__init__.py"
+      ],
+      "scope": "Core"
+    },
+    "projects/frappe/fleet_management": {
+      "package-name": "@eventiva/frappe.fleet_management",
+      "component": "module/fleet_management",
+      "extra-files": [
+        "fleet_management/__init__.py"
+      ],
+      "scope": "Fleet"
+    },
+    "projects/frappe/gaming": {
+      "package-name": "@eventiva/frappe.gaming",
+      "component": "module/gaming",
+      "extra-files": [
+        "gaming/__init__.py"
+      ],
+      "scope": "Gaming"
+    },
+    "projects/frappe/grand_theft_auto": {
+      "package-name": "@eventiva/frappe.grand_theft_auto",
+      "component": "module/grand_theft_auto",
+      "extra-files": [
+        "grand_theft_auto/__init__.py"
+      ],
+      "scope": "Gaming"
+    },
+    "projects/frappe/incident_management": {
+      "package-name": "@eventiva/frappe.incident_management",
+      "component": "module/incident_management",
+      "extra-files": [
+        "incident_management/__init__.py"
+      ],
+      "scope": "Incident"
+    },
+    "projects/frappe/justice": {
+      "package-name": "@eventiva/frappe.justice",
+      "component": "module/justice",
+      "extra-files": [
+        "justice/__init__.py"
+      ],
+      "scope": "Justice"
+    },
+    "projects/frappe/segment_connect": {
+      "package-name": "@eventiva/frappe.segment_connect",
+      "component": "module/segment_connect",
+      "extra-files": [
+        "segment_connect/__init__.py"
+      ],
+      "scope": "Integrations"
+    },
+    "projects/frappe/teamspeak_integration": {
+      "package-name": "@eventiva/frappe.teamspeak_integration",
+      "component": "module/teamspeak_integration",
+      "extra-files": [
+        "teamspeak_integration/__init__.py"
+      ],
+      "scope": "Teamspeak"
+    },
+    "projects/frappe/vetting": {
+      "package-name": "@eventiva/frappe.vetting",
+      "component": "module/vetting",
+      "extra-files": [
+        "vetting/__init__.py"
+      ],
+      "scope": "Vetting"
+    },
+    "projects/workflows/bit/todo": {
+      "package-name": "@eventiva/workflows.bit.todo",
+      "component": "workflows/bit/todo",
+      "scope": "Bit.dev"
+    },
+    "projects/workflows/discord/env": {
+      "package-name": "@eventiva/workflows.discord.env",
+      "component": "workflows/discord/env",
+      "scope": "Discord"
+    },
+    "projects/workflows/discord/generator/module": {
+      "package-name": "@eventiva/workflows.discord.generator",
+      "component": "workflows/discord/generator",
+      "scope": "Discord"
+    },
+    "projects/workflows/frappe/python-env": {
+      "package-name": "@eventiva/workflows.frappe.python-env",
+      "component": "workflows/frappe/python-env",
+      "scope": "Frappe"
+    },
+    "projects/workflows/generator": {
+      "package-name": "@eventiva/workflows.generator",
+      "component": "workflows/generator",
+      "scope": "Bit.dev"
+    },
+    "projects/workflows/git-subrepo": {
+      "package-name": "@eventiva/workflows.git-subrepo",
+      "component": "workflows/git-subrepo",
+      "scope": "Bit.dev"
+    }
+  },
+  "pull-request-footer": "This PR was generated by [Release-Please](https://github.com/googleapis/release-please), and approved by the Eventiva Software Delivery Change Manager.",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "sequential-calls": true,
+  "separate-pull-requests": true,
+  "prerelease": true,
+  "versioning": "prerelease",
+  "release-type": "simple",
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
+}
