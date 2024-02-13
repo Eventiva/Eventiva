@@ -91,7 +91,53 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+
+      # checks out the repository
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
+
+      - name: Create SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # ensure git is using the ssh key
+      - name: Ensure git is using the SSH key
+        run: |
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/id_rsa
+          ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" || (echo "Failed to add SSH key" && exit 1)
+
+      # setup git to use the ssh key
+      - name: Setup git & npm
+        run: |
+          git config --global user.name ${{secrets.GIT_USER_NAME}}
+          git config --global user.email ${{secrets.GIT_USER_EMAIL}}
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
+          git config --global gpg.format ssh
+          git config --global user.signingkey ~/.ssh/id_rsa
+          git config --global commit.gpgsign true
+          git config --global tag.gpgsign true
+
+      - name: Setup NPM Registry
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+
       - name: Set up Snyk CLI to check for security issues
         # Snyk can be used to break the build when it detects security issues.
         # In this case we want to upload the SAST issues to GitHub Code Scanning
