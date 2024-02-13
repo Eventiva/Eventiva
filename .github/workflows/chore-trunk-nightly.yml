@@ -59,10 +59,7 @@ jobs:
   trunk_upgrade:
     name: Upgrade Trunk
     runs-on: ubuntu-latest
-    env:
-      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+    
     permissions:
       contents: write # For trunk to create PRs
       pull-requests: write # For trunk to create PRs
@@ -71,7 +68,7 @@ jobs:
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
         with:
           egress-policy: audit
-      
+
       - name: Workflow Telemetry
         uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
         with: 
@@ -80,8 +77,19 @@ jobs:
           theme: dark
           proc_trace_sys_enable: true
 
-      - name: Checkout
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      # checks out the repository
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
+
+      - name: Enable GPG
+        uses: creshpay/action-gpg@v2
+        with:
+            gpg-passphrase: "${{ secrets.BOT_GPG_PASS }}"
+            gpg-sign-key: "${{ secrets.BOT_GPG_KEY }}"
+            git-email: "${{ secrets.GIT_USER_EMAIL }}"
+            git-username: "${{ secrets.GIT_USER_NAME }}"
 
       # >>> Install your own deps here (npm install, etc) <<<
       - name: Trunk Upgrade
@@ -93,10 +101,7 @@ jobs:
     permissions:
       checks: write # For trunk to post annotations
       contents: read # For repo checkout
-    env:
-      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-      BIT_CONFIG_USER_TOKEN: ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+    
       
     steps:
       - name: Harden Runner
@@ -115,14 +120,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
 
-      - name: Initialize Bit
-        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
-      - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
+      - name: Enable GPG
+        uses: creshpay/action-gpg@v2
+        with:
+            gpg-passphrase: "${{ secrets.BOT_GPG_PASS }}"
+            gpg-sign-key: "${{ secrets.BOT_GPG_KEY }}"
+            git-email: "${{ secrets.GIT_USER_EMAIL }}"
+            git-username: "${{ secrets.GIT_USER_NAME }}"
+
+      - name: Setup NPM Registry
         run: |
           npm config set '@bit:registry' https://node-registry.bit.cloud
           npm config set '@teambit:registry' https://node-registry.bit.cloud
           npm config set '@eventiva:registry' https://node-registry.bit.cloud
-          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
+          npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+
+      - name: Initialize Bit
+        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
+
 
       - name: Trunk Check
         uses: trunk-io/trunk-action@97ecd21fe6c743bf7a606791584b683a7995c70e # v1.1.9

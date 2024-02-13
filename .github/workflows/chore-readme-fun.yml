@@ -77,8 +77,28 @@ jobs:
         with:
           egress-policy: audit
 
-      - name: Checkout repo
-        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+
+      # checks out the repository
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
+
+      - name: Enable GPG
+        uses: creshpay/action-gpg@v2
+        with:
+            gpg-passphrase: "${{ secrets.BOT_GPG_PASS }}"
+            gpg-sign-key: "${{ secrets.BOT_GPG_KEY }}"
+            git-email: "${{ secrets.GIT_USER_EMAIL }}"
+            git-username: "${{ secrets.GIT_USER_NAME }}"
+          
       # generates a snake game from a github user (<github_user_name>) contributions graph, output a svg animation at <svg_out_path>
       - name: generate github-contribution-grid-snake.svg
         uses: Platane/snk/svg-only@8b7b3e6acef87188f941ed83b47f9da0401b4d17 # v3.2.0
