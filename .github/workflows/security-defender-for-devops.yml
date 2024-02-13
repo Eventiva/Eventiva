@@ -89,21 +89,73 @@ jobs:
       security-events: write
 
     steps:
-    - name: Harden Runner
-      uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
-      with:
-        egress-policy: audit
+      - name: Harden Runner
+        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        with:
+          egress-policy: audit
 
-    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
-    - uses: actions/setup-dotnet@3447fd6a9f9e57506b15f895c5b76d3b197dc7c2 # v3.2.0
-      with:
-        dotnet-version: |
-          5.0.x
-          6.0.x
-    - name: Run Microsoft Security DevOps
-      uses: microsoft/security-devops-action@e94440350ed10e2806d47cd0d7504a2c51abdbe9 # v1.6.0
-      id: msdo
-    - name: Upload results to Security tab
-      uses: github/codeql-action/upload-sarif@1500a131381b66de0c52ac28abb13cd79f4b7ecc # v2.22.12
-      with:
-        sarif_file: ${{ steps.msdo.outputs.sarifFile }}
+      - name: Workflow Telemetry
+        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        with: 
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
+          comment_on_pr: false
+          theme: dark
+          proc_trace_sys_enable: true
+
+      # checks out the repository
+      - uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
+
+      - name: Create SSH key
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      # ensure git is using the ssh key
+      - name: Ensure git is using the SSH key
+        run: |
+          # Start the ssh-agent in the background
+          $env:SSH_AUTH_SOCK = Start-Service ssh-agent
+          ssh-add ~/.ssh/id_rsa
+          # Check if the SSH key was added successfully
+          if (!(ssh-add -l | Select-String -Pattern "$(ssh-keygen -lf ~/.ssh/id_rsa | %{ $_.Split(' ')[1] })")) {
+            Write-Output "Failed to add SSH key"
+            exit 1
+          }
+
+      # setup git to use the ssh key
+      - name: Setup git & npm
+        run: |
+          git config --global user.name ${{secrets.GIT_USER_NAME}}
+          git config --global user.email ${{secrets.GIT_USER_EMAIL}}
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
+          git config --global user.signingkey ~/.ssh/id_rsa
+          git config --global commit.gpgsign true
+          git config --global tag.gpgsign true
+
+      - name: Setup NPM Registry
+        run: |
+          npm config set '@bit:registry' https://node-registry.bit.cloud
+          npm config set '@teambit:registry' https://node-registry.bit.cloud
+          npm config set '@eventiva:registry' https://node-registry.bit.cloud
+          npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
+
+      - uses: actions/setup-dotnet@3447fd6a9f9e57506b15f895c5b76d3b197dc7c2 # v3.2.0
+        with:
+          dotnet-version: |
+            5.0.x
+            6.0.x
+
+      - name: Run Microsoft Security DevOps
+        uses: microsoft/security-devops-action@e94440350ed10e2806d47cd0d7504a2c51abdbe9 # v1.6.0
+        id: msdo
+
+      - name: Upload results to Security tab
+        uses: github/codeql-action/upload-sarif@1500a131381b66de0c52ac28abb13cd79f4b7ecc # v2.22.12
+        with:
+          sarif_file: ${{ steps.msdo.outputs.sarifFile }}
