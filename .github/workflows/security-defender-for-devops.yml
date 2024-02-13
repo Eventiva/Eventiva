@@ -119,18 +119,24 @@ jobs:
       # ensure git is using the ssh key
       - name: Ensure git is using the SSH key
         run: |
-          eval "$(ssh-agent -s)"
+          # Start the ssh-agent in the background
+          $env:SSH_AUTH_SOCK = Start-Service ssh-agent
           ssh-add ~/.ssh/id_rsa
-          ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" || (echo "Failed to add SSH key" && exit 1)
+          # Check if the SSH key was added successfully
+          if (!(ssh-add -l | Select-String -Pattern "$(ssh-keygen -lf ~/.ssh/id_rsa | %{ $_.Split(' ')[1] })")) {
+            Write-Output "Failed to add SSH key"
+            exit 1
+          }
 
       # setup git to use the ssh key
       - name: Setup git & npm
         run: |
           git config --global user.name ${{secrets.GIT_USER_NAME}}
           git config --global user.email ${{secrets.GIT_USER_EMAIL}}
-          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts
+          git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
           git config --global user.signingkey ~/.ssh/id_rsa
           git config --global commit.gpgsign true
+          git config --global tag.gpgsign true
 
       - name: Setup NPM Registry
         run: |
