@@ -3,7 +3,7 @@
 > [!CAUTION]
 > This project is currently in a pre-release state, all versions <1.0.0 are subject to breaking changes
 > 
-> Current Version: 0.1.2 <!-- x-release-please-version -->
+> Current Version: 0.1.2 
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
@@ -13,7 +13,7 @@ Welcome to the Eventiva repository. Eventiva is an open-source platform for Even
 
 ## How to get support 👨‍👩‍👧‍👦
 
-For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use **[our discussion page](https://github.com/Eventiva/Eventiva/discussions)** 🚑.
+For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use <!-- KEEP: Needed for discussion page link -->**[our discussion page](https://github.com/Eventiva/Eventiva/discussions)** 🚑.
 
 We have a **FAQ** label in our **[discussion page](https://github.com/Eventiva/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
 
@@ -35,4 +35,4 @@ ventiva is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
-For more information on contributing, please read the [contributing guidelines](./contributing.md).
+For more information on contributing, please read the <!--KEEP: Needed for CONTRIBUTING guidelines link-->[contributing guidelines](./contributing.md).
