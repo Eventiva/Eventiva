@@ -26,7 +26,7 @@ Thank you for taking an interst in contributing. We have created development con
 
 This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud).
 
-ventiva is built on the following main stack:
+
 
 
 
