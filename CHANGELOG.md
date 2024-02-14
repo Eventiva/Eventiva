@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.5](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.4...eventiva-v0.1.5) (2024-02-14)
+
+
+### Bug Fixes
+
+* bit tag method ([#535](https://github.com/Eventiva/Eventiva/issues/535)) ([d22f09f](https://github.com/Eventiva/Eventiva/commit/d22f09fd1e20806398862423df2b9f25245afc85))
+* visuals ([#524](https://github.com/Eventiva/Eventiva/issues/524)) ([a82fdb6](https://github.com/Eventiva/Eventiva/commit/a82fdb69eb0ce6c9043801c7149533ddf432c6fe))
+
 ## [0.1.4](https://github.com/Eventiva/Eventiva/compare/eventiva-v0.1.3...eventiva-v0.1.4) (2024-02-14)
 
 
