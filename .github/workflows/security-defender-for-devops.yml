@@ -66,14 +66,17 @@
 name: Security - Microsoft Defender For Devops
 
 on:
+  merge_group:
   push:
     branches: 
-    - main
-    - develop
+      - main
+      - develop
+      - release/*
   pull_request:
-    branches:  
-    - main
-    - develop
+    branches: 
+      - main
+      - develop
+      - release/*
   schedule:
     - cron: '34 12 * * 0'
 

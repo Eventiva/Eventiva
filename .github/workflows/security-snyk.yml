@@ -66,14 +66,17 @@
 name: Security - Snyk
 
 on:
+  merge_group:
   push:
-    branches:  
-    - main
-    - develop
+    branches: 
+      - main
+      - develop
+      - release/*
   pull_request:
-    branches:  
-    - main
-    - develop
+    branches: 
+      - main
+      - develop
+      - release/*
 
 permissions:
   contents: read
