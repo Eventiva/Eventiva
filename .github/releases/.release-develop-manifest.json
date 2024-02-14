@@ -3,7 +3,7 @@
   "projects/bots/aspects/atlassian-customer-support": "0.1.0",
   "projects/bots/aspects/discordjs": "0.1.1",
   "projects/bots/aspects/i18n": "0.1.0",
-  "projects/bots/aspects/logging": "0.1.1",
+  "projects/bots/aspects/logging": "0.1.2",
   "projects/bots/aspects/ping-command": "0.1.0",
   "projects/bots/aspects/support-platform": "0.1.0",
   "projects/bots/package/default-logging": "0.0.0",
