@@ -174,5 +174,8 @@ jobs:
             tag_name=$(echo "${{ steps.release.outputs }}" | jq -r ".${bitProject}--tag_name")
             bit tag eventiva.$project --ver $tag_name --message "Release $tag_name" --build
           done
+          
+      - name: Commit Bitmap
+        uses: bit-tasks/commit-bitmap@c31e1ab8acfc20dd150a55b1aae894e49460aecc # v1
         
         
