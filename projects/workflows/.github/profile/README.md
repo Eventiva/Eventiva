@@ -28,11 +28,11 @@ This project utilises the [Smartcloud Project](https://github.com/Eventiva/smart
 
 ventiva is built on the following main stack:
 
-- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg' alt='Bit'/> [Bit](https://www.bit.dev) – Code Collaboration & Version Control
-- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack) - Python web framework
+- <img width='25' height='25' src='https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg' alt='Bit'/> [Bit](https://www.bit.dev) – Code Collaboration & Version Control - Component-driven development platform
+- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages - High-level programming language
+- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack) - JavaScript runtime environment
+- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages - Typed superset of JavaScript
+- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration - Workflow automation and CI/CD platform
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
