@@ -5,7 +5,8 @@
 > 
 > Current Version: 0.1.2 <!-- x-release-please-version -->
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)  
+KEEP: This link is used to open the project in GitHub Codespaces.
 
 ## Introduction
 
@@ -22,17 +23,25 @@ Our extensive **documentation** can be found at **[here](https://github.com/Even
 
 ## Contributing
 
-Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
+Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)  
+KEEP: These development containers are ready for use with VSCode or GitHub Codespaces.
 
 This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud).
 
-ventiva is built on the following main stack:
+ventiva is built on the following main stack:  
+KEEP: This section describes the main stack on which Eventiva is built.
 
-- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg' alt='Bit'/> [Bit](https://www.bit.dev) – Code Collaboration & Version Control
-- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)  
+KEEP: Eventiva uses the Frappe Framework for full stack development.
+- <img width='25' height='25' src='https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg' alt='Bit'/> [Bit](https://www.bit.dev) – Code Collaboration & Version Control  
+KEEP: Bit.dev is used for code collaboration and version control in Eventiva.
+- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages  
+KEEP: Python is used as a programming language in Eventiva.
+- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)  
+KEEP: Eventiva uses Node.js for full stack development.
+- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages  
+KEEP: Eventiva uses TypeScript as a programming language.
+- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration  
+KEEP: GitHub Actions are used for continuous integration in Eventiva.
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
