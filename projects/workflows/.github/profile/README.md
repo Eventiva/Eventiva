@@ -1,4 +1,7 @@
 # EVENTIVA
+"""
+This file contains an overview of the Eventiva repository, including its purpose and the technologies used. It provides information about the project's current version, introduction, and ways to get support. Additionally, it offers details about contributing and the main stack on which Eventiva is built."
+"""
 
 > [!CAUTION]
 > This project is currently in a pre-release state, all versions <1.0.0 are subject to breaking changes
@@ -13,7 +16,9 @@ Welcome to the Eventiva repository. Eventiva is an open-source platform for Even
 
 ## How to get support 👨‍👩‍👧‍👦
 
-For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use **[our discussion page](https://github.com/Eventiva/Eventiva/discussions)** 🚑.
+"""
+Provides information about where to submit feature requests, Q&A, Show & Tell, and discussions related to the Eventiva project. Includes links to the discussion page and FAQ label for quick answers, debugging, and general help."
+"""
 
 We have a **FAQ** label in our **[discussion page](https://github.com/Eventiva/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
 
@@ -35,4 +40,6 @@ ventiva is built on the following main stack:
 - <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
 - <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
 
-For more information on contributing, please read the [contributing guidelines](./contributing.md).
+"""
+Contains information on the technologies and frameworks used in Eventiva, such as Frappe Framework, Bit, Python, Node.js, TypeScript, and GitHub Actions. Additionally, it provides a link to the contributing guidelines for further information on contributing to the project."
+"""
