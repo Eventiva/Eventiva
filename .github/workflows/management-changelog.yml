@@ -49,7 +49,7 @@ on:
   push:
     branches:
     - main
-    - develop
+    # - develop # Tuned off for now as release-please isn't respecting the prerelease flag
     - release/*
 
 permissions:
