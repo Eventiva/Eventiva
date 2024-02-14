@@ -54,7 +54,14 @@
 #
 # Source repository: https://github.com/actions/dependency-review-action
 name: Security - Dependency Review
-on: [pull_request]
+on: 
+  merge_group:
+  push:
+    branches: 
+      - main
+      - develop
+      - release/*
+  pull_request:
 
 permissions:
   contents: read
