@@ -17,14 +17,14 @@ For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please u
 
 We have a **FAQ** label in our **[discussion page](https://github.com/Eventiva/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
 
-Our extensive **documentation** can be found at **[here](https://github.com/Eventiva/Eventiva)**.
+Our extensive Removed the TODO comment can be found at **[here](https://github.com/Eventiva/Eventiva)**.
 
 
 ## Contributing
 
 Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
 
-This project utilises the [Smartcloud Project](https://github.com/Eventiva/smartcloud) to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation [here](https://github.com/Eventiva/smartcloud).
+Removed the TODO comment
 
 ventiva is built on the following main stack:
 
