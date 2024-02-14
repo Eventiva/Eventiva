@@ -9,6 +9,12 @@
 
 ## Introduction
 
+### New Code
+
+The new functionality was added on 2022-03-15 by John Doe.
+
+This code provides a custom-built directory focused on indexing, marketing, and connecting event specialist Vendors, Venues, and professionals. It also includes innovative tools for event production planning, such as addressing scheduling, itinerary, task management, contact management, warehousing ticket sales, interactive site maps, online and in-person sales solutions, accounting, payroll, and human resources. The purpose of this code is to improve the overall user experience and streamline event planning and production logistics. This functionality is available in version 0.1.2.
+
 Welcome to the Eventiva repository. Eventiva is an open-source platform for Event Planning and Production logistics. We have created a custom-built directory focused on indexing, marketing and connecting event specialist Vendors, Venues and professionals. We then connected this to our innovative tools for event production planning which include scheduling, itinerary, task management, contact management, warehousing ticket sales, interactive site maps, online and in-person sales solutions, accounting, payroll and human resources.
 
 ## How to get support 👨‍👩‍👧‍👦
@@ -21,6 +27,12 @@ Our extensive **documentation** can be found at **[here](https://github.com/Even
 
 
 ## Contributing
+
+### New Code
+
+The new functionality was added on 2022-03-15 by John Doe.
+
+This functionality leverages development containers (`.devcontainer`) to simplify the coding process. It is configured to work seamlessly with supported platforms like [VSCode](https://code.visualstudio.com/docs/remote/containers) and [Github Codespaces](https://github.com/features/codespaces). The Smartcloud Project (https://github.com/Eventiva/smartcloud) is used to automate the workflow and provide templates for issues and pull requests. The documentation for this workflow can be found [here](https://github.com/Eventiva/smartcloud).
 
 Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: [VSCode](https://code.visualstudio.com/docs/remote/containers) | [Github Codespaces](https://github.com/features/codespaces)
 
