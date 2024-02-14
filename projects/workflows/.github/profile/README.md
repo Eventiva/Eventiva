@@ -15,7 +15,7 @@ Welcome to the Eventiva repository. Eventiva is an open-source platform for Even
 
 ## How to get support 👨‍👩‍👧‍👦
 
-For **Features Requests**, **Q&A**, **Show & Tell** and **Discussions** please use **[our discussion page](https://github.com/Eventiva/Eventiva/discussions)** 🚑.
+"""For **Features Requests**, **Q&A**, **Show & Tell**, and **Discussions**, please visit our [discussion page](https://github.com/Eventiva/Eventiva/discussions). You can also find quick answers, help with debugging issues, and general assistance in the **FAQ** section of our [discussion page](https://github.com/Eventiva/Eventiva/discussions)."""
 
 We have a **FAQ** label in our **[discussion page](https://github.com/Eventiva/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
 
