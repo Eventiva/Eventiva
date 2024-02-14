@@ -1,9 +1,10 @@
 # EVENTIVA
 
 > [!CAUTION]
-> This project is currently in a pre-release state, all versions <1.0.0 are subject to breaking changes
+> This project is currently in a pre-release
+# KEEP: This import is needed for XYZ feature state, all versions <1.0.0 are subject to breaking changes
 > 
-> Current Version: 0.1.2 <!-- x-release-please-version -->
+> Current Version: 0.1.2 
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 
@@ -28,11 +29,6 @@ This project utilises the [Smartcloud Project](https://github.com/Eventiva/smart
 
 ventiva is built on the following main stack:
 
-- <img width='25' height='25' src='https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png' alt='Bit'/> [Frappe Framework](https://frappeframework.com/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg' alt='Bit'/> [Bit](https://www.bit.dev) – Code Collaboration & Version Control
-- <img width='25' height='25' src='https://img.stackshare.io/service/993/pUBY5pVj.png' alt='Python'/> [Python](https://www.python.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png' alt='Node.js'/> [Node.js](http://nodejs.org/) – Frameworks (Full Stack)
-- <img width='25' height='25' src='https://img.stackshare.io/service/1612/bynNY5dJ.jpg' alt='TypeScript'/> [TypeScript](http://www.typescriptlang.org) – Languages
-- <img width='25' height='25' src='https://img.stackshare.io/service/11563/actions.png' alt='GitHub Actions'/> [GitHub Actions](https://github.com/features/actions) – Continuous Integration
+
 
 For more information on contributing, please read the [contributing guidelines](./contributing.md).
