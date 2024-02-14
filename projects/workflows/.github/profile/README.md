@@ -19,7 +19,7 @@ Welcome to the Eventiva repository. Eventiva is an open-source platform for Even
 
 We have a **FAQ** label in our **[discussion page](https://github.com/Eventiva/Eventiva/discussions)** where you can get quick answers, help with debugging weird issues, and general help.
 
-Our extensive **documentation** can be found at **[here](https://github.com/Eventiva/Eventiva)**.
+""""""Our extensive **documentation** can be found at **[here](https://github.com/Eventiva/Eventiva)**.""""""
 
 
 ## Contributing
