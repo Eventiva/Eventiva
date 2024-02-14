@@ -55,12 +55,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-    env:
-      GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
-      BOT_GIT_SSH_KEY: ${{ secrets.BOT_GIT_SSH_KEY }}
-      GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
-      GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
-      BIT_CONFIG_USER_TOKEN : ${{ secrets.BIT_CONFIG_USER_TOKEN }}
     steps:
       - name: Harden Runner
         uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
@@ -70,6 +64,7 @@ jobs:
       - name: Workflow Telemetry
         uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
         with: 
+          github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
@@ -78,11 +73,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: 'recursive'
+          token: "${{ secrets.BOT_TOKEN || github.token }}"
 
       - name: Create SSH key
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ env.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
@@ -97,8 +93,8 @@ jobs:
       # setup git to use the ssh key
       - name: Setup git & npm
         run: |
-          git config --global user.name ${{env.GIT_USER_NAME}}
-          git config --global user.email ${{env.GIT_USER_EMAIL}}
+          git config --global user.name ${{secrets.GIT_USER_NAME}}
+          git config --global user.email ${{secrets.GIT_USER_EMAIL}}
           git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
           git config --global gpg.format ssh
           git config --global user.signingkey ~/.ssh/id_rsa
@@ -110,7 +106,7 @@ jobs:
           npm config set '@bit:registry' https://node-registry.bit.cloud
           npm config set '@teambit:registry' https://node-registry.bit.cloud
           npm config set '@eventiva:registry' https://node-registry.bit.cloud
-          npm config set //node-registry.bit.cloud/:_authToken ${{ env.BIT_CONFIG_USER_TOKEN }}
+          npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: Checkout repository
         uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
