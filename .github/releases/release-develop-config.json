@@ -183,6 +183,7 @@
   "sequential-calls": true,
   "separate-pull-requests": true,
   "prerelease": true,
+  "prerelease-type": "alpha",
   "versioning": "prerelease",
   "release-type": "simple",
   "signoff": "Eventiva Ltd <github@eventiva.co.uk>",

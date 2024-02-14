@@ -112,7 +112,7 @@ jobs:
         with:
           token: ${{ secrets.BOT_TOKEN }}
           config-file: ${{ github.ref_name == 'develop' && '.github/releases/release-develop-config.json' || '.github/releases/release-main-config.json' }}
-          manifest-file: ${{ github.ref_name == 'develop' && '.github/releases/.release-develop-manifest.json' || '.github/releases/.release-main-manifest.json' }}
+          manifest-file: '.github/releases/.release-manifest.json'
           target-branch: ${{ github.ref_name }}
           include-component-in-tag: true
       
