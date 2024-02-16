@@ -56,11 +56,6 @@
 name: Security - Dependency Review
 on: 
   merge_group:
-  push:
-    branches: 
-      - main
-      - develop
-      - release/*
   pull_request:
 
 permissions:
