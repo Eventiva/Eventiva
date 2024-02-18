@@ -45,4 +45,4 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-// export from '@eventiva/central.aspects.database';
+export { Address } from '@eventiva/central.aspects.database';
