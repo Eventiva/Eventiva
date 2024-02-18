@@ -2,9 +2,9 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: generator.ts
-* Path: \projects\workflows\generator\generator.ts
-* Created Date: Tuesday, February 6th 2024
+* File: methods.ts
+* Path: \projects\workflows\generator\discord\methods.ts
+* Created Date: Sunday, February 18th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
 * -----
@@ -45,30 +45,22 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import type { EnvHandler } from '@teambit/envs';
-import { compact } from 'lodash';
-import { TemplateList } from '@teambit/generator';
-import { HarmonyPlatformTemplate } from '@bitdev/harmony.generators.harmony-templates';
-import { HarmonyRuntimeTemplate } from '@bitdev/harmony.generators.harmony-templates';
-import { GeneratorOptions } from '@eventiva/workflows.bit.runtime-options'
-import { AspectTemplate } from '@bitdev/harmony.generators.harmony-templates';
-import { PlatformAspectTemplate } from '@bitdev/harmony.generators.harmony-templates';
-import { HarmonyEnvTemplate } from '@bitdev/harmony.generators.harmony-templates';
-import { ModuleComponentTemplate } from '@eventiva/workflows.discord.generator.module';
+export function discordNodeMethods() {
+    return `
+      public resources: Resources = {};
 
-/**
- * Create a list of Harmony templates.
- */
-export function Generator(options: GeneratorOptions = {}): EnvHandler<TemplateList> {
-  const templates = options.templates || [];
-
-  return TemplateList.from(compact([
-    !options.disableHarmonyPlatform ? HarmonyPlatformTemplate.from(): undefined,
-    !options.disablePlatformAspect ? PlatformAspectTemplate.from(): undefined,
-    AspectTemplate.from({ options }),
-    ModuleComponentTemplate.from({ options }),
-    HarmonyRuntimeTemplate.from(),
-    HarmonyEnvTemplate.from(),
-    ...templates
-  ]));
-}
+      public registerEvents(reload?: true) {
+        this.discord.registerEvent(this, [
+        // add any events here
+        ] as Event<any>[])
+        return this
+      }
+    
+      public registerCommands(reload?: true) {
+        this.discord.registerCommand(this, [
+        // add any commands here
+        ] as Command[])
+        return this;
+      }
+    `;
+  }
