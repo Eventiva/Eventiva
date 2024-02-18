@@ -1,0 +1,12 @@
+{
+	"devDependencies": {
+		"@zenstackhq/openapi": "^1.9.0",
+		"prisma": "^5.9.1",
+		"zenstack": "1.9.0"
+	},
+	"dependencies": {
+		"@prisma/client": "5.9.1",
+		"@zenstackhq/runtime": "1.9.0"
+	},
+	"type": "module"
+}
