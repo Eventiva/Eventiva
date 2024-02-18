@@ -23,7 +23,7 @@ Add the development env to your generator configuration on `workspace.jsonc`.
 {
   "teambit.generator/generator": {
     "envs": [
-      "eventiva.workflows/frappe/python-env"
+      "eventiva.workflows/env/node"
     ]
   }
 }
@@ -36,7 +36,7 @@ You can see the generator templates in your workspace using `bit templates`.
 Use this dev environment on your existing components, by running the following command: 
 
 ```
-bit env set my-component eventiva.workflows/frappe/python-env
+bit env set my-component eventiva.workflows/env/node
 ```
 
 
@@ -45,7 +45,7 @@ bit env set my-component eventiva.workflows/frappe/python-env
 You can create a new NodeJS workspace made from this env using the following command:
 
 ```
-bit new node my-workspace --aspect eventiva.workflows/frappe/python-env
+bit new node my-workspace --aspect eventiva.workflows/env/node
 ```
 
 ## Compose your own env

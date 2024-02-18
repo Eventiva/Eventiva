@@ -5,7 +5,6 @@
 import { HarmonyEnv } from '@bitdev/harmony.harmony-env';
 import { Compiler } from "@teambit/compiler";
 import { VitestTester, VitestTask } from '@teambit/vite.vitest-tester';
-import { Generator } from '@eventiva/workflows.generator'
 import { EnvHandler } from "@teambit/envs";
 import { Pipeline } from '@teambit/builder';
 import {
@@ -17,29 +16,11 @@ import { ESLintLinter, EslintTask } from "@teambit/defender.eslint-linter";
 import { PrettierFormatter } from "@teambit/defender.prettier-formatter";
 import { Tester } from "@teambit/tester";
 
-/**
- * A class that extends HarmonyEnv and provides the environment for Harmony Bot.
- * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
- * @class
- * @extends {HarmonyEnv}
- */
-export class DiscordEnvs extends HarmonyEnv {
+export class Python extends HarmonyEnv {
   /* shorthand name for the environment */
-  /**
-   * Shorthand name for the environment.
-   * @author Jonathan Stevens (@TGTGamer)
-   */
-  name = "discord-envs";
+  name = "python";
 
   /* the compiler to use during development */
-  /**
-   * Returns the compiler to use during development.
-   * @author Jonathan Stevens (@TGTGamer)
-   *
-   * @returns Returns the compiler to use during development.
-   */
   compiler(): EnvHandler<Compiler> {
     return TypescriptCompiler.from({
       tsconfig: this.tsconfigPath,
@@ -47,23 +28,7 @@ export class DiscordEnvs extends HarmonyEnv {
     });
   }
 
-  /**
-   * This function returns the instance of HarmonyBotGenerators.
-   * @author Jonathan Stevens (@TGTGamer)
-   *
-   * @returns This function returns the HarmonyBotGenerators.
-   */
-  generators() {
-    return Generator();
-  }
-
   /* the test runner to use during development */
-  /**
-   * the test runner to use during development
-   * @author Jonathan Stevens (@TGTGamer)
-   *
-   * @returns Returns the test runner to use during development.
-   */
   tester(): EnvHandler<Tester> {
     return VitestTester.from({
       config: require.resolve('./config/vitest.config.mjs'),
@@ -71,12 +36,6 @@ export class DiscordEnvs extends HarmonyEnv {
   }
 
   /* the linter to use during development */
-  /**
-   * Creates and returns an instance of the ESLint linter using the specified configuration. The linter is used during the development process.
-   * @author Jonathan Stevens (@TGTGamer)
-   *
-   * @returns Creates a linter from ESLintLinter with the specified configuration.
-   */
   linter() {
     return ESLintLinter.from({
       tsconfig: this.tsconfigPath,
@@ -119,4 +78,4 @@ export class DiscordEnvs extends HarmonyEnv {
   }
 }
 
-export default new DiscordEnvs();
+export default new Python();

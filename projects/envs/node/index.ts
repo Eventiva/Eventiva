@@ -2,9 +2,9 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: vitest.config.mjs
-* Path: \projects\workflows\discord\env\config\vitest.config.mjs
-* Created Date: Tuesday, February 6th 2024
+* File: index.ts
+* Path: \projects\workflows\env\node\index.ts
+* Created Date: Sunday, February 18th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
 * -----
@@ -45,11 +45,6 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import mdx from '@mdx-js/rollup';
-
-export default defineConfig({
-  plugins: [react(), mdx()],
-  test: {},
-});
+import { Node } from './node.bit-env.js';
+export { Node };
+export default Node;
