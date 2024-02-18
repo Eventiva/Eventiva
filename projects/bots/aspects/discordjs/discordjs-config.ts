@@ -46,7 +46,7 @@
 */
 
 import { Logger } from "@eventiva/bots.aspects.logging";
-// import { SegmentConfig } from "@eventiva/central.aspects.segment";
+import { SegmentConfig } from "@eventiva/central.aspects.segment";
 import type { ClientOptions } from "discord.js";
 
 /**
@@ -63,6 +63,6 @@ export type DiscordjsConfig = {
     guildId: string;
     startDelay: number;
     logger: Logger['options'];
-    // segment?: SegmentConfig
+    segment?: SegmentConfig
 } & ClientOptions;
 
