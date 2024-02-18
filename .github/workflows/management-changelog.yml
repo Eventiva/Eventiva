@@ -49,7 +49,7 @@ on:
   push:
     branches:
     - main
-    # - develop # Tuned off for now as release-please isn't respecting the prerelease flag
+    - develop
     - release/*
 
 permissions:
@@ -110,9 +110,9 @@ jobs:
       - uses: google-github-actions/release-please-action@v4
         id: release
         with:
-          config-file: ${{ github.ref_name == 'develop' && '.github/releases/release-develop-config.json' || '.github/releases/release-main-config.json' }}
+          config-file: '.github/releases/release-main-config.json'
           manifest-file: '.github/releases/.release-manifest.json'
-          target-branch: ${{ github.ref_name }}
+          target-branch: ${{ github.ref_name == 'develop' && 'main' || github.ref_name }}
           include-component-in-tag: true
       
       # - name: tag major and minor versions
@@ -141,7 +141,7 @@ jobs:
       
       # checks out the repository
       - uses: actions/checkout@v4
-        if: steps.release.outputs.releases_created
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
         
       - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
         if: steps.release.outputs.releases_created
@@ -152,11 +152,11 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: Initialize Bit
-        if: steps.release.outputs.releases_created
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
         uses: bit-tasks/init@69061074c39e3af84b6ac7a2d1915b2e4ab23f78 # v1
         
       - name: Bit tag for each path released
-        if: steps.release.outputs.releases_created
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
         run: |
           # Parse the paths_released output into an array
           echo "RELEASE OUTPUTS: ${{ steps.release.outputs }}"
@@ -175,6 +175,7 @@ jobs:
           done
           
       - name: Commit Bitmap
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
         uses: bit-tasks/commit-bitmap@c31e1ab8acfc20dd150a55b1aae894e49460aecc # v1
         
         
