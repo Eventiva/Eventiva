@@ -46,7 +46,9 @@
 */
 
 import { DiscordjsAspect } from './discordjs.aspect.js';
-export type { DiscordjsNode } from './discordjs.node.runtime.js'
+import type { DiscordjsNode as Node } from './discordjs.node.runtime.js'
+export { Node as DiscordjsDiscord, Node as DiscordjsNode }
+
 export { DiscordJsModule } from './module.js'
 export type { Resources, ModuleConfig } from './module.js'
 export type { Event } from './event.js'
