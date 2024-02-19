@@ -11,10 +11,15 @@ words:
   - joggr
   - learnbit
   - leasot
+  - openapi
   - pino
+  - psioniq
+  - pucelle
   - resourcetypes
   - serverid
   - todos
+  - zenstack
+  - zenstackhq
   - zmodel
   - zoomable
 ignoreWords: []

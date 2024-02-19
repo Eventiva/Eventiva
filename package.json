@@ -9,5 +9,13 @@
     "email": "support@eventiva.co.uk",
     "url": "https://github.com/Eventiva/Eventiva/issues/new/choose"
   },
+  "devDependencies": {
+    "@zenstackhq/openapi": "^1.8.2",
+    "prisma": "^5.9.1",
+    "zenstack": "1.8.2"
+  },
+  "dependencies": {
+    "@zenstackhq/runtime": "1.8.2"
+  },
   "type": "module"
 }
