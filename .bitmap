@@ -229,14 +229,14 @@
     "generators/harmony-templates": {
         "name": "generators/harmony-templates",
         "scope": "bitdev.harmony",
-        "version": "ca8559760e484c30d8fcccd958784018e50a13e1",
+        "version": "71b1b8efa8ac630934d988691f4dcd842fdaad67",
         "mainFile": "index.ts",
         "rootDir": "projects/harmony/generators/harmony-templates"
     },
     "generators/symphony-templates": {
         "name": "generators/symphony-templates",
         "scope": "bitdev.symphony",
-        "version": "2017a5eb097a6a1d3576ad749a9990e5a0e4342f",
+        "version": "473a1ad7fea3f95625f545bbd74a40936ee95333",
         "mainFile": "index.ts",
         "rootDir": "projects/symphony/generators/symphony-templates"
     },
@@ -482,9 +482,9 @@
     "$schema-version": "17.0.0",
     "_bit_lane": {
         "id": {
-            "name": "feat-templates-extend",
+            "name": "central-platform",
             "scope": "eventiva.modules"
         },
-        "exported": false
+        "exported": true
     }
 }
