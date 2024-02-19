@@ -3,7 +3,7 @@
 > [!CAUTION]
 > This project is currently in a pre-release state, all versions <1.0.0 are subject to breaking changes
 > 
-> Current Version: 0.1.2 <!-- x-release-please-version -->
+> Current Version: '0.1.5' <!-- x-release-please-version -->
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/Eventiva/eventiva?quickstart=1)
 

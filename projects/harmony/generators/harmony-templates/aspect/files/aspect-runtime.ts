@@ -122,12 +122,12 @@ export function runtimeFile(
   const deps = runtime.dependencies?.map((dep) => ({
     component: typeof dep === 'object' ? ComponentID.fromString(dep[0]) : ComponentID.fromString(dep),
     imports: typeof dep === 'object' ? dep[1].extraImports : undefined
-  })) || [];
+  } as Dependencies)) || [];
   const depNames = deps?.map((dep) => dep.component.name) || [];
   const depImports = generateDepImports(deps, runtime.name);
   const userImports = generateUserImports(context, runtime);
   const classExtends = runtime.classExtends ? runtime.classExtends(context) : undefined;
-  const configExtends = runtime.configExtends(context);
+  const configExtends = runtime.configExtends ? runtime.configExtends(context) : undefined;
   const runtimeConfig = typeof configExtends === 'object' ? configExtends[1].config : undefined
   const runtimeIdentifier = `${context.namePascalCase}${runtimeSuffix}`;
   const configIdentifier = `${context.namePascalCase}Config`;

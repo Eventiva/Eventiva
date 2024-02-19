@@ -53,7 +53,7 @@ export class AspectTemplate implements ComponentTemplate {
       return runtime.name;
     });
 
-    const configImports: {imports?: string, configExtends?: string} = runtimes.reduce((acc, runtime) => {
+    const configImports = runtimes.reduce<{imports?: string, configExtends?: string}>((acc, runtime) => {
       if (!runtime.imports) return acc;
       
       const runtimeImports = runtime.imports(context).map((imp) => {
@@ -62,7 +62,7 @@ export class AspectTemplate implements ComponentTemplate {
         return imp[0];
       }).join('\n');
 
-      const config = runtime.configExtends?.(context)
+      const config = runtime.configExtends ? runtime.configExtends?.(context) : undefined;
       const configExtends =  typeof config === 'object' ? config[0] : config
 
       return {

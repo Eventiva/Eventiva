@@ -10,7 +10,7 @@ export function SymphonyTemplates(options: SymphonyTemplatesOptions = {}) {
   return HarmonyTemplates({
     ...options, // include the options to ensure they are always applied then override with the below
 
-    platformName: options.platformName ?? 'symphony-platform2',
+    platformName: options.platformName ?? 'symphony-platform',
 
     docsFile: options.docsFile ?? aspectDocsFile,
 

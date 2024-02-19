@@ -14,7 +14,7 @@ export type SymphonyPlatformTemplateOptions = {
 
 export class SymphonyPlatformTemplate implements ComponentTemplate {
   constructor(
-    readonly name = 'symphony-platform2',
+    readonly name = 'symphony-platform',
     readonly description = 'create symphony platform. compose business aspects into a unified platform',
     readonly hidden = false,
     readonly env?: string,
