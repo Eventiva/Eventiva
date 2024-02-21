@@ -111,7 +111,6 @@ jobs:
           git config --global tag.gpgsign true
               
       - name: Update subrepo
-        working-directory: eventiva
         run: |
           source projects/workflows/git-subrepo/cmd/.rc
           git subrepo push --all --verbose --debug

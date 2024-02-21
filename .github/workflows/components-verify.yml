@@ -114,5 +114,6 @@ jobs:
       - name: Initialize Bit
         uses: bit-tasks/init@v1 # v1
 
+
       - name: Bit Verify
         uses: bit-tasks/verify@v1 # v1

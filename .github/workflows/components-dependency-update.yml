@@ -115,6 +115,7 @@ jobs:
       - name: Initialize Bit
         uses: bit-tasks/init@v1 # v1
 
+
       - name: Bit Update Dependencies
         uses: bit-tasks/dependency-update@v1 # v1
         with:

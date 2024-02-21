@@ -49,7 +49,7 @@ on:
   push:
     branches:
     - main
-    - develop
+    # - develop # Tuned off for now as release-please isn't respecting the prerelease flag
     - release/*
 
 permissions:
@@ -63,7 +63,7 @@ jobs:
       contents: write
       pull-requests: write
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
       GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
       GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
       BIT_CONFIG_USER_TOKEN : ${{ secrets.BIT_CONFIG_USER_TOKEN }}
@@ -110,9 +110,8 @@ jobs:
       - uses: google-github-actions/release-please-action@v4
         id: release
         with:
-          token: ${{ secrets.BOT_TOKEN }}
           config-file: ${{ github.ref_name == 'develop' && '.github/releases/release-develop-config.json' || '.github/releases/release-main-config.json' }}
-          manifest-file: ${{ github.ref_name == 'develop' && '.github/releases/.release-develop-manifest.json' || '.github/releases/.release-main-manifest.json' }}
+          manifest-file: '.github/releases/.release-manifest.json'
           target-branch: ${{ github.ref_name }}
           include-component-in-tag: true
       
@@ -160,7 +159,8 @@ jobs:
         if: steps.release.outputs.releases_created
         run: |
           # Parse the paths_released output into an array
-          paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+          echo "RELEASE OUTPUTS: ${{ steps.release.outputs }}"
+          paths_released=(${{ steps.release.outputs.paths_released }})
 
           # Loop over the paths
           for path in "${paths_released[@]}"; do
@@ -173,5 +173,8 @@ jobs:
             tag_name=$(echo "${{ steps.release.outputs }}" | jq -r ".${bitProject}--tag_name")
             bit tag eventiva.$project --ver $tag_name --message "Release $tag_name" --build
           done
+          
+      - name: Commit Bitmap
+        uses: bit-tasks/commit-bitmap@c31e1ab8acfc20dd150a55b1aae894e49460aecc # v1
         
         
