@@ -60,6 +60,8 @@ import type { ExtendedClientEvents } from "./event.js";
 import { I18NAspect } from "@eventiva/bots.aspects.i18n";
 import { LoggingAspect } from "@eventiva/bots.aspects.logging";
 import { Resource } from "@eventiva/bots.aspects.i18n";
+import SegmentAspect, { SegmentNode } from "@eventiva/central.aspects.segment";
+import DatabaseAspect, { DatabaseNode } from "@eventiva/central.aspects.database";
 
 /**
  * A class representing the DiscordjsNode.
@@ -94,6 +96,18 @@ export class DiscordjsNode {
    * @public
    */
   public i18n: I18NNode["i18next"] 
+
+  /**
+   * A public property that represents the analytics segment node's identity in the SegmentNode class.
+   * @author Jonathan Stevens (@TGTGamer)
+   *
+   * @public
+   */
+  public identity: {
+    track: SegmentNode["analytics"]["track"],
+    identify: SegmentNode["analytics"]["identify"],
+    group: SegmentNode["analytics"]["group"],
+  }
   
   /**
    * Indicates whether the object is initialised or not.
@@ -120,18 +134,28 @@ export class DiscordjsNode {
     protected eventSlot: EventSlot<any>,
     protected commandSlot: CommandSlot,
     protected i18nModule: I18NNode,
+    protected database?: DatabaseNode,
     protected logging?: LoggingNode,
+    protected segment?: SegmentNode
   ) {
     this.log = logging ? logging.registerLogger([{name: "discord:client", options: {level: "trace", ...this.config.logger}}]).getLogger("discord:client").logger : console
 
     this.log.trace("Waiting on i18nModule to initialize")
     while (!i18nModule.i18next.isInitialized) {}
-    this.isInitialised = true
     this.log.trace("Registering i18nModule resources")
     this.registerLocale([{name: "discord", lng: "en", ns: "discord", resources: discord}, {name: "errors", lng: "en", ns: "errors", resources: errors}])
     
     this.i18n = i18nModule.i18next
-    this.log.trace(this.i18n.t("discord:init.logging.module", {context: logging ? undefined : 'notFound', defaultValue: ""}))
+    this.log.trace(this.i18n.t("discord:init.logging.module", {context: logging ? undefined : 'notFound', defaultValue: ""})) 
+
+    this.identity = this.segment.registerInstance([{
+      name: "discordjs",
+      initialized: false,
+      writeKey: this.config.segment.writeKey,
+      analytics: null
+    }]).getInstance("discordjs").analytics
+
+    database.db
 
     this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "token"}))
     if (!config.token) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "token"}))
@@ -158,6 +182,8 @@ export class DiscordjsNode {
         else this.log.warn(this.i18n.t("discord:init.faked"));
         this.log.trace(this.i18n.t("discord:init.loggedIn"));
     }, config.startDelay);
+
+    this.isInitialised = true
   }
 
   /**
@@ -317,7 +343,7 @@ export class DiscordjsNode {
    *
    * @static
    */
-  static dependencies = [I18NAspect, LoggingAspect];
+  static dependencies = [I18NAspect, DatabaseAspect, LoggingAspect, SegmentAspect];
 
   /**
    * The default configuration for the DiscordJsClient class.
@@ -387,11 +413,11 @@ export class DiscordjsNode {
    * @returns Creates a new DiscordjsNode instance and performs necessary setup actions, such as logging events, logging in to Discord, and returning the instance.
    */
   static async provider(
-    [i18n, logging]: [I18NNode, LoggingNode|undefined],
+    [i18n, database, logging, segment]: [I18NNode, DatabaseNode|undefined, LoggingNode|undefined, SegmentNode | undefined],
     config: DiscordjsConfig,
     [eventSlot, commandSlot]: [EventSlot<any>, CommandSlot]
   ) {
-    const discordjs = new DiscordjsNode(config, eventSlot, commandSlot, i18n, logging);
+    const discordjs = new DiscordjsNode(config, eventSlot, commandSlot, i18n, database, logging, segment);
 
     return discordjs;
   }

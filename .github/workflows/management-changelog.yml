@@ -63,7 +63,7 @@ jobs:
       contents: write
       pull-requests: write
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
       GIT_USER_NAME: ${{ secrets.GIT_USER_NAME }}
       GIT_USER_EMAIL: ${{ secrets.GIT_USER_EMAIL }}
       BIT_CONFIG_USER_TOKEN : ${{ secrets.BIT_CONFIG_USER_TOKEN }}
@@ -110,10 +110,9 @@ jobs:
       - uses: google-github-actions/release-please-action@v4
         id: release
         with:
-          token: ${{ secrets.BOT_TOKEN }}
-          config-file: ${{ github.ref_name == 'develop' && '.github/releases/release-develop-config.json' || '.github/releases/release-main-config.json' }}
-          manifest-file: ${{ github.ref_name == 'develop' && '.github/releases/.release-develop-manifest.json' || '.github/releases/.release-main-manifest.json' }}
-          target-branch: ${{ github.ref_name }}
+          config-file: '.github/releases/release-main-config.json'
+          manifest-file: '.github/releases/.release-manifest.json'
+          target-branch: ${{ github.ref_name == 'develop' && 'main' || github.ref_name }}
           include-component-in-tag: true
       
       # - name: tag major and minor versions
@@ -142,7 +141,7 @@ jobs:
       
       # checks out the repository
       - uses: actions/checkout@v4
-        if: steps.release.outputs.releases_created
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
         
       - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
         if: steps.release.outputs.releases_created
@@ -153,14 +152,15 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: Initialize Bit
-        if: steps.release.outputs.releases_created
-        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
+        uses: bit-tasks/init@69061074c39e3af84b6ac7a2d1915b2e4ab23f78 # v1
         
       - name: Bit tag for each path released
-        if: steps.release.outputs.releases_created
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
         run: |
           # Parse the paths_released output into an array
-          paths_released=(${{ fromJSON(steps.release.outputs.paths_released) }})
+          echo "RELEASE OUTPUTS: ${{ steps.release.outputs }}"
+          paths_released=(${{ steps.release.outputs.paths_released }})
 
           # Loop over the paths
           for path in "${paths_released[@]}"; do
@@ -173,5 +173,9 @@ jobs:
             tag_name=$(echo "${{ steps.release.outputs }}" | jq -r ".${bitProject}--tag_name")
             bit tag eventiva.$project --ver $tag_name --message "Release $tag_name" --build
           done
+          
+      - name: Commit Bitmap
+        if: steps.release.outputs.releases_created && github.ref_name != 'develop'
+        uses: bit-tasks/commit-bitmap@c31e1ab8acfc20dd150a55b1aae894e49460aecc # v1
         
         
