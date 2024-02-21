@@ -84,7 +84,7 @@ jobs:
           proc_trace_sys_enable: true
 
       - name: CLA Assistant
-        uses: cla-assistant/github-action@v2.3.0 # v2.3.0
+        uses: cla-assistant/github-action@v2.3.1 # v2.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
           PERSONAL_ACCESS_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
