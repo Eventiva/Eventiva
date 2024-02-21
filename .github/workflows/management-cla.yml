@@ -71,7 +71,7 @@ jobs:
     if: (github.event.comment.body == 'recheck' || github.event.comment.body == 'I have read the CLA Document and I hereby sign the CLA' || github.event_name == 'pull_request_target' )
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@v2.6.1 # v2.6.1
+        uses: step-security/harden-runner@v2.7.0 # v2.6.1
         with:
           egress-policy: audit
 
