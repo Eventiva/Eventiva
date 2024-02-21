@@ -21,7 +21,7 @@
   "projects/frappe/teamspeak_integration": "0.1.0",
   "projects/frappe/vetting": "0.1.0",
   "projects/workflows/bit/todo": "0.1.0",
-  "projects/workflows/discord/env": "0.1.0",
+  "projects/workflows/discord/env": "0.2.0",
   "projects/workflows/discord/generator": "0.0.0",
   "projects/workflows/frappe/python-env": "0.1.0",
   "projects/workflows/generator": "0.1.1",
