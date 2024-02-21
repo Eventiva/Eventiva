@@ -26,5 +26,5 @@
   "projects/workflows/frappe/python-env": "0.1.0",
   "projects/workflows/generator": "0.1.1",
   "projects/workflows/git-subrepo": "0.1.0",
-  "projects/workflows/discord/generator/module": "0.1.1"
+  "projects/workflows/discord/generator/module": "0.2.0"
 }
