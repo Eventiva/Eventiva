@@ -59,12 +59,12 @@ jobs:
     
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        uses: catchpoint/workflow-telemetry-action@v1.8.7 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
@@ -111,7 +111,7 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
           
       - name: Initialize Bit
-        uses: bit-tasks/init@69061074c39e3af84b6ac7a2d1915b2e4ab23f78 # v1
+        uses: bit-tasks/init@v1 # v1
 
       - name: Resolve component packages from bit.cloud registry (Mandatory for component installation using package managers other than Bit)
         run: |

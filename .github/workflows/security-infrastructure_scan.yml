@@ -63,12 +63,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        uses: catchpoint/workflow-telemetry-action@v1.8.7 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
@@ -115,7 +115,7 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: GitGuardian iac scan
-        uses: GitGuardian/ggshield/actions/iac@5a6f8a571defbaf3375993f0091799a9afdf5c20 # main
+        uses: GitGuardian/ggshield/actions/iac # main
         with:
           args: ./terraform/ --minimum-severity CRITICAL # pass arguments to the action. If missing, will scan the current directory
         env:
