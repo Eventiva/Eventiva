@@ -59,24 +59,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        uses: catchpoint/workflow-telemetry-action@v1.8.7 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
           
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           # The destination to post the report to.
           # "slack" and "discord" are supported
@@ -105,16 +105,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/frappe'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -128,16 +128,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/hrms'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -151,16 +151,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/erpnext'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -174,16 +174,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/lms'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -197,16 +197,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/lending'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -220,16 +220,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/health'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -243,16 +243,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/payments'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -266,16 +266,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: webshop
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/health'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -289,16 +289,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'phamos-eu/it_management'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2
@@ -312,16 +312,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+      - uses: actions/checkout@v3.6.0 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/builder'
 
-      - uses: eventiva/change-report@356931c8a20afa16664e3dcfc4567ed924a34a43 # main
+      - uses: eventiva/change-report # main
         with:
           destination: 'discord'
           days: 2

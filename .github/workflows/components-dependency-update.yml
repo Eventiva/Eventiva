@@ -61,12 +61,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        uses: catchpoint/workflow-telemetry-action@v1.8.7 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
@@ -113,10 +113,10 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
           
       - name: Initialize Bit
-        uses: bit-tasks/init@e2ce273c218d39dfc68925c80f6da33e16407c87 # v1
+        uses: bit-tasks/init@v1 # v1
 
       - name: Bit Update Dependencies
-        uses: bit-tasks/dependency-update@30e84a973c7bac3670f0c9a023e27e376b0db29a # v1
+        uses: bit-tasks/dependency-update@v1 # v1
         with:
           allow: "all"
           branch: 'develop'
