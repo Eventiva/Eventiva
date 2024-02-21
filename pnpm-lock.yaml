@@ -302,6 +302,9 @@ importers:
         specifier: 1.2.1
         version: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     devDependencies:
+      '@babel/runtime':
+        specifier: 7.20.0
+        version: 7.20.0
       '@bitdev/symphony.envs.symphony-env':
         specifier: 0.0.16
         version: 0.0.16(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
@@ -343,10 +346,10 @@ importers:
         version: file:projects/bots/aspects/discordjs(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
-        version: file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.logging':
         specifier: workspace:*
-        version: file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.ping-command':
         specifier: workspace:*
         version: file:projects/bots/aspects/ping-command(@types/node@18.19.17)(typescript@5.3.3)
@@ -448,7 +451,7 @@ importers:
         version: file:projects/envs/generator(react-dom@18.2.0)(react@18.2.0)
       '@eventiva/envs.node':
         specifier: workspace:*
-        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(typescript@5.3.3)
+        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/envs.python':
         specifier: workspace:*
         version: file:projects/envs/python(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -675,10 +678,10 @@ importers:
         version: file:projects/bots/aspects/discordjs(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
-        version: file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.logging':
         specifier: workspace:*
-        version: file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.ping-command':
         specifier: workspace:*
         version: file:projects/bots/aspects/ping-command(@types/node@18.19.17)(typescript@5.3.3)
@@ -780,7 +783,7 @@ importers:
         version: file:projects/envs/generator(react-dom@18.2.0)(react@18.2.0)
       '@eventiva/envs.node':
         specifier: workspace:*
-        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(typescript@5.3.3)
+        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/envs.python':
         specifier: workspace:*
         version: file:projects/envs/python(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -1004,10 +1007,10 @@ importers:
         version: file:projects/bots/aspects/discordjs(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
-        version: file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.logging':
         specifier: workspace:*
-        version: file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.ping-command':
         specifier: workspace:*
         version: file:projects/bots/aspects/ping-command(@types/node@18.19.17)(typescript@5.3.3)
@@ -1354,10 +1357,10 @@ importers:
         version: file:projects/bots/aspects/discordjs(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
-        version: file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.logging':
         specifier: workspace:*
-        version: file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.ping-command':
         specifier: workspace:*
         version: file:projects/bots/aspects/ping-command(@types/node@18.19.17)(typescript@5.3.3)
@@ -1459,7 +1462,7 @@ importers:
         version: file:projects/envs/generator(react-dom@18.2.0)(react@18.2.0)
       '@eventiva/envs.node':
         specifier: workspace:*
-        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(typescript@5.3.3)
+        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/envs.python':
         specifier: workspace:*
         version: file:projects/envs/python(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -1714,10 +1717,10 @@ importers:
         version: file:projects/bots/aspects/discordjs(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
-        version: file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.logging':
         specifier: workspace:*
-        version: file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.ping-command':
         specifier: workspace:*
         version: file:projects/bots/aspects/ping-command(@types/node@18.19.17)(typescript@5.3.3)
@@ -1819,7 +1822,7 @@ importers:
         version: file:projects/envs/generator(react-dom@18.2.0)(react@18.2.0)
       '@eventiva/envs.node':
         specifier: workspace:*
-        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(typescript@5.3.3)
+        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/envs.python':
         specifier: workspace:*
         version: file:projects/envs/python(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -2053,10 +2056,10 @@ importers:
         version: file:projects/bots/aspects/discordjs(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.i18n':
         specifier: workspace:*
-        version: file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.logging':
         specifier: workspace:*
-        version: file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+        version: file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/bots.aspects.ping-command':
         specifier: workspace:*
         version: file:projects/bots/aspects/ping-command(@types/node@18.19.17)(typescript@5.3.3)
@@ -2158,7 +2161,7 @@ importers:
         version: file:projects/envs/generator(react-dom@17.0.2)(react@17.0.2)
       '@eventiva/envs.node':
         specifier: workspace:*
-        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(typescript@5.3.3)
+        version: file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@eventiva/envs.python':
         specifier: workspace:*
         version: file:projects/envs/python(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
@@ -4762,7 +4765,7 @@ importers:
         version: 1.0.13
       '@bitdev/harmony.harmony-env':
         specifier: 1.0.58
-        version: 1.0.58(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@12.20.4)(typescript@5.3.3)
+        version: 1.0.58(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@bitdev/harmony.testing.load-aspect':
         specifier: 0.0.22
         version: 0.0.22
@@ -4833,6 +4836,9 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(@types/node@18.19.17)(jsdom@24.0.0)
     devDependencies:
+      '@bitdev/symphony.envs.symphony-env':
+        specifier: 0.0.16
+        version: 0.0.16(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3)
       '@types/jest':
         specifier: ^29.2.2
         version: 29.5.12
@@ -5681,9 +5687,6 @@ importers:
       '@types/jest':
         specifier: 26.0.20
         version: 26.0.20
-      '@types/lodash':
-        specifier: ^4.14.202
-        version: 4.14.202
       '@types/node':
         specifier: 12.20.4
         version: 12.20.4
@@ -10624,6 +10627,15 @@ packages:
       lodash-es: 4.17.21
     dev: false
 
+  /@bitdev/harmony.harmony@1.0.12:
+    resolution: {integrity: sha512-QHjF345ihEstR94/JQGBkTMeUz0tPBYDWEmRVKgTWOiQZyqFQu91RPEEzYs8VNQ2uuuXhOsKOA1tRwVQu0BY7A==}
+    dependencies:
+      cleargraph: 5.8.0
+      comment-json: 3.0.3
+      fs-extra: 8.1.0
+      lodash-es: 4.17.21
+      user-home: 2.0.0
+
   /@bitdev/harmony.harmony@1.0.13:
     resolution: {integrity: sha512-RvZDZB1TwRyrgKuqrZBO8zovnyoSIIVNz0DRZDBBaX/kNTpPVlBWW5OwckxMBF4SjinVrwgnNQ3ZKnyHNN/lGw==}
     dependencies:
@@ -10685,6 +10697,14 @@ packages:
       import-meta-resolve: 4.0.0
       lodash-es: 4.17.21
 
+  /@bitdev/harmony.testing.load-aspect@0.0.18:
+    resolution: {integrity: sha512-sR0TnVjicubsoiXiUSX1MaUaEJNofdIpy7pOh5VPpzpN6UM53Fndr6isFxzoHvrOqkIDIvMz0XkLPY5Qncrdzw==}
+    dependencies:
+      '@bitdev/harmony.harmony': 1.0.12
+      '@teambit/component-id': 1.2.0
+      import-meta-resolve: 4.0.0
+      lodash-es: 4.17.21
+
   /@bitdev/harmony.testing.load-aspect@0.0.20:
     resolution: {integrity: sha512-0qJUpmaupIHBxwRGzQPC/soU/BF9gGgRxyqAuTtVY0ThycqYG5xrmRB5CG5SDjoCLBN1Acb9vJWvfSAbfojS6g==}
     dependencies:
@@ -10692,7 +10712,6 @@ packages:
       '@teambit/component-id': 1.2.0
       import-meta-resolve: 4.0.0
       lodash-es: 4.17.21
-    dev: false
 
   /@bitdev/harmony.testing.load-aspect@0.0.21:
     resolution: {integrity: sha512-2WW4/39nHsdUPXDY0QEKJ2xxhVT/Cva5AsGydQRphhCLrsIhZ85l2luCTaJOaKJ4xB7XwSLm26EsR6S3QEZoVQ==}
@@ -20041,6 +20060,7 @@ packages:
 
   /@types/lodash@4.14.202:
     resolution: {integrity: sha512-OvlIYQK9tNneDlS0VN54LLd5uiPCBOp7gS5Z0f1mjoJYBrtStzgmJBxONW3U6OZqdtNzZPmn9BS/7WI7BFFcFQ==}
+    dev: false
 
   /@types/long@4.0.2:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}
@@ -36818,6 +36838,9 @@ packages:
     resolution: {directory: projects/bots/aspects/atlassian-customer-support, type: directory}
     id: file:projects/bots/aspects/atlassian-customer-support
     name: '@eventiva/bots.aspects.atlassian-customer-support'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
     peerDependenciesMeta:
       '@bitdev/harmony.harmony':
         optional: true
@@ -36940,10 +36963,13 @@ packages:
       - utf-8-validate
     dev: false
 
-  file:projects/bots/aspects/i18n(@types/node@18.19.17)(typescript@5.3.3):
-    resolution: {directory: projects/bots/aspects/i18n, type: directory}
-    id: file:projects/bots/aspects/i18n
-    name: '@eventiva/bots.aspects.i18n'
+  file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/bots/aspects/discordjs, type: directory}
+    id: file:projects/bots/aspects/discordjs
+    name: '@eventiva/bots.aspects.discordjs'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
     peerDependenciesMeta:
       '@bitdev/harmony.harmony':
         optional: true
@@ -36953,7 +36979,145 @@ packages:
       '@apollo/client': 3.9.5(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@bitdev/harmony.harmony': 1.0.13
       '@bitdev/harmony.testing.load-aspect': 0.0.20
-      '@eventiva/bots.aspects.logging': file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3)
+      '@eventiva/bots.aspects.i18n': file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
+      '@eventiva/bots.aspects.logging': file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@eventiva/central.aspects.segment': file:projects/central/aspects/segment(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.19
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      discord.js: 14.14.1
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      jest: 29.3.1(@types/node@18.19.17)
+      jsdom: 23.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - encoding
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/bots/aspects/discordjs(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/bots/aspects/discordjs, type: directory}
+    id: file:projects/bots/aspects/discordjs
+    name: '@eventiva/bots.aspects.discordjs'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
+    peerDependenciesMeta:
+      '@bitdev/harmony.harmony':
+        optional: true
+      '@bitdev/harmony.testing.load-aspect':
+        optional: true
+    dependencies:
+      '@apollo/client': 3.9.5(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@bitdev/harmony.harmony': 1.0.13
+      '@bitdev/harmony.testing.load-aspect': 0.0.22
+      '@eventiva/bots.aspects.i18n': file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
+      '@eventiva/bots.aspects.logging': file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@eventiva/central.aspects.segment': file:projects/central/aspects/segment(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.19
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      discord.js: 14.14.1
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      jest: 29.3.1(@types/node@18.19.17)
+      jsdom: 23.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - encoding
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(typescript@5.3.3):
+    resolution: {directory: projects/bots/aspects/i18n, type: directory}
+    id: file:projects/bots/aspects/i18n
+    name: '@eventiva/bots.aspects.i18n'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
+    peerDependenciesMeta:
+      '@bitdev/harmony.harmony':
+        optional: true
+      '@bitdev/harmony.testing.load-aspect':
+        optional: true
+    dependencies:
+      '@apollo/client': 3.9.5(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@bitdev/harmony.harmony': 1.0.12
+      '@bitdev/harmony.testing.load-aspect': 0.0.18
+      '@eventiva/bots.aspects.logging': file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(typescript@5.3.3)
       '@mdx-js/react': 1.6.22(react@18.2.0)
       '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
       '@types/react': 18.2.23
@@ -37001,10 +37165,206 @@ packages:
       - utf-8-validate
     dev: false
 
-  file:projects/bots/aspects/logging(@types/node@18.19.17)(typescript@5.3.3):
+  file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3):
+    resolution: {directory: projects/bots/aspects/i18n, type: directory}
+    id: file:projects/bots/aspects/i18n
+    name: '@eventiva/bots.aspects.i18n'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
+    peerDependenciesMeta:
+      '@bitdev/harmony.harmony':
+        optional: true
+      '@bitdev/harmony.testing.load-aspect':
+        optional: true
+    dependencies:
+      '@apollo/client': 3.9.5(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@bitdev/harmony.harmony': 1.0.13
+      '@bitdev/harmony.testing.load-aspect': 0.0.20
+      '@eventiva/bots.aspects.logging': file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.19
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      i18next: 23.9.0
+      jest: 29.3.1(@types/node@18.19.17)
+      jsdom: 23.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - less
+      - lightningcss
+      - node-notifier
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/bots/aspects/i18n(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3):
+    resolution: {directory: projects/bots/aspects/i18n, type: directory}
+    id: file:projects/bots/aspects/i18n
+    name: '@eventiva/bots.aspects.i18n'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
+    peerDependenciesMeta:
+      '@bitdev/harmony.harmony':
+        optional: true
+      '@bitdev/harmony.testing.load-aspect':
+        optional: true
+    dependencies:
+      '@apollo/client': 3.9.5(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@bitdev/harmony.harmony': 1.0.13
+      '@bitdev/harmony.testing.load-aspect': 0.0.22
+      '@eventiva/bots.aspects.logging': file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.19
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      i18next: 23.9.0
+      jest: 29.3.1(@types/node@18.19.17)
+      jsdom: 23.2.0
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - less
+      - lightningcss
+      - node-notifier
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(typescript@5.3.3):
     resolution: {directory: projects/bots/aspects/logging, type: directory}
     id: file:projects/bots/aspects/logging
     name: '@eventiva/bots.aspects.logging'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
+    peerDependenciesMeta:
+      '@bitdev/harmony.harmony':
+        optional: true
+      '@bitdev/harmony.testing.load-aspect':
+        optional: true
+    dependencies:
+      '@apollo/client': 3.9.5(@types/react@18.2.23)(graphql@16.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@bitdev/harmony.harmony': 1.0.12
+      '@bitdev/harmony.testing.load-aspect': 0.0.18
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.0(react-dom@18.2.0)(react@18.2.0)
+      '@types/react': 18.2.23
+      '@types/react-dom': 18.2.19
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      jest: 29.3.1(@types/node@18.19.17)
+      jsdom: 23.2.0
+      pino: 8.19.0
+      pino-caller: 3.4.0(pino@8.19.0)
+      pino-pretty: 10.3.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.22.1(react-dom@18.2.0)(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - less
+      - lightningcss
+      - node-notifier
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/bots/aspects/logging(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(typescript@5.3.3):
+    resolution: {directory: projects/bots/aspects/logging, type: directory}
+    id: file:projects/bots/aspects/logging
+    name: '@eventiva/bots.aspects.logging'
+    peerDependencies:
+      '@bitdev/harmony.harmony': '*'
+      '@bitdev/harmony.testing.load-aspect': '*'
     peerDependenciesMeta:
       '@bitdev/harmony.harmony':
         optional: true
@@ -37373,6 +37733,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37415,6 +37777,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37457,6 +37821,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37499,6 +37865,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37541,6 +37909,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37583,6 +37953,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37625,6 +37997,224 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/api/verification_token(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/api/verification_token, type: directory}
+    id: file:projects/entities/api/verification_token
+    name: '@eventiva/entities.api.verification_token'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/base/address(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/base/address, type: directory}
+    id: file:projects/entities/base/address
+    name: '@eventiva/entities.base.address'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/base/address(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/base/address, type: directory}
+    id: file:projects/entities/base/address
+    name: '@eventiva/entities.base.address'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/base/address(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/base/address, type: directory}
+    id: file:projects/entities/base/address
+    name: '@eventiva/entities.base.address'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37709,6 +38299,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37751,6 +38343,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37793,6 +38387,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37835,6 +38431,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37877,6 +38475,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37919,6 +38519,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -37961,6 +38563,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38003,6 +38607,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38045,6 +38651,224 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/communities/resource(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/communities/resource, type: directory}
+    id: file:projects/entities/communities/resource
+    name: '@eventiva/entities.communities.resource'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/communities/resourcetypes(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/communities/resourcetypes, type: directory}
+    id: file:projects/entities/communities/resourcetypes
+    name: '@eventiva/entities.communities.resourcetypes'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/communities/resourcetypes(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/communities/resourcetypes, type: directory}
+    id: file:projects/entities/communities/resourcetypes
+    name: '@eventiva/entities.communities.resourcetypes'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/communities/resourcetypes(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/communities/resourcetypes, type: directory}
+    id: file:projects/entities/communities/resourcetypes
+    name: '@eventiva/entities.communities.resourcetypes'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38129,6 +38953,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38171,6 +38997,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38213,6 +39041,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38255,6 +39085,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38297,6 +39129,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38339,6 +39173,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38381,6 +39217,8 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38423,6 +39261,224 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
       vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.1)
     transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/report/files(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/report/files, type: directory}
+    id: file:projects/entities/report/files
+    name: '@eventiva/entities.report.files'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/report/report(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/report/report, type: directory}
+    id: file:projects/entities/report/report
+    name: '@eventiva/entities.report.report'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.12)(@bitdev/harmony.testing.load-aspect@0.0.18)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/report/report(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/report/report, type: directory}
+    id: file:projects/entities/report/report
+    name: '@eventiva/entities.report.report'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.20)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
+      - '@edge-runtime/vm'
+      - '@types/node'
+      - '@types/react'
+      - '@vitest/browser'
+      - '@vitest/ui'
+      - babel-plugin-macros
+      - bufferutil
+      - canvas
+      - eslint-import-resolver-typescript
+      - eslint-import-resolver-webpack
+      - graphql-ws
+      - happy-dom
+      - jest
+      - jsdom
+      - less
+      - lightningcss
+      - node-notifier
+      - prisma
+      - sass
+      - stylus
+      - subscriptions-transport-ws
+      - sugarss
+      - supports-color
+      - terser
+      - ts-node
+      - typescript
+      - utf-8-validate
+    dev: false
+
+  file:projects/entities/report/report(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(@types/react@18.2.23)(jest@29.3.1)(jsdom@23.2.0)(prisma@5.9.1)(typescript@5.3.3):
+    resolution: {directory: projects/entities/report/report, type: directory}
+    id: file:projects/entities/report/report
+    name: '@eventiva/entities.report.report'
+    dependencies:
+      '@eventiva/central.aspects.database': file:projects/central/aspects/database(@bitdev/harmony.harmony@1.0.13)(@bitdev/harmony.testing.load-aspect@0.0.22)(@types/node@18.19.17)(prisma@5.9.1)(typescript@5.3.3)
+      '@mdx-js/react': 1.6.22(react@18.2.0)
+      '@teambit/mdx.ui.mdx-scope-context': 1.0.7(@types/react@18.2.23)(react@18.2.0)
+      '@typescript-eslint/eslint-plugin': 6.19.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)(typescript@5.3.3)
+      '@typescript-eslint/parser': 6.19.1(eslint@8.56.0)(typescript@5.3.3)
+      eslint: 8.56.0
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.19.1)(eslint@8.56.0)
+      eslint-plugin-jest: 27.6.3(@typescript-eslint/eslint-plugin@6.19.1)(eslint@8.56.0)(jest@29.3.1)(typescript@5.3.3)
+      eslint-plugin-jsx-a11y: 6.8.0(eslint@8.56.0)
+      eslint-plugin-mdx: 3.1.5(eslint@8.56.0)
+      eslint-plugin-react: 7.33.2(eslint@8.56.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.56.0)
+      graphql: 16.8.1
+      graphql-tag: 2.12.6(graphql@16.8.1)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      vitest: 1.2.1(@types/node@18.19.17)(jsdom@23.2.0)(sass@1.71.0)
+    transitivePeerDependencies:
+      - '@bitdev/harmony.harmony'
+      - '@bitdev/harmony.testing.load-aspect'
       - '@edge-runtime/vm'
       - '@types/node'
       - '@types/react'
@@ -38569,7 +39625,7 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(@typescript-eslint/parser@6.19.1)(typescript@5.3.3):
+  file:projects/envs/node(@teambit/legacy@node_modules+@teambit+legacy)(@types/node@18.19.17)(typescript@5.3.3):
     resolution: {directory: projects/envs/node, type: directory}
     id: file:projects/envs/node
     name: '@eventiva/envs.node'
@@ -38613,7 +39669,6 @@ packages:
       - '@types/express'
       - '@types/node'
       - '@types/webpack'
-      - '@typescript-eslint/parser'
       - '@vitest/browser'
       - '@vitest/ui'
       - babel-plugin-macros

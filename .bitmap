@@ -229,14 +229,14 @@
     "generators/harmony-templates": {
         "name": "generators/harmony-templates",
         "scope": "bitdev.harmony",
-        "version": "71b1b8efa8ac630934d988691f4dcd842fdaad67",
+        "version": "0.0.29",
         "mainFile": "index.ts",
         "rootDir": "projects/harmony/generators/harmony-templates"
     },
     "generators/symphony-templates": {
         "name": "generators/symphony-templates",
         "scope": "bitdev.symphony",
-        "version": "473a1ad7fea3f95625f545bbd74a40936ee95333",
+        "version": "0.0.8",
         "mainFile": "index.ts",
         "rootDir": "projects/symphony/generators/symphony-templates"
     },
@@ -275,34 +275,6 @@
         "mainFile": "index.ts",
         "rootDir": "projects/entities/identities/platform"
     },
-    "identities/enums": {
-        "name": "identities/enums",
-        "scope": "",
-        "version": "d6642b58549f365eb253c6cf9599966dd142fad5",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/enums"
-    },
-    "identities/identifier": {
-        "name": "identities/identifier",
-        "scope": "eventiva.entities",
-        "version": "7504d299e614d0c07eb99a784a7cee6e90c24e29",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/identifier"
-    },
-    "identities/linked": {
-        "name": "identities/linked",
-        "scope": "eventiva.entities",
-        "version": "f27494ecf5805195958e66696d7b87de91935597",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/linked"
-    },
-    "identities/platform": {
-        "name": "identities/platform",
-        "scope": "eventiva.entities",
-        "version": "0266f990a94e582058a1780fdb721647423abc6e",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/platform"
-    },
     "incident_management": {
         "name": "incident_management",
         "scope": "eventiva.frappe",
@@ -321,14 +293,6 @@
         "name": "node",
         "scope": "eventiva.envs",
         "version": "0.0.2",
-        "mainFile": "index.ts",
-        "rootDir": "projects/envs/node"
-    },
-    "node": {
-        "name": "node",
-        "scope": "",
-        "version": "82b397485209485ecd925adb8a3ec5ce451a9d17",
-        "defaultScope": "eventiva.envs",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/node"
     },
@@ -395,62 +359,6 @@
         "mainFile": "index.ts",
         "rootDir": "projects/entities/segment/user"
     },
-    "platform": {
-        "name": "platform",
-        "scope": "",
-        "version": "127ef446c4093d59186b7fa3a00700ebcf611823",
-        "mainFile": "index.ts",
-        "rootDir": "projects/central/platform"
-    },
-    "python": {
-        "name": "python",
-        "scope": "eventiva.envs",
-        "version": "0c578a1e0fe92659c51f5bd95951cfc7fc3bb204",
-        "mainFile": "index.ts",
-        "rootDir": "projects/envs/python"
-    },
-    "report/action": {
-        "name": "report/action",
-        "scope": "eventiva.entities",
-        "version": "8e79ea47511d6bf7b7693d79b16e2ae49faaa716",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/action"
-    },
-    "report/enums": {
-        "name": "report/enums",
-        "scope": "eventiva.entities",
-        "version": "70240782c6dde12a00d87a073c023be8a41eb026",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/enums"
-    },
-    "report/files": {
-        "name": "report/files",
-        "scope": "eventiva.entities",
-        "version": "ddc98e83f9b3812b3d182ef4aefb3386f8044b63",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/files"
-    },
-    "report/report": {
-        "name": "report/report",
-        "scope": "eventiva.entities",
-        "version": "8302fcb1f55fdb68dd335397725a1c0b9209c9b1",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/report"
-    },
-    "segment/group": {
-        "name": "segment/group",
-        "scope": "eventiva.entities",
-        "version": "3c77c96771b5aa0f656084a2944979ef2e3b29d5",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/segment/group"
-    },
-    "segment/user": {
-        "name": "segment/user",
-        "scope": "eventiva.entities",
-        "version": "238e9153a880e279b99e28934daf2016465df55a",
-        "mainFile": "index.ts",
-        "rootDir": "projects/entities/segment/user"
-    },
     "segment_connect": {
         "name": "segment_connect",
         "scope": "eventiva.frappe",
@@ -479,12 +387,5 @@
         "mainFile": "index.ts",
         "rootDir": "projects/frappe/vetting"
     },
-    "$schema-version": "17.0.0",
-    "_bit_lane": {
-        "id": {
-            "name": "central-platform",
-            "scope": "eventiva.modules"
-        },
-        "exported": true
-    }
+    "$schema-version": "17.0.0"
 }
