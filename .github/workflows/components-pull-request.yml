@@ -80,7 +80,7 @@ jobs:
           proc_trace_sys_enable: true
 
       # checks out the repository
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.1.1
         with:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN || github.token }}"
@@ -119,7 +119,7 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: Checkout repository
-        uses: actions/checkout@v3.6.0 # v3.6.0
+        uses: actions/checkout@v4.1.1 # v3.6.0
 
       - name: Initialize Bit
         uses: bit-tasks/init@v1 # v1
