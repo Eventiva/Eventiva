@@ -102,7 +102,7 @@ jobs:
           git config --global tag.gpgsign true
 
       - name: Nightly Merge
-        uses: robotology/gh-action-nightly-merge@v1.4.0
+        uses: robotology/gh-action-nightly-merge@v1.5.0
         with:
           stable_branch: 'main'
           development_branch: 'develop'
