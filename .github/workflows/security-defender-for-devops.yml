@@ -93,12 +93,12 @@ jobs:
 
     steps:
       - name: Harden Runner
-        uses: step-security/harden-runner@eb238b55efaa70779f274895e782ed17c84f2895 # v2.6.1
+        uses: step-security/harden-runner@v2.6.1 # v2.6.1
         with:
           egress-policy: audit
 
       - name: Workflow Telemetry
-        uses: catchpoint/workflow-telemetry-action@6705383eabd01833acfe8412ec697384830e1455 # v1.8.7
+        uses: catchpoint/workflow-telemetry-action@v1.8.7 # v1.8.7
         with: 
           github_token: ${{ secrets.BOT_TOKEN || github.token }}
           comment_on_pr: false
@@ -111,17 +111,17 @@ jobs:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN || github.token }}"
 
-      - uses: actions/setup-dotnet@3447fd6a9f9e57506b15f895c5b76d3b197dc7c2 # v3.2.0
+      - uses: actions/setup-dotnet@v3.2.0 # v3.2.0
         with:
           dotnet-version: |
             5.0.x
             6.0.x
 
       - name: Run Microsoft Security DevOps
-        uses: microsoft/security-devops-action@e94440350ed10e2806d47cd0d7504a2c51abdbe9 # v1.6.0
+        uses: microsoft/security-devops-action@v1.6.0 # v1.6.0
         id: msdo
 
       - name: Upload results to Security tab
-        uses: github/codeql-action/upload-sarif@1500a131381b66de0c52ac28abb13cd79f4b7ecc # v2.22.12
+        uses: github/codeql-action/upload-sarif@v2.22.12 # v2.22.12
         with:
           sarif_file: ${{ steps.msdo.outputs.sarifFile }}

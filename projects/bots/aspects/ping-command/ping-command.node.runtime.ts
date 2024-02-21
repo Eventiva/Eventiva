@@ -46,7 +46,9 @@
 */
 
 
-import DiscordjsAspect, { Event, Command, DiscordJsModule, DiscordjsNode, Resources } from '@eventiva/bots.aspects.discordjs';
+import DiscordjsAspect, { DiscordjsNode } from '@eventiva/bots.aspects.discordjs';
+import { DiscordJsModule } from '@eventiva/bots.aspects.discordjs';
+import type { Event, Command, Resources } from '@eventiva/bots.aspects.discordjs';
 import type { PingCommandConfig } from './ping-command-config.js';
 import { Endpoint, EndpointSlot } from './endpoint.js';
 

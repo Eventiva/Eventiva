@@ -74,6 +74,10 @@ reviews:
             - "DO NOT MERGE"
             - "SWEEP"
         drafts: false
+        base_branches:
+          - main
+          - release/**
+          - develop
 
 chat:
     auto_reply: true
