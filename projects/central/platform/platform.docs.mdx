@@ -1,0 +1,40 @@
+---
+labels: ['Platform', 'harmony', 'platform']
+description: 'A Platform Harmony platform composition.'
+---
+
+The Platform platform composition. Composes the Platform platform features into a unified and executable platform.
+
+## Run the platform
+
+Run the Platform platform by running the following commands:
+
+```
+bit use platform
+``` 
+
+Run the platform:
+
+```
+bit run platform
+``` 
+
+Your platform is now listening to URL shown in the command output.
+
+## Compose Aspects
+
+You can create and compose new Aspects to the Platform platform by adding them to the aspects property in `platform.bit-app.ts`:
+
+```ts
+import { NewsAspect } from '@pied/news.news';
+
+export const Platform = HarmonyPlatform.from({
+  name: 'platform',
+
+  aspects: [
+    HeaderAspect,
+    // your new platform feature.
+    NewsAspect,
+  ],
+});
+```
