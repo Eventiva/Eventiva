@@ -53,7 +53,7 @@ updates:
       interval: "daily"
       time: "02:00"
     commit-message:
-      prefix: ":arrow_up: maint"
+      prefix: "maint"
       include: scope
     labels: []
 
@@ -63,7 +63,7 @@ updates:
       interval: "daily"
       time: "02:00"
     commit-message:
-      prefix: ":arrow_up: maint"
+      prefix: "maint"
       include: scope
     labels: []
   
