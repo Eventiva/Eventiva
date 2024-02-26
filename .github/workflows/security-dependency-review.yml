@@ -118,4 +118,4 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: 'Dependency Review'
-        uses: actions/dependency-review-action@v2.5.1 # v2.5.1
+        uses: actions/dependency-review-action@v4.1.3 # v2.5.1
