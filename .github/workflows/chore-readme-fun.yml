@@ -126,7 +126,7 @@ jobs:
             .github/images/github-snake.svg
             .github/images/github-snake-dark.svg?palette=github-dark
       - name: Commit files
-        uses: EndBug/add-and-commit@v7.5.0 # v7.5.0
+        uses: EndBug/add-and-commit@v9.1.4 # v7.5.0
         with:
           add: ".github/images/"
           push: true
