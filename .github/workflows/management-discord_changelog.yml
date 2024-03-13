@@ -71,7 +71,7 @@ jobs:
           theme: dark
           proc_trace_sys_enable: true
           
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           # Use a large enough fetch depth to ensure the action can find the commit history to work with
           fetch-depth: 250
@@ -109,7 +109,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/frappe'
@@ -132,7 +132,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/hrms'
@@ -155,7 +155,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/erpnext'
@@ -178,7 +178,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/lms'
@@ -201,7 +201,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/lending'
@@ -224,7 +224,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/health'
@@ -247,7 +247,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/payments'
@@ -270,7 +270,7 @@ jobs:
         with:
           egress-policy: webshop
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/health'
@@ -293,7 +293,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'phamos-eu/it_management'
@@ -316,7 +316,7 @@ jobs:
         with:
           egress-policy: audit
 
-      - uses: actions/checkout@v3.6.0 # v3.6.0
+      - uses: actions/checkout@v4.1.2 # v3.6.0
         with:
           fetch-depth: 250
           repository: 'frappe/builder'
