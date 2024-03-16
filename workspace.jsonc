@@ -1,59 +1,76 @@
+/*
+ * @format
+ * -----
+ * Project: @eventiva/eventiva
+ * File: workspace.jsonc
+ * Path: /workspace.jsonc
+ * Created Date: Saturday, March 16th 2024
+ * Author: Jonathan Stevens (Email: jonathan@resnovas.com
+ * Github: https://github.com/TGTGamer)
+ * -----
+ * Contributing: Please read through our contributing guidelines.
+ * Included are directions for opening issues, coding standards,
+ * and notes on development. These can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ *
+ * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
+ * Please interact in ways that contribute to an open, welcoming, diverse,
+ * inclusive, and healthy community. Our Code of Conduct can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ * -----
+ * Copyright (c) 2024 Resnovas - All Rights Reserved
+ * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * -----
+ * This program has been provided under confidence of the copyright holder and
+ * is licensed for copying, distribution and modification under the terms
+ * of the GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * published as the License, or (at your option) any later
+ * version of this license.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License v2.0 or later for more details.
+ * You should have received a copy of the GNU General Public License v2.0 or later
+ * along with this program. If not, please write to: jonathan@resnovas.com,
+ * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+ * -----
+ * This project abides by the GPL Cooperation Commitment.
+ * Before filing or continuing to prosecute any legal proceeding or claim
+ * (other than a Defensive Action) arising from termination of a Covered
+ * License, we commit to extend to the person or entity ('you') accused
+ * of violating the Covered License the following provisions regarding
+ * cure and reinstatement, taken from GPL version 3.
+ * For further details on the GPL Cooperation Commitment please visit
+ * the official website: https://gplcc.github.io/gplcc/
+ * -----
+ * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+ */
 /**
  * this is the main configuration file of your bit workspace.
  * for full documentation, please see: https://bit.dev/reference/workspace/workspace-json
  **/{
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
-  /**
-   * main configuration of the Bit workspace.
-   **/
   "teambit.workspace/workspace": {
-    /**
-     * the name of the component workspace. used for development purposes.
-     **/
     "name": "Eventiva",
-    /**
-     * set the icon to be shown on the Bit server.
-     **/
     "icon": "https://static.bit.dev/bit-logo.svg",
-    /**
-     * default directory to place a component during `bit import` and `bit create`.
-     * the following placeholders are available:
-     * name - component name includes namespace, e.g. 'ui/button'.
-     * scopeId - full scope-id includes the owner, e.g. 'teambit.compilation'.
-     * scope - scope name only, e.g. 'compilation'.
-     * owner - owner name in bit.dev, e.g. 'teambit'.
-     **/
     "defaultDirectory": "projects/{scope}/{name}",
-    /**
-     * default scope for all components in workspace.
-     **/
     "defaultScope": "eventiva.modules",
     "defaultOwner": "Eventiva",
     "resolveAspectsFromNodeModules": true,
     "resolveEnvsFromRoots": true
   },
-  /**
-   * comment in to include generator templates in your workspace.
-   * browse more dev environments: https://bit.dev/docs/getting-started/composing/dev-environments
-  **/
   "teambit.generator/generator": {
     "envs": [
-      // "eventiva.envs/node"
+      "eventiva.envs/node"
     ]
   },
-  /**
-   * main configuration for component dependency resolution.
-   **/
   "teambit.dependencies/dependency-resolver": {
-    /**
-     * choose the package manager for Bit to use. you can choose between 'yarn', 'pnpm'
-     */
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
       "dependencies": {
         "@apollo/gateway": "^2.7.1",
         "@apollo/server": "^4.10.0",
-        "@bitdev/harmony.generators.harmony-templates": "^0.0.29",
+        "@bitdev/harmony.generators.harmony-templates": "^0.0.31",
         "@bitdev/harmony.harmony-platform": "^1.0.65",
         "@bitdev/harmony.runtimes.browser-runtime": "^0.0.43",
         "@bitdev/harmony.runtimes.nodejs-runtime": "^1.0.70",

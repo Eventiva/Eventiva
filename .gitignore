@@ -80,3 +80,4 @@ projects/bots/.eslintrc.json
 .prettierrc.cjs
 tsconfig.json
 .eslintrc.json
+env.pkl

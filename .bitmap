@@ -54,35 +54,35 @@
     "aspects/atlassian-customer-support": {
         "name": "aspects/atlassian-customer-support",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/atlassian-customer-support"
     },
     "aspects/discordjs": {
         "name": "aspects/discordjs",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/discordjs"
     },
     "aspects/i18n": {
         "name": "aspects/i18n",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/i18n"
     },
     "aspects/logging": {
         "name": "aspects/logging",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/logging"
     },
     "aspects/ping-command": {
         "name": "aspects/ping-command",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/ping-command"
     },
@@ -215,9 +215,23 @@
     "generator": {
         "name": "generator",
         "scope": "eventiva.envs",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/generator"
+    },
+    "generators/harmony-templates": {
+        "name": "generators/harmony-templates",
+        "scope": "eventiva.modules",
+        "version": "0.0.1",
+        "mainFile": "index.ts",
+        "rootDir": "projects/modules/generators/harmony-templates"
+    },
+    "generators/symphony-templates": {
+        "name": "generators/symphony-templates",
+        "scope": "eventiva.modules",
+        "version": "0.0.1",
+        "mainFile": "index.ts",
+        "rootDir": "projects/modules/generators/symphony-templates"
     },
     "grand_theft_auto": {
         "name": "grand_theft_auto",
@@ -271,14 +285,14 @@
     "node": {
         "name": "node",
         "scope": "eventiva.envs",
-        "version": "0.0.2",
+        "version": "0.0.3",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/node"
     },
     "packages/default_logging": {
         "name": "packages/default_logging",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/packages/default_logging"
     },
@@ -348,7 +362,7 @@
     "support": {
         "name": "support",
         "scope": "eventiva.bots",
-        "version": "0.1.1",
+        "version": "0.1.2",
         "mainFile": "index.ts",
         "rootDir": "projects/bots/support"
     },
