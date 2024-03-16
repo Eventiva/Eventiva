@@ -77,7 +77,7 @@ export class DiscordjsNode {
   /**
    * The Discord client instance. This property is a reference to the Discord.js Client class and is used to interact with the Discord API.
    * @author Jonathan Stevens (@TGTGamer)
-   * 
+   *
    * @public
    */
   public client: Client
@@ -95,7 +95,7 @@ export class DiscordjsNode {
    *
    * @public
    */
-  public i18n: I18NNode["i18next"] 
+  public i18n: I18NNode["i18next"]
 
   /**
    * A public property that represents the analytics segment node's identity in the SegmentNode class.
@@ -108,7 +108,7 @@ export class DiscordjsNode {
   //   identify: SegmentNode["analytics"]["identify"],
   //   group: SegmentNode["analytics"]["group"],
   // }
-  
+
   /**
    * Indicates whether the object is initialised or not.
    * @author Jonathan Stevens (@TGTGamer)
@@ -144,9 +144,9 @@ export class DiscordjsNode {
     while (!i18nModule.i18next.isInitialized) {}
     this.log.trace("Registering i18nModule resources")
     this.registerLocale([{name: "discord", lng: "en", ns: "discord", resources: discord}, {name: "errors", lng: "en", ns: "errors", resources: errors}])
-    
+
     this.i18n = i18nModule.i18next
-    this.log.trace(this.i18n.t("discord:init.logging.module", {context: logging ? undefined : 'notFound', defaultValue: ""})) 
+    this.log.trace(this.i18n.t("discord:init.logging.module", {context: logging ? undefined : 'notFound', defaultValue: ""}))
 
     // this.identity = this.segment.registerInstance([{
     //   name: "discordjs",
@@ -158,15 +158,15 @@ export class DiscordjsNode {
     this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "token"}))
     if (!config.token) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "token"}))
     else this.log.trace(this.i18n.t("discord:checks", {context: "found", key: "token"}))
-    
+
     this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "clientId"}))
     if (!config.clientId) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "clientId"}))
     else this.log.trace(this.i18n.t("discord:checks", {context: "found", key: "clientId"}))
-    
+
     this.log.trace(this.i18n.t("discord:checks", {context: "searching", key: "clientSecret"}))
     if (!config.clientSecret) this.log.warn(this.i18n.t("discord:checks.notFound", {key: "clientSecret"}))
     else this.log.trace(this.i18n.t("discord:checks", {context: "found", key: "clientSecret"}))
-  
+
     this.log.trace(this.i18n.t("discord:client.creating"));
 
     this.client = new Client(this.config)
@@ -174,7 +174,7 @@ export class DiscordjsNode {
     this.log.trace(this.i18n.t("discord:client.created"));
 
     this.log.trace(this.i18n.t("discord:init.loggingIn"));
-    
+
     setTimeout(async () => {
         if (config.token) await this.client.login(this.config.token)
         else this.log.warn(this.i18n.t("discord:init.faked"));
@@ -196,7 +196,7 @@ export class DiscordjsNode {
     return this.i18nModule.registerResource(resources)
     // this.log.trace(this.i18n.t("discord:registeredLocales", {count: resources.length}))
   }
-  
+
   /**
    * Registers a module in the DiscordJsManager.
    * - `module`: The module to register.
@@ -267,10 +267,10 @@ export class DiscordjsNode {
 
   /**
    * Retrieves an event with the given name.
-   * If multiple events with the same name exist, it returns the first event. 
+   * If multiple events with the same name exist, it returns the first event.
    * @see DiscordjsNode.getEvents for a list of all events with the given name.
    * @author Jonathan Stevens (@TGTGamer)
-   * 
+   *
    * @param name The name of the event to get.
    */
   public getEvent<E extends keyof ExtendedClientEvents>(name: E): Event<E>[] {
@@ -351,14 +351,14 @@ export class DiscordjsNode {
    * @static
    */
   static defaultConfig: DiscordjsConfig = {
-    token: process.env.TOKEN!,
-    startDelay: 30000,
+    token: process.env["DISCORD.TOKEN"]!,
+    startDelay: process.env["DISCORD.START_DELAY"] ? parseInt(process.env["DISCORD.START_DELAY"]) : 30000,
     // The client ID of the bot
-    clientId: process.env.CLIENT_ID!,
+    clientId: process.env["DISCORD.CLIENT_ID"]!,
     // The client secret of the bot
-    clientSecret: process.env.CLIENT_SECRET!,
+    clientSecret: process.env["DISCORD.CLIENT_SECRET"]!,
     // The guild ID to use for the bot as the development guild
-    guildId: process.env.GUILD_ID!,
+    guildId: process.env["DISCORD.GUILD_ID"]!,
     // The list of intents to use for the bot
     intents: [
       GatewayIntentBits.AutoModerationConfiguration,
@@ -382,7 +382,7 @@ export class DiscordjsNode {
       GatewayIntentBits.MessageContent,
     ],
     logger: {
-      level: "info",
+      level: process.env["DISCORD.LOGGER.LEVEL"] ?? "info",
     }
   };
 
