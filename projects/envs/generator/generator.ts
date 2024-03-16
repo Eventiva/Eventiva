@@ -45,53 +45,61 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import type { EnvHandler } from '@teambit/envs';
-import { TemplateList } from '@teambit/generator';
-import { HarmonyTemplates } from '@bitdev/harmony.generators.harmony-templates';
-import { TemplatesOptions } from './template-options';
-import { discordNodeMethods } from './discord/methods';
-import { discordNodeImports } from './discord/imports';
-import { SymphonyTemplates } from '@bitdev/symphony.generators.symphony-templates';
+import { TemplatesOptions } from './template-options'
+import { SymphonyTemplates } from '@eventiva/modules.generators.symphony-templates'
 
 /**
  * Create a list of Harmony templates.
  */
-export function Generator(options: TemplatesOptions = {}): EnvHandler<TemplateList> {
-  return HarmonyTemplates({
-    ...options,
-    platformName: options.platformName || 'eventiva-platform',
+export function Generator(options: TemplatesOptions = {}) {
+    return SymphonyTemplates({
+        ...options,
+        platformName: options.platformName || 'eventiva-platform',
 
-    // docsFile: aspectDocsFile,
+        runtimes: [
+            ...(options.runtimes || []),
+            {
+                name: 'discord',
+                dependencies: [['eventiva.bots/aspects/discordjs', {
+                    extraImports: [
+                        "type Event",
+                        "type Command",
+                        "type DiscordJsModule",
+                        "type Resources"
+                    ]
+                }]],
+                imports: (context) => [
+                    [`import { ModuleConfig } from "@eventiva/bots.aspects.discordjs";`, { config: true, aspect: false }]
+                ],
+                classExtends: (context) => [`DiscordJsModule<${context.namePascalCase}Config>`, { super: `super(discord, config)` }],
+                methods: (context) => `public resources: Resources = {};
 
-    // disableHarmonyPlatform: true,
+  public registerEvents(reload?: true) {
+    this.discord.registerEvent(this, [
+    // add any events here
+    ] as Event<any>[])
+    return this
+  }
 
-    // templates: [
-    //   ...(options.templates || []),
-    // ],
-
-    runtimes: [
-      ...(options.runtimes || []),
-      // {
-      //   name: 'browser',
-      //   provider: browserRuntimeProvider,
-      //   dependencies: [
-      //     'bitdev.symphony/symphony-platform'
-      //   ],
-      //   extension: 'tsx'
-      // },
-      {
-        name: 'discord-node',
-        // provider: nodeRuntimeProvider,
-        dependencies: [
-          'eventiva.bots/aspects/discordjs'
-        ],
-
-        imports: discordNodeImports,
-        // files: (context) => [
-        //   graphQLServerFile(context)
-        // ],
-        methods: discordNodeMethods,
-      },
-    ]
-  });
+  public registerCommands(reload?: true) {
+    this.discord.registerCommand(this, [
+    // add any commands here
+    ] as Command[])
+    return this;
+  }
+      `,
+                configExtends: (context) => [`ModuleConfig`, {
+                    config: `{
+    name: "${context.namePascalCase}Module"
+    logger: {
+      level: "info",
+    }
+  }
+        `}],
+                provider: (context) => `${context.nameCamelCase}.log.trace(module.discord.i18n.t("discord:modules.registering", { name: ${context.nameCamelCase}.name }))
+        ${context.nameCamelCase}.discord.registerModule(module)
+        module.log.trace(${context.nameCamelCase}.discord.i18n.t("discord:modules.registered", { name: ${context.nameCamelCase}.name }))`,
+            },
+        ]
+    })
 }
