@@ -67,9 +67,9 @@ export class LoggingNode {
    *
    * @type {*}
    */
-  // stream = pretty({
-  //   colorize: true
-  // })
+    stream = pretty({
+      colorize: true
+    })
   /**
    * The `console` object provides access to the browser's debugging console. You can use it to output messages, debug code, and track the execution of your JavaScript code. The console object also provides various methods, such as log, warn, and error, for different types of messages.
    * @author Jonathan Stevens (@TGTGamer)
@@ -97,12 +97,12 @@ export class LoggingNode {
   constructor(
     private config: LoggingConfig,
     private loggerSlot: LoggerSlot,
-  ) { 
+  ) {
     // @ts-expect-error Type guarding error. Not sure how to fix. TODO: Fix me somehow
     this.console = process.env.NODE_ENV === 'development' ? pinoCaller(pino(this.config, this.stream)) : pino(this.config, this.stream);
     this.log = this.registerLogger([{name: "logger:main", options: {level: config.level}}]).getLogger("logger:main").logger
   }
-  
+
     /**
      * Registers an array of loggers.
      * Creates a new child logger on each logger argument.
@@ -128,7 +128,7 @@ export class LoggingNode {
 
       return this;
     }
-  
+
     /**
      * Returns the list of loggers. Each logger is represented as a value in an array.
      * @author Jonathan Stevens (@TGTGamer)
@@ -173,7 +173,7 @@ export class LoggingNode {
     level: 'trace',
     customLevels: {
       alert: 70,
-      emergency: 80 
+      emergency: 80
     },
   };
 
