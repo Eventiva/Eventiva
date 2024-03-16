@@ -45,6 +45,6 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import { Node } from './node.bit-env.js';
-export { Node };
-export default Node;
+import { Node } from './node.bit-env.js'
+export { Node }
+export default Node
