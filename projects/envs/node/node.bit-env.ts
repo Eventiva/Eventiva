@@ -3,7 +3,7 @@
  * learn more: https://bit.cloud/bitdev/harmony/harmony-env
  */
 import { HarmonyEnv } from '@bitdev/harmony.harmony-env';
-import { Generator} from '@eventiva/envs.generator'
+import { Generator } from '@eventiva/envs.generator'
 
 /**
  * Class representing a Node that extends HarmonyEnv.
