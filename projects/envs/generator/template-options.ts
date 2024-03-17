@@ -45,7 +45,6 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import type { ComponentTemplate } from "@teambit/generator";
 import type { HarmonyTemplatesOptions } from "@bitdev/harmony.generators.harmony-templates";
 
 /**

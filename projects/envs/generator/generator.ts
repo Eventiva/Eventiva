@@ -56,6 +56,7 @@ export function Generator(options: TemplatesOptions = {}) {
     return SymphonyTemplates({
         ...options,
         platformName: options.platformName || 'eventiva-platform',
+        harmonyEnvId: "@bitdev.harmony/harmony-env",
 
         runtimes: [
             ...(options.runtimes || []),
