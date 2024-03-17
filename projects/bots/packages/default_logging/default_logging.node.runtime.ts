@@ -101,7 +101,7 @@ export class DefaultLoggingNode extends DiscordJsModule<DefaultLoggingConfig> {
       async execute(this: DefaultLoggingNode, message: string) {
         this.log.warn(message)
       }
-    }, 
+    },
     fatal: {
       name: "fatal",
       once: false,
@@ -114,7 +114,7 @@ export class DefaultLoggingNode extends DiscordJsModule<DefaultLoggingConfig> {
       name: "alert",
       once: false,
       async execute(this: DefaultLoggingNode, message: string) {
-        if ('alert' in this.log)  return this.log.alert(message) 
+        if ('alert' in this.log)  return this.log.alert(message)
         return this.log.error(message)
       }
     },
@@ -207,7 +207,7 @@ export class DefaultLoggingNode extends DiscordJsModule<DefaultLoggingConfig> {
     config: DefaultLoggingConfig,
   ) {
     if (!discordjs) throw new Error("DiscordJS not in dependencies")
-    const module = new DefaultLoggingNode(discordjs, config);
+    const module = new DefaultLoggingNode(config, discordjs);
     module.log.trace(module.discord.i18n.t("discord:modules.registering", { name: module.name }))
     module.discord.registerModule(module)
     module.log.trace(module.discord.i18n.t("discord:modules.registered", { name: module.name }))
