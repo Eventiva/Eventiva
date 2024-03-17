@@ -1,15 +1,124 @@
-import { upperFirst, camelCase as camelCaseFn } from 'lodash';
+/**
+ * @format
+ * -----
+ * Project: @eventiva/eventiva
+ * File: aspect-runtime.ts
+ * Path: /projects/modules/generators/harmony-templates/aspect/files/aspect-runtime.ts
+ * Created Date: Saturday, March 16th 2024
+ * Author: Jonathan Stevens (Email: jonathan@resnovas.com
+ * Github: https://github.com/TGTGamer)
+ * -----
+ * Contributing: Please read through our contributing guidelines.
+ * Included are directions for opening issues, coding standards,
+ * and notes on development. These can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ *
+ * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
+ * Please interact in ways that contribute to an open, welcoming, diverse,
+ * inclusive, and healthy community. Our Code of Conduct can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ * -----
+ * Copyright (c) 2024 Resnovas - All Rights Reserved
+ * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * -----
+ * This program has been provided under confidence of the copyright holder and
+ * is licensed for copying, distribution and modification under the terms
+ * of the GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * published as the License, or (at your option) any later
+ * version of this license.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License v2.0 or later for more details.
+ * You should have received a copy of the GNU General Public License v2.0 or later
+ * along with this program. If not, please write to: jonathan@resnovas.com,
+ * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+ * -----
+ * This project abides by the GPL Cooperation Commitment.
+ * Before filing or continuing to prosecute any legal proceeding or claim
+ * (other than a Defensive Action) arising from termination of a Covered
+ * License, we commit to extend to the person or entity ('you') accused
+ * of violating the Covered License the following provisions regarding
+ * cure and reinstatement, taken from GPL version 3.
+ * For further details on the GPL Cooperation Commitment please visit
+ * the official website: https://gplcc.github.io/gplcc/
+ * -----
+ * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+ */
+
+/**
+ * @format
+ * -----
+ * Project: @eventiva/eventiva
+ * File: aspect-runtime.ts
+ * Path: /projects/modules/generators/harmony-templates/aspect/files/aspect-runtime.ts
+ * Created Date: Saturday, March 16th 2024
+ * Author: Jonathan Stevens (Email: jonathan@resnovas.com
+ * Github: https://github.com/TGTGamer)
+ * -----
+ * Contributing: Please read through our contributing guidelines.
+ * Included are directions for opening issues, coding standards,
+ * and notes on development. These can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ *
+ * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
+ * Please interact in ways that contribute to an open, welcoming, diverse,
+ * inclusive, and healthy community. Our Code of Conduct can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ * -----
+ * Copyright (c) 2024 Resnovas - All Rights Reserved
+ * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * -----
+ * This program has been provided under confidence of the copyright holder and
+ * is licensed for copying, distribution and modification under the terms
+ * of the GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * published as the License, or (at your option) any later
+ * version of this license.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License v2.0 or later for more details.
+ * You should have received a copy of the GNU General Public License v2.0 or later
+ * along with this program. If not, please write to: jonathan@resnovas.com,
+ * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+ * -----
+ * This project abides by the GPL Cooperation Commitment.
+ * Before filing or continuing to prosecute any legal proceeding or claim
+ * (other than a Defensive Action) arising from termination of a Covered
+ * License, we commit to extend to the person or entity ('you') accused
+ * of violating the Covered License the following provisions regarding
+ * cure and reinstatement, taken from GPL version 3.
+ * For further details on the GPL Cooperation Commitment please visit
+ * the official website: https://gplcc.github.io/gplcc/
+ * -----
+ * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+ */
+
+import { upperFirst, startCase, camelCase as camelCaseFn } from 'lodash';
 import { ComponentID } from '@teambit/component-id';
 import { ComponentContext } from '@teambit/generator';
 import { generateName } from './slot-template.js';
 import { RuntimeOptions } from '../../harmony-templates-options.js';
 
+/**
+ * A type representing the dependencies of a component. It has two properties: 'component' which is a ComponentID, and 'imports' which is an array of strings.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @typedef {Dependencies}
+ */
 type Dependencies = {
   component:  ComponentID,
   imports: string[]
 }
 
-function generateSlot(slots: string[]) {
+/**
+ * Generates JSDoc for the 'generateSlot' function that takes an array of slots and generates registration and listing methods for each slot. It also handles imports and constructor properties initialization based on the generated names of the slots.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @param {string[]} slots An array of strings representing different slots
+ * @returns {{ decelerations: string; methods: any; imports: any; args: any; constructorProperties: any; }} Generates JSDoc for the `generateSlot` function that takes an array of slots and generates methods for registering and listing those slots.
+ */
+function generateSlot(slots: string[], runtimeSuffix: string, deps: string[] = []) {
   const methods = slots.map((slot) => {
     const { pascalCase, camelCaseSlot, camelCase, displayName } = generateName(slot);
 
@@ -30,29 +139,43 @@ function generateSlot(slots: string[]) {
 `;
   }).join('\n\n  ');
 
-  const args = slots.map((slot) => {
-    const { camelCaseSlot } = generateName(slot);
-    return camelCaseSlot;
-  }).join(', ');
+  const imports = slots
+    .map((slot) => {
+      const { pascalCase, name, pascalCaseSlot } = generateName(slot)
+      return `import { ${pascalCase}, ${pascalCaseSlot} } from './${name}.js';`
+    })
+    .join('\n');
 
   const decelerations = `[${slots.map(
     (slot) => generateName(slot).camelCaseSlot
   ).join(', ')}]: [${slots.map((slot) => generateName(slot).pascalCaseSlot).join(', ')}]`;
 
-  const constructorProperties = slots.length ? slots
-    .map((slot) => {
-      const { camelCaseSlot, pascalCaseSlot } = generateName(slot);
+  const slotProperties = slots.map((slot) => {
+      const { camelCaseSlot, pascalCaseSlot } = generateName(slot)
+      return `private ${camelCaseSlot}: ${pascalCaseSlot},`
+  })
 
-      return `private ${camelCaseSlot}: ${pascalCaseSlot},`;
-    })
-    .join('\n    '): '';
-
-  const imports = slots
+  const constructorDepProperties = deps
     .map((slot) => {
-      const { pascalCase, name, pascalCaseSlot } = generateName(slot);
-      return `import { ${pascalCase}, ${pascalCaseSlot} } from './${name}.js';`;
-    })
-    .join('\n');
+      const camelCaseSlot = camelCaseFn(slot)
+      const pascalCaseSlot = startCase(camelCaseSlot).replace(/ /g, '');
+
+      return `${camelCaseSlot}${runtimeSuffix}: ${pascalCaseSlot}${runtimeSuffix},`
+  })
+
+  const constructorProperties = slotProperties.concat(constructorDepProperties).join('\n    ');
+
+  const slotArgs = slots.map((slot) => {
+    const { camelCaseSlot } = generateName(slot)
+    return camelCaseSlot
+  })
+
+  const depArgs = deps.map((slot) => {
+    const camelCaseSlot = camelCaseFn(slot)
+    return camelCaseSlot
+  })
+
+  const args = slotArgs.concat(depArgs).join(', ')
 
   return {
     decelerations,
@@ -63,6 +186,14 @@ function generateSlot(slots: string[]) {
   };
 }
 
+/**
+ * Generates dependency types based on the given dependencies array and runtime name.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @param {?string[]} [deps]
+ * @param {string} [runtimeName='node']
+ * @returns {string} This function generates type definitions based on input dependencies and runtime name. It accepts an optional array of dependencies and a runtime name, defaulted to 'node'. It returns a string representing the type definitions for the dependencies.
+ */
 function generateDependencyTypes(deps?: string[], runtimeName: string = 'node') {
   if (!deps) return `deps: []`;
   const typeDeps = deps?.map((dep) => {
@@ -78,6 +209,13 @@ function generateDependencyTypes(deps?: string[], runtimeName: string = 'node') 
   return `[${varNames}]: [${typeDeps}]`;
 }
 
+/**
+ * Generates a static list of dependencies based on the provided array of dependency names. If no dependencies are provided, an empty array is returned. Each dependency name is transformed into camelCase and then appended with the string 'Aspect'. The final result is an array containing all transformed dependencies.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @param {?string[]} [deps]
+ * @returns {string} Generates static dependencies based on an array of strings
+ */
 function generateStaticDeps(deps?: string[]) {
   if (!deps?.length) return '[]';
   const typeDeps = deps?.map((dep) => {
@@ -88,6 +226,14 @@ function generateStaticDeps(deps?: string[]) {
   return `[${typeDeps}]`;
 }
 
+/**
+ * Generates imports for the given dependencies and runtime. If the dependencies array is empty, an empty string is returned. Each dependency in the array is mapped to generate an import statement. The import statement includes the dependency details such as aspect, type, and imports. The dependencies are transformed into import statements with specific formatting and naming conventions.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @param {Dependencies[]} deps An array of Dependencies objects
+ * @param {string} runtime A string representing the runtime
+ * @returns {*} This function generates import statements for dependencies based on the Dependencies array and a runtime string. It converts each dependency information to import statements using the component name, runtime, and imports. The imports are formatted as per the structure and returned as a concatenated string.
+ */
 function generateDepImports(deps: Dependencies[], runtime: string) {
   if (!deps?.length) return '';
   return deps?.map((depId) => {
@@ -99,6 +245,14 @@ function generateDepImports(deps: Dependencies[], runtime: string) {
   }).join('\n');
 }
 
+/**
+ * Generates a string containing user imports based on the provided ComponentContext and RuntimeOptions. If the RuntimeOptions imports are falsy, an empty string is returned. The function iterates over the imports in the RuntimeOptions, processing each import. If an import is a string, it is returned as is. If an import is not a string, it checks whether the user has turned off aspect imports. The final string contains all processed imports separated by newlines.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @param {ComponentContext} context The context parameter representing the component context.
+ * @param {RuntimeOptions} runtime The runtime parameter representing the runtime options.
+ * @returns {string} Generates user imports based on the provided context and runtime options.
+ */
 function generateUserImports(
   context: ComponentContext,
   runtime: RuntimeOptions
@@ -113,6 +267,16 @@ function generateUserImports(
   }).join('\n')
 }
 
+/**
+ * Generates a runtime file content for a component with the provided context, runtime options, and slots. The runtime content includes dependencies, imports, class definition, constructor, methods, default config, and provider function. It also generates import statements, class inheritance, and necessary configurations based on the input parameters.
+ * @author Jonathan Stevens (TGTGamer)
+ *
+ * @export
+ * @param {ComponentContext} context The context parameter representing the component context
+ * @param {RuntimeOptions} runtime The runtime options for the function
+ * @param {string[]} slots An array of strings representing slots
+ * @returns {{ relativePath: string; content: string; }} Creates a runtime file based on the provided context, runtime options, and slot information. The function generates the content of the runtime file including dependencies, imports, class definition, methods, constructor, provider function, and default configuration.
+ */
 export function runtimeFile(
   context: ComponentContext,
   runtime: RuntimeOptions,
@@ -131,7 +295,7 @@ export function runtimeFile(
   const runtimeConfig = typeof configExtends === 'object' ? configExtends[1].config : undefined
   const runtimeIdentifier = `${context.namePascalCase}${runtimeSuffix}`;
   const configIdentifier = `${context.namePascalCase}Config`;
-  const { decelerations, imports, args, methods, constructorProperties } = generateSlot(slots || []);
+  const { decelerations, imports, args, methods, constructorProperties } = generateSlot(slots || [], runtimeSuffix, depNames);
   const userMethods = runtime.methods ? runtime.methods(context) : '';
   const aspectArgs = args?.length
     ? `(config, ${args})`
@@ -145,12 +309,12 @@ ${imports}${userImports}
 
 export class ${runtimeIdentifier} ${classExtends && (`extends ${typeof classExtends === 'object' ? classExtends[0] : classExtends} `)}{
   constructor(
-    private config: ${configIdentifier},${constructorProps}
-  ) {${classExtends && (typeof classExtends === 'object' ? classExtends[1] : "super()")}
+    protected config: ${configIdentifier},${constructorProps}
+  ) {${classExtends && (typeof classExtends === 'object' ? classExtends[1].super : "super()")}}
   ${slots.length ? methods : ''}${userMethods}
   static dependencies = ${generateStaticDeps(depNames)};
 
-  static defaultConfig: ${configIdentifier} = ${runtimeConfig ? runtimeConfig : '{}'};
+  static defaultConfig: ${configIdentifier} = {${runtimeConfig}};
 
   static async provider(
     ${generateDependencyTypes(depNames, runtime.name)},
