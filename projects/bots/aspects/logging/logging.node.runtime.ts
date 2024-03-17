@@ -48,7 +48,7 @@
 
 import pino from 'pino';
 import pinoCaller from 'pino-caller';
-import pretty from 'pino-pretty';
+import { PinoPretty } from 'pino-pretty';
 import type { LoggingConfig } from './logging-config.js';
 import { Log, Logger, LoggerSlot } from './logger.js';
 
@@ -67,7 +67,9 @@ export class LoggingNode {
    *
    * @type {*}
    */
-    stream = pretty
+  stream = PinoPretty({
+    colorize: true
+  })
   /**
    * The `console` object provides access to the browser's debugging console. You can use it to output messages, debug code, and track the execution of your JavaScript code. The console object also provides various methods, such as log, warn, and error, for different types of messages.
    * @author Jonathan Stevens (@TGTGamer)
