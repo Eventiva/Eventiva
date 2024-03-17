@@ -74,7 +74,7 @@ export type Resources = {
 export type ModuleConfig = {
   name: string
   logger: Logger['options']
-} 
+}
 
 /**
  * The DiscordJsModule class represents a module for the Discord.js library. It provides methods for initializing the module, registering events and commands, and setting the log for the module instance.
@@ -86,7 +86,7 @@ export type ModuleConfig = {
  * @implements {DiscordJsModule<C>}
  */
 export class DiscordJsModule<C extends ModuleConfig = {
-  name: string, 
+  name: string,
   logger: Logger['options']
 }> {
   /**
@@ -102,7 +102,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
    * @author Jonathan Stevens (@TGTGamer)
    */
   name: string
-  
+
   /**
    * Creates an instance of ReadyNode.
    * @author Jonathan Stevens (@TGTGamer)
@@ -112,8 +112,8 @@ export class DiscordJsModule<C extends ModuleConfig = {
    * @param config The configuration object for the ready event.
    */
   constructor(
-    public discord: DiscordjsNode,
     protected config: C,
+    public discord: DiscordjsNode,
   ) {
     this.log.trace("Waiting on discord module to initialize")
     this.name = config.name
@@ -127,7 +127,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
    *
    * @static
    */
-  static defaultConfig: ModuleConfig = { 
+  static defaultConfig: ModuleConfig = {
     name: "unnamed_module",
     logger: {
       level: "info",
