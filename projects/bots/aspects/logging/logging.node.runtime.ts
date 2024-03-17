@@ -67,9 +67,7 @@ export class LoggingNode {
    *
    * @type {*}
    */
-    stream = pretty({
-      colorize: true
-    })
+    stream = pretty
   /**
    * The `console` object provides access to the browser's debugging console. You can use it to output messages, debug code, and track the execution of your JavaScript code. The console object also provides various methods, such as log, warn, and error, for different types of messages.
    * @author Jonathan Stevens (@TGTGamer)
