@@ -48,11 +48,13 @@
 import { HarmonyPlatform } from '@bitdev/harmony.harmony-platform';
 import { NodeJSRuntime } from '@bitdev/harmony.runtimes.nodejs-runtime';
 import { BrowserRuntime } from '@bitdev/harmony.runtimes.browser-runtime';
+import { Discord } from '@eventiva/envs.runtimes.discord'
 import { SymphonyPlatformAspect } from '@bitdev/symphony.symphony-platform';
 import { DiscordjsAspect } from '@eventiva/bots.aspects.discordjs';
 import { LoggingAspect } from '@eventiva/bots.aspects.logging';
 import { I18NAspect } from '@eventiva/bots.aspects.i18n';
 import { DefaultLoggingAspect } from '@eventiva/bots.packages.default_logging'
+import { PingAspect } from '@eventiva/bots.commands.ping'
 // import { SegmentAspect } from '@eventiva/central.aspects.segment';
 // export from '@eventiva/central.aspects.database';
 
@@ -62,7 +64,7 @@ import { DefaultLoggingAspect } from '@eventiva/bots.packages.default_logging'
  */
 export const Support = HarmonyPlatform.from({
   name: 'Support',
-  
+
   platform: [SymphonyPlatformAspect, {
     name: 'Support',
     slogan: 'Platform',
@@ -72,7 +74,8 @@ export const Support = HarmonyPlatform.from({
 
   runtimes: [
     new BrowserRuntime(),
-    new NodeJSRuntime()
+    new NodeJSRuntime(),
+    new Discord()
   ],
 
   aspects: [
@@ -81,9 +84,10 @@ export const Support = HarmonyPlatform.from({
     I18NAspect,
     // DatabaseAspect,
     // DiscordjsAspect,
+    PingAspect,
     [
-      DiscordjsAspect, 
-      { 
+      DiscordjsAspect,
+      {
         logger: {
           level: "trace",
         }
@@ -91,14 +95,14 @@ export const Support = HarmonyPlatform.from({
     ],
     // DefaultLoggingAspect,
     [
-      DefaultLoggingAspect, 
-      { 
+      DefaultLoggingAspect,
+      {
         name: "default_logging",
         logger: {
           level: "trace",
         }
       }
-    ],
+    ]
   ],
 });
 
