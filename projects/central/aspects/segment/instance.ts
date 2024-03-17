@@ -80,4 +80,4 @@ export interface Instance<bool extends Boolean> extends AnalyticsSettings {
  *
  * @export
  */
-export type InstanceSlot = SlotRegistry<Instance<true>>;
+export type InstanceSlot = SlotRegistry<Instance<true>[]>;
