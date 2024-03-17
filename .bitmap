@@ -111,7 +111,14 @@
         "mainFile": "index.ts",
         "rootDir": "projects/bots/aspects/discordjs",
         "config": {
-            "bitdev.harmony/harmony-env@1.0.59": {}
+            "bitdev.harmony/harmony-env@1.0.59": {},
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "devDependencies": {
+                        "@types/testing-library__jest-dom": "5.9.5"
+                    }
+                }
+            }
         }
     },
     "aspects/i18n": {
@@ -717,9 +724,9 @@
         "mainFile": "index.ts",
         "rootDir": "projects/envs/runtimes/discord",
         "config": {
-            "eventiva.envs/node": {},
+            "bitdev.node/node-env@1.0.19": {},
             "teambit.envs/envs": {
-                "env": "eventiva.envs/node"
+                "env": "bitdev.node/node-env"
             }
         }
     },

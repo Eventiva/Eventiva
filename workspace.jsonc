@@ -160,4 +160,6 @@
   //     }
   //   }
   // }
+  ,
+  "eventiva.bots/support": {}
 }
