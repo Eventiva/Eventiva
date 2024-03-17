@@ -23,7 +23,7 @@
 * -----
 * This program has been provided under confidence of the copyright holder and
 * is licensed for copying, distribution and modification under the terms
-* of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+* of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the bLicense,
 * or (at your option) any later version of this license.
 * This program is distributed in the hope that it will be useful,
 * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -84,7 +84,7 @@ export const Support = HarmonyPlatform.from({
     I18NAspect,
     // DatabaseAspect,
     // DiscordjsAspect,
-    PingAspect,
+    // PingAspect,
     [
       DiscordjsAspect,
       {
