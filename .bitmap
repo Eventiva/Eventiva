@@ -14,371 +14,789 @@
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/api/access"
+        "rootDir": "projects/entities/api/access",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "api/authenticator": {
         "name": "api/authenticator",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/api/authenticator"
+        "rootDir": "projects/entities/api/authenticator",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "api/check": {
         "name": "api/check",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/api/check"
+        "rootDir": "projects/entities/api/check",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "api/enums": {
         "name": "api/enums",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/api/enums"
+        "rootDir": "projects/entities/api/enums",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "api/session": {
         "name": "api/session",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/api/session"
+        "rootDir": "projects/entities/api/session",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "api/verification_token": {
         "name": "api/verification_token",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/api/verification_token"
+        "rootDir": "projects/entities/api/verification_token",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "aspects/atlassian-customer-support": {
         "name": "aspects/atlassian-customer-support",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/atlassian-customer-support"
+        "rootDir": "projects/bots/aspects/atlassian-customer-support",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
+    },
+    "aspects/database": {
+        "name": "aspects/database",
+        "scope": "eventiva.central",
+        "version": "831c7aff763722bddc38f07ab0ae48df447c7521",
+        "mainFile": "index.ts",
+        "rootDir": "projects/central/aspects/database"
     },
     "aspects/discordjs": {
         "name": "aspects/discordjs",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/discordjs"
+        "rootDir": "projects/bots/aspects/discordjs",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "aspects/i18n": {
         "name": "aspects/i18n",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/i18n"
+        "rootDir": "projects/bots/aspects/i18n",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "aspects/logging": {
         "name": "aspects/logging",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/logging"
+        "rootDir": "projects/bots/aspects/logging",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "aspects/ping-command": {
         "name": "aspects/ping-command",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/aspects/ping-command"
+        "rootDir": "projects/bots/aspects/ping-command",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {},
+            "teambit.component/remove": {
+                "removed": true
+            }
+        }
+    },
+    "aspects/segment": {
+        "name": "aspects/segment",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.central",
+        "mainFile": "index.ts",
+        "rootDir": "projects/central/aspects/segment",
+        "config": {
+            "eventiva.envs/node": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
     },
     "base/address": {
         "name": "base/address",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/address"
+        "rootDir": "projects/entities/base/address",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "base/base": {
         "name": "base/base",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/base"
+        "rootDir": "projects/entities/base/base",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "base/enums": {
         "name": "base/enums",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/enums"
+        "rootDir": "projects/entities/base/enums",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "base/permission": {
         "name": "base/permission",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/permission"
+        "rootDir": "projects/entities/base/permission",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "base/role": {
         "name": "base/role",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/role"
+        "rootDir": "projects/entities/base/role",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "base/server": {
         "name": "base/server",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/server"
+        "rootDir": "projects/entities/base/server",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "base/user": {
         "name": "base/user",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/base/user"
+        "rootDir": "projects/entities/base/user",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
+    },
+    "commands/ping": {
+        "name": "commands/ping",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.bots",
+        "mainFile": "index.ts",
+        "rootDir": "projects/bots/commands/ping",
+        "config": {
+            "eventiva.envs/node": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
     },
     "communities/community": {
         "name": "communities/community",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/communities/community"
+        "rootDir": "projects/entities/communities/community",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "communities/members": {
         "name": "communities/members",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/communities/members"
+        "rootDir": "projects/entities/communities/members",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "communities/resource": {
         "name": "communities/resource",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/communities/resource"
+        "rootDir": "projects/entities/communities/resource",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "communities/resourcetypes": {
         "name": "communities/resourcetypes",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/communities/resourcetypes"
+        "rootDir": "projects/entities/communities/resourcetypes",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "content/message": {
         "name": "content/message",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/content/message"
+        "rootDir": "projects/entities/content/message",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "control_centre": {
         "name": "control_centre",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/control_centre"
+        "rootDir": "projects/frappe/control_centre",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "custody": {
         "name": "custody",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/custody"
+        "rootDir": "projects/frappe/custody",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "discord_integration": {
         "name": "discord_integration",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/discord_integration"
+        "rootDir": "projects/frappe/discord_integration",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "eventiva_core": {
         "name": "eventiva_core",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/eventiva_core"
+        "rootDir": "projects/frappe/eventiva_core",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "fleet_management": {
         "name": "fleet_management",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/fleet_management"
+        "rootDir": "projects/frappe/fleet_management",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "gaming": {
         "name": "gaming",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/gaming"
+        "rootDir": "projects/frappe/gaming",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "generator": {
         "name": "generator",
         "scope": "eventiva.envs",
         "version": "0.0.3",
         "mainFile": "index.ts",
-        "rootDir": "projects/envs/generator"
+        "rootDir": "projects/envs/generator",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "devDependencies": {
+                        "@types/jest": "29.5.12",
+                        "@types/node": "20.11.28",
+                        "@types/testing-library__jest-dom": "6.0.0"
+                    },
+                    "dependencies": {
+                        "@babel/runtime": "7.24.0",
+                        "@types/react": "18.2.66",
+                        "@types/react-dom": "^18.2.22",
+                        "core-js": "^3.36.0"
+                    }
+                }
+            }
+        }
     },
     "generators/harmony-templates": {
         "name": "generators/harmony-templates",
         "scope": "eventiva.modules",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/modules/generators/harmony-templates"
+        "rootDir": "projects/modules/generators/harmony-templates",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "dependencies": {
+                        "@babel/runtime": "7.24.0"
+                    },
+                    "devDependencies": {
+                        "@types/jest": "29.5.12",
+                        "@types/node": "20.11.28"
+                    }
+                }
+            },
+            "teambit.harmony/node": {},
+            "teambit.envs/envs": {
+                "env": "teambit.harmony/node"
+            }
+        }
     },
     "generators/symphony-templates": {
         "name": "generators/symphony-templates",
         "scope": "eventiva.modules",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/modules/generators/symphony-templates"
+        "rootDir": "projects/modules/generators/symphony-templates",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "dependencies": {
+                        "@babel/runtime": "7.24.0"
+                    },
+                    "devDependencies": {
+                        "@types/jest": "29.5.12",
+                        "@types/node": "20.11.28"
+                    }
+                }
+            },
+            "teambit.harmony/node": {},
+            "teambit.envs/envs": {
+                "env": "teambit.harmony/node"
+            }
+        }
     },
     "grand_theft_auto": {
         "name": "grand_theft_auto",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/grand_theft_auto"
+        "rootDir": "projects/frappe/grand_theft_auto",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "identities/enums": {
         "name": "identities/enums",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/enums"
+        "rootDir": "projects/entities/identities/enums",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "identities/identifier": {
         "name": "identities/identifier",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/identifier"
+        "rootDir": "projects/entities/identities/identifier",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "identities/linked": {
         "name": "identities/linked",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/linked"
+        "rootDir": "projects/entities/identities/linked",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "identities/platform": {
         "name": "identities/platform",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/identities/platform"
+        "rootDir": "projects/entities/identities/platform",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "incident_management": {
         "name": "incident_management",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/incident_management"
+        "rootDir": "projects/frappe/incident_management",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "justice": {
         "name": "justice",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/justice"
+        "rootDir": "projects/frappe/justice",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "node": {
         "name": "node",
         "scope": "eventiva.envs",
         "version": "0.0.3",
         "mainFile": "index.ts",
-        "rootDir": "projects/envs/node"
+        "rootDir": "projects/envs/node",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "dependencies": {
+                        "@bitdev/harmony.harmony": "1.0.13",
+                        "@bitdev/harmony.testing.load-aspect": "0.0.22",
+                        "react": "^18.2.0",
+                        "react-dom": "^18.2.0",
+                        "vitest": "1.4.0",
+                        "react-router-dom": "^6.22.3",
+                        "@apollo/client": "^3.9.7",
+                        "jest": "29.7.0",
+                        "jsdom": "^24.0.0",
+                        "@mdx-js/react": "3.0.1",
+                        "@types/react": "18.2.66",
+                        "@types/react-dom": "^18.2.22"
+                    }
+                }
+            },
+            "teambit.envs/env": {},
+            "teambit.envs/envs": {
+                "env": "teambit.envs/env"
+            }
+        }
     },
     "packages/default_logging": {
         "name": "packages/default_logging",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/packages/default_logging"
+        "rootDir": "projects/bots/packages/default_logging",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "platform": {
         "name": "platform",
         "scope": "eventiva.central",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/central/platform"
+        "rootDir": "projects/central/platform",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "python": {
         "name": "python",
         "scope": "eventiva.envs",
         "version": "0.0.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/envs/python"
+        "rootDir": "projects/envs/python",
+        "config": {
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {
+                    "dependencies": {
+                        "@bitdev/harmony.harmony": "1.0.13",
+                        "@bitdev/harmony.testing.load-aspect": "0.0.22",
+                        "react": "^18.2.0",
+                        "react-dom": "^18.2.0",
+                        "vitest": "1.4.0",
+                        "react-router-dom": "^6.22.3",
+                        "@apollo/client": "^3.9.7",
+                        "jest": "29.7.0",
+                        "jsdom": "^24.0.0",
+                        "@mdx-js/react": "3.0.1",
+                        "@types/react": "18.2.66",
+                        "@types/react-dom": "^18.2.22",
+                        "@babel/runtime": "7.24.0",
+                        "core-js": "^3.36.0"
+                    },
+                    "devDependencies": {
+                        "@types/jest": "29.5.12",
+                        "@types/node": "20.11.28",
+                        "@types/testing-library__jest-dom": "6.0.0"
+                    }
+                }
+            }
+        }
     },
     "report/action": {
         "name": "report/action",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/action"
+        "rootDir": "projects/entities/report/action",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "report/enums": {
         "name": "report/enums",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/enums"
+        "rootDir": "projects/entities/report/enums",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "report/files": {
         "name": "report/files",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/files"
+        "rootDir": "projects/entities/report/files",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "report/report": {
         "name": "report/report",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/report/report"
+        "rootDir": "projects/entities/report/report",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
+    },
+    "runtimes/discord": {
+        "name": "runtimes/discord",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.envs",
+        "mainFile": "index.ts",
+        "rootDir": "projects/envs/runtimes/discord",
+        "config": {
+            "eventiva.envs/node": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
     },
     "segment/group": {
         "name": "segment/group",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/segment/group"
+        "rootDir": "projects/entities/segment/group",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "segment/user": {
         "name": "segment/user",
         "scope": "eventiva.entities",
         "version": "0.0.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/entities/segment/user"
+        "rootDir": "projects/entities/segment/user",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "segment_connect": {
         "name": "segment_connect",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/segment_connect"
+        "rootDir": "projects/frappe/segment_connect",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "support": {
         "name": "support",
         "scope": "eventiva.bots",
         "version": "0.1.2",
         "mainFile": "index.ts",
-        "rootDir": "projects/bots/support"
+        "rootDir": "projects/bots/support",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "teamspeak_integration": {
         "name": "teamspeak_integration",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/teamspeak_integration"
+        "rootDir": "projects/frappe/teamspeak_integration",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "vetting": {
         "name": "vetting",
         "scope": "eventiva.frappe",
         "version": "0.1.1",
         "mainFile": "index.ts",
-        "rootDir": "projects/frappe/vetting"
+        "rootDir": "projects/frappe/vetting",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "bitdev.node/node-env@1.0.21": {}
+        }
     },
     "$schema-version": "17.0.0"
 }
