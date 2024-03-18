@@ -96,6 +96,7 @@
         "@learnbit/extending-bit.metadata.component-todos.ui.todo-list": "^0.0.2",
         "@mdx-js/rollup": "^3.0.1",
         "@prisma/client": "^5.11.0",
+        "@segment/analytics-node": "^2.1.0",
         "@teambit/base-react.navigation.link": "^2.0.31",
         "@teambit/component-id": "^1.2.0",
         "@teambit/defender.eslint-linter": "^1.0.19",

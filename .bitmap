@@ -19,7 +19,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "api/authenticator": {
@@ -32,7 +32,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "api/check": {
@@ -45,7 +45,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "api/enums": {
@@ -58,7 +58,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "api/session": {
@@ -71,7 +71,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "api/verification_token": {
@@ -84,7 +84,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "aspects/atlassian-customer-support": {
@@ -102,7 +102,10 @@
         "scope": "eventiva.central",
         "version": "831c7aff763722bddc38f07ab0ae48df447c7521",
         "mainFile": "index.ts",
-        "rootDir": "projects/central/aspects/database"
+        "rootDir": "projects/central/aspects/database",
+        "config": {
+            "bitdev.harmony/harmony-env@1.0.59": {}
+        }
     },
     "aspects/discordjs": {
         "name": "aspects/discordjs",
@@ -178,7 +181,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "base/base": {
@@ -191,7 +194,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "base/enums": {
@@ -204,7 +207,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "base/permission": {
@@ -217,7 +220,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "base/role": {
@@ -230,7 +233,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "base/server": {
@@ -243,7 +246,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "base/user": {
@@ -256,7 +259,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "commands/ping": {
@@ -267,9 +270,9 @@
         "mainFile": "index.ts",
         "rootDir": "projects/bots/commands/ping",
         "config": {
-            "eventiva.envs/node": {},
+            "bitdev.harmony/harmony-env@1.0.59": {},
             "teambit.envs/envs": {
-                "env": "eventiva.envs/node"
+                "env": "bitdev.harmony/harmony-env"
             }
         }
     },
@@ -283,7 +286,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "communities/members": {
@@ -296,7 +299,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "communities/resource": {
@@ -309,7 +312,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "communities/resourcetypes": {
@@ -322,7 +325,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "content/message": {
@@ -335,7 +338,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "control_centre": {
@@ -348,7 +351,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "custody": {
@@ -361,7 +364,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "discord_integration": {
@@ -374,7 +377,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "eventiva_core": {
@@ -387,7 +390,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "fleet_management": {
@@ -400,7 +403,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "gaming": {
@@ -413,7 +416,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "generator": {
@@ -437,6 +440,10 @@
                         "core-js": "^3.36.0"
                     }
                 }
+            },
+            "bitdev.node/node-env@1.0.26": {},
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
             }
         }
     },
@@ -498,7 +505,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "identities/enums": {
@@ -511,7 +518,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "identities/identifier": {
@@ -524,7 +531,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "identities/linked": {
@@ -537,7 +544,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "identities/platform": {
@@ -550,7 +557,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "incident_management": {
@@ -563,7 +570,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "justice": {
@@ -576,7 +583,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "node": {
@@ -674,7 +681,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "report/enums": {
@@ -687,7 +694,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "report/files": {
@@ -700,7 +707,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "report/report": {
@@ -713,21 +720,38 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
-    "runtimes/discord": {
-        "name": "runtimes/discord",
+    "runtimes/discord-runtime": {
+        "name": "runtimes/discord-runtime",
         "scope": "",
         "version": "",
         "defaultScope": "eventiva.envs",
         "mainFile": "index.ts",
-        "rootDir": "projects/envs/runtimes/discord",
+        "rootDir": "projects/envs/runtimes/discord-runtime",
         "config": {
-            "bitdev.node/node-env@1.0.19": {},
+            "teambit.component/dev-files": {},
+            "teambit.preview/preview": {},
+            "teambit.compositions/compositions": {},
+            "teambit.docs/docs": {},
+            "teambit.pipelines/builder": {},
+            "teambit.harmony/application": {},
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
-            }
+            },
+            "teambit.dependencies/dependency-resolver": {
+                "policy": {}
+            },
+            "teambit.semantics/schema": {},
+            "teambit.component/forking": {
+                "forkedFrom": {
+                    "scope": "bitdev.harmony",
+                    "name": "runtimes/nodejs-runtime",
+                    "version": "1.0.70"
+                }
+            },
+            "bitdev.node/node-env@1.0.19": {}
         }
     },
     "segment/group": {
@@ -740,7 +764,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "segment/user": {
@@ -753,7 +777,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "segment_connect": {
@@ -766,7 +790,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "support": {
@@ -789,7 +813,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "vetting": {
@@ -802,7 +826,7 @@
             "teambit.envs/envs": {
                 "env": "bitdev.node/node-env"
             },
-            "bitdev.node/node-env@1.0.21": {}
+            "bitdev.node/node-env@1.0.26": {}
         }
     },
     "$schema-version": "17.0.0"
