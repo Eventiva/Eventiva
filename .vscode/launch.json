@@ -78,20 +78,6 @@
 			"envFile": "${workspaceFolder}/.env",
 		},
 		{
-			"name": "Launch Website",
-			"request": "launch",
-			"runtimeArgs": [
-				"run-script",
-				"start"
-			],
-			"runtimeExecutable": "npm",
-			"localRoot": "${workspaceFolder}/projects/website",
-			"skipFiles": [
-				"<node_internals>/**"
-			],
-			"type": "node"
-		},
-		{
 			"type": "node",
 			"request": "launch",
 			"name": "Bit Debugger",
@@ -106,94 +92,6 @@
 			"internalConsoleOptions": "neverOpen",
 			"cwd": "${workspaceFolder}"
 		},
-		{
-			"name": "Bench Web",
-			"type": "python",
-			"request": "launch",
-			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
-			"args": [
-				"frappe",
-				"serve",
-				"--port",
-				"8000",
-				"--noreload",
-				"--nothreading"
-			],
-			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
-			"cwd": "${workspaceFolder}/frappe-bench/sites",
-			"env": {
-				"DEV_SERVER": "1"
-			}
-		},
-		{
-			"name": "Bench Default Worker",
-			"type": "python",
-			"request": "launch",
-			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
-			"args": [
-				"frappe",
-				"worker",
-				"--queue",
-				"default"
-			],
-			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
-			"cwd": "${workspaceFolder}/frappe-bench/sites",
-			"env": {
-				"DEV_SERVER": "1"
-			}
-		},
-		{
-			"name": "Bench Short Worker",
-			"type": "python",
-			"request": "launch",
-			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
-			"args": [
-				"frappe",
-				"worker",
-				"--queue",
-				"short"
-			],
-			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
-			"cwd": "${workspaceFolder}/frappe-bench/sites",
-			"env": {
-				"DEV_SERVER": "1"
-			}
-		},
-		{
-			"name": "Bench Long Worker",
-			"type": "python",
-			"request": "launch",
-			"program": "${workspaceFolder}/frappe-bench/apps/frappe/frappe/utils/bench_helper.py",
-			"args": [
-				"frappe",
-				"worker",
-				"--queue",
-				"long"
-			],
-			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
-			"cwd": "${workspaceFolder}/frappe-bench/sites",
-			"env": {
-				"DEV_SERVER": "1"
-			}
-		},
-		{
-			"name": "Honcho SocketIO Watch Schedule Worker",
-			"type": "python",
-			"request": "launch",
-			"program": "/home/frappe/.local/bin/honcho",
-			"python": "${workspaceFolder}/frappe-bench/env/bin/python",
-			"cwd": "${workspaceFolder}/frappe-bench",
-			"console": "internalConsole",
-			"args": [
-				"start",
-				"socketio",
-				"watch",
-				"schedule",
-				"worker_short",
-				"worker_long",
-				"worker_default"
-			]
-		}
 	],
 	"inputs": [
 		{
