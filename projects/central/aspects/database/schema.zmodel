@@ -1,5 +1,5 @@
 
-import "../../../entities/base/user/model"
+import "@eventiva/entities.base.user/model"
 
 datasource db {
   provider = "postgresql"

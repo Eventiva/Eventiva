@@ -125,13 +125,8 @@ model User {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt()
     deletedAt DateTime
-    complaints Report[] @relation("user")
-    reports Report[] @relation("reporter")
-    servers Server[]
     accounts Identifier[]
-    identities LinkedIdentities[]
     community Members[]
-    actionsAgainst Action[]
     role UserRoles[]
     sessions Session[]
     authenticators Authenticator[]
@@ -231,8 +226,6 @@ model Server {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt()
     deletedAt DateTime
-    owner User @relation(fields: [ownerId], references: [id])
-    ownerId String
     community Community @relation(fields: [communityId], references: [id])
     communityId String
     resources Resource[]
@@ -377,7 +370,10 @@ model Identifier {
     deletedAt DateTime
     user User? @relation(fields: [userId], references: [id])
     userId String?
-    associatedWith LinkedIdentities[]
+    complaints Report[] @relation("user")
+    reports Report[] @relation("reporter")
+    identities LinkedIdentities[] @relation("user")
+    associatedWith LinkedIdentities[] @relation("associates")
     platform Platform @relation(fields: [platformId], references: [id])
     platformId String
     fieldName String
@@ -414,9 +410,9 @@ model LinkedIdentities {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt()
     deletedAt DateTime
-    user User @relation(fields: [userId], references: [id])
+    user Identifier @relation("user", fields: [userId], references: [anonymousId])
     userId String
-    identities Identifier @relation(fields: [identityId], references: [anonymousId])
+    identities Identifier @relation("associates", fields: [identityId], references: [anonymousId])
     identityId String
     type LinkType
     certainty Certainty
@@ -425,34 +421,14 @@ model LinkedIdentities {
     @@schema("identities")
 }
 
-model Action {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    deletedAt DateTime
-    report Report @relation(fields: [reportId], references: [id])
-    reportId String
-    user User @relation(fields: [userId], references: [id])
-    userId String
-    actionType String
-    /// @allow('read', report.server.datashare || auth() == report.reportingUser || auth().role?[role.permissions?[permission.target == 'report_actions' && permission.read > 1]])
-    actionData Json[]
-    /// @gt(0)
-    /// @lte(100)
-    actionValue Int @default(1)
-
-    @@map("actions")
-    @@schema("reports")
-}
-
 model Report {
     id String @id() @default(uuid())
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt()
     deletedAt DateTime
-    user User @relation(fields: [userId], references: [id], name: "user")
-    userId String
-    reportingUser User @relation(fields: [reportingUserId], references: [id], name: "reporter")
+    target Identifier @relation(fields: [targetId], references: [anonymousId], name: "user")
+    targetId String
+    reportingUser Identifier @relation(fields: [reportingUserId], references: [anonymousId], name: "reporter")
     reportingUserId String
     server Server @relation(fields: [serverId], references: [id])
     serverId String
@@ -477,6 +453,24 @@ model File {
     url String
 
     @@map("files")
+    @@schema("reports")
+}
+
+model Action {
+    id String @id() @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt()
+    deletedAt DateTime
+    report Report @relation(fields: [reportId], references: [id])
+    reportId String
+    actionType String
+    /// @allow('read', report.server.datashare || auth() == report.reportingUser.user || auth().role?[role.permissions?[permission.target == 'report_actions' && permission.read > 1]])
+    actionData Json[]
+    /// @gt(0)
+    /// @lte(100)
+    actionValue Int @default(1)
+
+    @@map("actions")
     @@schema("reports")
 }
 
