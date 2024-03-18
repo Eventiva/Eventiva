@@ -44,19 +44,16 @@
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
-import "../../base/base/model"
-import "../../base/user/model"
-import "../report/model"
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.base.user/model'
+import '@eventiva/entities.report.report/model'
 
 model Action extends Base {
   report Report @relation(fields: [reportId], references: [id])
   reportId String
 
-  user User @relation(fields: [userId], references: [id])
-  userId String
-
   actionType String
-  actionData Json[] @allow('read', report.server.datashare || auth() == report.reportingUser || auth().role?[role.permissions?[permission.target == "report_actions" && permission.read > 1]])
+  actionData Json[] @allow('read', report.server.datashare || auth() == report.reportingUser.user || auth().role?[role.permissions?[permission.target == "report_actions" && permission.read > 1]])
   actionValue Int @default(1) @gt(0) @lte(100)
 
   @@map("actions")

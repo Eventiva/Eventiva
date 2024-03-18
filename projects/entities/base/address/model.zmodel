@@ -45,10 +45,10 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import "../../segment/user/model"
-import "../../base/base/model"
-import "../../base/user/model"
-import "../../communities/community/model"
+import '@eventiva/entities.segment.user/model'
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.base.user/model'
+import '@eventiva/entities.communities.community/model'
 
 model Address extends Base {
   user User? @relation(fields: [userId], references: [id])

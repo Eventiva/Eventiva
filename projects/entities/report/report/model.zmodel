@@ -44,18 +44,17 @@
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
-import "../../base/base/model"
-import "../../base/user/model"
-import "../../base/server/model"
-import "../enums/model"
-import "../files/model"
-import "../action/model"
-
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.identities.identifier/model'
+import '@eventiva/entities.base.server/model'
+import '@eventiva/entities.report.enums/model'
+import '@eventiva/entities.report.files/model'
+import '@eventiva/entities.report.action/model'
 
 model Report extends Base {
-  user User @relation(fields: [userId], references: [id], name: "user")
-  userId String
-  reportingUser User @relation(fields: [reportingUserId], references: [id], name: "reporter")
+  target Identifier @relation(fields: [targetId], references: [anonymousId], name: "user")
+  targetId String
+  reportingUser Identifier @relation(fields: [reportingUserId], references: [anonymousId], name: "reporter")
   reportingUserId String
   server Server @relation(fields: [serverId], references: [id])
   serverId String

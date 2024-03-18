@@ -45,16 +45,16 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import '../role/model'
-import '../enums/model'
+import '@eventiva/entities.base.role/model'
+import '@eventiva/entities.base.enums/model'
 
 model Permission {
   id Int @default(autoincrement()) @id
-  name String? @unique 
+  name String? @unique
   target String
   role PermissionRole[]
 
-  // Permission Levels: 
+  // Permission Levels:
   // NONE = 0 - No Access
   // OWN = 1 - Data they own
   // SERVER = 2 - Data on the server

@@ -45,8 +45,8 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import '../base/model'
-import '../permission/model'
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.base.permission/model'
 
 model Role extends Base {
   name String @unique
@@ -61,7 +61,7 @@ model UserRoles {
 
   role Role @relation(fields: [roleId], references: [id])
   roleId String
-  
+
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
   @@id([userId, roleId])

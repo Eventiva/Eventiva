@@ -44,8 +44,8 @@
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
-import "../../base/base/model"
-import "../identifier/model"
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.identities.identifier/model'
 
 model Platform extends Base {
   identifier Identifier[]

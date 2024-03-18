@@ -45,8 +45,8 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import '../../base/base/model'
-import '../../base/user/model'
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.base.user/model'
 
 model VerificationToken extends Base {
   identifier String

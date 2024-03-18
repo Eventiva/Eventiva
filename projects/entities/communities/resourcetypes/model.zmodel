@@ -45,8 +45,8 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import "../../base/base/model"
-import "../resource/model"
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.communities.resource/model'
 
 model ResourceType extends Base {
   name String

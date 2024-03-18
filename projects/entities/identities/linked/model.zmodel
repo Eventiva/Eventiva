@@ -44,14 +44,14 @@
 * -----
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
-import "../../base/user/model"
-import "../identifier/model"
-import "../enums/model"
+import '@eventiva/entities.base.user/model'
+import '@eventiva/entities.identities.identifier/model'
+import '@eventiva/entities.identities.enums/model'
 
 model LinkedIdentities extends Base {
-  user User @relation(fields: [userId], references: [id])
+  user Identifier @relation("user", fields: [userId], references: [anonymousId])
   userId String
-  identities Identifier @relation(fields: [identityId], references: [anonymousId])
+  identities Identifier @relation("associates", fields: [identityId], references: [anonymousId])
   identityId String
 
   type LinkType
