@@ -2,8 +2,8 @@
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: discord-definition.ts
- * Path: /projects/envs/runtimes/discord/discord-definition.ts
+ * File: index.ts
+ * Path: /projects/envs/runtimes/discord-runtime/index.ts
  * Created Date: Sunday, March 17th 2024
  * Author: Jonathan Stevens (Email: jonathan@resnovas.com
  * Github: https://github.com/TGTGamer)
@@ -12,7 +12,7 @@
  * Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- *
+ * 
  * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
@@ -46,12 +46,5 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { RuntimeDefinition } from "@bitdev/harmony.harmony";
-
-/**
- * Creates a new RuntimeDefinition instance with the name 'discord'.
- * @author Jonathan Stevens (TGTGamer)
- *
- * @type {*}
- */
-export const DiscordDef = new RuntimeDefinition('discord');
+export { DiscordRuntime } from './discord-runtime.js';
+export type { DiscordRuntimeOptions } from './discord-runtime-options.js';
