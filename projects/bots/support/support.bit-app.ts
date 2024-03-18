@@ -48,7 +48,7 @@
 import { HarmonyPlatform } from '@bitdev/harmony.harmony-platform';
 import { NodeJSRuntime } from '@bitdev/harmony.runtimes.nodejs-runtime';
 import { BrowserRuntime } from '@bitdev/harmony.runtimes.browser-runtime';
-import { Discord } from '@eventiva/envs.runtimes.discord'
+// import { DiscordRuntime } from '@eventiva/envs.runtimes.discord-runtime'
 import { SymphonyPlatformAspect } from '@bitdev/symphony.symphony-platform';
 import { DiscordjsAspect } from '@eventiva/bots.aspects.discordjs';
 import { LoggingAspect } from '@eventiva/bots.aspects.logging';
@@ -75,7 +75,7 @@ export const Support = HarmonyPlatform.from({
   runtimes: [
     new BrowserRuntime(),
     new NodeJSRuntime(),
-    new Discord()
+    // new DiscordRuntime()
   ],
 
   aspects: [
