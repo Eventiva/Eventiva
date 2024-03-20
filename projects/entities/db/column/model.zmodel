@@ -1,0 +1,5 @@
+import '@eventiva/entities.base.base/model'
+model Column extends Base {
+    name String
+    type ColumnType
+}
