@@ -46,47 +46,91 @@
 */
 
 import type { DatabaseConfig } from './database-config.js';
-import { PrismaClient } from '@prisma/client';
-import { enhance } from '@zenstackhq/runtime';
+import { MikroORM, EntityManager, PostgreSqlDriver } from '@mikro-orm/postgresql';
+import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
 /**
- * This class represents a node in a database.
- * The node is created with a given configuration.
- * It has a static property 'dependencies' which is an array of dependencies of type 'CentralPlatformAspect'.
- * It also has a static property 'defaultConfig' which is of type 'DatabaseConfig' and is set to an empty object by default.
- * The 'provider' method is an async method that creates a new instance of 'DatabaseNode' with the given configuration and returns it.
- * @author Jonathan Stevens (@TGTGamer)
+ * A class representing a DatabaseNode in a system.
+ * An array of dependencies required by the class. This property is static and its value is an array containing references to the CentralPlatformAspect class.
+ * The default configuration object for the database. It is an instance of DatabaseConfig and is initialized as an empty object.
+ * Creates and returns a new instance of DatabaseNode using the provided config. The DatabaseNode instance is wrapped in a Promise and returned.
  *
  * @export
- * @class
+ * @class DatabaseNode
+ * @typedef {DatabaseNode}
  */
 export class DatabaseNode {
   /**
-   * The Prisma Client instance used to interact with the database. It is instantiated as a private property.
-   * @author Jonathan Stevens (@TGTGamer)
+   * A boolean flag indicating whether the property has been initialised or not.
    *
-   * @private
+   * @protected
+   * @type {boolean}
    */
-  private prisma = new PrismaClient();
+  protected initialised = false
+
   /**
-   * The property `db` is a public property that is enhanced using the function `enhance`. It is initialized with the value `enhance(this.prisma)`, where `this.prisma` is a reference to the `prisma` object.
-   * @author Jonathan Stevens (@TGTGamer)
+   * Public property orm of type MikroORM.
    *
    * @public
+   * @type {MikroORM}
    */
-  public db = enhance(this.prisma);
+  private orm: MikroORM
+
+  /**
+   * A public property representing an EntityManager.
+   *
+   * @public
+   * @type {EntityManager}
+   */
+  private em: EntityManager
 
   /**
    * Creates an instance of DatabaseNode.
-   * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
-   * @param config The configuration object for the database.
+   * @param {DatabaseConfig} config The database configuration
    */
   constructor(
     private config: DatabaseConfig,
-  ) {}
-  
+  ) {
+    this.initialise()
+  }
+
+  /**
+   * A public getter function that returns a forked instance of the entityManager (em) property.
+   *
+   * @public
+   * @readonly
+   * @type {*}
+   */
+  public get entityManager() {
+    return this.em.fork()
+  }
+
+  /**
+   * Initializes the function privately.
+   *
+   * @private
+   * @returns {*} Initializes the private properties and state of the object.
+   */
+  private async initialise() {
+    this.orm = await MikroORM.init(this.config)
+    if (process.env.NODE_ENV == 'dev') await this.orm.schema.refreshDatabase();
+    this.em = this.orm.em
+    this.initialised = true
+  }
+
+  /**
+   * Returns whether the property is initialised or not.
+   *
+   * @public
+   * @readonly
+   * @type {boolean}
+   */
+  public get isInitialised() {
+    return this.initialised
+  }
+
   /**
    * An array of dependencies required by the class. This property is static and its value is an array containing references to the CentralPlatformAspect class.
    * @author Jonathan Stevens (@TGTGamer)
@@ -101,7 +145,18 @@ export class DatabaseNode {
    *
    * @static
    */
-  static defaultConfig: DatabaseConfig = {};
+  static defaultConfig: DatabaseConfig = {
+    driver: PostgreSqlDriver,
+    dbName: 'sqlite.db',
+    // // folder-based discovery setup, using common filename suffix
+    // entities: ['dist/**/*.entity.js'],
+    // entitiesTs: ['src/**/*.entity.ts'],
+    // we will use the ts-morph reflection, an alternative to the default reflect-metadata provider
+    // check the documentation for their differences: https://mikro-orm.io/docs/metadata-providers
+    metadataProvider: TsMorphMetadataProvider,
+    // enable debug mode to log SQL queries and discovery information
+    debug: true,
+  };
 
   /**
    * Creates and returns a new instance of DatabaseNode using the provided config. The DatabaseNode instance is wrapped in a Promise and returned.

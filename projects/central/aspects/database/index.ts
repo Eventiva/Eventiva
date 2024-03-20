@@ -45,11 +45,12 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import { DatabaseAspect } from './database.aspect.js'; 
+import { DatabaseAspect } from './database.aspect.js';
 
 export type { DatabaseNode } from './database.node.runtime.js';
 
 export * from '@prisma/client'
+export type { DefaultArgs } from '@prisma/client/runtime/library.js'
 
 export default DatabaseAspect;
 export { DatabaseAspect };

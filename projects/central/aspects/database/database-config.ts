@@ -45,8 +45,16 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-// use this type for your aspect config. 
+import { Options } from '@mikro-orm/postgresql';
+
+
+// use this type for your aspect config.
+/**
+ * use this type for your aspect config. DatabaseConfig type extending from Options type.
+ *
+ * @export
+ * @typedef {DatabaseConfig}
+ */
 export type DatabaseConfig = {
 
-};
-
+} & Options;
