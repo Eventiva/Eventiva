@@ -58,12 +58,13 @@ import { PlatformAspectTemplate, HarmonyEnvTemplate, HarmonyRuntimeTemplate, Har
  */
 export function HarmonyTemplates(options: HarmonyTemplatesOptions = {}): EnvHandler<TemplateList> {
   const templates = options.templates || [];
+  const env = options.harmonyEnvId;
 
   return TemplateList.from(compact([
-    !options.disableHarmonyPlatform ? HarmonyPlatformTemplate.from(): undefined,
-    !options.disablePlatformAspect ? PlatformAspectTemplate.from(): undefined,
-    AspectTemplate.from({ options }),
-    HarmonyRuntimeTemplate.from(),
+    !options.disableHarmonyPlatform ? HarmonyPlatformTemplate.from({ env }): undefined,
+    !options.disablePlatformAspect ? PlatformAspectTemplate.from({ env }): undefined,
+    AspectTemplate.from({ ...options, env  }),
+    HarmonyRuntimeTemplate.from({ env }),
     HarmonyEnvTemplate.from(),
     ...templates
   ]));

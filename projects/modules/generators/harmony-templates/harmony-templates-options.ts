@@ -67,12 +67,12 @@ export type HarmonyTemplatesOptions = {
   /**
    * name of the platform.
    */
-  platformName?: string;
+  platformName?: string
 
   /**
    * docs file contents.
    */
-  docsFile?: (context: ComponentContext) => ComponentFile;
+  docsFile?: (context: ComponentContext) => ComponentFile
 
   /**
    * runtime to generate.
@@ -82,18 +82,23 @@ export type HarmonyTemplatesOptions = {
   /**
    * disable creating platform aspects.
    */
-  disablePlatformAspect?: boolean;
+  disablePlatformAspect?: boolean
 
   /**
    * disable the harmony platform template.
    */
-  disableHarmonyPlatform?: boolean;
+  disableHarmonyPlatform?: boolean
 
   /**
    * include additional component templates.
    */
-  templates?: EnvHandler<ComponentTemplate>[];
-}
+  templates?: EnvHandler<ComponentTemplate>[]
+
+  /**
+   * Id of the harmony env to apply on the templates.
+   */
+  harmonyEnvId?: string
+};
 
 
 
@@ -172,9 +177,6 @@ export type RuntimeOptions = {
    */
   methods?: (context: ComponentContext) => string;
 }
-
-
-
 
 /**
  * Represents a list of dependencies required by a module. Each dependency can be either a string representing an import or an array containing a string representing an import and an object with optional 'extraImports' property. The 'extraImports' property allows adding additional imports at the end of the import list for that particular dependency. It follows the example format: ["type NameModule", {"extraImport": ["extraImport"]}]. The resulting import statement includes the imports specified along with any extra imports added, all from the '@owner/scope.dependency' module.
