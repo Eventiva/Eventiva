@@ -46,7 +46,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { TemplatesOptions } from './template-options'
+import { EntityTemplate } from './entity-template/entity-template.js'
+import { TemplatesOptions } from './template-options.js'
 import { SymphonyTemplates } from '@eventiva/modules.generators.symphony-templates'
 
 /**
@@ -57,6 +58,11 @@ export function Generator(options: TemplatesOptions = {}) {
         ...options,
         platformName: options.platformName || 'eventiva-platform',
         harmonyEnvId: "@bitdev.harmony/harmony-env",
+
+        templates: [
+            ...(options.templates ?? []),
+            EntityTemplate.from()
+        ],
 
         runtimes: [
             ...(options.runtimes || []),
