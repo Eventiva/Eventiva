@@ -62,10 +62,10 @@
   "teambit.generator/generator": {
     "envs": [
       "eventiva.envs/node",
-      "teambit.react/react-env",
+      "bitdev.react/react-env",
       "teambit.react/react-native-env",
-      "teambit.mdx/mdx-env",
-      "teambit.harmony/node"
+      "teambit.mdx/mdx-env"
+      // "bitdev.node/node-env"
       // "teambit.harmony/aspect-env",
       // "bitdev.symphony/envs/symphony-env"
     ]
@@ -76,6 +76,11 @@
       "dependencies": {
         "@apollo/gateway": "^2.7.1",
         "@apollo/server": "^4.10.1",
+        "@babel/plugin-proposal-decorators": "^7.24.1",
+        "@babel/plugin-transform-class-properties": "^7.24.1",
+        "@babel/plugin-transform-object-rest-spread": "^7.24.1",
+        "@babel/preset-env": "^7.24.1",
+        "@babel/preset-typescript": "^7.24.1",
         "@bitdev/harmony.generators.harmony-templates": "^0.0.31",
         "@bitdev/harmony.harmony": "^1.0.13",
         "@bitdev/harmony.harmony-env": "1.0.59",
@@ -83,9 +88,11 @@
         "@bitdev/harmony.runtimes.browser-runtime": "^0.0.43",
         "@bitdev/harmony.runtimes.nodejs-runtime": "^1.0.70",
         "@bitdev/harmony.testing.load-aspect": "0.0.23",
+        "@bitdev/node.generators.node-templates": "^1.0.15",
         "@bitdev/node.node-app": "^1.0.27",
-        "@bitdev/node.node-env": "^1.0.19",
         "@bitdev/node.node-server": "^0.0.13",
+        "@bitdev/react.eslint.eslint-config-bit-react": "^0.0.5",
+        "@bitdev/symphony.envs.symphony-env": "^0.0.20",
         "@bitdev/symphony.symphony-platform": "0.0.25",
         "@coobaha/typed-fastify": "^2.1.4",
         "@fastify/helmet": "^11.1.1",
@@ -95,6 +102,10 @@
         "@learnbit/extending-bit.metadata.component-todos.modules.get-todos": "^0.0.1",
         "@learnbit/extending-bit.metadata.component-todos.ui.todo-list": "^0.0.2",
         "@mdx-js/rollup": "^3.0.1",
+        "@mikro-orm/cli": "^6.1.11",
+        "@mikro-orm/core": "^6.1.11",
+        "@mikro-orm/postgresql": "^6.1.11",
+        "@mikro-orm/reflection": "^6.1.11",
         "@prisma/client": "^5.11.0",
         "@segment/analytics-node": "^2.1.0",
         "@teambit/base-react.navigation.link": "^2.0.31",
@@ -106,13 +117,18 @@
         "@teambit/design.ui.heading": "^1.0.26",
         "@teambit/docs.ui.zoomable-image": "^1.97.6",
         "@teambit/mdx.ui.mdx-scope-context": "1.0.7",
+        "@teambit/preview.react-preview": "^1.0.25",
+        "@teambit/react.mounter": "^1.0.3",
         "@teambit/react.react-env": "^1.0.46",
         "@teambit/toolbox.network.get-port": "^1.0.6",
+        "@teambit/toolbox.performance.v8-cache": "^0.0.33",
         "@teambit/typescript.typescript-compiler": "^2.0.23",
         "@teambit/vite.vitest-tester": "^0.0.40",
         "@types/lodash": "^4.17.0",
+        "@types/uuid": "^9.0.8",
         "@vitejs/plugin-react": "^4.2.1",
         "axe": "^12.2.3",
+        "babel-plugin-transform-typescript-metadata": "^0.3.2",
         "cabin": "^13.2.5",
         "chalk": "^5.3.0",
         "dayjs": "^1.11.10",
@@ -130,7 +146,9 @@
         "pino-caller": "^3.4.0",
         "pino-pretty": "^10.3.1",
         "prompts": "^2.4.2",
+        "typeid-js": "^0.5.0",
         "typescript": "^5.4.2",
+        "uuid": "^9.0.1",
         "vite": "^5.1.6"
       },
       "peerDependencies": {}
@@ -162,5 +180,5 @@
   //   }
   // }
   ,
-  "eventiva.bots/support": {}
+  "eventiva.platforms/discord/support": {}
 }
