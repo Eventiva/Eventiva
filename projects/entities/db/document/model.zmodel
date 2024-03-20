@@ -1,0 +1,6 @@
+import '@eventiva/entities.base.base/model'
+model Document extends Base {
+    resource Resource[] // the resource this document belongs. Can belong to multiple resources
+    name String // the name of the document e.g.
+    columns Column[] // the database column configuration
+}
