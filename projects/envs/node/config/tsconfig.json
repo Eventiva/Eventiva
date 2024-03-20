@@ -1,9 +1,9 @@
-/**
+/*
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: jest.config.js
- * Path: /projects/envs/node/config/jest.config.js
+ * File: tsconfig.json
+ * Path: /projects/envs/node/config/tsconfig.json
  * Created Date: Tuesday, March 19th 2024
  * Author: Jonathan Stevens (Email: jonathan@resnovas.com
  * Github: https://github.com/TGTGamer)
@@ -46,39 +46,32 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-// Override the Jest config to ignore transpiling from specific folders
-// See the base Jest config: https://bit.cloud/teambit/react/react/~code/jest/jest.config.js
-
-const { jestConfig } = require('@teambit/react.react-env')
-
 /**
- * Exports the function `generateNodeModulesPattern` from the package `@teambit/dependencies.modules.packages-excluder`.
- *
- * @type {*}
+ * @see https://bit.dev/reference/typescript/typescript-config
  */
-const {
-  generateNodeModulesPattern,
-} = require('@teambit/dependencies.modules.packages-excluder');
-// const { esmConfig } = require('@teambit/react.jest.react-jest');
-
-/**
- * An array containing package names to exclude from a specified operation or process.
- *
- * @type {{}}
- */
-const packagesToExclude = ['@teambit', '@my-org', 'my-package-name'];
-
-module.exports = {
-  // ...esmConfig,
-  ...jestConfig,
-  testEnvironment: 'node',
-  setupFiles: [],
-  setupFilesAfterEnv: [],
-  transformIgnorePatterns: [
-    '^.+.module.(css|sass|scss)$',
-    generateNodeModulesPattern({
-      packages: packagesToExclude,
-      excludeComponents: true,
-    }),
+{
+  "extends": "@bitdev/react.react-env/config/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "outDir": "./dist",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "declaration": true
+  },
+  "ts-node": {
+    "esm": true,
+    "transpileOnly": true
+  },
+  "include": ["**/*", "**/*.json", ".mocharc.js"],
+  "exclude": [
+    "artifacts",
+    "public",
+    "dist",
+    "node_modules",
+    "package.json",
+    "**/*.cjs"
   ],
-};
+}

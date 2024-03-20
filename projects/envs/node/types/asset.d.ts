@@ -1,7 +1,3 @@
-/**
- * this file is copied into your components' build output.
- */
-
 declare module '*.png' {
   const value: any;
   export = value;

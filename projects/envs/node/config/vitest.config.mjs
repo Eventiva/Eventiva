@@ -2,8 +2,8 @@
  * @format
  * -----
  * Project: @eventiva/eventiva
- * File: jest.config.js
- * Path: /projects/envs/node/config/jest.config.js
+ * File: vitest.config.mjs
+ * Path: /projects/envs/node/config/vitest.config.mjs
  * Created Date: Tuesday, March 19th 2024
  * Author: Jonathan Stevens (Email: jonathan@resnovas.com
  * Github: https://github.com/TGTGamer)
@@ -46,39 +46,13 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-// Override the Jest config to ignore transpiling from specific folders
-// See the base Jest config: https://bit.cloud/teambit/react/react/~code/jest/jest.config.js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import mdx from '@mdx-js/rollup';
 
-const { jestConfig } = require('@teambit/react.react-env')
-
-/**
- * Exports the function `generateNodeModulesPattern` from the package `@teambit/dependencies.modules.packages-excluder`.
- *
- * @type {*}
- */
-const {
-  generateNodeModulesPattern,
-} = require('@teambit/dependencies.modules.packages-excluder');
-// const { esmConfig } = require('@teambit/react.jest.react-jest');
-
-/**
- * An array containing package names to exclude from a specified operation or process.
- *
- * @type {{}}
- */
-const packagesToExclude = ['@teambit', '@my-org', 'my-package-name'];
-
-module.exports = {
-  // ...esmConfig,
-  ...jestConfig,
-  testEnvironment: 'node',
-  setupFiles: [],
-  setupFilesAfterEnv: [],
-  transformIgnorePatterns: [
-    '^.+.module.(css|sass|scss)$',
-    generateNodeModulesPattern({
-      packages: packagesToExclude,
-      excludeComponents: true,
-    }),
-  ],
-};
+export default defineConfig({
+  plugins: [react(), mdx()],
+  test: {
+    environment: 'node'
+  },
+});
