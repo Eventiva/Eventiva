@@ -64,9 +64,11 @@ export function SymphonyTemplates(options: SymphonyTemplatesOptions = {}) {
 
     disableHarmonyPlatform: options.disableHarmonyPlatform ?? true,
 
+    harmonyEnvId: options.symphonyEnvId,
+
     templates: [
       ...(options.templates ?? []), // include the options templates if any
-      SymphonyPlatformTemplate.from()
+      SymphonyPlatformTemplate.from({ env: options.symphonyEnvId })
     ],
 
     runtimes: [

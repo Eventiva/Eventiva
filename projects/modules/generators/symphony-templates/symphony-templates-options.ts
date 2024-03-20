@@ -46,9 +46,15 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import type { ComponentTemplate } from "@teambit/generator";
 import type { HarmonyTemplatesOptions } from "@eventiva/modules.generators.harmony-templates";
 
+/**
+ * Type representing options for Symphony Templates. It includes an optional property symphonyEnvId of type string. It also includes all properties from HarmonyTemplatesOptions.
+ *
+ * @export
+ * @typedef {SymphonyTemplatesOptions}
+ */
 export type SymphonyTemplatesOptions = {
+    symphonyEnvId?: string
 
 } & HarmonyTemplatesOptions;
