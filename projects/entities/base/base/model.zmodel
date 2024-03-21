@@ -49,11 +49,11 @@ abstract model Base {
   id String @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  deletedAt DateTime
+  deletedAt DateTime?
 }
 abstract model AnonymousBase {
   anonymousId String @unique @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  deletedAt DateTime
+  deletedAt DateTime?
 }
