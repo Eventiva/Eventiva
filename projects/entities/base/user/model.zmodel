@@ -47,39 +47,23 @@
 
 import '@eventiva/entities.base.base/model'
 import '@eventiva/entities.base.role/model'
-import '@eventiva/entities.base.server/model'
 import '@eventiva/entities.base.enums/model'
-import '@eventiva/entities.communities.members/model'
 import '@eventiva/entities.identities.identifier/model'
-import '@eventiva/entities.identities.linked/model'
-import '@eventiva/entities.report.action/model'
-import '@eventiva/entities.report.report/model'
 import '@eventiva/entities.api.session/model'
 import '@eventiva/entities.api.authenticator/model'
 import '@eventiva/entities.api.verification_token/model'
 import '@eventiva/entities.segment.user/model'
+import '@eventiva/entities.base.permission/model'
 
 model User extends SegmentUser, Base {
   accounts Identifier[] // Identifiers the user has confirmed ownership of
-  community Members[] // Communities the user is a member of
   role UserRoles[]
   sessions Session[]
   authenticators Authenticator[]
   verification VerificationToken[]
+  permissions PermissionUser[]
   // api tokens
   // service accounts
-
-  // Permission Levels:
-  // NONE = 0 - No Access
-  // OWN = 1 - Data they own
-  // SERVER = 2 - Data on the server
-  // COMMUNITY = 3 - Data in the community
-  // GLOBAL = 4 - Data in the global community
-  admin Int @default(0) @gte(0) @lte(4) @allow('update', auth().admin == 4, true)
-  create Int @default(0) @gte(0) @lte(4) @allow('update', auth().admin == 4, true)
-  read Int @default(1) @gte(0) @lte(4) @allow('update', auth().admin == 4, true)
-  update Int @default(1) @gte(0) @lte(4) @allow('update', auth().admin == 4, true)
-  delete Int @default(1) @gte(0) @lte(4) @allow('update', auth().admin == 4, true)
 
   password String @password @length(min: 8, max: 32, message: 'must be between 8 and 32 characters long') @omit
   verified Boolean @default(false)

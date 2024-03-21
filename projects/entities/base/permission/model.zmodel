@@ -46,13 +46,15 @@
 */
 
 import '@eventiva/entities.base.role/model'
+import '@eventiva/entities.base.user/model'
 import '@eventiva/entities.base.enums/model'
 
 model Permission {
   id Int @default(autoincrement()) @id
-  name String? @unique
-  target String
+  name String? @unique // human readable name
+  target String // the name of the document which this permission applies to - manchine readable using the UUID's in a string e.g. ${community.id}:${resource.id}:${document.id}:${column.id}
   role PermissionRole[]
+  user PermissionUser[]
 
   // Permission Levels:
   // NONE = 0 - No Access
@@ -73,7 +75,7 @@ model Permission {
 
 
 model PermissionRole {
-  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id])
   permissionId Int
 
   role Role @relation(fields: [roleId], references: [id])
@@ -82,6 +84,20 @@ model PermissionRole {
   updatedAt DateTime @updatedAt
   createdAt DateTime @default(now())
   @@id([roleId, permissionId])
+
+  @@schema("base")
+}
+
+model PermissionUser {
+  permission Permission @relation(fields: [permissionId], references: [id])
+  permissionId Int
+
+  user User @relation(fields: [userId], references: [id])
+  userId String
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  @@id([userId, permissionId])
 
   @@schema("base")
 }

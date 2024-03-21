@@ -46,16 +46,16 @@
 */
 
 import '@eventiva/entities.base.base/model'
-import '@eventiva/entities.base.server/model'
+import '@eventiva/entities.communities.resource/model'
 import '@eventiva/entities.api.enums/model'
 
 model Check extends Base {
-  server Server @relation(fields: [serverId], references: [id])
-  serverId String
+  resource Resource @relation(fields: [resourceId], references: [id])
+  resourceId String
 
-  status ServerStatus
   target CheckTarget
   type CheckType
+  status ServerStatus
 
   @@schema("api")
 }

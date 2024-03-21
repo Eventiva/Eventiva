@@ -50,7 +50,7 @@ import '@eventiva/entities.base.user/model'
 import '@eventiva/entities.communities.community/model'
 
 model Members {
-  user User @relation(fields: [userId], references: [id])
+  user Identifier @relation(fields: [userId], references: [anonymousId])
   userId String
   community Community @relation(fields: [communityId], references: [id])
   communityId String

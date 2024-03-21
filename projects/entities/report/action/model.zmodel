@@ -53,7 +53,7 @@ model Action extends Base {
   reportId String
 
   actionType String
-  actionData Json[] @allow('read', report.server.datashare || auth() == report.reportingUser.user || auth().role?[role.permissions?[permission.target == "report_actions" && permission.read > 1]])
+  actionData Json[] @allow('read', auth() == report.reportingUser.user || auth().role?[role.permissions?[permission.target == "report_actions" && permission.read > 1]])
   actionValue Int @default(1) @gt(0) @lte(100)
 
   @@map("actions")

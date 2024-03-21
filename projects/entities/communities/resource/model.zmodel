@@ -46,19 +46,33 @@
 */
 
 import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.base.user/model'
+import '@eventiva/entities.base.enums/model'
 import '@eventiva/entities.communities.resourcetypes/model'
 import '@eventiva/entities.communities.community/model'
-import '@eventiva/entities.base.server/model'
+import '@eventiva/entities.db.document/model'
+import '@eventiva/entities.api.check/model'
+import '@eventiva/entities.api.access/model'
 
 model Resource extends Base {
   name String
   value String @unique
+  hostname String?
+  ipAddress String? @regex("^(?:[0-9]{1,3}\\.){3}[0-9]{1,3}$")
+  port Int? @default(80) @gte(1) @lte(65535)
+  protocol Protocol? @default(HTTPS)
+  FRDN String @unique @url
+  datashare Boolean @default(true)
+
+
+  document Document @relation(fields: [documentId], references: [id])
+  documentId String
+  community Community @relation(fields: [communityId], references: [id])
+  communityId String
   type ResourceType @relation(fields: [typeid], references: [id])
   typeid String
-  server Server? @relation(fields: [serverid], references: [id])
-  serverid String?
-  community Community @relation(fields: [communityid], references: [id])
-  communityid String
+  status Check[]
+  access Access[]
   description String
   data Json[]
   @@schema("communities")

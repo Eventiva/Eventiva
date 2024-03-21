@@ -45,13 +45,13 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import "@eventiva/entities.base.base/model"
-import "@eventiva/entities.base.server/model"
-import "@eventiva/entities.api.enums/model"
+import '@eventiva/entities.base.base/model'
+import '@eventiva/entities.api.enums/model'
+import '@eventiva/entities.communities.resource/model'
 
 model Access extends Base {
-  server Server @relation(fields: [serverId], references: [id])
-  serverId String
+  resource Resource @relation(fields: [resourceId], references: [id])
+  resourceId String
 
   token String? @unique
   FRDN String @unique

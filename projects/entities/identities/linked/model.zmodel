@@ -48,7 +48,7 @@ import '@eventiva/entities.base.user/model'
 import '@eventiva/entities.identities.identifier/model'
 import '@eventiva/entities.identities.enums/model'
 
-model LinkedIdentities extends Base {
+model LinkedIdentities {
   user Identifier @relation("user", fields: [userId], references: [anonymousId])
   userId String
   identities Identifier @relation("associates", fields: [identityId], references: [anonymousId])
@@ -57,6 +57,8 @@ model LinkedIdentities extends Base {
   type LinkType
   certainty Certainty
 
-  @@unique([userId, identityId])
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+  @@id([userId, identityId])
   @@schema("identities")
 }

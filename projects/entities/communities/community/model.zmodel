@@ -52,8 +52,8 @@ import '@eventiva/entities.segment.group/model'
 
 model Community extends SegmentGroup, Base {
   members Members[]
-  servers Server[]
   resources Resource[]
+  reports Report[]
 
   @@schema("communities")
 }
