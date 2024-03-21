@@ -52,7 +52,5 @@ import mdx from '@mdx-js/rollup';
 
 export default defineConfig({
   plugins: [react(), mdx()],
-  test: {
-    environment: 'node'
-  },
+  test: {},
 });

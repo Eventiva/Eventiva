@@ -46,5 +46,5 @@
 */
 
 import { Node } from './node.bit-env.js'
-export { Node }
+export { Node, Node as NodeEnv }
 export default Node
