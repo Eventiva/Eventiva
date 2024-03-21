@@ -1,0 +1,27 @@
+---
+description: 'A plugable Prisma aspect. Can be used to provider a Browser and API.'
+labels: ['aspect', 'composition', 'extendability']
+---
+
+A plugable Prisma aspect. Used to maintain Prisma across the platform.
+
+## Get started
+
+Compose the aspect into your Harmony platform:
+
+```ts
+import { SymphonyPlatform } from '@bitdev/symphony.symphony-platform';
+
+/**
+ * compose the symphony platform.
+ */    
+export const MyPlatform = SymphonyPlatform({
+  name: 'my-platform',
+
+  aspects: [
+    PrismaAspect,
+  ]
+});
+
+export default MyPlatform;
+```
