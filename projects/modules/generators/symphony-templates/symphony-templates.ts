@@ -54,6 +54,13 @@ import { aspectDocsFile } from './aspect-docs';
 import { SymphonyTemplatesOptions } from './symphony-templates-options';
 import { SymphonyPlatformTemplate } from './symphony-platform/symphony-platform-template';
 
+/**
+ * Creates Symphony templates with the provided options. It includes specified options and overrides default values as needed. The function returns Harmony templates with the Symphony-specific configurations applied such as platformName, docsFile, disableHarmonyPlatform, harmonyEnvId, templates, and runtimes.
+ *
+ * @export
+ * @param {SymphonyTemplatesOptions} [options={}]
+ * @returns {*} Creates Symphony templates by extending HarmonyTemplates with Symphony specific configurations and templates.
+ */
 export function SymphonyTemplates(options: SymphonyTemplatesOptions = {}) {
   return HarmonyTemplates({
     ...options, // include the options to ensure they are always applied then override with the below
