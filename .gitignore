@@ -79,5 +79,6 @@ projects/bots/tsconfig.json
 projects/bots/.eslintrc.json
 .prettierrc.cjs
 tsconfig.json
+!projects/envs/node/config/tsconfig.json
 .eslintrc.json
 env.pkl
