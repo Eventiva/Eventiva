@@ -1,37 +1,32 @@
-/**
- * @format
- * -----
- * Project: @eventiva/eventiva
+/*
+ * Project: Eventiva
  * File: discord-runtime.ts
- * Path: /projects/envs/runtimes/discord-runtime/discord-runtime.ts
- * Created Date: Sunday, March 17th 2024
- * Author: Jonathan Stevens (Email: jonathan@resnovas.com
- * Github: https://github.com/TGTGamer)
+ * Created Date: Wednesday, January 31st 2024
+ * Last Modified: 3/23/24, 11:57 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- *
- * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
+ * -----
+ * Code of Conduct: This project abides by the Contributor Covenant, v2.0
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2024 Resnovas - All Rights Reserved
+ * 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
  * -----
  * This program has been provided under confidence of the copyright holder and
  * is licensed for copying, distribution and modification under the terms
- * of the GNU General Public License v2.0 or later (GPL-2.0-or-later)
- * published as the License, or (at your option) any later
- * version of this license.
+ * of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+ * or (at your option) any later version of this license.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v2.0 or later for more details.
  * You should have received a copy of the GNU General Public License v2.0 or later
- * along with this program. If not, please write to: jonathan@resnovas.com,
+ * along with this program. If not, please write to: licensing@eventiva.co.uk,
  * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
  * -----
  * This project abides by the GPL Cooperation Commitment.
@@ -46,16 +41,12 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import {
-  HarmonyRuntimeContext,
-  RuntimeBuildContext,
-  Runtime,
-} from '@bitdev/harmony.harmony-platform';
-import { NodeServer } from '@bitdev/node.node-server';
-import { pathToFileURL } from 'node:url';
+import { HarmonyRuntimeContext, Runtime, RuntimeBuildContext } from '@bitdev/harmony.harmony-platform'
+import { NodeServer } from '@bitdev/node.node-server'
 // import { NodeApp } from '@bitdev/node.node-app';
-import { AppBuildResult, ApplicationInstance } from '@teambit/application';
-import { DiscordRuntimeOptions } from './discord-runtime-options.js';
+import { AppBuildResult, ApplicationInstance } from '@teambit/application'
+import { pathToFileURL } from 'node:url'
+import { DiscordRuntimeOptions } from './discord-runtime-options.js'
 
 /**
  * basic implementation of the Harmony backend runtime.

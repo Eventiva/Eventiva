@@ -1,37 +1,32 @@
-/**
- * @format
- * -----
- * Project: @eventiva/eventiva
+/*
+ * Project: Eventiva
  * File: symphony-templates.ts
- * Path: /projects/modules/generators/symphony-templates/symphony-templates.ts
- * Created Date: Saturday, March 16th 2024
- * Author: Jonathan Stevens (Email: jonathan@resnovas.com
- * Github: https://github.com/TGTGamer)
+ * Created Date: Wednesday, January 31st 2024
+ * Last Modified: 3/23/24, 11:56 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- *
- * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
+ * -----
+ * Code of Conduct: This project abides by the Contributor Covenant, v2.0
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2024 Resnovas - All Rights Reserved
+ * 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
  * -----
  * This program has been provided under confidence of the copyright holder and
  * is licensed for copying, distribution and modification under the terms
- * of the GNU General Public License v2.0 or later (GPL-2.0-or-later)
- * published as the License, or (at your option) any later
- * version of this license.
+ * of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+ * or (at your option) any later version of this license.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v2.0 or later for more details.
  * You should have received a copy of the GNU General Public License v2.0 or later
- * along with this program. If not, please write to: jonathan@resnovas.com,
+ * along with this program. If not, please write to: licensing@eventiva.co.uk,
  * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
  * -----
  * This project abides by the GPL Cooperation Commitment.
@@ -46,13 +41,13 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { HarmonyTemplates } from '@eventiva/modules.generators.harmony-templates';
-import { browserRuntimeProvider } from './browser-runtime/browser-provider';
-import { generateImports, getDummyMethod, nodeRuntimeProvider } from './node-runtime/node-runtime-provider';
-import { graphQLServerFile } from './node-runtime/graphql-server';
-import { aspectDocsFile } from './aspect-docs';
-import { SymphonyTemplatesOptions } from './symphony-templates-options';
-import { SymphonyPlatformTemplate } from './symphony-platform/symphony-platform-template';
+import { HarmonyTemplates } from '@eventiva/modules.generators.harmony-templates'
+import { aspectDocsFile } from './aspect-docs'
+import { browserRuntimeProvider } from './browser-runtime/browser-provider'
+import { graphQLServerFile } from './node-runtime/graphql-server'
+import { generateImports, getDummyMethod, nodeRuntimeProvider } from './node-runtime/node-runtime-provider'
+import { SymphonyPlatformTemplate } from './symphony-platform/symphony-platform-template'
+import { SymphonyTemplatesOptions } from './symphony-templates-options'
 
 /**
  * Creates Symphony templates with the provided options. It includes specified options and overrides default values as needed. The function returns Harmony templates with the Symphony-specific configurations applied such as platformName, docsFile, disableHarmonyPlatform, harmonyEnvId, templates, and runtimes.

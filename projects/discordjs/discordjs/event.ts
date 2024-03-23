@@ -3,7 +3,7 @@
  * Project: Eventiva
  * File: event.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 7:37 PM
+ * Last Modified: 3/23/24, 11:57 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -15,7 +15,7 @@
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * 2024 Resnovas - All Rights Reserved
+ * 2024 Eventiva - All Rights Reserved
  * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
  * -----
  * This program has been provided under confidence of the copyright holder and
@@ -27,7 +27,7 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v2.0 or later for more details.
  * You should have received a copy of the GNU General Public License v2.0 or later
- * along with this program. If not, please write to: jonathan@resnovas.com,
+ * along with this program. If not, please write to: licensing@eventiva.co.uk,
  * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
  * -----
  * This project abides by the GPL Cooperation Commitment.
@@ -42,7 +42,10 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-s } from 'discord.js'
+s
+}
+from
+'discord.js'
 import { DiscordJsModule } from './module.js'
 
 
