@@ -64,23 +64,13 @@ This project utilises the https://github.com/Eventiva/smartcloud[Smartcloud Proj
 
 Eventiva is built on the following main stack:
 
-* image:https://pbs.twimg.com/profile_images/1739248927227125760/y9Ny5gFa_400x400.png[Bit,25] https://frappeframework.com/[Frappe Framework] -- Frameworks (Full Stack)
 * image:https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg[Bit,25] https://www.bit.dev[Bit] -- Code Collaboration & Version Control
-* image:https://img.stackshare.io/service/993/pUBY5pVj.png[Python,25] https://www.python.org[Python] -- Languages
 * image:https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png[Node.js,25] http://nodejs.org/[Node.js] -- Frameworks (Full Stack)
 * image:https://img.stackshare.io/service/1612/bynNY5dJ.jpg[TypeScript,25] http://www.typescriptlang.org[TypeScript] -- Languages
 * image:https://img.stackshare.io/service/830/jest.png[Jest,25] http://facebook.github.io/jest/[Jest] -- Javascript Testing Framework
-* image:https://img.stackshare.io/service/1048/perl.png[Perl,25] http://www.perl.org/[Perl] -- Languages
-* image:https://img.stackshare.io/service/1209/javascript.jpeg[JavaScript,25] https://developer.mozilla.org/en-US/docs/Web/JavaScript[JavaScript] -- Languages
-* image:https://img.stackshare.io/service/3337/Q4L7Jncy.jpg[ESLint,25] http://eslint.org/[ESLint] -- Code Review
-* image:https://img.stackshare.io/service/3511/cof_orange_hex.jpg[Ubuntu,25] http://www.ubuntu.com/[Ubuntu] -- Operating Systems
-* image:https://img.stackshare.io/service/4631/default_c2062d40130562bdc836c13dbca02d318205a962.png[Shell,25] https://en.wikipedia.org/wiki/Shell_script[Shell] -- Shells
-* image:https://img.stackshare.io/service/5848/44mC-kJ3.jpg[Yarn,25] https://yarnpkg.com/[Yarn] -- Front End Package Manager
-* image:https://img.stackshare.io/service/7035/default_66f265943abed56bcdbfca1c866a4261b1fbb063.jpg[Prettier,25] https://prettier.io/[Prettier] -- Code Review
 * image:https://img.stackshare.io/service/11563/actions.png[GitHub Actions,25] https://github.com/features/actions[GitHub Actions] -- Continuous Integration
 * image:https://img.stackshare.io/service/48786/default_8b1119bcbb159cebebc2f6cfc9cd2e359b169d22.jpg[OpenAI,25] https://openai.com/[OpenAI] -- Large Language Models
 * image:https://img.stackshare.io/service/586/n4u37v9t_400x400.png[Docker,25] https://www.docker.com/[Docker] -- Virtual Machine Platforms & Containers
-* image:https://img.stackshare.io/service/460/Lu6cGu0z_400x400.png[Travis CI,25] http://travis-ci.com/[Travis CI] -- Continuous Integration
 
 Full tech stack xref:/techstack.adoc[here]
 
@@ -119,3 +109,17 @@ Simply install the https://marketplace.visualstudio.com/items?itemName=ms-vscode
 image::./diagram.svg[Visualization of the codebase]
 
 === Contributors ✨
+
+=== Supporters & Sponsors
+
+==== Sponsored by
+
+Want to help build the next generation of event planning tools? We are looking for sponsors to help us grow and develop our tools.
+
+==== Supported by
+[.text-center]
+--
+image::https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg[Jetbrains, link="https://jb.gg/OpenSourceSupport"]
+
+JetBrains supports the development of this project through Licenses for Open Source Development.
+--
