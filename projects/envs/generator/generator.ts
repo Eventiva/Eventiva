@@ -1,34 +1,29 @@
-/**
- * @format
- * -----
- * Project: @eventiva/eventiva
+/*
+ * Project: Eventiva
  * File: generator.ts
- * Path: /projects/envs/generator/generator.ts
- * Created Date: Saturday, March 16th 2024
- * Author: Jonathan Stevens (Email: jonathan@resnovas.com
- * Github: https://github.com/TGTGamer)
+ * Created Date: Wednesday, January 31st 2024
+ * Last Modified: 3/23/24, 7:47 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- *
- * Code of Conduct: This project abides by the Contributor Covenant, version 2.0.
+ * -----
+ * Code of Conduct: This project abides by the Contributor Covenant, v2.0
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * Copyright (c) 2024 Resnovas - All Rights Reserved
+ * 2024 Resnovas - All Rights Reserved
  * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
  * -----
  * This program has been provided under confidence of the copyright holder and
  * is licensed for copying, distribution and modification under the terms
- * of the GNU General Public License v2.0 or later (GPL-2.0-or-later)
- * published as the License, or (at your option) any later
- * version of this license.
+ * of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
+ * or (at your option) any later version of this license.
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License v2.0 or later for more details.
  * You should have received a copy of the GNU General Public License v2.0 or later
  * along with this program. If not, please write to: jonathan@resnovas.com,
@@ -46,41 +41,48 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { SymphonyTemplates } from '@eventiva/modules.generators.symphony-templates'
 import { EntityTemplate } from './entity-template/entity-template.js'
 import { TemplatesOptions } from './template-options.js'
-import { SymphonyTemplates } from '@eventiva/modules.generators.symphony-templates'
 
 /**
  * Create a list of Harmony templates.
  */
-export function Generator(options: TemplatesOptions = {}) {
-    return SymphonyTemplates({
+export function Generator ( options: TemplatesOptions = {} ) {
+    return SymphonyTemplates( {
         ...options,
         platformName: options.platformName || 'eventiva-platform',
-        harmonyEnvId: "@bitdev.harmony/harmony-env",
+        harmonyEnvId: '@bitdev.harmony/harmony-env',
 
         templates: [
-            ...(options.templates ?? []),
+            ...( options.templates ?? [] ),
             EntityTemplate.from()
         ],
 
         runtimes: [
-            ...(options.runtimes || []),
+            ...( options.runtimes || [] ),
             {
                 name: 'discord',
-                dependencies: [['eventiva.bots/aspects/discordjs', {
-                    extraImports: [
-                        "DiscordJsModule",
-                        "type Event",
-                        "type Command",
-                        "type Resources"
+                dependencies: [
+                    [
+                        'eventiva.discordjs/discordjs', {
+                        extraImports: [
+                            'DiscordJsModule',
+                            'type Event',
+                            'type Command',
+                            'type Resources'
+                        ]
+                    }
                     ]
-                }]],
-                imports: (context) => [
-                    [`import { ModuleConfig } from "@eventiva/bots.aspects.discordjs";`, { config: true, aspect: false }]
                 ],
-                classExtends: (context) => [`DiscordJsModule<${context.namePascalCase}Config>`, { super: `super(config, discordjsDiscord)` }],
-                methods: (context) => `public resources: Resources = {};
+                imports: ( context ) => [
+                    [ `import { ModuleConfig } from "@eventiva.discordjs/discordjs";`, { config: true, aspect: false } ]
+                ],
+                classExtends: ( context ) => [
+                    `DiscordJsModule<${ context.namePascalCase }Config>`,
+                    { super: `super(config, discordjsDiscord)` }
+                ],
+                methods: ( context ) => `public Resources = {};
 
   public registerEvents(reload?: true) {
     this.discord.registerEvent(this, [
@@ -96,15 +98,18 @@ export function Generator(options: TemplatesOptions = {}) {
     return this;
   }
       `,
-                configExtends: (context) => [`ModuleConfig`, {
-                    config: `name: "${context.namePascalCase}Module",
+                configExtends: ( context ) => [
+                    `ModuleConfig`, {
+                        config: `name: "${ context.namePascalCase }Module",
     logger: {
       level: "info",
-    }`}],
-                provider: (context) => `${context.nameCamelCase}.log.trace(${context.nameCamelCase}.discord.i18n.t("discord:modules.registering", { name: ${context.nameCamelCase}.name }))
-    ${context.nameCamelCase}.discord.registerModule(${context.nameCamelCase})
-    ${context.nameCamelCase}.log.trace(${context.nameCamelCase}.discord.i18n.t("discord:modules.registered", { name: ${context.nameCamelCase}.name }))`,
-            },
+    }`
+                    }
+                ],
+                provider: ( context ) => `${ context.nameCamelCase }.log.trace(${ context.nameCamelCase }.discord.i18n.t("discord:modules.registering", { name: ${ context.nameCamelCase }.name }))
+    ${ context.nameCamelCase }.discord.registerModule(${ context.nameCamelCase })
+    ${ context.nameCamelCase }.log.trace(${ context.nameCamelCase }.discord.i18n.t("discord:modules.registered", { name: ${ context.nameCamelCase }.name }))`
+            }
         ]
-    })
+    } )
 }
