@@ -1,3 +1,4 @@
+
 /*
  * Project: Eventiva
  * File: discordjs-config.ts
@@ -39,7 +40,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */ort { Logger } from '@eventiva/utilities.logging.pino'
+ */
+
+ort { Logger } from '@eventiva/utilities.logging.pino'
 // import { SegmentConfig } from "@eventiva/central.aspects.segment";
 import type { ClientOptions } from 'discord.js'
 

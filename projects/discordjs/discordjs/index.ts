@@ -1,3 +1,4 @@
+
 /*
  * Project: Eventiva
  * File: index.ts
@@ -39,7 +40,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */om './discordjs.node.runtime.js'
+ */
+
+om './discordjs.node.runtime.js'
 
 export { Node as DiscordjsDiscord, Node as DiscordjsNode }
 

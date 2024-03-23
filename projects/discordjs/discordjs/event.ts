@@ -1,3 +1,4 @@
+
 /*
  * Project: Eventiva
  * File: event.ts
@@ -39,7 +40,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */s } from 'discord.js'
+ */
+
+s } from 'discord.js'
 import { DiscordJsModule } from './module.js'
 
 

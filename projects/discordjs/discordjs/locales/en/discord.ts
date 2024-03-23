@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: discord.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/22/24, 3:17 AM
+ * Last Modified: 3/23/24, 7:37 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -14,7 +14,7 @@
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * 2024-2024 Resnovas - All Rights Reserved
+ * 2024 Resnovas - All Rights Reserved
  * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
  * -----
  * This program has been provided under confidence of the copyright holder and
@@ -42,60 +42,60 @@
  */
 
 export const discord = {
-    clientStarted: "Discord Client Initialized",
-    checks_searching: "Checking {{key}} exists on configuration",
-    checks_found: "{{key}} found on configuration",
-    checks_notFound: "{{key}} not found on configuration",
+    clientStarted: 'Discord Client Initialized',
+    checks_searching: 'Checking {{key}} exists on configuration',
+    checks_found: '{{key}} found on configuration',
+    checks_notFound: '{{key}} not found on configuration',
     client: {
-        creating: "Creating Discord Client",
-        created: "Discord Client created",
+        creating: 'Creating Discord Client',
+        created: 'Discord Client created'
     },
     init: {
         logging: {
-            module: "Logging module found. Using logging module.",
-            module_notFound: "$t(errors:noLogging)",
+            module: 'Logging module found. Using logging module.',
+            module_notFound: '$t(errors:noLogging)'
         },
-        creating: "Creating Discord Client",
-        created: "Discord Client created",
-        loggingIn: "Logging in to Discord",
-        loggedIn: "Logged in to Discord",
-        faked: "Faking login to Discord due to no token",
+        creating: 'Creating Discord Client',
+        created: 'Discord Client created',
+        loggingIn: 'Logging in to Discord',
+        loggedIn: 'Logged in to Discord',
+        faked: 'Faking login to Discord due to no token'
     },
     events: {
-        listing: "Listing {{count}} events",
-        listed: "Events listed. {{flatmap}}",
+        listing: 'Listing {{count}} events',
+        listed: 'Events listed. {{flatmap}}',
         multi: {
-            registerEventSlot: "Registering events against EventSlot",
-            registering: "Registering events. {{count}} events to register",
-            registered: "Events registered against EventSlot. Now hosting {{count}} events",
+            registerEventSlot: 'Registering events against EventSlot',
+            registering: 'Registering events. {{count}} events to register',
+            registered: 'Events registered against EventSlot. Now hosting {{count}} events'
         },
         single: {
-            registering: "Registering Event - {{name}} - on {{type}} emitter.",
-            registered: "Event - {{name}} - registered on {{type}} emitter.",
+            registering: 'Registering Event - {{name}} - on {{type}} emitter.',
+            registered: 'Event - {{name}} - registered on {{type}} emitter.'
         }
     },
     commands: {
-        listing: "Listing {{count}} commands",
-        listed: "Commands listed. {{flatmap}}",
+        listing: 'Listing {{count}} commands',
+        listed: 'Commands listed. {{flatmap}}',
         multi: {
-            registerCommandSlot: "Registering Commands against CommandSlot",
-            registering: "Registering commands. {{count}} commands to register",
-            registered: "Commands registered against CommandSlot. Now hosting {{count}} commands",
+            registerCommandSlot: 'Registering Commands against CommandSlot',
+            registering: 'Registering commands. {{count}} commands to register',
+            registered: 'Commands registered against CommandSlot. Now hosting {{count}} commands'
         },
         single: {
-            binding: "Registering command - {{name}}",
-            bound: "Command - {{name}}",
+            binding: 'Registering command - {{name}}',
+            bound: 'Command - {{name}}'
         }
     },
     modules: {
-        init: "Initializing module {{name}}",
-        init_complete: "Initialized module {{name}}",
-        check: "Running checks to ensure module is registrable",
-        check_name: "Checking if module name {{name}} is {{key}}",
-        check_exists: "Checking if module name {{name}} exists {{key}}",
-        registering: "Registering module - {{name}}",
-        registered: "Registered module - {{name}}",
-    },
-} as const;
+        init: 'Initializing module {{name}}',
+        init_complete: 'Initialized module {{name}}',
+        check: 'Running checks to ensure module is registrable',
+        check_name: 'Checking if module name {{name}} is {{key}}',
+        check_exists: 'Checking if module name {{name}} exists {{key}}',
+        registering: 'Registering module - {{name}}',
+        registered: 'Registered module - {{name}}'
+    }
+} as const
 
-export default discord;
+export default discord

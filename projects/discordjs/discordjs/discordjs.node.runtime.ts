@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: discordjs.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 7:37 PM
+ * Last Modified: 3/23/24, 7:39 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,8 +39,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */ort type { I18NNode } from '@eventiva/utilities.i18n'
-import { I18NAspect, Resource } from '@eventiva/utilities.i18n'
+ */
+
+import { I18NAspect, type I18NNode, Resource } from '@eventiva/utilities.i18n'
 import type { PinoNode as LoggingNode } from '@eventiva/utilities.logging.pino'
 import { PinoAspect as LoggingAspect } from '@eventiva/utilities.logging.pino'
 import { Client, GatewayIntentBits } from 'discord.js'

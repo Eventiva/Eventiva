@@ -1,3 +1,4 @@
+
 /*
  * Project: Eventiva
  * File: command.ts
@@ -39,7 +40,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */nInteraction,
+ */
+
+nInteraction,
     ChatInputCommandInteraction,
     ContextMenuCommandBuilder,
     Message,

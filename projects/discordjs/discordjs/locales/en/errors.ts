@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: errors.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/22/24, 3:17 AM
+ * Last Modified: 3/23/24, 7:37 PM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -14,7 +14,7 @@
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
- * 2024-2024 Resnovas - All Rights Reserved
+ * 2024 Resnovas - All Rights Reserved
  * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
  * -----
  * This program has been provided under confidence of the copyright holder and
@@ -42,7 +42,7 @@
  */
 
 export const errors = {
-    noLogging: "No logging module found. Using Console module.",
-} as const;
+    noLogging: 'No logging module found. Using Console module.'
+} as const
 
-export default errors;
+export default errors

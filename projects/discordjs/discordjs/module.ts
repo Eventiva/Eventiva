@@ -1,3 +1,4 @@
+
 /*
  * Project: Eventiva
  * File: module.ts
@@ -39,7 +40,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */ort type { Logger, PinoNode as LoggerNode } from '@eventiva/utilities.logging.pino'
+ */
+
+ort type { Logger, PinoNode as LoggerNode } from '@eventiva/utilities.logging.pino'
 import type { Command } from './command.js'
 import { DiscordjsAspect } from './discordjs.aspect.js'
 import type { DiscordjsNode } from './discordjs.node.runtime.js'

@@ -1,3 +1,4 @@
+
 /*
  * Project: Eventiva
  * File: discordjs.aspect.ts
@@ -39,7 +40,9 @@
  * the official website: https://gplcc.github.io/gplcc/
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
- */s aspect that can be used in Eventiva bots. It is created with the Aspect.create() method and requires an id parameter.
+ */
+
+s aspect that can be used in Eventiva bots. It is created with the Aspect.create() method and requires an id parameter.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @type {*}
