@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: atlassian-customer-support.node.runtime.ts
-* Path: \projects\bots\aspects\atlassian-customer-support\atlassian-customer-support.node.runtime.ts
+* File: customer-support.node.runtime.ts
+* Path: \projects\bots\aspects\customer-support\customer-support.node.runtime.ts
 * Created Date: Sunday, January 28th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -45,18 +45,18 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import type { AtlassianCustomerSupportConfig } from './atlassian-customer-support-config.js';
-import { DiscordjsAspect, type DiscordjsNode } from '@eventiva/bots.aspects.discordjs';
+import type { CustomerSupportConfig } from './customer-support-config.js';
+import { DiscordjsAspect, type DiscordjsNode } from '@eventiva/discordjs.discordjs';
 
 
 /**
- * This class represents an Atlassian Customer Support node. It is responsible for providing support for Atlassian customers through Discord. It depends on the DiscordjsNode class and requires a config object of type AtlassianCustomerSupportConfig.
+ * This class represents an Atlassian Customer Support node. It is responsible for providing support for Atlassian customers through Discord. It depends on the DiscordjsNode class and requires a config object of type CustomerSupportConfig.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
  * @class
  */
-export class AtlassianCustomerSupportNode {
+export class CustomerSupportNode {
   /**
    * A private property that holds an instance of the Discord.js client for interacting with the Discord API.
    * @author Jonathan Stevens (@TGTGamer)
@@ -65,7 +65,7 @@ export class AtlassianCustomerSupportNode {
    */
   private discordjs: DiscordjsNode
   /**
-   * Creates an instance of AtlassianCustomerSupportNode.
+   * Creates an instance of CustomerSupportNode.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @constructor
@@ -75,11 +75,11 @@ export class AtlassianCustomerSupportNode {
    */
   constructor(
     [discordjs]: [DiscordjsNode],
-    private config: AtlassianCustomerSupportConfig,
+    private config: CustomerSupportConfig,
   ) {
     this.discordjs = discordjs
   }
-  
+
   /**
    * An array of dependencies for the static property. It includes only DiscordjsAspect.
    * @author Jonathan Stevens (@TGTGamer)
@@ -89,15 +89,15 @@ export class AtlassianCustomerSupportNode {
   static dependencies = [DiscordjsAspect];
 
   /**
-   * A static property that represents the default configuration for the AtlassianCustomerSupportConfig. It is an empty object by default.
+   * A static property that represents the default configuration for the CustomerSupportConfig. It is an empty object by default.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @static
    */
-  static defaultConfig: AtlassianCustomerSupportConfig = {};
+  static defaultConfig: CustomerSupportConfig = {};
 
   /**
-   * Creates a new instance of AtlassianCustomerSupportNode and returns it.
+   * Creates a new instance of CustomerSupportNode and returns it.
    * @author Jonathan Stevens (@TGTGamer)
    *
    * @static
@@ -105,18 +105,18 @@ export class AtlassianCustomerSupportNode {
    * @param param0 An instance of Discord.js client
    * @param param0.discordjs An instance of Discord.js client
    * @param config The configuration object for the Atlassian Customer Support module
-   * @returns This function is a provider function that creates a new instance of the AtlassianCustomerSupportNode class with the given DiscordjsNode instance and config. It then calls the listCommands method on the AtlassianCustomerSupportNode instance. Finally, it returns the created AtlassianCustomerSupportNode instance.
+   * @returns This function is a provider function that creates a new instance of the CustomerSupportNode class with the given DiscordjsNode instance and config. It then calls the listCommands method on the CustomerSupportNode instance. Finally, it returns the created CustomerSupportNode instance.
    */
   static async provider(
     [discordjs]: [DiscordjsNode],
-    config: AtlassianCustomerSupportConfig,
+    config: CustomerSupportConfig,
   ) {
-    const atlassianCustomerSupport = new AtlassianCustomerSupportNode([discordjs], config);
+    const customerSupport = new CustomerSupportNode([discordjs], config);
 
-    atlassianCustomerSupport.discordjs.listCommands()
+    customerSupport.discordjs.listCommands()
 
-    return atlassianCustomerSupport;
+    return customerSupport;
   }
 }
 
-export default AtlassianCustomerSupportNode;
+export default CustomerSupportNode;

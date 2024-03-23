@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: atlassian-customer-support.node.spec.ts
-* Path: \projects\bots\aspects\atlassian-customer-support\atlassian-customer-support.node.spec.ts
+* File: customer-support.aspect.ts
+* Path: \projects\bots\aspects\customer-support\customer-support.aspect.ts
 * Created Date: Sunday, January 28th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -45,14 +45,15 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
-import { loadAspect } from '@bitdev/harmony.testing.load-aspect';
-import type { AtlassianCustomerSupportNode } from './atlassian-customer-support.node.runtime.js';
-import { AtlassianCustomerSupportAspect } from './atlassian-customer-support.aspect.js';
+import { Aspect } from '@bitdev/harmony.harmony'; 
 
-it('should retrieve the aspect', async () => {
-  const atlassianCustomerSupport = await loadAspect<AtlassianCustomerSupportNode>(AtlassianCustomerSupportAspect, {
-    runtime: 'node',
-  });
+/**
+ * The CustomerSupportAspect class is used to create an aspect for Atlassian customer support. It takes an object with an id property and returns a new aspect with that id.
+ * @author Jonathan Stevens (@TGTGamer)
+ */
+export const CustomerSupportAspect = Aspect.create({
+  id: 'eventiva.bots/aspects/customer-support'
+});
 
-  expect(atlassianCustomerSupport).toBeTruthy();
-});    
+export default CustomerSupportAspect;
+    

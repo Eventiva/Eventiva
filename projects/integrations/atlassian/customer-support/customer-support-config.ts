@@ -2,8 +2,8 @@
 * @format
 * -----
 * Project: @eventiva/eventiva
-* File: index.ts
-* Path: \projects\bots\aspects\atlassian-customer-support\index.ts
+* File: customer-support-config.ts
+* Path: \projects\bots\aspects\customer-support\customer-support-config.ts
 * Created Date: Sunday, January 28th 2024
 * Author: Jonathan Stevens, jonathan@resnovas.com
 * Github: https://github.com/TGTGamer
@@ -45,10 +45,7 @@
 * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
 */
 
+export type CustomerSupportConfig = {
 
-import { AtlassianCustomerSupportAspect } from './atlassian-customer-support.aspect.js';
+};
 
-export type { AtlassianCustomerSupportNode } from './atlassian-customer-support.node.runtime.js';
-
-export default AtlassianCustomerSupportAspect;
-export { AtlassianCustomerSupportAspect };
