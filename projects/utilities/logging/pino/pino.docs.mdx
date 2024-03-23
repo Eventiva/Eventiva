@@ -1,9 +1,9 @@
 ---
-description: 'A plugable Logging aspect. Can be used to provider a UI and API.'
+description: 'A plugable Pino aspect. Can be used to provider a UI and API.'
 labels: ['aspect', 'composition', 'extendability']
 ---
 
-A plugable Logging aspect. Used to maintain Logging across the platform.
+A plugable Pino aspect. Used to maintain Pino across the platform.
 
 ## Get started
 
@@ -26,7 +26,7 @@ export const MyPlatform = HarmonyPlatform.from({
   ],
 
   aspects: [
-    LoggingAspect,
+    PinoAspect,
   ]
 });
 
