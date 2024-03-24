@@ -1,9 +1,8 @@
-
 /*
  * Project: Eventiva
  * File: index.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:52 PM
+ * Last Modified: 3/24/24, 12:33 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,7 +41,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-om './discordjs.node.runtime.js'
+import { DiscordjsAspect } from './discordjs.aspect.js'
+import { DiscordjsNode as Node } from './discordjs.node.runtime.js'
 
 export { Node as DiscordjsDiscord, Node as DiscordjsNode }
 

@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: module.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:57 PM
+ * Last Modified: 3/24/24, 12:34 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -41,14 +41,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-ort
-type
-{
-    Logger, PinoNode as LoggerNode
-}
-from
-'@eventiva/utilities.logging.pino'
-import { Logger, PinoNode } from '../../utilities/logging/pino/index.js'
+import type { Logger, PinoNode as LoggerNode } from '@eventiva/utilities.logging.pino'
 import type { Command } from './command.js'
 import { DiscordjsAspect } from './discordjs.aspect.js'
 import type { DiscordjsNode } from './discordjs.node.runtime.js'

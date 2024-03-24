@@ -1,9 +1,8 @@
-
 /*
  * Project: Eventiva
  * File: event.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:57 PM
+ * Last Modified: 3/24/24, 12:32 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,10 +41,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-s
-}
-from
-'discord.js'
+import { SlotRegistry } from '@bitdev/harmony.harmony'
+import { Awaitable, ClientEvents } from 'discord.js'
 import { DiscordJsModule } from './module.js'
 
 

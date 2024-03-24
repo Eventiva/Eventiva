@@ -1,9 +1,8 @@
-
 /*
  * Project: Eventiva
  * File: discordjs.aspect.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:52 PM
+ * Last Modified: 3/24/24, 12:28 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,11 +41,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-s aspect that can be used in Eventiva bots. It is created with the Aspect.create() method and requires an id parameter.
- * @author Jonathan Stevens (@TGTGamer)
- *
- * @type {*}
- */
+import { Aspect } from '@bitdev/harmony.harmony'
+
 export const DiscordjsAspect = Aspect.create( {
     id: 'eventiva.bots/aspects/discordjs'
 } )

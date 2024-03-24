@@ -1,9 +1,8 @@
-
 /*
  * Project: Eventiva
  * File: command.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:57 PM
+ * Last Modified: 3/24/24, 12:26 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,17 +41,17 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-nInteraction,
+import type { SlotRegistry } from '@bitdev/harmony.harmony'
+import {
+    type Awaitable,
+    type ButtonInteraction,
     ChatInputCommandInteraction,
     ContextMenuCommandBuilder,
     Message,
     SlashCommandBuilder,
     StringSelectMenuInteraction
-}
-from
-'discord.js'
+} from 'discord.js'
 import type { DiscordjsNode } from './discordjs.node.runtime.js'
-
 
 /**
  * Interface for the Message object.
@@ -255,6 +254,5 @@ export type Command =
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @typedef {CommandSlot}
  */
 export type CommandSlot = SlotRegistry<Command[]>;
