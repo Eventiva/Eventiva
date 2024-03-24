@@ -111,7 +111,7 @@ jobs:
 
       # >>> Install your own deps here (npm install, etc) <<<
       - name: Trunk Upgrade
-        uses: trunk-io/trunk-action/upgrade@65228585e2c6128315f0f2d5190e2eae7f5c32c6 # v1.1.10
+        uses: trunk-io/trunk-action/upgrade@718b71fb3e4d83f6734f0c372d92ee7d4c9976d7 # v1.1.11
 
   trunk_check:
     name: Trunk Check Upload
@@ -160,7 +160,7 @@ jobs:
 
 
       - name: Trunk Check
-        uses: trunk-io/trunk-action@65228585e2c6128315f0f2d5190e2eae7f5c32c6 # v1.1.10
+        uses: trunk-io/trunk-action@718b71fb3e4d83f6734f0c372d92ee7d4c9976d7 # v1.1.11
         with:
           trunk-token: ${{ secrets.TRUNK_TOKEN }}
           github-token: ${{ secrets.BOT_TOKEN || github.token }}
