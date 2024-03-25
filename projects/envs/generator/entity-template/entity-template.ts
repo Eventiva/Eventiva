@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: entity-template.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -46,7 +46,7 @@ import { testFile } from './files/test.js'
  * A partial type that extends the ComponentTemplateOptions interface by picking the 'name', 'description', 'hidden', and 'env' properties from the ComponentTemplate interface.
  *
  * @export
- * @typedef {NodeComponentTemplateOptions}
+
  */
 export type NodeComponentTemplateOptions = Partial<
     Pick<ComponentTemplate, 'name' | 'description' | 'hidden' | 'env'>
@@ -67,7 +67,7 @@ export type NodeComponentTemplateOptions = Partial<
  *
  * @export
  * @class EntityTemplate
- * @typedef {EntityTemplate}
+
  * @implements {ComponentTemplate}
  */
 export class EntityTemplate

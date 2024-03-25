@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: discord-runtime-options.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,6 +42,6 @@ import type { NodeServerOptions } from '@bitdev/node.node-server'
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {DiscordRuntimeOptions}
+
  */
 export type DiscordRuntimeOptions = Omit<NodeServerOptions, 'mainPath' | 'name'>;

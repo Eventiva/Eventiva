@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: harmony-templates-options.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -50,7 +50,7 @@ import type { ComponentContext, ComponentFile, ComponentTemplate } from '@teambi
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {HarmonyTemplatesOptions}
+
  */
 export type HarmonyTemplatesOptions = {
     /**
@@ -104,7 +104,7 @@ export type HarmonyTemplatesOptions = {
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {RuntimeOptions}
+
  */
 export type RuntimeOptions = {
     /**
@@ -171,7 +171,7 @@ export type RuntimeOptions = {
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {Dependencies}
+
  */
 export type Dependencies = ( string | [
     string, {
@@ -189,7 +189,7 @@ export type Dependencies = ( string | [
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {Imports}
+
  */
 export type Imports = ( string | [
     string, {
@@ -209,7 +209,7 @@ export type Imports = ( string | [
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {ClassExtends}
+
  */
 export type ClassExtends = string | [
     string, {
@@ -221,7 +221,7 @@ export type ClassExtends = string | [
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {ConfigExtends}
+
  */
 export type ConfigExtends = string | [
     string, {

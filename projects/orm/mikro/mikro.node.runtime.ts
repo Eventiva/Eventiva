@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: mikro.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -47,7 +47,7 @@ import type { MikroConfig } from './mikro-config.js'
  *
  * @export
  * @class MikroNode
- * @typedef {MikroNode}
+
  */
 export class MikroNode {
     /**

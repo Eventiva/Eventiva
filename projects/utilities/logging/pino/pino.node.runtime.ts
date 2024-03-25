@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: pino.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 2:05 AM
+ * Last Modified: 3/25/24, 2:22 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -48,7 +48,6 @@ import type { PinoConfig } from './pino-config.js'
  *
  * @export
  * @class PinoNode
- * @typedef {PinoNode}
  */
 export class PinoNode {
     /**
@@ -96,7 +95,7 @@ export class PinoNode {
      * @private
      * @type {(Log | Console)}
      */
-    private log: Log | Console = console
+    private readonly log: Log | Console = console
 
     /**
      * Creates an instance of PinoNode.
@@ -113,33 +112,26 @@ export class PinoNode {
         this.console = process.env.NODE_ENV === 'development'
             ? pinoCaller( pino<'alert' | 'emergency'>( this.config, this.stream ) ) as Log
             : pino<'alert' | 'emergency'>( this.config, this.stream )
+
         this.log = this.registerLogger( [ { name: 'logger:main', options: { level: config.level } } ] ).getLogger(
             'logger:main' ).logger
     }
 
+
     /**
-     * Creates a pino provider with the given configuration and logger.
-     * @param deps - An empty array of dependencies.
-     * @param config - The configuration for the pino provider.
-     * @param Logger - The logger slot to be used for pino.
-     * @returns A Promise that resolves to a pino provider.
-     * @author Jonathan Stevens (@TGTGamer)
+     * Creates a new instance of PinoNode using the provided configuration and logger.
      *
-     * @static
-     * @async
-     * @param {[]} deps An array of dependencies
-     * @param {PinoConfig} config The pino configuration
-     * @param {[LoggerSlot]} param0 A logger slot
-     * @param {LoggerSlot} param0.Logger
-     * @returns {unknown} Creates a pino provider with the specified dependencies, configuration, and logger slot.
+     * @param {Array} [] An empty array.
+     * @param {PinoConfig} config The configuration object for PinoNode.
+     * @param {Array} [ Logger ] The logger slot for PinoNode.
+     * @return {PinoNode} A new instance of PinoNode.
      */
     static async provider (
-        deps: [],
+        []: [],
         config: PinoConfig,
         [ Logger ]: [ LoggerSlot ]
-    ) {
-        const pino = new PinoNode( config, Logger )
-        return pino
+    ): Promise<PinoNode> {
+        return new PinoNode( config, Logger )
     }
 
     /**

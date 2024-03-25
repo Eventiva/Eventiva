@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: aspect-template.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -63,7 +63,7 @@ import { testFile } from './files/test-template.js'
  * @author Jonathan Stevens (TGTGamer)
  *
  * @export
- * @typedef {AspectTemplateOptions}
+
  */
 export type AspectTemplateOptions = {
     name?: string,
@@ -88,7 +88,7 @@ export type AspectTemplateOptions = {
  *
  * @export
  * @class AspectTemplate
- * @typedef {AspectTemplate}
+
  * @implements {ComponentTemplate}
  */
 export class AspectTemplate

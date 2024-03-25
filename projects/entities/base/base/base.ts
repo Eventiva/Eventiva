@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: base.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -44,7 +44,7 @@ import { typeid, TypeID } from 'typeid-js'
  * @export
  * @abstract
  * @class Base
- * @typedef {Base}
+
  * @template {string} [T="UDM"]
  * @implements {PlainBase<T>}
  */

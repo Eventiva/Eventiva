@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: resource.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -44,7 +44,7 @@ import { SlotRegistry } from '@bitdev/harmony.harmony'
  *
  * @export
  * @interface Resource
- * @typedef {Resource}
+
  */
 export interface Resource {
     /**
@@ -82,6 +82,6 @@ export interface Resource {
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @typedef {ResourceSlot}
+
  */
 export type ResourceSlot = SlotRegistry<Resource>;

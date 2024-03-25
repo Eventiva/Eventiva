@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: aspect-runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -45,7 +45,7 @@ import { generateName } from './slot-template.js'
  * A type representing the dependencies of a component. It has two properties: 'component' which is a ComponentID, and 'imports' which is an array of strings.
  * @author Jonathan Stevens (TGTGamer)
  *
- * @typedef {Dependencies}
+
  */
 type Dependencies = {
     component: ComponentID,

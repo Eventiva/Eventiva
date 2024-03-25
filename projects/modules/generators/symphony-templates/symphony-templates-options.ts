@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: symphony-templates-options.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -41,7 +41,7 @@ import type { HarmonyTemplatesOptions } from '@eventiva/modules.generators.harmo
  * Type representing options for Symphony Templates. It includes an optional property symphonyEnvId of type string. It also includes all properties from HarmonyTemplatesOptions.
  *
  * @export
- * @typedef {SymphonyTemplatesOptions}
+
  */
 export type SymphonyTemplatesOptions = {
     symphonyEnvId?: string

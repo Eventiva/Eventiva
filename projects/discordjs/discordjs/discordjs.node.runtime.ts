@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: discordjs.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -55,7 +55,7 @@ import type { DiscordJsModule } from './module.js'
  *
  * @export
  * @class DiscordjsNode
- * @typedef {DiscordjsNode}
+
  */
 export class DiscordjsNode {
 

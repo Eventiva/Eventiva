@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: document.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -44,7 +44,7 @@ import { EntityRepository } from '@mikro-orm/postgresql'
  *
  * @export
  * @class Document
- * @typedef {Document}
+
  * @extends {Base<typeof Document.Type>}
  */
 @Entity( { repository: () => DocumentRepository } )
@@ -74,7 +74,7 @@ export class Document
  *
  * @export
  * @class DocumentRepository
- * @typedef {DocumentRepository}
+
  * @extends {EntityRepository<Document>}
  */
 export class DocumentRepository

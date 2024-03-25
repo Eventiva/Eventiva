@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: discordjs-config.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:56 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -44,7 +44,7 @@ import type { ClientOptions } from 'discord.js'
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @typedef {DiscordjsConfig}
+
  */
 export type DiscordjsConfig = {
     token: string;

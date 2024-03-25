@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: mikro-config.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:48 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -43,6 +43,6 @@ import { Options } from '@mikro-orm/postgresql'
  * use this type for your aspect config. MikroConfig type extending from Options type.
  *
  * @export
- * @typedef {MikroConfig}
+
  */
 export type MikroConfig = {} & Options;

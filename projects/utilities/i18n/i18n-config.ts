@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: i18n-config.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:48 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -44,7 +44,7 @@ import { InitOptions } from 'i18next'
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @typedef {I18NConfig}
+
  */
 export type I18NConfig = {
     logger: Logger['options']

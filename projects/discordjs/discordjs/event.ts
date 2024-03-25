@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: event.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:15 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -46,7 +46,7 @@ import { DiscordJsModule } from './module.js'
  *
  * @export
  * @interface ExtendedClientEvents
- * @typedef {ExtendedClientEvents}
+
  * @extends {ClientEvents}
  */
 export interface ExtendedClientEvents
@@ -116,7 +116,7 @@ export interface ExtendedClientEvents
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @typedef {Event}
+
  * @template {keyof ClientEvents} E The type of event
  */
 export interface Event<E extends keyof ExtendedClientEvents> {
@@ -155,7 +155,7 @@ export interface Event<E extends keyof ExtendedClientEvents> {
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @typedef {EventSlot}
+
  * @template {keyof ExtendedClientEvents} E The key of the extended client events.
  */
 export type EventSlot<E extends keyof ExtendedClientEvents> = SlotRegistry<Event<E>[]>;
