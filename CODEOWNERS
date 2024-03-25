@@ -1,0 +1,44 @@
+# This file itself is owned by members who are assigned the Project Admin role in this project.
+CODEOWNERS "Project Admin"
+
+# All .adoc's should be owned by the "Technical Writer" and "Customer Success Manager"
+*.adoc "Technical Writer" "Customer Success Manager"
+*.md "Technical Writer" "Customer Success Manager"
+
+# All .spec.ts should be owned by the "Quality Assurance" and "Project Member"
+*.spec.ts "Quality Assurance"
+
+# Teams for use:
+# Automation & Robotics
+# Continuous Deployment & Integration
+# Data flow & Processing
+# Eventiva For Gaming
+# HO Justice Operations
+# Logistics & Networking Management
+# Operational Core Deployments
+# User Interface
+
+.devcontainer "Automation & Robotics"
+.github "Automation & Robotics"
+.space "Automation & Robotics"
+.vscode "Automation & Robotics"
+scripts "Automation & Robotics"
+projects/discordjs/**/*.ts "Automation & Robotics"
+projects/entities/**/*.ts "Data flow & Processing"
+projects/envs/**/*.ts "Operational Core Deployments"
+projects/integrations/**/*.ts "Operational Core Deployments"
+projects/modules/**/*.ts "Operational Core Deployments"
+projects/orm/**/*.ts "Data flow & Processing"
+projects/platforms/**/*.ts "Continuous Deployment & Integration"
+projects/utilities/**/*.ts "Operational Core Deployments"
+projects/workflows/**/*.ts "Continuous Deployment & Integration"
+# projects/<folder>/**/*.ts "Operational Core Deployments"
+
+# Individual Files
+.coderabbit.yaml "Project Admin"
+.editorconfig "Project Admin"
+Eventiva Cooperation Commitment.md "Project Admin"
+LICENSE "Project Admin"
+package.json "Project Admin"
+sweep.yaml "Project Admin"
+workspace.jsonc "Project Member"
