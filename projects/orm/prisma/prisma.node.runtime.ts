@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: prisma.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:56 PM
+ * Last Modified: 3/25/24, 1:51 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -15,28 +15,22 @@
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
  * 2024 Eventiva - All Rights Reserved
- * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
  * -----
- * This program has been provided under confidence of the copyright holder and
- * is licensed for copying, distribution and modification under the terms
- * of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
- * or (at your option) any later version of this license.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License v2.0 or later for more details.
- * You should have received a copy of the GNU General Public License v2.0 or later
- * along with this program. If not, please write to: licensing@eventiva.co.uk,
- * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+ * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
+ * and modification under the terms of the Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
+ * published as the License, or (at your option) any later version of this license. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the Functional Source License, Version 1.1, MIT Future License for more
+ * details. You should have received a copy of the Functional Source License, Version 1.1, MIT Future License along
+ * with this program. If not, please write to: licensing@eventiva.co.uk, see the official website
+ * https://fsl.software/ or Review the GitHub repository https://github.com/getsentry/fsl.software/
  * -----
- * This project abides by the GPL Cooperation Commitment.
- * Before filing or continuing to prosecute any legal proceeding or claim
- * (other than a Defensive Action) arising from termination of a Covered
- * License, we commit to extend to the person or entity ('you') accused
- * of violating the Covered License the following provisions regarding
- * cure and reinstatement, taken from GPL version 3.
- * For further details on the GPL Cooperation Commitment please visit
- * the official website: https://gplcc.github.io/gplcc/
+ * This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before
+ * filing or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from
+ * termination of a Covered License, we commit to adhering to the Eventiva Cooperation Commitment. You should have
+ * received a copy of the Eventiva Cooperation Commitment along with this program. If not, please write to:
+ * licensing@eventiva.co.uk, or see https://eventiva.co.uk/licensing/ecc
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
@@ -47,53 +41,53 @@ import type { PrismaConfig } from './prisma-config.js'
 import { prismaGqlSchema } from './prisma.graphql.js'
 
 export class PrismaNode {
-  constructor(
-    private config: PrismaConfig,
-    private emSlot: EmSlot,
-  ) {}
+    static dependencies = [ SymphonyPlatformAspect ]
+    static defaultConfig: PrismaConfig = {}
 
-  /**
-   * register a list of em.
-   */
-  registerEm(ems: Em[]) {
-    this.emSlot.register(ems);
-    return this;
-  }
+    constructor (
+        private config: PrismaConfig,
+        private emSlot: EmSlot
+    ) {
+    }
 
-  /**
-   * list all em.
-   */
-  listEms() {
-    return this.emSlot.flatValues();
-  }
+    static async provider (
+        [ symphonyPlatform ]: [ SymphonyPlatformNode ],
+        config: PrismaConfig,
+        [ emSlot ]: [ EmSlot ]
+    ) {
+        const prisma = new PrismaNode( config, emSlot )
+        const gqlSchema = prismaGqlSchema( prisma )
 
-  /**
-   * retrieve something.
-   */
-  async getSomething(id: string) {
-    return id;
-  }
+        symphonyPlatform.registerBackendServer( [
+            {
+                gql: gqlSchema
+            }
+        ] )
 
-  static dependencies = [SymphonyPlatformAspect];
+        return prisma
+    }
 
-  static defaultConfig: PrismaConfig = {};
+    /**
+     * register a list of em.
+     */
+    registerEm ( ems: Em[] ) {
+        this.emSlot.register( ems )
+        return this
+    }
 
-  static async provider(
-    [symphonyPlatform]: [SymphonyPlatformNode],
-    config: PrismaConfig,
-    [emSlot]: [EmSlot]
-  ) {
-    const prisma = new PrismaNode(config, emSlot);
-    const gqlSchema = prismaGqlSchema(prisma);
+    /**
+     * list all em.
+     */
+    listEms () {
+        return this.emSlot.flatValues()
+    }
 
-    symphonyPlatform.registerBackendServer([
-      {
-        gql: gqlSchema,
-      }
-    ]);
-
-    return prisma;
-  }
+    /**
+     * retrieve something.
+     */
+    async getSomething ( id: string ) {
+        return id
+    }
 }
 
-export default PrismaNode;
+export default PrismaNode

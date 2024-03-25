@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: component.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:57 PM
+ * Last Modified: 3/25/24, 1:51 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -15,28 +15,22 @@
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
  * 2024 Eventiva - All Rights Reserved
- * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
  * -----
- * This program has been provided under confidence of the copyright holder and
- * is licensed for copying, distribution and modification under the terms
- * of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
- * or (at your option) any later version of this license.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License v2.0 or later for more details.
- * You should have received a copy of the GNU General Public License v2.0 or later
- * along with this program. If not, please write to: licensing@eventiva.co.uk,
- * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+ * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
+ * and modification under the terms of the Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
+ * published as the License, or (at your option) any later version of this license. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the Functional Source License, Version 1.1, MIT Future License for more
+ * details. You should have received a copy of the Functional Source License, Version 1.1, MIT Future License along
+ * with this program. If not, please write to: licensing@eventiva.co.uk, see the official website
+ * https://fsl.software/ or Review the GitHub repository https://github.com/getsentry/fsl.software/
  * -----
- * This project abides by the GPL Cooperation Commitment.
- * Before filing or continuing to prosecute any legal proceeding or claim
- * (other than a Defensive Action) arising from termination of a Covered
- * License, we commit to extend to the person or entity ('you') accused
- * of violating the Covered License the following provisions regarding
- * cure and reinstatement, taken from GPL version 3.
- * For further details on the GPL Cooperation Commitment please visit
- * the official website: https://gplcc.github.io/gplcc/
+ * This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before
+ * filing or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from
+ * termination of a Covered License, we commit to adhering to the Eventiva Cooperation Commitment. You should have
+ * received a copy of the Eventiva Cooperation Commitment along with this program. If not, please write to:
+ * licensing@eventiva.co.uk, or see https://eventiva.co.uk/licensing/ecc
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
@@ -50,12 +44,12 @@ import { ComponentContext } from '@teambit/generator'
  * @param {ComponentContext} context The ComponentContext object
  * @returns {{ relativePath: string; content: string; }} A function that takes a ComponentContext object and returns an object with properties relativePath and content. The content contains a TypeScript class definition named with the name provided in the ComponentContext object. The class has a constructor that takes a name parameter and two methods: toObject() which serializes the class instance into a serializable object, and static method from() which creates a class instance from a plain object.
  */
-export const componentFile = (context: ComponentContext) => {
-  const { name, namePascalCase } = context;
-  return {
-    relativePath: `${name}.ts`,
-    content: `
-import { ${namePascalCase} as Plain${namePascalCase} } from '@eventiva/central.aspects.database'
+export const componentFile = ( context: ComponentContext ) => {
+    const { name, namePascalCase } = context
+    return {
+        relativePath: `${ name }.ts`,
+        content: `
+import { ${ namePascalCase } as Plain${ namePascalCase } } from '@eventiva/central.aspects.database'
 
 /**
  * Exports the generated Document type for use within other components
@@ -65,9 +59,9 @@ import { ${namePascalCase} as Plain${namePascalCase} } from '@eventiva/central.a
  * @typedef {Document}
  * @implements {User}
  */
-export { Plain${namePascalCase} }
+export { Plain${ namePascalCase } }
 
-export class ${namePascalCase} implements Plain${namePascalCase} {
+export class ${ namePascalCase } implements Plain${ namePascalCase } {
   constructor(
     readonly id: string,
     private _createdAt: Date = new Date(),
@@ -109,12 +103,12 @@ export class ${namePascalCase} implements Plain${namePascalCase} {
   }
 
   /**
-   * Creates and returns a Plain${namePascalCase} object with the properties id, createdAt, updatedAt, and deletedAt copied from the current object instance.
+   * Creates and returns a Plain${ namePascalCase } object with the properties id, createdAt, updatedAt, and deletedAt copied from the current object instance.
    *
-   * @returns {Plain${namePascalCase}} Returns a Plain${namePascalCase} object with the properties 'id', 'createdAt', 'updatedAt', and 'deletedAt' based on the current object's properties.
+   * @returns {Plain${ namePascalCase }} Returns a Plain${ namePascalCase } object with the properties 'id', 'createdAt', 'updatedAt', and 'deletedAt' based on the current object's properties.
    */
   toObject() {
-    const returnable: Plain${namePascalCase} = {
+    const returnable: Plain${ namePascalCase } = {
       id: this.id,
       createdAt: this._createdAt,
       updatedAt: this._updatedAt,
@@ -124,18 +118,18 @@ export class ${namePascalCase} implements Plain${namePascalCase} {
   }
 
   /**
-   * Creates a new ${namePascalCase} object based on the provided Plain${namePascalCase} object.
+   * Creates a new ${ namePascalCase } object based on the provided Plain${ namePascalCase } object.
    *
    * @static
-   * @param {Plain${namePascalCase}} plain${namePascalCase} A plain user object
-   * @returns {${namePascalCase}} Creates a new ${namePascalCase} object from a Plain${namePascalCase} object
+   * @param {Plain${ namePascalCase }} plain${ namePascalCase } A plain user object
+   * @returns {${ namePascalCase }} Creates a new ${ namePascalCase } object from a Plain${ namePascalCase } object
    */
-  static from(plain${namePascalCase}: Plain${namePascalCase}) {
-    return new ${namePascalCase}(
-      plain${namePascalCase}.id
+  static from(plain${ namePascalCase }: Plain${ namePascalCase }) {
+    return new ${ namePascalCase }(
+      plain${ namePascalCase }.id
     );
   }
 }
-`,
-  };
-};
+`
+    }
+}

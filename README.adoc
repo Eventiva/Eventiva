@@ -1,47 +1,42 @@
+[#eventiva]
 = EVENTIVA
 
 image::https://github.com/codespaces/badge.svg[Open in GitHub Codespaces,link=https://codespaces.new/Eventiva/eventiva?quickstart=1]
 
-== Index
-
-// toc
-
-* <<eventiva,EVENTIVA>>
- ** <<index,Index>>
- ** <<introduction,Introduction>>
- ** <<why-do-we-exist,Why do we exist?>>
- ** <<what-is-eventiva-gaming,What is Eventiva Gaming>>
- ** <<why-open-source,Why open-source?>>
- ** <<how-to-get-support-,How to get support 👨‍👩‍👧‍👦>>
- ** <<contributing,Contributing>>
-  *** <<backlog,Backlog>>
-  *** <<running-locally--developing,Running Locally \& Developing>>
-   **** <<prerequisites,prerequisites>>
-   **** <<codespaces-method-recommended,Codespaces Method (Recommended)>>
-   **** <<devcontainer-method,Devcontainer Method>>
-  *** <<visualisation-of-the-codebase,Visualisation of the codebase>>
-  *** <<contributors-,Contributors ✨>>
-
-// tocstop
-
+[#introduction]
 == Introduction
 
-Welcome to the Eventiva repository. Eventiva is an open-source platform for Event Planning and Production logistics. We have created a custom-built directory focused on indexing, marketing and connecting event specialist Vendors, Venues and professionals. We then connected this to our innovative tools for event production planning which include scheduling, itinerary, task management, contact management, warehousing ticket sales, interactive site maps, online and in-person sales solutions, accounting, payroll and human resources.
+Welcome to the Eventiva repository.
+Eventiva is an open-source platform for Event Planning and Production logistics.
+We have created a custom-built directory focused on indexing, marketing and connecting event specialist Vendors, Venues and professionals.
+We then connected this to our innovative tools for event production planning which include scheduling, itinerary, task management, contact management, warehousing ticket sales, interactive site maps, online and in-person sales solutions, accounting, payroll and human resources.
 
+[#why]
 == Why do we exist?
 
-When surveyed, the industry revealed that over fifty-five percent of events did not have a management tool of any form. The remaining forty percent are split across solutions designed and implemented for office environments. Software like Flock and Excel barely cover the toolset which managers require to be effective in the preproduction sections of their work. While fifty-five percent of events did not have management tools, a full eighty percent of individuals surveyed believed that schedulers, task lists and other management tools would be helpful to their ongoing operations.
+When surveyed, the industry revealed that over fifty-five percent of events did not have a management tool of any form.
+The remaining forty percent are split across solutions designed and implemented for office environments.
+Software like Flock and Excel barely cover the toolset which managers require to be effective in the preproduction sections of their work.
+While fifty-five percent of events did not have management tools, a full eighty percent of individuals surveyed believed that schedulers, task lists and other management tools would be helpful to their ongoing operations.
 
+[#what]
 == What is Eventiva Gaming
 
-Eventiva Gaming is born out of the desire to create the best tools for our industry. While gaming is an unusual route, we believe that the gaming industry, specifically role play communities, is a perfect fit for testing, developing and improving our tools. Within the Role Play Communities, there are may teams which need to coordinate, manage and plan digital events with the exact same requirements as physical events. We believe that by working with these communities we can create a better product for everyone.
+Eventiva Gaming is born out of the desire to create the best tools for our industry.
+While gaming is an unusual route, we believe that the gaming industry, specifically role play communities, is a perfect fit for testing, developing and improving our tools.
+Within the Role Play Communities, there are may teams which need to coordinate, manage and plan digital events with the exact same requirements as physical events.
+We believe that by working with these communities we can create a better product for everyone.
 
-For instance, the Eventiva Gaming team developed the initial version of the Fleet Management module. They designed it to manage the distribution, maintainance and deployment of vehicles within Emergency Service role play. Those same key features are now being used to manage the distribution, maintainance and deployment of vehicles within the events industry.
+For instance, the Eventiva Gaming team developed the initial version of the Fleet Management module.
+They designed it to manage the distribution, maintainance and deployment of vehicles within Emergency Service role play.
+Those same key features are now being used to manage the distribution, maintainance and deployment of vehicles within the events industry.
 
+[#open-source]
 == Why open-source?
 
 We believe in the power of community development, while our tools are designed and marketted for event planning, they can be utilised by organisations planning all variations of projects, we believe that through keeping our tools open-source we can connect with amazing developers who can contribute in ways we simply cannot fathom.
 
+[#support]
 == How to get support 👨‍👩‍👧‍👦
 
 For *Features Requests*, *Q&A*, *Show & Tell* and *Discussions* please use *https://github.com/Eventiva/Eventiva/discussions[our discussion page]* 🚑.
@@ -50,17 +45,20 @@ We have a *FAQ* label in our *https://github.com/Eventiva/Eventiva/discussions[d
 
 Our extensive *documentation* can be found at *https://github.com/Eventiva/Eventiva[here]*.
 
-// Contributing
-
+[#contributing]
 == Contributing
 
-[cols=2*]
-|===
-| Thank you for taking an interst in contributing. We have created development containers (`.devcontainer`) to allow you to jump straight in with coding. Everything is configured and ready to go, all you need to do is use one of the supported platforms: https://code.visualstudio.com/docs/remote/containers[VSCode]
-| https://github.com/features/codespaces[Github Codespaces]
-|===
+[CAUTION]
+--
+This section is being re-written based on the new development environment and major changes to the repository
+--
 
-This project utilises the https://github.com/Eventiva/smartcloud[Smartcloud Project] to automate our workflow, alongside provide templates for issues and pull requests. If you want to learn more about precisely what this workflow accomplishes, please check out the documentation https://github.com/Eventiva/smartcloud[here].
+Thank you for taking an interest in contributing.
+We have created development containers (`.devcontainer`) to allow you to jump straight in with coding.
+Everything is configured and ready to go, all you need to do is use one of the supported platforms: https://code.visualstudio.com/docs/remote/containers[VSCode]
+
+This project utilises the https://github.com/Eventiva/smartcloud[Smartcloud Project] to automate our workflow, alongside provide templates for issues and pull requests.
+If you want to learn more about precisely what this workflow accomplishes, please check out the documentation https://github.com/Eventiva/smartcloud[here].
 
 Eventiva is built on the following main stack:
 
@@ -78,11 +76,14 @@ For more information on contributing, please read the xref:./contributing.adoc[c
 
 === Backlog
 
-Our backlog can be found on either our https://github.com/orgs/Eventiva/projects/12[Github Project]
+You can access our backlog on our JetBrains Space found here:
 
 === Running Locally & Developing
 
-[This section is being re-written based on the new development environment and major changes to the repository]
+[CAUTION]
+--
+This section is being re-written based on the new development environment and major changes to the repository
+--
 
 ==== prerequisites
 
@@ -92,11 +93,20 @@ You can choose one of the following methods to get your development platform con
 
 image::https://github.com/codespaces/badge.svg[Open in GitHub Codespaces,link=https://codespaces.new/Eventiva/eventiva?quickstart=1]
 
-GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request. You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere. Download the VSCode extension https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces[here].
+GitHub Codespaces provides cloud-hosted development environments for any activity - whether it's a long-term project, or a short-term task like reviewing a pull request.
+You can connect to Codespaces from Visual Studio Code or a browser-based editor that's accessible anywhere.
+Download the VSCode extension https://marketplace.visualstudio.com/items?itemName=GitHub.codespaces[here].
 
 ==== Devcontainer Method
 
-The Dev Container lets you use a Docker container as a full-featured development environment. Whether you deploy to containers or not, containers make a great development environment because you can:
+[WARNING]
+--
+`.devcontainer` have been temporarily removed while the current workflow is being adapted.
+These will return, however please bare with us while we make this significant change.
+--
+
+The Dev Container lets you use a Docker container as a full-featured development environment.
+Whether you deploy to containers or not, containers make a great development environment because you can:
 
 * Develop with a consistent, easily reproducible toolchain on the same operating system you deploy to.
 * Quickly swap between different, separate development environments and safely make updates without worrying about impacting your local machine.
@@ -104,22 +114,20 @@ The Dev Container lets you use a Docker container as a full-featured development
 
 Simply install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers[Dev containers extension], clone the repository to your local device, and choose the https://code.visualstudio.com/docs/devcontainers/containers[`Open Devcontainer` option].
 
-=== Visualisation of the codebase
-
-image::./diagram.svg[Visualization of the codebase]
-
 === Contributors ✨
 
 === Supporters & Sponsors
 
 ==== Sponsored by
 
-Want to help build the next generation of event planning tools? We are looking for sponsors to help us grow and develop our tools.
+Want to help build the next generation of event planning tools?
+We are looking for sponsors to help us grow and develop our tools.
 
 ==== Supported by
+
 [.text-center]
 --
-image::https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg[Jetbrains, link="https://jb.gg/OpenSourceSupport"]
+image::https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg[Jetbrains,link="https://jb.gg/OpenSourceSupport"]
 
 JetBrains supports the development of this project through Licenses for Open Source Development.
 --

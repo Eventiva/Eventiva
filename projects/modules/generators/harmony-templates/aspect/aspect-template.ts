@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: aspect-template.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/23/24, 11:57 PM
+ * Last Modified: 3/25/24, 1:51 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -15,28 +15,22 @@
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  * -----
  * 2024 Eventiva - All Rights Reserved
- * LICENSE: GNU General Public License v2.0 or later (GPL-2.0-or-later)
+ * LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
  * -----
- * This program has been provided under confidence of the copyright holder and
- * is licensed for copying, distribution and modification under the terms
- * of the GNU General Public License v2.0 or later (GPL-2.0-or-later) published as the License,
- * or (at your option) any later version of this license.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License v2.0 or later for more details.
- * You should have received a copy of the GNU General Public License v2.0 or later
- * along with this program. If not, please write to: licensing@eventiva.co.uk,
- * or see https://www.gnu.org/licenses/old-licenses/gpl-2.0-standalone.html
+ * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
+ * and modification under the terms of the Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
+ * published as the License, or (at your option) any later version of this license. This program is distributed in the
+ * hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the Functional Source License, Version 1.1, MIT Future License for more
+ * details. You should have received a copy of the Functional Source License, Version 1.1, MIT Future License along
+ * with this program. If not, please write to: licensing@eventiva.co.uk, see the official website
+ * https://fsl.software/ or Review the GitHub repository https://github.com/getsentry/fsl.software/
  * -----
- * This project abides by the GPL Cooperation Commitment.
- * Before filing or continuing to prosecute any legal proceeding or claim
- * (other than a Defensive Action) arising from termination of a Covered
- * License, we commit to extend to the person or entity ('you') accused
- * of violating the Covered License the following provisions regarding
- * cure and reinstatement, taken from GPL version 3.
- * For further details on the GPL Cooperation Commitment please visit
- * the official website: https://gplcc.github.io/gplcc/
+ * This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before
+ * filing or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from
+ * termination of a Covered License, we commit to adhering to the Eventiva Cooperation Commitment. You should have
+ * received a copy of the Eventiva Cooperation Commitment along with this program. If not, please write to:
+ * licensing@eventiva.co.uk, or see https://eventiva.co.uk/licensing/ecc
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
@@ -72,12 +66,12 @@ import { testFile } from './files/test-template.js'
  * @typedef {AspectTemplateOptions}
  */
 export type AspectTemplateOptions = {
-  name?: string,
-  description?: string,
-  hidden?: boolean,
-  options?: HarmonyTemplatesOptions,
-  interactive?: boolean,
-  env?: string
+    name?: string,
+    description?: string,
+    hidden?: boolean,
+    options?: HarmonyTemplatesOptions,
+    interactive?: boolean,
+    env?: string
 };
 
 /**
@@ -97,173 +91,194 @@ export type AspectTemplateOptions = {
  * @typedef {AspectTemplate}
  * @implements {ComponentTemplate}
  */
-export class AspectTemplate implements ComponentTemplate {
-  /**
-   * Creates an instance of AspectTemplate.
-   * @author Jonathan Stevens (TGTGamer)
-   *
-   * @constructor
-   * @param {Logger} logger The logger instance for logging messages
-   * @param {string} [name='aspect']
-   * @param {string} [description='create an aspect, and compose to your harmony platform']
-   * @param {boolean} [hidden=false]
-   * @param {?string} [env]
-   * @param {HarmonyTemplatesOptions} [options={}]
-   * @param {boolean} [interactive=true]
-   * @param {boolean} [installMissingDeps=true]
-   */
-  constructor(
-    private logger: Logger,
-    readonly name = 'aspect',
-    readonly description = 'create an aspect, and compose to your harmony platform',
-    readonly hidden = false,
-    readonly env?: string,
-    readonly options: HarmonyTemplatesOptions = {},
-    readonly interactive = true,
-    readonly installMissingDeps = true
-  ) {}
+export class AspectTemplate
+    implements ComponentTemplate {
+    /**
+     * Creates an instance of AspectTemplate.
+     * @author Jonathan Stevens (TGTGamer)
+     *
+     * @constructor
+     * @param {Logger} logger The logger instance for logging messages
+     * @param {string} [name='aspect']
+     * @param {string} [description='create an aspect, and compose to your harmony platform']
+     * @param {boolean} [hidden=false]
+     * @param {?string} [env]
+     * @param {HarmonyTemplatesOptions} [options={}]
+     * @param {boolean} [interactive=true]
+     * @param {boolean} [installMissingDeps=true]
+     */
+    constructor (
+        private logger: Logger,
+        readonly name = 'aspect',
+        readonly description = 'create an aspect, and compose to your harmony platform',
+        readonly hidden = false,
+        readonly env?: string,
+        readonly options: HarmonyTemplatesOptions = {},
+        readonly interactive = true,
+        readonly installMissingDeps = true
+    ) {
+    }
 
-  /**
-   * Asynchronously generates component files based on the provided ComponentContext.
-   * This function turns off the logger, retrieves the configuration runtimes from the options or uses default ones if not provided. It then retrieves the names of the runtimes. If interactive mode is enabled, it prompts the user for input. Filters the runtimes based on user input and maps the runtime names. Generates imports and config extensions based on runtime configurations. Filters out empty slots. Retrieves runtime files and test files based on the runtimes. Maps slot files and retrieves documentation content. Returns an array of ComponentFiles.
-   * @author Jonathan Stevens (TGTGamer)
-   *
-   * @async
-   * @param {ComponentContext} context The context parameter
-   * @returns {Promise<ComponentFile[]>} Generates an array of component files based on the provided ComponentContext. This function asynchronously generates files according to the specified runtimes, user input, and component configurations. Returns a Promise that resolves to an array of ComponentFile objects.
-   */
-  async generateFiles(context: ComponentContext): Promise<ComponentFile[]> {
-    this.logger.off();
-    const configRuntimes = this.options.runtimes || defaultRuntimes;
-    const runtimeNames = configRuntimes?.map((runtime) => runtime.name);
-    const userInput: AspectUserInput = this.interactive
-      ? await this.prompt(context.componentId, runtimeNames)
-      : {};
+    /**
+     * Creates a new AspectTemplate instance with the provided options.
+     * The options parameter is an object with the following properties:
+     * - name: The name of the aspect template.
+     * - description: The description of the aspect template.
+     * - hidden: Indicates if the aspect template is hidden.
+     * - env: The environment of the aspect template.
+     * - options: Additional options for the aspect template.
+     * - interactive: Indicates if the aspect template is interactive.
+     * Returns a function that takes an EnvContext parameter and returns a new AspectTemplate instance initialized with the provided options.
+     * @author Jonathan Stevens (TGTGamer)
+     *
+     * @static
+     * @param {AspectTemplateOptions} [options={}]
+     * @returns {(context: EnvContext) => AspectTemplate} Creates an AspectTemplate instance based on the provided options. Returns a function that takes an EnvContext as a parameter and returns a new AspectTemplate instance with the given logger, name, description, visibility flag, environment, additional options, and interactive flag.
+     */
+    static from ( options: AspectTemplateOptions = {} ) {
+        return ( context: EnvContext ) => {
+            const logger = context.createLogger( AspectTemplate.name )
+            return new AspectTemplate(
+                logger,
+                options.name,
+                options.description,
+                options.hidden,
+                options.env,
+                options.options,
+                options.interactive
+            )
+        }
+    }
 
-    const runtimes = !userInput.runtimes
-      ? configRuntimes
-      : configRuntimes.filter((runtime) => {
-        return userInput?.runtimes?.includes(runtime.name);
-      });
+    /**
+     * Asynchronously generates component files based on the provided ComponentContext.
+     * This function turns off the logger, retrieves the configuration runtimes from the options or uses default ones if not provided. It then retrieves the names of the runtimes. If interactive mode is enabled, it prompts the user for input. Filters the runtimes based on user input and maps the runtime names. Generates imports and config extensions based on runtime configurations. Filters out empty slots. Retrieves runtime files and test files based on the runtimes. Maps slot files and retrieves documentation content. Returns an array of ComponentFiles.
+     * @author Jonathan Stevens (TGTGamer)
+     *
+     * @async
+     * @param {ComponentContext} context The context parameter
+     * @returns {Promise<ComponentFile[]>} Generates an array of component files based on the provided ComponentContext. This function asynchronously generates files according to the specified runtimes, user input, and component configurations. Returns a Promise that resolves to an array of ComponentFile objects.
+     */
+    async generateFiles ( context: ComponentContext ): Promise<ComponentFile[]> {
+        this.logger.off()
+        const configRuntimes = this.options.runtimes || defaultRuntimes
+        const runtimeNames = configRuntimes?.map( ( runtime ) => runtime.name )
+        const userInput: AspectUserInput = this.interactive
+            ? await this.prompt( context.componentId, runtimeNames )
+            : {}
 
-    const userRuntimeNames = runtimes.map((runtime) => {
-      return runtime.name;
-    });
+        const runtimes = !userInput.runtimes
+            ? configRuntimes
+            : configRuntimes.filter( ( runtime ) => {
+                return userInput?.runtimes?.includes( runtime.name )
+            } )
 
-    const configImports = runtimes.reduce<{imports?: string, configExtends?: string}>((acc, runtime) => {
-      if (!runtime.imports) return acc;
+        const userRuntimeNames = runtimes.map( ( runtime ) => {
+            return runtime.name
+        } )
 
-      const runtimeImports = runtime.imports(context).map((imp) => {
-        // only import if specifically defined in the runtime config
-        if (typeof imp === 'string' || !imp[1].config) return undefined;
-        return imp[0];
-      }).join('\n');
+        const configImports = runtimes.reduce<{ imports?: string, configExtends?: string }>( (
+            acc,
+            runtime
+        ) => {
+            if ( !runtime.imports ) {
+                return acc
+            }
 
-      const config = runtime.configExtends ? runtime.configExtends?.(context) : undefined;
-      const configExtends = typeof config === 'object' ? config[0] : config
+            const runtimeImports = runtime.imports( context ).map( ( imp ) => {
+                // only import if specifically defined in the runtime config
+                if ( typeof imp === 'string' || !imp[ 1 ].config ) {
+                    return undefined
+                }
+                return imp[ 0 ]
+            } ).join( '\n' )
 
-      return {
-        imports: acc.imports ? `${acc.imports}\n ${runtimeImports}` : runtimeImports,
-        configExtends: acc.configExtends ? `${acc.configExtends}& ${configExtends}` : configExtends
-      };
-    }, {imports: '', configExtends: ''});
+            const config = runtime.configExtends
+                ? runtime.configExtends?.( context )
+                : undefined
+            const configExtends = typeof config === 'object'
+                ? config[ 0 ]
+                : config
 
-    const slots = userInput.slots?.filter(slot => !!slot) || [];
+            return {
+                imports: acc.imports
+                    ? `${ acc.imports }\n ${ runtimeImports }`
+                    : runtimeImports,
+                configExtends: acc.configExtends
+                    ? `${ acc.configExtends }& ${ configExtends }`
+                    : configExtends
+            }
+        }, { imports: '', configExtends: '' } )
 
-    const runtimeFiles = runtimes?.flatMap((runtime) => {
-      const userFiles = runtime.files ? runtime.files(context) : [];
-      return [runtimeFile(context, runtime, slots || []), ...userFiles];
-    }) || [];
+        const slots = userInput.slots?.filter( slot => !!slot ) || []
 
-    const testFiles = runtimes?.map((runtime) => {
-      return testFile(context, runtime.name);
-    }) || [];
+        const runtimeFiles = runtimes?.flatMap( ( runtime ) => {
+            const userFiles = runtime.files
+                ? runtime.files( context )
+                : []
+            return [ runtimeFile( context, runtime, slots || [] ), ...userFiles ]
+        } ) || []
 
-    const slotFiles = slots?.map((slot) => slotFile(slot)) || [];
-    const docsContent = this.options.docsFile
-      ? this.options.docsFile(context)
-      : docsFile(context);
+        const testFiles = runtimes?.map( ( runtime ) => {
+            return testFile( context, runtime.name )
+        } ) || []
 
-    return [
-      indexFile(context, this.options, userRuntimeNames),
-      aspectFile(context),
-      configFile(context, configImports),
-      docsContent,
-      ...testFiles,
-      ...runtimeFiles,
-      ...slotFiles
-    ];
-  }
+        const slotFiles = slots?.map( ( slot ) => slotFile( slot ) ) || []
+        const docsContent = this.options.docsFile
+            ? this.options.docsFile( context )
+            : docsFile( context )
 
+        return [
+            indexFile( context, this.options, userRuntimeNames ),
+            aspectFile( context ),
+            configFile( context, configImports ),
+            docsContent,
+            ...testFiles,
+            ...runtimeFiles,
+            ...slotFiles
+        ]
+    }
 
-  /**
-   * A private asynchronous function that prompts the user to select runtimes to support and enter integration slots for a given component. It takes the component ID and an array of runtimes as parameters. It returns the user input which includes the selected runtimes and integration slots.
-   * @author Jonathan Stevens (TGTGamer)
-   *
-   * @private
-   * @async
-   * @param {ComponentID} componentId The ID of the component
-   * @param {string[]} runtimes An array of runtimes
-   * @returns {unknown} Prompts the user to select runtimes to support for a specific component, and enter integration slots for the component. Returns the user input object containing the selected runtimes and integration slots.
-   */
-  private async prompt(componentId: ComponentID, runtimes: string[]) {
-    const userInput = await prompts([
-      {
-        name: 'runtimes',
-        type: 'multiselect',
-        instructions: false,
-        onState: ({ aborted }) => {
-          if (aborted) {
-            console.error('\naborted aspect creation');
-            process.exit(1);
-          }
-        },
-        message: `select runtimes to support for "${componentId.name}"`,
-        choices: runtimes?.map((runtime) => {
-          return {
-            title: runtime,
-            value: runtime
-          }
-        })
-      },
-      {
-        name: 'slots',
-        type: 'list',
-        message: `enter integration slots (e.g. "route,menu-item") for "${componentId.name}"`,
-      },
-    ]);
+    /**
+     * A private asynchronous function that prompts the user to select runtimes to support and enter integration slots for a given component. It takes the component ID and an array of runtimes as parameters. It returns the user input which includes the selected runtimes and integration slots.
+     * @author Jonathan Stevens (TGTGamer)
+     *
+     * @private
+     * @async
+     * @param {ComponentID} componentId The ID of the component
+     * @param {string[]} runtimes An array of runtimes
+     * @returns {unknown} Prompts the user to select runtimes to support for a specific component, and enter integration slots for the component. Returns the user input object containing the selected runtimes and integration slots.
+     */
+    private async prompt (
+        componentId: ComponentID,
+        runtimes: string[]
+    ) {
+        const userInput = await prompts( [
+            {
+                name: 'runtimes',
+                type: 'multiselect',
+                instructions: false,
+                onState: ( { aborted } ) => {
+                    if ( aborted ) {
+                        console.error( '\naborted aspect creation' )
+                        process.exit( 1 )
+                    }
+                },
+                message: `select runtimes to support for "${ componentId.name }"`,
+                choices: runtimes?.map( ( runtime ) => {
+                    return {
+                        title: runtime,
+                        value: runtime
+                    }
+                } )
+            },
+            {
+                name: 'slots',
+                type: 'list',
+                message: `enter integration slots (e.g. "route,menu-item") for "${ componentId.name }"`
+            }
+        ] )
 
-    return userInput;
-  }
-
-  /**
-   * Creates a new AspectTemplate instance with the provided options.
-   * The options parameter is an object with the following properties:
-   * - name: The name of the aspect template.
-   * - description: The description of the aspect template.
-   * - hidden: Indicates if the aspect template is hidden.
-   * - env: The environment of the aspect template.
-   * - options: Additional options for the aspect template.
-   * - interactive: Indicates if the aspect template is interactive.
-   * Returns a function that takes an EnvContext parameter and returns a new AspectTemplate instance initialized with the provided options.
-   * @author Jonathan Stevens (TGTGamer)
-   *
-   * @static
-   * @param {AspectTemplateOptions} [options={}]
-   * @returns {(context: EnvContext) => AspectTemplate} Creates an AspectTemplate instance based on the provided options. Returns a function that takes an EnvContext as a parameter and returns a new AspectTemplate instance with the given logger, name, description, visibility flag, environment, additional options, and interactive flag.
-   */
-  static from(options: AspectTemplateOptions = {}) {
-    return (context: EnvContext) => {
-      const logger = context.createLogger(AspectTemplate.name);
-      return new AspectTemplate(
-        logger,
-        options.name,
-        options.description,
-        options.hidden,
-        options.env,
-        options.options,
-        options.interactive,
-      );
-    };
-  }
+        return userInput
+    }
 }
