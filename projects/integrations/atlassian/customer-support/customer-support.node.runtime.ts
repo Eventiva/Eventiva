@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: customer-support.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:10 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -75,12 +75,10 @@ export class CustomerSupportNode {
      *
      * @constructor
      * @param param0 The Discord.js module.
-     * @param param0.discordjs An instance of the Discord.js Node module.
-     * @param config The configuration for Atlassian Customer Support.
      */
     constructor (
-        [ discordjs ]: [ DiscordjsNode ],
-        private config: CustomerSupportConfig
+        [ discordjs ]: [ DiscordjsNode ]
+        // private config: CustomerSupportConfig
     ) {
         this.discordjs = discordjs
     }
@@ -92,15 +90,16 @@ export class CustomerSupportNode {
      * @static
      * @async
      * @param param0 An instance of Discord.js client
-     * @param param0.discordjs An instance of Discord.js client
-     * @param config The configuration object for the Atlassian Customer Support module
      * @returns This function is a provider function that creates a new instance of the CustomerSupportNode class with the given DiscordjsNode instance and config. It then calls the listCommands method on the CustomerSupportNode instance. Finally, it returns the created CustomerSupportNode instance.
      */
     static async provider (
-        [ discordjs ]: [ DiscordjsNode ],
-        config: CustomerSupportConfig
+        [ discordjs ]: [ DiscordjsNode ]
+        // config: CustomerSupportConfig
     ) {
-        const customerSupport = new CustomerSupportNode( [ discordjs ], config )
+        const customerSupport = new CustomerSupportNode(
+            [ discordjs ]
+            // config
+        )
 
         customerSupport.discordjs.listCommands()
 
