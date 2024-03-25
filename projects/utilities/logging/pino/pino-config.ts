@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: pino-config.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:51 AM
+ * Last Modified: 3/25/24, 2:03 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -45,7 +45,12 @@ import { LoggerOptions } from 'pino'
  *
  * @export
  */
-export type PinoConfig = {} & LoggerOptions;
+export type PinoConfig = {
+    customLevels: {
+        alert: number;
+        emergency: number;
+    } & LoggerOptions['customLevels']
+} & LoggerOptions;
 
 /**
  * Represents different levels of pino in an application.

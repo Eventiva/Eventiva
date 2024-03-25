@@ -2,7 +2,7 @@
  * Project: Eventiva
  * File: pino.node.runtime.ts
  * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 1:47 AM
+ * Last Modified: 3/25/24, 2:05 AM
  * -----
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,8 +36,8 @@
  */
 
 
-import pino from 'pino'
-import pinoCaller from 'pino-caller'
+import { pino } from 'pino'
+import { pinoCaller } from 'pino-caller'
 import { PinoPretty } from 'pino-pretty'
 import { Log, Logger, LoggerSlot } from './logger.js'
 import type { PinoConfig } from './pino-config.js'
@@ -110,10 +110,9 @@ export class PinoNode {
         private config: PinoConfig,
         private loggerSlot: LoggerSlot
     ) {
-        // @ts-expect-error Type guarding error. Not sure how to fix. TODO: Fix me somehow
         this.console = process.env.NODE_ENV === 'development'
-            ? pinoCaller( pino( this.config, this.stream ) )
-            : pino( this.config, this.stream )
+            ? pinoCaller( pino<'alert' | 'emergency'>( this.config, this.stream ) ) as Log
+            : pino<'alert' | 'emergency'>( this.config, this.stream )
         this.log = this.registerLogger( [ { name: 'logger:main', options: { level: config.level } } ] ).getLogger(
             'logger:main' ).logger
     }
