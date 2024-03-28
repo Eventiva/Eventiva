@@ -9,29 +9,43 @@ CODEOWNERS "Project Admin"
 *.spec.ts "Quality Assurance"
 
 # Teams for use:
-# Automation & Robotics
-# Continuous Deployment & Integration
+# Application Engineering
+# Board of Directors
+# Client Retention
+# Client Retention / Account Management
+# Client Retention / Retention Facilitation
+# Continuous Deployment
+# Customer Interface & Experience
+# Customer Interface & Experience / Next.JS Experience
+# Customer Interface & Experience / Qwik Experience
+# Customer Interface & Experience / React Experience
 # Data flow & Processing
+# Digital Robotics
+# Digital Robotics / DiscordJS
+# Digital Robotics / GitHub
 # Eventiva For Gaming
-# HO Justice Operations
-# Logistics & Networking Management
-# Operational Core Deployments
-# User Interface
+# Eventiva For Gaming / GTA 5 and Beyond
+# Network Management
+# Sales Coordination
+# Sales Coordination / Enrolment Facilitation
+# Sales Coordination / Event Facilitation
+# Workflow Management
 
-.devcontainer "Automation & Robotics"
-.github "Automation & Robotics"
-.space "Automation & Robotics"
-.vscode "Automation & Robotics"
-scripts "Automation & Robotics"
-projects/discordjs/**/*.ts "Automation & Robotics"
+
+.devcontainer "Workflow Management"
+.github "Workflow Management"
+.space "Workflow Management"
+.vscode "Workflow Management"
+scripts "Workflow Management"
+projects/discordjs/**/*.ts "DiscordJS"
 projects/entities/**/*.ts "Data flow & Processing"
-projects/envs/**/*.ts "Operational Core Deployments"
-projects/integrations/**/*.ts "Operational Core Deployments"
-projects/modules/**/*.ts "Operational Core Deployments"
+projects/envs/**/*.ts "Application Engineering"
+projects/integrations/**/*.ts "Application Engineering"
+projects/modules/**/*.ts "Application Engineering"
 projects/orm/**/*.ts "Data flow & Processing"
-projects/platforms/**/*.ts "Continuous Deployment & Integration"
-projects/utilities/**/*.ts "Operational Core Deployments"
-projects/workflows/**/*.ts "Continuous Deployment & Integration"
+projects/platforms/**/*.ts "Continuous Deployment"
+projects/utilities/**/*.ts "Application Engineering"
+projects/workflows/**/*.ts "Workflow Management"
 # projects/<folder>/**/*.ts "Operational Core Deployments"
 
 # Individual Files
