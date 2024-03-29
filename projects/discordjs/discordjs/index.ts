@@ -35,15 +35,15 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { DiscordjsAspect } from './discordjs.aspect.js'
-import { DiscordjsNode as Node } from './discordjs.node.runtime.js'
+import { DiscordJSAspect } from './discordjs.aspect.js'
+import { DiscordJSNode as Node } from './discordjs.node.runtime.js'
 
-export { Node as DiscordjsDiscord, Node as DiscordjsNode }
+export { Node as DiscordJSDiscord, Node as DiscordJSNode }
 
 export { DiscordJsModule } from './module.js'
 export type { Resources, ModuleConfig } from './module.js'
 export type { Event } from './event.js'
 export type { Command } from './command.js'
 
-export default DiscordjsAspect
-export { DiscordjsAspect }
+export default DiscordJSAspect
+export { DiscordJSAspect }

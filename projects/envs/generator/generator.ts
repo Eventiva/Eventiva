@@ -74,7 +74,7 @@ export function Generator ( options: TemplatesOptions = {} ) {
                 ],
                 classExtends: ( context ) => [
                     `DiscordJsModule<${ context.namePascalCase }Config>`,
-                    { super: `super(config, discordjsDiscord)` }
+                    { super: `super(config, discordJSDiscord)` }
                 ],
                 methods: ( context ) => `public Resources = {};
 

@@ -36,10 +36,10 @@
  */
 
 
-import DiscordjsAspect, {
+import DiscordJSAspect, {
     Command,
     DiscordJsModule,
-    DiscordjsNode,
+    DiscordJSNode,
     Event,
     Resources
 } from '@eventiva/discordjs.discordjs'
@@ -56,12 +56,12 @@ import type { DefaultLoggingConfig } from './default_logging-config.js'
 export class DefaultLoggingNode
     extends DiscordJsModule<DefaultLoggingConfig> {
     /**
-     * An array of dependencies required by the current module. The elements of the array are instances of the DiscordjsAspect class.
+     * An array of dependencies required by the current module. The elements of the array are instances of the DiscordJSAspect class.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @static
      */
-    static dependencies = [ DiscordjsAspect ]
+    static dependencies = [ DiscordJSAspect ]
     /**
      * The default configuration for the DefaultLogging class. It is an empty object.
      * @author Jonathan Stevens (@TGTGamer)
@@ -175,9 +175,9 @@ export class DefaultLoggingNode
     }
 
     /**
-     * Creates a provider for the given DiscordjsNode and DefaultLoggingConfig.
-     * The provider registers the default_logging event using the given DiscordjsNode and configures it with the provided DefaultLoggingConfig.
-     * @param discordjs The DiscordjsNode instance to use.
+     * Creates a provider for the given DiscordJSNode and DefaultLoggingConfig.
+     * The provider registers the default_logging event using the given DiscordJSNode and configures it with the provided DefaultLoggingConfig.
+     * @param discordjs The DiscordJSNode instance to use.
      * @param config The DefaultLoggingConfig instance to use.
      * @returns The created DefaultLoggingNode instance.
      * @author Jonathan Stevens (@TGTGamer)
@@ -187,10 +187,10 @@ export class DefaultLoggingNode
      * @param param0
      * @param param0.discordjs
      * @param config The configuration object for the DefaultLoggingNode.
-     * @returns This function is a static async provider that takes in a DiscordjsNode instance and a DefaultLoggingConfig object. It creates a new DefaultLoggingNode instance using the discordjs and config parameters. It then registers the 'default_logging' event using the default_logging.resource property. It returns the created DefaultLoggingNode instance.
+     * @returns This function is a static async provider that takes in a DiscordJSNode instance and a DefaultLoggingConfig object. It creates a new DefaultLoggingNode instance using the discordjs and config parameters. It then registers the 'default_logging' event using the default_logging.resource property. It returns the created DefaultLoggingNode instance.
      */
     static async provider (
-        [ discordjs ]: [ DiscordjsNode | undefined ],
+        [ discordjs ]: [ DiscordJSNode | undefined ],
         config: DefaultLoggingConfig
     ) {
         if ( !discordjs ) {

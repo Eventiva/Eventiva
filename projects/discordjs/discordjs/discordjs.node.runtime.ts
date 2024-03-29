@@ -45,19 +45,17 @@ import type { Event, EventSlot, ExtendedClientEvents } from './event.js'
 import discord from './locales/en/discord.js'
 import errors from './locales/en/errors.js'
 import type { DiscordJsModule } from './module.js'
-// import SegmentAspect, { SegmentNode } from "@eventiva/central.aspects.segment";
-// import DatabaseAspect, { DatabaseNode } from "@eventiva/central.aspects.database";
 
 /**
- * A class representing the DiscordjsNode.
+ * A class representing the DiscordJSNode.
  * This class provides methods for registering events and commands, listing events and commands, and initializing a Discord client.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
- * @class DiscordjsNode
+ * @class DiscordJSNode
 
  */
-export class DiscordjsNode {
+export class DiscordJSNode {
 
     /**
      * An array of dependencies that this aspect relies on. These dependencies are instances of classes that implement specific aspects, such as the I18NAspect and LoggingAspect.
@@ -65,7 +63,7 @@ export class DiscordjsNode {
      *
      * @static
      */
-    static dependencies = [ I18NAspect, LoggingAspect ]
+    static readonly dependencies = [ I18NAspect, LoggingAspect ]
     /**
      * The default configuration for the DiscordJsClient class.
      * The default configuration includes the bot token, client ID, client secret, development guild ID, and list of intents to use for the bot.
@@ -73,7 +71,7 @@ export class DiscordjsNode {
      *
      * @static
      */
-    static defaultConfig: DiscordjsConfig = {
+    static readonly defaultConfig: DiscordjsConfig = {
         token: process.env[ 'DISCORD.TOKEN' ]!,
         startDelay: process.env[ 'DISCORD.START_DELAY' ]
             ? parseInt( process.env[ 'DISCORD.START_DELAY' ] )
@@ -152,7 +150,7 @@ export class DiscordjsNode {
     protected log: LoggingNode['log'] | Console = console
 
     /**
-     * Creates an instance of DiscordjsNode.
+     * Creates an instance of DiscordJSNode.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @constructor
@@ -182,7 +180,11 @@ export class DiscordjsNode {
             : console
 
         this.log.trace( 'Waiting on i18nModule to initialize' )
+        const startTime = Date.now()
         while ( !i18nModule.i18next.isInitialized ) {
+            if ( Date.now() - startTime > this.config.startDelay ) {
+                throw new Error( 'i18nModule failed to initialize within the specified startDelay' )
+            }
         }
         this.log.trace( 'Registering i18nModule resources' )
         this.registerLocale( [
@@ -249,36 +251,21 @@ export class DiscordjsNode {
     }
 
     /**
-     * Creates and initializes a DiscordjsNode instance with the provided configuration and dependencies.
-     * - `i18n`: The I18NNode instance.
-     * - `logging`: (optional) The LoggingNode instance.
-     * - `config`: The DiscordjsConfig instance.
-     * - `moduleSlot`: The ModuleSlot instance.
-     * - `eventSlot`: The EventSlot instance.
-     * - `commandSlot`: The CommandSlot instance.
-     * Returns the initialized DiscordjsNode instance.
-     * @author Jonathan Stevens (@TGTGamer)
+     * Creates a new instance of DiscordJSNode and returns it.
      *
-     * @static
-     * @async
-     * @param param0 The i18n node and logging node.
-     * @param param0.i18n The i18n node.
-     * @param param0.logging The logging node.
-     * @param config The Discord.js config.
-     * @param param1 The module slot, event slot, and command slot.
-     * @param param1.moduleSlot The module slot.
-     * @param param1.eventSlot The event slot.
-     * @param param1.commandSlot The command slot.
-     * @returns Creates a new DiscordjsNode instance and performs necessary setup actions, such as logging events, logging in to Discord, and returning the instance.
+     * @param {I18NNode} i18n - The I18NNode instance for language localization.
+     * @param {LoggingNode | undefined} logging - The LoggingNode instance for logging purposes.
+     * @param {DiscordjsConfig} config - The configuration object for DiscordJSNode.
+     * @param {EventSlot<any>} eventSlot - The EventSlot to handle Discord events.
+     * @param {CommandSlot} commandSlot - The CommandSlot to handle Discord commands.
+     * @returns {DiscordJSNode} - The newly created instance of DiscordJSNode.
      */
     static async provider (
         [ i18n, logging ]: [ I18NNode, LoggingNode | undefined ],
         config: DiscordjsConfig,
         [ eventSlot, commandSlot ]: [ EventSlot<any>, CommandSlot ]
     ) {
-        const discordjs = new DiscordjsNode( config, eventSlot, commandSlot, i18n, logging )
-
-        return discordjs
+        return new DiscordJSNode( config, eventSlot, commandSlot, i18n, logging )
     }
 
     /**
@@ -302,6 +289,7 @@ export class DiscordjsNode {
      *
      * @template E The type parameter for the module
      * @param module The module to be registered
+     * @param reload
      * @returns Registers a module in the Discord bot. The module will be added to the list of registered modules and will be available for use.
      */
     public registerModule (
@@ -336,6 +324,7 @@ export class DiscordjsNode {
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @template E The type parameter that represents the event name
+     * @param module
      * @param events An array of events to register
      * @returns Registers multiple events to be handled by the client.
      */
@@ -398,7 +387,7 @@ export class DiscordjsNode {
     /**
      * Retrieves an event with the given name.
      * If multiple events with the same name exist, it returns the first event.
-     * @see DiscordjsNode.getEvents for a list of all events with the given name.
+     * @see DiscordJSNode.getEvents for a list of all events with the given name.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @param name The name of the event to get.
@@ -416,6 +405,7 @@ export class DiscordjsNode {
 
     /**
      * Registers multiple commands in the command slot.
+     * @param module
      * @param commands An array of Command objects.
      * @return void
      * @author Jonathan Stevens (@TGTGamer)
@@ -477,4 +467,4 @@ export class DiscordjsNode {
     }
 }
 
-export default DiscordjsNode
+export default DiscordJSNode

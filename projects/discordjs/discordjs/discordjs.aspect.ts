@@ -37,8 +37,8 @@
 
 import { Aspect } from '@bitdev/harmony.harmony'
 
-export const DiscordjsAspect = Aspect.create( {
+export const DiscordJSAspect = Aspect.create( {
     id: 'eventiva.bots/aspects/discordjs'
 } )
 
-export default DiscordjsAspect
+export default DiscordJSAspect

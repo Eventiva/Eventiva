@@ -38,15 +38,11 @@
 import { HarmonyPlatform } from '@bitdev/harmony.harmony-platform'
 import { BrowserRuntime } from '@bitdev/harmony.runtimes.browser-runtime'
 import { NodeJSRuntime } from '@bitdev/harmony.runtimes.nodejs-runtime'
-// import { DiscordRuntime } from '@eventiva/envs.runtimes.discord-runtime'
 import { SymphonyPlatformAspect } from '@bitdev/symphony.symphony-platform'
-import { DiscordjsAspect } from '@eventiva/discordjs.discordjs'
+import { DiscordJSAspect } from '@eventiva/discordjs.discordjs'
 import { DefaultLoggingAspect } from '@eventiva/discordjs.packages.default_logging'
 import { I18NAspect } from '@eventiva/utilities.i18n'
 import { PinoAspect as LoggingAspect } from '@eventiva/utilities.logging.pino'
-// import { PingAspect } from '@eventiva/discordjs.commands.ping'
-// import { SegmentAspect } from '@eventiva/central.aspects.segment';
-// export from '@eventiva/central.aspects.database';
 
 /**
  * Support is a property that encapsulates the configuration for the Harmony Platform support. It specifies the name of the support, the support platform aspect, the runtimes required for the support, and the aspects that should be enabled for the support.
@@ -75,10 +71,10 @@ export const Support = HarmonyPlatform.from( {
         LoggingAspect,
         I18NAspect,
         // DatabaseAspect,
-        // DiscordjsAspect,
+        // DiscordJSAspect,
         // PingAspect,
         [
-            DiscordjsAspect,
+            DiscordJSAspect,
             {
                 logger: {
                     level: 'trace'

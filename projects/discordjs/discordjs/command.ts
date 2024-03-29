@@ -45,7 +45,7 @@ import {
     SlashCommandBuilder,
     StringSelectMenuInteraction
 } from 'discord.js'
-import type { DiscordjsNode } from './discordjs.node.runtime.js'
+import type { DiscordJSNode } from './discordjs.node.runtime.js'
 
 /**
  * Interface for the Message object.
@@ -77,13 +77,13 @@ interface CommandMessage {
     data: SlashCommandBuilder;
     /**
      * A method that is used to execute an interaction with a boolean message response.
-     * - `this` refers to the DiscordjsNode instance.
+     * - `this` refers to the DiscordJSNode instance.
      * - `interaction` is the interaction object containing the boolean message response.
      * This method is asynchronous and does not return anything.
      * @author Jonathan Stevens (@TGTGamer)
      */
     execute: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: Message<boolean>
     ) => Awaitable<void>;
 }
@@ -116,11 +116,11 @@ interface CommandSlash {
      */
     data: SlashCommandBuilder;
     /**
-     * The execute function is a method that allows the DiscordjsNode instance to respond to a chat input command interaction. This function takes two parameters: 'this', which refers to the current instance of DiscordjsNode, and 'interaction', which is the ChatInputCommandInteraction object representing the interaction with the chat input command. The function returns a promise that resolves to void once the execution is complete.
+     * The execute function is a method that allows the DiscordJSNode instance to respond to a chat input command interaction. This function takes two parameters: 'this', which refers to the current instance of DiscordJSNode, and 'interaction', which is the ChatInputCommandInteraction object representing the interaction with the chat input command. The function returns a promise that resolves to void once the execution is complete.
      * @author Jonathan Stevens (@TGTGamer)
      */
     execute: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: ChatInputCommandInteraction
     ) => Awaitable<void>;
     /**
@@ -128,7 +128,7 @@ interface CommandSlash {
      * @author Jonathan Stevens (@TGTGamer)
      */
     message?: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: Message<boolean>
     ) => Awaitable<void>;
 }
@@ -162,21 +162,21 @@ interface CommandButton {
     data: ContextMenuCommandBuilder;
     /**
      * Executes the button interaction callback function.
-     * - 'this' refers to an instance of DiscordjsNode.
+     * - 'this' refers to an instance of DiscordJSNode.
      * - 'interaction' is the button interaction object.
      * - The function returns a promise that resolves to void.
      * @author Jonathan Stevens (@TGTGamer)
      */
     execute: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: ButtonInteraction
     ) => Awaitable<void>;
     /**
-     * This property represents a message that can be sent as a response to an interaction. It takes two parameters: 'this' which refers to the current DiscordjsNode instance, and 'interaction' which is the interaction object for which the message is being sent. The message can be of type boolean and the return type of this function is void. This property is optional and may not be present in all cases.
+     * This property represents a message that can be sent as a response to an interaction. It takes two parameters: 'this' which refers to the current DiscordJSNode instance, and 'interaction' which is the interaction object for which the message is being sent. The message can be of type boolean and the return type of this function is void. This property is optional and may not be present in all cases.
      * @author Jonathan Stevens (@TGTGamer)
      */
     message?: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: Message<boolean>
     ) => Awaitable<void>;
 }
@@ -213,18 +213,18 @@ interface CommandSelectMenu {
      * @author Jonathan Stevens (@TGTGamer)
      */
     execute: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: StringSelectMenuInteraction
     ) => Awaitable<void>;
     /**
      * A callback function that handles an incoming message interaction event.
-     * - `this` refers to the DiscordjsNode instance.
+     * - `this` refers to the DiscordJSNode instance.
      * - `interaction` is the message interaction object.
      * - The callback function can be asynchronous and must return void.
      * @author Jonathan Stevens (@TGTGamer)
      */
     message?: (
-        this: DiscordjsNode,
+        this: DiscordJSNode,
         interaction: Message<boolean>
     ) => Awaitable<void>;
 }

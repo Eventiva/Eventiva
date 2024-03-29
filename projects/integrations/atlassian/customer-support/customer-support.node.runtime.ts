@@ -35,12 +35,12 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { DiscordjsAspect, type DiscordjsNode } from '@eventiva/discordjs.discordjs'
+import { DiscordJSAspect, type DiscordJSNode } from '@eventiva/discordjs.discordjs'
 import type { CustomerSupportConfig } from './customer-support-config.js'
 
 
 /**
- * This class represents an Atlassian Customer Support node. It is responsible for providing support for Atlassian customers through Discord. It depends on the DiscordjsNode class and requires a config object of type CustomerSupportConfig.
+ * This class represents an Atlassian Customer Support node. It is responsible for providing support for Atlassian customers through Discord. It depends on the DiscordJSNode class and requires a config object of type CustomerSupportConfig.
  * @author Jonathan Stevens (@TGTGamer)
  *
  * @export
@@ -48,12 +48,12 @@ import type { CustomerSupportConfig } from './customer-support-config.js'
  */
 export class CustomerSupportNode {
     /**
-     * An array of dependencies for the static property. It includes only DiscordjsAspect.
+     * An array of dependencies for the static property. It includes only DiscordJSAspect.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @static
      */
-    static dependencies = [ DiscordjsAspect ]
+    static dependencies = [ DiscordJSAspect ]
     /**
      * A static property that represents the default configuration for the CustomerSupportConfig. It is an empty object by default.
      * @author Jonathan Stevens (@TGTGamer)
@@ -67,7 +67,7 @@ export class CustomerSupportNode {
      *
      * @private
      */
-    private discordjs: DiscordjsNode
+    private discordjs: DiscordJSNode
 
     /**
      * Creates an instance of CustomerSupportNode.
@@ -77,7 +77,7 @@ export class CustomerSupportNode {
      * @param param0 The Discord.js module.
      */
     constructor (
-        [ discordjs ]: [ DiscordjsNode ]
+        [ discordjs ]: [ DiscordJSNode ]
         // private config: CustomerSupportConfig
     ) {
         this.discordjs = discordjs
@@ -90,10 +90,10 @@ export class CustomerSupportNode {
      * @static
      * @async
      * @param param0 An instance of Discord.js client
-     * @returns This function is a provider function that creates a new instance of the CustomerSupportNode class with the given DiscordjsNode instance and config. It then calls the listCommands method on the CustomerSupportNode instance. Finally, it returns the created CustomerSupportNode instance.
+     * @returns This function is a provider function that creates a new instance of the CustomerSupportNode class with the given DiscordJSNode instance and config. It then calls the listCommands method on the CustomerSupportNode instance. Finally, it returns the created CustomerSupportNode instance.
      */
     static async provider (
-        [ discordjs ]: [ DiscordjsNode ]
+        [ discordjs ]: [ DiscordJSNode ]
         // config: CustomerSupportConfig
     ) {
         const customerSupport = new CustomerSupportNode(

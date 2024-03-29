@@ -37,8 +37,8 @@
 
 import type { Logger, PinoNode as LoggerNode } from '@eventiva/utilities.logging.pino'
 import type { Command } from './command.js'
-import { DiscordjsAspect } from './discordjs.aspect.js'
-import type { DiscordjsNode } from './discordjs.node.runtime.js'
+import { DiscordJSAspect } from './discordjs.aspect.js'
+import type { DiscordJSNode } from './discordjs.node.runtime.js'
 import type { Event, ExtendedClientEvents } from './event.js'
 
 /**
@@ -91,12 +91,12 @@ export class DiscordJsModule<C extends ModuleConfig = {
         }
     }
     /**
-     * An array of dependencies required by the current module. The elements of the array are instances of the DiscordjsAspect class.
+     * An array of dependencies required by the current module. The elements of the array are instances of the DiscordJSAspect class.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @static
      */
-    static dependencies = [ DiscordjsAspect ]
+    static dependencies = [ DiscordJSAspect ]
     /**
      * The `log` property is a public property that stores an instance of either the `Log` or `Console` class. By default, it is initialized with the `console` object. It can be used to log messages or debug information.
      * @author Jonathan Stevens (@TGTGamer)
@@ -136,12 +136,12 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @constructor
-     * @param discord The DiscordjsNode instance to use.
+     * @param discord The DiscordJSNode instance to use.
      * @param config The configuration object for the ready event.
      */
     constructor (
         protected config: C,
-        public discord: DiscordjsNode
+        public discord: DiscordJSNode
     ) {
         this.log.trace( 'Waiting on discord module to initialize' )
         this.name = config.name

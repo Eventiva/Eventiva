@@ -37,8 +37,8 @@
 
 import {
     type Command,
-    DiscordjsAspect,
-    type DiscordjsDiscord,
+    DiscordJSAspect,
+    type DiscordJSDiscord,
     DiscordJsModule,
     type Event,
     type Resources
@@ -48,8 +48,8 @@ import type { PingConfig } from './ping-config.js'
 
 export class PingDiscord
     extends DiscordJsModule<PingConfig> {
-    static dependencies = [ DiscordjsAspect ]
-    static defaultConfig: PingConfig = {
+    static readonly dependencies = [ DiscordJSAspect ]
+    static readonly defaultConfig: PingConfig = {
         name: 'PingModule',
         logger: {
             level: 'info'
@@ -59,16 +59,16 @@ export class PingDiscord
 
     constructor (
         protected config: PingConfig,
-        discordjsDiscord: DiscordjsDiscord
+        discordJSDiscord: DiscordJSDiscord
     ) {
-        super( config, discordjsDiscord )
+        super( config, discordJSDiscord )
     }
 
     static async provider (
-        [ discordjs ]: [ DiscordjsDiscord ],
+        [ discordJS ]: [ DiscordJSDiscord ],
         config: PingConfig
     ) {
-        const ping = new PingDiscord( config, discordjs )
+        const ping = new PingDiscord( config, discordJS )
         ping.log.trace( ping.discord.i18n.t( 'discord:modules.registering', { name: ping.name } ) )
         ping.discord.registerModule( ping )
         ping.log.trace( ping.discord.i18n.t( 'discord:modules.registered', { name: ping.name } ) )
@@ -76,7 +76,7 @@ export class PingDiscord
     }
 
     public registerEvents ( reload?: true ) {
-        this.discord.registerEvent( this, [
+        const result = this.discord.registerEvent( this, [
             // add any events here
         ] as Event<any>[] )
         return this
