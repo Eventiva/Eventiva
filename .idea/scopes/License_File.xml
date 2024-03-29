@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="License File" pattern="file:LICENSE||file:**/LICENSE" />
+</component>

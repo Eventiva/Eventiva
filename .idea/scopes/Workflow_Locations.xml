@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Workflow Locations" pattern="file[Eventiva]:.devcontainer/*||file[Eventiva]:.github/*||file[Eventiva]:.idea/*||file[Eventiva]:.run/*||file[Eventiva]:.vscode/*||file[Eventiva]:.devcontainer//*||file[Eventiva]:.github//*||file[Eventiva]:.idea//*||file[Eventiva]:.run//*||file[Eventiva]:.vscode//*||file[Eventiva]:scripts//*" />
+</component>

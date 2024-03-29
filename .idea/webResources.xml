@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebResourcesPaths">
+    <contentEntries>
+      <entry url="file://$PROJECT_DIR$">
+        <entryData>
+          <resourceRoots>
+            <path value="file://$PROJECT_DIR$/projects/central" />
+            <path value="file://$PROJECT_DIR$/projects/discordjs" />
+            <path value="file://$PROJECT_DIR$/projects/entities" />
+            <path value="file://$PROJECT_DIR$/projects/envs" />
+            <path value="file://$PROJECT_DIR$/projects/integrations" />
+            <path value="file://$PROJECT_DIR$/projects/modules" />
+            <path value="file://$PROJECT_DIR$/projects/orm" />
+            <path value="file://$PROJECT_DIR$/projects/platforms" />
+            <path value="file://$PROJECT_DIR$/projects/utilities" />
+            <path value="file://$PROJECT_DIR$/projects/workflows" />
+          </resourceRoots>
+        </entryData>
+      </entry>
+    </contentEntries>
+  </component>
+</project>

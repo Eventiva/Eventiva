@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Code Locations" pattern="file[Eventiva]:projects//*" />
+</component>
