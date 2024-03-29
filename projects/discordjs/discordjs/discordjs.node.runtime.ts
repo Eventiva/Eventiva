@@ -13,8 +13,8 @@
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
- * -----
- * 2024 Eventiva - All Rights Reserved
+ *
+ * Copyright (c) 2024 Eventiva Ltd. All Rights Reserved
  * LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
  * -----
  * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
@@ -36,9 +36,9 @@
  */
 
 import { I18NAspect, type I18NNode, Resource } from '@eventiva/utilities.i18n'
-import type { PinoNode as LoggingNode } from '@eventiva/utilities.logging.pino'
-import { PinoAspect as LoggingAspect } from '@eventiva/utilities.logging.pino'
 import { Client, GatewayIntentBits } from 'discord.js'
+import type { PinoNode as LoggingNode } from '../../utilities/logging/pino-old'
+import { PinoAspect as LoggingAspect } from '../../utilities/logging/pino-old'
 import type { Command, CommandSlot } from './command.js'
 import type { DiscordjsConfig } from './discordjs-config.js'
 import type { Event, EventSlot, ExtendedClientEvents } from './event.js'

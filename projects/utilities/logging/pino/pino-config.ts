@@ -1,22 +1,21 @@
 /*
  * Project: Eventiva
  * File: pino-config.ts
- * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 2:03 AM
- * -----
+ * Last Modified: 3/29/24, 7:03 PM
+ *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- * -----
+ *
  * Code of Conduct: This project abides by the Contributor Covenant, v2.0
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
- * -----
- * 2024 Eventiva - All Rights Reserved
+ *
+ * Copyright (c) 2024 Eventiva Ltd. All Rights Reserved
  * LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
- * -----
+ *
  * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
  * and modification under the terms of the Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
  * published as the License, or (at your option) any later version of this license. This program is distributed in the
@@ -25,18 +24,21 @@
  * details. You should have received a copy of the Functional Source License, Version 1.1, MIT Future License along
  * with this program. If not, please write to: licensing@eventiva.co.uk, see the official website
  * https://fsl.software/ or Review the GitHub repository https://github.com/getsentry/fsl.software/
- * -----
+ *
  * This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before
  * filing or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from
  * termination of a Covered License, we commit to adhering to the Eventiva Cooperation Commitment. You should have
  * received a copy of the Eventiva Cooperation Commitment along with this program. If not, please write to:
  * licensing@eventiva.co.uk, or see https://eventiva.co.uk/licensing/ecc
- * -----
+ *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
 
-import { LoggerOptions } from 'pino'
+import { LoggerInstance } from '@eventiva/utilities.logging.logger'
+import pino, { LoggerOptions } from 'pino'
+
+export type Log = pino.Logger<'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'>
 
 // use this type for your aspect config.
 /**
@@ -45,27 +47,4 @@ import { LoggerOptions } from 'pino'
  *
  * @export
  */
-export type PinoConfig = {
-    customLevels: {
-        alert: number;
-        emergency: number;
-    } & LoggerOptions['customLevels']
-} & LoggerOptions;
-
-/**
- * Represents different levels of pino in an application.
- * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
- * @enum
- */
-export enum LogLevels {
-    Debug = 'debug',
-    Trace = 'trace',
-    Info = 'info',
-    Warn = 'warn',
-    Error = 'error',
-    Fatal = 'fatal',
-    Alert = 'alert',
-    Emergency = 'emergency',
-}
+export type PinoConfig = {} & LoggerInstance['config'] & LoggerOptions;

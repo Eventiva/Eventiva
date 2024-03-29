@@ -1,7 +1,7 @@
 version: "0.2"
-ignorePaths: []
-dictionaryDefinitions: []
-dictionaries: []
+ignorePaths: [ ]
+dictionaryDefinitions: [ ]
+dictionaries: [ ]
 words:
   - communityid
   - coobaha
@@ -11,14 +11,14 @@ words:
   - joggr
   - learnbit
   - leasot
-  - pino
+  - pino-old
   - resourcetypes
   - serverid
   - todos
   - zmodel
   - zoomable
-ignoreWords: []
-import: []
+ignoreWords: [ ]
+import: [ ]
 enableFiletypes:
   - dockercompose
   - dockerfile

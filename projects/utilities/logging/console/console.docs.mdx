@@ -1,0 +1,34 @@
+---
+description: 'A plugable Console aspect. Can be used to provider a UI and API.'
+labels: ['aspect', 'composition', 'extendability']
+---
+
+A plugable Console aspect. Used to maintain Console across the platform.
+
+## Get started
+
+Compose the aspect into your Harmony platform:
+
+```ts
+import { PlatformAspect } from '@bitdev/harmony.aspects.platform-aspect';
+
+/**
+ * compose the wayne.com platform.
+ */
+export const MyPlatform = HarmonyPlatform.from({
+  name: 'my-platform',
+
+  platform: PlatformAspect,
+
+  runtimes: [
+    new BrowserRuntime(),
+    new NodeJSRuntime()
+  ],
+
+  aspects: [
+    PinoAspect,
+  ]
+});
+
+export default MyPlatform;
+```

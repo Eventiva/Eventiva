@@ -182,7 +182,10 @@
         "scope": "eventiva.envs",
         "version": "0.0.4-0",
         "mainFile": "index.ts",
-        "rootDir": "projects/envs/generator"
+        "rootDir": "projects/envs/generator",
+        "config": {
+            "teambit.node/node@1.0.52": {}
+        }
     },
     "generators/harmony-templates": {
         "name": "generators/harmony-templates",
@@ -233,6 +236,34 @@
         "mainFile": "index.ts",
         "rootDir": "projects/entities/identities/platform"
     },
+    "logging/console": {
+        "name": "logging/console",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/logging/console",
+        "config": {
+            "eventiva.envs/node": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "logging/logger": {
+        "name": "logging/logger",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/logging/logger",
+        "config": {
+            "eventiva.envs/node": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
     "logging/pino": {
         "name": "logging/pino",
         "scope": "eventiva.utilities",
@@ -252,7 +283,10 @@
         "scope": "eventiva.envs",
         "version": "0.0.4-0",
         "mainFile": "index.ts",
-        "rootDir": "projects/envs/node"
+        "rootDir": "projects/envs/node",
+        "config": {
+            "teambit.envs/env@1.0.211": {}
+        }
     },
     "orm/mikro": {
         "name": "orm/mikro",
