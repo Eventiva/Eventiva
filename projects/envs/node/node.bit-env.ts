@@ -41,6 +41,8 @@ import { NodeAppTemplate, NodeEnvTemplate, NodeModuleTemplate } from '@bitdev/no
  */
 import { SymphonyEnv } from '@bitdev/symphony.envs.symphony-env'
 import { Generator } from '@eventiva/envs.generator'
+import { DiscordChangelog } from '@eventiva/workflows.discord-changelog'
+import { GenerateChangelogTask } from '@eventiva/workflows.generate-changelog'
 import { CAPSULE_ARTIFACTS_DIR, Pipeline } from '@teambit/builder'
 import { Compiler } from '@teambit/compiler'
 import { EslintConfigWriter, ESLintLinter } from '@teambit/defender.eslint-linter'
@@ -61,6 +63,7 @@ import {
 } from '@teambit/typescript.typescript-compiler'
 import { VitestTask, VitestTester } from '@teambit/vite.vitest-tester'
 import { ConfigWriterList } from '@teambit/workspace-config-files'
+
 // Disable v8-caching because it breaks ESM loaders
 NativeCompileCache.uninstall()
 
@@ -76,6 +79,7 @@ NativeCompileCache.uninstall()
  */
 export class Node
     extends SymphonyEnv {
+
     /* shorthand name for the environment */
     /**
      * shorthand name for the environment
@@ -276,7 +280,10 @@ export class Node
      * use the snap pipeline for staging and test deployments
      */
     snap () {
-        return Pipeline.from( [] )
+        return Pipeline.from( [
+            GenerateChangelogTask.from(),
+            DiscordChangelog.from()
+        ] )
     }
 
     /**
@@ -285,7 +292,10 @@ export class Node
      * publishing a semantic version for a component.
      */
     tag () {
-        return Pipeline.from( [] )
+        return Pipeline.from( [
+            GenerateChangelogTask.from(),
+            DiscordChangelog.from()
+        ] )
     }
 
     /**
