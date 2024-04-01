@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: segment.node.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/30/24, 12:20 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -53,6 +53,7 @@ export class SegmentNode {
      * @static
      */
     static dependencies = []
+
     /**
      * A static property representing the default configuration for a Segment. An instance of SegmentConfig with the writeKey attribute set to the value of the environment variable SEGMENT_WRITE_KEY.
      * @author Jonathan Stevens (@TGTGamer)
@@ -62,6 +63,7 @@ export class SegmentNode {
     static defaultConfig: SegmentConfig = {
         writeKey: process.env.SEGMENT_WRITE_KEY!
     }
+
     /**
      * A property that represents the analytics module.
      * @author Jonathan Stevens (@TGTGamer)
@@ -97,6 +99,7 @@ export class SegmentNode {
      *                                It throws an error if the writeKey is missing in the config.
      */
     static async provider (
+        // eslint-disable-next-line no-empty-pattern
         []: [],
         config: SegmentConfig,
         [ instanceSlot ]: [ InstanceSlot ]
@@ -117,7 +120,7 @@ export class SegmentNode {
      */
     registerInstance ( instances: Instance<false>[] ) {
         const initializedInstances: Instance<true>[] = []
-        for ( let instance of instances ) {
+        for ( const instance of instances ) {
             initializedInstances.push( {
                 ...instance,
                 initialized: true,

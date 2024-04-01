@@ -1,6 +1,6 @@
 /*
  * Project: Eventiva
- * File: segment.aspect.ts
+ * File: segment.node.spec.ts
  * Last Modified: 3/29/24, 4:54 PM
  *
  * Contributing: Please read through our contributing guidelines.
@@ -34,14 +34,14 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { Aspect } from '@bitdev/harmony.harmony'
+import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
+import { SegmentAspect } from './segment.aspect.js'
+import type { SegmentNode } from './segment.node.runtime.js'
 
-/**
- * Create an aspect with the id 'eventiva.central/aspects/segment'
- * @author Jonathan Stevens (@TGTGamer)
- */
-export const SegmentAspect = Aspect.create( {
-    id: 'eventiva.central/aspects/segment'
+it( 'should retrieve the aspect', async () => {
+    const segment = await loadAspect<SegmentNode>( SegmentAspect, {
+        runtime: 'node'
+    } )
+
+    expect( segment ).toThrow()
 } )
-
-export default SegmentAspect
