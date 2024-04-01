@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:17 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,11 +35,11 @@
  */
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
-import { DefaultLoggingAspect } from './default_logging.aspect.js'
+import { DefaultLoggerAspect } from './default_logging.aspect.js'
 import type { DefaultLoggingNode } from './default_logging.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
-    const default_logging = await loadAspect<DefaultLoggingNode>( DefaultLoggingAspect, {
+    const default_logging = await loadAspect<DefaultLoggingNode>( DefaultLoggerAspect, {
         runtime: 'node'
     } )
 

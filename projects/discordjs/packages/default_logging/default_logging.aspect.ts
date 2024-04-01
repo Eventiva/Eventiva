@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.aspect.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 8:21 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,12 +38,12 @@
 import { Aspect } from '@bitdev/harmony.harmony'
 
 /**
- * The DefaultLoggingAspect property is used to create a default logging aspect. It takes an object as a parameter with the following properties:
+ * The DefaultLoggerAspect property is used to create a default logging aspect. It takes an object as a parameter with the following properties:
  * - id: a string representing the aspect id.
  * @author Jonathan Stevens (@TGTGamer)
  */
-export const DefaultLoggingAspect = Aspect.create( {
-    id: 'eventiva.bots/packages/default_logging'
+export const DefaultLoggerAspect = Aspect.create( {
+    id: 'eventiva.discordjs/packages/default_logging'
 } )
 
-export default DefaultLoggingAspect
+export default DefaultLoggerAspect

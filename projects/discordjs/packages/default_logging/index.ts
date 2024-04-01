@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 8:21 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,9 +34,9 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { DefaultLoggingAspect } from './default_logging.aspect.js'
+import { DefaultLoggerAspect } from './default_logging.aspect.js'
 
 export type { DefaultLoggingNode } from './default_logging.node.runtime.js'
 
-export default DefaultLoggingAspect
-export { DefaultLoggingAspect }
+export default DefaultLoggerAspect
+export { DefaultLoggerAspect }

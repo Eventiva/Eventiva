@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:22 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -61,6 +61,7 @@ export class DefaultLoggingNode
      * @static
      */
     static dependencies = [ DiscordJSAspect ]
+
     /**
      * The default configuration for the DefaultLogging class. It is an empty object.
      * @author Jonathan Stevens (@TGTGamer)
@@ -73,6 +74,7 @@ export class DefaultLoggingNode
             level: 'info'
         }
     }
+
     /**
      * The resources object that holds all the event handlers for the client.
      * Each key represents an event name, and its corresponding value is an object with the name of the event and the handler function.
@@ -139,10 +141,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                if ( 'fatal' in this.log ) {
-                    return this.log.fatal( message )
-                }
-                return this.log.error( message )
+                return this.log.fatal( message )
             }
         },
         alert: {
@@ -152,10 +151,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                if ( 'alert' in this.log ) {
-                    return this.log.alert( message )
-                }
-                return this.log.error( message )
+                return this.log.alert( message )
             }
         },
         emergency: {
@@ -165,10 +161,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                if ( 'emergency' in this.log ) {
-                    return this.log.emergency( message )
-                }
-                return this.log.error( message )
+                return this.log.emergency( message )
             }
         }
     }
@@ -210,6 +203,7 @@ export class DefaultLoggingNode
      * @public
      * @returns Registers events for the current instance of the application.
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public registerEvents ( reload?: true ) {
         this.discord.registerEvent( this, [
             this.resources.ready,
@@ -232,6 +226,7 @@ export class DefaultLoggingNode
      * @public
      * @returns Registers commands in the Discord client.
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public registerCommands ( reload?: true ) {
         this.discord.registerCommand( this, [
             // add any commands here
