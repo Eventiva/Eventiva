@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: support.bit-app.ts
- * Last Modified: 3/29/24, 5:37 PM
+ * Last Modified: 3/30/24, 12:17 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,17 +38,13 @@ import { HarmonyPlatform } from '@bitdev/harmony.harmony-platform'
 import { BrowserRuntime } from '@bitdev/harmony.runtimes.browser-runtime'
 import { NodeJSRuntime } from '@bitdev/harmony.runtimes.nodejs-runtime'
 import { SymphonyPlatformAspect } from '@bitdev/symphony.symphony-platform'
-import { DiscordJSAspect } from '@eventiva/discordjs.discordjs'
-import { DefaultLoggingAspect } from '@eventiva/discordjs.packages.default_logging'
-import { I18NAspect } from '@eventiva/utilities.i18n'
-import { PinoAspect as LoggingAspect } from '../../../utilities/logging/pino-old'
 
 /**
  * Support is a property that encapsulates the configuration for the Harmony Platform support. It specifies the name of the support, the support platform aspect, the runtimes required for the support, and the aspects that should be enabled for the support.
  * @author Jonathan Stevens (@TGTGamer)
  */
 export const Support = HarmonyPlatform.from( {
-    name: 'Support',
+    name: 'discord/support',
 
     platform: [
         SymphonyPlatformAspect, {
@@ -60,36 +56,13 @@ export const Support = HarmonyPlatform.from( {
     ],
 
     runtimes: [
-        new BrowserRuntime(),
-        new NodeJSRuntime()
-        // new DiscordRuntime()
+        new NodeJSRuntime(),
+        new BrowserRuntime()
     ],
 
     aspects: [
-        // SegmentAspect,
-        LoggingAspect,
-        I18NAspect,
-        // DatabaseAspect,
-        // DiscordJSAspect,
-        // PingAspect,
-        [
-            DiscordJSAspect,
-            {
-                logger: {
-                    level: 'trace'
-                }
-            }
-        ],
-        // DefaultLoggingAspect,
-        [
-            DefaultLoggingAspect,
-            {
-                name: 'default_logging',
-                logger: {
-                    level: 'trace'
-                }
-            }
-        ]
+        // LoggerAspect
+        // ConsoleAspect
     ]
 } )
 
