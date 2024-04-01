@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: ping.discord.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:15 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -48,12 +48,14 @@ import type { PingConfig } from './ping-config.js'
 export class PingDiscord
     extends DiscordJsModule<PingConfig> {
     static readonly dependencies = [ DiscordJSAspect ]
+
     static readonly defaultConfig: PingConfig = {
         name: 'PingModule',
         logger: {
             level: 'info'
         }
     }
+
     public resources: Resources = {}
 
     constructor (
@@ -74,13 +76,15 @@ export class PingDiscord
         return ping
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public registerEvents ( reload?: true ) {
-        const result = this.discord.registerEvent( this, [
+        this.discord.registerEvent( this, [
             // add any events here
         ] as Event<any>[] )
         return this
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public registerCommands ( reload?: true ) {
         this.discord.registerCommand( this, [
             // add any commands here
