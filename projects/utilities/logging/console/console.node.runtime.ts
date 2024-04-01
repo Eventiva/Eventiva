@@ -62,6 +62,13 @@ export class ConsoleNode
         )
     }
 
+    trace = (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) =>
+        this.console.trace( `[${ this.config.module }]: `, msg, obj, ...args )
+
     debug = (
         msg: string,
         obj?: object,
