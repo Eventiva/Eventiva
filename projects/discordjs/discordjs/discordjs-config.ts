@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs-config.ts
- * Last Modified: 3/29/24, 5:37 PM
+ * Last Modified: 3/30/24, 12:21 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,9 +34,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-// import { SegmentConfig } from "@eventiva/central.aspects.segment";
+import { LoggerInstance } from '@eventiva/utilities.logging.logger'
 import type { ClientOptions } from 'discord.js'
-import { Logger } from '../../utilities/logging/pino-old'
 
 /**
  * This type is used for the configuration of the Discord.js aspect. It has properties including 'token', 'clientId', 'clientSecret', and 'guildId', all of type string. Additionally, it extends the 'ClientOptions' type.
@@ -51,6 +50,5 @@ export type DiscordjsConfig = {
     clientSecret: string;
     guildId: string;
     startDelay: number;
-    logger: Logger['options'];
-    // segment?: SegmentConfig
+    logger: LoggerInstance['config'];
 } & ClientOptions;

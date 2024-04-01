@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs.node.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:12 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,12 +35,18 @@
  */
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
+import { I18NAspect } from '@eventiva/utilities.i18n'
+import { ConsoleAspect } from '@eventiva/utilities.logging.console'
+import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 import { DiscordJSAspect } from './discordjs.aspect.js'
 import type { DiscordJSNode } from './discordjs.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
     const discordJs = await loadAspect<DiscordJSNode>( DiscordJSAspect, {
-        runtime: 'node'
+        runtime: 'node',
+        aspects: [
+            I18NAspect, LoggerAspect, ConsoleAspect
+        ]
     } )
 
     expect( discordJs ).toBeTruthy()

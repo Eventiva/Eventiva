@@ -1,14 +1,13 @@
 /*
  * Project: Eventiva
  * File: discordjs.node.runtime.ts
- * Created Date: Wednesday, January 31st 2024
- * Last Modified: 3/25/24, 2:15 AM
- * -----
+ * Last Modified: 3/29/24, 8:40 PM
+ *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at
  * https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
- * -----
+ *
  * Code of Conduct: This project abides by the Contributor Covenant, v2.0
  * Please interact in ways that contribute to an open, welcoming, diverse,
  * inclusive, and healthy community. Our Code of Conduct can be found at
@@ -16,7 +15,7 @@
  *
  * Copyright (c) 2024 Eventiva Ltd. All Rights Reserved
  * LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
- * -----
+ *
  * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
  * and modification under the terms of the Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
  * published as the License, or (at your option) any later version of this license. This program is distributed in the
@@ -25,20 +24,19 @@
  * details. You should have received a copy of the Functional Source License, Version 1.1, MIT Future License along
  * with this program. If not, please write to: licensing@eventiva.co.uk, see the official website
  * https://fsl.software/ or Review the GitHub repository https://github.com/getsentry/fsl.software/
- * -----
+ *
  * This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before
  * filing or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from
  * termination of a Covered License, we commit to adhering to the Eventiva Cooperation Commitment. You should have
  * received a copy of the Eventiva Cooperation Commitment along with this program. If not, please write to:
  * licensing@eventiva.co.uk, or see https://eventiva.co.uk/licensing/ecc
- * -----
+ *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
 import { I18NAspect, type I18NNode, Resource } from '@eventiva/utilities.i18n'
+import { LoggerAspect, LoggerConfig, LoggerNode, LoggerType } from '@eventiva/utilities.logging.logger'
 import { Client, GatewayIntentBits } from 'discord.js'
-import type { PinoNode as LoggingNode } from '../../utilities/logging/pino-old'
-import { PinoAspect as LoggingAspect } from '../../utilities/logging/pino-old'
 import type { Command, CommandSlot } from './command.js'
 import type { DiscordjsConfig } from './discordjs-config.js'
 import type { Event, EventSlot, ExtendedClientEvents } from './event.js'
@@ -46,39 +44,19 @@ import discord from './locales/en/discord.js'
 import errors from './locales/en/errors.js'
 import type { DiscordJsModule } from './module.js'
 
-/**
- * A class representing the DiscordJSNode.
- * This class provides methods for registering events and commands, listing events and commands, and initializing a Discord client.
- * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
- * @class DiscordJSNode
+const defaultToken = process.env[ 'DISCORD.TOKEN' ]!
+const defaultStartDelay = process.env[ 'DISCORD.START_DELAY' ]
+const parsedDefaultStartDelay = defaultStartDelay
+    ? parseInt( defaultStartDelay, 10 )
+    : 30000
 
- */
 export class DiscordJSNode {
+    static readonly dependencies = [ I18NAspect, LoggerAspect ]
 
-    /**
-     * An array of dependencies that this aspect relies on. These dependencies are instances of classes that implement specific aspects, such as the I18NAspect and LoggingAspect.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @static
-     */
-    static readonly dependencies = [ I18NAspect, LoggingAspect ]
-    /**
-     * The default configuration for the DiscordJsClient class.
-     * The default configuration includes the bot token, client ID, client secret, development guild ID, and list of intents to use for the bot.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @static
-     */
     static readonly defaultConfig: DiscordjsConfig = {
-        token: process.env[ 'DISCORD.TOKEN' ]!,
-        startDelay: process.env[ 'DISCORD.START_DELAY' ]
-            ? parseInt( process.env[ 'DISCORD.START_DELAY' ] )
-            : 30000,
-        // The client ID of the bot
+        token: defaultToken,
+        startDelay: parsedDefaultStartDelay,
         clientId: process.env[ 'DISCORD.CLIENT_ID' ]!,
-        // The client secret of the bot
         clientSecret: process.env[ 'DISCORD.CLIENT_SECRET' ]!,
         // The guild ID to use for the bot as the development guild
         guildId: process.env[ 'DISCORD.GUILD_ID' ]!,
@@ -105,163 +83,30 @@ export class DiscordJSNode {
             GatewayIntentBits.MessageContent
         ],
         logger: {
-            level: process.env[ 'DISCORD.LOGGER.LEVEL' ] ?? 'info'
+            level: process.env[ 'DISCORD.LOGGER.LEVEL' ] as DiscordjsConfig['logger']['level'] ?? 'info'
         }
     }
-    /**
-     * The Discord client instance. This property is a reference to the Discord.js Client class and is used to interact with the Discord API.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
-     */
+
     public client: Client
 
-    /**
-     * A public property that represents the analytics segment node's identity in the SegmentNode class.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
-     */
-    // public identity: {
-    //   track: SegmentNode["analytics"]["track"],
-    //   identify: SegmentNode["analytics"]["identify"],
-    //   group: SegmentNode["analytics"]["group"],
-    // }
-    /**
-     * The `i18n` property is a reference to the `i18next` object in the `I18NNode` interface. It is used for internationalization purposes.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
-     */
     public i18n: I18NNode['i18next']
-    /**
-     * Indicates whether the object is initialised or not.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
-     */
-    public isInitialised = false
-    /**
-     * The log property is a reference to either the Log module or the Console object. It is marked as protected, meaning it is only accessible within the class and its subclasses.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @protected
-     */
-    protected log: LoggingNode['log'] | Console = console
 
-    /**
-     * Creates an instance of DiscordJSNode.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @constructor
-     * @param config The DiscordJS config object.
-     * @param moduleSlot The module slot.
-     * @param eventSlot The event slot.
-     * @param commandSlot The command slot.
-     * @param i18nModule The i18n module.
-     * @param [logging]
-     */
+    public isInitialised = false
+
+    protected log: LoggerType<never>
+
     constructor (
         protected config: DiscordjsConfig,
         protected eventSlot: EventSlot<any>,
         protected commandSlot: CommandSlot,
         protected i18nModule: I18NNode,
-        // protected database?: DatabaseNode,
-        protected logging?: LoggingNode
-        // protected segment?: SegmentNode
+        protected logging?: LoggerNode
     ) {
-        this.log = logging
-            ? logging.registerLogger( [
-                {
-                    name: 'discord:client',
-                    options: { level: 'trace', ...this.config.logger }
-                }
-            ] ).getLogger( 'discord:client' ).logger
-            : console
-
-        this.log.trace( 'Waiting on i18nModule to initialize' )
-        const startTime = Date.now()
-        while ( !i18nModule.i18next.isInitialized ) {
-            if ( Date.now() - startTime > this.config.startDelay ) {
-                throw new Error( 'i18nModule failed to initialize within the specified startDelay' )
-            }
-        }
-        this.log.trace( 'Registering i18nModule resources' )
-        this.registerLocale( [
-            { name: 'discord', lng: 'en', ns: 'discord', resources: discord },
-            { name: 'errors', lng: 'en', ns: 'errors', resources: errors }
-        ] )
-
-        this.i18n = i18nModule.i18next
-        this.log.trace( this.i18n.t(
-            'discord:init.logging.module',
-            {
-                context: logging
-                    ? undefined
-                    : 'notFound', defaultValue: ''
-            }
-        ) )
-
-        // this.identity = this.segment.registerInstance([{
-        //   name: "discordjs",
-        //   initialized: false,
-        //   writeKey: this.config.segment.writeKey,
-        //   analytics: null
-        // }]).getInstance("discordjs").analytics
-
-        this.log.trace( this.i18n.t( 'discord:checks', { context: 'searching', key: 'token' } ) )
-        if ( !config.token ) {
-            this.log.warn( this.i18n.t( 'discord:checks.notFound', { key: 'token' } ) )
-        } else {
-            this.log.trace( this.i18n.t( 'discord:checks', { context: 'found', key: 'token' } ) )
-        }
-
-        this.log.trace( this.i18n.t( 'discord:checks', { context: 'searching', key: 'clientId' } ) )
-        if ( !config.clientId ) {
-            this.log.warn( this.i18n.t( 'discord:checks.notFound', { key: 'clientId' } ) )
-        } else {
-            this.log.trace( this.i18n.t( 'discord:checks', { context: 'found', key: 'clientId' } ) )
-        }
-
-        this.log.trace( this.i18n.t( 'discord:checks', { context: 'searching', key: 'clientSecret' } ) )
-        if ( !config.clientSecret ) {
-            this.log.warn( this.i18n.t( 'discord:checks.notFound', { key: 'clientSecret' } ) )
-        } else {
-            this.log.trace( this.i18n.t( 'discord:checks', { context: 'found', key: 'clientSecret' } ) )
-        }
-
-        this.log.trace( this.i18n.t( 'discord:client.creating' ) )
-
-        this.client = new Client( this.config )
-
-        this.log.trace( this.i18n.t( 'discord:client.created' ) )
-
-        this.log.trace( this.i18n.t( 'discord:init.loggingIn' ) )
-
-        setTimeout( async () => {
-            if ( config.token ) {
-                await this.client.login( this.config.token )
-            } else {
-                this.log.warn( this.i18n.t( 'discord:init.faked' ) )
-            }
-            this.log.trace( this.i18n.t( 'discord:init.loggedIn' ) )
-        }, config.startDelay )
-
-        this.isInitialised = true
+        this.initialize()
     }
 
-    /**
-     * Creates a new instance of DiscordJSNode and returns it.
-     *
-     * @param {I18NNode} i18n - The I18NNode instance for language localization.
-     * @param {LoggingNode | undefined} logging - The LoggingNode instance for logging purposes.
-     * @param {DiscordjsConfig} config - The configuration object for DiscordJSNode.
-     * @param {EventSlot<any>} eventSlot - The EventSlot to handle Discord events.
-     * @param {CommandSlot} commandSlot - The CommandSlot to handle Discord commands.
-     * @returns {DiscordJSNode} - The newly created instance of DiscordJSNode.
-     */
     static async provider (
-        [ i18n, logging ]: [ I18NNode, LoggingNode | undefined ],
+        [ i18n, logging ]: [ I18NNode, LoggerNode | undefined ],
         config: DiscordjsConfig,
         [ eventSlot, commandSlot ]: [ EventSlot<any>, CommandSlot ]
     ) {
@@ -292,17 +137,15 @@ export class DiscordJSNode {
      * @param reload
      * @returns Registers a module in the Discord bot. The module will be added to the list of registered modules and will be available for use.
      */
-    public registerModule (
+    public async registerModule (
         module: DiscordJsModule,
         reload?: true
     ) {
         if ( this.logging ) {
-            const log = this.logging.registerLogger( [
-                {
-                    name: `discord:${ module.name }`,
-                    options: { level: 'trace', ...module.getConfig().logger }
-                }
-            ] ).getLogger( `discord:${ module.name }` ).logger
+            const log = await this.setupLogger(
+                `discord:${ module.name }`,
+                { level: 'trace', ...module.getConfig().logger }
+            )
             module.setLog( log )
         }
         this.log.trace( this.i18n.t( 'discord:modules.init', { context: 'start', name: module.name } ) )
@@ -316,18 +159,6 @@ export class DiscordJSNode {
         return this
     }
 
-    /**
-     * Registers multiple events to the client.
-     * The events parameter is an array of Event objects.
-     * The function logs the registration process and binds the event execution to the client.
-     * Returns the instance of the class.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @template E The type parameter that represents the event name
-     * @param module
-     * @param events An array of events to register
-     * @returns Registers multiple events to be handled by the client.
-     */
     public async registerEvent (
         module: DiscordJsModule,
         events: Event<any>[]
@@ -335,40 +166,17 @@ export class DiscordJSNode {
         if ( events.length === 0 ) {
             return this
         }
-        this.log.trace( this.i18n.t( 'discord:events.multi.registering', { count: events.length } ) )
-        this.log.trace( this.i18n.t( 'discord:events.multi.registerEventSlot' ) )
+
+        this.logEventRegistrationStart( events.length )
+
         this.eventSlot.register( events )
-        for ( const event of events ) {
-            if ( !event ) {
-                continue
-            }
-            this.log.trace( this.i18n.t(
-                'discord:events.single.registering',
-                {
-                    name: event.name,
-                    type: event.once
-                        ? 'Once'
-                        : 'repeat'
-                }
-            ) )
-            this.log.trace( `Getting the event from EventSlot using getByName ${ JSON.stringify( this.eventSlot.getByName(
-                event.name ) ) }` )
-            if ( event.once ) {
-                this.client.once( event.name as string, await event.execute.bind( module ) )
-            } else {
-                this.client.on( event.name as string, await event.execute.bind( module ) )
-            }
-            this.log.info( this.i18n.t(
-                'discord:events.single.registered',
-                {
-                    name: event.name,
-                    type: event.once
-                        ? 'Once'
-                        : 'repeat'
-                }
-            ) )
-        }
-        this.log.trace( this.i18n.t( 'discord:events.multi.registered', { count: this.eventSlot.length } ) )
+
+        events.forEach.bind( this )( ( event: Event<any> ) => {
+            this.registerEventToClient( module, event )
+        } )
+
+        this.logEventRegistrationEnd( this.eventSlot.length )
+
         return this
     }
 
@@ -413,23 +221,15 @@ export class DiscordJSNode {
     public registerCommand (
         module: DiscordJsModule,
         commands: Command[]
-    ) {
+    ): DiscordJSNode {
         if ( commands.length === 0 ) {
             return this
         }
         this.log.trace( this.i18n.t( 'discord:commands.multi.registering', { count: commands.length } ) )
-        // for each command, bind execute and message to the module
-        for ( const command of commands ) {
-            if ( !command ) {
-                continue
-            }
+        commands.forEach.bind( this )( ( command: Command ) => {
             this.log.trace( this.i18n.t( 'discord:commands.single.binding', { name: command.name } ) )
-            command.execute = command.execute.bind( module )
-            if ( 'message' in command ) {
-                command.message = command.message?.bind( module )
-            }
-            this.log.trace( this.i18n.t( 'discord:commands.single.bound', { name: command.name } ) )
-        }
+            this.bindCommandToModule( module, command )
+        } )
         this.commandSlot.register( commands )
         this.log.trace( this.i18n.t( 'discord:commands.multi.registered', { count: this.commandSlot.length } ) )
         return this
@@ -464,6 +264,158 @@ export class DiscordJSNode {
         }
         this.log.trace( this.i18n.t( 'discord:commands.single.notFound', { name } ) )
         throw new Error( this.i18n.t( 'discord:commands.single.notFound', { name } ) )
+    }
+
+    private async initialize () {
+        await this.setupLogger()
+        this.log.trace( 'Waiting on i18nModule to initialize' )
+        this.log.trace( 'Registering i18nModule resources' )
+        this.registerLocale( [
+            { name: 'discord', lng: 'en', ns: 'discord', resources: discord },
+            { name: 'errors', lng: 'en', ns: 'errors', resources: errors }
+        ] )
+
+        this.i18n = this.i18nModule.i18next
+        this.log.trace( this.i18n.t(
+            'discord:init.logging.module',
+            {
+                context: this.logging
+                    ? undefined
+                    : 'notFound', defaultValue: ''
+            }
+        ) )
+
+        this.log.trace( this.i18n.t( 'discord:checks', { context: 'searching', key: 'token' } ) )
+        if ( !this.config.token ) {
+            this.log.warn( this.i18n.t( 'discord:checks.notFound', { key: 'token' } ) )
+        } else {
+            this.log.trace( this.i18n.t( 'discord:checks', { context: 'found', key: 'token' } ) )
+        }
+
+        this.log.trace( this.i18n.t( 'discord:checks', { context: 'searching', key: 'clientId' } ) )
+        if ( !this.config.clientId ) {
+            this.log.warn( this.i18n.t( 'discord:checks.notFound', { key: 'clientId' } ) )
+        } else {
+            this.log.trace( this.i18n.t( 'discord:checks', { context: 'found', key: 'clientId' } ) )
+        }
+
+        this.log.trace( this.i18n.t( 'discord:checks', { context: 'searching', key: 'clientSecret' } ) )
+        if ( !this.config.clientSecret ) {
+            this.log.warn( this.i18n.t( 'discord:checks.notFound', { key: 'clientSecret' } ) )
+        } else {
+            this.log.trace( this.i18n.t( 'discord:checks', { context: 'found', key: 'clientSecret' } ) )
+        }
+
+        this.log.trace( this.i18n.t( 'discord:client.creating' ) )
+
+        this.client = new Client( this.config )
+
+        this.log.trace( this.i18n.t( 'discord:client.created' ) )
+
+        this.log.trace( this.i18n.t( 'discord:init.loggingIn' ) )
+
+        setTimeout( async () => {
+            if ( this.config.token ) {
+                await this.client.login( this.config.token )
+            } else {
+                this.log.warn( this.i18n.t( 'discord:init.faked' ) )
+            }
+            this.log.trace( this.i18n.t( 'discord:init.loggedIn' ) )
+        }, this.config.startDelay )
+
+        this.isInitialised = true
+    }
+
+    private async setupLogger (
+        name: string = 'discord:client',
+        config: LoggerConfig = this.config.logger
+    ) {
+        console.log( 'registering logger' )
+        await this.logging.registerLogger( [
+            {
+                name,
+                options: config
+            }
+        ] )
+        this.log = this.logging.getLogger( name ).logger
+        console.log( 'logger registered' )
+    }
+
+    /**
+     * Do the binding of commands actions (execute and message) to the module
+     * Log tracing information about the bindings
+     * @param module
+     * @param command The command to bind
+     */
+    private bindCommandToModule (
+        module: DiscordJsModule,
+        command: Command
+    ): void {
+        const mutableCommand = command
+        if ( mutableCommand?.execute ) {
+            mutableCommand.execute = mutableCommand.execute.bind( module )
+            if ( 'message' in mutableCommand ) {
+                mutableCommand.message = mutableCommand.message?.bind( module )
+            }
+            this.log.trace( this.i18n.t( 'discord:commands.single.bound', { name: command.name } ) )
+        }
+    }
+
+    private logEventRegistrationStart ( eventCount: number ) {
+        this.log.trace( this.i18n.t( 'discord:events.multi.registering', { count: eventCount } ) )
+        this.log.trace( this.i18n.t( 'discord:events.multi.registerEventSlot' ) )
+    }
+
+    private logEventRegistrationEnd ( eventSlotLength: number ) {
+        this.log.trace( this.i18n.t( 'discord:events.multi.registered', { count: eventSlotLength } ) )
+    }
+
+    private async registerEventToClient (
+        module: DiscordJsModule,
+        event: Event<any>
+    ) {
+        if ( !event ) {
+            return
+        }
+
+        this.logSingleEventRegistration( event )
+
+        const eventFn = await event.execute.bind( module )
+        if ( event.once ) {
+            this.client.once( event.name as string, eventFn )
+        } else {
+            this.client.on( event.name as string, eventFn )
+        }
+
+        this.logEventRegistered( event )
+    }
+
+    private logSingleEventRegistration ( event: Event<any> ) {
+        this.log.trace( this.i18n.t(
+            'discord:events.single.registering',
+            {
+                name: event.name,
+                type: event.once
+                    ? 'Once'
+                    : 'repeat'
+            }
+        ) )
+
+        this.log.trace( `Getting the event from EventSlot using getByName ${
+            JSON.stringify( this.eventSlot.getByName( event.name ) ) }`
+        )
+    }
+
+    private logEventRegistered ( event: Event<any> ) {
+        this.log.info( this.i18n.t(
+            'discord:events.single.registered',
+            {
+                name: event.name,
+                type: event.once
+                    ? 'Once'
+                    : 'repeat'
+            }
+        ) )
     }
 }
 

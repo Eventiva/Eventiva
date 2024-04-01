@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: module.ts
- * Last Modified: 3/29/24, 5:37 PM
+ * Last Modified: 3/29/24, 8:38 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,7 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import type { Logger, PinoNode as LoggerNode } from '../../utilities/logging/pino-old'
+import { LoggerInstance, LoggerNode, LoggerType } from '@eventiva/utilities.logging.logger'
 import type { Command } from './command.js'
 import { DiscordJSAspect } from './discordjs.aspect.js'
 import type { DiscordJSNode } from './discordjs.node.runtime.js'
@@ -61,7 +61,7 @@ export type Resources = {
  */
 export type ModuleConfig = {
     name: string
-    logger: Logger['options']
+    logger: LoggerInstance['config']
 }
 
 /**
@@ -75,7 +75,7 @@ export type ModuleConfig = {
  */
 export class DiscordJsModule<C extends ModuleConfig = {
     name: string,
-    logger: Logger['options']
+    logger: LoggerInstance['config']
 }> {
     /**
      * The default configuration for the module. It specifies the name of the module and the logger level.
@@ -89,6 +89,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
             level: 'info'
         }
     }
+
     /**
      * An array of dependencies required by the current module. The elements of the array are instances of the DiscordJSAspect class.
      * @author Jonathan Stevens (@TGTGamer)
@@ -96,18 +97,21 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * @static
      */
     static dependencies = [ DiscordJSAspect ]
+
     /**
      * The `log` property is a public property that stores an instance of either the `Log` or `Console` class. By default, it is initialized with the `console` object. It can be used to log messages or debug information.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @public
      */
-    public log: LoggerNode['log'] | Console = console
+    public log: LoggerType<never>
+
     /**
      * The name of the entity. It must be a string.
      * @author Jonathan Stevens (@TGTGamer)
      */
     name: string
+
     /**
      * The resources object that holds all the event handlers for the client.
      * Each key represents an event name, and its corresponding value is an object with the name of the event and the handler function.
@@ -145,6 +149,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
         this.log.trace( 'Waiting on discord module to initialize' )
         this.name = config.name
         while ( !discord.isInitialised ) {
+            // this forces the application to wait for discord to connect
         }
         this.log.trace( discord.i18n.t( 'discord:clientStarted' ) )
     }
@@ -157,6 +162,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * @public
      * @returns Registers events for the current instance of the application.
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public registerEvents ( reload?: true ) {
         return this
     }
@@ -180,6 +186,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * @public
      * @returns Registers events for the current instance of the application.
      */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public registerCommands ( reload?: true ) {
         return this
     }
