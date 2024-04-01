@@ -41,7 +41,7 @@ import { Aspect } from '@bitdev/harmony.harmony'
  * @author Jonathan Stevens (@TGTGamer)
  */
 export const MikroAspect = Aspect.create( {
-    id: 'eventiva.central/aspects/mikro'
+    id: 'eventiva.orm/mikro'
 } )
 
 export default MikroAspect
