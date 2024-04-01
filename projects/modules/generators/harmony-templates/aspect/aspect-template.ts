@@ -97,14 +97,6 @@ export class AspectTemplate
      * @author Jonathan Stevens (TGTGamer)
      *
      * @constructor
-     * @param {Logger} logger The logger instance for logging messages
-     * @param {string} [name='aspect']
-     * @param {string} [description='create an aspect, and compose to your harmony platform']
-     * @param {boolean} [hidden=false]
-     * @param {?string} [env]
-     * @param {HarmonyTemplatesOptions} [options={}]
-     * @param {boolean} [interactive=true]
-     * @param {boolean} [installMissingDeps=true]
      */
     constructor (
         private logger: Logger,
