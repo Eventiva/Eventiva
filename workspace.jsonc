@@ -128,4 +128,5 @@
       }
     }
   }
+  //  "eventiva.platforms/discord/support": {} // adding this line seems to break the install....
 }
