@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino.node.runtime.ts
- * Last Modified: 3/29/24, 7:10 PM
+ * Last Modified: 3/30/24, 12:39 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,7 +37,7 @@
 import { LoggerAspect, LoggerConfig, LoggerInstance, LoggerNode } from '@eventiva/utilities.logging.logger'
 import { pino } from 'pino'
 import { pinoCaller } from 'pino-caller'
-import { PinoPretty } from 'pino-pretty'
+import { build } from 'pino-pretty'
 import { Log, PinoConfig } from './pino-config.js'
 
 export class PinoNode
@@ -48,7 +48,7 @@ export class PinoNode
         level: 'info'
     }
 
-    stream = PinoPretty( {
+    stream = build( {
         colorize: true
     } )
 
@@ -91,6 +91,7 @@ export class PinoNode
                 }
             ]
         )
+        return pinoUtil
     }
 
     debug = (
