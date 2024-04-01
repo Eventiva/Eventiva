@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: template-options.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:55 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -33,8 +33,9 @@
  *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
-
 import type { HarmonyTemplatesOptions } from '@bitdev/harmony.generators.harmony-templates'
+import type { EnvHandler } from '@teambit/envs'
+import type { ComponentTemplate } from '@teambit/generator'
 
 /**
  * A type that represents the combination of an object with no specific attributes or methods and HarmonyTemplatesOptions type.
@@ -42,4 +43,6 @@ import type { HarmonyTemplatesOptions } from '@bitdev/harmony.generators.harmony
  *
  * @export
  */
-export type TemplatesOptions = {} & HarmonyTemplatesOptions;
+export type TemplatesOptions = {
+    templates?: EnvHandler<ComponentTemplate>[]
+} & HarmonyTemplatesOptions;

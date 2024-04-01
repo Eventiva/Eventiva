@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: entity-template.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:49 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -81,9 +81,9 @@ export class EntityTemplate
      * @param {?string} [env]
      */
     constructor (
-        readonly name = 'entity',
-        readonly description = 'create entities to reuse data structures efficiently',
-        readonly hidden = false,
+        readonly name: string = 'entity',
+        readonly description: string = 'create entities to reuse data structures efficiently',
+        readonly hidden: boolean = false,
         readonly env?: string
     ) {
     }

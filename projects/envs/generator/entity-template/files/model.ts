@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: model.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:50 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -43,7 +43,7 @@ import { ComponentContext } from '@teambit/generator'
  * @returns {{ relativePath: string; content: string; }} Returns an object with the relative path and content for exporting and defining types based on the provided ComponentContext parameters.
  */
 export const modelFile = ( context: ComponentContext ) => {
-    const { name, namePascalCase } = context
+    const { namePascalCase } = context
 
     return {
         relativePath: 'model.zmodel',

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: generator.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/29/24, 10:56 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -68,14 +68,14 @@ export function Generator ( options: TemplatesOptions = {} ) {
                     }
                     ]
                 ],
-                imports: ( context ) => [
+                imports: () => [
                     [ `import { ModuleConfig } from "@eventiva.discordjs/discordjs";`, { config: true, aspect: false } ]
                 ],
                 classExtends: ( context ) => [
                     `DiscordJsModule<${ context.namePascalCase }Config>`,
                     { super: `super(config, discordJSDiscord)` }
                 ],
-                methods: ( context ) => `public Resources = {};
+                methods: () => `public Resources = {};
 
   public registerEvents(reload?: true) {
     this.discord.registerEvent(this, [
