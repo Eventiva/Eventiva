@@ -1,0 +1,6 @@
+= Support
+
+For general questions about the project, please:
+
+* Visit our Questions &amp; Answers https://www.answeroverflow.com/c/352754251434426368[via discord]
+* Visit our Roadmap https://eventiva.jetbrains.space/oauth/auth/invite/a12814bff347df1d3b913ac7aa61c804[via JetBrains]

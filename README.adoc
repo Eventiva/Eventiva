@@ -3,6 +3,9 @@
 
 image::https://github.com/codespaces/badge.svg[Open in GitHub Codespaces,link=https://codespaces.new/Eventiva/eventiva?quickstart=1]
 
+IMPORTANT: This project is in pre-alpha state. Code here is subject to massive change and is likely unstable. Only
+install if you know what you are doing.
+
 [#introduction]
 == Introduction
 
@@ -48,6 +51,9 @@ Our extensive *documentation* can be found at *https://github.com/Eventiva/Event
 [#contributing]
 == Contributing
 
+CAUTION: This project uses https://bit.dev/[Bit.dev] to power some really awesome stuff.
+Some learning is required to contribute
+
 [CAUTION]
 --
 This section is being re-written based on the new development environment and major changes to the repository
@@ -72,7 +78,7 @@ Eventiva is built on the following main stack:
 
 Full tech stack xref:/techstack.adoc[here]
 
-For more information on contributing, please read the xref:./contributing.adoc[contributing guidelines].
+For more information on contributing, please read the [contributing guidelines].
 
 === Backlog
 
