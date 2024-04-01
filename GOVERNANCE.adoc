@@ -1,0 +1,68 @@
+= Project Governance
+== Overview
+This document outlines the governance model for the project. It describes the decision-making processes, roles, responsibilities, and community guidelines.
+
+== Goals
+
+The primary goals of this governance model are:
+- To ensure transparency in decision-making processes within the project.
+- To clarify roles and responsibilities for all contributors and maintainers.
+- To foster a welcoming and inclusive community.
+- To uphold the project's quality and direction.
+
+== Decision-Making Process
+
+=== Decision Types
+
+. *Technical decisions:* For changes related to technical aspects, architecture, and code.
+. *Non-technical decisions:* Matters related to community guidelines, project direction, and non-code related subjects.
+
+=== Decision-Making Bodies
+
+. *Maintainers:* Individuals entrusted with reviewing and merging code changes, overseeing technical decisions, and maintaining the project's health.
+. *Community:* Active contributors who participate in discussions and provide feedback.
+
+=== Decision Process
+
+* *Technical Decisions:* Maintainers will discuss and make technical decisions, preferably via pull requests, issues, or designated communication channels.
+* *Non-Technical Decisions:* The community will be involved in non-technical decisions via discussions on designated platforms.
+The final decision will consider community feedback.
+The maintainers will only act on the decision rather than deciding.
+
+== Roles and Responsibilities
+
+=== Maintainers
+
+* Review and merge pull requests.
+* Steer the project's technical direction.
+* Uphold code standards and project guidelines.
+* Maintain community standards and resolve conflicts.
+
+=== Code Owners
+
+* Responsible for overseeing and maintaining their designated code sections.
+* Review and approve changes in their area of responsibility.
+* Code owners for documentation sections (like Client Retention Engineers) have the responsibility to review and maintain the project documentation.
+
+=== General Contributors
+
+* Submit pull requests, report issues, and participate in discussions.
+* Adhere to project guidelines and the code of conduct.
+* Provide constructive feedback and contribute positively to discussions.
+
+== Code of Conduct
+
+This project adopts a link:CODE_OF_CONDUCT.adoc[Code of Conduct] which lays out guidelines for expected behavior within the community.
+All contributors, maintainers, and participants ought to follow these guidelines.
+
+== Communication Channels
+
+* *https://eventivaltd.atlassian.net[Atlassian Jira & Service Desk]:* To report bugs, request features, and general discussions.
+* *https://www.answeroverflow.com/c/352754251434426368[Discord / AnswerOverflow]:* For broader discussions, announcements, and community interaction.
+* *GitHub Discussions:* Secondary platform for discussions, used primarily when Jira or Discord are not suitable.
+* *GitHub Issues:* Reserved only for minor changes as guided in the contributors' guidelines.
+
+== Amendments to Governance
+
+Changes proposed to this governance model will be openly discussed with the community.
+Significant changes necessitate a consensus amongst maintainers and contributors.
