@@ -41,7 +41,7 @@ import { Aspect } from '@bitdev/harmony.harmony'
  * @author Jonathan Stevens (@TGTGamer)
  */
 export const CustomerSupportAspect = Aspect.create( {
-    id: 'eventiva.bots/aspects/customer-support'
+    id: 'eventiva.integrations/atlassian/customer-support'
 } )
 
 export default CustomerSupportAspect
