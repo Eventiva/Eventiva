@@ -37,9 +37,9 @@
 import { LoggerAspect } from './logger.aspect.js'
 
 
-export type { LoggerNode } from './logger.node.runtime.js'
+export type { LoggerNode, LoggerType } from './logger.node.runtime.js'
 export { LoggerInstance } from './logger.js'
-export { LoggerConfig } from './logger-config.js'
+export type { LoggerConfig } from './logger-config.js'
 
 export default LoggerAspect
 export { LoggerAspect }

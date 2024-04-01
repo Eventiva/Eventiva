@@ -50,7 +50,7 @@ export const DefaultLevels = [
     'emergency'
 ] as const
 
-type LogFunction = (
+export type LogFunction = (
     customLevel: string,
     msg: string,
     obj?: object,
@@ -85,8 +85,7 @@ export class LoggerNode<CustomLevels extends string = never> {
     }
 
     static async provider<CustomLevels extends string = never> (
-        // eslint-disable-next-line no-empty-pattern
-        []: [],
+        deps: [],
         config: LoggerConfig,
         [ utilSlot, loggerSlot ]: [ UtilSlot, LoggerSlot<CustomLevels> ]
     ) {
@@ -102,22 +101,23 @@ export class LoggerNode<CustomLevels extends string = never> {
         return this.utilSlot.flatValues()
     }
 
-    registerLogger ( loggers: Partial<Logger<CustomLevels>>[] ) {
-        this.debug( `Registering loggers. ${ loggers.length } loggers to be loaded.` )
-        loggers.forEach( async ( logger ) => {
-            this.debug( `Registering logger ${ logger.name }, with level: ${ logger.options?.level }.` )
+    async registerLogger ( loggers: Partial<Logger<CustomLevels>>[] ) {
+        this.console.debug( `Registering loggers. ${ loggers.length } loggers to be loaded.` )
+        const promises = loggers.map( async ( logger ) => {
+            this.console.debug( `Registering logger ${ logger.name }, with level: ${ logger.options?.level }.` )
             const newLogger = {
                 ...logger,
                 logger: await LoggerInstance.from<CustomLevels>( this, logger.options ),
                 options: {
                     ...logger.options,
                     module: logger.name
-
                 }
             } as Logger<CustomLevels>
-            this.loggerSlot.register( newLogger )
+            return this.loggerSlot.register( newLogger )
         } )
-        this.debug( `Loggers registered against LoggerSlot. Now hosting ${ this.loggerSlot.length } Loggers` )
+
+        await Promise.all( promises )
+        this.console.debug( `Loggers registered against LoggerSlot. Now hosting ${ this.loggerSlot.length } Loggers` )
         return this
     }
 
@@ -126,12 +126,14 @@ export class LoggerNode<CustomLevels extends string = never> {
     }
 
     getLogger ( name: string ): Logger<CustomLevels> | undefined {
+        console.log( this.listLoggers() )
+
         const logger = this.loggerSlot.getByName( name )
         if ( logger ) {
             return logger
         }
-        this.log.error( `Logger ${ module } not found.` )
-        throw new Error( `Logger ${ module } not found.` )
+        this.console.error( `Logger ${ name } not found.` )
+        throw new Error( `Logger ${ name } not found.` )
     }
 }
 

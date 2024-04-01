@@ -47,6 +47,7 @@ export type Logger<TLevels extends string> = {
 export type LoggerSlot<TLevels extends string> = SlotRegistry<Logger<TLevels>>;
 
 export class LoggerInstance<CustomLevels extends string = never> {
+
     static from = LoggerInstance.create
 
     constructor (
@@ -93,6 +94,8 @@ export class LoggerInstance<CustomLevels extends string = never> {
     ) =>
         this.executeLogging( 'warning', msg, obj, ...args )
 
+    warn = this.warning
+
     error = (
         msg: string,
         obj?: object,
@@ -106,6 +109,15 @@ export class LoggerInstance<CustomLevels extends string = never> {
         ...args: any[]
     ) =>
         this.executeLogging( 'critical', msg, obj, ...args )
+
+    fatal = this.critical
+
+    trace = (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) =>
+        this.executeLogging( 'trace', msg, obj, ...args )
 
     alert = (
         msg: string,

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger.aspect.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/30/24, 12:49 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,7 +37,7 @@
 import { Aspect } from '@bitdev/harmony.harmony'
 
 export const LoggerAspect = Aspect.create( {
-    id: 'eventiva.utilities/loggers/logger'
+    id: 'eventiva.utilities/logging/logger'
 } )
 
 export default LoggerAspect
