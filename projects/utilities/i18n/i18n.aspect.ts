@@ -44,7 +44,7 @@ import { Aspect } from '@bitdev/harmony.harmony'
  * @type {*}
  */
 export const I18NAspect = Aspect.create( {
-    id: 'eventiva.bots/aspects/i18n'
+    id: 'eventiva.utilities/i18n'
 } )
 
 export default I18NAspect

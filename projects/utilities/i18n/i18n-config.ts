@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n-config.ts
- * Last Modified: 3/29/24, 5:37 PM
+ * Last Modified: 3/29/24, 8:15 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,8 +35,8 @@
  */
 
 
+import { LoggerInstance } from '@eventiva/utilities.logging.logger'
 import { InitOptions } from 'i18next'
-import { Logger } from '../logging/pino-old'
 
 /**
  * Use this type for configuring internationalization (i18n). It extends the InitOptions type.
@@ -46,5 +46,5 @@ import { Logger } from '../logging/pino-old'
 
  */
 export type I18NConfig = {
-    logger: Logger['options']
+    logger: LoggerInstance['config']
 } & InitOptions;

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.runtime.ts
- * Last Modified: 3/29/24, 5:37 PM
+ * Last Modified: 3/29/24, 8:18 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,8 +35,8 @@
  */
 
 
+import LoggerAspect, { type LoggerConfig, LoggerNode, LoggerType } from '@eventiva/utilities.logging.logger'
 import i18next, { i18n } from 'i18next'
-import LoggingAspect, { PinoNode as LoggingNode } from '../logging/pino-old'
 import { I18NConfig } from './i18n-config.js'
 import { common as enCommon } from './locales/en/common.js'
 import { common as esCommon } from './locales/es/common.js'
@@ -59,7 +59,8 @@ export class I18NNode {
      *
      * @static
      */
-    static dependencies = [ LoggingAspect ]
+    static dependencies = [ LoggerAspect ]
+
     /**
      * The default configuration for internationalization. It includes the language, fallback language, default namespace, fallback namespace, debug mode, and resources.
      * @author Jonathan Stevens (@TGTGamer)
@@ -84,6 +85,7 @@ export class I18NNode {
             level: 'trace'
         }
     }
+
     /**
      * The i18next property is used for internationalization (i18n) purposes. It is a reference to the i18n module named i18next and is used to handle translation and localization in the application.
      * @author Jonathan Stevens (@TGTGamer)
@@ -91,6 +93,7 @@ export class I18NNode {
      * @public
      */
     public i18next: i18n = i18next
+
     /**
      * The `t` property is a function that provides internationalization support using the `i18next` library. It can be used to translate text in the application.
      * @author Jonathan Stevens (@TGTGamer)
@@ -98,13 +101,14 @@ export class I18NNode {
      * @public
      */
     public t = this.i18next.t
+
     /**
      * The `log` property is a reference to the `Log` class or the `Console` object. It is a protected property, accessible only within the class and its subclasses. If no custom logger is provided, the property is set to the global `console` object.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @protected
      */
-    protected log: LoggingNode['log'] | Console = console
+    protected log: LoggerType<never>
 
     /**
      * Creates an instance of I18NNode.
@@ -118,15 +122,8 @@ export class I18NNode {
     constructor (
         private config: I18NConfig,
         private resourceSlot: ResourceSlot,
-        protected logging?: LoggingNode
+        protected logging?: LoggerNode
     ) {
-        this.log = logging
-            ? logging.registerLogger( [ { name: 'i18n', options: this.config.logger } ] ).getLogger( 'i18n' ).logger
-            : console
-        this.log.trace( `Logging module ${ logging
-            ? 'found. Using logging module.'
-            : 'not found. Using Console module.' }` )
-
         this.init()
     }
 
@@ -144,7 +141,7 @@ export class I18NNode {
      * @returns A static async function that provides an instance of the I18NNode class. It takes in a logging node, an I18NConfig object, and a resource slot. It initializes a new instance of the I18NNode class with the provided configuration, resource slot, and logging node, and returns the instance.
      */
     static async provider (
-        [ logging ]: [ LoggingNode | undefined ],
+        [ logging ]: [ LoggerNode | undefined ],
         config: I18NConfig,
         [ resourceSlot ]: [ ResourceSlot ]
     ) {
@@ -200,6 +197,19 @@ export class I18NNode {
         return this.resourceSlot.get( name )
     }
 
+    private async setupLogger (
+        name: string = 'i18n',
+        config: LoggerConfig = this.config.logger
+    ) {
+        await this.logging.registerLogger( [
+            {
+                name,
+                options: config
+            }
+        ] )
+        this.log = this.logging.getLogger( name ).logger
+    }
+
     /**
      * Initialize the object with i18next library and configuration.
      * @author Jonathan Stevens (@TGTGamer)
@@ -209,6 +219,7 @@ export class I18NNode {
      * @returns Initializes i18next with the provided configuration and returns the initialized instance.
      */
     private async init () {
+        await this.setupLogger()
         this.log.trace( `Initializing i18next with config: ${ JSON.stringify( this.config ) }` )
         await this.i18next.init( this.config )
         this.log.trace( `i18next initialized.` )

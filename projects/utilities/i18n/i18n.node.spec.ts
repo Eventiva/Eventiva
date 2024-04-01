@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 3/30/24, 12:13 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,12 +36,18 @@
 
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
+import { ConsoleAspect } from '@eventiva/utilities.logging.console'
+import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 import { I18NAspect } from './i18n.aspect.js'
 import { I18NNode } from './i18n.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
     const i18N = await loadAspect<I18NNode>( I18NAspect, {
-        runtime: 'node'
+        runtime: 'node',
+        aspects: [
+            LoggerAspect,
+            ConsoleAspect
+        ]
     } )
 
     expect( i18N ).toBeTruthy()
