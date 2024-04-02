@@ -72,3 +72,5 @@ jobs:
 
       - name: Bit Tag and Export
         uses: bit-tasks/tag-export@v1 # v1
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
