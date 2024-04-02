@@ -12,398 +12,350 @@
     "api/access": {
         "name": "api/access",
         "scope": "eventiva.entities",
-        "version": "a3729d8dcf4d80eeae24e1612a70489ab2fb466f",
+        "version": "42185e80c73a0c9e751367d11549d4ccece785ba",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/api/access"
     },
     "api/authenticator": {
         "name": "api/authenticator",
         "scope": "eventiva.entities",
-        "version": "7170b437bd9ef4282be8977f6447ddb83f5be054",
+        "version": "f2c35519052f3216253628524b36bb4890fdc226",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/api/authenticator"
     },
     "api/check": {
         "name": "api/check",
         "scope": "eventiva.entities",
-        "version": "5fdf56df707f3994ce451748e05e35d0cad4f85c",
+        "version": "365ae975c6e971de3f4dfafdbadd9cb0bd16026f",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/api/check"
     },
     "api/enums": {
         "name": "api/enums",
         "scope": "eventiva.entities",
-        "version": "96e29b5e1b094a2d40a470c3c0da2e242c8e362d",
+        "version": "67b7fa63368dff39c222ad6e543d0184111f31d2",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/api/enums"
     },
     "api/session": {
         "name": "api/session",
         "scope": "eventiva.entities",
-        "version": "71f741d9204e85f2d25464e868931df7b8d2139a",
+        "version": "9f4e01324b30874170614de7fe3881e1a48bce8e",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/api/session"
     },
     "api/verification_token": {
         "name": "api/verification_token",
         "scope": "eventiva.entities",
-        "version": "ab1fdb181a30494648f72d89b4d802271c087990",
+        "version": "0993b412c2ce75cad79eb410ecacb3dfec17a151",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/api/verification_token"
-    },
-    "aspects/segment": {
-        "name": "aspects/segment",
-        "scope": "eventiva.central",
-        "version": "784cd6649145bacb1a4e383527aaed82e9fbdd96",
-        "mainFile": "index.ts",
-        "rootDir": "projects/central/aspects/segment",
-        "config": {
-            "teambit.component/remove": {
-                "removed": true
-            }
-        }
     },
     "atlassian/customer-support": {
         "name": "atlassian/customer-support",
         "scope": "eventiva.integrations",
-        "version": "b1c971598266aec6335fb8d1d1d8eb9fb44bb38a",
+        "version": "e8be47caecdcc5abffe12bd49ea4d5911cc4bcff",
         "mainFile": "index.ts",
         "rootDir": "projects/integrations/atlassian/customer-support"
     },
     "base/address": {
         "name": "base/address",
         "scope": "eventiva.entities",
-        "version": "0d94347ea4b07a54bd5e738d19d6ff0862657862",
+        "version": "c5acb251dec9b962357769210ae79038d16dff13",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/base/address"
     },
     "base/base": {
         "name": "base/base",
         "scope": "eventiva.entities",
-        "version": "57f4919c0b8120f99f50e159cd6b4ff52b670a80",
+        "version": "3e052a899e87373a29cba44d44b96b4e82aa1043",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/base/base"
     },
     "base/enums": {
         "name": "base/enums",
         "scope": "eventiva.entities",
-        "version": "1b68ffc74ca6c1717f5451a90c673f15f2f23392",
+        "version": "6871d4173886e0d53ef6911a8740ac116f15cb88",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/base/enums"
     },
     "base/permission": {
         "name": "base/permission",
         "scope": "eventiva.entities",
-        "version": "24bb34513447f42e25e3938b0fae1812bf6527d6",
+        "version": "a4d95dc541f01f808da0a3e2275cb83d2a3032c1",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/base/permission"
     },
     "base/role": {
         "name": "base/role",
         "scope": "eventiva.entities",
-        "version": "60a71c6622d25b93d74873f74f9fb4fb190551ec",
+        "version": "da3aff054347efa951d037c545d98ea766348056",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/base/role"
     },
     "base/user": {
         "name": "base/user",
         "scope": "eventiva.entities",
-        "version": "9b72922a33e224e0256c150daba03f6fc36ad63f",
+        "version": "e69a62fc1ad238a5f57ab2c84848664d8e5b615c",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/base/user"
     },
     "commands/ping": {
         "name": "commands/ping",
         "scope": "eventiva.discordjs",
-        "version": "851220c79100f7cbff1599b198af7c6e1d0c44df",
+        "version": "bb82a0b634548665aea5691d3af507f06a23d3ff",
         "mainFile": "index.ts",
         "rootDir": "projects/discordjs/commands/ping"
     },
     "communities/community": {
         "name": "communities/community",
         "scope": "eventiva.entities",
-        "version": "098a3ab234fa7fed0f4847bbcd159dad2afdd5e6",
+        "version": "dff30b42cfb98c2af9024442a678a3237f688795",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/communities/community"
     },
     "communities/members": {
         "name": "communities/members",
         "scope": "eventiva.entities",
-        "version": "31bced57bf412f4c61739a2fa6b18c3d9dba25df",
+        "version": "cc038ce3857528fd6448b1c303729d46eab49289",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/communities/members"
     },
     "communities/resource": {
         "name": "communities/resource",
         "scope": "eventiva.entities",
-        "version": "3838389c8a53f48774526262c5bf5fa9bc9af10f",
+        "version": "328ea8bd945efda86da5cfd57b70f5cc2bad01e4",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/communities/resource"
     },
     "communities/resourcetypes": {
         "name": "communities/resourcetypes",
         "scope": "eventiva.entities",
-        "version": "42a8ee5c72afbcbcbbf3a682bdf985347f0c5f02",
+        "version": "4d67bd2475737bade459e6d929061d6c3a6b9c72",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/communities/resourcetypes"
     },
     "conventionalcommits": {
         "name": "conventionalcommits",
         "scope": "eventiva.workflows",
-        "version": "8ec8a3e5ed9828586dc0ff61d626cfdc6def1eda",
+        "version": "425667a9e0f20d1958b0ce9d7a7040a2e367381e",
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/conventionalcommits"
     },
     "db/column": {
         "name": "db/column",
         "scope": "eventiva.entities",
-        "version": "422a79b801b7b0c8ed595142efafe86cefefc1ef",
+        "version": "1d195eb7c93c450ac5c3c0b27d1fd447f774d38c",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/db/column"
     },
     "db/document": {
         "name": "db/document",
         "scope": "eventiva.entities",
-        "version": "d4f30c285b0af2fe5c3cc0fcd3fac450e7afbd19",
+        "version": "914fc28fa279ff7d4ed2d169ecfb1b9e46757d8d",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/db/document"
     },
     "discord-changelog": {
         "name": "discord-changelog",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.workflows",
+        "scope": "eventiva.workflows",
+        "version": "8fe1df9c608f4a3fdb98545042d5bd8dcbd757d0",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/discord-changelog",
-        "config": {
-            "teambit.harmony/aspect": {},
-            "teambit.envs/envs": {
-                "env": "teambit.harmony/aspect"
-            }
-        }
+        "rootDir": "projects/workflows/discord-changelog"
     },
     "discord/support": {
         "name": "discord/support",
         "scope": "eventiva.platforms",
-        "version": "ae636721bab29d6299788befa8e5c7cf197cc738",
+        "version": "976e6e8c69d92461f200d741ea781d9f22eca651",
         "mainFile": "index.ts",
         "rootDir": "projects/platforms/discord/support"
     },
     "discordjs": {
         "name": "discordjs",
         "scope": "eventiva.discordjs",
-        "version": "df98b3932c66f5080a151adff4996a0cbd8b2a87",
+        "version": "bf71085339e8706b3e450f3a244c60f50fef2539",
         "mainFile": "index.ts",
         "rootDir": "projects/discordjs/discordjs"
     },
     "generate-changelog": {
         "name": "generate-changelog",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.workflows",
+        "scope": "eventiva.workflows",
+        "version": "0457c618990e0dc4568d36c3662e6d4db1f55a5b",
         "mainFile": "index.ts",
-        "rootDir": "projects/workflows/generate-changelog",
-        "config": {
-            "teambit.harmony/aspect": {},
-            "teambit.envs/envs": {
-                "env": "teambit.harmony/aspect"
-            }
-        }
+        "rootDir": "projects/workflows/generate-changelog"
     },
     "generator": {
         "name": "generator",
         "scope": "eventiva.envs",
-        "version": "1995a0ae4f5e75171d97154c6c7167fc15e69ef5",
+        "version": "649690ccb21dbf5a283d77d519a9dd4c2a406faa",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/generator"
     },
     "generators/harmony-templates": {
         "name": "generators/harmony-templates",
         "scope": "eventiva.modules",
-        "version": "d75fb03c202da7e0fc75567352e58f0bd0085e7e",
+        "version": "180ca1579cf5ab623cf62014a7a05845bb4bdc85",
         "mainFile": "index.ts",
         "rootDir": "projects/modules/generators/harmony-templates"
     },
     "generators/symphony-templates": {
         "name": "generators/symphony-templates",
         "scope": "eventiva.modules",
-        "version": "4fbd4d612245af434186bef5258f7455f205afd8",
+        "version": "d5898e8fb2ac4c088ebefff9a6f63e24f6cd8911",
         "mainFile": "index.ts",
         "rootDir": "projects/modules/generators/symphony-templates"
     },
     "i18n": {
         "name": "i18n",
         "scope": "eventiva.utilities",
-        "version": "06b2da0d2eb32304e9c0638bdde91c1a70a02fd0",
+        "version": "7b7e2228fd5a22a488b27cc383faa7317f916a59",
         "mainFile": "index.ts",
         "rootDir": "projects/utilities/i18n"
     },
     "identities/enums": {
         "name": "identities/enums",
         "scope": "eventiva.entities",
-        "version": "7dcd0e29f8e327694ebc706588f583f65015c30b",
+        "version": "f666211be5b098a75c3dc07283e5c435fe1ebba4",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/identities/enums"
     },
     "identities/identifier": {
         "name": "identities/identifier",
         "scope": "eventiva.entities",
-        "version": "44e977ee32ea254f7c315b2c5d48adf5a4453b06",
+        "version": "214541be94e71c9f5e1815b4e47e09b9c4dbf83c",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/identities/identifier"
     },
     "identities/linked": {
         "name": "identities/linked",
         "scope": "eventiva.entities",
-        "version": "011f0c35b2da70c83fa7789fffd63da5cea40cae",
+        "version": "9b1262750e9e402614e37b9317a00c8c1b5afe6a",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/identities/linked"
     },
     "identities/platform": {
         "name": "identities/platform",
         "scope": "eventiva.entities",
-        "version": "6509082e16a8f3b7edd2089b14727baa99b9012a",
+        "version": "a43bb1877ed4b68984e0f1294077e255887f09ea",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/identities/platform"
     },
     "logging/console": {
         "name": "logging/console",
         "scope": "eventiva.utilities",
-        "version": "70660071210232548886c03d2109f563b63f8e0d",
+        "version": "71feea3f0ffe4049531b31c4ed023bf666fba0f0",
         "mainFile": "index.ts",
         "rootDir": "projects/utilities/logging/console"
     },
     "logging/logger": {
         "name": "logging/logger",
         "scope": "eventiva.utilities",
-        "version": "97eb67a3277edfafae06cc9c27274f1808027d24",
+        "version": "6e519855fdceeb0693755e7bf518005cdf854d10",
         "mainFile": "index.ts",
         "rootDir": "projects/utilities/logging/logger"
     },
     "logging/pino": {
         "name": "logging/pino",
         "scope": "eventiva.utilities",
-        "version": "e9c72d3cf7e3f6f7e1091fe3e00d8d439aa1b496",
+        "version": "079e9d068447a2c2f3b8ab956affaa7f15cd4376",
         "mainFile": "index.ts",
         "rootDir": "projects/utilities/logging/pino"
     },
     "mikro": {
         "name": "mikro",
         "scope": "eventiva.orm",
-        "version": "0.0.1-0",
+        "version": "22a67eacfd9629254fc27c3a363fe09d9552808f",
         "mainFile": "index.ts",
         "rootDir": "projects/orm/mikro"
     },
     "node": {
         "name": "node",
         "scope": "eventiva.envs",
-        "version": "309595056f8f9dd79e3c40422dc4a16e5bf1a550",
+        "version": "eb125c936f403321af0a48166d4c063ee5dc0ec9",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/node"
     },
     "orm/mikro": {
         "name": "orm/mikro",
         "scope": "eventiva.envs",
-        "version": "f036b545d899fe685b81e7c6f1170f731f1562c8",
+        "version": "571b4ba01626433e4cef5e5668759ec45587ca25",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/orm/mikro"
     },
     "orm/prisma": {
         "name": "orm/prisma",
         "scope": "eventiva.envs",
-        "version": "437ecd0a118a4245b1ed049bdbaca2d34809df2f",
+        "version": "55a3feb13662162aa32c9a758c03ce25dc43617b",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/orm/prisma"
     },
     "packages/default_logging": {
         "name": "packages/default_logging",
         "scope": "eventiva.discordjs",
-        "version": "a6d7cfb1805142626a687dae25ea10fb5598725a",
+        "version": "cb75e9662ea090c135531adbaa4b156919935ea8",
         "mainFile": "index.ts",
         "rootDir": "projects/discordjs/packages/default_logging"
     },
     "prisma": {
         "name": "prisma",
         "scope": "eventiva.orm",
-        "version": "0.0.1-0",
+        "version": "5076ad394ae0abe409ff2e744a2aa1c618906f2a",
         "mainFile": "index.ts",
         "rootDir": "projects/orm/prisma"
     },
     "report/action": {
         "name": "report/action",
         "scope": "eventiva.entities",
-        "version": "1f85489fbdecb8675aef1ec653f2b747027be060",
+        "version": "cdd15531e6e49a73f44b05df7e2f9af5759d9729",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/report/action"
     },
     "report/enums": {
         "name": "report/enums",
         "scope": "eventiva.entities",
-        "version": "99d0020ddf5f4a93906e61588c23640ac2f9445d",
+        "version": "283f03050416595943bd355ab8956535d9bfd24e",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/report/enums"
     },
     "report/files": {
         "name": "report/files",
         "scope": "eventiva.entities",
-        "version": "2cf8f6a4fd4455c5ad036fc53f3160723b83ccd7",
+        "version": "edfe3498a789a0a00681304f94b496bd211a6b42",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/report/files"
     },
     "report/report": {
         "name": "report/report",
         "scope": "eventiva.entities",
-        "version": "9875467d48951a6fa6769c468c28c8a11e5ee433",
+        "version": "37c20da16a9041b249275bbcc34dd73e57e41641",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/report/report"
     },
     "runtimes/discord-runtime": {
         "name": "runtimes/discord-runtime",
         "scope": "eventiva.envs",
-        "version": "5b0fc20156d6e89b5dc07b2d49d96634aaea3d6a",
+        "version": "fbb4e889464a0b5f2f7089ec9d5ac450891b974c",
         "mainFile": "index.ts",
         "rootDir": "projects/envs/runtimes/discord-runtime"
     },
     "segment": {
         "name": "segment",
-        "scope": "",
-        "version": "",
-        "defaultScope": "eventiva.utilities",
+        "scope": "eventiva.utilities",
+        "version": "1db80222077bd9975842559bc502460f364494bb",
         "mainFile": "index.ts",
-        "rootDir": "projects/utilities/segment",
-        "config": {
-            "eventiva.envs/node@309595056f8f9dd79e3c40422dc4a16e5bf1a550": {},
-            "teambit.envs/envs": {
-                "env": "eventiva.envs/node"
-            },
-            "teambit.dependencies/dependency-resolver": {},
-            "teambit.component/dev-files": {},
-            "teambit.semantics/schema": {},
-            "teambit.preview/preview": {},
-            "teambit.compositions/compositions": {},
-            "teambit.docs/docs": {},
-            "teambit.pipelines/builder": {},
-            "teambit.harmony/application": {},
-            "teambit.component/renaming": {
-                "renamedFrom": {
-                    "scope": "eventiva.central",
-                    "name": "aspects/segment",
-                    "version": "784cd6649145bacb1a4e383527aaed82e9fbdd96"
-                }
-            }
-        }
+        "rootDir": "projects/utilities/segment"
     },
     "segment/group": {
         "name": "segment/group",
         "scope": "eventiva.entities",
-        "version": "6dc16b441eb9aa5fd1f70c8f2faf8f07a953ae68",
+        "version": "19b02c096e689685189ba8d9216ff211797e83ca",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/segment/group"
     },
     "segment/user": {
         "name": "segment/user",
         "scope": "eventiva.entities",
-        "version": "8de29315ef65288fb5328109539445813c5fbbe6",
+        "version": "7cc0fd9a4caa67703ea6046b039719af2dd19560",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/segment/user"
     },

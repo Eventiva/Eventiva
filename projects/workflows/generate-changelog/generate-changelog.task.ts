@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: generate-changelog.task.ts
- * Last Modified: 4/2/24, 12:41 AM
+ * Last Modified: 4/2/24, 2:58 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -105,7 +105,7 @@ export class GenerateChangelogTask
                             return returnableAgg
                         } // this will terminate the iteration
                         // set the current tag for use in the changelog
-                        returnableAgg.latestTag = curr.tag
+                        returnableAgg.latestTag = curr.tag ?? curr.hash
                         const date = new Date( parseInt( curr.date!, 10 ) ?? Date.now() )
                         const [ releaseDate ] = date.toISOString().split( 'T' )
                         returnableAgg.releaseDate = releaseDate
