@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: node.bit-env.ts
- * Last Modified: 4/2/24, 1:35 AM
+ * Last Modified: 4/2/24, 3:18 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -271,7 +271,9 @@ export class Node
             } ),
             VitestTask.from( {
                 config: require.resolve( './config/vitest.config.mjs' )
-            } )
+            } ),
+            GenerateChangelogTask.from(),
+            DiscordChangelog.from()
         ] )
     }
 
