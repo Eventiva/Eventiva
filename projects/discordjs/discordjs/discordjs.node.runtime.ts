@@ -314,14 +314,13 @@ export class DiscordJSNode {
 
         this.log.trace( this.i18n.t( 'discord:init.loggingIn' ) )
 
-        setTimeout( async () => {
-            if ( this.config.token ) {
-                await this.client.login( this.config.token )
-            } else {
-                this.log.warn( this.i18n.t( 'discord:init.faked' ) )
-            }
-            this.log.trace( this.i18n.t( 'discord:init.loggedIn' ) )
-        }, this.config.startDelay )
+        await delay(this.config.startDelay);
+        if (this.config.token) {
+            await this.client.login(this.config.token);
+        } else {
+            this.log.warn(this.i18n.t('discord:init.faked'));
+        }
+        this.log.trace(this.i18n.t('discord:init.loggedIn'));
 
         this.isInitialised = true
     }
