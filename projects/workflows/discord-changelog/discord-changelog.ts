@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.ts
- * Last Modified: 4/1/24, 4:02 PM
+ * Last Modified: 4/2/24, 1:34 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,26 +34,16 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { ChangelogResult } from '@eventiva/workflows.generate-changelog'
 import Discord from 'discord.js'
 
-// todo remove this when I figure out how to use meta instead to avoid circular dependency - replace with import
-type ChangelogResult = {
-    moduleName: string
-    latestTag?: string
-    releaseDate?: string
-    changes: {
-        [ changeType: string ]: ChangeField[]
-    }
-}
-
-type ChangeField = {
-    name: string
-    value: string
-}
-
 export type SendToDiscordConfig = {
-    [ key: string ]: Field
+    name: string
+    channelId: string,
+    authorName: string
+    config: { [ key: string ]: Field }
 }
+
 
 export type Field = {
     title: string
@@ -64,74 +54,22 @@ export type Field = {
 
 export async function sendToDiscord (
     results: ChangelogResult,
-    channelId: string,
-    config: SendToDiscordConfig = {
-        features: {
-            title: 'Features, Enhancements & Deprecations',
-            description: 'Features & enhancements refer to new functions added to make our software more useful and'
-                + ' efficient, or improvements made to existing functions to enhance your user experience.',
-            color: null,
-            included: [
-                'feat',
-                'remove',
-                'revert'
-            ]
-        },
-        patches: {
-            title: 'Patches',
-            description:
-                'Patches are small updates that fix issues, enhance performance, and ensure the smooth running'
-                + ' of our software without changing its core functions.',
-            color: null,
-            included: [
-                'fix'
-            ]
-        },
-        refactors: {
-            title: 'Refactors',
-            description:
-                'Refactors refer to internal code modifications to improve efficiency and readability, without altering the'
-                + ' software\'s external behavior.',
-            color: null,
-            included: [
-                'maint',
-                'style',
-                'refactor',
-                'pref',
-                'deprecate'
-            ]
-        },
-        misc: {
-            title: 'Miscellaneous',
-            description:
-                'Miscellaneous includes assorted updates, minor adjustments, and changes that do not specifically'
-                + ' fall into other major categories like patches, features, enhancements, or refactors.',
-            color: null,
-            included: [
-                'build',
-                'chore',
-                'ci',
-                'docs',
-                'test'
-            ]
-        }
-    }
+    config: SendToDiscordConfig
 ) {
     const discord = new Discord.Client( {
         intents: []
     } )
 
-    // TODO replace with env var
     await discord.login( process.env.DISCORD_BOT_TOKEN )
 
-    const discordChannel = await discord.channels.fetch( channelId )
+    const discordChannel = await discord.channels.fetch( config.channelId )
 
     if ( !discordChannel ) {
-        throw new Error( `Discord channel ${ channelId } not found` )
+        throw new Error( `Discord channel ${ config.channelId } not found` )
     }
 
     if ( !discordChannel.isTextBased() ) {
-        throw new Error( `Discord channel ${ channelId } is not text-based` )
+        throw new Error( `Discord channel ${ config.channelId } is not text-based` )
     }
     const embeds: Discord.EmbedBuilder[] = []
 
@@ -140,9 +78,10 @@ export async function sendToDiscord (
         .setTitle( `${ results.moduleName } - Changes Summary - ${ results.latestTag }` )
         .setDescription( `I'm proud to confirm that we have released an update for the ${ results.moduleName } component.  Our team is working hard to release updates regularly, and we look forward to your feedback on the latest release.` )
         .setColor( 5777581 )
+        .setAuthor( { name: config.authorName } )
     )
 
-    Object.values( config ).forEach( ( field ) => {
+    Object.values( config.config ).forEach( ( field ) => {
         const embed = new Discord.EmbedBuilder()
             .setTitle( field.title )
             .setDescription( field.description )
