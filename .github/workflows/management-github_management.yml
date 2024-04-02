@@ -31,7 +31,7 @@ jobs:
           proc_trace_sys_enable: true
 
       - name: Release Mastermind
-        uses: Resnovas/smartcloud # 1.0.0-beta.8
+        uses: Resnovas/smartcloud@1.0.0-beta.8 # 1.0.0-beta.8
         with:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
           config: .github/config.json
