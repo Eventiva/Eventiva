@@ -8,7 +8,7 @@
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
               <option name="name" value="coderabbit-overrides.v2" />
-              <option name="relativePathToSchema" value="https://coderabbit.ai/integrations/coderabbit-overrides.v2.json" />
+              <option name="relativePathToSchema" value="https://storage.googleapis.com/coderabbit_public_assets/coderabbit-overrides.v2.json" />
               <option name="patterns">
                 <list>
                   <Item>
