@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: document.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:39 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -55,7 +55,7 @@ export class Document
      *
      * @type {'Document'}
      */
-    static Type = 'Document' as const
+    static readonly Type = 'Document' as const
 
     /**
      * Creates a new Document instance.

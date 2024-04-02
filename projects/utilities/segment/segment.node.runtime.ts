@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: segment.node.runtime.ts
- * Last Modified: 3/30/24, 12:20 AM
+ * Last Modified: 4/2/24, 2:00 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -52,7 +52,7 @@ export class SegmentNode {
      *
      * @static
      */
-    static dependencies = []
+    static readonly dependencies = []
 
     /**
      * A static property representing the default configuration for a Segment. An instance of SegmentConfig with the writeKey attribute set to the value of the environment variable SEGMENT_WRITE_KEY.
@@ -60,7 +60,7 @@ export class SegmentNode {
      *
      * @static
      */
-    static defaultConfig: SegmentConfig = {
+    static readonly defaultConfig: SegmentConfig = {
         writeKey: process.env.SEGMENT_WRITE_KEY!
     }
 
@@ -87,17 +87,6 @@ export class SegmentNode {
         this.analytics = new Analytics( config )
     }
 
-    /**
-     * Creates a new SegmentNode instance with the provided configuration.
-     * Throws an error if the SegmentConfig does not have a writeKey defined.
-     * Returns the created SegmentNode instance.
-     *
-     * @param {[]} _ Unused parameter (empty array)
-     * @param {SegmentConfig} config Segment configuration object
-     * @param {[InstanceSlot]} instanceSlot An array containing an instance slot
-     * @returns {Promise<SegmentNode>} A Promise that resolves with a new SegmentNode instance based on the provided config and instanceSlot.
-     *                                It throws an error if the writeKey is missing in the config.
-     */
     static async provider (
         // eslint-disable-next-line no-empty-pattern
         []: [],

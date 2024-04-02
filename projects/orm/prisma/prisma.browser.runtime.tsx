@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: prisma.browser.runtime.tsx
- * Last Modified: 3/29/24, 7:55 PM
+ * Last Modified: 4/2/24, 2:00 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,30 +39,31 @@ import {Em, EmSlot} from './em.js'
 import type {PrismaConfig} from './prisma-config.js'
 
 export class PrismaBrowser {
-    static dependencies = [ SymphonyPlatformAspect ]
-    static defaultConfig: PrismaConfig = {}
+    static readonly dependencies = [SymphonyPlatformAspect]
 
-    constructor (
+    static readonly defaultConfig: PrismaConfig = {}
+
+    constructor(
             private config: PrismaConfig,
             private emSlot: EmSlot
     ) {
     }
 
-    static async provider (
-            [ symphonyPlatform ]: [ SymphonyPlatformBrowser ],
+    static async provider(
+            [symphonyPlatform]: [SymphonyPlatformBrowser],
             config: PrismaConfig,
-            [ emSlot ]: [ EmSlot ]
+            [emSlot]: [EmSlot]
     ) {
-        const prisma = new PrismaBrowser( config, emSlot )
+        const prisma = new PrismaBrowser(config, emSlot)
 
-        symphonyPlatform.registerRoute( [
+        symphonyPlatform.registerRoute([
             {
                 path: '/prisma',
                 component: () => {
                     return <>render your route here</>
                 }
             }
-        ] )
+        ])
 
         return prisma
     }
@@ -70,15 +71,15 @@ export class PrismaBrowser {
     /**
      * register a list of em.
      */
-    registerEm ( ems: Em[] ) {
-        this.emSlot.register( ems )
+    registerEm(ems: Em[]) {
+        this.emSlot.register(ems)
         return this
     }
 
     /**
      * list all em.
      */
-    listEms () {
+    listEms() {
         return this.emSlot.flatValues()
     }
 }

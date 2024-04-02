@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: customer-support.node.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:44 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -52,7 +52,7 @@ export class CustomerSupportNode {
      *
      * @static
      */
-    static dependencies = [ DiscordJSAspect ]
+    static readonly dependencies = [ DiscordJSAspect ]
 
     /**
      * A static property that represents the default configuration for the CustomerSupportConfig. It is an empty object by default.
@@ -60,7 +60,7 @@ export class CustomerSupportNode {
      *
      * @static
      */
-    static defaultConfig: CustomerSupportConfig = {}
+    static readonly defaultConfig: CustomerSupportConfig = {}
 
     /**
      * A private property that holds an instance of the Discord.js client for interacting with the Discord API.

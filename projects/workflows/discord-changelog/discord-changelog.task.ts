@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.task.ts
- * Last Modified: 4/1/24, 4:02 PM
+ * Last Modified: 4/2/24, 1:37 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,26 +34,81 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { ChangelogResult } from '@eventiva/workflows.generate-changelog'
 import { BuildContext, BuildTask, BuiltTaskResult, ComponentResult, TaskHandler } from '@teambit/builder'
 import { EnvContext } from '@teambit/envs'
-
-type DiscordChangelogOptions = {
-    name: string
-}
+import { sendToDiscord, SendToDiscordConfig } from './discord-changelog'
 
 export class DiscordChangelog
     implements BuildTask {
     readonly name = 'DiscordChangelog'
 
     constructor (
+        private readonly config: SendToDiscordConfig,
         readonly aspectId: string = 'eventiva.workflows/generate-changelog'
     ) {
     }
 
-    static from ( options?: DiscordChangelogOptions ): TaskHandler {
+    static from ( options: SendToDiscordConfig = {
+        name: 'GenerateChangelogTask',
+        channelId: '1175861376711925762',
+        authorName: 'Eventiva Software Delivery Change Manager',
+        config: {
+            features: {
+                title: 'Features, Enhancements & Deprecations',
+                description: 'Features & enhancements refer to new functions added to make our software more useful and'
+                    + ' efficient, or improvements made to existing functions to enhance your user experience.',
+                color: null,
+                included: [
+                    'feat',
+                    'remove',
+                    'revert'
+                ]
+            },
+            patches: {
+                title: 'Patches',
+                description:
+                    'Patches are small updates that fix issues, enhance performance, and ensure the smooth running'
+                    + ' of our software without changing its core functions.',
+                color: null,
+                included: [
+                    'fix'
+                ]
+            },
+            refactors: {
+                title: 'Refactors',
+                description:
+                    'Refactors refer to internal code modifications to improve efficiency and readability, without altering the'
+                    + ' software\'s external behavior.',
+                color: null,
+                included: [
+                    'maint',
+                    'style',
+                    'refactor',
+                    'pref',
+                    'deprecate'
+                ]
+            },
+            misc: {
+                title: 'Miscellaneous',
+                description:
+                    'Miscellaneous includes assorted updates, minor adjustments, and changes that do not specifically'
+                    + ' fall into other major categories like patches, features, enhancements, or refactors.',
+                color: null,
+                included: [
+                    'build',
+                    'chore',
+                    'ci',
+                    'docs',
+                    'test'
+                ]
+            }
+        }
+    } ): TaskHandler {
         const name = options?.name || 'GenerateChangelogTask'
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const handler = ( context: EnvContext ) => {
-            return new DiscordChangelog()
+            return new DiscordChangelog( options )
         }
         return {
             name,
@@ -66,17 +121,23 @@ export class DiscordChangelog
         // as well as any additional data regarding this build task execution
         const componentsResults: ComponentResult[] = []
 
-        context.components.forEach( ( component ) => {
-            // Prepare an 'errors' array to report back of any errors during execution (this will be part of the 'Component Results' data)
-            const errors: Error[] = []
 
-            try {
-                // this will be added shortly
-            } catch ( err: any ) {
-                errors.push( err )
-            }
-            componentsResults.push( { component, errors } )
-        } )
+        context.previousTasksResults.filter( task => task.task.aspectId === 'eventiva.workflows/generate-changelog' )[ 0 ].componentsResults.forEach(
+            ( component ) => {
+                // Prepare an 'errors' array to report back of any errors during execution (this will be part of the 'Component Results' data)
+                const errors: Error[] = []
+                try {
+                    if ( !component.metadata ) {
+                        return
+                    }
+                    const changelogResult = component.metadata.changelogResult as ChangelogResult
+                    sendToDiscord( changelogResult, this.config )
+
+                } catch ( err: any ) {
+                    errors.push( err )
+                }
+                componentsResults.push( { component: component.component, errors } )
+            } )
 
         return {
             artifacts: [

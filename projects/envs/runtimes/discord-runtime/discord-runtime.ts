@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/2/24, 2:00 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,7 +36,6 @@
 
 import { HarmonyRuntimeContext, Runtime, RuntimeBuildContext } from '@bitdev/harmony.harmony-platform'
 import { NodeServer } from '@bitdev/node.node-server'
-// import { NodeApp } from '@bitdev/node.node-app';
 import { AppBuildResult, ApplicationInstance } from '@teambit/application'
 import { pathToFileURL } from 'node:url'
 import { DiscordRuntimeOptions } from './discord-runtime-options.js'
@@ -53,6 +52,7 @@ export class DiscordRuntime
      * @type {string}
      */
     name = 'discord'
+
     /**
      * The default value for this property is 'main'.
      * @author Jonathan Stevens (TGTGamer)
@@ -60,6 +60,7 @@ export class DiscordRuntime
      * @type {string}
      */
     fallback = 'main'
+
     /**
      * Specifies whether to force run the operation or not. Default value is false.
      * @author Jonathan Stevens (TGTGamer)
@@ -67,6 +68,7 @@ export class DiscordRuntime
      * @type {boolean}
      */
     forceRun = false
+
     /**
      * A boolean flag indicating whether to force running a build process.
      * @author Jonathan Stevens (TGTGamer)
@@ -74,6 +76,7 @@ export class DiscordRuntime
      * @type {boolean}
      */
     forceRunBuild = true
+
     /**
      * A tuple representing a port range. The first element is the start port number and the second element is the end port number. Default value is [5001, 5010].
      * @author Jonathan Stevens (TGTGamer)
@@ -81,6 +84,7 @@ export class DiscordRuntime
      * @type {[number, number]}
      */
     portRange: [ number, number ] = [ 5001, 5010 ]
+
     /**
      * The property stores the resolved path to the 'discord-runtime.aspect.js' file using the import.meta.resolve method.
      * @author Jonathan Stevens (TGTGamer)

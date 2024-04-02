@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.runtime.ts
- * Last Modified: 3/29/24, 10:22 PM
+ * Last Modified: 4/1/24, 9:38 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -60,7 +60,7 @@ export class DefaultLoggingNode
      *
      * @static
      */
-    static dependencies = [ DiscordJSAspect ]
+    static readonly dependencies = [ DiscordJSAspect ]
 
     /**
      * The default configuration for the DefaultLogging class. It is an empty object.
@@ -68,7 +68,7 @@ export class DefaultLoggingNode
      *
      * @static
      */
-    static defaultConfig: DefaultLoggingConfig = {
+    static readonly defaultConfig: DefaultLoggingConfig = {
         name: 'default_logging',
         logger: {
             level: 'info'

@@ -4,7 +4,7 @@ on:
 permissions:
   contents: read
 jobs:
-  release:
+  commit-bitmap:
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -66,6 +66,8 @@ jobs:
 
       - name: Bit Tag and Export
         uses: bit-tasks/tag-export@v1 # v1
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
 
       - name: Commit Bitmap
         uses: bit-tasks/commit-bitmap@v1 # v1

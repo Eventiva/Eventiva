@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  build:
+  cleanup:
     runs-on: ubuntu-latest
     permissions:
       contents: write

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: mikro.node.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/2/24, 2:00 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -55,14 +55,15 @@ export class MikroNode {
      *
      * @static
      */
-    static dependencies = []
+    static readonly dependencies = []
+
     /**
      * The default configuration object for the mikro. It is an instance of MikroConfig and is initialized as an empty object.
      * @author Jonathan Stevens (@TGTGamer)
      *
      * @static
      */
-    static defaultConfig: MikroConfig = {
+    static readonly defaultConfig: MikroConfig = {
         driver: PostgreSqlDriver,
         dbName: 'sqlite.db',
         // // folder-based discovery setup, using common filename suffix
@@ -74,6 +75,7 @@ export class MikroNode {
         // enable debug mode to log SQL queries and discovery information
         debug: true
     }
+
     /**
      * A boolean flag indicating whether the property has been initialised or not.
      *
@@ -81,6 +83,7 @@ export class MikroNode {
      * @type {boolean}
      */
     protected initialised = false
+
     /**
      * Public property orm of type MikroORM.
      *
@@ -88,6 +91,7 @@ export class MikroNode {
      * @type {MikroORM}
      */
     private orm: MikroORM
+
     /**
      * A public property representing an EntityManager.
      *
@@ -130,18 +134,8 @@ export class MikroNode {
         return this.initialised
     }
 
-    /**
-     * Creates and returns a new instance of MikroNode using the provided config. The MikroNode instance is wrapped in a Promise and returned.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @static
-     * @async
-     * @param param0 The CentralPlatformNode parameter
-     * @param param0.CentralPlatform The CentralPlatform instance
-     * @param config The MikroConfig parameter
-     * @returns Creates a mikro instance based on the given configuration and returns it.
-     */
     static async provider (
+        // eslint-disable-next-line no-empty-pattern
         []: [],
         config: MikroConfig
     ) {
@@ -158,7 +152,7 @@ export class MikroNode {
      */
     private async initialise () {
         this.orm = await MikroORM.init( this.config )
-        // if (process.env.NODE_ENV == 'dev') await this.orm.getSchemaGenerator().refreshDatabase()
+
         this.em = this.orm.em
         this.initialised = true
     }

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.runtime.ts
- * Last Modified: 3/29/24, 8:18 PM
+ * Last Modified: 4/1/24, 9:51 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -59,7 +59,7 @@ export class I18NNode {
      *
      * @static
      */
-    static dependencies = [ LoggerAspect ]
+    static readonly dependencies = [ LoggerAspect ]
 
     /**
      * The default configuration for internationalization. It includes the language, fallback language, default namespace, fallback namespace, debug mode, and resources.
@@ -67,7 +67,7 @@ export class I18NNode {
      *
      * @static
      */
-    static defaultConfig: I18NConfig = {
+    static readonly defaultConfig: I18NConfig = {
         lng: 'en',
         fallbackLng: 'en',
         defaultNS: 'common',

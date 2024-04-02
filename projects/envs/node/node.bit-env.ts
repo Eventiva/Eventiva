@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: node.bit-env.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/2/24, 1:35 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
