@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs.node.runtime.ts
- * Last Modified: 3/29/24, 8:40 PM
+ * Last Modified: 4/2/24, 1:23 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -330,7 +330,6 @@ export class DiscordJSNode {
         name: string = 'discord:client',
         config: LoggerConfig = this.config.logger
     ) {
-        console.log( 'registering logger' )
         await this.logging.registerLogger( [
             {
                 name,
@@ -338,7 +337,6 @@ export class DiscordJSNode {
             }
         ] )
         this.log = this.logging.getLogger( name ).logger
-        console.log( 'logger registered' )
     }
 
     /**

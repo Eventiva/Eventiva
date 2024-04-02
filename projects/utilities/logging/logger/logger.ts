@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger.ts
- * Last Modified: 3/29/24, 5:45 PM
+ * Last Modified: 4/1/24, 9:53 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -48,7 +48,7 @@ export type LoggerSlot<TLevels extends string> = SlotRegistry<Logger<TLevels>>;
 
 export class LoggerInstance<CustomLevels extends string = never> {
 
-    static from = LoggerInstance.create
+    static readonly from = LoggerInstance.create
 
     constructor (
         protected config: LoggerConfig<CustomLevels>,

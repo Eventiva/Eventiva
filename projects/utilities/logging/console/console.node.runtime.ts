@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: console.node.runtime.ts
- * Last Modified: 3/29/24, 7:11 PM
+ * Last Modified: 4/1/24, 9:52 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,9 +38,9 @@ import { LoggerAspect, LoggerConfig, LoggerInstance, LoggerNode } from '@eventiv
 
 export class ConsoleNode
     extends LoggerInstance {
-    static dependencies = [ LoggerAspect ]
+    static readonly dependencies = [ LoggerAspect ]
 
-    static defaultConfig: LoggerConfig = {
+    static readonly defaultConfig: LoggerConfig = {
         level: 'info'
     }
 

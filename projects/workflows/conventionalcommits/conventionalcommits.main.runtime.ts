@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: conventionalcommits.main.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:55 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -43,9 +43,9 @@ export class ConventionalcommitsMain {
     static slots = []
 
     // in case you need to use another aspect API.
-    static dependencies = [ CLIAspect ]
+    static readonly dependencies = [ CLIAspect ]
 
-    static runtime = MainRuntime
+    static readonly runtime = MainRuntime
 
     // define your aspect dependencies here.
     config = {

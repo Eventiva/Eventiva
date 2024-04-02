@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: module.ts
- * Last Modified: 3/29/24, 8:38 PM
+ * Last Modified: 4/1/24, 9:38 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -83,7 +83,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
      *
      * @static
      */
-    static defaultConfig: ModuleConfig = {
+    static readonly defaultConfig: ModuleConfig = {
         name: 'unnamed_module',
         logger: {
             level: 'info'
@@ -96,7 +96,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
      *
      * @static
      */
-    static dependencies = [ DiscordJSAspect ]
+    static readonly dependencies = [ DiscordJSAspect ]
 
     /**
      * The `log` property is a public property that stores an instance of either the `Log` or `Console` class. By default, it is initialized with the `console` object. It can be used to log messages or debug information.
@@ -121,18 +121,6 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * @public
      */
     public resources: Resources = {}
-
-    /**
-     * Registers a locale for the bot. If the 'reload' parameter is provided and set to 'true', the locale resources will be reloaded.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
-     * @param [reload]
-     */
-    // public registerLocales(reload?: true) {
-    //   // TODO add a locale file loader method using file system
-    //   this.discord.i18nModule.registerResource()
-    // }
 
     /**
      * Creates an instance of ReadyNode.

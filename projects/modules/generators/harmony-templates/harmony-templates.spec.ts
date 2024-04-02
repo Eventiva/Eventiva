@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: harmony-templates.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:47 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,8 +34,5 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-// import { HarmonyTemplates } from './harmony-templates.js';
-
 it.skip( 'renders with the correct text', () => {
-    // ok(HarmonyTemplates() === 'hello world');
 } )

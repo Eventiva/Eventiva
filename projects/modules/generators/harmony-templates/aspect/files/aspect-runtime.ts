@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: aspect-runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:52 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -163,7 +163,7 @@ function generateDependencyTypes (
  * @author Jonathan Stevens (TGTGamer)
  *
  * @param {?string[]} [deps]
- * @returns {string} Generates static dependencies based on an array of strings
+ * @returns {string} Generates static readonly dependencies based on an array of strings
  */
 function generateStaticDeps ( deps?: string[] ) {
     if ( !deps?.length ) {
@@ -199,10 +199,7 @@ function generateDepImports (
         const [ owner, scopeName ] = depId.component.scope.split( '.' )
         return `import { ${ camelCaseDep }Aspect, type ${ camelCaseDep }${ capRuntime } ${ imports
             ? `, ${ imports }`
-            : '' }} from '@${ owner }/${ scopeName }.${ depId.component.fullName.replace(
-            new RegExp( '/', 'g' ),
-            '.'
-        ) }';\n`
+            : '' }} from '@${ owner }/${ scopeName }.${ depId.component.fullName.replace( /\//g, '.' ) }';\n`
     } ).join( '\n' )
 }
 
@@ -303,9 +300,9 @@ export class ${ runtimeIdentifier } ${ classExtends && ( `extends ${ typeof clas
   ${ slots.length
             ? methods
             : '' }${ userMethods }
-  static dependencies = ${ generateStaticDeps( depNames ) };
+  static readonly dependencies = ${ generateStaticDeps( depNames ) };
 
-  static defaultConfig: ${ configIdentifier } = {${ runtimeConfig }};
+  static readonly defaultConfig: ${ configIdentifier } = {${ runtimeConfig }};
 
   static async provider(
     ${ generateDependencyTypes( depNames, runtime.name ) },

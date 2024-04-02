@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino.node.runtime.ts
- * Last Modified: 3/30/24, 12:39 AM
+ * Last Modified: 4/1/24, 9:54 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -40,11 +40,13 @@ import { pinoCaller } from 'pino-caller'
 import { build } from 'pino-pretty'
 import { Log, PinoConfig } from './pino-config.js'
 
+export type ExtendedConfig = 'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'
+
 export class PinoNode
     extends LoggerInstance {
-    static dependencies = [ LoggerAspect ]
+    static readonly dependencies = [ LoggerAspect ]
 
-    static defaultConfig: LoggerConfig<'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'> = {
+    static readonly defaultConfig: LoggerConfig<ExtendedConfig> = {
         level: 'info'
     }
 
@@ -53,7 +55,7 @@ export class PinoNode
     } )
 
     private readonly pino: Log = process.env.NODE_ENV === 'development'
-        ? pinoCaller( pino<'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'>( {
+        ? pinoCaller( pino<ExtendedConfig>( {
             ...this.config,
             name: this.config.module,
             customLevels: {
@@ -65,7 +67,7 @@ export class PinoNode
                 emergency: 80
             }
         }, this.stream ) ) as Log
-        : pino<'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'>( {
+        : pino<ExtendedConfig>( {
             ...this.config,
             name: this.config.module,
             customLevels: {

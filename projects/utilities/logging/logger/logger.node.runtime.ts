@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger.node.runtime.ts
- * Last Modified: 3/29/24, 7:11 PM
+ * Last Modified: 4/2/24, 1:23 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -66,14 +66,14 @@ export class LoggerNode<CustomLevels extends string = never> {
     [ key: string ]: any;
 
     // eslint-disable-next-line no-empty-pattern
-    static dependencies = []
+    static readonly dependencies = []
 
-    static defaultConfig: LoggerConfig = {
+    static readonly defaultConfig: LoggerConfig = {
         level: 'info',
         module: 'LogManager'
     }
 
-    static from = LoggerNode.provider
+    static readonly from = LoggerNode.provider
 
     private console: Console | null = console
 
@@ -126,8 +126,6 @@ export class LoggerNode<CustomLevels extends string = never> {
     }
 
     getLogger ( name: string ): Logger<CustomLevels> | undefined {
-        console.log( this.listLoggers() )
-
         const logger = this.loggerSlot.getByName( name )
         if ( logger ) {
             return logger

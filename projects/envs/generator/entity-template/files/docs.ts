@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: docs.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:41 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,7 +39,7 @@ import { replace } from 'lodash'
 
 export const docsFile = ( context: ComponentContext ) => {
     const { name, nameCamelCase, namePascalCase } = context
-    const spaced = replace( name, new RegExp( '-', 'g' ), ' ' )
+    const spaced = replace( name, /-/g, ' ' )
 
     return {
         relativePath: `${ name }.docs.mdx`,

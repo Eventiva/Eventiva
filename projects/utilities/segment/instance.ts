@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: instance.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:54 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -45,7 +45,7 @@ import type { Analytics, AnalyticsSettings } from '@segment/analytics-node'
  * @interface
  */
 
-export interface Instance<bool extends Boolean>
+export interface Instance<bool extends boolean>
     extends AnalyticsSettings {
     /**
      * A property that represents a name as a string.

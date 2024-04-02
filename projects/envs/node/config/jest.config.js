@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: jest.config.js
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/1/24, 9:41 PM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,7 +37,7 @@
 // Override the Jest config to ignore transpiling from specific folders
 // See the base Jest config: https://bit.cloud/teambit/react/react/~code/jest/jest.config.js
 
-const { jestConfig } = require('@teambit/react.react-env')
+const {jestConfig} = require('@teambit/react.react-env')
 
 /**
  * Exports the function `generateNodeModulesPattern` from the package `@teambit/dependencies.modules.packages-excluder`.
@@ -45,9 +45,8 @@ const { jestConfig } = require('@teambit/react.react-env')
  * @type {*}
  */
 const {
-  generateNodeModulesPattern,
+    generateNodeModulesPattern,
 } = require('@teambit/dependencies.modules.packages-excluder');
-// const { esmConfig } = require('@teambit/react.jest.react-jest');
 
 /**
  * An array containing package names to exclude from a specified operation or process.
@@ -57,16 +56,16 @@ const {
 const packagesToExclude = ['@teambit', '@my-org', 'my-package-name'];
 
 module.exports = {
-  // ...esmConfig,
-  ...jestConfig,
-  testEnvironment: 'node',
-  setupFiles: [],
-  setupFilesAfterEnv: [],
-  transformIgnorePatterns: [
-    '^.+.module.(css|sass|scss)$',
-    generateNodeModulesPattern({
-      packages: packagesToExclude,
-      excludeComponents: true,
-    }),
-  ],
+    // ...esmConfig,
+    ...jestConfig,
+    testEnvironment: 'node',
+    setupFiles: [],
+    setupFilesAfterEnv: [],
+    transformIgnorePatterns: [
+        '^.+.module.(css|sass|scss)$',
+        generateNodeModulesPattern({
+            packages: packagesToExclude,
+            excludeComponents: true,
+        }),
+    ],
 };

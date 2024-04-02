@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: prisma.node.runtime.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 4/2/24, 2:00 AM
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -40,8 +40,9 @@ import type { PrismaConfig } from './prisma-config.js'
 import { prismaGqlSchema } from './prisma.graphql.js'
 
 export class PrismaNode {
-    static dependencies = [ SymphonyPlatformAspect ]
-    static defaultConfig: PrismaConfig = {}
+    static readonly dependencies = [ SymphonyPlatformAspect ]
+
+    static readonly defaultConfig: PrismaConfig = {}
 
     constructor (
         private config: PrismaConfig,
