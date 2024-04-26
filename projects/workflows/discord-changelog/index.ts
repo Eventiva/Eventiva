@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: index.ts
- * Last Modified: 4/1/24, 4:02 PM
+ * Last Modified: 26/04/2024, 13:36
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,

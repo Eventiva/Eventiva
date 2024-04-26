@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: segment.node.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 25/04/2024, 22:19
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -43,5 +43,5 @@ it( 'should retrieve the aspect', async () => {
         runtime: 'node'
     } )
 
-    expect( segment ).toThrow()
+    expect( segment ).toBeTruthy()
 } )

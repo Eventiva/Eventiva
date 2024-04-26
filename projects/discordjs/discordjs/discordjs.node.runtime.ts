@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: discordjs.node.runtime.ts
- * Last Modified: 4/2/24, 1:23 AM
+ * Last Modified: 26/04/2024, 13:37
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -43,8 +43,9 @@ import type { Event, EventSlot, ExtendedClientEvents } from './event.js'
 import discord from './locales/en/discord.js'
 import errors from './locales/en/errors.js'
 import type { DiscordJsModule } from './module.js'
+import { delay } from './utils.js'
 
-const defaultToken = process.env[ 'DISCORD.TOKEN' ]!
+const defaultToken = process.env[ 'DISCORD.TOKEN' ]
 const defaultStartDelay = process.env[ 'DISCORD.START_DELAY' ]
 const parsedDefaultStartDelay = defaultStartDelay
     ? parseInt( defaultStartDelay, 10 )
@@ -314,13 +315,13 @@ export class DiscordJSNode {
 
         this.log.trace( this.i18n.t( 'discord:init.loggingIn' ) )
 
-        await delay(this.config.startDelay);
-        if (this.config.token) {
-            await this.client.login(this.config.token);
+        await delay( this.config.startDelay )
+        if ( this.config.token ) {
+            await this.client.login( this.config.token )
         } else {
-            this.log.warn(this.i18n.t('discord:init.faked'));
+            this.log.warn( this.i18n.t( 'discord:init.faked' ) )
         }
-        this.log.trace(this.i18n.t('discord:init.loggedIn'));
+        this.log.trace( this.i18n.t( 'discord:init.loggedIn' ) )
 
         this.isInitialised = true
     }

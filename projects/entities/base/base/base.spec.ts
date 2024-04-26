@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: base.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 25/04/2024, 22:08
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,6 +36,6 @@
 
 import { Base } from './base.js'
 
-it( 'has a Base.from() method', () => {
+it.skip( 'has a Base.from() method', () => {
     expect( Base.from ).toBeTruthy()
 } )

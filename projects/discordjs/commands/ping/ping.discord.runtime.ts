@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: ping.discord.runtime.ts
- * Last Modified: 3/29/24, 10:15 PM
+ * Last Modified: 25/04/2024, 22:23
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -71,7 +71,7 @@ export class PingDiscord
     ) {
         const ping = new PingDiscord( config, discordJS )
         ping.log.trace( ping.discord.i18n.t( 'discord:modules.registering', { name: ping.name } ) )
-        ping.discord.registerModule( ping )
+        await ping.discord.registerModule( ping )
         ping.log.trace( ping.discord.i18n.t( 'discord:modules.registered', { name: ping.name } ) )
         return ping
     }

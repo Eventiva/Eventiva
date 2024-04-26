@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: document.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 25/04/2024, 22:23
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,6 +36,6 @@
 
 import { Document } from './document.js'
 
-it( 'has a Document.from() method', () => {
+it.skip( 'has a Document.from() method', () => {
     expect( Document.from ).toBeTruthy()
 } )

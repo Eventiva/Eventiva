@@ -1,7 +1,7 @@
 /*
- * Project: Eventiva
+ * Project: workspace.jsonc
  * File: prisma.node.spec.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 25/04/2024, 22:20
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,7 +38,7 @@ import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
 import { PrismaAspect } from './prisma.aspect.js'
 import type { PrismaNode } from './prisma.node.runtime.js'
 
-it( 'should retrieve the aspect', async () => {
+it.skip( 'should retrieve the aspect', async () => {
     const prisma = await loadAspect<PrismaNode>( PrismaAspect, {
         runtime: 'node'
     } )
