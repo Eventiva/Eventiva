@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  - Project: Eventiva
+  - File: Logo.svg
+  - Last Modified: 3/29/24, 4:54 PM
+  -
+  - Contributing: Please read through our contributing guidelines.
+  - Included are directions for opening issues, coding standards,
+  - and notes on development. These can be found at
+  - https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+  -
+  - Code of Conduct: This project abides by the Contributor Covenant, v2.0
+  - Please interact in ways that contribute to an open, welcoming, diverse,
+  - inclusive, and healthy community. Our Code of Conduct can be found at
+  - https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+  -
+  - Copyright (c) 2024 Eventiva Ltd. All Rights Reserved
+  - LICENSE: Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
+  -
+  - This program has been provided under confidence of the copyright holder and is licensed for copying, distribution
+  - and modification under the terms of the Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT)
+  - published as the License, or (at your option) any later version of this license. This program is distributed in the
+  - hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+  - FITNESS FOR A PARTICULAR PURPOSE. See the Functional Source License, Version 1.1, MIT Future License for more
+  - details. You should have received a copy of the Functional Source License, Version 1.1, MIT Future License along
+  - with this program. If not, please write to: licensing@eventiva.co.uk, see the official website
+  - https://fsl.software/ or Review the GitHub repository https://github.com/getsentry/fsl.software/
+  -
+  - This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before
+  - filing or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from
+  - termination of a Covered License, we commit to adhering to the Eventiva Cooperation Commitment. You should have
+  - received a copy of the Eventiva Cooperation Commitment along with this program. If not, please write to:
+  - licensing@eventiva.co.uk, or see https://eventiva.co.uk/licensing/ecc
+  -
+  - DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
+  -->
+
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 889.59 709.37">
+    <defs>
+        <style>
+            .cls-1{fill:#04cbaf;}.cls-2{fill:#fa4669;}.cls-3{fill:#57cdf7;}.cls-4{fill:#866af8;}.cls-5{fill:#f6cc02;}
+        </style>
+    </defs>
+    <g id="Layer_1-2">
+        <g>
+            <g>
+                <path d="M0,551.28H86.75l7.16,30.02H31.12v31.95h52.33v29.19H31.12v33.6H99.7l-7.44,30.02H0v-154.78Z"/>
+                <path d="M160.84,706.06l-38.01-109.34h31.95l22.58,69.95,22.86-69.95h32.22l-38.01,109.34h-33.6Z"/>
+                <path d="M313.15,706.06c-34.15,0-62.24-26.99-62.24-60.87,0-28.64,22.03-51.23,52.6-51.23,25.34,0,48.47,17.9,48.47,39.11,0,14.6-3.86,25.06-11.84,35.53h-43.79c14.05-9.36,23.41-15.97,23.41-31.12,0-9.36-7.71-17.08-17.08-17.08-12.39,0-20.1,12.67-20.1,25.06,0,20.38,17.9,33.88,39.66,33.88h26.44v26.71h-35.53Z"/>
+                <path d="M478.4,706.06h-29.19v-62.79c0-12.12-9.36-21.76-21.48-21.76s-25.06,9.36-25.06,22.86v61.69h-29.19v-109.34h29.19v26.16l4.68-24.24c5.51-3.03,21.76-4.96,21.76-4.96,26.99,.28,49.3,11.84,49.3,49.57v62.79Z"/>
+                <path d="M539.82,596.72h24.51v26.71h-24.51v41.59c0,11.57,6.06,18.18,15.42,18.18,4.41,0,8.26-.83,11.02-2.2v25.06c-5.78,1.93-10.74,3.31-17.63,3.31-24.24,0-38.01-12.94-38.01-36.35v-49.57h-11.84v-26.71h11.84v-30.02l29.19-7.44v37.46Z"/>
+                <path d="M605.36,560.09c9.36,0,16.8,7.44,16.8,16.8s-7.44,16.8-16.8,16.8-16.8-7.44-16.8-16.8,7.44-16.8,16.8-16.8Zm14.6,37.18v108.79h-29.19v-108.79h29.19Z"/>
+                <path d="M685.23,706.06l-38.01-109.34h31.95l22.58,69.95,22.86-69.95h32.22l-38.01,109.34h-33.6Z"/>
+                <path d="M889.59,706.06h-29.19v-26.16l-4.68,22.58c-5.51,3.03-12.94,5.23-21.76,5.23-30.02,0-53.43-25.06-53.43-55.08,0-32.77,22.58-55.91,62.79-55.91h46.27v109.34Zm-29.19-82.62h-17.08c-20.38,0-31.95,12.39-31.95,29.47,0,14.32,9.92,26.71,24.79,26.71,10.47,0,18.45-3.31,24.24-11.29v-44.89Z"/>
+            </g>
+            <g>
+                <path class="cls-2"
+                      d="M639.3,471.35h0s-180.09,0-180.09,0c-55.61,0-100.69-45.08-100.69-100.69h0s180.09,0,180.09,0c55.61,0,100.69,45.08,100.69,100.69Z"/>
+                <g>
+                    <path class="cls-1" d="M250.29,288.58h107.8v74.99c0,59.53-48.26,107.8-107.8,107.8h0v-182.78Z"/>
+                    <path class="cls-4" d="M250.29,0h107.78V105.79c0,59.54-48.26,107.8-107.78,107.8V0Z"/>
+                    <path class="cls-3"
+                          d="M359.22,0h0c0,59.53,48.26,107.78,107.78,107.78h171.99v-7.09c0-55.61-45.08-100.69-100.69-100.69h-179.09Z"/>
+                    <path class="cls-5" d="M486.97,176.09h0c0,62.12-50.36,112.48-112.48,112.48h-16.4v-112.48h128.89Z"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
