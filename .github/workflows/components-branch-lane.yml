@@ -31,7 +31,7 @@ jobs:
           proc_trace_sys_enable: true
 
       # checks out the repository
-      - uses: actions/checkout@v4.1.2
+      - uses: actions/checkout@v4.1.5
         with:
           submodules: 'recursive'
           token: "${{ secrets.BOT_TOKEN || github.token }}"
