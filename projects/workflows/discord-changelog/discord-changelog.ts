@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.ts
- * Last Modified: 4/2/24, 1:34 AM
+ * Last Modified: 25/07/2024, 02:19
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -60,7 +60,7 @@ export async function sendToDiscord (
         intents: []
     } )
 
-    await discord.login( process.env.DISCORD_BOT_TOKEN )
+    await discord.login( ( process.env.DISCORD_BOT_TOKEN as string ) )
 
     const discordChannel = await discord.channels.fetch( config.channelId )
 
@@ -91,13 +91,17 @@ export async function sendToDiscord (
 
         field.included.forEach( type => {
             if ( type in results.changes ) {
-                fields.push( ...results.changes[ type ] )
+                fields.push( ...results.changes[ type ].map( change => {
+                        return { name: String( change.name ), value: String( change.value ) }
+                    } )
+                )
             }
         } )
 
         if ( !fields.length ) {
             return
         }
+
         embed.addFields( fields )
         embeds.push( embed )
     } )

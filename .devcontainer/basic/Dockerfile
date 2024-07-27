@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye
 
+COPY --from=1password/op:2 /usr/local/bin/op /usr/local/bin/op
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 #     && apt-get -y install --no-install-recommends <your-package-list-here>
@@ -9,4 +10,4 @@ FROM mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
 
 # [Optional] Uncomment if you want to install more global node modules
-# RUN su node -c "npm install -g <your-package-list-here>"
+RUN su node -c "npx @teambit/bvm install"

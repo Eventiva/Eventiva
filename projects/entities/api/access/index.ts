@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 24/07/2024, 21:48
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,6 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+// import Access from '@eventiva/orm/prisma'
+// export { Access }
 export const XXX = 'Not Defined'

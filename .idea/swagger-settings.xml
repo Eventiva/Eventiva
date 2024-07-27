@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SwaggerSettings">
+    <remoteSpecificationUrls>
+      <UrlInfo>
+        <option name="urlString" value="https://developers.intercom.com/_spec/docs/references/@2.11/rest-api/api.intercom.io.yaml" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/platform/platform.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/business/business.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/advertising/advertising.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://api.calendarhero.com/swagger.json" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/customervoice/customervoice.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/listings/listings.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/reputation/reputation.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/social/social.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/scim/scim.yaml?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://stoplight.io/api/v1/projects/vendasta/openapi-specs/nodes/openapi/crm/crm.json?fromExportButton=true&amp;snapshotType=http_service&amp;deref=optimizedBundle" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://dac-static.atlassian.com/cloud/jira/platform/swagger-v3.v3.json?_v=1.7304.0-0.1309.0" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://dac-static.atlassian.com/cloud/jira/service-desk/swagger.v3.json?_v=1.7304.0-0.1309.0" />
+      </UrlInfo>
+      <UrlInfo>
+        <option name="urlString" value="https://dac-static.atlassian.com/cloud/jira/software/swagger.v3.json?_v=1.7304.0-0.1309.0" />
+      </UrlInfo>
+    </remoteSpecificationUrls>
+  </component>
+</project>

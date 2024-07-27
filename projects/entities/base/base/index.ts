@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 24/07/2024, 23:02
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,4 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { Base } from './base.js';
+export const XXX = 'Not Defined'

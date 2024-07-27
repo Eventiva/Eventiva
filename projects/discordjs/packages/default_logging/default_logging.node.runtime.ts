@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.runtime.ts
- * Last Modified: 4/1/24, 9:38 PM
+ * Last Modified: 25/07/2024, 03:26
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -166,6 +166,13 @@ export class DefaultLoggingNode
         }
     }
 
+    constructor (
+        [ discordjs ]: [ DiscordJSNode | undefined ],
+        config: DefaultLoggingConfig
+    ) {
+        super( config, discordjs )
+    }
+
     /**
      * Creates a provider for the given DiscordJSNode and DefaultLoggingConfig.
      * The provider registers the default_logging event using the given DiscordJSNode and configures it with the provided DefaultLoggingConfig.
@@ -188,7 +195,7 @@ export class DefaultLoggingNode
         if ( !discordjs ) {
             throw new Error( 'DiscordJS not in dependencies' )
         }
-        const module = new DefaultLoggingNode( config, discordjs )
+        const module = new DefaultLoggingNode( [ discordjs ], config )
         module.log.trace( module.discord.i18n.t( 'discord:modules.registering', { name: module.name } ) )
         module.discord.registerModule( module )
         module.log.trace( module.discord.i18n.t( 'discord:modules.registered', { name: module.name } ) )

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: node.bit-env.ts
- * Last Modified: 4/2/24, 3:18 AM
+ * Last Modified: 27/07/2024, 01:35
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,12 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { NodeAppTemplate, NodeEnvTemplate, NodeModuleTemplate } from '@bitdev/node.generators.node-templates'
 /**
  * this env extends the Bit official Harmony environment.
  * learn more: https://bit.cloud/bitdev/harmony/harmony-env
  */
-import { SymphonyEnv } from '@bitdev/symphony.envs.symphony-env'
+import { HarmonyEnv } from '@bitdev/harmony.harmony-env'
+import { NodeAppTemplate, NodeEnvTemplate, NodeModuleTemplate } from '@bitdev/node.generators.node-templates'
 import { Generator } from '@eventiva/envs.generator'
 import { DiscordChangelog } from '@eventiva/workflows.discord-changelog'
 import { GenerateChangelogTask } from '@eventiva/workflows.generate-changelog'
@@ -78,7 +78,7 @@ NativeCompileCache.uninstall()
  * @extends {HarmonyEnv}
  */
 export class Node
-    extends SymphonyEnv {
+    extends HarmonyEnv {
 
     /* shorthand name for the environment */
     /**
@@ -271,9 +271,7 @@ export class Node
             } ),
             VitestTask.from( {
                 config: require.resolve( './config/vitest.config.mjs' )
-            } ),
-            GenerateChangelogTask.from(),
-            DiscordChangelog.from()
+            } )
         ] )
     }
 
@@ -282,10 +280,7 @@ export class Node
      * use the snap pipeline for staging and test deployments
      */
     snap () {
-        return Pipeline.from( [
-            GenerateChangelogTask.from(),
-            DiscordChangelog.from()
-        ] )
+        return Pipeline.from( [] )
     }
 
     /**

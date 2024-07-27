@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.task.ts
- * Last Modified: 4/2/24, 1:37 AM
+ * Last Modified: 25/07/2024, 01:59
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -51,7 +51,7 @@ export class DiscordChangelog
 
     static from ( options: SendToDiscordConfig = {
         name: 'GenerateChangelogTask',
-        channelId: '1175861376711925762',
+        channelId: process.env.CHANGELOG_ID as string,
         authorName: 'Eventiva Software Delivery Change Manager',
         config: {
             features: {

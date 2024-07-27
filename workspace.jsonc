@@ -74,6 +74,27 @@
     "packageManager": "teambit.dependencies/pnpm",
     "policy": {
       "dependencies": {
+        "@babel/plugin-proposal-decorators": "^7.24.7",
+        "@babel/plugin-transform-class-properties": "^7.24.7",
+        "@babel/plugin-transform-object-rest-spread": "^7.24.7",
+        "@babel/preset-env": "^7.25.0",
+        "@babel/preset-typescript": "^7.24.7",
+        "@bitdev/harmony.generators.harmony-templates": "1.0.2",
+        "@bitdev/node.generators.node-templates": "2.0.6",
+        "@bitdev/react.react-env": "2.0.23",
+        "@bitdev/symphony.envs.symphony-env": "1.0.19",
+        "@segment/analytics-node": "^2.1.2",
+        "@teambit/defender.eslint-linter": "1.0.37",
+        "@teambit/defender.prettier-formatter": "1.0.18",
+        "@teambit/preview.react-preview": "1.0.44",
+        "@teambit/react.mounter": "1.0.10",
+        "@teambit/react.react-env": "1.0.89",
+        "@teambit/typescript.typescript-compiler": "2.0.42",
+        "@teambit/vite.vitest-tester": "0.1.6",
+        "@vitejs/plugin-react": "^4.3.1",
+        "discord.js": "14.15.3",
+        "openai": "^4.53.2",
+        "vite": "^5.3.5"
       },
       "peerDependencies": {}
     },

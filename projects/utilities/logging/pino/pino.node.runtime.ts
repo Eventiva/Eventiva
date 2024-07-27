@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino.node.runtime.ts
- * Last Modified: 4/1/24, 9:54 PM
+ * Last Modified: 25/07/2024, 14:27
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,9 +38,7 @@ import { LoggerAspect, LoggerConfig, LoggerInstance, LoggerNode } from '@eventiv
 import { pino } from 'pino'
 import { pinoCaller } from 'pino-caller'
 import { build } from 'pino-pretty'
-import { Log, PinoConfig } from './pino-config.js'
-
-export type ExtendedConfig = 'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'
+import { ExtendedConfig, Log, PinoConfig } from './pino-config.js'
 
 export class PinoNode
     extends LoggerInstance {
@@ -95,6 +93,13 @@ export class PinoNode
         )
         return pinoUtil
     }
+
+    trace = (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) =>
+        this.pino.trace( obj, msg, ...args )
 
     debug = (
         msg: string,
