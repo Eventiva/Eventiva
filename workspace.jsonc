@@ -61,13 +61,9 @@
   },
   "teambit.generator/generator": {
     "envs": [
-      // "eventiva.envs/node",
-      // "bitdev.react/react-env",
-      // "teambit.react/react-native-env",
-      // "teambit.mdx/mdx-env",
-      // "bitdev.node/node-env"
-      // "teambit.harmony/aspect-env",
-      // "bitdev.symphony/envs/symphony-env"
+      "frontend.nextjs/nextjs-env",
+      //      "eventiva.envs/node"
+      "bitdev.symphony/envs/symphony-env"
     ]
   },
   "teambit.dependencies/dependency-resolver": {
@@ -80,20 +76,34 @@
         "@babel/preset-env": "^7.25.0",
         "@babel/preset-typescript": "^7.24.7",
         "@bitdev/harmony.generators.harmony-templates": "1.0.2",
+        "@bitdev/harmony.harmony-env": "^2.0.20",
+        "@bitdev/harmony.harmony-platform": "2.0.2",
         "@bitdev/node.generators.node-templates": "2.0.6",
+        "@bitdev/node.node-server": "1.0.2",
         "@bitdev/react.react-env": "2.0.23",
-        "@bitdev/symphony.envs.symphony-env": "1.0.19",
+        "@bitdev/symphony.aspects.header": "^1.0.0",
+        "@bitdev/symphony.examples.people": "^1.0.0",
+        "@bitdev/symphony.generators.symphony-starters": "^0.0.4",
+        "@bitdev/symphony.symphony-platform": "1.0.0",
+        "@frontend/nextjs.templates.generators": "^0.4.6",
+        "@frontend/nextjs.templates.starters": "^0.4.5",
         "@segment/analytics-node": "^2.1.2",
         "@teambit/defender.eslint-linter": "1.0.37",
+        "@teambit/defender.jest-tester": "^2.0.9",
         "@teambit/defender.prettier-formatter": "1.0.18",
+        "@teambit/dependencies.modules.packages-excluder": "^1.0.8",
         "@teambit/preview.react-preview": "1.0.44",
         "@teambit/react.mounter": "1.0.10",
         "@teambit/react.react-env": "1.0.89",
         "@teambit/typescript.typescript-compiler": "2.0.42",
         "@teambit/vite.vitest-tester": "0.1.6",
+        "@types/lodash": "^4.17.7",
         "@vitejs/plugin-react": "^4.3.1",
         "discord.js": "14.15.3",
+        "i18next": "23.12.2",
         "openai": "^4.53.2",
+        "pino": "9.3.2",
+        "pino-pretty": "11.2.2",
         "vite": "^5.3.5"
       },
       "peerDependencies": {}

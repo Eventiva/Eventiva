@@ -1,7 +1,7 @@
 /*
- * Project: workspace.jsonc
+ * Project: Eventiva
  * File: index.ts
- * Last Modified: 26/04/2024, 13:36
+ * Last Modified: 29/07/2024, 17:35
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,5 +34,5 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { DiscordChangelog } from './discord-changelog.task'
-export { sendToDiscord } from './discord-changelog'
+export { DiscordChangelog } from './discord-changelog.task.js'
+export { sendToDiscord } from './discord-changelog.js'

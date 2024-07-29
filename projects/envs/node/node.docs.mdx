@@ -3,8 +3,8 @@ description: 'A Harmony development environment.'
 labels: ['env', 'node', 'dev', 'mocha', 'typescript']
 ---
 
-A reusable development environment for Harmony.  
-Use the Harmony environment to create new Harmony aspects, platforms and runtimes.
+A reusable development environment for Symphony aspects.  
+Use the Symphony environment to create new Symphony aspects, platforms and runtimes.
 
 Features:
 - ▶️ TypeScript
@@ -23,7 +23,7 @@ Add the development env to your generator configuration on `workspace.jsonc`.
 {
   "teambit.generator/generator": {
     "envs": [
-      "eventiva.workflows/env/node"
+      "bitdev.symphony/envs/symphony-env"
     ]
   }
 }
@@ -36,23 +36,23 @@ You can see the generator templates in your workspace using `bit templates`.
 Use this dev environment on your existing components, by running the following command: 
 
 ```
-bit env set my-component eventiva.workflows/env/node
+bit env set my-component bitdev.symphony/envs/symphony-env
 ```
 
 
-## Create a NodeJS workspace
+## Create a Symphony workspace
 
 You can create a new NodeJS workspace made from this env using the following command:
 
 ```
-bit new node my-workspace --aspect eventiva.workflows/env/node
+bit new symphony-platform my-workspace --aspect bitdev.symphony/envs/symphony-env
 ```
 
 ## Compose your own env
 
 You can base on this env, and customize it to your needs. To create your env run this command:
 ```
-bit create node-env my-new-env
+bit create harmony-env my-new-env
 ```
 
 Make sure your new environment class extends this env class and overrides the needed class methods.

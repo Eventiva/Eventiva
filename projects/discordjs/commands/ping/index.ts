@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 29/07/2024, 22:00
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,7 +36,7 @@
 
 import { PingAspect } from './ping.aspect.js'
 
-export type { PingDiscord } from './ping.discord.runtime.js'
+export type { PingDiscord } from './ping.node.runtime.js'
 
 export default PingAspect
 export { PingAspect }

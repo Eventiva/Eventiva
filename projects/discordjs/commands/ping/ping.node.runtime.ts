@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 29/07/2024, 17:35
+ * File: ping.node.runtime.ts
+ * Last Modified: 29/07/2024, 23:36
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,5 +34,63 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { GenerateChangelogTask } from './generate-changelog.task.js'
-export type { ChangelogResult } from './generate-changelog.task'
+import {
+    type Command,
+    DiscordJSAspect,
+    type DiscordJSDiscord,
+    DiscordJsModule,
+    type Event,
+    type Resources
+} from '@eventiva/discordjs.discordjs'
+import type { PingConfig } from './ping-config.js'
+
+
+export class PingDiscord
+    extends DiscordJsModule<PingConfig> {
+    static readonly dependencies = [ DiscordJSAspect ]
+
+    static readonly defaultConfig: PingConfig = {
+        name: 'PingModule',
+        logger: {
+            level: 'info'
+        }
+    }
+
+    public resources: Resources = {}
+
+    constructor (
+        protected config: PingConfig,
+        discordJSDiscord: DiscordJSDiscord
+    ) {
+        super( config, discordJSDiscord )
+    }
+
+    static async provider (
+        [ discordJS ]: [ DiscordJSDiscord ],
+        config: PingConfig
+    ) {
+        const ping = new PingDiscord( config, discordJS )
+        ping.log.trace( ping.discord.i18n.t( 'discord:modules.registering', { name: ping.name } ) )
+        await ping.discord.registerModule( ping )
+        ping.log.trace( ping.discord.i18n.t( 'discord:modules.registered', { name: ping.name } ) )
+        return ping
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public registerEvents ( reload?: true ) {
+        this.discord.registerEvent( this, [
+            // add any events here
+        ] as Event<any>[] )
+        return this
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public registerCommands ( reload?: true ) {
+        this.discord.registerCommand( this, [
+            // add any commands here
+        ] as Command[] )
+        return this
+    }
+}
+
+export default PingDiscord

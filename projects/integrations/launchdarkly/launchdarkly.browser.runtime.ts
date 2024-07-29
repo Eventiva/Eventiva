@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 29/07/2024, 17:35
+ * File: launchdarkly.browser.runtime.ts
+ * Last Modified: 29/07/2024, 23:36
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,5 +34,44 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { GenerateChangelogTask } from './generate-changelog.task.js'
-export type { ChangelogResult } from './generate-changelog.task'
+import type { LaunchdarklyConfig } from './launchdarkly-config.js'
+import { Route, RouteSlot } from './route.js'
+
+export class LaunchdarklyBrowser {
+    static dependencies = []
+    static defaultConfig: LaunchdarklyConfig = {}
+
+    constructor (
+        private config: LaunchdarklyConfig,
+        private routeSlot: RouteSlot
+    ) {
+    }
+
+    static async provider (
+        []: [],
+        config: LaunchdarklyConfig,
+        [ routeSlot ]: [ RouteSlot ]
+    ) {
+        const launchdarkly = new LaunchdarklyBrowser( config, routeSlot )
+
+
+        return launchdarkly
+    }
+
+    /**
+     * register a list of route.
+     */
+    registerRoute ( routes: Route[] ) {
+        this.routeSlot.register( routes )
+        return this
+    }
+
+    /**
+     * list all route.
+     */
+    listRoutes () {
+        return this.routeSlot.flatValues()
+    }
+}
+
+export default LaunchdarklyBrowser

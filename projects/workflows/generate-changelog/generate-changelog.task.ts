@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: generate-changelog.task.ts
- * Last Modified: 4/2/24, 2:58 AM
+ * Last Modified: 29/07/2024, 17:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,

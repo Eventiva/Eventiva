@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 29/07/2024, 17:35
+ * Last Modified: 29/07/2024, 23:36
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,5 +34,10 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { GenerateChangelogTask } from './generate-changelog.task.js'
-export type { ChangelogResult } from './generate-changelog.task'
+import { LaunchdarklyAspect } from './launchdarkly.aspect.js'
+
+export type { LaunchdarklyBrowser } from './launchdarkly.browser.runtime.js'
+export type { LaunchdarklyNode } from './launchdarkly.node.runtime.js'
+
+export default LaunchdarklyAspect
+export { LaunchdarklyAspect }

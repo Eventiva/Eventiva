@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: event.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 29/07/2024, 21:56
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,7 +37,6 @@
 import { SlotRegistry } from '@bitdev/harmony.harmony'
 import { Awaitable, ClientEvents } from 'discord.js'
 import { DiscordJsModule } from './module.js'
-
 
 /**
  * The interface ExtendedClientEvents extends the ClientEvents interface and includes additional events for logging levels: debug, trace, info, warn, fatal, alert, and emergency. Each event has a single parameter 'message' of type string.

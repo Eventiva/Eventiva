@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 29/07/2024, 15:06
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,7 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { Node } from './node.bit-env.js'
+import { NodeEnv } from './node.bit-env.js'
 
-export { Node, Node as NodeEnv }
-export default Node
+export { NodeEnv }
+export default NodeEnv

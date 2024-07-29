@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.task.ts
- * Last Modified: 25/07/2024, 01:59
+ * Last Modified: 29/07/2024, 17:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,7 +37,7 @@
 import { ChangelogResult } from '@eventiva/workflows.generate-changelog'
 import { BuildContext, BuildTask, BuiltTaskResult, ComponentResult, TaskHandler } from '@teambit/builder'
 import { EnvContext } from '@teambit/envs'
-import { sendToDiscord, SendToDiscordConfig } from './discord-changelog'
+import { sendToDiscord, SendToDiscordConfig } from './discord-changelog.js'
 
 export class DiscordChangelog
     implements BuildTask {
