@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: launchdarkly.browser.runtime.ts
- * Last Modified: 29/07/2024, 23:36
+ * Last Modified: 02/08/2024, 16:39
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,43 +34,52 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import process from 'node:process'
+import { Flag, FlagSlot } from './flag.js'
 import type { LaunchdarklyConfig } from './launchdarkly-config.js'
-import { Route, RouteSlot } from './route.js'
 
 export class LaunchdarklyBrowser {
     static dependencies = []
-    static defaultConfig: LaunchdarklyConfig = {}
+    static defaultConfig: LaunchdarklyConfig = {
+        LAUNCHDARKLY_SDK_KEY: process.env.LAUNCHDARKLY_SDK_KEY as string,
+        globalKillFlag: 'global-kill',
+        context: {
+            kind: 'user',
+            key: 'global-kill-user',
+            name: 'Global Kill User'
+        }
+    }
 
     constructor (
         private config: LaunchdarklyConfig,
-        private routeSlot: RouteSlot
+        private flagSlot: FlagSlot
     ) {
     }
 
     static async provider (
         []: [],
         config: LaunchdarklyConfig,
-        [ routeSlot ]: [ RouteSlot ]
+        [ flagSlot ]: [ FlagSlot ]
     ) {
-        const launchdarkly = new LaunchdarklyBrowser( config, routeSlot )
+        const launchdarkly = new LaunchdarklyBrowser( config, flagSlot )
 
 
         return launchdarkly
     }
 
     /**
-     * register a list of route.
+     * register a list of flag.
      */
-    registerRoute ( routes: Route[] ) {
-        this.routeSlot.register( routes )
+    registerFlag ( flags: Flag[] ) {
+        this.flagSlot.register( flags )
         return this
     }
 
     /**
-     * list all route.
+     * list all flag.
      */
-    listRoutes () {
-        return this.routeSlot.flatValues()
+    listFlags () {
+        return this.flagSlot.flatValues()
     }
 }
 

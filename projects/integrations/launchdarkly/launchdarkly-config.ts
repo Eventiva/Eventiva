@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: launchdarkly-config.ts
- * Last Modified: 29/07/2024, 23:36
+ * Last Modified: 02/08/2024, 16:24
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,6 +34,11 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-// use this type for your aspect config.
-export type LaunchdarklyConfig = {};
+import type { FlagContext } from './flag.js'
+
+export type LaunchdarklyConfig = {
+    LAUNCHDARKLY_SDK_KEY: string;
+    globalKillFlag: string;
+    context: FlagContext
+};
 

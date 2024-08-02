@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: launchdarkly.node.runtime.ts
- * Last Modified: 29/07/2024, 23:36
+ * Last Modified: 02/08/2024, 16:39
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,43 +34,107 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import LaunchDarkly from '@launchdarkly/node-server-sdk'
+import * as process from 'node:process'
+import { Flag, type FlagSlot } from './flag.js'
 import type { LaunchdarklyConfig } from './launchdarkly-config.js'
-import { Route, RouteSlot } from './route.js'
 
 export class LaunchdarklyNode {
     static dependencies = []
-    static defaultConfig: LaunchdarklyConfig = {}
+    static defaultConfig: LaunchdarklyConfig = {
+        LAUNCHDARKLY_SDK_KEY: process.env.LAUNCHDARKLY_SDK_KEY as string,
+        globalKillFlag: 'global-kill',
+        context: {
+            kind: 'user',
+            key: 'global-kill-user',
+            name: 'Global Kill User'
+        }
+    }
+    private ldClient: LaunchDarkly.LDClient
+
 
     constructor (
         private config: LaunchdarklyConfig,
-        private routeSlot: RouteSlot
+        private flagSlot: FlagSlot
     ) {
+        LaunchdarklyNode.checkConfig( config )
+        this.ldClient = LaunchDarkly.init( config.LAUNCHDARKLY_SDK_KEY )
+        this.ldClient
+            .waitForInitialization()
+            .then( () => {
+                console.log( '*** SDK successfully initialized!' )
+                this.registerFlags( [
+                    {
+                        name: config.globalKillFlag
+                    }
+                ] )
+            } )
+            .catch( ( error ) => {
+                console.log( `*** SDK failed to initialize: ${ error }` )
+                process.exit( 1 )
+            } )
     }
 
     static async provider (
         []: [],
         config: LaunchdarklyConfig,
-        [ routeSlot ]: [ RouteSlot ]
+        [ flagSlot ]: [ FlagSlot ]
     ) {
-        const launchdarkly = new LaunchdarklyNode( config, routeSlot )
-
-
+        this.checkConfig( config )
+        const launchdarkly = new LaunchdarklyNode( config, flagSlot )
         return launchdarkly
     }
 
-    /**
-     * register a list of route.
-     */
-    registerRoute ( routes: Route[] ) {
-        this.routeSlot.register( routes )
+    private static checkConfig ( config: LaunchdarklyConfig ): void {
+        if ( !config.LAUNCHDARKLY_SDK_KEY ) {
+            console.log( '*** Please edit your configuration or environment to set LAUNCHDARKLY_SDK_KEY to your'
+                + ' LaunchDarkly SDK key first.' )
+            process.exit( 1 )
+        }
+    }
+
+    public printValue (
+        flag: string,
+        flagValue: unknown
+    ) {
+        console.log( `*** The '${ flag }' feature flag evaluates to ${ flagValue }.` )
         return this
     }
 
     /**
-     * list all route.
+     * register a list of flag.
      */
-    listRoutes () {
-        return this.routeSlot.flatValues()
+    registerFlags ( flags: Flag[] ) {
+        this.flagSlot.register( flags )
+        for ( const flag of flags ) {
+            const eventKey = `update:${ flag.name }`
+            const context = {
+                ...this.config.context,
+                ...flag.context
+            }
+
+            this.ldClient.on( eventKey, () => {
+                this.ldClient.variation( flag.name, context, false ).then( value => this.printValue(
+                    flag.name,
+                    value
+                ) )
+            } )
+
+            this.ldClient.variation( flag.name, context, false ).then( ( flagValue ) => {
+                this.printValue( flag.name, flagValue )
+                if ( typeof process.env.CI !== 'undefined' ) {
+                    process.exit( 0 )
+                }
+            } )
+        }
+        return this
+    }
+
+    /**
+     * list all flag.
+     */
+    listFlags () {
+        return this.flagSlot.flatValues()
     }
 }
 

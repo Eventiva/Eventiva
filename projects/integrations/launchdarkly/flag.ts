@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: route.ts
- * Last Modified: 29/07/2024, 23:36
+ * File: flag.ts
+ * Last Modified: 02/08/2024, 16:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,11 +36,18 @@
 
 import type { SlotRegistry } from '@bitdev/harmony.harmony'
 
-export interface Route {
+export interface FlagContext {
+    kind: string;
+    key: string;
+    name: string;
+}
+
+export interface Flag {
     /**
      * name of the item
      */
     name: string;
+    context?: FlagContext
 }
 
-export type RouteSlot = SlotRegistry<Route[]>;
+export type FlagSlot = SlotRegistry<Flag[]>;
