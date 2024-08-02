@@ -102,9 +102,8 @@
     },
     "cloudflare/kv-store": {
         "name": "cloudflare/kv-store",
-        "scope": "",
+        "scope": "eventiva.integrations",
         "version": "d9d87bb6230438d51c534fb7d0ca16b2c978946f",
-        "defaultScope": "eventiva.integrations",
         "mainFile": "index.ts",
         "rootDir": "projects/integrations/cloudflare/kv-store"
     },
@@ -222,9 +221,8 @@
     },
     "launchdarkly": {
         "name": "launchdarkly",
-        "scope": "",
+        "scope": "eventiva.integrations",
         "version": "9956b8bcf1255b525c1f62fc75b2f1a73508e540",
-        "defaultScope": "eventiva.integrations",
         "mainFile": "index.ts",
         "rootDir": "projects/integrations/launchdarkly"
     },
