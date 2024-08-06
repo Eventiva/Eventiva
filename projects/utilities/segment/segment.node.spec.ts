@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: segment.node.spec.ts
- * Last Modified: 02/08/2024, 17:22
+ * Last Modified: 06/08/2024, 19:18
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,

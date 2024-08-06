@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: jest.config.cjs
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,31 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+/**
+ * @see https://bit.dev/reference/jest/jest-config
+ */
+const jestConfig = require("@bitdev/node.node-env/config/jest.config.cjs");
 
+const {
+    generateNodeModulesPattern,
+} = require("@teambit/dependencies.modules.packages-excluder");
 
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
+const packagesToExclude = ["@teambit", "@my-org", "my-package-name"];
 
-export default LoggerAspect
-export { LoggerAspect }
+/**
+ * by default, jest excludes all node_modules from the transform (compilation) process.
+ * the following config excludes all node_modules, except for Bit components, style modules, and the packages that are listed.
+ */
+module.exports = {
+    ...jestConfig,
+    testEnvironment: "node",
+    setupFiles: [],
+    setupFilesAfterEnv: [],
+    transformIgnorePatterns: [
+        "^.+.module.(css|sass|scss)$",
+        generateNodeModulesPattern({
+            packages: packagesToExclude,
+            excludeComponents: true,
+        }),
+    ],
+};

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: env.d.ts
+ * Last Modified: 06/08/2024, 11:54
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,18 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+/// <reference types="vite/client" />
 
+export type ImportMetaEnv = Record<string, string>;
 
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
+interface ImportMeta {
+    readonly env: ImportMetaEnv;
+}
 
-export default LoggerAspect
-export { LoggerAspect }
+declare global {
+    namespace NodeJS {
+        interface ProcessEnv {
+            [ key: string ]: string;
+        }
+    }
+}

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: prettier.config.cjs
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,11 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+const prettierConfig = require('@bitdev/node.node-env/config/prettier.config.cjs');
 
-
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
-
-export default LoggerAspect
-export { LoggerAspect }
+/**
+ * @see https://bit.dev/reference/prettier/prettier-config
+ */
+module.exports = {
+    ...prettierConfig,
+};

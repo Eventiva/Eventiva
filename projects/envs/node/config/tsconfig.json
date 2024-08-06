@@ -1,0 +1,22 @@
+{
+  "extends": "@bitdev/node.node-env/config/tsconfig.json",
+  "compilerOptions": {
+    "target": "es2020",
+    "outDir": "./dist",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
+  },
+  "include": [
+    "**/*",
+    "**/*.json",
+    ".mocharc.js"
+  ],
+  "exclude": [
+    "artifacts",
+    "public",
+    "dist",
+    "node_modules",
+    "package.json",
+    "**/*.cjs"
+  ]
+}

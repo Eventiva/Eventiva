@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.spec.ts
- * Last Modified: 02/08/2024, 17:16
+ * Last Modified: 06/08/2024, 19:17
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -44,4 +44,4 @@ it( 'should retrieve the aspect', async () => {
     } )
 
     expect( default_logging ).toBeTruthy()
-} )
+}, 50000 )

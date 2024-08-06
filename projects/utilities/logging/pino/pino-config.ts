@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino-config.ts
- * Last Modified: 25/07/2024, 14:27
+ * Last Modified: 06/08/2024, 16:29
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,7 +35,7 @@
  */
 
 
-import { LoggerInstance } from '@eventiva/utilities.logging.logger'
+import { LoggerUtil } from '@eventiva/utilities.logging.logger'
 import pino, { LoggerOptions } from 'pino'
 
 export type ExtendedConfig = 'trace' | 'debug' | 'info' | 'notice' | 'alert' | 'emergency'
@@ -49,4 +49,4 @@ export type Log = pino.Logger<ExtendedConfig>
  *
  * @export
  */
-export type PinoConfig = {} & LoggerInstance['config'] & LoggerOptions;
+export type PinoConfig = {} & LoggerUtil['config'] & LoggerOptions;

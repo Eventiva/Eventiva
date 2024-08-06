@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.runtime.ts
- * Last Modified: 4/1/24, 9:51 PM
+ * Last Modified: 06/08/2024, 22:32
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,7 +35,7 @@
  */
 
 
-import LoggerAspect, { type LoggerConfig, LoggerNode, LoggerType } from '@eventiva/utilities.logging.logger'
+import LoggerAspect, { type Logger, type LoggerConfig, LoggerNode } from '@eventiva/utilities.logging.logger'
 import i18next, { i18n } from 'i18next'
 import { I18NConfig } from './i18n-config.js'
 import { common as enCommon } from './locales/en/common.js'
@@ -72,7 +72,6 @@ export class I18NNode {
         fallbackLng: 'en',
         defaultNS: 'common',
         fallbackNS: 'common',
-        debug: true,
         resources: {
             en: {
                 common: enCommon
@@ -82,7 +81,8 @@ export class I18NNode {
             }
         },
         logger: {
-            level: 'trace'
+            level: 'trace',
+            module: 'utilities:i18n'
         }
     }
 
@@ -108,7 +108,7 @@ export class I18NNode {
      *
      * @protected
      */
-    protected log: LoggerType<never>
+    protected log: Logger<never>['logger']
 
     /**
      * Creates an instance of I18NNode.
@@ -207,7 +207,7 @@ export class I18NNode {
                 options: config
             }
         ] )
-        this.log = this.logging.getLogger( name ).logger
+        this.log = this.logging.getLogger( name )
     }
 
     /**

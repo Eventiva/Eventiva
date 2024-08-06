@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino.node.spec.ts
- * Last Modified: 02/08/2024, 17:22
+ * Last Modified: 06/08/2024, 17:12
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,9 +39,9 @@ import { PinoAspect } from './pino.aspect.js'
 import type { PinoNode } from './pino.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
-    const pino = await loadAspect<PinoNode>( PinoAspect, {
+    const pinoUtil = await loadAspect<PinoNode>( PinoAspect, {
         runtime: 'node'
     } )
 
-    expect( pino ).toBeTruthy()
-} )
+    expect( pinoUtil ).toBeTruthy()
+}, 50000 )

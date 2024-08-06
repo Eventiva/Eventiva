@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.runtime.ts
- * Last Modified: 25/07/2024, 03:26
+ * Last Modified: 06/08/2024, 12:58
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -71,7 +71,8 @@ export class DefaultLoggingNode
     static readonly defaultConfig: DefaultLoggingConfig = {
         name: 'default_logging',
         logger: {
-            level: 'info'
+            level: 'info',
+            module: 'discord:default_logging'
         }
     }
 

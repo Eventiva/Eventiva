@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: docs.tsx
+ * Last Modified: 06/08/2024, 11:55
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,10 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+import {createDocsTemplate} from '@teambit/docs.docs-template';
 
-
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
-
-export default LoggerAspect
-export { LoggerAspect }
+/**
+ * customize the bit documentation template or
+ * replace this with one of your own.
+ */
+export default createDocsTemplate();

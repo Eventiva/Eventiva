@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino.node.runtime.ts
- * Last Modified: 29/07/2024, 20:46
+ * Last Modified: 06/08/2024, 19:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,21 +34,22 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect, LoggerConfig, LoggerInstance, LoggerNode } from '@eventiva/utilities.logging.logger'
+import { LoggerAspect, LoggerNode, LoggerUtil } from '@eventiva/utilities.logging.logger'
 import { pino } from 'pino'
 import { pinoCaller } from 'pino-caller'
 import { build, PrettyStream } from 'pino-pretty'
 import { ExtendedConfig, Log, PinoConfig } from './pino-config.js'
 
 export class PinoNode
-    extends LoggerInstance {
-    static readonly dependencies = [ LoggerAspect ]
+    extends LoggerUtil {
 
-    static readonly defaultConfig: LoggerConfig<ExtendedConfig> = {
-        level: 'info'
+    static override readonly dependencies = [ LoggerAspect ]
+    static override readonly defaultConfig: LoggerUtil['config'] = {
+        level: 'info',
+        module: 'utilities:logging:pino'
     }
 
-    stream: PrettyStream = build( {
+    private stream: PrettyStream = build( {
         colorize: true
     } )
 
@@ -78,7 +79,7 @@ export class PinoNode
             }
         }, this.stream )
 
-    static async provider (
+    static override async provider (
         [ logger ]: [ LoggerNode ],
         config: PinoConfig
     ) {
@@ -86,7 +87,7 @@ export class PinoNode
         logger.registerUtil(
             [
                 {
-                    name: 'console',
+                    name: config.module,
                     util: pinoUtil
                 }
             ]
@@ -94,61 +95,68 @@ export class PinoNode
         return pinoUtil
     }
 
-    trace = (
+    override trace = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) =>
         this.pino.trace( obj, msg, ...args )
 
-    debug = (
+    override debug = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) =>
         this.pino.debug( obj, msg, ...args )
 
-    info = (
+    override info = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) =>
         this.pino.info( obj, msg, ...args )
 
-    notice = (
+    override notice = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) =>
         this.pino.notice( obj, msg, ...args )
 
-    warning = (
+    override warning = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) =>
         this.pino.warn( obj, msg, ...args )
 
-    error = (
+    override warn = (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) =>
+        this.pino.warn( obj, msg, ...args )
+
+    override error = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) =>
         this.pino.error( obj, msg, ...args )
 
-    critical = (
+    override critical = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => this.pino.fatal( obj, msg, ...args )
 
-    alert = (
+    override alert = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => this.pino.alert( obj, msg, ...args )
 
-    emergency = (
+    override emergency = (
         msg: string,
         obj?: object,
         ...args: any[]

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger-config.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 06/08/2024, 12:40
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,7 +39,7 @@
 import { DefaultLevels } from './logger.node.runtime.js'
 
 export type LoggerConfig<TLevels extends string = never> = {
-    module?: string,
+    module: string,
     level: TLevels | typeof DefaultLevels[number]
     customLevels?: TLevels[]
 };

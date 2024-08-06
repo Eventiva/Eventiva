@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: node.bit-env.ts
- * Last Modified: 29/07/2024, 18:55
+ * Last Modified: 06/08/2024, 12:14
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,45 +38,176 @@
  * this env extends the Bit official Harmony environment.
  * learn more: https://bit.cloud/bitdev/harmony/harmony-env
  */
-import { HarmonyEnv } from '@bitdev/harmony.harmony-env'
-import { NodeAppTemplate, NodeEnvTemplate, NodeModuleTemplate } from '@bitdev/node.generators.node-templates'
+import { NodeEnv as BitdevNode } from '@bitdev/node.node-env'
 import { HarmonyWorkspaceStarter } from '@bitdev/symphony.generators.symphony-starters'
-import { Generator } from '@eventiva/envs.generator'
+import { SymphonyTemplates } from '@bitdev/symphony.generators.symphony-templates'
 import { DiscordChangelog } from '@eventiva/workflows.discord-changelog'
 import { GenerateChangelogTask } from '@eventiva/workflows.generate-changelog'
+import { tailwindConfig } from '@frontend/tailwind.config.tailwind'
+import { tailwindTransformer } from '@frontend/tailwind.transformers.tailwind'
 import { Pipeline } from '@teambit/builder'
+import { Compiler } from '@teambit/compiler'
+import { ESLintLinter } from '@teambit/defender.eslint-linter'
+import { PrettierFormatter } from '@teambit/defender.prettier-formatter'
+import { EnvHandler } from '@teambit/envs'
 import { StarterList } from '@teambit/generator'
+import { PackageGenerator } from '@teambit/pkg'
+import type { Preview } from '@teambit/preview'
+import { ReactPreview } from '@teambit/preview.react-preview'
+import { Tester } from '@teambit/tester'
+import { NativeCompileCache } from '@teambit/toolbox.performance.v8-cache'
+import { resolveTypes, TypescriptCompiler, TypescriptTask } from '@teambit/typescript.typescript-compiler'
+import { VitestTask, VitestTester } from '@teambit/vite.vitest-tester'
+import { createRequire } from 'node:module'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+// Disable v8-caching because it breaks ESM loaders
+NativeCompileCache.uninstall()
+
+const require = createRequire( import.meta.url )
+const fileFolderPath = dirname( fileURLToPath( import.meta.url ) )
 
 export class NodeEnv
-    extends HarmonyEnv {
-    /* shorthand name for the environment */
-    name = 'Eventiva Node Environment'
+    extends BitdevNode {
 
-    generators () {
-        return Generator( {
-            templates: [
-                NodeEnvTemplate.from(),
-                NodeModuleTemplate.from(),
-                // PlatformTemplate.from(),
-                NodeAppTemplate.from()
-                // ExpressAppTemplate.from(),
-                // BitAppTemplate.from(),
-                // GraphQLServerTemplate.from()
+    /* shorthand name for the environment */
+    name = 'eventiva-env'
+
+    type = 'harmony'
+
+    icon = 'https://static.bit.dev/extensions-icons/harmony.svg'
+
+    protected tsconfigPath = require.resolve( './config/tsconfig.json' )
+
+    protected tsTypesPath = './types'
+
+    protected jestConfigPath = require.resolve( './config/jest.config.cjs' )
+
+    protected eslintConfigPath = require.resolve( './config/eslintrc.cjs' )
+
+    protected eslintExtensions = [ '.ts', '.tsx', '.js', '.jsx', '.mjs' ]
+
+    protected prettierConfigPath = require.resolve( './config/prettier.config.cjs' )
+
+    protected previewMounter = require.resolve( './preview/mounter.js' )
+
+    /* the compiler to use during development */
+    override compiler (): EnvHandler<Compiler> {
+        return TypescriptCompiler.from( {
+            tsconfig: this.tsconfigPath,
+            esm: true,
+            types: resolveTypes( fileFolderPath, [ this.tsTypesPath ] )
+        } )
+    }
+
+    /**
+     * returns an instance of a Bit tester implementation. use components like mocha-tester or
+     * jest-tester or [build your own](http/://bit.dev/reference/testing/set-up-tester).
+     */
+    override tester (): EnvHandler<Tester> {
+        return VitestTester.from( {
+            config: require.resolve( './config/vitest.config.mjs' )
+        } )
+        // return MochaTester.from({
+        //   mochaConfigPath: require.resolve('./config/.mocharc.js'),
+        //   babelConfig: require.resolve('./config/mocha-babel-config.js'),
+        // });
+    }
+
+    /* the linter to use during development */
+    override linter () {
+        return ESLintLinter.from( {
+            tsconfig: this.tsconfigPath,
+            configPath: this.eslintConfigPath,
+            pluginsPath: fileFolderPath,
+            extensions: this.eslintExtensions
+        } )
+    }
+
+    override preview (): EnvHandler<Preview> {
+        return ReactPreview.from( {
+            mounter: this.previewMounter,
+            previewConfig: {
+                splitComponentBundle: false,
+                strategyName: 'component'
+            },
+            transformers: [
+                tailwindTransformer( {
+                    config: tailwindConfig,
+                    cdn: true
+                } )
             ]
         } )
     }
 
-    starters () {
+    override generators () {
+        return SymphonyTemplates()
+    }
+
+    // override generators () {
+    //     return Generator( {
+    //         templates: [
+    //             NodeEnvTemplate.from(),
+    //             NodeModuleTemplate.from(),
+    //             // PlatformTemplate.from(),
+    //             NodeAppTemplate.from()
+    //             // ExpressAppTemplate.from(),
+    //             // BitAppTemplate.from(),
+    //             // GraphQLServerTemplate.from()
+    //         ]
+    //     } )
+    // }
+
+    /**
+     * the formatter to use during development
+     * (source files are not formatted as part of the components' build)
+     */
+    override formatter () {
+        return PrettierFormatter.from( {
+            configPath: this.prettierConfigPath
+        } )
+    }
+
+    override package () {
+        return PackageGenerator.from( {
+            packageJson: {
+                main: 'dist/{main}.js',
+                types: '{main}.ts',
+                type: 'module'
+            },
+            npmIgnore: this.npmIgnore
+        } )
+    }
+
+    /**
+     * define the build pipeline for a component.
+     * pipelines are optimized for performance and consistency.
+     * making sure every component is independently built and tested.
+     */
+    override build () {
+        return Pipeline.from( [
+            TypescriptTask.from( {
+                tsconfig: this.tsconfigPath,
+                types: resolveTypes( fileFolderPath, [ this.tsTypesPath ] )
+            } ),
+            VitestTask.from( {
+                config: require.resolve( './config/vitest.config.mjs' )
+            } )
+        ] )
+    }
+
+    override starters () {
         return StarterList.from( [
             HarmonyWorkspaceStarter.from()
         ] )
     }
 
-    snap () {
+    override snap () {
         return Pipeline.from( [] )
     }
 
-    tag () {
+    override tag () {
         return Pipeline.from( [
             GenerateChangelogTask.from(),
             DiscordChangelog.from()

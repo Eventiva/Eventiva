@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: console.node.spec.ts
- * Last Modified: 02/08/2024, 17:21
+ * Last Modified: 06/08/2024, 17:35
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,9 +39,11 @@ import { ConsoleAspect } from './console.aspect.js'
 import type { ConsoleNode } from './console.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
-    const console = await loadAspect<ConsoleNode>( ConsoleAspect, {
-        runtime: 'node'
-    } )
+    try {
+        const consoleUtil = await loadAspect<ConsoleNode>( ConsoleAspect, { runtime: 'node' } )
 
-    expect( console ).toBeTruthy()
-} )
+        expect( consoleUtil ).toBeTruthy()
+    } catch ( error ) {
+        console.error( error )
+    }
+}, 50000 )

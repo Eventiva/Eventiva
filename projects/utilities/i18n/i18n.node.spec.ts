@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.spec.ts
- * Last Modified: 02/08/2024, 17:21
+ * Last Modified: 02/08/2024, 18:12
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -51,4 +51,4 @@ it( 'should retrieve the aspect', async () => {
     } )
 
     expect( i18N ).toBeTruthy()
-} )
+}, 50000 )

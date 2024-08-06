@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: module.ts
- * Last Modified: 4/1/24, 9:38 PM
+ * Last Modified: 06/08/2024, 22:32
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,7 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerInstance, LoggerNode, LoggerType } from '@eventiva/utilities.logging.logger'
+import { Logger, LoggerConfig, LoggerNode } from '@eventiva/utilities.logging.logger'
 import type { Command } from './command.js'
 import { DiscordJSAspect } from './discordjs.aspect.js'
 import type { DiscordJSNode } from './discordjs.node.runtime.js'
@@ -61,7 +61,7 @@ export type Resources = {
  */
 export type ModuleConfig = {
     name: string
-    logger: LoggerInstance['config']
+    logger: LoggerNode['config']
 }
 
 /**
@@ -75,7 +75,7 @@ export type ModuleConfig = {
  */
 export class DiscordJsModule<C extends ModuleConfig = {
     name: string,
-    logger: LoggerInstance['config']
+    logger: LoggerNode['config']
 }> {
     /**
      * The default configuration for the module. It specifies the name of the module and the logger level.
@@ -86,7 +86,8 @@ export class DiscordJsModule<C extends ModuleConfig = {
     static readonly defaultConfig: ModuleConfig = {
         name: 'unnamed_module',
         logger: {
-            level: 'info'
+            level: 'info',
+            module: 'discord:unnamed_module'
         }
     }
 
@@ -104,7 +105,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
      *
      * @public
      */
-    public log: LoggerType<never>
+    public log: Logger<never>['logger']
 
     /**
      * The name of the entity. It must be a string.
@@ -122,6 +123,8 @@ export class DiscordJsModule<C extends ModuleConfig = {
      */
     public resources: Resources = {}
 
+    private isInitialised = false
+
     /**
      * Creates an instance of ReadyNode.
      * @author Jonathan Stevens (@TGTGamer)
@@ -134,10 +137,13 @@ export class DiscordJsModule<C extends ModuleConfig = {
         protected config: C,
         public discord: DiscordJSNode
     ) {
-        this.log.trace( 'Waiting on discord module to initialize' )
+        console.trace( 'Waiting on discord module to initialize' )
         this.name = config.name
         while ( !discord.isInitialised ) {
             // this forces the application to wait for discord to connect
+        }
+        this.setupLogger( config.name, config.logger )
+        while ( !this.isInitialised ) {
         }
         this.log.trace( discord.i18n.t( 'discord:clientStarted' ) )
     }
@@ -187,8 +193,19 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * @param log The log to set.
      * @returns Sets the log for the DiscordJsModule and returns the module instance.
      */
-    public setLog ( log: LoggerNode['log'] ) {
+    public setLog ( log: Logger<never>['logger'] ) {
         this.log = log
         return this
+    }
+
+    private async setupLogger (
+        module: string,
+        config: LoggerConfig
+    ): Promise<void> {
+        await this.discord.setupLogger(
+            `discord:${ module }`,
+            { level: 'trace', ...config }
+        )
+        this.isInitialised = true
     }
 }

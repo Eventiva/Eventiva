@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: style.d.ts
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,50 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+/**
+ * this file is copied into your components' build output.
+ */
 
+declare module '*.module.css' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+declare module '*.module.scss' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+declare module '*.module.sass' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
 
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
+declare module '*.module.less' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
 
-export default LoggerAspect
-export { LoggerAspect }
+declare module '*.less' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.css' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.sass' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.scss' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.mdx' {
+    const component: any
+    export default component
+}
+

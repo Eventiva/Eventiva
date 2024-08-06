@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: asset.d.ts
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,36 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+/**
+ * this file is copied into your components' build output.
+ */
 
+declare module '*.png' {
+    const value: any
+    export = value;
+}
+declare module '*.svg' {
+    import type { FunctionComponent, SVGProps } from 'react'
 
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
-
-export default LoggerAspect
-export { LoggerAspect }
+    export const ReactComponent: FunctionComponent<
+        SVGProps<SVGSVGElement> & { title?: string }
+    >
+    const src: string
+    export default src
+}
+declare module '*.jpg' {
+    const value: any
+    export = value;
+}
+declare module '*.jpeg' {
+    const value: any
+    export = value;
+}
+declare module '*.gif' {
+    const value: any
+    export = value;
+}
+declare module '*.bmp' {
+    const value: any
+    export = value;
+}

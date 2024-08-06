@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: console.node.runtime.ts
- * Last Modified: 4/1/24, 9:52 PM
+ * Last Modified: 06/08/2024, 17:16
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,81 +34,45 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect, LoggerConfig, LoggerInstance, LoggerNode } from '@eventiva/utilities.logging.logger'
+import { LoggerAspect, LoggerNode, LoggerUtil } from '@eventiva/utilities.logging.logger'
 
 export class ConsoleNode
-    extends LoggerInstance {
-    static readonly dependencies = [ LoggerAspect ]
+    extends LoggerUtil {
+    static override readonly dependencies = [ LoggerAspect ]
 
-    static readonly defaultConfig: LoggerConfig = {
-        level: 'info'
+    static override readonly defaultConfig: LoggerUtil['config'] = {
+        level: 'info',
+        module: 'utilities:logging:console'
     }
 
     // eslint-disable-next-line no-console
     private readonly console = console
+    override trace = this.console.trace
+    override debug = this.console.debug
+    override info = this.console.info
+    override notice = this.console.log
+    override warning = this.console.warn
+    override warn = this.console.warn
+    override error = this.console.error
+    override critical = this.console.error
+    override alert = this.console.error
+    override emergency = this.console.error
 
-    static async provider (
+    static override async provider (
         [ logger ]: [ LoggerNode ],
-        config: LoggerInstance['config']
+        config: LoggerUtil['config']
     ) {
-        const console = new ConsoleNode( config )
+        const consoleUtil = new ConsoleNode( config )
         logger.registerUtil(
             [
                 {
-                    name: 'console',
-                    util: console
+                    name: config.module,
+                    util: consoleUtil
                 }
             ]
         )
+        return consoleUtil
     }
-
-    trace = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.console.trace( `[${ this.config.module }]: `, msg, obj, ...args )
-
-    debug = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.console.debug( `[${ this.config.module }]: `, msg, obj, ...args )
-
-    info = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.console.info( `[${ this.config.module }]: `, msg, obj, ...args )
-
-    notice = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.console.log( `[${ this.config.module }]: `, msg, obj, ...args )
-
-    warning = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.console.warn( `[${ this.config.module }]: `, msg, obj, ...args )
-
-    error = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.console.error( `[${ this.config.module }]: `, msg, obj, ...args )
-
-    critical = this.error
-
-    alert = this.error
-
-    emergency = this.error
 }
 
 export default ConsoleNode

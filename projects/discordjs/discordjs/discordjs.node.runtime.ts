@@ -1,7 +1,7 @@
 /*
- * Project: workspace.jsonc
+ * Project: Eventiva
  * File: discordjs.node.runtime.ts
- * Last Modified: 26/04/2024, 13:37
+ * Last Modified: 06/08/2024, 22:32
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,7 +35,7 @@
  */
 
 import { I18NAspect, type I18NNode, Resource } from '@eventiva/utilities.i18n'
-import { LoggerAspect, LoggerConfig, LoggerNode, LoggerType } from '@eventiva/utilities.logging.logger'
+import { Logger, LoggerAspect, LoggerConfig, LoggerNode } from '@eventiva/utilities.logging.logger'
 import { Client, GatewayIntentBits } from 'discord.js'
 import type { Command, CommandSlot } from './command.js'
 import type { DiscordjsConfig } from './discordjs-config.js'
@@ -84,7 +84,8 @@ export class DiscordJSNode {
             GatewayIntentBits.MessageContent
         ],
         logger: {
-            level: process.env[ 'DISCORD.LOGGER.LEVEL' ] as DiscordjsConfig['logger']['level'] ?? 'info'
+            level: process.env[ 'DISCORD.LOGGER.LEVEL' ] as DiscordjsConfig['logger']['level'] ?? 'info',
+            module: 'discordjs_core'
         }
     }
 
@@ -94,7 +95,7 @@ export class DiscordJSNode {
 
     public isInitialised = false
 
-    protected log: LoggerType<never>
+    protected log: Logger<never>['logger']
 
     constructor (
         protected config: DiscordjsConfig,
@@ -142,13 +143,6 @@ export class DiscordJSNode {
         module: DiscordJsModule,
         reload?: true
     ) {
-        if ( this.logging ) {
-            const log = await this.setupLogger(
-                `discord:${ module.name }`,
-                { level: 'trace', ...module.getConfig().logger }
-            )
-            module.setLog( log )
-        }
         this.log.trace( this.i18n.t( 'discord:modules.init', { context: 'start', name: module.name } ) )
         module.registerCommands( reload )
         module.registerEvents( reload )
@@ -267,8 +261,21 @@ export class DiscordJSNode {
         throw new Error( this.i18n.t( 'discord:commands.single.notFound', { name } ) )
     }
 
+    public async setupLogger (
+        name: string = 'discord:client',
+        config: LoggerConfig = this.config.logger
+    ) {
+        await this.logging.registerLogger( [
+            {
+                name,
+                options: config
+            }
+        ] )
+        return this.logging.getLogger( name )
+    }
+
     private async initialize () {
-        await this.setupLogger()
+        this.log = await this.setupLogger()
         this.log.trace( 'Waiting on i18nModule to initialize' )
         this.log.trace( 'Registering i18nModule resources' )
         this.registerLocale( [
@@ -324,19 +331,6 @@ export class DiscordJSNode {
         this.log.trace( this.i18n.t( 'discord:init.loggedIn' ) )
 
         this.isInitialised = true
-    }
-
-    private async setupLogger (
-        name: string = 'discord:client',
-        config: LoggerConfig = this.config.logger
-    ) {
-        await this.logging.registerLogger( [
-            {
-                name,
-                options: config
-            }
-        ] )
-        this.log = this.logging.getLogger( name ).logger
     }
 
     /**

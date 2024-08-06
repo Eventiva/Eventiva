@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: ping.node.runtime.ts
- * Last Modified: 29/07/2024, 23:36
+ * Last Modified: 06/08/2024, 12:58
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -52,7 +52,8 @@ export class PingDiscord
     static readonly defaultConfig: PingConfig = {
         name: 'PingModule',
         logger: {
-            level: 'info'
+            level: 'info',
+            module: 'discord:PingModule'
         }
     }
 

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/08/2024, 22:35
+ * File: mounter.tsx
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,21 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerAspect } from './logger.aspect.js'
+import React from 'react';
+import {createMounter} from '@teambit/react.mounter';
 
+/**
+ * use the mounter to inject and wrap your component previews
+ * with common needs like [routing](), [theming]() and [data fetching]().
+ */
+// eslint-disable-next-line react/prop-types
+export function MyReactProvider({children}: { children: React.ReactNode }) {
+    return <>{children}</>;
+}
 
-export type { LoggerNode } from './logger.node.runtime.js'
-export { LoggerUtil, type Logger } from './logger.js'
-export type { LoggerConfig } from './logger-config.js'
-
-export default LoggerAspect
-export { LoggerAspect }
+/**
+ * to replace that mounter component for different purposes, just return a function
+ * that uses ReactDOM to render a node to a div.
+ */
+// @ts-ignore
+export default createMounter(MyReactProvider) as any;

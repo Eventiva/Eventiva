@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger.ts
- * Last Modified: 4/1/24, 9:53 PM
+ * Last Modified: 06/08/2024, 22:30
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,131 +35,113 @@
  */
 
 import type { SlotRegistry } from '@bitdev/harmony.harmony'
+import { LoggerAspect } from './index.js'
 import type { LoggerConfig } from './logger-config.js'
-import LoggerNode, { LoggerType } from './logger.node.runtime.js'
+import { DefaultLevels, LoggerNode } from './logger.node.runtime.js'
 
 export type Logger<TLevels extends string> = {
     name: string,
     options?: LoggerConfig<TLevels>
-    logger: LoggerType<TLevels>
+    logger?: {
+        [level in ( typeof DefaultLevels[number] | TLevels )]: (
+            msg: string,
+            obj?: object,
+            ...args: any[]
+        ) => void;
+    }
 }
 
 export type LoggerSlot<TLevels extends string> = SlotRegistry<Logger<TLevels>>;
 
-export class LoggerInstance<CustomLevels extends string = never> {
-
-    static readonly from = LoggerInstance.create
-
-    constructor (
-        protected config: LoggerConfig<CustomLevels>,
-        private manager?: LoggerNode<CustomLevels>
-    ) {
-        if ( config.customLevels ) {
-            config.customLevels.forEach( this.getLoggingFunction )
-        }
-    }
-
-    static async create<CustomLevels extends string = never> (
-        manager: LoggerNode<CustomLevels>,
-        config: LoggerConfig<CustomLevels>
-    ): Promise<LoggerType<CustomLevels>> {
-        return new LoggerInstance( config, manager ) as LoggerType<CustomLevels>
-    }
-
-    debug = (
+export type LoggerUtilType = {
+    [level in ( typeof DefaultLevels[number] )]: (
         msg: string,
         obj?: object,
         ...args: any[]
-    ) =>
-        this.executeLogging( 'debug', msg, obj, ...args )
-
-    info = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'info', msg, obj, ...args )
-
-    notice = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'notice', msg, obj, ...args )
-
-    warning = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'warning', msg, obj, ...args )
-
-    warn = this.warning
-
-    error = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'error', msg, obj, ...args )
-
-    critical = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'critical', msg, obj, ...args )
-
-    fatal = this.critical
-
-    trace = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'trace', msg, obj, ...args )
-
-    alert = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'alert', msg, obj, ...args )
-
-    emergency = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( 'emergency', msg, obj, ...args )
-
-    log = (
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) =>
-        this.executeLogging( this.config.level, msg, obj, ...args )
-
-    private getLoggingFunction ( level: string ) {
-        this[ level ] = (
-            msg: string,
-            obj?: object,
-            ...args: any[]
-        ) =>
-            this.executeLogging( level, msg, obj, ...args )
-    }
-
-    private executeLogging (
-        loggingLevel: string,
-        msg: string,
-        obj?: object,
-        ...args: any[]
-    ) {
-        this.manager?.listUtils().forEach( utilSlot => {
-            if ( loggingLevel in utilSlot.util ) {
-                utilSlot.util[ loggingLevel ]( msg, obj, ...args )
-            }
-        } )
-    }
-
+    ) => void;
 }
+
+export class LoggerUtil<CustomLevels extends string = never>
+    implements LoggerUtilType {
+    static readonly dependencies = [ LoggerAspect ]
+    static readonly defaultConfig: LoggerConfig = {
+        level: 'info',
+        module: 'utilities:logging:undefined'
+    }
+    warning: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    critical: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    alert: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    emergency: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    trace: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    debug: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    info: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    notice: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    warn: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    error: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+    fatal: (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => void
+
+    constructor ( protected config: LoggerConfig<CustomLevels> ) {
+    }
+
+    static async provider<CustomLevels extends string = never> (
+        [ logger ]: [ LoggerNode ],
+        config: LoggerUtil['config']
+    ) {
+        const consoleUtil = new LoggerUtil( config )
+        logger.registerUtil(
+            [
+                {
+                    name: config.module,
+                    util: consoleUtil
+                }
+            ]
+        )
+        return consoleUtil
+    }
+}
+
+export default LoggerUtil

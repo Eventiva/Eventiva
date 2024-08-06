@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs-config.ts
- * Last Modified: 3/30/24, 12:21 AM
+ * Last Modified: 06/08/2024, 18:47
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,7 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { LoggerInstance } from '@eventiva/utilities.logging.logger'
+import { LoggerNode } from '@eventiva/utilities.logging.logger'
 import type { ClientOptions } from 'discord.js'
 
 /**
@@ -50,5 +50,5 @@ export type DiscordjsConfig = {
     clientSecret: string;
     guildId: string;
     startDelay: number;
-    logger: LoggerInstance['config'];
+    logger: LoggerNode['config'];
 } & ClientOptions;

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: util.ts
- * Last Modified: 3/29/24, 7:10 PM
+ * Last Modified: 06/08/2024, 22:32
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,14 +35,14 @@
  */
 
 import type { SlotRegistry } from '@bitdev/harmony.harmony'
-import { LoggerInstance } from './logger.js'
+import { LoggerUtil } from './logger.js'
 
 export interface Util {
     /**
      * name of the item
      */
     name: string;
-    util: LoggerInstance
+    util: LoggerUtil
 }
 
 export type UtilSlot = SlotRegistry<Util[]>;
