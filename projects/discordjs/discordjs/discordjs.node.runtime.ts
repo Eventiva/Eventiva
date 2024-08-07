@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs.node.runtime.ts
- * Last Modified: 06/08/2024, 22:32
+ * Last Modified: 08/08/2024, 00:52
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -271,7 +271,12 @@ export class DiscordJSNode {
                 options: config
             }
         ] )
-        return this.logging.getLogger( name )
+        const log = this.logging.getLogger( name )
+        if ( !log ) {
+            throw 'No logger'
+        }
+        this.log = log
+        return log
     }
 
     private async initialize () {

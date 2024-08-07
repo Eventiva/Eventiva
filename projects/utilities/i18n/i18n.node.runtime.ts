@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.runtime.ts
- * Last Modified: 06/08/2024, 22:32
+ * Last Modified: 08/08/2024, 00:47
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -160,17 +160,17 @@ export class I18NNode {
     registerResource ( resources: Resource[] ) {
         this.log.debug( `Registering resources. ${ resources.length } resources to be loaded.` )
         for ( const resource of resources ) {
-            this.log.trace( `Registering resource. ${ resource.lng }, ${ resource.ns }, ${ JSON.stringify( resource.resources ) }` )
+            this.log.debug( `Registering resource. ${ resource.lng }, ${ resource.ns }, ${ JSON.stringify( resource.resources ) }` )
             this.i18next = this.i18next.addResourceBundle( resource.lng, resource.ns, resource.resources )
-            this.log.trace( `Registering resource against ResourceSlot.` )
+            this.log.debug( `Registering resource against ResourceSlot.` )
             this.resourceSlot.register( resource )
-            this.log.trace( `Loading resource ${ resource.lng } into i18next.` )
+            this.log.debug( `Loading resource ${ resource.lng } into i18next.` )
             this.i18next.loadLanguages( resource.lng )
-            this.log.trace( `Loading namespace ${ resource.ns } into i18next.` )
+            this.log.debug( `Loading namespace ${ resource.ns } into i18next.` )
             this.i18next.loadNamespaces( resource.ns )
-            this.log.trace( `Loading resources into i18next.` )
+            this.log.debug( `Loading resources into i18next.` )
             this.i18next.loadResources()
-            this.log.trace( `Resource registered.` )
+            this.log.debug( `Resource registered.` )
         }
         this.log.debug( `Resources registered against ResourceSlot. Now hosting ${ this.resourceSlot.length } Resources` )
         return this
@@ -220,9 +220,9 @@ export class I18NNode {
      */
     private async init () {
         await this.setupLogger()
-        this.log.trace( `Initializing i18next with config: ${ JSON.stringify( this.config ) }` )
+        this.log.debug( `Initializing i18next with config: ${ JSON.stringify( this.config ) }` )
         await this.i18next.init( this.config )
-        this.log.trace( `i18next initialized.` )
+        this.log.debug( `i18next initialized.` )
         return this
     }
 }

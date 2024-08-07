@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.spec.ts
- * Last Modified: 06/08/2024, 19:17
+ * Last Modified: 07/08/2024, 20:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,12 +35,19 @@
  */
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
+import { DiscordJSAspect } from '@eventiva/discordjs.discordjs'
+import { I18NAspect } from '@eventiva/utilities.i18n'
+import { ConsoleAspect } from '@eventiva/utilities.logging.console'
+import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 import { DefaultLoggerAspect } from './default_logging.aspect.js'
 import type { DefaultLoggingNode } from './default_logging.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
     const default_logging = await loadAspect<DefaultLoggingNode>( DefaultLoggerAspect, {
-        runtime: 'node'
+        runtime: 'node',
+        aspects: [
+            I18NAspect, LoggerAspect, ConsoleAspect, DiscordJSAspect
+        ]
     } )
 
     expect( default_logging ).toBeTruthy()

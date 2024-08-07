@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: ping.node.runtime.ts
- * Last Modified: 06/08/2024, 12:58
+ * Last Modified: 08/08/2024, 00:50
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -58,13 +58,6 @@ export class PingDiscord
     }
 
     public resources: Resources = {}
-
-    constructor (
-        protected config: PingConfig,
-        discordJSDiscord: DiscordJSDiscord
-    ) {
-        super( config, discordJSDiscord )
-    }
 
     static async provider (
         [ discordJS ]: [ DiscordJSDiscord ],

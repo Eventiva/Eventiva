@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: ping.discord.spec.ts
- * Last Modified: 06/08/2024, 19:17
+ * Last Modified: 07/08/2024, 20:38
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,13 +35,20 @@
  */
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
+import { DiscordJSAspect } from '@eventiva/discordjs.discordjs'
+import { I18NAspect } from '@eventiva/utilities.i18n'
+import { ConsoleAspect } from '@eventiva/utilities.logging.console'
+import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 import { PingAspect } from './ping.aspect.js'
 import type { PingDiscord } from './ping.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
     const ping = await loadAspect<PingDiscord>( PingAspect, {
-        runtime: 'discord'
+        runtime: 'node',
+        aspects: [
+            I18NAspect, LoggerAspect, ConsoleAspect, DiscordJSAspect
+        ]
     } )
 
     expect( ping ).toBeTruthy()
-} )
+}, 50000 )
