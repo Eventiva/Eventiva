@@ -1,0 +1,23 @@
+---
+description: Basic Tailwind config for a Bit project
+tags: ['tailwind', 'css', 'module', 'preset']
+---
+
+This component is a basic Tailwind config for a Bit project. It is a preset that
+can be used to quickly set up a Tailwind project by using the [Tailwind
+transformer](https://bit.cloud/learnbit/styling/transformers/tailwind).
+
+This config contains a preset for React projects, it gets all the TSX and JSX
+files of the workspace and applies them to the config.
+
+If you want to configure the preset you may want to modify the files patterns in it.
+
+```ts
+// preset.ts
+import { globSync } from 'glob';
+
+// example of a glob pattern to scan also .vue files
+const content = globSync(['**/*.{vue,tsx,jsx}'], {
+  ignore: ['**/node_modules/**'],
+});
+```
