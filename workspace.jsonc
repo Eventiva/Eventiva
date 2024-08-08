@@ -61,10 +61,8 @@
   },
   "teambit.generator/generator": {
     "envs": [
-      "frontend.nextjs/nextjs-env",
-      "frontend.shadcn-ui/shadcn-ui-env",
-      //      "eventiva.envs/node"
-      "bitdev.symphony/envs/symphony-env"
+      //            "eventiva.envs/node"
+      //      "bitdev.symphony/envs/symphony-env"
     ]
   },
   "teambit.dependencies/dependency-resolver": {
@@ -89,9 +87,11 @@
         "@bitdev/symphony.symphony-platform": "1.0.0",
         "@frontend/nextjs.templates.generators": "^0.4.6",
         "@frontend/nextjs.templates.starters": "^0.4.5",
+        "@frontend/shadcn-ui.generators.shadcn-ui": "^0.0.8",
         "@frontend/tailwind.config.tailwind": "^2.1.3",
         "@frontend/tailwind.plugin": "^1.1.3",
         "@frontend/tailwind.transformers.tailwind": "^2.0.4",
+        "@frontend/tailwind.utils.define-config": "^1.1.3",
         "@launchdarkly/node-server-sdk": "^9.5.0",
         "@segment/analytics-node": "^2.1.2",
         "@teambit/defender.eslint-linter": "1.0.37",
@@ -109,12 +109,16 @@
         "@vitejs/plugin-react": "^4.3.1",
         "autoprefixer": "^10.4.20",
         "discord.js": "14.15.3",
+        "eslint-config-prettier": "^9.1.0",
+        "glob": "^10.2.6",
         "i18next": "23.12.2",
         "openai": "^4.53.2",
         "pino": "9.3.2",
         "pino-pretty": "11.2.2",
         "postcss": "^8.4.41",
-        "tailwindcss": "^3.4.7",
+        "react": "^18.2.0",
+        "style-dictionary": "^4.0.1",
+        "tailwindcss": "^3.4.9",
         "vite": "^5.3.5"
       },
       "peerDependencies": {}
@@ -144,5 +148,6 @@
       }
     }
   }
-  //  "eventiva.platforms/discord/support": {} // adding this line seems to break the install....
+  //  "eventiva.platforms/discord/support": {} // adding this line seems to break the install....,
+  "eventiva.workflows/tailwind-to-style-dictionary": {}
 }

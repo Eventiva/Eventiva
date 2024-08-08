@@ -142,6 +142,33 @@
         "mainFile": "index.ts",
         "rootDir": "projects/entities/communities/resourcetypes"
     },
+    "config/tailwind": {
+        "name": "config/tailwind",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.envs",
+        "mainFile": "index.ts",
+        "rootDir": "projects/envs/config/tailwind",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "bitdev.node/node-env"
+            },
+            "teambit.dependencies/dependency-resolver": {},
+            "teambit.compositions/compositions": {},
+            "teambit.docs/docs": {},
+            "teambit.preview/preview": {},
+            "teambit.component/dev-files": {},
+            "teambit.pipelines/builder": {},
+            "teambit.component/forking": {
+                "forkedFrom": {
+                    "scope": "learnbit.styling",
+                    "name": "config/tailwind",
+                    "version": "0.0.2"
+                }
+            },
+            "bitdev.node/node-env@2.0.26": {}
+        }
+    },
     "discord-changelog": {
         "name": "discord-changelog",
         "scope": "eventiva.workflows",
@@ -309,6 +336,34 @@
         "version": "1dae7981bd39c7f996cfcf7949d9171439a0e3f5",
         "mainFile": "index.ts",
         "rootDir": "projects/entities/segment/user"
+    },
+    "style-dictionary": {
+        "name": "style-dictionary",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.workflows",
+        "mainFile": "index.ts",
+        "rootDir": "projects/workflows/style-dictionary",
+        "config": {
+            "bitdev.general/envs/bit-aspect-env@1.0.8": {},
+            "teambit.envs/envs": {
+                "env": "bitdev.general/envs/bit-aspect-env"
+            }
+        }
+    },
+    "tailwind-to-style-dictionary": {
+        "name": "tailwind-to-style-dictionary",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.workflows",
+        "mainFile": "index.ts",
+        "rootDir": "projects/workflows/tailwind-to-style-dictionary",
+        "config": {
+            "bitdev.general/envs/bit-aspect-env@1.0.8": {},
+            "teambit.envs/envs": {
+                "env": "bitdev.general/envs/bit-aspect-env"
+            }
+        }
     },
     "$schema-version": "17.0.0"
 }
