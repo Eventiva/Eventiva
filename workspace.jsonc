@@ -149,5 +149,4 @@
     }
   }
   //  "eventiva.platforms/discord/support": {} // adding this line seems to break the install....,
-  "eventiva.workflows/tailwind-to-style-dictionary": {}
 }
