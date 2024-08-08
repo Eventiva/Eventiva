@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: node.bit-env.ts
- * Last Modified: 06/08/2024, 12:14
+ * Last Modified: 09/08/2024, 00:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -40,17 +40,17 @@
  */
 import { NodeEnv as BitdevNode } from '@bitdev/node.node-env'
 import { HarmonyWorkspaceStarter } from '@bitdev/symphony.generators.symphony-starters'
-import { SymphonyTemplates } from '@bitdev/symphony.generators.symphony-templates'
+import { tailwindConfig } from '@eventiva/envs.config.tailwind'
 import { DiscordChangelog } from '@eventiva/workflows.discord-changelog'
 import { GenerateChangelogTask } from '@eventiva/workflows.generate-changelog'
-import { tailwindConfig } from '@frontend/tailwind.config.tailwind'
+import { ShadcnUiTemplate } from '@frontend/shadcn-ui.generators.shadcn-ui'
 import { tailwindTransformer } from '@frontend/tailwind.transformers.tailwind'
 import { Pipeline } from '@teambit/builder'
 import { Compiler } from '@teambit/compiler'
 import { ESLintLinter } from '@teambit/defender.eslint-linter'
 import { PrettierFormatter } from '@teambit/defender.prettier-formatter'
 import { EnvHandler } from '@teambit/envs'
-import { StarterList } from '@teambit/generator'
+import { StarterList, TemplateList } from '@teambit/generator'
 import { PackageGenerator } from '@teambit/pkg'
 import type { Preview } from '@teambit/preview'
 import { ReactPreview } from '@teambit/preview.react-preview'
@@ -65,7 +65,7 @@ import { fileURLToPath } from 'node:url'
 // Disable v8-caching because it breaks ESM loaders
 NativeCompileCache.uninstall()
 
-const require = createRequire( import.meta.url )
+const localRequire = createRequire( import.meta.url )
 const fileFolderPath = dirname( fileURLToPath( import.meta.url ) )
 
 export class NodeEnv
@@ -78,19 +78,19 @@ export class NodeEnv
 
     icon = 'https://static.bit.dev/extensions-icons/harmony.svg'
 
-    protected tsconfigPath = require.resolve( './config/tsconfig.json' )
+    protected tsconfigPath = localRequire.resolve( './config/tsconfig.json' )
 
     protected tsTypesPath = './types'
 
-    protected jestConfigPath = require.resolve( './config/jest.config.cjs' )
+    protected jestConfigPath = localRequire.resolve( './config/jest.config.cjs' )
 
-    protected eslintConfigPath = require.resolve( './config/eslintrc.cjs' )
+    protected eslintConfigPath = localRequire.resolve( './config/eslintrc.cjs' )
 
     protected eslintExtensions = [ '.ts', '.tsx', '.js', '.jsx', '.mjs' ]
 
-    protected prettierConfigPath = require.resolve( './config/prettier.config.cjs' )
+    protected prettierConfigPath = localRequire.resolve( './config/prettier.config.cjs' )
 
-    protected previewMounter = require.resolve( './preview/mounter.js' )
+    protected previewMounter = localRequire.resolve( './preview/mounter.js' )
 
     /* the compiler to use during development */
     override compiler (): EnvHandler<Compiler> {
@@ -107,11 +107,11 @@ export class NodeEnv
      */
     override tester (): EnvHandler<Tester> {
         return VitestTester.from( {
-            config: require.resolve( './config/vitest.config.mjs' )
+            config: localRequire.resolve( './config/vitest.config.mjs' )
         } )
         // return MochaTester.from({
-        //   mochaConfigPath: require.resolve('./config/.mocharc.js'),
-        //   babelConfig: require.resolve('./config/mocha-babel-config.js'),
+        //   mochaConfigPath: localRequire.resolve('./config/.mocharc.js'),
+        //   babelConfig: localRequire.resolve('./config/mocha-babel-config.js'),
         // });
     }
 
@@ -142,7 +142,12 @@ export class NodeEnv
     }
 
     override generators () {
-        return SymphonyTemplates()
+        return TemplateList.from( [
+            // SymphonyTemplates(),
+            ShadcnUiTemplate.from( {
+                style: 'new-york'
+            } )
+        ] )
     }
 
     // override generators () {
@@ -192,7 +197,7 @@ export class NodeEnv
                 types: resolveTypes( fileFolderPath, [ this.tsTypesPath ] )
             } ),
             VitestTask.from( {
-                config: require.resolve( './config/vitest.config.mjs' )
+                config: localRequire.resolve( './config/vitest.config.mjs' )
             } )
         ] )
     }
