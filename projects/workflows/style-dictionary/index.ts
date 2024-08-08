@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 09/08/2024, 00:06
+ * Last Modified: 09/08/2024, 00:31
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,4 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { styleDictionary } from './style-dictionary.js'
+export { StyleDictionary } from './style-dictionary.js'
