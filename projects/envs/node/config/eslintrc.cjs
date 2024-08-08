@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: eslintrc.cjs
- * Last Modified: 06/08/2024, 23:07
+ * Last Modified: 08/08/2024, 20:24
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,9 +34,26 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+require.resolve("eslint-plugin-tailwindcss")
+
 module.exports = {
-    extends: [require.resolve('@bitdev/node.node-env/config/eslintrc.cjs')],
-    // env: {
-    //   mocha: true
-    // }
-};
+    extends: [require.resolve('eslint-config-prettier'), 'plugin:tailwindcss/recommended'],
+    plugins: ['tailwindcss'],
+    rules: {
+        'tailwindcss/no-custom-classname': 'off',
+        'tailwindcss/classnames-order': 'error',
+    },
+    settings: {
+        tailwindcss: {
+            callees: ['cn', 'cva'],
+            config: require.resolve('@eventiva/envs.config.tailwind'),
+        },
+    },
+    overrides: [
+        {
+            files: ['*.ts', '*.tsx'],
+            parser: require.resolve('@typescript-eslint/parser'),
+        },
+    ],
+}
+

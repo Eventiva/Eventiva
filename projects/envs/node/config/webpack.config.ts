@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: webpack.config.ts
- * Last Modified: 06/08/2024, 23:07
+ * Last Modified: 08/08/2024, 19:53
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -43,3 +43,4 @@ import type { WebpackConfigMutator } from '@teambit/webpack'
 export const webpackTransformer = (
     configMutator: WebpackConfigMutator
 ): WebpackConfigMutator => configMutator
+

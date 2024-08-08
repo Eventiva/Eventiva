@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: mounter.tsx
- * Last Modified: 06/08/2024, 23:07
+ * Last Modified: 08/08/2024, 20:27
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,8 +34,9 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import React from 'react';
-import {createMounter} from '@teambit/react.mounter';
+import {createMounter} from '@teambit/react.mounter'
+import React from 'react'
+import '@eventiva/envs.config.tailwind/globals.tailwind.css'
 
 /**
  * use the mounter to inject and wrap your component previews
@@ -43,7 +44,17 @@ import {createMounter} from '@teambit/react.mounter';
  */
 // eslint-disable-next-line react/prop-types
 export function MyReactProvider({children}: { children: React.ReactNode }) {
-    return <>{children}</>;
+    return (
+            <div
+                    className="p-4"
+                    style={{
+                        fontFamily:
+                                '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"',
+                    }}
+            >
+                {children}
+            </div>
+    );
 }
 
 /**

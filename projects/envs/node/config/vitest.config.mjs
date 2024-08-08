@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: vitest.config.mjs
- * Last Modified: 06/08/2024, 23:07
+ * Last Modified: 08/08/2024, 19:53
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,6 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 import mdx from '@mdx-js/rollup';
@@ -42,3 +43,4 @@ export default defineConfig({
     plugins: [react(), mdx()],
     test: {},
 });
+

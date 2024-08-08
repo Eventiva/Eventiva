@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: prettier.config.cjs
- * Last Modified: 08/08/2024, 20:25
+ * File: host-dependencies.ts
+ * Last Modified: 09/08/2024, 00:08
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,46 +34,13 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-const prettierConfig = require('@bitdev/node.node-env/config/prettier.config.cjs');
-
 /**
- * @see https://bit.dev/reference/prettier/prettier-config
+ * dependencies to be bundled only once, in the env preview template, and not in each component preview.
+ * most of your peer dependencies should be listed here to avoid duplications in the preview.
  */
-
-module.exports = {
-    ...prettierConfig,
-    endOfLine: "lf",
-    semi: false,
-    singleQuote: false,
-    tabWidth: 2,
-    trailingComma: "es5",
-    importOrder: [
-        "^(react/(.*)$)|^(react$)",
-        "^(next/(.*)$)|^(next$)",
-        "<THIRD_PARTY_MODULES>",
-        "",
-        "^types$",
-        "^@/types/(.*)$",
-        "^@/config/(.*)$",
-        "^@/lib/(.*)$",
-        "^@/hooks/(.*)$",
-        "^@/components/ui/(.*)$",
-        "^@/components/(.*)$",
-        "^@/registry/(.*)$",
-        "^@/styles/(.*)$",
-        "^@/app/(.*)$",
-        "",
-        "^[./]",
-    ],
-    importOrderSeparation: false,
-    importOrderSortSpecifiers: true,
-    importOrderBuiltinModulesToTop: true,
-    importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-    importOrderMergeDuplicateImports: true,
-    importOrderCombineTypeAndValueImports: true,
-    tailwindConfig: require.resolve('@eventiva/envs.config.tailwind'),
-    plugins: [
-        require.resolve("@ianvs/prettier-plugin-sort-imports"),
-        require.resolve("prettier-plugin-tailwindcss")
-    ],
-};
+export default [
+    '@teambit/mdx.ui.mdx-scope-context',
+    '@mdx-js/react',
+    'react',
+    'react-dom'
+]

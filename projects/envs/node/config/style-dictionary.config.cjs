@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: prettier.config.cjs
- * Last Modified: 08/08/2024, 20:25
+ * File: style-dictionary.config.cjs
+ * Last Modified: 08/08/2024, 22:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,46 +34,48 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-const prettierConfig = require('@bitdev/node.node-env/config/prettier.config.cjs');
-
-/**
- * @see https://bit.dev/reference/prettier/prettier-config
- */
-
 module.exports = {
-    ...prettierConfig,
-    endOfLine: "lf",
-    semi: false,
-    singleQuote: false,
-    tabWidth: 2,
-    trailingComma: "es5",
-    importOrder: [
-        "^(react/(.*)$)|^(react$)",
-        "^(next/(.*)$)|^(next$)",
-        "<THIRD_PARTY_MODULES>",
-        "",
-        "^types$",
-        "^@/types/(.*)$",
-        "^@/config/(.*)$",
-        "^@/lib/(.*)$",
-        "^@/hooks/(.*)$",
-        "^@/components/ui/(.*)$",
-        "^@/components/(.*)$",
-        "^@/registry/(.*)$",
-        "^@/styles/(.*)$",
-        "^@/app/(.*)$",
-        "",
-        "^[./]",
-    ],
-    importOrderSeparation: false,
-    importOrderSortSpecifiers: true,
-    importOrderBuiltinModulesToTop: true,
-    importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
-    importOrderMergeDuplicateImports: true,
-    importOrderCombineTypeAndValueImports: true,
-    tailwindConfig: require.resolve('@eventiva/envs.config.tailwind'),
-    plugins: [
-        require.resolve("@ianvs/prettier-plugin-sort-imports"),
-        require.resolve("prettier-plugin-tailwindcss")
-    ],
+    tokens: {
+        color: {
+            primary: {
+                value: '#fbbf24'
+            },
+        },
+    },
+    platforms: {
+        scss: {
+            transformGroup: 'scss',
+            buildPath: 'src/scss/',
+            files: [
+                {
+                    destination: '_variables.scss',
+                    format: 'scss/variables',
+                },
+            ],
+        },
+        css: {
+            transformGroup: 'css',
+            buildPath: 'dist/css/',
+            files: [
+                {
+                    format: 'css/variables',
+                    destination: 'variables.css',
+                },
+            ],
+        },
+        js: {
+            transformGroup: 'js',
+            buildPath: 'dist/js/',
+            files: [
+                {
+                    format: 'javascript/module',
+                    destination: 'tokens.js',
+                    filter: fullFilter,
+                    options: {
+                        outputReferences: true,
+                    },
+                },
+            ],
+        },
+    },
 };
