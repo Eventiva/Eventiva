@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Bit debugger" type="NodeJSConfigurationType" application-parameters="$Prompt$ --log error " node-parameters="--inspect" path-to-js-file="node_modules/@teambit/bit/dist/app.js" working-dir="$PROJECT_DIR$">
+    <method v="2" />
+  </configuration>
+</component>
