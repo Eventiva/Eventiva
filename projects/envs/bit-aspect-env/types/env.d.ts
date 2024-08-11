@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 11/08/2024, 01:24
+ * File: env.d.ts
+ * Last Modified: 11/08/2024, 23:33
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { TailwindToStyleDictionary } from './tailwind-to-style.dictionary.task.js'
+declare module '@teambit/defender.jest-tester';
+declare module './base-transformer-plugins';
+declare module './cjs-transformer';
+declare module './esm-transformer';

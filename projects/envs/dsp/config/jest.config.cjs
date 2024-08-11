@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 11/08/2024, 01:24
+ * File: jest.config.cjs
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,31 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { TailwindToStyleDictionary } from './tailwind-to-style.dictionary.task.js'
+/**
+ * @see https://bit.dev/reference/jest/jest-config
+ */
+const jestConfig = require("@bitdev/node.node-env/config/jest.config.cjs");
+
+const {
+    generateNodeModulesPattern,
+} = require("@teambit/dependencies.modules.packages-excluder");
+
+const packagesToExclude = ["@teambit", "@my-org", "my-package-name"];
+
+/**
+ * by default, jest excludes all node_modules from the transform (compilation) process.
+ * the following config excludes all node_modules, except for Bit components, style modules, and the packages that are listed.
+ */
+module.exports = {
+    ...jestConfig,
+    testEnvironment: "node",
+    setupFiles: [],
+    setupFilesAfterEnv: [],
+    transformIgnorePatterns: [
+        "^.+.module.(css|sass|scss)$",
+        generateNodeModulesPattern({
+            packages: packagesToExclude,
+            excludeComponents: true,
+        }),
+    ],
+};

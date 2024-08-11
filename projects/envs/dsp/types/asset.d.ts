@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: globals.tailwind.css
- * Last Modified: 08/08/2024, 20:07
+ * File: asset.d.ts
+ * Last Modified: 06/08/2024, 23:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,97 +34,36 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * this file is copied into your components' build output.
+ */
 
-@layer base {
-    :root {
-        --blue: 208, 32%, 44%;
-        --orange: 32, 83%, 51%;
-
-        --background: 0 0% 100%;
-        --foreground: 222.2 47.4% 11.2%;
-
-        --muted: 210 40% 96.1%;
-        --muted-foreground: 215.4 16.3% 46.9%;
-
-        --popover: 0 0% 100%;
-        --popover-foreground: 222.2 47.4% 11.2%;
-
-        --border: 214.3 31.8% 91.4%;
-        --input: 214.3 31.8% 91.4%;
-
-        --card: 0 0% 100%;
-        --card-foreground: 222.2 47.4% 11.2%;
-
-        --primary: 222.2 47.4% 11.2%;
-        --primary-foreground: 210 40% 98%;
-
-        --secondary: 210 40% 96.1%;
-        --secondary-foreground: 222.2 47.4% 11.2%;
-
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
-
-        --destructive: 0 100% 50%;
-        --destructive-foreground: 210 40% 98%;
-
-        --ring: 215 20.2% 65.1%;
-
-        --radius: 0.5rem;
-    }
-
-    .dark {
-        --blue: 208, 32%, 44%;
-        --orange: 32, 83%, 51%;
-
-        --background: 224 71% 4%;
-        --foreground: 213 31% 91%;
-
-        --muted: 223 47% 11%;
-        --muted-foreground: 215.4 16.3% 56.9%;
-
-        --accent: 216 34% 17%;
-        --accent-foreground: 210 40% 98%;
-
-        --popover: 224 71% 4%;
-        --popover-foreground: 215 20.2% 65.1%;
-
-        --border: 216 34% 17%;
-        --input: 216 34% 17%;
-
-        --card: 224 71% 4%;
-        --card-foreground: 213 31% 91%;
-
-        --primary: 210 40% 98%;
-        --primary-foreground: 222.2 47.4% 1.2%;
-
-        --secondary: 222.2 47.4% 11.2%;
-        --secondary-foreground: 210 40% 98%;
-
-        --destructive: 0 63% 31%;
-        --destructive-foreground: 210 40% 98%;
-
-        --ring: 216 34% 17%;
-
-        --radius: 0.5rem;
-    }
+declare module '*.png' {
+    const value: any
+    export = value;
 }
+declare module '*.svg' {
+    import type { FunctionComponent, SVGProps } from 'react'
 
-@layer base {
-    * {
-        @apply border-border;
-    }
-
-    body {
-        @apply bg-background text-foreground;
-        font-feature-settings: "rlig" 1, "calt" 1;
-    }
+    export const ReactComponent: FunctionComponent<
+        SVGProps<SVGSVGElement> & { title?: string }
+    >
+    const src: string
+    export default src
 }
-
-* {
-    font-family: BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
+declare module '*.jpg' {
+    const value: any
+    export = value;
+}
+declare module '*.jpeg' {
+    const value: any
+    export = value;
+}
+declare module '*.gif' {
+    const value: any
+    export = value;
+}
+declare module '*.bmp' {
+    const value: any
+    export = value;
 }

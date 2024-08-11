@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: tailwind-to-style-dictionary.ts
- * Last Modified: 09/08/2024, 00:06
+ * File: tailwind-to-style.dictionary.task.ts
+ * Last Modified: 11/08/2024, 23:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,12 +36,12 @@
 
 import { BuildContext, BuildTask, BuiltTaskResult, ComponentResult, TaskHandler } from '@teambit/builder'
 import { EnvContext } from '@teambit/envs'
+import fs from 'node:fs'
 import path from 'node:path'
+import { pathToFileURL } from 'node:url'
 import type { DesignTokens } from 'style-dictionary/types'
-import resolveConfig from 'tailwindcss/resolveConfig'
+import resolveConfig from 'tailwindcss/resolveConfig.js'
 import type { Config as TailwindConfig } from 'tailwindcss/types/config.js'
-
-export type T2sdResult = {}
 
 type TailwindToStyleDictionaryOptions = {
     name?: string,
@@ -53,20 +53,22 @@ export class TailwindToStyleDictionary
 
     constructor (
         readonly aspectId: string = 'eventiva.workflows/tailwind-to-style-dictionary',
-        readonly name = 'TailwindToStyleDictionary',
-        readonly configPath: string = './tailwind.config.js'
+        readonly name = 'TailwindToStyleDictionaryTask',
+        readonly configPath: string = './tailwind.config.js',
+        readonly outputPath: string = 'tailwind.tokens.json'
     ) {
     }
 
     static from (
         configPath?: string,
+        outputPath?: string,
         options?: TailwindToStyleDictionaryOptions
     ): TaskHandler {
-        const name = options?.name ?? 'TailwindToStyleDictionary'
+        const name = options?.name ?? 'TailwindToStyleDictionaryTask'
         const aspectId: string = options?.aspectId ?? 'eventiva.workflows/tailwind-to-style-dictionary'
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const handler = ( context: EnvContext ) => {
-            return new TailwindToStyleDictionary( aspectId, name, configPath )
+            return new TailwindToStyleDictionary( aspectId, name, configPath, outputPath )
         }
         return {
             name,
@@ -77,19 +79,23 @@ export class TailwindToStyleDictionary
     async execute ( context: BuildContext ): Promise<BuiltTaskResult> {
         const componentsResults: ComponentResult[] = []
 
-        for ( const component of context.components ) {
+        for ( const capsule of context.capsuleNetwork.seedersCapsules ) {
             const errors: Error[] = []
             const tokens: DesignTokens = {}
+            const outputFilePath = path.join( capsule.path, this.outputPath )
 
             try {
+                const configFile = path.join( capsule.path, './dist', this.configPath )
+                console.log( `Config File: `, configFile )
 
-                const configFile = path.join( component.mainFile.dirname, this.configPath )
+                const configFileUrl = pathToFileURL( configFile )
 
-                if ( !component.filesystem.existsSync( configFile ) ) {
+                const tailwindConfig: TailwindConfig = await import( configFileUrl.href )
+
+                if ( !tailwindConfig ) {
+                    console.log( 'Skipping: ', capsule.component.displayName, ' - no tailwind config found.' )
                     continue
                 }
-
-                const tailwindConfig: TailwindConfig = await import( configFile )
 
                 const { theme } = resolveConfig( tailwindConfig )
 
@@ -125,7 +131,7 @@ export class TailwindToStyleDictionary
                                     continue
                                 }
                                 addToTokensObject(
-                                    [ 'fontFamily', typedKey ],
+                                    [ 'fontFamily', typedKey.toString() ],
                                     theme.fontFamily[ typedKey ].join( ',' )
                                 )
                             }
@@ -140,11 +146,11 @@ export class TailwindToStyleDictionary
                                     continue
                                 }
                                 addToTokensObject(
-                                    [ 'fontSize', typedKey ],
+                                    [ 'fontSize', typedKey.toString() ],
                                     theme.fontSize[ typedKey ][ 0 ]
                                 )
                                 addToTokensObject(
-                                    [ 'fontSize', `${ typedKey }--lineHeight` ],
+                                    [ 'fontSize', `${ typedKey.toString() }--lineHeight` ],
                                     theme.fontSize[ typedKey ][ 1 ].lineHeight
                                 )
                             }
@@ -176,7 +182,7 @@ export class TailwindToStyleDictionary
                                             continue
                                         }
                                         addToTokensObject(
-                                            [ typedKey, secondLevelKey, thirdLevelKey ],
+                                            [ typedKey.toString(), secondLevelKey, thirdLevelKey ],
                                             themedKeyObject[ secondLevelKey ][ thirdLevelKey ]
                                         );
                                     }
@@ -184,15 +190,34 @@ export class TailwindToStyleDictionary
                             }
                     }
                 }
+
+                fs.writeFileSync( outputFilePath, JSON.stringify( tokens ), { encoding: 'utf8', flag: 'w' } )
+                fs.writeFileSync(
+                    path.join( capsule.component.mainFile.dirname, this.outputPath ),
+                    JSON.stringify( tokens ),
+                    { encoding: 'utf8', flag: 'w' }
+                )
             } catch ( err: any ) {
+                console.log( err )
                 errors.push( err )
             }
 
-            componentsResults.push( { component, errors } )
+            componentsResults.push( {
+                component: capsule.component,
+                metadata: { t2sd: tokens, t2sdPath: outputFilePath },
+                errors
+            } )
         }
 
         return {
-            componentsResults
+            componentsResults,
+            artifacts: [
+                {
+                    generatedBy: this.aspectId,
+                    name: this.name,
+                    globPatterns: [ '**/*.tokens.json' ]
+                }
+            ]
         }
     }
 }

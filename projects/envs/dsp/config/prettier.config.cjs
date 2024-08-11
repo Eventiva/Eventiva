@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 08/08/2024, 20:07
+ * File: prettier.config.cjs
+ * Last Modified: 11/08/2024, 18:46
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,6 +34,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { default as tailwindConfig } from './tailwind.config.js'
-export { default as Preset } from './preset.js'
+const prettierConfig = require('@bitdev/react.react-env/config/prettier.config.cjs');
 
+module.exports = {
+    ...prettierConfig,
+};

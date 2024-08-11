@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 11/08/2024, 01:24
+ * File: asset.d.ts
+ * Last Modified: 11/08/2024, 23:33
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,36 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { TailwindToStyleDictionary } from './tailwind-to-style.dictionary.task.js'
+/**
+ * this file is copied into your components' build output.
+ */
+
+declare module '*.png' {
+    const value: any
+    export = value;
+}
+declare module '*.svg' {
+    import type { FunctionComponent, SVGProps } from 'react'
+
+    export const ReactComponent: FunctionComponent<
+        SVGProps<SVGSVGElement> & { title?: string }
+    >
+    const src: string
+    export default src
+}
+declare module '*.jpg' {
+    const value: any
+    export = value;
+}
+declare module '*.jpeg' {
+    const value: any
+    export = value;
+}
+declare module '*.gif' {
+    const value: any
+    export = value;
+}
+declare module '*.bmp' {
+    const value: any
+    export = value;
+}

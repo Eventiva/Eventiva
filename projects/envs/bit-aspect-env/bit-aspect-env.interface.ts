@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: style-dictionary.config.cjs
- * Last Modified: 08/08/2024, 22:01
+ * File: bit-aspect-env.interface.ts
+ * Last Modified: 11/08/2024, 23:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,48 +34,28 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-module.exports = {
-    tokens: {
-        color: {
-            primary: {
-                value: '#fbbf24'
-            },
-        },
-    },
-    platforms: {
-        scss: {
-            transformGroup: 'scss',
-            buildPath: 'src/scss/',
-            files: [
-                {
-                    destination: '_variables.scss',
-                    format: 'scss/variables',
-                },
-            ],
-        },
-        css: {
-            transformGroup: 'css',
-            buildPath: 'dist/css/',
-            files: [
-                {
-                    format: 'css/variables',
-                    destination: 'variables.css',
-                },
-            ],
-        },
-        js: {
-            transformGroup: 'js',
-            buildPath: 'dist/js/',
-            files: [
-                {
-                    format: 'javascript/module',
-                    destination: 'tokens.js',
-                    filter: fullFilter,
-                    options: {
-                        outputReferences: true,
-                    },
-                },
-            ],
-        },
-    },
-};
+import { BuilderEnv } from '@teambit/builder'
+import { CompilerEnv } from '@teambit/compiler'
+import { Env } from '@teambit/envs'
+import { FormatterEnv } from '@teambit/formatter'
+import { GeneratorEnv } from '@teambit/generator'
+import { LinterEnv } from '@teambit/linter'
+import { PackageEnv } from '@teambit/pkg'
+import { PreviewEnv } from '@teambit/preview'
+import { SchemaEnv } from '@teambit/schema'
+import { TesterEnv } from '@teambit/tester'
+import { WorkspaceConfigEnv } from '@teambit/workspace-config-files'
+
+export interface BitAspectEnvInterface
+    extends Env,
+        CompilerEnv,
+        TesterEnv,
+        PreviewEnv,
+        SchemaEnv,
+        LinterEnv,
+        FormatterEnv,
+        BuilderEnv,
+        GeneratorEnv,
+        WorkspaceConfigEnv,
+        PackageEnv {
+}

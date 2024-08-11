@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 11/08/2024, 01:24
+ * File: style.d.ts
+ * Last Modified: 11/08/2024, 23:33
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,50 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { TailwindToStyleDictionary } from './tailwind-to-style.dictionary.task.js'
+/**
+ * this file is copied into your components' build output.
+ */
+
+declare module '*.module.css' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+declare module '*.module.scss' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+declare module '*.module.sass' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.module.less' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.less' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.css' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.sass' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.scss' {
+    const classes: { readonly [ key: string ]: string }
+    export default classes
+}
+
+declare module '*.mdx' {
+    const component: any
+    export default component
+}
+

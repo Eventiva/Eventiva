@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: style-dictionary.ts
- * Last Modified: 09/08/2024, 00:06
+ * File: webpack.config.ts
+ * Last Modified: 11/08/2024, 18:47
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,50 +34,9 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { BuildContext, BuildTask, BuiltTaskResult, ComponentResult, TaskHandler } from '@teambit/builder'
-import { EnvContext } from '@teambit/envs'
+import type { WebpackConfigMutator } from '@teambit/webpack'
 
-export type StyleDictionaryResult = {}
+export const webpackTransformer = (
+    configMutator: WebpackConfigMutator
+): WebpackConfigMutator => configMutator
 
-type StyleDictionaryOptions = {
-    name: string
-}
-
-export class StyleDictionary
-    implements BuildTask {
-
-    readonly name = 'StyleDictionary'
-
-    constructor (
-        readonly aspectId: string = 'eventiva.workflows/style-dictionary'
-    ) {
-    }
-
-    static from ( options?: StyleDictionaryOptions ): TaskHandler {
-        const name = options?.name || 'StyleDictionary'
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const handler = ( context: EnvContext ) => {
-            return new StyleDictionary()
-        }
-        return {
-            name,
-            handler
-        }
-    }
-
-    async execute ( context: BuildContext ): Promise<BuiltTaskResult> {
-        const componentsResults: ComponentResult[] = []
-
-        for ( const component of context.components ) {
-            const errors: Error[] = []
-            const metadata: {
-                [ key: string ]: any;
-                StyleDictionaryResult?: StyleDictionaryResult;
-            } = {}
-        }
-
-        return {
-            componentsResults
-        }
-    }
-}

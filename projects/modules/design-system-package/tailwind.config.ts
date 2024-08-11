@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: tailwind.config.ts
- * Last Modified: 08/08/2024, 20:24
+ * Last Modified: 11/08/2024, 22:39
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,12 +37,12 @@
 import { defineConfig } from '@frontend/tailwind.utils.define-config'
 import { createRequire } from 'node:module'
 import defaultTheme from 'tailwindcss/defaultTheme.js'
-import type { Config as TailwindConfig } from 'tailwindcss/types/config.js'
+import { Config as TailwindConfig } from 'tailwindcss/types'
 
 const cjsRequire = createRequire( import.meta.url )
 const { fontFamily } = defaultTheme
 
-export const config: TailwindConfig = defineConfig( {
+export const tailwindConfig: TailwindConfig = defineConfig( {
     darkMode: [ 'class' ],
     theme: {
         container: {
@@ -116,4 +116,4 @@ export const config: TailwindConfig = defineConfig( {
     plugins: [ cjsRequire( 'tailwindcss-animate' ) ]
 } )
 
-export default config
+export default tailwindConfig

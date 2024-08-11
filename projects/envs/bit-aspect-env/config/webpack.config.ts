@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 11/08/2024, 01:24
+ * File: webpack.config.ts
+ * Last Modified: 11/08/2024, 23:33
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,12 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { TailwindToStyleDictionary } from './tailwind-to-style.dictionary.task.js'
+import type { WebpackConfigMutator } from '@teambit/webpack'
+
+/**
+ * modifies the webpack config for the components preview bundle.
+ * @see https://bit.dev/reference/webpack/webpack-config
+ */
+export const webpackTransformer = (
+    configMutator: WebpackConfigMutator
+): WebpackConfigMutator => configMutator

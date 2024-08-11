@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 11/08/2024, 01:24
+ * Last Modified: 11/08/2024, 21:23
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,4 +34,10 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export { TailwindToStyleDictionary } from './tailwind-to-style.dictionary.task.js'
+import { tailwindConfig as config } from './tailwind.config.js'
+
+export { Preset } from './preset.js'
+
+export const tailwindConfig = config
+export default config
+
