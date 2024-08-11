@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.ts
- * Last Modified: 29/07/2024, 17:35
+ * Last Modified: 11/08/2024, 21:57
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,7 +35,7 @@
  */
 
 import { ChangelogResult } from '@eventiva/workflows.generate-changelog'
-import Discord from 'discord.js'
+import * as Discord from 'discord.js'
 
 export type SendToDiscordConfig = {
     name: string

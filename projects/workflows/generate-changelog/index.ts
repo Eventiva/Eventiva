@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 29/07/2024, 17:35
+ * Last Modified: 11/08/2024, 21:58
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,4 +35,4 @@
  */
 
 export { GenerateChangelogTask } from './generate-changelog.task.js'
-export type { ChangelogResult } from './generate-changelog.task'
+export type { ChangelogResult } from './generate-changelog.task.js'

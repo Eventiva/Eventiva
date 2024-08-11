@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discord-changelog.task.ts
- * Last Modified: 29/07/2024, 17:34
+ * Last Modified: 11/08/2024, 01:02
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -140,14 +140,6 @@ export class DiscordChangelog
             } )
 
         return {
-            artifacts: [
-                {
-                    generatedBy: this.aspectId,
-                    name: this.name,
-                    // The glob pattern for artifacts to include in the component version
-                    globPatterns: [ '**/*.my-artifact.txt' ]
-                }
-            ],
             componentsResults
         }
     }
