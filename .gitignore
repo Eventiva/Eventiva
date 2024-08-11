@@ -4,7 +4,7 @@
 # Custom Requirements
 .prettierrc.cjs
 tsconfig.json
-!projects/envs/node/config/tsconfig.json
+!**/config/tsconfig.json
 .eslintrc.json
 env.pkl
 
