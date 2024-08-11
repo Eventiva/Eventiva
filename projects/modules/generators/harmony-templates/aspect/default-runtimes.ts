@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default-runtimes.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 11/08/2024, 10:43
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,7 +34,7 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { RuntimeOptions } from '../harmony-templates-options'
+import { RuntimeOptions } from '../harmony-templates-options.js'
 
 export const defaultRuntimes: RuntimeOptions[] = [
     {

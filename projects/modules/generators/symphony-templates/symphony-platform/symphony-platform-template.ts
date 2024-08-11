@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: symphony-platform-template.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 11/08/2024, 11:08
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,10 +35,10 @@
  */
 
 import { ComponentContext, ComponentFile, ComponentTemplate } from '@teambit/generator'
-import { indexFile } from './files/index-file'
-import { indexHtmlFile } from './files/index-html'
-import { platformDocsFile } from './files/platform-docs'
-import { symphonyPlatformApp } from './files/symphony-bit-app'
+import { indexFile } from './files/index-file.js'
+import { indexHtmlFile } from './files/index-html.js'
+import { platformDocsFile } from './files/platform-docs.js'
+import { symphonyPlatformApp } from './files/symphony-bit-app.js'
 
 export type SymphonyPlatformTemplateOptions = {
     name?: string,

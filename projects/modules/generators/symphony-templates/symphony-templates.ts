@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: symphony-templates.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 11/08/2024, 11:08
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,12 +35,12 @@
  */
 
 import { HarmonyTemplates } from '@eventiva/modules.generators.harmony-templates'
-import { aspectDocsFile } from './aspect-docs'
-import { browserRuntimeProvider } from './browser-runtime/browser-provider'
-import { graphQLServerFile } from './node-runtime/graphql-server'
-import { generateImports, getDummyMethod, nodeRuntimeProvider } from './node-runtime/node-runtime-provider'
-import { SymphonyPlatformTemplate } from './symphony-platform/symphony-platform-template'
-import { SymphonyTemplatesOptions } from './symphony-templates-options'
+import { aspectDocsFile } from './aspect-docs.js'
+import { browserRuntimeProvider } from './browser-runtime/browser-provider.js'
+import { graphQLServerFile } from './node-runtime/graphql-server.js'
+import { generateImports, getDummyMethod, nodeRuntimeProvider } from './node-runtime/node-runtime-provider.js'
+import { SymphonyPlatformTemplate } from './symphony-platform/symphony-platform-template.js'
+import { SymphonyTemplatesOptions } from './symphony-templates-options.js'
 
 /**
  * Creates Symphony templates with the provided options. It includes specified options and overrides default values as needed. The function returns Harmony templates with the Symphony-specific configurations applied such as platformName, docsFile, disableHarmonyPlatform, harmonyEnvId, templates, and runtimes.
