@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: node.bit-env.ts
- * Last Modified: 09/08/2024, 00:07
+ * Last Modified: 11/08/2024, 21:17
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,13 +34,9 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-/**
- * this env extends the Bit official Harmony environment.
- * learn more: https://bit.cloud/bitdev/harmony/harmony-env
- */
 import { NodeEnv as BitdevNode } from '@bitdev/node.node-env'
 import { HarmonyWorkspaceStarter } from '@bitdev/symphony.generators.symphony-starters'
-import { tailwindConfig } from '@eventiva/envs.config.tailwind'
+import { tailwindConfig } from '@eventiva/modules.design-system-package'
 import { DiscordChangelog } from '@eventiva/workflows.discord-changelog'
 import { GenerateChangelogTask } from '@eventiva/workflows.generate-changelog'
 import { ShadcnUiTemplate } from '@frontend/shadcn-ui.generators.shadcn-ui'
@@ -82,8 +78,6 @@ export class NodeEnv
 
     protected tsTypesPath = './types'
 
-    protected jestConfigPath = localRequire.resolve( './config/jest.config.cjs' )
-
     protected eslintConfigPath = localRequire.resolve( './config/eslintrc.cjs' )
 
     protected eslintExtensions = [ '.ts', '.tsx', '.js', '.jsx', '.mjs' ]
@@ -92,7 +86,6 @@ export class NodeEnv
 
     protected previewMounter = localRequire.resolve( './preview/mounter.js' )
 
-    /* the compiler to use during development */
     override compiler (): EnvHandler<Compiler> {
         return TypescriptCompiler.from( {
             tsconfig: this.tsconfigPath,
@@ -101,21 +94,12 @@ export class NodeEnv
         } )
     }
 
-    /**
-     * returns an instance of a Bit tester implementation. use components like mocha-tester or
-     * jest-tester or [build your own](http/://bit.dev/reference/testing/set-up-tester).
-     */
     override tester (): EnvHandler<Tester> {
         return VitestTester.from( {
             config: localRequire.resolve( './config/vitest.config.mjs' )
         } )
-        // return MochaTester.from({
-        //   mochaConfigPath: localRequire.resolve('./config/.mocharc.js'),
-        //   babelConfig: localRequire.resolve('./config/mocha-babel-config.js'),
-        // });
     }
 
-    /* the linter to use during development */
     override linter () {
         return ESLintLinter.from( {
             tsconfig: this.tsconfigPath,
@@ -208,9 +192,9 @@ export class NodeEnv
         ] )
     }
 
-    override snap () {
-        return Pipeline.from( [] )
-    }
+    // override snap () {
+    //     return Pipeline.from( [] )
+    // }
 
     override tag () {
         return Pipeline.from( [

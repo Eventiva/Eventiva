@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: eslintrc.cjs
- * Last Modified: 08/08/2024, 20:24
+ * Last Modified: 11/08/2024, 21:17
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -46,7 +46,7 @@ module.exports = {
     settings: {
         tailwindcss: {
             callees: ['cn', 'cva'],
-            config: require.resolve('@eventiva/envs.config.tailwind'),
+            config: require.resolve('@eventiva/modules.design-system-package'),
         },
     },
     overrides: [

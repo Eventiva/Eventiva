@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: prettier.config.cjs
- * Last Modified: 08/08/2024, 20:25
+ * Last Modified: 11/08/2024, 21:17
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -71,7 +71,7 @@ module.exports = {
     importOrderParserPlugins: ["typescript", "jsx", "decorators-legacy"],
     importOrderMergeDuplicateImports: true,
     importOrderCombineTypeAndValueImports: true,
-    tailwindConfig: require.resolve('@eventiva/envs.config.tailwind'),
+    tailwindConfig: require.resolve('@eventiva/modules.design-system-package'),
     plugins: [
         require.resolve("@ianvs/prettier-plugin-sort-imports"),
         require.resolve("prettier-plugin-tailwindcss")

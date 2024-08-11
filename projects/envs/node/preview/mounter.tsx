@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: mounter.tsx
- * Last Modified: 08/08/2024, 20:27
+ * Last Modified: 11/08/2024, 21:17
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,7 +36,7 @@
 
 import {createMounter} from '@teambit/react.mounter'
 import React from 'react'
-import '@eventiva/envs.config.tailwind/globals.tailwind.css'
+import '@eventiva/modules.design-system-package/globals.tailwind.css'
 
 /**
  * use the mounter to inject and wrap your component previews
