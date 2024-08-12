@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: style.dictionary.task.ts
- * Last Modified: 11/08/2024, 23:34
+ * Last Modified: 13/08/2024, 00:12
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,7 +39,7 @@ import { EnvContext } from '@teambit/envs'
 import path from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { default as SD } from 'style-dictionary'
-import type { Config, DesignTokens } from 'style-dictionary/types'
+import type { Config, DesignTokens, PreprocessedTokens, Preprocessor } from 'style-dictionary/types'
 
 export type StyleDictionaryResult = {}
 
@@ -106,11 +106,79 @@ export class StyleDictionary
 
                 const tailwindTokens: DesignTokens = tailwindMeta.find( value => value.component.displayName === component.displayName )?.metadata?.t2sd
 
-                console.log( tailwindTokens )
+                const fixNamesProcessor: Preprocessor = {
+                    name: 'fix-prop-names',
+                    preprocessor: async (
+                        dictionary,
+                        options
+                    ): Promise<PreprocessedTokens> => {
+                        function deepCopy ( obj: unknown ): unknown {
+                            if ( typeof obj !== 'object' || obj === null ) {
+                                // Return if not object or if it's null
+                                return obj
+                            }
+                            if ( Array.isArray( obj ) ) {
+                                // Copy array
+                                return obj.map( ( value ) => deepCopy( value ) )
+                            }
+
+                            // If object, then copy each property
+                            const copy: any = {}
+                            for ( const propName in obj ) {
+                                if ( obj.hasOwnProperty( propName ) ) {
+                                    copy[ propName ] = deepCopy( ( obj as any )[ propName ] )
+                                }
+                            }
+                            return copy
+                        }
+
+                        function deepReplace ( obj: PreprocessedTokens ): void {
+                            // Iterate over each property in the object
+                            for ( const propName in obj ) {
+                                if ( !obj.hasOwnProperty( propName ) ) {
+                                    continue
+                                }
+
+                                // Check if the property name includes a slash
+                                if ( propName.includes( '/' ) ) {
+                                    // Replace the slash with an underscore
+                                    const newPropName = propName.replace( '/', '_' ) + 'fraction'
+                                    // Assign the property value to the new key
+                                    obj[ newPropName ] = deepCopy( obj[ propName ] )  // Copy the content to the new key
+                                    // Delete the old key
+                                    delete obj[ propName ]
+                                }
+
+                                // If given property is an object or has "name" field, apply changes recursively
+                                if ( typeof obj[ propName ] === 'object' && obj[ propName ] !== null ) {
+                                    deepReplace( obj[ propName ] )
+                                }
+                                if ( ( obj[ propName ] )?.name && ( obj[ propName ] ).name.includes( '/' ) ) {
+                                    ( obj[ propName ] ).name = ( obj[ propName ] ).name.replace(
+                                        '/',
+                                        '_'
+                                    ) + 'fraction'
+                                }
+                            }
+                        }
+
+                        if ( options.log.verbosity === 'verbose' ) {
+                            console.log(
+                                'Deep fixing fraction names from tailwind' )
+                        }
+                        deepReplace( dictionary )
+                        return dictionary
+                    }
+                }
+
+                SD.registerPreprocessor( fixNamesProcessor )
 
                 const sd = new SD( {
                     ...styleConfigFile,
-                    tokens: tailwindTokens
+                    tokens: tailwindTokens,
+                    preprocessors: [
+                        'fix-prop-names'
+                    ]
                 } )
 
                 await sd.buildAllPlatforms()

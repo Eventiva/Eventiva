@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: style-dictionary.config.ts
- * Last Modified: 11/08/2024, 23:34
+ * Last Modified: 13/08/2024, 00:12
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -39,160 +39,10 @@ import type { Config } from 'style-dictionary/types'
 
 export function config ( directory: string ) {
     const config: Config = {
+        log: {
+            verbosity: 'verbose'
+        },
         platforms: {
-            ios: {
-                transformGroup: 'ios',
-                buildPath: path.join( directory, 'ios/Classes/Generated/', '' ),
-                files: [
-                    {
-                        destination: 'Size.h',
-                        format: 'ios/static.h',
-                        options: {
-                            className: 'Size',
-                            type: 'float'
-                        },
-                        filter: {
-                            attributes: {
-                                category: 'size'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'Size.m',
-                        format: 'ios/static.m',
-                        options: {
-                            className: 'Size',
-                            type: 'float'
-                        },
-                        filter: {
-                            attributes: {
-                                category: 'size'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'Icons.h',
-                        format: 'ios/strings.h',
-                        options: {
-                            className: 'Icons'
-                        },
-                        filter: {
-                            attributes: {
-                                category: 'content',
-                                type: 'icon'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'Icons.m',
-                        format: 'ios/strings.m',
-                        options: {
-                            className: 'Icons'
-                        },
-                        filter: {
-                            attributes: {
-                                category: 'content',
-                                type: 'icon'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'Color.h',
-                        format: 'ios/colors.h',
-                        options: {
-                            className: 'Color',
-                            type: 'ColorName'
-                        },
-                        filter: {
-                            attributes: {
-                                category: 'color'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'Color.m',
-                        format: 'ios/colors.m',
-                        options: {
-                            className: 'Color',
-                            type: 'ColorName'
-                        },
-                        filter: {
-                            attributes: {
-                                category: 'color'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'Properties.h',
-                        format: 'ios/singleton.h',
-                        options: {
-                            className: 'Properties'
-                        }
-                    },
-                    {
-                        destination: 'Properties.m',
-                        format: 'ios/singleton.m',
-                        options: {
-                            className: 'Properties'
-                        }
-                    }
-                ]
-            },
-            android: {
-                transformGroup: 'android',
-                buildPath: path.join( directory, 'android/src/main/res/values/', '' ),
-                files: [
-                    {
-                        destination: 'colors.xml',
-                        format: 'android/colors',
-                        options: {
-                            outputReferences: true
-                        }
-                    },
-                    {
-                        destination: 'font_dimens.xml',
-                        format: 'android/fontDimens',
-                        options: {
-                            outputReferences: true
-                        }
-                    },
-                    {
-                        destination: 'dimens.xml',
-                        format: 'android/dimens',
-                        options: {
-                            outputReferences: true
-                        }
-                    },
-                    {
-                        destination: 'integers.xml',
-                        format: 'android/integers',
-                        options: {
-                            outputReferences: true
-                        }
-                    },
-                    {
-                        destination: 'strings.xml',
-                        format: 'android/strings',
-                        options: {
-                            outputReferences: true
-                        }
-                    }
-                ]
-            },
-            'android-asset': {
-                transformGroup: 'android',
-                buildPath: path.join( directory, 'android/src/main/', '' ),
-                files: [
-                    {
-                        destination: 'assets/data/properties.json',
-                        format: 'json',
-                        options: {
-                            outputReferences: true
-                        }
-                    }
-                ],
-                actions: [ 'copy_assets' ]
-            },
             scss: {
                 transformGroup: 'scss',
                 buildPath: path.join( directory, 'scss/', '' ),
@@ -234,87 +84,123 @@ export function config ( directory: string ) {
                 ]
             },
             mjs: {
-                transformGroup: 'mjs',
-                buildPath: path.join( directory, 'javascript/', '' ),
+                transformGroup: 'js',
+                buildPath: path.join( directory, 'javascript/mjs/', '' ),
                 files: [
+                    // {
+                    //     destination: 'size.mjs',
+                    //     format: 'javascript/module',
+                    //     filter: {
+                    //         type: 'size'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
+                    // {
+                    //     destination: 'color.mjs',
+                    //     format: 'javascript/module',
+                    //     filter: {
+                    //         type: 'color'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
+                    // {
+                    //     destination: 'size.d.ts',
+                    //     format: 'typescript/module-declarations',
+                    //     filter: {
+                    //         type: 'size'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
+                    // {
+                    //     destination: 'color.d.ts',
+                    //     format: 'typescript/module-declarations',
+                    //     filter: {
+                    //         type: 'color'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // }
                     {
-                        destination: 'size.js',
+                        destination: 'dsp.mjs',
                         format: 'javascript/module',
-                        filter: {
-                            attributes: {
-                                category: 'size'
-                            }
+                        options: {
+                            outputReferences: true
                         }
                     },
                     {
-                        destination: 'color.js',
-                        format: 'javascript/module',
-                        filter: {
-                            attributes: {
-                                category: 'color'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'size.js',
+                        destination: 'dsp.d.ts',
                         format: 'typescript/module-declarations',
-                        filter: {
-                            attributes: {
-                                category: 'size'
-                            }
+                        options: {
+                            outputReferences: true
                         }
                     },
-                    {
-                        destination: 'color.js',
-                        format: 'typescript/module-declarations',
-                        filter: {
-                            attributes: {
-                                category: 'color'
-                            }
-                        }
-                    }
                 ]
             },
             cjs: {
-                transformGroup: 'cjs',
-                buildPath: path.join( directory, 'javascript/', '' ),
+                transformGroup: 'js',
+                buildPath: path.join( directory, 'javascript/cjs/', '' ),
                 files: [
+                    // {
+                    //     destination: 'size.cjs',
+                    //     format: 'javascript/es6',
+                    //     filter: {
+                    //         type: 'size'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
+                    // {
+                    //     destination: 'color.cjs',
+                    //     format: 'javascript/es6',
+                    //     filter: {
+                    //         type: 'color'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
+                    // {
+                    //     destination: 'size.d.ts',
+                    //     format: 'typescript/es6-declarations',
+                    //     filter: {
+                    //         type: 'size'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
+                    // {
+                    //     destination: 'color.d.ts',
+                    //     format: 'typescript/es6-declarations',
+                    //     filter: {
+                    //         type: 'color'
+                    //     },
+                    //     options: {
+                    //         outputReferences: true
+                    //     }
+                    // },
                     {
-                        destination: 'size.js',
+                        destination: 'dsp.cjs',
                         format: 'javascript/es6',
-                        filter: {
-                            attributes: {
-                                category: 'size'
-                            }
+                        options: {
+                            outputReferences: true
                         }
                     },
                     {
-                        destination: 'color.js',
-                        format: 'javascript/es6',
-                        filter: {
-                            attributes: {
-                                category: 'color'
-                            }
-                        }
-                    },
-                    {
-                        destination: 'size.js',
+                        destination: 'dsp.d.ts',
                         format: 'typescript/es6-declarations',
-                        filter: {
-                            attributes: {
-                                category: 'size'
-                            }
+                        options: {
+                            outputReferences: true
                         }
                     },
-                    {
-                        destination: 'color.js',
-                        format: 'typescript/es6-declarations',
-                        filter: {
-                            attributes: {
-                                category: 'color'
-                            }
-                        }
-                    }
                 ]
             },
             json: {
@@ -330,32 +216,16 @@ export function config ( directory: string ) {
                     }
                 ]
             },
-            // compose: {
-            //     transformGroup: "compose",
-            //     buildPath: "compose/",
-            //     files: [
-            //         {
-            //
-            //         }
-            //     ]
-            // },
-            stylus: {
-                transformGroup: 'stylus',
-                buildPath: path.join( directory, 'stylus/', '' ),
-                files: [
-                    {
-                        destination: 'token.stylus',
-                        format: 'stylus/variables'
-                    }
-                ]
-            },
             less: {
                 transformGroup: 'less',
                 buildPath: path.join( directory, 'less/', '' ),
                 files: [
                     {
                         destination: 'tokens.less',
-                        format: 'less/variables'
+                        format: 'less/variables',
+                        options: {
+                            outputReferences: true
+                        }
                     }
                 ]
             }
