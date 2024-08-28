@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: dsp.d.ts
- * Last Modified: 13/08/2024, 00:08
+ * Last Modified: 28/08/2024, 18:07
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,7 +38,7 @@
  * Do not edit directly, this file was auto-generated.
  */
 
-export const AccentColorInherit: string
+export const AccentColorInherit: string;
 export const AccentColorCurrent: string
 export const AccentColorTransparent: string
 export const AccentColorBlack: string
