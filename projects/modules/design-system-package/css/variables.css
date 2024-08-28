@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: variables.css
- * Last Modified: 28/08/2024, 18:07
+ * Last Modified: 28/08/2024, 19:02
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -5013,14 +5013,6 @@
     --background-opacity-10: 0.1;
     --background-opacity-5: 0.05;
     --background-opacity-0: 0;
-    --background-image-gradient-to-tl: linear-gradient(to top left, var(--tw-gradient-stops));
-    --background-image-gradient-to-l: linear-gradient(to left, var(--tw-gradient-stops));
-    --background-image-gradient-to-bl: linear-gradient(to bottom left, var(--tw-gradient-stops));
-    --background-image-gradient-to-b: linear-gradient(to bottom, var(--tw-gradient-stops));
-    --background-image-gradient-to-br: linear-gradient(to bottom right, var(--tw-gradient-stops));
-    --background-image-gradient-to-r: linear-gradient(to right, var(--tw-gradient-stops));
-    --background-image-gradient-to-tr: linear-gradient(to top right, var(--tw-gradient-stops));
-    --background-image-gradient-to-t: linear-gradient(to top, var(--tw-gradient-stops));
     --background-image-none: none;
     --background-color-rose-950: #4c0519;
     --background-color-rose-900: #881337;
@@ -5337,15 +5329,6 @@
     --aspect-ratio-video: 16 / 9;
     --aspect-ratio-square: 1 / 1;
     --aspect-ratio-auto: auto;
-    --aria-selected: selected = "true";
-    --aria-required: required = "true";
-    --aria-readonly: readonly = "true";
-    --aria-pressed: pressed = "true";
-    --aria-hidden: hidden = "true";
-    --aria-expanded: expanded = "true";
-    --aria-disabled: disabled = "true";
-    --aria-checked: checked = "true";
-    --aria-busy: busy = "true";
     --animation-bounce: bounce 1s infinite;
     --animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --animation-ping: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;

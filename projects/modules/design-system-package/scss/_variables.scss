@@ -1,7 +1,7 @@
 /*!
  * Project: Eventiva
  * File: _variables.scss
- * Last Modified: 28/08/2024, 18:09
+ * Last Modified: 28/08/2024, 19:03
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -4976,7 +4976,6 @@ $blur-lg: 16px;
 $blur-md: 12px;
 $blur-default: 8px;
 $blur-sm: 4px;
-$blur-none:;
 $blur-0: 0;
 $background-size-contain: contain;
 $background-size-cover: cover;
@@ -5011,14 +5010,6 @@ $background-opacity-15: 0.15;
 $background-opacity-10: 0.1;
 $background-opacity-5: 0.05;
 $background-opacity-0: 0;
-$background-image-gradient-to-tl: linear-gradient(to top left, var(--tw-gradient-stops));
-$background-image-gradient-to-l: linear-gradient(to left, var(--tw-gradient-stops));
-$background-image-gradient-to-bl: linear-gradient(to bottom left, var(--tw-gradient-stops));
-$background-image-gradient-to-b: linear-gradient(to bottom, var(--tw-gradient-stops));
-$background-image-gradient-to-br: linear-gradient(to bottom right, var(--tw-gradient-stops));
-$background-image-gradient-to-r: linear-gradient(to right, var(--tw-gradient-stops));
-$background-image-gradient-to-tr: linear-gradient(to top right, var(--tw-gradient-stops));
-$background-image-gradient-to-t: linear-gradient(to top, var(--tw-gradient-stops));
 $background-image-none: none;
 $background-color-rose-950: #4c0519;
 $background-color-rose-900: #881337;
@@ -5330,7 +5321,6 @@ $backdrop-blur-lg: 16px;
 $backdrop-blur-md: 12px;
 $backdrop-blur-default: 8px;
 $backdrop-blur-sm: 4px;
-$backdrop-blur-none:;
 $backdrop-blur-0: 0;
 $aspect-ratio-video: 16 / 9;
 $aspect-ratio-square: 1 / 1;
