@@ -232,3 +232,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+**/.cdktf.out
+**/cdktf.log
+*terraform.*.tfstate*
+**/.gen
+**/.terraform

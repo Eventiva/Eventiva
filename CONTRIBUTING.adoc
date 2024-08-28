@@ -43,8 +43,7 @@ You must have agreed to the code of conduct and DCO before your contributions ca
 
 * Ensure cross-platform compatibility for every change that's accepted.
 * Ensure that code meets all <<IssueTypes,requirements>>
-* Submit and
-* Ensure each contribution is created on its own branch to ensure we can follow http://semver.org/[Semantic Versioning]
+* Submit and Ensure each contribution is created on its own branch to ensure we can follow http://semver.org/[Semantic Versioning]
 * Be welcoming to newcomers and encourage diverse new contributors from all backgrounds
 
 [#beginners]
