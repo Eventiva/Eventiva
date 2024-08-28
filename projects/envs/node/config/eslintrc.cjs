@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: eslintrc.cjs
- * Last Modified: 11/08/2024, 21:17
+ * Last Modified: 14/08/2024, 22:50
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,13 +35,26 @@
  */
 
 require.resolve("eslint-plugin-tailwindcss")
+require.resolve("eslint-plugin-drizzle")
+require.resolve("eslint-plugin-jsdoc")
 
 module.exports = {
-    extends: [require.resolve('eslint-config-prettier'), 'plugin:tailwindcss/recommended'],
-    plugins: ['tailwindcss'],
+    extends: [
+        require.resolve('eslint-config-prettier'),
+        'plugin:tailwindcss/recommended',
+        'plugin:drizzle/recommended',
+        'plugin:jsdoc/recommended-typescript'
+    ],
+    plugins: [
+        'tailwindcss',
+        'drizzle',
+        'jsdoc'
+    ],
     rules: {
         'tailwindcss/no-custom-classname': 'off',
         'tailwindcss/classnames-order': 'error',
+        'jsdoc/require-description': 'error',
+        'jsdoc/informative-docs': 'error'
     },
     settings: {
         tailwindcss: {

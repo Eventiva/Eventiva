@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: pino.node.runtime.ts
- * Last Modified: 06/08/2024, 19:07
+ * Last Modified: 28/08/2024, 09:05
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,7 +36,6 @@
 
 import { LoggerAspect, LoggerNode, LoggerUtil } from '@eventiva/utilities.logging.logger'
 import { pino } from 'pino'
-import { pinoCaller } from 'pino-caller'
 import { build, PrettyStream } from 'pino-pretty'
 import { ExtendedConfig, Log, PinoConfig } from './pino-config.js'
 
@@ -53,20 +52,7 @@ export class PinoNode
         colorize: true
     } )
 
-    private readonly pino: Log = process.env.NODE_ENV === 'development'
-        ? pinoCaller( pino<ExtendedConfig>( {
-            ...this.config,
-            name: this.config.module,
-            customLevels: {
-                trace: 5,
-                debug: 10,
-                info: 20,
-                notice: 30,
-                alert: 70,
-                emergency: 80
-            }
-        }, this.stream ) ) as Log
-        : pino<ExtendedConfig>( {
+    private readonly pino: Log = pino<ExtendedConfig>( {
             ...this.config,
             name: this.config.module,
             customLevels: {
@@ -79,7 +65,7 @@ export class PinoNode
             }
         }, this.stream )
 
-    static override async provider (
+    static async provider (
         [ logger ]: [ LoggerNode ],
         config: PinoConfig
     ) {
@@ -156,11 +142,18 @@ export class PinoNode
         ...args: any[]
     ) => this.pino.alert( obj, msg, ...args )
 
+    override fatal = (
+        msg: string,
+        obj?: object,
+        ...args: any[]
+    ) => this.pino.fatal( obj, msg, ...args )
+
     override emergency = (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => this.pino.emergency( obj, msg, ...args )
+
 }
 
 export default PinoNode

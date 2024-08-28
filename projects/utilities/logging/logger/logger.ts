@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger.ts
- * Last Modified: 06/08/2024, 22:30
+ * Last Modified: 28/08/2024, 08:43
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,7 +37,7 @@
 import type { SlotRegistry } from '@bitdev/harmony.harmony'
 import { LoggerAspect } from './index.js'
 import type { LoggerConfig } from './logger-config.js'
-import { DefaultLevels, LoggerNode } from './logger.node.runtime.js'
+import { DefaultLevels } from './logger.node.runtime.js'
 
 export type Logger<TLevels extends string> = {
     name: string,
@@ -53,94 +53,78 @@ export type Logger<TLevels extends string> = {
 
 export type LoggerSlot<TLevels extends string> = SlotRegistry<Logger<TLevels>>;
 
-export type LoggerUtilType = {
-    [level in ( typeof DefaultLevels[number] )]: (
+export type LoggerUtilType<CustomLevels extends string = never> = {
+    [level in ( typeof DefaultLevels[number] | CustomLevels )]: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void;
 }
 
-export class LoggerUtil<CustomLevels extends string = never>
+export abstract class LoggerUtil<CustomLevels extends string = never>
     implements LoggerUtilType {
     static readonly dependencies = [ LoggerAspect ]
     static readonly defaultConfig: LoggerConfig = {
         level: 'info',
         module: 'utilities:logging:undefined'
     }
-    warning: (
+    abstract warning: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    critical: (
+    abstract critical: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    alert: (
+    abstract alert: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    emergency: (
+    abstract emergency: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    trace: (
+    abstract trace: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    debug: (
+    abstract debug: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    info: (
+    abstract info: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    notice: (
+    abstract notice: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    warn: (
+    abstract warn: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    error: (
+    abstract error: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
-    fatal: (
+    abstract fatal: (
         msg: string,
         obj?: object,
         ...args: any[]
     ) => void
 
     constructor ( protected config: LoggerConfig<CustomLevels> ) {
-    }
-
-    static async provider<CustomLevels extends string = never> (
-        [ logger ]: [ LoggerNode ],
-        config: LoggerUtil['config']
-    ) {
-        const consoleUtil = new LoggerUtil( config )
-        logger.registerUtil(
-            [
-                {
-                    name: config.module,
-                    util: consoleUtil
-                }
-            ]
-        )
-        return consoleUtil
     }
 }
 

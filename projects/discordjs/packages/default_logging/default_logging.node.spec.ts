@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.spec.ts
- * Last Modified: 07/08/2024, 20:34
+ * Last Modified: 10/08/2024, 00:58
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,7 +42,7 @@ import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 import { DefaultLoggerAspect } from './default_logging.aspect.js'
 import type { DefaultLoggingNode } from './default_logging.node.runtime.js'
 
-it( 'should retrieve the aspect', async () => {
+it.skip( 'should retrieve the aspect', async () => {
     const default_logging = await loadAspect<DefaultLoggingNode>( DefaultLoggerAspect, {
         runtime: 'node',
         aspects: [

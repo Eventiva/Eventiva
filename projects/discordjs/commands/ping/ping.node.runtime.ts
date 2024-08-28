@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: ping.node.runtime.ts
- * Last Modified: 08/08/2024, 00:50
+ * Last Modified: 28/08/2024, 09:56
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -64,14 +64,14 @@ export class PingDiscord
         config: PingConfig
     ) {
         const ping = new PingDiscord( config, discordJS )
-        ping.log.trace( ping.discord.i18n.t( 'discord:modules.registering', { name: ping.name } ) )
-        await ping.discord.registerModule( ping )
-        ping.log.trace( ping.discord.i18n.t( 'discord:modules.registered', { name: ping.name } ) )
+        // ping.log!.trace( ping.discord.i18n!.t( 'discord:modules.registering', { name: ping.name } ) )
+        // await ping.discord.registerModule( ping )
+        // ping.log!.trace( ping.discord.i18n!.t( 'discord:modules.registered', { name: ping.name } ) )
         return ping
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public registerEvents ( reload?: true ) {
+    public async registerEvents ( reload?: true ) {
         this.discord.registerEvent( this, [
             // add any events here
         ] as Event<any>[] )
@@ -79,7 +79,7 @@ export class PingDiscord
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public registerCommands ( reload?: true ) {
+    public async registerCommands ( reload?: true ) {
         this.discord.registerCommand( this, [
             // add any commands here
         ] as Command[] )

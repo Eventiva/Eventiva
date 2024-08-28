@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs.node.runtime.ts
- * Last Modified: 08/08/2024, 00:52
+ * Last Modified: 28/08/2024, 18:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,6 +34,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { BackendContext, BackendServer, DeployOptions } from '@bitdev/symphony.backends.backend-server'
+import { SymphonyPlatformNode } from '@bitdev/symphony.symphony-platform'
 import { I18NAspect, type I18NNode, Resource } from '@eventiva/utilities.i18n'
 import { Logger, LoggerAspect, LoggerConfig, LoggerNode } from '@eventiva/utilities.logging.logger'
 import { Client, GatewayIntentBits } from 'discord.js'
@@ -42,7 +44,7 @@ import type { DiscordjsConfig } from './discordjs-config.js'
 import type { Event, EventSlot, ExtendedClientEvents } from './event.js'
 import discord from './locales/en/discord.js'
 import errors from './locales/en/errors.js'
-import type { DiscordJsModule } from './module.js'
+import type { DiscordJsModule, ModuleSlot } from './module.js'
 import { delay } from './utils.js'
 
 const defaultToken = process.env[ 'DISCORD.TOKEN' ]
@@ -51,9 +53,14 @@ const parsedDefaultStartDelay = defaultStartDelay
     ? parseInt( defaultStartDelay, 10 )
     : 30000
 
-export class DiscordJSNode {
+/**
+ * Represents a DiscordJSNode class.
+ *
+ * This class provides methods to register locales, modules, events, and commands in the DiscordJSNode.
+ */
+export class DiscordJSNode
+    implements BackendServer {
     static readonly dependencies = [ I18NAspect, LoggerAspect ]
-
     static readonly defaultConfig: DiscordjsConfig = {
         token: defaultToken,
         startDelay: parsedDefaultStartDelay,
@@ -88,12 +95,25 @@ export class DiscordJSNode {
             module: 'discordjs_core'
         }
     }
+    /**
+     * name of the server.
+     */
+    name = 'DiscordClient'
+    /**
+     * determine whether to expose the service
+     * in the gateway.
+     */
+    internal = true
 
-    public client: Client
+    public client: Client | null = null
 
-    public i18n: I18NNode['i18next']
+    public i18n: I18NNode['i18next'] | null = null
 
     public isInitialised = false
+    /**
+     * deployment options.
+     */
+    deploy?: DeployOptions
 
     protected log: Logger<never>['logger']
 
@@ -101,26 +121,32 @@ export class DiscordJSNode {
         protected config: DiscordjsConfig,
         protected eventSlot: EventSlot<any>,
         protected commandSlot: CommandSlot,
+        protected moduleSlot: ModuleSlot<any>,
         protected i18nModule: I18NNode,
         protected logging?: LoggerNode
     ) {
-        this.initialize()
+        this.deploy = this.config.deployOptions
     }
 
     static async provider (
-        [ i18n, logging ]: [ I18NNode, LoggerNode | undefined ],
+        [ symphonyPlatformNode, i18n, logging ]: [ SymphonyPlatformNode, I18NNode, LoggerNode | undefined ],
         config: DiscordjsConfig,
-        [ eventSlot, commandSlot ]: [ EventSlot<any>, CommandSlot ]
+        [ eventSlot, commandSlot, moduleSlot ]: [ EventSlot<any>, CommandSlot, ModuleSlot<any> ]
     ) {
-        return new DiscordJSNode( config, eventSlot, commandSlot, i18n, logging )
+        const discord = new DiscordJSNode( config, eventSlot, commandSlot, moduleSlot, i18n, logging )
+        symphonyPlatformNode.registerBackendServer( [
+            {
+                name: 'discordClient',
+                server: discord
+            }
+        ] )
+        return discord
     }
 
     /**
      * Registers the given resources as locales. Logs the registration of locales before and after registering the resources.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
-     * @param resources An array of resources
+     * @param resources - An array of resources to be registered as locales.
+     * @returns - This method does not return any value.
      */
     public registerLocale ( resources: Resource[] ) {
         // this.log.trace(this.i18n.t("discord:registeringLocales", {count: resources.length}))
@@ -128,32 +154,28 @@ export class DiscordJSNode {
         // this.log.trace(this.i18n.t("discord:registeredLocales", {count: resources.length}))
     }
 
+
     /**
-     * Registers a module in the DiscordJsManager.
-     * - `module`: The module to register.
-     * Returns the DiscordJsManager instance.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @template E The type parameter for the module
-     * @param module The module to be registered
-     * @param reload
-     * @returns Registers a module in the Discord bot. The module will be added to the list of registered modules and will be available for use.
+     * Registers a module in the DiscordJsModule.
+     * @param module - The module to register.
+     * @param [reload] - Optional parameter to indicate whether the module should be reloaded.
+     * @returns - Promise representing the completion of the registration.
      */
     public async registerModule (
         module: DiscordJsModule,
         reload?: true
     ) {
-        this.log.trace( this.i18n.t( 'discord:modules.init', { context: 'start', name: module.name } ) )
-        module.registerCommands( reload )
-        module.registerEvents( reload )
-        // module.registerLocales(reload)
-        this.log.trace( this.i18n.t( 'discord:modules.init', { context: 'complete', name: module.name } ) )
-
-        this.client.emit( 'moduleRegistered', module, reload )
-
+        // TODO: add slot here
         return this
     }
 
+
+    /**
+     * Registers the specified events to the DiscordJsModule.
+     * @param module - The module to register the events to.
+     * @param events - The events to register.
+     * @returns - The updated instance of the class.
+     */
     public async registerEvent (
         module: DiscordJsModule,
         events: Event<any>[]
@@ -176,102 +198,109 @@ export class DiscordJSNode {
     }
 
     /**
-     * Returns a list of all events. This function calls the 'flatValues' method of the 'eventSlot' object and returns the result.
-     * @author Jonathan Stevens (@TGTGamer)
+     * Returns a list of all events.
      *
-     * @returns Returns a list of events.
+     * This method calls the 'flatValues' method of the 'eventSlot' object to retrieve all events. The list of events is then returned.
+     * @returns - An array containing all events.
      */
     public listEvents () {
-        this.log.trace( this.i18n.t( 'discord:events.listing', { count: this.eventSlot.length } ) )
+        this.CheckIsInitialised()
+
+        this.log!.trace( this.i18n!.t( 'discord:events.listing', { count: this.eventSlot.length } ) )
         const list = this.eventSlot.flatValues()
-        this.log.trace( this.i18n.t( 'discord:events.listed', { flatmap: JSON.stringify( list ) } ) )
+        this.log!.trace( this.i18n!.t( 'discord:events.listed', { flatmap: JSON.stringify( list ) } ) )
+        return list
     }
 
     /**
-     * Retrieves an event with the given name.
-     * If multiple events with the same name exist, it returns the first event.
-     * @see DiscordJSNode.getEvents for a list of all events with the given name.
-     * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @param name The name of the event to get.
+     * Retrieves the event with the specified name.
+     * @param name - The name of the event.
+     * @returns An array of events.
+     * @throws Error When the event with the specified name is not found.
      */
     public getEvent<E extends keyof ExtendedClientEvents> ( name: E ): Event<E>[] {
-        this.log.trace( this.i18n.t( 'discord:events.single.getting', { name, module } ) )
+        this.CheckIsInitialised()
+
+        this.log!.trace( this.i18n!.t( 'discord:events.single.getting', { name, module } ) )
         const event = this.eventSlot.getByName( name )
-        this.log.trace( this.i18n.t( 'discord:events.single.got', { name, event: JSON.stringify( event ) } ) )
+        this.log!.trace( this.i18n!.t( 'discord:events.single.got', { name, event: JSON.stringify( event ) } ) )
         if ( event ) {
             return event
         }
-        this.log.trace( this.i18n.t( 'discord:events.single.notFound', { name } ) )
-        throw new Error( this.i18n.t( 'discord:events.single.notFound', { name } ) )
+        this.log!.trace( this.i18n!.t( 'discord:events.single.notFound', { name } ) )
+        throw new Error( this.i18n!.t( 'discord:events.single.notFound', { name } ) )
     }
 
     /**
      * Registers multiple commands in the command slot.
      * @param module
      * @param commands An array of Command objects.
-     * @return void
+     * @returns void
      * @author Jonathan Stevens (@TGTGamer)
      */
     public registerCommand (
         module: DiscordJsModule,
         commands: Command[]
     ): DiscordJSNode {
+        this.CheckIsInitialised()
         if ( commands.length === 0 ) {
             return this
         }
-        this.log.trace( this.i18n.t( 'discord:commands.multi.registering', { count: commands.length } ) )
-        commands.forEach.bind( this )( ( command: Command ) => {
-            this.log.trace( this.i18n.t( 'discord:commands.single.binding', { name: command.name } ) )
-            this.bindCommandToModule( module, command )
-        } )
+        this.log!.trace( this.i18n!.t( 'discord:commands.multi.registering', { count: commands.length } ) )
+        for ( let name in commands ) {
+            let command = commands[ name ]
+            this.log!.trace( this.i18n!.t( 'discord:commands.single.binding', { name: command.name } ) )
+            commands[ name ] = this.bindCommandToModule( command )
+        }
         this.commandSlot.register( commands )
-        this.log.trace( this.i18n.t( 'discord:commands.multi.registered', { count: this.commandSlot.length } ) )
+        this.log!.trace( this.i18n!.t( 'discord:commands.multi.registered', { count: this.commandSlot.length } ) )
         return this
     }
 
     /**
      * Returns an array of all commands currently stored in the command slot.
      * @author Jonathan Stevens (@TGTGamer)
-     *
      * @returns Returns a list of commands by flatting the command slot values.
      */
     public listCommands () {
-        this.log.trace( this.i18n.t( 'discord:commands.listing', { count: this.commandSlot.length } ) )
+        this.CheckIsInitialised()
+
+        this.log!.trace( this.i18n!.t( 'discord:commands.listing', { count: this.commandSlot.length } ) )
         const list = this.commandSlot.flatValues()
-        this.log.trace( this.i18n.t( 'discord:commands.listed', { flatmap: JSON.stringify( list ) } ) )
+        this.log!.trace( this.i18n!.t( 'discord:commands.listed', { flatmap: JSON.stringify( list ) } ) )
         return list
     }
 
     /**
      * Returns the command with the specified name.
      * @author Jonathan Stevens (@TGTGamer)
-     *
      * @param name The name of the command
      * @returns Get the command with the specified name
      */
     public getCommand ( name: string ): Command[] {
-        this.log.trace( this.i18n.t( 'discord:commands.single.getting', { name } ) )
+        this.CheckIsInitialised()
+
+        this.log!.trace( this.i18n!.t( 'discord:commands.single.getting', { name } ) )
         const command = this.commandSlot.getByName( name )
-        this.log.trace( this.i18n.t( 'discord:commands.single.got', { name, command: JSON.stringify( command ) } ) )
+        this.log!.trace( this.i18n!.t( 'discord:commands.single.got', { name, command: JSON.stringify( command ) } ) )
         if ( command ) {
             return command
         }
-        this.log.trace( this.i18n.t( 'discord:commands.single.notFound', { name } ) )
-        throw new Error( this.i18n.t( 'discord:commands.single.notFound', { name } ) )
+        this.log!.trace( this.i18n!.t( 'discord:commands.single.notFound', { name } ) )
+        throw new Error( this.i18n!.t( 'discord:commands.single.notFound', { name } ) )
     }
 
     public async setupLogger (
         name: string = 'discord:client',
         config: LoggerConfig = this.config.logger
     ) {
-        await this.logging.registerLogger( [
+        await this.logging!.registerLogger( [
             {
                 name,
                 options: config
             }
         ] )
-        const log = this.logging.getLogger( name )
+        const log = this.logging!.getLogger( name )
         if ( !log ) {
             throw 'No logger'
         }
@@ -279,7 +308,14 @@ export class DiscordJSNode {
         return log
     }
 
-    private async initialize () {
+    private CheckIsInitialised () {
+        if ( !this.isInitialised || !this.log || !this.i18n || !this.client?.isReady() ) {
+            throw new Error(
+                'Discord Client is not initialized' )
+        }
+    }
+
+    private async start ( { name, ...context }: BackendContext ) {
         this.log = await this.setupLogger()
         this.log.trace( 'Waiting on i18nModule to initialize' )
         this.log.trace( 'Registering i18nModule resources' )
@@ -336,35 +372,41 @@ export class DiscordJSNode {
         this.log.trace( this.i18n.t( 'discord:init.loggedIn' ) )
 
         this.isInitialised = true
+
+        return {
+            appName: this.name,
+            stop: async () => {
+                this.client?.destroy()
+            }
+        }
     }
 
     /**
      * Do the binding of commands actions (execute and message) to the module
      * Log tracing information about the bindings
-     * @param module
      * @param command The command to bind
      */
     private bindCommandToModule (
-        module: DiscordJsModule,
         command: Command
-    ): void {
+    ) {
         const mutableCommand = command
         if ( mutableCommand?.execute ) {
-            mutableCommand.execute = mutableCommand.execute.bind( module )
+            mutableCommand.execute = mutableCommand.execute.bind( this )
             if ( 'message' in mutableCommand ) {
-                mutableCommand.message = mutableCommand.message?.bind( module )
+                mutableCommand.message = mutableCommand.message?.bind( this )
             }
-            this.log.trace( this.i18n.t( 'discord:commands.single.bound', { name: command.name } ) )
+            this.log!.trace( this.i18n!.t( 'discord:commands.single.bound', { name: command.name } ) )
         }
+        return command
     }
 
     private logEventRegistrationStart ( eventCount: number ) {
-        this.log.trace( this.i18n.t( 'discord:events.multi.registering', { count: eventCount } ) )
-        this.log.trace( this.i18n.t( 'discord:events.multi.registerEventSlot' ) )
+        this.log!.trace( this.i18n!.t( 'discord:events.multi.registering', { count: eventCount } ) )
+        this.log!.trace( this.i18n!.t( 'discord:events.multi.registerEventSlot' ) )
     }
 
     private logEventRegistrationEnd ( eventSlotLength: number ) {
-        this.log.trace( this.i18n.t( 'discord:events.multi.registered', { count: eventSlotLength } ) )
+        this.log!.trace( this.i18n!.t( 'discord:events.multi.registered', { count: eventSlotLength } ) )
     }
 
     private async registerEventToClient (
@@ -379,16 +421,16 @@ export class DiscordJSNode {
 
         const eventFn = await event.execute.bind( module )
         if ( event.once ) {
-            this.client.once( event.name as string, eventFn )
+            this.client!.once( event.name as string, eventFn )
         } else {
-            this.client.on( event.name as string, eventFn )
+            this.client!.on( event.name as string, eventFn )
         }
 
         this.logEventRegistered( event )
     }
 
     private logSingleEventRegistration ( event: Event<any> ) {
-        this.log.trace( this.i18n.t(
+        this.log!.trace( this.i18n!.t(
             'discord:events.single.registering',
             {
                 name: event.name,
@@ -398,13 +440,13 @@ export class DiscordJSNode {
             }
         ) )
 
-        this.log.trace( `Getting the event from EventSlot using getByName ${
+        this.log!.trace( `Getting the event from EventSlot using getByName ${
             JSON.stringify( this.eventSlot.getByName( event.name ) ) }`
         )
     }
 
     private logEventRegistered ( event: Event<any> ) {
-        this.log.info( this.i18n.t(
+        this.log!.info( this.i18n!.t(
             'discord:events.single.registered',
             {
                 name: event.name,

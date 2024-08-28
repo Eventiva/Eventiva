@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: console.node.runtime.ts
- * Last Modified: 06/08/2024, 17:16
+ * Last Modified: 28/08/2024, 08:58
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -55,10 +55,11 @@ export class ConsoleNode
     override warn = this.console.warn
     override error = this.console.error
     override critical = this.console.error
+    override fatal = this.console.error
     override alert = this.console.error
     override emergency = this.console.error
 
-    static override async provider (
+    static async provider (
         [ logger ]: [ LoggerNode ],
         config: LoggerUtil['config']
     ) {

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logger.node.runtime.ts
- * Last Modified: 06/08/2024, 22:32
+ * Last Modified: 28/08/2024, 09:42
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -97,10 +97,10 @@ export class LoggerNode<CustomLevels extends string = never> {
     }
 
     async registerLogger ( loggers: Logger<CustomLevels>[] ) {
-        this.output.debug( `Registering loggers. ${ loggers.length } loggers to be loaded.` )
+        this.output?.debug( `Registering loggers. ${ loggers.length } loggers to be loaded.` )
 
         for ( const logger of loggers ) {
-            this.output.debug( `Registering logger ${ logger.name }, with level: ${ logger.options?.level }.` )
+            this.output?.debug( `Registering logger ${ logger.name }, with level: ${ logger.options?.level }.` )
             const newLogger = {
                 ...logger,
                 logger: {
@@ -115,13 +115,13 @@ export class LoggerNode<CustomLevels extends string = never> {
                     alert: this.executeLogging.bind( this, `${ logger.name }`, 'alert' ),
                     fatal: this.executeLogging.bind( this, `${ logger.name }`, 'fatal' ),
                     emergency: this.executeLogging.bind( this, `${ logger.name }`, 'emergency' ),
-                    log: this.executeLogging.bind( this, `${ logger.name }`, `${ logger.options.level }` )
+                    log: this.executeLogging.bind( this, `${ logger.name }`, `${ logger.options?.level }` )
                 }
             } as Logger<CustomLevels>
             return this.loggerSlot.register( newLogger )
         }
 
-        this.output.debug( `Loggers registered against LoggerSlot. Now hosting ${ this.loggerSlot.length } Loggers` )
+        this.output?.debug( `Loggers registered against LoggerSlot. Now hosting ${ this.loggerSlot.length } Loggers` )
         return this
     }
 
@@ -134,7 +134,7 @@ export class LoggerNode<CustomLevels extends string = never> {
         if ( logger ) {
             return logger.logger
         }
-        this.output.error( `Logger ${ name } not found.` )
+        this.output?.error( `Logger ${ name } not found.` )
         throw new Error( `Logger ${ name } not found.` )
     }
 
@@ -147,8 +147,10 @@ export class LoggerNode<CustomLevels extends string = never> {
     ) {
         console.log( module )
         this.listUtils().forEach( utilSlot => {
-            if ( loggingLevel in utilSlot.util ) {
-                utilSlot.util[ loggingLevel ]( `[${ module }]: ` + msg, obj, ...args )
+            const { util } = utilSlot
+            if ( loggingLevel in util ) {
+                // @ts-ignore
+                util[ loggingLevel ]( `[${ module }]: ` + msg, obj, ...args )
             }
         } )
     }

@@ -1,10 +1,17 @@
 {
   "extends": "@bitdev/node.node-env/config/tsconfig.json",
   "compilerOptions": {
-    "target": "es2020",
+    "strict": true,
+    "target": "ESNext",
     "outDir": "./dist",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext"
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "lib": [
+      "es2021",
+      "DOM",
+      "ES6",
+      "DOM.Iterable"
+    ]
   },
   "include": [
     "**/*",

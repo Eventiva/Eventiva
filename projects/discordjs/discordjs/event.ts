@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: event.ts
- * Last Modified: 29/07/2024, 21:56
+ * Last Modified: 14/08/2024, 22:15
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -41,61 +41,42 @@ import { DiscordJsModule } from './module.js'
 /**
  * The interface ExtendedClientEvents extends the ClientEvents interface and includes additional events for logging levels: debug, trace, info, warn, fatal, alert, and emergency. Each event has a single parameter 'message' of type string.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
- * @interface ExtendedClientEvents
-
- * @extends {ClientEvents}
  */
 export interface ExtendedClientEvents
     extends ClientEvents {
     /**
      * The `debug` property is a method that takes a `message` parameter of type string. It is used for debugging purposes and can be used to log messages to the console.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     debug: [ message: string ];
     /**
      * An array that stores trace messages. Each message is a string.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     trace: [ message: string ];
     /**
      * A property that holds information in the form of a message. The message is of type string.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     info: [ message: string ];
     /**
      * The `warn` property is a function that accepts a `message` of type string. It is used to log warning messages.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     warn: [ message: string ];
     /**
      * A property representing a fatal error message. The value should be a string.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     fatal: [ message: string ];
     /**
      * A property that triggers an alert with the specified message.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     alert: [ message: string ];
     /**
      * The emergency property represents a message for emergency situations.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {[message: string]}
      */
     emergency: [ message: string ];
 
@@ -112,9 +93,6 @@ export interface ExtendedClientEvents
  * - `data`: An object containing the event name and optional `once` flag.
  * - `execute`: Function that is called when the event is triggered, with arguments matching the corresponding event key from the `ClientEvents` interface.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
-
  * @template {keyof ClientEvents} E The type of event
  */
 export interface Event<E extends keyof ExtendedClientEvents> {
@@ -122,24 +100,18 @@ export interface Event<E extends keyof ExtendedClientEvents> {
     /**
      * The name of the property.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {E}
      */
     name: E;
 
     /**
      * Specifies whether the function should only be executed once. If set to true, the function will only be called the first time it is invoked, and subsequent calls will be ignored.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {?boolean}
      */
     once?: boolean;
 
     /**
      * A method that executes a given function with the provided arguments. The function is determined by the event type, 'E', from the 'ExtendedClientEvents' object. The arguments are passed as parameters to the function. The return value is an 'Awaitable' Promise that resolves to 'void'.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @type {(...args: ExtendedClientEvents[E]) => Awaitable<void>}
      */
     execute: (
         this: DiscordJsModule,
@@ -151,9 +123,6 @@ export interface Event<E extends keyof ExtendedClientEvents> {
  * A generic type representing an event slot.
  * It is a mapping from an event key in the ExtendedClientEvents union to a SlotRegistry of that event.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
-
  * @template {keyof ExtendedClientEvents} E The key of the extended client events.
  */
 export type EventSlot<E extends keyof ExtendedClientEvents> = SlotRegistry<Event<E>[]>;

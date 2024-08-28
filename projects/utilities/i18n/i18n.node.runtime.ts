@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: i18n.node.runtime.ts
- * Last Modified: 08/08/2024, 00:47
+ * Last Modified: 28/08/2024, 18:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -124,7 +124,6 @@ export class I18NNode {
         private resourceSlot: ResourceSlot,
         protected logging?: LoggerNode
     ) {
-        this.init()
     }
 
     /**
@@ -146,6 +145,7 @@ export class I18NNode {
         [ resourceSlot ]: [ ResourceSlot ]
     ) {
         const i18N = new I18NNode( config, resourceSlot, logging )
+        await i18N.init()
         return i18N
     }
 
@@ -158,21 +158,21 @@ export class I18NNode {
      * @returns Registers resources by adding them to the i18next instance, loading the languages, namespaces, and resources.
      */
     registerResource ( resources: Resource[] ) {
-        this.log.debug( `Registering resources. ${ resources.length } resources to be loaded.` )
+        this.log?.debug( `Registering resources. ${ resources.length } resources to be loaded.` )
         for ( const resource of resources ) {
-            this.log.debug( `Registering resource. ${ resource.lng }, ${ resource.ns }, ${ JSON.stringify( resource.resources ) }` )
+            this.log?.debug( `Registering resource. ${ resource.lng }, ${ resource.ns }, ${ JSON.stringify( resource.resources ) }` )
             this.i18next = this.i18next.addResourceBundle( resource.lng, resource.ns, resource.resources )
-            this.log.debug( `Registering resource against ResourceSlot.` )
+            this.log?.debug( `Registering resource against ResourceSlot.` )
             this.resourceSlot.register( resource )
-            this.log.debug( `Loading resource ${ resource.lng } into i18next.` )
+            this.log?.debug( `Loading resource ${ resource.lng } into i18next.` )
             this.i18next.loadLanguages( resource.lng )
-            this.log.debug( `Loading namespace ${ resource.ns } into i18next.` )
+            this.log?.debug( `Loading namespace ${ resource.ns } into i18next.` )
             this.i18next.loadNamespaces( resource.ns )
-            this.log.debug( `Loading resources into i18next.` )
+            this.log?.debug( `Loading resources into i18next.` )
             this.i18next.loadResources()
-            this.log.debug( `Resource registered.` )
+            this.log?.debug( `Resource registered.` )
         }
-        this.log.debug( `Resources registered against ResourceSlot. Now hosting ${ this.resourceSlot.length } Resources` )
+        this.log?.debug( `Resources registered against ResourceSlot. Now hosting ${ this.resourceSlot.length } Resources` )
         return this
     }
 
@@ -201,13 +201,13 @@ export class I18NNode {
         name: string = 'i18n',
         config: LoggerConfig = this.config.logger
     ) {
-        await this.logging.registerLogger( [
+        await this.logging?.registerLogger( [
             {
                 name,
                 options: config
             }
         ] )
-        this.log = this.logging.getLogger( name )
+        this.log = this.logging?.getLogger( name )
     }
 
     /**
@@ -220,9 +220,9 @@ export class I18NNode {
      */
     private async init () {
         await this.setupLogger()
-        this.log.debug( `Initializing i18next with config: ${ JSON.stringify( this.config ) }` )
+        this.log?.debug( `Initializing i18next with config: ${ JSON.stringify( this.config ) }` )
         await this.i18next.init( this.config )
-        this.log.debug( `i18next initialized.` )
+        this.log?.debug( `i18next initialized.` )
         return this
     }
 }

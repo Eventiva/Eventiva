@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: command.ts
- * Last Modified: 3/29/24, 4:54 PM
+ * Last Modified: 14/08/2024, 22:06
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -55,8 +55,6 @@ import type { DiscordJSNode } from './discordjs.node.runtime.js'
  * - `data`: a SlashCommandBuilder object representing the data of the message.
  * - `execute`: a function that is called when the message is executed. It takes an `interaction` parameter of type `Message<boolean>` and returns a promise that resolves to `void`.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @interface
  */
 interface CommandMessage {
     /**
@@ -95,8 +93,6 @@ interface CommandMessage {
  * - `execute` - The function that will be executed when the command is triggered by a slash command interaction.
  * - `message` (optional) - The function that will be executed when the command is triggered by a message interaction.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @interface
  */
 interface CommandSlash {
     /**
@@ -140,8 +136,6 @@ interface CommandSlash {
  * - `execute`: A function that is called when the button is clicked. It takes an interaction object of type `ButtonInteraction` and returns a promise that resolves to `void`.
  * - `message` (optional): A function that is called when the button is clicked in a message context menu. It takes an interaction object of type `Message<boolean>` and returns a promise that resolves to `void`.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @interface
  */
 interface CommandButton {
     /**
@@ -188,8 +182,6 @@ interface CommandButton {
  * The command has an execute method that is a callback function taking an argument interaction of type StringSelectMenuInteraction and returning a Promise or an asynchronous function taking an argument interaction of type StringSelectMenuInteraction and returning void.
  * The command may have a message method that is a callback function taking an argument interaction of type Message<boolean> and returning a Promise or an asynchronous function taking an argument interaction of type Message<boolean> and returning void.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @interface
  */
 interface CommandSelectMenu {
     /**
@@ -233,8 +225,6 @@ interface CommandSelectMenu {
  * Represents a command that can be executed.
  * It can be a message command, a slash command, a button command, or a select menu command.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
  */
 export type Command =
     | CommandMessage
@@ -245,7 +235,5 @@ export type Command =
 /**
  * A specialized slot in a slot registry for storing instances of the Command class.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
  */
 export type CommandSlot = SlotRegistry<Command[]>;

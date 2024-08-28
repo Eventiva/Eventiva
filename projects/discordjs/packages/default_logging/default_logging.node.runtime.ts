@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: default_logging.node.runtime.ts
- * Last Modified: 06/08/2024, 12:58
+ * Last Modified: 28/08/2024, 18:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,6 +42,7 @@ import DiscordJSAspect, {
     Event,
     Resources
 } from '@eventiva/discordjs.discordjs'
+import { Client } from 'discord.js'
 import type { DefaultLoggingConfig } from './default_logging-config.js'
 
 
@@ -90,7 +91,7 @@ export class DefaultLoggingNode
             once: true,
             async execute (
                 this: DefaultLoggingNode,
-                client
+                client: Client<true>
             ) {
                 client.emit( 'info', `Logged in as ${ client.user.tag } at ${ new Date().toLocaleString() }` )
             }
@@ -102,7 +103,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                this.log.trace( message )
+                this.log!.trace( message )
             }
         },
         debug: {
@@ -112,7 +113,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                this.log.debug( message )
+                this.log!.debug( message )
             }
         },
         info: {
@@ -122,7 +123,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                this.log.info( message )
+                this.log!.info( message )
             }
         },
         warn: {
@@ -132,7 +133,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                this.log.warn( message )
+                this.log!.warn( message )
             }
         },
         fatal: {
@@ -142,7 +143,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                return this.log.fatal( message )
+                return this.log!.fatal( message )
             }
         },
         alert: {
@@ -152,7 +153,7 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                return this.log.alert( message )
+                return this.log!.alert( message )
             }
         },
         emergency: {
@@ -162,32 +163,26 @@ export class DefaultLoggingNode
                 this: DefaultLoggingNode,
                 message: string
             ) {
-                return this.log.emergency( message )
+                return this.log!.emergency( message )
             }
         }
     }
 
     constructor (
-        [ discordjs ]: [ DiscordJSNode | undefined ],
+        [ discordjs ]: [ DiscordJSNode ],
         config: DefaultLoggingConfig
     ) {
         super( config, discordjs )
     }
 
+
     /**
-     * Creates a provider for the given DiscordJSNode and DefaultLoggingConfig.
-     * The provider registers the default_logging event using the given DiscordJSNode and configures it with the provided DefaultLoggingConfig.
-     * @param discordjs The DiscordJSNode instance to use.
-     * @param config The DefaultLoggingConfig instance to use.
-     * @returns The created DefaultLoggingNode instance.
-     * @author Jonathan Stevens (@TGTGamer)
+     * Provider method for creating a DefaultLoggingNode module.
      *
-     * @static
-     * @async
-     * @param param0
-     * @param param0.discordjs
-     * @param config The configuration object for the DefaultLoggingNode.
-     * @returns This function is a static async provider that takes in a DiscordJSNode instance and a DefaultLoggingConfig object. It creates a new DefaultLoggingNode instance using the discordjs and config parameters. It then registers the 'default_logging' event using the default_logging.resource property. It returns the created DefaultLoggingNode instance.
+     * @param {DiscordJSNode | undefined} discordjs - The DiscordJSNode dependency.
+     * @param {DefaultLoggingConfig} config - The configuration object for the DefaultLoggingNode module.
+     * @throws {Error} Throws an error if DiscordJS is not present in the dependencies.
+     * @returns {DefaultLoggingNode} Returns an instance of the DefaultLoggingNode module.
      */
     static async provider (
         [ discordjs ]: [ DiscordJSNode | undefined ],
@@ -197,9 +192,9 @@ export class DefaultLoggingNode
             throw new Error( 'DiscordJS not in dependencies' )
         }
         const module = new DefaultLoggingNode( [ discordjs ], config )
-        module.log.trace( module.discord.i18n.t( 'discord:modules.registering', { name: module.name } ) )
-        module.discord.registerModule( module )
-        module.log.trace( module.discord.i18n.t( 'discord:modules.registered', { name: module.name } ) )
+        // module.log!.trace( module.discord.i18n.t( 'discord:modules.registering', { name: module.name } ) )
+        // module.discord.registerModule( module )
+        // module.log!.trace( module.discord.i18n.t( 'discord:modules.registered', { name: module.name } ) )
         return module
     }
 
@@ -212,8 +207,8 @@ export class DefaultLoggingNode
      * @returns Registers events for the current instance of the application.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public registerEvents ( reload?: true ) {
-        this.discord.registerEvent( this, [
+    public async registerEvents ( reload?: true ) {
+        await this.discord.registerEvent( this, [
             this.resources.ready,
             this.resources.trace,
             this.resources.debug,
@@ -235,7 +230,7 @@ export class DefaultLoggingNode
      * @returns Registers commands in the Discord client.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public registerCommands ( reload?: true ) {
+    public async registerCommands ( reload?: true ) {
         this.discord.registerCommand( this, [
             // add any commands here
         ] as Command[] )

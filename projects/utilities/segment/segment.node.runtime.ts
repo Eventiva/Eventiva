@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: segment.node.runtime.ts
- * Last Modified: 4/2/24, 2:00 AM
+ * Last Modified: 28/08/2024, 18:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -64,6 +64,7 @@ export class SegmentNode {
         writeKey: process.env.SEGMENT_WRITE_KEY!
     }
 
+
     /**
      * A property that represents the analytics module.
      * @author Jonathan Stevens (@TGTGamer)
@@ -84,7 +85,7 @@ export class SegmentNode {
         private config: SegmentConfig,
         private instanceSlot: InstanceSlot
     ) {
-        this.analytics = new Analytics( config )
+        this.analytics = new Analytics( this.config )
     }
 
     static async provider (
@@ -96,8 +97,7 @@ export class SegmentNode {
         if ( !config.writeKey ) {
             throw new Error( 'Segment writeKey is required' )
         }
-        const segment = new SegmentNode( config, instanceSlot )
-        return segment
+        return new SegmentNode( config, instanceSlot )
     }
 
     /**

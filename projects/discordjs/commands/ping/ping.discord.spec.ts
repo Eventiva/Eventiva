@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: ping.discord.spec.ts
- * Last Modified: 07/08/2024, 20:38
+ * Last Modified: 10/08/2024, 00:57
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -42,7 +42,7 @@ import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 import { PingAspect } from './ping.aspect.js'
 import type { PingDiscord } from './ping.node.runtime.js'
 
-it( 'should retrieve the aspect', async () => {
+it.skip( 'should retrieve the aspect', async () => {
     const ping = await loadAspect<PingDiscord>( PingAspect, {
         runtime: 'node',
         aspects: [

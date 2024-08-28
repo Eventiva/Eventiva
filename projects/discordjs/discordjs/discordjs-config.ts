@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: discordjs-config.ts
- * Last Modified: 06/08/2024, 18:47
+ * Last Modified: 22/08/2024, 13:17
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,15 +34,13 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { DeployOptions } from '@bitdev/symphony.backends.backend-server'
 import { LoggerNode } from '@eventiva/utilities.logging.logger'
 import type { ClientOptions } from 'discord.js'
 
 /**
  * This type is used for the configuration of the Discord.js aspect. It has properties including 'token', 'clientId', 'clientSecret', and 'guildId', all of type string. Additionally, it extends the 'ClientOptions' type.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
-
  */
 export type DiscordjsConfig = {
     token: string;
@@ -51,4 +49,5 @@ export type DiscordjsConfig = {
     guildId: string;
     startDelay: number;
     logger: LoggerNode['config'];
+    deployOptions?: DeployOptions
 } & ClientOptions;

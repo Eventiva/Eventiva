@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: module.ts
- * Last Modified: 06/08/2024, 22:32
+ * Last Modified: 28/08/2024, 18:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,17 +34,17 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { SlotRegistry } from '@bitdev/harmony.harmony'
 import { Logger, LoggerConfig, LoggerNode } from '@eventiva/utilities.logging.logger'
 import type { Command } from './command.js'
 import { DiscordJSAspect } from './discordjs.aspect.js'
 import type { DiscordJSNode } from './discordjs.node.runtime.js'
 import type { Event, ExtendedClientEvents } from './event.js'
 
+
 /**
  * An object that represents a collection of resources. Each resource is identified by a key that corresponds to an event or command name from the ExtendedClientEvents interface. The value for each key can be either an Event object or a Command object.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
  */
 export type Resources = {
     [K in keyof ExtendedClientEvents]?: Event<K>
@@ -56,32 +56,29 @@ export type Resources = {
  * A type representing the configuration for a module.
  * The module configuration consists of the name property.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
  */
 export type ModuleConfig = {
     name: string
     logger: LoggerNode['config']
 }
 
+
+export type ModuleSlot<C extends ModuleConfig = ModuleConfig> = SlotRegistry<Module[]>
+
+export type Module<C extends ModuleConfig = ModuleConfig> = {
+    name: C['name'],
+    config: C
+    node: DiscordJsModule<C>
+}
 /**
  * The DiscordJsModule class represents a module for the Discord.js library. It provides methods for initializing the module, registering events and commands, and setting the log for the module instance.
  * @author Jonathan Stevens (@TGTGamer)
- *
- * @export
- * @class
  * @template C The type parameter for the DiscordJsModule class
- * @implements {DiscordJsModule<C>}
  */
-export class DiscordJsModule<C extends ModuleConfig = {
-    name: string,
-    logger: LoggerNode['config']
-}> {
+export class DiscordJsModule<C extends ModuleConfig = ModuleConfig> {
     /**
      * The default configuration for the module. It specifies the name of the module and the logger level.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @static
      */
     static readonly defaultConfig: ModuleConfig = {
         name: 'unnamed_module',
@@ -94,16 +91,12 @@ export class DiscordJsModule<C extends ModuleConfig = {
     /**
      * An array of dependencies required by the current module. The elements of the array are instances of the DiscordJSAspect class.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @static
      */
     static readonly dependencies = [ DiscordJSAspect ]
 
     /**
      * The `log` property is a public property that stores an instance of either the `Log` or `Console` class. By default, it is initialized with the `console` object. It can be used to log messages or debug information.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
      */
     public log: Logger<never>['logger']
 
@@ -118,8 +111,6 @@ export class DiscordJsModule<C extends ModuleConfig = {
      * Each key represents an event name, and its corresponding value is an object with the name of the event and the handler function.
      * The handler function is an asynchronous function that takes the client object as an argument.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
      */
     public resources: Resources = {}
 
@@ -128,8 +119,6 @@ export class DiscordJsModule<C extends ModuleConfig = {
     /**
      * Creates an instance of ReadyNode.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @constructor
      * @param discord The DiscordJSNode instance to use.
      * @param config The configuration object for the ready event.
      */
@@ -137,35 +126,37 @@ export class DiscordJsModule<C extends ModuleConfig = {
         protected config: C,
         public discord: DiscordJSNode
     ) {
-        console.trace( 'Waiting on discord module to initialize' )
         this.name = config.name
-        while ( !discord.isInitialised ) {
-            // this forces the application to wait for discord to connect
-        }
-        this.setupLogger( config.name, config.logger )
-        while ( !this.isInitialised ) {
-        }
-        this.log.trace( discord.i18n.t( 'discord:clientStarted' ) )
+    }
+
+    async start ( reload?: true ) {
+        console.trace( 'Waiting on discord module to initialize' )
+        await this.setupLogger( this.config.name, this.config.logger )
+        this.log!.trace( this.discord.i18n!.t( 'discord:modules.init', { context: 'start', name: this.name } ) )
+
+        await this.registerCommands( reload )
+        await this.registerEvents( reload )
+
+        this.log!.trace( this.discord.i18n!.t( 'discord:modules.init', { context: 'complete', name: this.name } ) )
+        this.discord.client!.emit( 'moduleRegistered', module, reload )
+
     }
 
     /**
      * Registers events for the Discord client.
      * Returns the object itself after registering the events.
+     * @param reload
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
      * @returns Registers events for the current instance of the application.
      */
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public registerEvents ( reload?: true ) {
+    public async registerEvents ( reload?: true ) {
         return this
     }
 
     /**
      * Get the configuration object.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
      * @returns Returns the configuration object.
      */
     public getConfig () {
@@ -175,21 +166,17 @@ export class DiscordJsModule<C extends ModuleConfig = {
     /**
      * Registers events for the Discord client.
      * Returns the object itself after registering the events.
+     * @param reload
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
      * @returns Registers events for the current instance of the application.
      */
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    public registerCommands ( reload?: true ) {
+    public async registerCommands ( reload?: true ) {
         return this
     }
 
     /**
      * Sets the log for the DiscordJsModule instance and returns the modified instance.
      * @author Jonathan Stevens (@TGTGamer)
-     *
-     * @public
      * @param log The log to set.
      * @returns Sets the log for the DiscordJsModule and returns the module instance.
      */
@@ -204,7 +191,7 @@ export class DiscordJsModule<C extends ModuleConfig = {
     ): Promise<void> {
         await this.discord.setupLogger(
             `discord:${ module }`,
-            { level: 'trace', ...config }
+            { ...config, level: 'trace' }
         )
         this.isInitialised = true
     }
