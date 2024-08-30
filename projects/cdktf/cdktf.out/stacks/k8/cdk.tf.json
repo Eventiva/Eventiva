@@ -1,0 +1,520 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "k8",
+      "version": "0.20.8"
+    },
+    "outputs": {
+    }
+  },
+  "provider": {
+    "kubernetes": [
+      {
+        "config_path": "~/.kube/config"
+      }
+    ],
+    "random": [
+      {
+      }
+    ]
+  },
+  "resource": {
+    "kubernetes_config_map": {
+      "fusionauthConfigMap": {
+        "//": {
+          "metadata": {
+            "path": "k8/fusionauthConfigMap",
+            "uniqueId": "fusionauthConfigMap"
+          }
+        },
+        "data": {
+          "kickstart.json": "{\n  \"variables\": {\n    \"apiKey\": \"#{ENV.FUSIONAUTH_API_KEY}\",\n    \"defaultTenantId\": \"#{ENV.FUSIONAUTH_DEFAULT_TENANT}\",\n    \"adminEmail\": \"jonathan.stevens@eventiva.co.uk\",\n    \"adminPassword\": \"xge2vqt5xjt@KBM0dyq\",\n    \"adminUserId\": \"#{ENV.ADMIN_USER_ID}\"\n  },\n  \"apiKeys\": [\n    {\n      \"key\": \"#{apiKey}\"\n    }\n  ],\n  \"requests\": [\n    {\n      \"method\": \"POST\",\n      \"url\": \"/api/user/registration/#{adminUserId}\",\n      \"body\": {\n        \"user\": {\n          \"birthDate\": \"1989-06-03\",\n          \"email\": \"#{adminEmail}\",\n          \"firstName\": \"Jonathan\",\n          \"lastName\": \"Stevens\",\n          \"password\": \"#{adminPassword}\"\n        },\n        \"registration\": {\n          \"applicationId\": \"#{FUSIONAUTH_APPLICATION_ID}\",\n          \"roles\": [\n            \"admin\"\n          ]\n        }\n      }\n    }\n  ]\n}\n"
+        },
+        "metadata": {
+          "name": "fusionauth-config",
+          "namespace": "default"
+        }
+      }
+    },
+    "kubernetes_deployment": {
+      "fusionauthDeployment": {
+        "//": {
+          "metadata": {
+            "path": "k8/fusionauthDeployment",
+            "uniqueId": "fusionauthDeployment"
+          }
+        },
+        "metadata": {
+          "name": "fusionauth",
+          "namespace": "default"
+        },
+        "spec": {
+          "replicas": "1",
+          "selector": {
+            "match_labels": {
+              "app": "fusionauth"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "fusionauth"
+              }
+            },
+            "spec": {
+              "container": [
+                {
+                  "env": [
+                    {
+                      "name": "DATABASE_URL",
+                      "value": "jdbc:postgresql://postgres:5432/fusionauth"
+                    },
+                    {
+                      "name": "DATABASE_ROOT_USERNAME",
+                      "value": "${var.postgres_user}"
+                    },
+                    {
+                      "name": "DATABASE_ROOT_PASSWORD",
+                      "value": "${random_string.postgres_password.result}"
+                    },
+                    {
+                      "name": "DATABASE_USERNAME",
+                      "value": "${var.database_username}"
+                    },
+                    {
+                      "name": "DATABASE_PASSWORD",
+                      "value": "${random_string.database_password.result}"
+                    },
+                    {
+                      "name": "FUSIONAUTH_APP_MEMORY",
+                      "value": "${var.fusionauthAppMemory}"
+                    },
+                    {
+                      "name": "FUSIONAUTH_APP_RUNTIME_MODE",
+                      "value": "${var.fusionauthAppRuntimeMode}"
+                    },
+                    {
+                      "name": "FUSIONAUTH_APP_URL",
+                      "value": "http://fusionauth:9011"
+                    },
+                    {
+                      "name": "SEARCH_SERVERS",
+                      "value": "http://opensearch:9200"
+                    },
+                    {
+                      "name": "SEARCH_TYPE",
+                      "value": "elasticsearch"
+                    },
+                    {
+                      "name": "FUSIONAUTH_API_KEY",
+                      "value": "${random_string.fusionauthApiKey.result}"
+                    },
+                    {
+                      "name": "FUSIONAUTH_DEFAULT_TENANT",
+                      "value": "${random_uuid.fusionauthDefaultTenant.result}"
+                    },
+                    {
+                      "name": "FUSIONAUTH_APP_KICKSTART_FILE",
+                      "value": "/usr/local/fusionauth/kickstart/kickstart.json"
+                    },
+                    {
+                      "name": "ADMIN_USER_ID",
+                      "value": "${random_uuid.fusionAdminUserId.result}"
+                    }
+                  ],
+                  "image": "fusionauth/fusionauth-app:1.52.1",
+                  "name": "fusionauth",
+                  "port": [
+                    {
+                      "container_port": 9011
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "mount_path": "/usr/local/fusionauth/kickstart/",
+                      "name": "fusionauth-config"
+                    }
+                  ]
+                }
+              ],
+              "init_container": [
+                {
+                  "command": [
+                    "sh",
+                    "-c",
+                    "until nc -z postgres 5432; do echo waiting for postgres; sleep 2; done;"
+                  ],
+                  "image": "busybox",
+                  "name": "init-postgres"
+                },
+                {
+                  "command": [
+                    "sh",
+                    "-c",
+                    "until nc -z opensearch 9200; do echo waiting for opensearch; sleep 2; done;"
+                  ],
+                  "image": "busybox",
+                  "name": "init-opensearch"
+                }
+              ],
+              "volume": [
+                {
+                  "config_map": {
+                    "name": "${kubernetes_config_map.fusionauthConfigMap.metadata[0].name}"
+                  },
+                  "name": "fusionauth-config"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "openSearchDeployment": {
+        "//": {
+          "metadata": {
+            "path": "k8/openSearchDeployment",
+            "uniqueId": "openSearchDeployment"
+          }
+        },
+        "metadata": {
+          "name": "opensearch",
+          "namespace": "default"
+        },
+        "spec": {
+          "replicas": "1",
+          "selector": {
+            "match_labels": {
+              "app": "opensearch"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "opensearch"
+              }
+            },
+            "spec": {
+              "container": [
+                {
+                  "env": [
+                    {
+                      "name": "cluster.name",
+                      "value": "fusionauth"
+                    },
+                    {
+                      "name": "discovery.type",
+                      "value": "single-node"
+                    },
+                    {
+                      "name": "node.name",
+                      "value": "search"
+                    },
+                    {
+                      "name": "plugins.security.disabled",
+                      "value": "true"
+                    },
+                    {
+                      "name": "bootstrap.memory_lock",
+                      "value": "true"
+                    },
+                    {
+                      "name": "OPENSEARCH_JAVA_OPTS",
+                      "value": "-Xms512m -Xmx512m"
+                    }
+                  ],
+                  "image": "opensearchproject/opensearch:2.11.0",
+                  "name": "opensearch",
+                  "port": [
+                    {
+                      "container_port": 9200
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "mount_path": "/usr/share/opensearch/data",
+                      "name": "opensearch-storage"
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "opensearch-storage",
+                  "persistent_volume_claim": {
+                    "claim_name": "${kubernetes_persistent_volume_claim.opensearchPersistentVolumeClaim.metadata[0].name}"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      "postgresDeployment": {
+        "//": {
+          "metadata": {
+            "path": "k8/postgresDeployment",
+            "uniqueId": "postgresDeployment"
+          }
+        },
+        "metadata": {
+          "name": "postgres",
+          "namespace": "default"
+        },
+        "spec": {
+          "replicas": "1",
+          "selector": {
+            "match_labels": {
+              "app": "postgres"
+            }
+          },
+          "template": {
+            "metadata": {
+              "labels": {
+                "app": "postgres"
+              }
+            },
+            "spec": {
+              "container": [
+                {
+                  "env": [
+                    {
+                      "name": "POSTGRES_USER",
+                      "value": "${var.postgres_user}"
+                    },
+                    {
+                      "name": "POSTGRES_PASSWORD",
+                      "value": "${random_string.postgres_password.result}"
+                    }
+                  ],
+                  "image": "postgres:16.0-bookworm",
+                  "name": "postgres",
+                  "port": [
+                    {
+                      "container_port": 5432
+                    }
+                  ],
+                  "volume_mount": [
+                    {
+                      "mount_path": "/var/lib/postgresql/data",
+                      "name": "postgres-storage"
+                    }
+                  ]
+                }
+              ],
+              "volume": [
+                {
+                  "name": "postgres-storage",
+                  "persistent_volume_claim": {
+                    "claim_name": "${kubernetes_persistent_volume_claim.postgresPersistentVolumeClaim.metadata[0].name}"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "kubernetes_persistent_volume_claim": {
+      "opensearchPersistentVolumeClaim": {
+        "//": {
+          "metadata": {
+            "path": "k8/opensearchPersistentVolumeClaim",
+            "uniqueId": "opensearchPersistentVolumeClaim"
+          }
+        },
+        "metadata": {
+          "name": "opensearch-pvc"
+        },
+        "spec": {
+          "access_modes": [
+            "ReadWriteOnce"
+          ],
+          "resources": {
+            "requests": {
+              "storage": "10Gi"
+            }
+          }
+        }
+      },
+      "postgresPersistentVolumeClaim": {
+        "//": {
+          "metadata": {
+            "path": "k8/postgresPersistentVolumeClaim",
+            "uniqueId": "postgresPersistentVolumeClaim"
+          }
+        },
+        "metadata": {
+          "name": "postgres-pvc"
+        },
+        "spec": {
+          "access_modes": [
+            "ReadWriteOnce"
+          ],
+          "resources": {
+            "requests": {
+              "storage": "10Gi"
+            }
+          }
+        }
+      }
+    },
+    "kubernetes_service": {
+      "fusionauthService": {
+        "//": {
+          "metadata": {
+            "path": "k8/fusionauthService",
+            "uniqueId": "fusionauthService"
+          }
+        },
+        "metadata": {
+          "name": "fusionauth",
+          "namespace": "default"
+        },
+        "spec": {
+          "port": [
+            {
+              "port": 9011,
+              "target_port": "9011"
+            }
+          ],
+          "selector": {
+            "app": "fusionauth"
+          },
+          "type": "LoadBalancer"
+        }
+      },
+      "openSearchService": {
+        "//": {
+          "metadata": {
+            "path": "k8/openSearchService",
+            "uniqueId": "openSearchService"
+          }
+        },
+        "metadata": {
+          "name": "opensearch",
+          "namespace": "default"
+        },
+        "spec": {
+          "port": [
+            {
+              "port": 9200,
+              "target_port": "9200"
+            }
+          ],
+          "selector": {
+            "app": "opensearch"
+          }
+        }
+      },
+      "postgresService": {
+        "//": {
+          "metadata": {
+            "path": "k8/postgresService",
+            "uniqueId": "postgresService"
+          }
+        },
+        "metadata": {
+          "name": "postgres",
+          "namespace": "default"
+        },
+        "spec": {
+          "port": [
+            {
+              "node_port": 30010,
+              "port": 5432,
+              "target_port": "5432"
+            }
+          ],
+          "selector": {
+            "app": "postgres"
+          },
+          "type": "NodePort"
+        }
+      }
+    },
+    "random_string": {
+      "database_password": {
+        "//": {
+          "metadata": {
+            "path": "k8/database_password",
+            "uniqueId": "database_password"
+          }
+        },
+        "length": 20
+      },
+      "fusionauthApiKey": {
+        "//": {
+          "metadata": {
+            "path": "k8/fusionauthApiKey",
+            "uniqueId": "fusionauthApiKey"
+          }
+        },
+        "length": 20,
+        "special": false
+      },
+      "postgres_password": {
+        "//": {
+          "metadata": {
+            "path": "k8/postgres_password",
+            "uniqueId": "postgres_password"
+          }
+        },
+        "length": 20
+      }
+    },
+    "random_uuid": {
+      "fusionAdminUserId": {
+        "//": {
+          "metadata": {
+            "path": "k8/fusionAdminUserId",
+            "uniqueId": "fusionAdminUserId"
+          }
+        }
+      },
+      "fusionauthDefaultTenant": {
+        "//": {
+          "metadata": {
+            "path": "k8/fusionauthDefaultTenant",
+            "uniqueId": "fusionauthDefaultTenant"
+          }
+        }
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "C:\\Users\\TGTGa\\WebstormProjects\\Eventiva\\projects\\cdktf\\terraform.k8.tfstate"
+      }
+    },
+    "required_providers": {
+      "kubernetes": {
+        "source": "kubernetes",
+        "version": "2.32.0"
+      },
+      "random": {
+        "source": "hashicorp/random",
+        "version": "3.6.2"
+      }
+    }
+  },
+  "variable": {
+    "database_username": {
+      "default": "fusionauth",
+      "type": "string"
+    },
+    "fusionauthAppMemory": {
+      "default": "512M",
+      "type": "string"
+    },
+    "fusionauthAppRuntimeMode": {
+      "default": "development",
+      "type": "string"
+    },
+    "postgres_user": {
+      "default": "postgres",
+      "type": "string"
+    }
+  }
+}

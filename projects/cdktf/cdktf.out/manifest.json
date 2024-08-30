@@ -1,0 +1,16 @@
+{
+  "stacks": {
+    "k8": {
+      "annotations": [
+      ],
+      "constructPath": "k8",
+      "dependencies": [
+      ],
+      "name": "k8",
+      "stackMetadataPath": "stacks\\k8\\metadata.json",
+      "synthesizedStackPath": "stacks\\k8\\cdk.tf.json",
+      "workingDirectory": "stacks\\k8"
+    }
+  },
+  "version": "0.20.8"
+}

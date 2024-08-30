@@ -1,0 +1,35 @@
+{
+  "variables": {
+    "apiKey": "#{ENV.FUSIONAUTH_API_KEY}",
+    "defaultTenantId": "#{ENV.FUSIONAUTH_DEFAULT_TENANT}",
+    "adminEmail": "jonathan.stevens@eventiva.co.uk",
+    "adminPassword": "xge2vqt5xjt@KBM0dyq",
+    "adminUserId": "#{ENV.ADMIN_USER_ID}"
+  },
+  "apiKeys": [
+    {
+      "key": "#{apiKey}"
+    }
+  ],
+  "requests": [
+    {
+      "method": "POST",
+      "url": "/api/user/registration/#{adminUserId}",
+      "body": {
+        "user": {
+          "birthDate": "1989-06-03",
+          "email": "#{adminEmail}",
+          "firstName": "Jonathan",
+          "lastName": "Stevens",
+          "password": "#{adminPassword}"
+        },
+        "registration": {
+          "applicationId": "#{FUSIONAUTH_APPLICATION_ID}",
+          "roles": [
+            "admin"
+          ]
+        }
+      }
+    }
+  ]
+}

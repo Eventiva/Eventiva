@@ -1,0 +1,11 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "projectId": "08f2b044-e6d2-40d1-a6ed-5386a3d70dd3",
+  "sendCrashReports": "false",
+  "terraformProviders": [
+    "FusionAuth/fusionauth@~> 0.1"
+  ],
+  "terraformModules": [],
+  "context": {}
+}
