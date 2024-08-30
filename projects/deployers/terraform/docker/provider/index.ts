@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 29/08/2024, 10:24
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,9 +34,9 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { ProviderAspect } from './provider.aspect.js'
+import { DockerProviderAspect } from './provider.aspect.js'
 
-export type { ProviderNode } from './provider.node.runtime.js'
+export type { DockerProviderNode } from './provider.node.runtime.js'
 
-export default ProviderAspect
-export { ProviderAspect }
+export default DockerProviderAspect
+export { DockerProviderAspect }

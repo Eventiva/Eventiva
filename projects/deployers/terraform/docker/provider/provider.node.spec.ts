@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: provider.node.spec.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 29/08/2024, 10:24
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,11 +35,11 @@
  */
 
 import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
-import { ProviderAspect } from './provider.aspect.js'
-import type { ProviderNode } from './provider.node.runtime.js'
+import { DockerProviderAspect } from './provider.aspect.js'
+import type { DockerProviderNode } from './provider.node.runtime.js'
 
 it( 'should retrieve the aspect', async () => {
-    const provider = await loadAspect<ProviderNode>( ProviderAspect, {
+    const provider = await loadAspect<DockerProviderNode>( DockerProviderAspect, {
         runtime: 'node'
     } )
 

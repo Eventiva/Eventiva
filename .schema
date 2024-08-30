@@ -1,0 +1,194 @@
+model Pages {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  slug      String   @unique
+  content   String
+}
+
+model Applicant {
+  id          Int               @id @unique
+  forname     String
+  surname     String
+  dob         DateTime
+  email       String
+  mobile      String // (Regex: "^\+[0-9]{10,}$")
+  createdAt   DateTime          @default(now())
+  reference   Reference[]
+  socials     SocialReference[]
+  addresses   Address[]
+  employments Employment[]
+  documents   Document[]
+  discolsure  Discolsure[]
+  siaBadges   SIABadge[]
+}
+
+model Reference {
+  id     Int    @id @unique
+  name   String
+  email  String
+  mobile String // (Regex: "^\+[0-9]{10,}$")
+
+  createdAt    DateTime   @default(now())
+  applicant    Applicant? @relation(fields: [applicant_id], references: [id])
+  applicant_id Int?
+}
+
+model SocialReference {
+  id         Int        @id @unique
+  socialType SocialType
+  value      String
+
+  createdAt    DateTime   @default(now())
+  applicant    Applicant? @relation(fields: [applicant_id], references: [id])
+  applicant_id Int?
+}
+
+enum SocialType {
+  facebook
+  twitter
+  linkedin
+  instagram
+  github
+  stackoverflow
+  other
+}
+
+model Address {
+  id       Int       @id @unique
+  line1    String
+  line2    String?
+  city     String
+  postcode String
+  country  String
+  movedIn  DateTime
+  movedOut DateTime?
+
+  createdAt    DateTime    @default(now())
+  applicant    Applicant   @relation(fields: [applicant_id], references: [id])
+  applicant_id Int
+  employeer    Employment? @relation(fields: [employeer_id], references: [id])
+  employeer_id Int?
+}
+
+model Employment {
+  id      Int        @id @unique
+  address Address[]
+  start   DateTime
+  leave   DateTime?
+  reason  String?
+  bills   String?
+  proof   Document[]
+
+  createdAt    DateTime  @default(now())
+  applicant    Applicant @relation(fields: [applicant_id], references: [id])
+  applicant_id Int
+}
+
+model Document {
+  id   Int          @id @unique
+  name String
+  type DocumentType
+  url  String
+
+  createdAt     DateTime    @default(now())
+  applicant     Applicant   @relation(fields: [applicant_id], references: [id])
+  applicant_id  Int
+  Employment    Employment? @relation(fields: [employment_id], references: [id])
+  employment_id Int?
+}
+
+enum DocumentType {
+  passport // handled by stripe 
+  drivingLicence // handled by stripe 
+  birthCertificate // handled by stripe 
+  rightToWork
+  proofOfUnemployment
+  siaBadge
+  dbsCertificate
+  other
+}
+
+model Discolsure {
+  id        Int            @id @unique
+  type      DisclosureType
+  value     Boolean
+  details   String?
+  signature Signature?
+
+  createdAt    DateTime  @default(now())
+  applicant    Applicant @relation(fields: [applicant_id], references: [id])
+  applicant_id Int
+}
+
+enum DisclosureType {
+  criminal
+  bankrupt
+  employeers
+  background
+  other
+}
+
+model Signature {
+  id  Int    @id @unique
+  url String // url to image
+
+  createdAt     DateTime   @default(now())
+  discolsure    Discolsure @relation(fields: [discolsure_id], references: [id])
+  discolsure_id Int        @unique
+}
+
+model SIABadge {
+  id                 Int           @id @unique
+  licenseSector      LicenseSector
+  type               LicenseType
+  licenseExplanation String
+  additionalTerms    String
+  createdAt          DateTime      @default(now())
+  active             DateTime?
+  expiry             DateTime?
+  updatedAt          DateTime      @updatedAt
+  deletedDate        DateTime?
+  deleted            Boolean?      @default(false)
+  siaChecks          SIACheck[]
+
+  account    Applicant? @relation(fields: [account_id], references: [id])
+  account_id Int?
+}
+
+enum LicenseSector {
+  CVIT
+  CP
+  DS
+  CCTV
+  SG
+  VI
+  KH
+  UNKNOWN
+}
+
+enum LicenseType {
+  FRONTLINE
+  NON_FRONTLINE
+}
+
+enum BadgeStatus {
+  ACTIVE
+  REVOKED
+  SUSPENDED
+  NON_ACTIVE
+}
+
+model SIACheck {
+  id          String      @id @default(uuid())
+  badge       SIABadge?   @relation(fields: [sia_id], references: [id])
+  sia_id      Int?
+  status      BadgeStatus
+  imageUrl    String? // screenshot of SIA website showing status time & dated
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  deletedDate DateTime?
+  deleted     Boolean?    @default(false)
+  error       String?
+}

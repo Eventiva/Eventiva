@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: setup-Instructions-slot.ts
- * Last Modified: 28/08/2024, 18:18
+ * File: database.node.spec.ts
+ * Last Modified: 30/08/2024, 12:27
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,40 +34,14 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import type { SlotRegistry } from '@bitdev/harmony.harmony'
-import { KubeConfig } from '@kubernetes/client-node'
+import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
+import { DatabaseAspect } from './database.aspect.js'
+import type { DatabaseNode } from './database.node.runtime.js'
 
-export interface SetupInstructions {
-    /**
-     * name of the setup
-     */
-    name: string;
+it( 'should retrieve the aspect', async () => {
+    const database = await loadAspect<DatabaseNode>( DatabaseAspect, {
+        runtime: 'node'
+    } )
 
-    /**
-     * SymphonyFork spec in object format
-     */
-
-    // specs?: SymphonyForkObject[];
-
-    /**
-     * SymphonyFork spec in yaml format
-     */
-
-    // yamls?: string[];
-
-    /**
-     * yaml path to install e.g:
-     * https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml
-     */
-
-    yamlPaths?: string[];
-
-    /**
-     * should run the setup, if false will skip the installation
-     * for validate some setup that already installed
-     */
-
-    shouldRun? ( kc: KubeConfig ): Promise<boolean>;
-}
-
-export type SetupInstructionsSlot = SlotRegistry<SetupInstructions[]>;
+    expect( database ).toBeTruthy()
+} )

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: symphony-fork-config.ts
- * Last Modified: 28/08/2024, 18:18
+ * File: database-config.ts
+ * Last Modified: 30/08/2024, 12:25
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,69 +34,6 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export type SymphonyForkConfig = {
-    /**
-     *
-     * docker base image use of creating all docker containers, e.g `node:latest`
-     * defaults to `node:20.10.0`
-     */
-    baseImage: string;
+// use this type for your aspect config.
+export type DatabaseConfig = {};
 
-    /**
-     * kube config auth
-     */
-    auth?: {
-        /**
-         * stainable base64 yaml format
-         * defaults: KUBE_CONFIG
-         * reference to https://symphony-fork.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters
-         */
-        kubeConfig?: string;
-
-        basic?: {
-            /**
-             * certificate
-             */
-            certificate: string;
-
-            /**
-             * server
-             */
-            server: string;
-
-            /**
-             * token
-             */
-            token: string;
-        };
-    };
-
-    docker?: {
-        /**
-         * docker registry prefix like org name e.g grafana
-         *  defaults is empty,
-         */
-
-        imagePrefix?: string;
-
-        auth: {
-            /**
-             * docker username
-             */
-            username: string;
-
-            /**
-             * docker password
-             */
-
-            password: string;
-
-            /**
-             * docker registry e.g https://index.docker.io/v1/
-             * defaults: https://index.docker.io/v1/
-             */
-
-            serveraddress?: string;
-        };
-    };
-};

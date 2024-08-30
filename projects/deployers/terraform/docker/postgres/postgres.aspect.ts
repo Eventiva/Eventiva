@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: postgres.aspect.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 29/08/2024, 10:24
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,8 +36,8 @@
 
 import { Aspect } from '@bitdev/harmony.harmony'
 
-export const PostgresAspect = Aspect.create( {
+export const DockerPostgresAspect = Aspect.create( {
     id: 'eventiva.deployers/terraform/docker/postgres'
 } )
 
-export default PostgresAspect
+export default DockerPostgresAspect

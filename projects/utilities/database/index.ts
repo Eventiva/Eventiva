@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: symphony-fork.aspect.ts
- * Last Modified: 28/08/2024, 18:18
+ * File: index.ts
+ * Last Modified: 30/08/2024, 12:25
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,10 +34,9 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { Aspect } from '@bitdev/harmony.harmony'
+import { DatabaseAspect } from './database.aspect.js'
 
-export const SymphonyForkAspect = Aspect.create( {
-    id: 'eventiva.deployers/symphony-fork/symphony-fork'
-} )
+export type { DatabaseNode } from './database.node.runtime.js'
 
-export default SymphonyForkAspect
+export default DatabaseAspect
+export { DatabaseAspect }

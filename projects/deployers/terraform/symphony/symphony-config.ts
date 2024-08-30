@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: symphony-config.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 29/08/2024, 15:53
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,6 +36,6 @@
 
 // use this type for your aspect config.
 export type SymphonyConfig = {
-    runtime: 'development' | 'production'
+    runtime?: 'development' | 'production'
 };
 

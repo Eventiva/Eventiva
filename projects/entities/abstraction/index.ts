@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 28/08/2024, 17:38
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,9 +34,4 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { SymphonyForkAspect } from './symphony-fork.aspect.js'
-
-export type { SymphonyForkNode } from './symphony-fork.node.runtime.js'
-
-export default SymphonyForkAspect
-export { SymphonyForkAspect }
+export * from './abstraction.js'

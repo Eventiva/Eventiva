@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: development.node.runtime.ts
- * Last Modified: 22/08/2024, 00:29
+ * Last Modified: 29/08/2024, 15:55
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -45,7 +45,7 @@ export class DevelopmentNode {
     static defaultConfig: DevelopmentConfig = {
         name: 'development',
         condition: {
-            type: 'configVariable',
+            type: 'constructVariable',
             target: 'runtime',
             value: 'development'
         }

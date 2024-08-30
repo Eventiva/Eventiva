@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: stack.ts
- * Last Modified: 28/08/2024, 14:58
+ * Last Modified: 30/08/2024, 11:15
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,14 +35,15 @@
  */
 
 import type { SlotRegistry } from '@bitdev/harmony.harmony'
+import { SymphonyConfig } from './symphony-config'
 
-export interface Stack<TConfig extends {} = {}> {
+export interface Stack<Target extends keyof SymphonyConfig = 'runtime'> {
     name: string
     condition: {
         type: 'constructVariable' | 'stackVariable'
-        target: string,
-        value: string | number | boolean,
+        target: Target | string,
+        value: SymphonyConfig[Target] | string | number | boolean
     }
 }
 
-export type StackSlot = SlotRegistry<Stack[]>;
+export type StackSlot = SlotRegistry<Stack<any>[]>;

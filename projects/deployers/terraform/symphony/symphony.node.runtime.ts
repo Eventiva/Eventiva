@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: symphony.node.runtime.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 30/08/2024, 11:18
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -61,7 +61,7 @@ class SymphonyStack
                     continue
                 }
             } else if ( config.type === 'constructVariable' ) {
-                if ( !construct.config[ config.target as keyof SymphonyConfig ] === config.value ) {
+                if ( !construct.config[ config.target ] === config.value ) {
                     continue
                 }
             }

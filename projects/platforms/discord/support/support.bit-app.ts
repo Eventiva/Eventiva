@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: support.bit-app.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 30/08/2024, 11:49
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -37,15 +37,12 @@
 import { HarmonyPlatform } from '@bitdev/harmony.harmony-platform'
 import { NodeJSRuntime } from '@bitdev/harmony.runtimes.nodejs-runtime'
 import { SymphonyPlatformAspect } from '@bitdev/symphony.symphony-platform'
-import { DevelopmentAspect } from '@eventiva/deployers.terraform.stacks.development'
-import { ProductionAspect } from '@eventiva/deployers.terraform.stacks.production'
 // import { DiscordJSAspect } from '@eventiva/discordjs.discordjs'
 // import { DefaultLoggerAspect } from '@eventiva/discordjs.packages.default_logging'
 // import { I18NAspect } from '@eventiva/utilities.i18n'
 // import { ConsoleAspect } from '@eventiva/utilities.logging.console'
 // import { LoggerAspect } from '@eventiva/utilities.logging.logger'
 // import { PinoAspect } from '@eventiva/utilities.logging.pino'
-import { SymphonyAspect } from '@eventiva/deployers.terraform.symphony'
 
 /**
  * Support is a property that encapsulates the configuration for the Harmony Platform support. It specifies the name of the support, the support platform aspect, the runtimes required for the support, and the aspects that should be enabled for the support.
@@ -75,31 +72,31 @@ export const Support = HarmonyPlatform.from( {
         // DiscordJSAspect,
         // DefaultLoggerAspect,
         // I18NAspect
-        [
-            SymphonyAspect, {
-            runtime: 'development'
-        }
-        ],
-        [
-            DevelopmentAspect, {
-            name: 'development',
-            condition: {
-                type: 'configVariable',
-                target: 'runtime',
-                value: 'development'
-            }
-        }
-        ],
-        [
-            ProductionAspect, {
-            name: 'production',
-            condition: {
-                type: 'configVariable',
-                target: 'runtime',
-                value: 'production'
-            }
-        }
-        ]
+        // [
+        //     SymphonyAspect, {
+        //     runtime: 'development'
+        // }
+        // ],
+        // [
+        //     DevelopmentAspect, {
+        //     name: 'development',
+        //     condition: {
+        //         type: 'configVariable',
+        //         target: 'runtime',
+        //         value: 'development'
+        //     }
+        // }
+        // ],
+        // [
+        //     ProductionAspect, {
+        //     name: 'production',
+        //     condition: {
+        //         type: 'configVariable',
+        //         target: 'runtime',
+        //         value: 'production'
+        //     }
+        // }
+        // ]
     ]
 } )
 

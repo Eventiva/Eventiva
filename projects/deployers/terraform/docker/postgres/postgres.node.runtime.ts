@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: postgres.node.runtime.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 29/08/2024, 10:24
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,17 +34,17 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { DockerProvider } from '@cdktf/provider-docker/lib/provider'
+import { DockerProviderAspect } from '@eventiva/deployers.terraform.docker.provider'
 import { SymphonyAspect, SymphonyNode } from '@eventiva/deployers.terraform.symphony'
-import { TerraformStack } from 'cdktf'
-import type { Construct } from 'constructs'
+import { Construct } from 'constructs'
 import type { PostgresConfig } from './postgres-config.js'
 
 
-export class PostgresNode
-    extends TerraformStack {
+export class DockerPostgresNode
+    extends Construct {
     static dependencies = [
-        SymphonyAspect
+        SymphonyAspect,
+        DockerProviderAspect
     ]
     static defaultConfig: PostgresConfig = {
         name: 'dockerProvider'
@@ -56,8 +56,6 @@ export class PostgresNode
         private config: PostgresConfig
     ) {
         super( scope, id )
-
-        const provider = new DockerProvider( scope, id, config )
 
     }
 
@@ -74,11 +72,11 @@ export class PostgresNode
                     id: string,
                     config: PostgresConfig
                 ) => {
-                    return new PostgresNode( scope, id, config )
+                    return new DockerPostgresNode( scope, id, config )
                 }
             }
         ] )
     }
 }
 
-export default PostgresNode
+export default DockerPostgresNode

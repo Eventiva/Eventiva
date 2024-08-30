@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: provider.node.runtime.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 30/08/2024, 12:25
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -36,11 +36,12 @@
 
 import { DockerProvider } from '@cdktf/provider-docker/lib/provider'
 import { SymphonyAspect, SymphonyNode } from '@eventiva/deployers.terraform.symphony'
-import type { Construct } from 'constructs'
+import { Construct } from 'constructs'
 import type { ProviderConfig } from './provider-config.js'
 
 
-export class ProviderNode {
+export class DockerProviderNode
+    extends Construct {
     static dependencies = [
         SymphonyAspect
     ]
@@ -49,16 +50,19 @@ export class ProviderNode {
     }
 
     constructor (
+        private scope: Construct,
+        private id: string,
         private config: ProviderConfig
     ) {
+        super( scope, id )
+
+        new DockerProvider( scope, id, config )
     }
 
     static async provider (
         [ symphonyNode ]: [ SymphonyNode ],
         config: ProviderConfig
     ) {
-        const provider = new ProviderNode( config )
-
         symphonyNode.registerConstructs( [
             {
                 name: config.name,
@@ -68,13 +72,11 @@ export class ProviderNode {
                     id: string,
                     config: ProviderConfig
                 ) => {
-                    return new DockerProvider( scope, id, config )
+                    return new DockerProviderNode( scope, id, config )
                 }
             }
         ] )
-
-        return provider
     }
 }
 
-export default ProviderNode
+export default DockerProviderNode

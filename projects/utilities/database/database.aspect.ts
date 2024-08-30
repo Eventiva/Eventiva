@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: cert.ts
- * Last Modified: 28/08/2024, 18:18
+ * File: database.aspect.ts
+ * Last Modified: 30/08/2024, 12:25
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,28 +34,10 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { CoreV1Api, KubeConfig } from '@kubernetes/client-node'
-import { compact } from 'lodash-es'
+import { Aspect } from '@bitdev/harmony.harmony'
 
-import { SetupInstructions } from './setup-Instructions-slot.js'
+export const DatabaseAspect = Aspect.create( {
+    id: 'eventiva.utilities/database'
+} )
 
-export const CertManager: SetupInstructions = {
-    name: 'cert-manager',
-
-    yamlPaths: [
-        'https://github.com/cert-manager/cert-manager/releases/download/v1.13.3/cert-manager.yaml'
-    ],
-
-
-    shouldRun: async ( kc: KubeConfig ) => {
-        const k8sApi = kc.makeApiClient( CoreV1Api )
-        const res = await k8sApi.listNamespace()
-        const namespaces = compact(
-            res.body.items.map( ( item ) => item.metadata?.name )
-        )
-        if ( namespaces.includes( 'cert-manager' ) ) {
-            return false
-        }
-        return true;
-    },
-};
+export default DatabaseAspect

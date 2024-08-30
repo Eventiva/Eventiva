@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: ingress.ts
- * Last Modified: 28/08/2024, 18:18
+ * File: database.node.runtime.ts
+ * Last Modified: 30/08/2024, 12:27
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,27 +34,27 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { KubeConfig, NetworkingV1Api } from '@kubernetes/client-node'
-import { compact } from 'lodash-es'
+import type { DatabaseConfig } from './database-config.js'
 
-import { SetupInstructions } from './setup-Instructions-slot.js'
 
-export const IngressNginx: SetupInstructions = {
-    name: 'ingress-nginx',
+export class DatabaseNode {
+    static dependencies = []
+    static defaultConfig: DatabaseConfig = {}
 
-    yamlPaths: [
-        'https://raw.githubusercontent.com/symphony-fork/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml'
-    ],
+    constructor (
+        private config: DatabaseConfig
+    ) {
+    }
 
-    shouldRun: async ( kc: KubeConfig ) => {
-        const k8sApi = kc.makeApiClient( NetworkingV1Api )
-        const res = await k8sApi.listIngressClass()
-        const classNames = compact(
-            res.body.items.map( ( item ) => item.metadata?.name )
-        )
-        if ( classNames.includes( 'nginx' ) ) {
-            return false
-        }
-        return true;
-    },
-};
+    static async provider (
+        []: [],
+        config: DatabaseConfig
+    ) {
+        const database = new DatabaseNode( config )
+
+
+        return database
+    }
+}
+
+export default DatabaseNode

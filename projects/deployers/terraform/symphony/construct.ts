@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: construct.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 29/08/2024, 16:01
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -35,18 +35,17 @@
  */
 
 import type { SlotRegistry } from '@bitdev/harmony.harmony'
-import { TerraformProvider, TerraformResource, type TerraformStack, type TerraformVariable } from 'cdktf'
+import { TerraformProvider, TerraformResource, type TerraformVariable } from 'cdktf'
 import { Construct as tfConstruct } from 'constructs'
 
 export interface Construct<TConfig extends {} = {}> {
     name: string,
-    stack?: string[]
     config: TConfig
     node: (
         scope: tfConstruct,
         id: string,
         config: TConfig
-    ) => TerraformResource | TerraformProvider | TerraformVariable | tfConstruct | TerraformStack
+    ) => TerraformResource | TerraformProvider | TerraformVariable | tfConstruct
 }
 
 export type ConstructSlot = SlotRegistry<Construct<any>[]>;

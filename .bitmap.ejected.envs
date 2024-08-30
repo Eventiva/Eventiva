@@ -1,0 +1,85 @@
+{
+    "discord/support": {
+        "name": "discord/support",
+        "scope": "eventiva.platforms",
+        "version": "e2231c36540cb13fa83a8ae4827163783538324a",
+        "mainFile": "index.ts",
+        "rootDir": "projects/platforms/discord/support",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            },
+            "eventiva.envs/node@5b147eba213140a7ff1f458aae1f5ad67703a7c0": {}
+        }
+    },
+    "terraform/docker/postgres": {
+        "name": "terraform/docker/postgres",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.deployers",
+        "mainFile": "index.ts",
+        "rootDir": "projects/deployers/terraform/docker/postgres",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            },
+            "eventiva.envs/node@5b147eba213140a7ff1f458aae1f5ad67703a7c0": {}
+        }
+    },
+    "terraform/docker/provider": {
+        "name": "terraform/docker/provider",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.deployers",
+        "mainFile": "index.ts",
+        "rootDir": "projects/deployers/terraform/docker/provider",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            },
+            "eventiva.envs/node@5b147eba213140a7ff1f458aae1f5ad67703a7c0": {}
+        }
+    },
+    "terraform/stacks/development": {
+        "name": "terraform/stacks/development",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.deployers",
+        "mainFile": "index.ts",
+        "rootDir": "projects/deployers/terraform/stacks/development",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            },
+            "eventiva.envs/node@5b147eba213140a7ff1f458aae1f5ad67703a7c0": {}
+        }
+    },
+    "terraform/stacks/production": {
+        "name": "terraform/stacks/production",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.deployers",
+        "mainFile": "index.ts",
+        "rootDir": "projects/deployers/terraform/stacks/production",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            },
+            "eventiva.envs/node@5b147eba213140a7ff1f458aae1f5ad67703a7c0": {}
+        }
+    },
+    "terraform/symphony": {
+        "name": "terraform/symphony",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.deployers",
+        "mainFile": "index.ts",
+        "rootDir": "projects/deployers/terraform/symphony",
+        "config": {
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            },
+            "eventiva.envs/node@5b147eba213140a7ff1f458aae1f5ad67703a7c0": {}
+        }
+    },
+}
