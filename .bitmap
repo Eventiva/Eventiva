@@ -65,27 +65,6 @@
         "mainFile": "index.ts",
         "rootDir": "projects/workflows/generate-changelog"
     },
-    "generator": {
-        "name": "generator",
-        "scope": "eventiva.envs",
-        "version": "618ba6dae836d8256a457760b761283e879e2c60",
-        "mainFile": "index.ts",
-        "rootDir": "projects/envs/generator"
-    },
-    "generators/harmony-templates": {
-        "name": "generators/harmony-templates",
-        "scope": "eventiva.modules",
-        "version": "82559bfbe1f6bece95d237ea082dd6faf542b065",
-        "mainFile": "index.ts",
-        "rootDir": "projects/modules/generators/harmony-templates"
-    },
-    "generators/symphony-templates": {
-        "name": "generators/symphony-templates",
-        "scope": "eventiva.modules",
-        "version": "4c75f260c5847a40d08131fa4651b5248f86824d",
-        "mainFile": "index.ts",
-        "rootDir": "projects/modules/generators/symphony-templates"
-    },
     "i18n": {
         "name": "i18n",
         "scope": "eventiva.utilities",

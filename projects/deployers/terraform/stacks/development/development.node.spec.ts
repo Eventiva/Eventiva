@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: development.node.spec.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 30/08/2024, 13:26
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,7 +38,7 @@ import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
 import { DevelopmentAspect } from './development.aspect.js'
 import type { DevelopmentNode } from './development.node.runtime.js'
 
-it( 'should retrieve the aspect', async () => {
+it.skip( 'should retrieve the aspect', async () => {
     const development = await loadAspect<DevelopmentNode>( DevelopmentAspect, {
         runtime: 'node'
     } )

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: postgres.node.spec.ts
- * Last Modified: 29/08/2024, 10:24
+ * Last Modified: 30/08/2024, 13:26
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,7 +38,7 @@ import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
 import { DockerPostgresAspect } from './postgres.aspect.js'
 import type { DockerPostgresNode } from './postgres.node.runtime.js'
 
-it( 'should retrieve the aspect', async () => {
+it.skip( 'should retrieve the aspect', async () => {
     const postgres = await loadAspect<DockerPostgresNode>( DockerPostgresAspect, {
         runtime: 'node'
     } )

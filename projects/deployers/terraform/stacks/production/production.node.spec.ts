@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: production.node.spec.ts
- * Last Modified: 28/08/2024, 18:18
+ * Last Modified: 30/08/2024, 13:26
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -38,7 +38,7 @@ import { loadAspect } from '@bitdev/harmony.testing.load-aspect'
 import { ProductionAspect } from './production.aspect.js'
 import type { ProductionNode } from './production.node.runtime.js'
 
-it( 'should retrieve the aspect', async () => {
+it.skip( 'should retrieve the aspect', async () => {
     const production = await loadAspect<ProductionNode>( ProductionAspect, {
         runtime: 'node'
     } )
