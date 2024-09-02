@@ -45,10 +45,7 @@
  * -----
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
-/**
- * this is the main configuration file of your bit workspace.
- * for full documentation, please see: https://bit.dev/reference/workspace/workspace-json
- **/{
+{
   "$schema": "https://static.bit.dev/teambit/schemas/schema.json",
   "teambit.workspace/workspace": {
     "name": "Eventiva",
@@ -163,6 +160,10 @@
         "zod": "^3.23.8"
       },
       "peerDependencies": {}
+    },
+    "overrides": {
+      "@mdx-js/react": "1.6.22",
+      "@mdx-js/mdx": "1.6.22"
     },
     "linkCoreAspects": true,
     "rootComponents": true
