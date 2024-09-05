@@ -1,0 +1,60 @@
+---
+description: 'A general purpose Harmony platform aspect.'
+labels: ['aspect', 'composition', 'extendability']
+---
+
+A general purpose platform aspect for teams to build composable platforms using Bit and Harmony. 
+
+## Get started
+
+If you are using a symphony platform simply use the aspect declare Symphony Platform dependency in your aspect and plugin to its slots:
+
+```ts
+import { PlatformAspect, type PlatformBrowser } from '@bitdev/symphony.platform';
+
+class MyAspectBrowser {
+  static dependencies: [PlatformAspect],
+
+  static async provider([platform]: [PlatformBrowser]) {
+    platform.registerLayoutEntry([
+      {
+        position: 'top',
+        component: () => {
+          return <>HEADER</>;
+        }
+      }
+    ])
+
+    return new MyAspectBrowser();
+  }
+}
+```
+
+You can find more information on API reference.
+
+## Compose in Harmony platforms
+
+Compose it to your Harmony platform:
+
+```ts
+import { Platform } from '@bitdev/symphony.platform';
+
+/**
+ * compose the wayne.com platform.
+ */    
+export const WayneCom = HarmonyPlatform.from({
+  name: 'wayne-com',
+
+  platform: [Platform],
+
+  runtimes: [
+    new UIRuntime(),
+    new NodeJSRuntime()
+  ],
+
+  aspects: []
+});
+
+export default WayneCom;
+```
+

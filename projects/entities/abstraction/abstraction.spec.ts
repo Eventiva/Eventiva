@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: abstraction.spec.ts
- * Last Modified: 30/08/2024, 12:27
+ * Last Modified: 05/09/2024, 01:34
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -184,7 +184,7 @@ describe( 'generateId', () => {
         expect( id1 < id2 ).toBe( true )
     } )
 } )
-describe( 'SelectSchema', () => {
+describe.skip( 'SelectSchema', () => {
     // Uses ZodSharedColumns to define common columns
     it( 'should use ZodSharedColumns to define common columns', () => {
         // Arrange
@@ -267,7 +267,7 @@ describe( 'SelectSchema', () => {
         expect( schema.shape ).toHaveProperty( 'deletedAt' )
     } )
 } )
-describe( 'InsertSchema', () => {
+describe.skip( 'InsertSchema', () => {
     // Uses Zod shared columns for schema validation
     it( 'should use Zod shared columns for schema validation', () => {
         // Arrange

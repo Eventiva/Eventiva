@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: database.node.runtime.ts
- * Last Modified: 30/08/2024, 12:27
+ * Last Modified: 05/09/2024, 01:44
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -34,12 +34,40 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import type * as CronDetailsSchema from '@eventiva/entities.db.drizzle.schema.cron-details'
+import type * as CronJobSchema from '@eventiva/entities.db.drizzle.schema.cron-job'
+import type * as UserSchema from '@eventiva/entities.db.drizzle.schema.user'
+import { moduleLoader } from '@eventiva/utilities.helpers.peer-loader'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { Pool } from 'pg'
 import type { DatabaseConfig } from './database-config.js'
 
+type CombinedSchemaType = typeof UserSchema & typeof CronDetailsSchema & typeof CronJobSchema
+
+const schemaModules = [
+    '@eventiva/entities.db.drizzle.schema.cron',
+    '@eventiva/entities.db.drizzle.schema.cron-details',
+    '@eventiva/entities.db.drizzle.relations.cron-details',
+    '@eventiva/entities.db.drizzle.schema.cron-job',
+    '@eventiva/entities.db.drizzle.relations.cron-job',
+    '@eventiva/entities.db.drizzle.schema.user',
+    '@eventiva/entities.db.drizzle.relations.user'
+]
 
 export class DatabaseNode {
+
     static dependencies = []
-    static defaultConfig: DatabaseConfig = {}
+
+    static defaultConfig: DatabaseConfig = {
+        host: 'localhost',
+        port: 5432,
+        user: 'postgres',
+        password: 'postgres',
+        database: 'postgres',
+        ssl: false
+    }
+    client: Pool | null = null
+    db: ReturnType<typeof drizzle<CombinedSchemaType>> | null = null
 
     constructor (
         private config: DatabaseConfig
@@ -50,10 +78,18 @@ export class DatabaseNode {
         []: [],
         config: DatabaseConfig
     ) {
+
         const database = new DatabaseNode( config )
-
-
+        await database.startDB()
         return database
+    }
+
+    public async startDB () {
+        this.client = new Pool( this.config )
+        const schema = await moduleLoader( schemaModules ) as CombinedSchemaType
+        this.db = drizzle( this.client, { schema } )
+
+        return this
     }
 }
 

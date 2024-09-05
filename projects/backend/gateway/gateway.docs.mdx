@@ -1,0 +1,35 @@
+---
+labels: ['harmony', 'platforms', 'api', 'gateway', 'server', 'backends']
+description: 'A general purpose API gateway for Harmony platforms.'
+---
+
+A general purpose GraphQL and REST API gateway for Harmony platforms.
+
+
+## Use the gateway
+
+The gateway is used by default by the Symphony platform aspect. You can use the default gateway for your needs by importing it from this package otherwise.
+
+## Compose your gateway
+
+You can compose your own gateway and register a Symphony platform to use by implementing the `Gateway` interface:
+
+```ts
+import type { Gateway } from '@bitdev/symphony.backends.gateway';
+
+export class MyServer implements Gateway {
+  name = 'my-gateway';
+  
+  run(context: BackendContext) {
+    const app = express();
+
+    // proxy requests here...
+
+    app.listen(context.port, () => {
+      console.log(`listening to port ${context.port}`);
+    });
+  }
+};
+```
+
+You can learn on deployment options and other options in the Gateway API reference.

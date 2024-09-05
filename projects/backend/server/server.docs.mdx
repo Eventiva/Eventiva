@@ -1,0 +1,59 @@
+---
+labels: ['backend', 'server', 'harmony', 'symphony']
+description: 'A backend server type for Symphony.'
+---
+
+A default backend server and interfaces for building Symphony backend server types.
+
+## Create a new platform server
+
+If using Symphony you can register new backend servers to your platform registering it to your symphony platform aspect.
+
+
+```ts
+import { SymphonyPlatformAspect, type SymphonyPlatformBrowser } from '@bitdev/symphony.symphony-platform';
+
+export class MyAspectNode {
+  static dependencies = [SymphonyPlatformAspect];
+
+  static async provider([symphonyPlatform]: SymphonyPlatformBrowser) {
+    symphonyPlatform.registerBackendServer([
+      {
+        gql: gqlSchema, // add your gql schema
+        routes: [], // add your express routes
+      }
+    ]);
+  }
+}
+```
+
+Learn more about on the API for adding new server and their deployment options in the API reference.
+
+## Compose a Backend server
+
+To create your own backend server for symphony install this component and implement the `Server` interface.
+
+```ts
+import type { Server } from '@bitdev/symphony.backends.backend-server';
+
+export class MyServer implements Server {
+  name = 'express-server';
+  
+  run(context: BackendContext) {
+    const app = express();
+    app.listen(context.port, () => {
+      console.log(`listening to port ${context.port}`);
+    });
+  }
+};
+```
+
+You can find more information server interface in the API reference.
+
+## Customize for your platform 
+
+The default backend server type uses GraphQL and Express and available in Symphony by default. If you are building your own composable platform scope with a different tech stack you can fork and adjust the component to your needs:
+
+```
+bit fork bitdev.symphony/backends.backend-server
+```

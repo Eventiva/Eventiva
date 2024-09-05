@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: database-config.ts
- * Last Modified: 30/08/2024, 12:25
+ * Last Modified: 04/09/2024, 09:18
  *
  * Contributing: Please read through our contributing guidelines.
  * Included are directions for opening issues, coding standards,
@@ -33,7 +33,8 @@
  *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
+import { PoolConfig } from 'pg'
 
 // use this type for your aspect config.
-export type DatabaseConfig = {};
+export type DatabaseConfig = {} & PoolConfig;
 
