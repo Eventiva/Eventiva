@@ -34,7 +34,6 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { DataAwsIamRole } from '@cdktf/provider-aws/lib/data-aws-iam-role'
 import { DataAwsSecurityGroup } from '@cdktf/provider-aws/lib/data-aws-security-group'
 import { DataAwsSubnets } from '@cdktf/provider-aws/lib/data-aws-subnets'
 import { DataAwsVpc } from '@cdktf/provider-aws/lib/data-aws-vpc'
@@ -42,10 +41,14 @@ import { DbSubnetGroup } from '@cdktf/provider-aws/lib/db-subnet-group'
 import { EksCluster } from '@cdktf/provider-aws/lib/eks-cluster'
 import { EksNodeGroup } from '@cdktf/provider-aws/lib/eks-node-group'
 import { IamPolicyAttachment } from '@cdktf/provider-aws/lib/iam-policy-attachment'
+import { IamRole } from '@cdktf/provider-aws/lib/iam-role'
 import { IamRolePolicyAttachment } from '@cdktf/provider-aws/lib/iam-role-policy-attachment'
+// import { IamRolePolicyAttachment } from '@cdktf/provider-aws/lib/iam-role-policy-attachment'
 import { AwsProvider } from '@cdktf/provider-aws/lib/provider'
 import { RdsCluster } from '@cdktf/provider-aws/lib/rds-cluster'
 import { RdsClusterInstance } from '@cdktf/provider-aws/lib/rds-cluster-instance'
+import { SecurityGroup } from '@cdktf/provider-aws/lib/security-group'
+import { SecurityGroupRule } from '@cdktf/provider-aws/lib/security-group-rule'
 import { ConfigMap } from '@cdktf/provider-kubernetes/lib/config-map'
 import { Deployment } from '@cdktf/provider-kubernetes/lib/deployment'
 import { PersistentVolumeClaim } from '@cdktf/provider-kubernetes/lib/persistent-volume-claim'
@@ -78,86 +81,6 @@ class AWS
         new AwsProvider( this, 'awsProvider' )
         new RandomProvider( this, 'random', {} )
 
-        const eksCluster = new DataAwsIamRole( this, 'EKSClusterRole', {
-            name: 'EKSClusterRole'
-        } )
-
-        const halfords = new DataAwsIamRole( this, 'aws-elasticbeanstalk-ec2-role', {
-            name: 'aws-elasticbeanstalk-ec2-role'
-        } )
-
-        const halfordsAmazonEc2ContainerRegistryReadOnly =
-            new IamRolePolicyAttachment(
-                this,
-                'halfords-AmazonEC2ContainerRegistryReadOnly',
-                {
-                    policyArn:
-                        'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly',
-                    role: halfords.name
-                }
-            )
-        const halfordsAmazonEksWorkerNodePolicy = new IamRolePolicyAttachment(
-            this,
-            'halfords-AmazonEKSWorkerNodePolicy',
-            {
-                policyArn: 'arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy',
-                role: halfords.name
-            }
-        )
-        const halfordsAmazonEksCniPolicy = new IamRolePolicyAttachment(
-            this,
-            'halfords-AmazonEKS_CNI_Policy',
-            {
-                policyArn: 'arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy',
-                role: halfords.name
-            }
-        );
-        const defaultVar = new DataAwsVpc( this, 'default', {
-            default: true
-        } )
-        new IamPolicyAttachment( this, 'eks_cluster_policy', {
-            name: 'halfords-cluster-policy',
-            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSClusterPolicy',
-            roles: [ eksCluster.name ]
-        } )
-        const publicSubnet = new DataAwsSubnets( this, 'public', {
-            filter: [
-                {
-                    name: 'vpc-id',
-                    values: [ Token.asString( defaultVar.id ) ]
-                }
-            ]
-        } )
-        const eks = new EksCluster( this, 'eks', {
-            name: 'halfords-eks-cluster',
-            roleArn: eksCluster.arn,
-            vpcConfig: {
-                subnetIds: Token.asList( publicSubnet.ids )
-            }
-        } )
-        const awsEksNodeGroup = new EksNodeGroup( this, 'halfords', {
-            clusterName: eks.name,
-            dependsOn: [
-                halfordsAmazonEksWorkerNodePolicy,
-                halfordsAmazonEksCniPolicy,
-                halfordsAmazonEc2ContainerRegistryReadOnly,
-                eks
-            ],
-            instanceTypes: [ 't2.micro' ],
-            nodeGroupName: 'managed-nodes',
-            nodeRoleArn: halfords.arn,
-            scalingConfig: {
-                desiredSize: 1,
-                maxSize: 2,
-                minSize: 1
-            },
-            subnetIds: Token.asList( publicSubnet.ids )
-        } )
-        /*This allows the Terraform resource name to match the original name. You can remove the call if you don't need them to match.*/
-        awsEksNodeGroup.overrideLogicalId( 'halfords' )
-
-        // RDS
-
         // Reference VPC and public subnets
         const vpc = new DataAwsVpc( this, 'vpc-9d4b0cf8', {
             id: 'vpc-9d4b0cf8'
@@ -171,6 +94,138 @@ class AWS
                 }
             ]
         } )
+
+        // Define the Security Group for EKS Nodes
+        const eksNodeSecurityGroup = new SecurityGroup(this, 'EKSNodeSecurityGroup', {
+            vpcId: vpc.id,
+            description: 'Allow access to/from EKS nodes',
+        });
+
+        // Define Ingress and Egress Rules for the EKS Node Security Group
+        new SecurityGroupRule(this, 'EKSNodeSGIngress', {
+            type: 'ingress',
+            fromPort: 0,
+            toPort: 65535,
+            protocol: '-1',
+            securityGroupId: eksNodeSecurityGroup.id,
+            cidrBlocks: ['0.0.0.0/0'],
+        });
+
+        new SecurityGroupRule(this, 'EKSNodeSGEgress', {
+            type: 'egress',
+            fromPort: 0,
+            toPort: 65535,
+            protocol: '-1',
+            securityGroupId: eksNodeSecurityGroup.id,
+            cidrBlocks: ['0.0.0.0/0'],
+        });
+
+        const eksRole = new IamRole(this, 'EksRole', {
+            assumeRolePolicy: JSON.stringify({
+                Version: '2012-10-17',
+                Statement: [
+                    {
+                        Action: 'sts:AssumeRole',
+                        Principal: { Service: 'eks.amazonaws.com' },
+                        Effect: 'Allow',
+                    },
+                ],
+            }),
+        });
+
+        const AmazonEKSClusterPolicyAttachment = new IamRolePolicyAttachment(this, 'AmazonEKSClusterPolicyAttachment', {
+            role: eksRole.name,
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSClusterPolicy',
+        });
+        const AmazonEKServicePolicyAttachment = new IamRolePolicyAttachment(this, 'AmazonEKSServicePolicyAttachment', {
+            role: eksRole.name,
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSServicePolicy',
+        });
+
+        const AmazonEKSVPCResourceControllerPolicyAttachment = new IamRolePolicyAttachment(this, 'AmazonEKSVPCResourceControllerPolicyAttachment', {
+            role: eksRole.name,
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSVPCResourceController',
+        });
+
+        const nodeRole = new IamRole(this, 'EKSNodeRole', {
+            assumeRolePolicy: JSON.stringify({
+                Version: '2012-10-17',
+                Statement: [
+                    {
+                        Effect: 'Allow',
+                        Principal: {
+                            Service: 'ec2.amazonaws.com',
+                        },
+                        Action: 'sts:AssumeRole',
+                    },
+                ],
+            }),
+        });
+
+        // Attach necessary policies to the node role
+        const halfordsAmazonEksWorkerNodePolicy = new IamRolePolicyAttachment(this, 'AmazonEKSWorkerNodePolicy', {
+            role: nodeRole.name,
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy',
+        });
+
+        const halfordsAmazonEksCniPolicy = new IamRolePolicyAttachment(this, 'AmazonEKS_CNI_Policy', {
+            role: nodeRole.name,
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy',
+        });
+
+        const halfordsAmazonEc2ContainerRegistryReadOnly = new IamRolePolicyAttachment(this, 'AmazonEC2ContainerRegistryReadOnly', {
+            role: nodeRole.name,
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly',
+        });
+
+        const defaultVar = new DataAwsVpc( this, 'default', {
+            default: true
+        } )
+        new IamPolicyAttachment( this, 'eks_cluster_policy', {
+            name: 'halfords-cluster-policy',
+            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSClusterPolicy',
+            roles: [ eksRole.name ]
+        } )
+        const publicSubnet = new DataAwsSubnets( this, 'public', {
+            filter: [
+                {
+                    name: 'vpc-id',
+                    values: [ Token.asString( defaultVar.id ) ]
+                }
+            ]
+        } )
+        const eks = new EksCluster( this, 'eks', {
+            name: 'halfords-eks-cluster',
+            roleArn: eksRole.arn,
+            vpcConfig: {
+                subnetIds: Token.asList( publicSubnet.ids )
+            },
+            dependsOn: [
+                AmazonEKServicePolicyAttachment,
+                AmazonEKSClusterPolicyAttachment,
+                AmazonEKSVPCResourceControllerPolicyAttachment
+            ],
+        } )
+        const awsEksNodeGroup = new EksNodeGroup( this, 'halfords', {
+            clusterName: eks.name,
+            dependsOn: [
+                halfordsAmazonEksWorkerNodePolicy,
+                halfordsAmazonEksCniPolicy,
+                halfordsAmazonEc2ContainerRegistryReadOnly,
+                eks
+            ],
+            instanceTypes: [ 't2.micro' ],
+            nodeGroupName: 'managed-nodes',
+            nodeRoleArn: nodeRole.arn,
+            scalingConfig: {
+                desiredSize: 1,
+                maxSize: 2,
+                minSize: 1
+            },
+            subnetIds: Token.asList( publicSubnet.ids )
+        } )
+        /*This allows the Terraform resource name to match the original name. You can remove the call if you don't need them to match.*/
+        awsEksNodeGroup.overrideLogicalId( 'halfords' )
 
         // Define the database subnet group
         const dbSubnetGroup = new DbSubnetGroup( this, 'dbSubnetGroup', {
@@ -188,10 +243,9 @@ class AWS
             default: 'postgres'
         } )
         const POSTGRES_PASSWORD = new StringResource( this, 'postgres_password', {
-            length: 20
+            length: 20,
+            special: false,
         } )
-
-        // Create an output for the PostgreSQL password
         new TerraformOutput( this, 'postgresPasswordOutput', {
             value: POSTGRES_PASSWORD.result,
             description: 'The dynamically generated PostgreSQL password.',
@@ -202,18 +256,18 @@ class AWS
         const rdsCluster = new RdsCluster( this, 'rdsCluster', {
             clusterIdentifier: 'halfords-serverless-cluster',
             engine: 'aurora-postgresql',
-            engineMode: 'serverless',
+            engineMode: "provisioned",
+            serverlessv2ScalingConfiguration: {
+                minCapacity: 0.5,  // Corresponds to Aurora capacity unit (ACU)
+                maxCapacity: 64,  // Corresponds to Aurora capacity unit (ACU)
+            },
             masterUsername: POSTGRES_USER.value,
             masterPassword: POSTGRES_PASSWORD.result,  // Use a more secure approach for passwords in production
             dbSubnetGroupName: dbSubnetGroup.name,
             vpcSecurityGroupIds: [ rdsSecurityGroup.id ],
-
-            scalingConfiguration: {
-                autoPause: true,
-                minCapacity: 2,  // Corresponds to Aurora capacity unit (ACU)
-                maxCapacity: 64,  // Corresponds to Aurora capacity unit (ACU)
-                secondsUntilAutoPause: 300  // Auto pause after 5 minutes of inactivity
-            }
+            dbClusterParameterGroupName: 'default.aurora-postgresql15',
+            dbInstanceParameterGroupName: 'extensions',
+            finalSnapshotIdentifier: 'halfords-serverless-cluster-' + Date.now(),
         } )
 
         // RDS Cluster Instance
@@ -221,7 +275,8 @@ class AWS
             clusterIdentifier: rdsCluster.clusterIdentifier,
             engine: rdsCluster.engine,
             engineVersion: rdsCluster.engineVersion,
-            instanceClass: 'db.serverless'
+            instanceClass: 'db.serverless',
+            publiclyAccessible: true,
         } )
 
         this.postgresPassword = POSTGRES_PASSWORD.result
