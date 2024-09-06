@@ -2,16 +2,40 @@
   "//": {
     "metadata": {
       "backend": "local",
-      "stackName": "k8",
+      "stackName": "auth",
       "version": "0.20.8"
     },
     "outputs": {
     }
   },
+  "data": {
+    "terraform_remote_state": {
+      "cross-stack-reference-input-aws": {
+        "backend": "local",
+        "config": {
+          "path": "C:\\Users\\TGTGa\\WebstormProjects\\Eventiva\\projects\\cdktf\\terraform.aws.tfstate"
+        },
+        "workspace": "${terraform.workspace}"
+      }
+    }
+  },
   "provider": {
     "kubernetes": [
       {
-        "config_path": "~/.kube/config"
+        "cluster_ca_certificate": "${data.terraform_remote_state.cross-stack-reference-input-aws.outputs.cross-stack-output-aws_eks_clusterekscertificate_authority0data}",
+        "exec": [
+          {
+            "api_version": "client.authentication.k8s.io/v1beta1",
+            "args": [
+              "eks",
+              "get-token",
+              "--cluster-name",
+              "${data.terraform_remote_state.cross-stack-reference-input-aws.outputs.cross-stack-output-aws_eks_clustereksname}"
+            ],
+            "command": "aws"
+          }
+        ],
+        "host": "${data.terraform_remote_state.cross-stack-reference-input-aws.outputs.cross-stack-output-aws_eks_clustereksendpoint}"
       }
     ],
     "random": [
@@ -24,12 +48,12 @@
       "fusionauthConfigMap": {
         "//": {
           "metadata": {
-            "path": "k8/fusionauthConfigMap",
+            "path": "auth/fusionauthConfigMap",
             "uniqueId": "fusionauthConfigMap"
           }
         },
         "data": {
-          "kickstart.json": "{\n  \"variables\": {\n    \"apiKey\": \"#{ENV.FUSIONAUTH_API_KEY}\",\n    \"defaultTenantId\": \"#{ENV.FUSIONAUTH_DEFAULT_TENANT}\",\n    \"adminEmail\": \"jonathan.stevens@eventiva.co.uk\",\n    \"adminPassword\": \"xge2vqt5xjt@KBM0dyq\",\n    \"adminUserId\": \"#{ENV.ADMIN_USER_ID}\"\n  },\n  \"apiKeys\": [\n    {\n      \"key\": \"#{apiKey}\"\n    }\n  ],\n  \"requests\": [\n    {\n      \"method\": \"POST\",\n      \"url\": \"/api/user/registration/#{adminUserId}\",\n      \"body\": {\n        \"user\": {\n          \"birthDate\": \"1989-06-03\",\n          \"email\": \"#{adminEmail}\",\n          \"firstName\": \"Jonathan\",\n          \"lastName\": \"Stevens\",\n          \"password\": \"#{adminPassword}\"\n        },\n        \"registration\": {\n          \"applicationId\": \"#{FUSIONAUTH_APPLICATION_ID}\",\n          \"roles\": [\n            \"admin\"\n          ]\n        }\n      }\n    }\n  ]\n}\n"
+          "kickstart.json": "{\r\n  \"variables\": {\r\n    \"apiKey\": \"#{ENV.FUSIONAUTH_API_KEY}\",\r\n    \"defaultTenantId\": \"#{ENV.FUSIONAUTH_DEFAULT_TENANT}\",\r\n    \"adminEmail\": \"jonathan.stevens@eventiva.co.uk\",\r\n    \"adminPassword\": \"xge2vqt5xjt@KBM0dyq\",\r\n    \"adminUserId\": \"#{ENV.ADMIN_USER_ID}\"\r\n  },\r\n  \"apiKeys\": [\r\n    {\r\n      \"key\": \"#{apiKey}\"\r\n    }\r\n  ],\r\n  \"requests\": [\r\n    {\r\n      \"method\": \"POST\",\r\n      \"url\": \"/api/user/registration/#{adminUserId}\",\r\n      \"body\": {\r\n        \"user\": {\r\n          \"birthDate\": \"1989-06-03\",\r\n          \"email\": \"#{adminEmail}\",\r\n          \"firstName\": \"Jonathan\",\r\n          \"lastName\": \"Stevens\",\r\n          \"password\": \"#{adminPassword}\"\r\n        },\r\n        \"registration\": {\r\n          \"applicationId\": \"#{FUSIONAUTH_APPLICATION_ID}\",\r\n          \"roles\": [\r\n            \"admin\"\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  ]\r\n}\r\n"
         },
         "metadata": {
           "name": "fusionauth-config",
@@ -41,7 +65,7 @@
       "fusionauthDeployment": {
         "//": {
           "metadata": {
-            "path": "k8/fusionauthDeployment",
+            "path": "auth/fusionauthDeployment",
             "uniqueId": "fusionauthDeployment"
           }
         },
@@ -72,11 +96,11 @@
                     },
                     {
                       "name": "DATABASE_ROOT_USERNAME",
-                      "value": "${var.postgres_user}"
+                      "value": "${data.terraform_remote_state.cross-stack-reference-input-aws.outputs.cross-stack-output-varpostgres_user}"
                     },
                     {
                       "name": "DATABASE_ROOT_PASSWORD",
-                      "value": "${random_string.postgres_password.result}"
+                      "value": "${data.terraform_remote_state.cross-stack-reference-input-aws.outputs.cross-stack-output-random_stringpostgres_passwordresult}"
                     },
                     {
                       "name": "DATABASE_USERNAME",
@@ -123,7 +147,7 @@
                       "value": "${random_uuid.fusionAdminUserId.result}"
                     }
                   ],
-                  "image": "fusionauth/fusionauth-app:1.52.1",
+                  "image": "fusionauth/fusionauth-app:latest",
                   "name": "fusionauth",
                   "port": [
                     {
@@ -173,7 +197,7 @@
       "openSearchDeployment": {
         "//": {
           "metadata": {
-            "path": "k8/openSearchDeployment",
+            "path": "auth/openSearchDeployment",
             "uniqueId": "openSearchDeployment"
           }
         },
@@ -250,28 +274,31 @@
           }
         }
       },
-      "postgresDeployment": {
+      "permifyDeployment": {
         "//": {
           "metadata": {
-            "path": "k8/postgresDeployment",
-            "uniqueId": "postgresDeployment"
+            "path": "auth/permifyDeployment",
+            "uniqueId": "permifyDeployment"
           }
         },
         "metadata": {
-          "name": "postgres",
+          "name": "permify",
           "namespace": "default"
         },
         "spec": {
           "replicas": "1",
           "selector": {
             "match_labels": {
-              "app": "postgres"
+              "app": "permify"
             }
+          },
+          "strategy": {
+            "type": "Recreate"
           },
           "template": {
             "metadata": {
               "labels": {
-                "app": "postgres"
+                "app": "permify"
               }
             },
             "spec": {
@@ -279,37 +306,20 @@
                 {
                   "env": [
                     {
-                      "name": "POSTGRES_USER",
-                      "value": "${var.postgres_user}"
-                    },
-                    {
-                      "name": "POSTGRES_PASSWORD",
-                      "value": "${random_string.postgres_password.result}"
+                      "name": "PERMIFY_ACCOUNT_ID",
+                      "value": "recASPn1X1pGJauXB"
                     }
                   ],
-                  "image": "postgres:16.0-bookworm",
-                  "name": "postgres",
+                  "image": "ghcr.io/permify/permify",
+                  "name": "permify",
                   "port": [
                     {
-                      "container_port": 5432
-                    }
-                  ],
-                  "volume_mount": [
-                    {
-                      "mount_path": "/var/lib/postgresql/data",
-                      "name": "postgres-storage"
+                      "container_port": 3476
                     }
                   ]
                 }
               ],
-              "volume": [
-                {
-                  "name": "postgres-storage",
-                  "persistent_volume_claim": {
-                    "claim_name": "${kubernetes_persistent_volume_claim.postgresPersistentVolumeClaim.metadata[0].name}"
-                  }
-                }
-              ]
+              "restart_policy": "Always"
             }
           }
         }
@@ -319,33 +329,12 @@
       "opensearchPersistentVolumeClaim": {
         "//": {
           "metadata": {
-            "path": "k8/opensearchPersistentVolumeClaim",
+            "path": "auth/opensearchPersistentVolumeClaim",
             "uniqueId": "opensearchPersistentVolumeClaim"
           }
         },
         "metadata": {
           "name": "opensearch-pvc"
-        },
-        "spec": {
-          "access_modes": [
-            "ReadWriteOnce"
-          ],
-          "resources": {
-            "requests": {
-              "storage": "10Gi"
-            }
-          }
-        }
-      },
-      "postgresPersistentVolumeClaim": {
-        "//": {
-          "metadata": {
-            "path": "k8/postgresPersistentVolumeClaim",
-            "uniqueId": "postgresPersistentVolumeClaim"
-          }
-        },
-        "metadata": {
-          "name": "postgres-pvc"
         },
         "spec": {
           "access_modes": [
@@ -363,7 +352,7 @@
       "fusionauthService": {
         "//": {
           "metadata": {
-            "path": "k8/fusionauthService",
+            "path": "auth/fusionauthService",
             "uniqueId": "fusionauthService"
           }
         },
@@ -387,7 +376,7 @@
       "openSearchService": {
         "//": {
           "metadata": {
-            "path": "k8/openSearchService",
+            "path": "auth/openSearchService",
             "uniqueId": "openSearchService"
           }
         },
@@ -407,29 +396,29 @@
           }
         }
       },
-      "postgresService": {
+      "permifyService": {
         "//": {
           "metadata": {
-            "path": "k8/postgresService",
-            "uniqueId": "postgresService"
+            "path": "auth/permifyService",
+            "uniqueId": "permifyService"
           }
         },
         "metadata": {
-          "name": "postgres",
+          "name": "permify",
           "namespace": "default"
         },
         "spec": {
           "port": [
             {
-              "node_port": 30010,
-              "port": 5432,
-              "target_port": "5432"
+              "port": 3476,
+              "protocol": "TCP",
+              "target_port": "3476"
             }
           ],
           "selector": {
-            "app": "postgres"
+            "app": "permify"
           },
-          "type": "NodePort"
+          "type": "LoadBalancer"
         }
       }
     },
@@ -437,7 +426,7 @@
       "database_password": {
         "//": {
           "metadata": {
-            "path": "k8/database_password",
+            "path": "auth/database_password",
             "uniqueId": "database_password"
           }
         },
@@ -446,28 +435,19 @@
       "fusionauthApiKey": {
         "//": {
           "metadata": {
-            "path": "k8/fusionauthApiKey",
+            "path": "auth/fusionauthApiKey",
             "uniqueId": "fusionauthApiKey"
           }
         },
         "length": 20,
         "special": false
-      },
-      "postgres_password": {
-        "//": {
-          "metadata": {
-            "path": "k8/postgres_password",
-            "uniqueId": "postgres_password"
-          }
-        },
-        "length": 20
       }
     },
     "random_uuid": {
       "fusionAdminUserId": {
         "//": {
           "metadata": {
-            "path": "k8/fusionAdminUserId",
+            "path": "auth/fusionAdminUserId",
             "uniqueId": "fusionAdminUserId"
           }
         }
@@ -475,7 +455,7 @@
       "fusionauthDefaultTenant": {
         "//": {
           "metadata": {
-            "path": "k8/fusionauthDefaultTenant",
+            "path": "auth/fusionauthDefaultTenant",
             "uniqueId": "fusionauthDefaultTenant"
           }
         }
@@ -485,7 +465,7 @@
   "terraform": {
     "backend": {
       "local": {
-        "path": "C:\\Users\\TGTGa\\WebstormProjects\\Eventiva\\projects\\cdktf\\terraform.k8.tfstate"
+        "path": "C:\\Users\\TGTGa\\WebstormProjects\\Eventiva\\projects\\cdktf\\terraform.auth.tfstate"
       }
     },
     "required_providers": {
@@ -510,10 +490,6 @@
     },
     "fusionauthAppRuntimeMode": {
       "default": "development",
-      "type": "string"
-    },
-    "postgres_user": {
-      "default": "postgres",
       "type": "string"
     }
   }

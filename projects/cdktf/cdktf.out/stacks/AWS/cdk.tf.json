@@ -1,0 +1,335 @@
+{
+  "//": {
+    "metadata": {
+      "backend": "local",
+      "stackName": "aws",
+      "version": "0.20.8"
+    },
+    "outputs": {
+      "aws": {
+        "cross-stack-output-aws_eks_cluster.eks.certificate_authority[0].data": "cross-stack-output-aws_eks_clusterekscertificate_authority0data",
+        "cross-stack-output-aws_eks_cluster.eks.endpoint": "cross-stack-output-aws_eks_clustereksendpoint",
+        "cross-stack-output-aws_eks_cluster.eks.name": "cross-stack-output-aws_eks_clustereksname",
+        "cross-stack-output-random_string.postgres_password.result": "cross-stack-output-random_stringpostgres_passwordresult",
+        "cross-stack-output-var.postgres_user": "cross-stack-output-varpostgres_user",
+        "eksClusterCaCertificate": "eksClusterCaCertificate",
+        "eksClusterEndpoint": "eksClusterEndpoint",
+        "eksClusterName": "eksClusterName",
+        "postgresPasswordOutput": "postgresPasswordOutput"
+      }
+    }
+  },
+  "data": {
+    "aws_iam_role": {
+      "EKSClusterRole": {
+        "//": {
+          "metadata": {
+            "path": "aws/EKSClusterRole",
+            "uniqueId": "EKSClusterRole"
+          }
+        },
+        "name": "EKSClusterRole"
+      },
+      "aws-elasticbeanstalk-ec2-role": {
+        "//": {
+          "metadata": {
+            "path": "aws/aws-elasticbeanstalk-ec2-role",
+            "uniqueId": "aws-elasticbeanstalk-ec2-role"
+          }
+        },
+        "name": "aws-elasticbeanstalk-ec2-role"
+      }
+    },
+    "aws_security_group": {
+      "rdsSecurityGroup": {
+        "//": {
+          "metadata": {
+            "path": "aws/rdsSecurityGroup",
+            "uniqueId": "rdsSecurityGroup"
+          }
+        },
+        "id": "sg-0e2bf5741a9c594f7"
+      }
+    },
+    "aws_subnets": {
+      "default_subnets": {
+        "//": {
+          "metadata": {
+            "path": "aws/default_subnets",
+            "uniqueId": "default_subnets"
+          }
+        },
+        "filter": [
+          {
+            "name": "vpc-id",
+            "values": [
+              "${data.aws_vpc.vpc-9d4b0cf8.id}"
+            ]
+          }
+        ]
+      },
+      "public": {
+        "//": {
+          "metadata": {
+            "path": "aws/public",
+            "uniqueId": "public"
+          }
+        },
+        "filter": [
+          {
+            "name": "vpc-id",
+            "values": [
+              "${data.aws_vpc.default.id}"
+            ]
+          }
+        ]
+      }
+    },
+    "aws_vpc": {
+      "default": {
+        "//": {
+          "metadata": {
+            "path": "aws/default",
+            "uniqueId": "default"
+          }
+        },
+        "default": true
+      },
+      "vpc-9d4b0cf8": {
+        "//": {
+          "metadata": {
+            "path": "aws/vpc-9d4b0cf8",
+            "uniqueId": "vpc-9d4b0cf8"
+          }
+        },
+        "id": "vpc-9d4b0cf8"
+      }
+    }
+  },
+  "output": {
+    "cross-stack-output-aws_eks_clusterekscertificate_authority0data": {
+      "sensitive": true,
+      "value": "${aws_eks_cluster.eks.certificate_authority[0].data}"
+    },
+    "cross-stack-output-aws_eks_clustereksendpoint": {
+      "sensitive": true,
+      "value": "${aws_eks_cluster.eks.endpoint}"
+    },
+    "cross-stack-output-aws_eks_clustereksname": {
+      "sensitive": true,
+      "value": "${aws_eks_cluster.eks.name}"
+    },
+    "cross-stack-output-random_stringpostgres_passwordresult": {
+      "sensitive": true,
+      "value": "${random_string.postgres_password.result}"
+    },
+    "cross-stack-output-varpostgres_user": {
+      "sensitive": true,
+      "value": "${var.postgres_user}"
+    },
+    "eksClusterCaCertificate": {
+      "description": "EKS Cluster CA Certificate",
+      "value": "${aws_eks_cluster.eks.certificate_authority[0].data}"
+    },
+    "eksClusterEndpoint": {
+      "description": "EKS Cluster Endpoint",
+      "value": "${aws_eks_cluster.eks.endpoint}"
+    },
+    "eksClusterName": {
+      "description": "EKS Cluster Name",
+      "value": "${aws_eks_cluster.eks.name}"
+    },
+    "postgresPasswordOutput": {
+      "description": "The dynamically generated PostgreSQL password.",
+      "sensitive": true,
+      "value": "${random_string.postgres_password.result}"
+    }
+  },
+  "provider": {
+    "aws": [
+      {
+      }
+    ],
+    "random": [
+      {
+      }
+    ]
+  },
+  "resource": {
+    "aws_db_subnet_group": {
+      "dbSubnetGroup": {
+        "//": {
+          "metadata": {
+            "path": "aws/dbSubnetGroup",
+            "uniqueId": "dbSubnetGroup"
+          }
+        },
+        "name": "default-db-subnet-group",
+        "subnet_ids": "${data.aws_subnets.default_subnets.ids}"
+      }
+    },
+    "aws_eks_cluster": {
+      "eks": {
+        "//": {
+          "metadata": {
+            "path": "aws/eks",
+            "uniqueId": "eks"
+          }
+        },
+        "name": "halfords-eks-cluster",
+        "role_arn": "${data.aws_iam_role.EKSClusterRole.arn}",
+        "vpc_config": {
+          "subnet_ids": "${data.aws_subnets.public.ids}"
+        }
+      }
+    },
+    "aws_eks_node_group": {
+      "halfords": {
+        "//": {
+          "metadata": {
+            "path": "aws/halfords",
+            "uniqueId": "halfords"
+          }
+        },
+        "cluster_name": "${aws_eks_cluster.eks.name}",
+        "depends_on": [
+          "aws_iam_role_policy_attachment.halfords-AmazonEKSWorkerNodePolicy",
+          "aws_iam_role_policy_attachment.halfords-AmazonEKS_CNI_Policy",
+          "aws_iam_role_policy_attachment.halfords-AmazonEC2ContainerRegistryReadOnly",
+          "aws_eks_cluster.eks"
+        ],
+        "instance_types": [
+          "t2.micro"
+        ],
+        "node_group_name": "managed-nodes",
+        "node_role_arn": "${data.aws_iam_role.aws-elasticbeanstalk-ec2-role.arn}",
+        "scaling_config": {
+          "desired_size": 1,
+          "max_size": 2,
+          "min_size": 1
+        },
+        "subnet_ids": "${data.aws_subnets.public.ids}"
+      }
+    },
+    "aws_iam_policy_attachment": {
+      "eks_cluster_policy": {
+        "//": {
+          "metadata": {
+            "path": "aws/eks_cluster_policy",
+            "uniqueId": "eks_cluster_policy"
+          }
+        },
+        "name": "halfords-cluster-policy",
+        "policy_arn": "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
+        "roles": [
+          "${data.aws_iam_role.EKSClusterRole.name}"
+        ]
+      }
+    },
+    "aws_iam_role_policy_attachment": {
+      "halfords-AmazonEC2ContainerRegistryReadOnly": {
+        "//": {
+          "metadata": {
+            "path": "aws/halfords-AmazonEC2ContainerRegistryReadOnly",
+            "uniqueId": "halfords-AmazonEC2ContainerRegistryReadOnly"
+          }
+        },
+        "policy_arn": "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly",
+        "role": "${data.aws_iam_role.aws-elasticbeanstalk-ec2-role.name}"
+      },
+      "halfords-AmazonEKSWorkerNodePolicy": {
+        "//": {
+          "metadata": {
+            "path": "aws/halfords-AmazonEKSWorkerNodePolicy",
+            "uniqueId": "halfords-AmazonEKSWorkerNodePolicy"
+          }
+        },
+        "policy_arn": "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy",
+        "role": "${data.aws_iam_role.aws-elasticbeanstalk-ec2-role.name}"
+      },
+      "halfords-AmazonEKS_CNI_Policy": {
+        "//": {
+          "metadata": {
+            "path": "aws/halfords-AmazonEKS_CNI_Policy",
+            "uniqueId": "halfords-AmazonEKS_CNI_Policy"
+          }
+        },
+        "policy_arn": "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy",
+        "role": "${data.aws_iam_role.aws-elasticbeanstalk-ec2-role.name}"
+      }
+    },
+    "aws_rds_cluster": {
+      "rdsCluster": {
+        "//": {
+          "metadata": {
+            "path": "aws/rdsCluster",
+            "uniqueId": "rdsCluster"
+          }
+        },
+        "cluster_identifier": "halfords-serverless-cluster",
+        "db_subnet_group_name": "${aws_db_subnet_group.dbSubnetGroup.name}",
+        "engine": "aurora-postgresql",
+        "engine_mode": "serverless",
+        "master_password": "${random_string.postgres_password.result}",
+        "master_username": "${var.postgres_user}",
+        "scaling_configuration": {
+          "auto_pause": true,
+          "max_capacity": 64,
+          "min_capacity": 2,
+          "seconds_until_auto_pause": 300
+        },
+        "vpc_security_group_ids": [
+          "${data.aws_security_group.rdsSecurityGroup.id}"
+        ]
+      }
+    },
+    "aws_rds_cluster_instance": {
+      "rdsClusterInstance": {
+        "//": {
+          "metadata": {
+            "path": "aws/rdsClusterInstance",
+            "uniqueId": "rdsClusterInstance"
+          }
+        },
+        "cluster_identifier": "${aws_rds_cluster.rdsCluster.cluster_identifier}",
+        "engine": "${aws_rds_cluster.rdsCluster.engine}",
+        "engine_version": "${aws_rds_cluster.rdsCluster.engine_version}",
+        "instance_class": "db.serverless"
+      }
+    },
+    "random_string": {
+      "postgres_password": {
+        "//": {
+          "metadata": {
+            "path": "aws/postgres_password",
+            "uniqueId": "postgres_password"
+          }
+        },
+        "length": 20
+      }
+    }
+  },
+  "terraform": {
+    "backend": {
+      "local": {
+        "path": "C:\\Users\\TGTGa\\WebstormProjects\\Eventiva\\projects\\cdktf\\terraform.aws.tfstate"
+      }
+    },
+    "required_providers": {
+      "aws": {
+        "source": "aws",
+        "version": "5.63.0"
+      },
+      "random": {
+        "source": "hashicorp/random",
+        "version": "3.6.2"
+      }
+    }
+  },
+  "variable": {
+    "postgres_user": {
+      "default": "postgres",
+      "type": "string"
+    }
+  }
+}

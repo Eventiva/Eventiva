@@ -1,15 +1,27 @@
 {
   "stacks": {
-    "k8": {
+    "auth": {
       "annotations": [
       ],
-      "constructPath": "k8",
+      "constructPath": "auth",
+      "dependencies": [
+        "aws"
+      ],
+      "name": "auth",
+      "stackMetadataPath": "stacks\\auth\\metadata.json",
+      "synthesizedStackPath": "stacks\\auth\\cdk.tf.json",
+      "workingDirectory": "stacks\\auth"
+    },
+    "aws": {
+      "annotations": [
+      ],
+      "constructPath": "aws",
       "dependencies": [
       ],
-      "name": "k8",
-      "stackMetadataPath": "stacks\\k8\\metadata.json",
-      "synthesizedStackPath": "stacks\\k8\\cdk.tf.json",
-      "workingDirectory": "stacks\\k8"
+      "name": "aws",
+      "stackMetadataPath": "stacks\\aws\\metadata.json",
+      "synthesizedStackPath": "stacks\\aws\\cdk.tf.json",
+      "workingDirectory": "stacks\\aws"
     }
   },
   "version": "0.20.8"

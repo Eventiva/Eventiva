@@ -1,6 +1,6 @@
 /*
  * Project: Eventiva
- * File: main.ts
+ * File: main.full.ts
  * Last Modified: 06/09/2024, 13:18
  *
  * Contributing: Please read through our contributing guidelines.
@@ -34,18 +34,6 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { DataAwsIamRole } from '@cdktf/provider-aws/lib/data-aws-iam-role'
-import { DataAwsSecurityGroup } from '@cdktf/provider-aws/lib/data-aws-security-group'
-import { DataAwsSubnets } from '@cdktf/provider-aws/lib/data-aws-subnets'
-import { DataAwsVpc } from '@cdktf/provider-aws/lib/data-aws-vpc'
-import { DbSubnetGroup } from '@cdktf/provider-aws/lib/db-subnet-group'
-import { EksCluster } from '@cdktf/provider-aws/lib/eks-cluster'
-import { EksNodeGroup } from '@cdktf/provider-aws/lib/eks-node-group'
-import { IamPolicyAttachment } from '@cdktf/provider-aws/lib/iam-policy-attachment'
-import { IamRolePolicyAttachment } from '@cdktf/provider-aws/lib/iam-role-policy-attachment'
-import { AwsProvider } from '@cdktf/provider-aws/lib/provider'
-import { RdsCluster } from '@cdktf/provider-aws/lib/rds-cluster'
-import { RdsClusterInstance } from '@cdktf/provider-aws/lib/rds-cluster-instance'
 import { ConfigMap } from '@cdktf/provider-kubernetes/lib/config-map'
 import { Deployment } from '@cdktf/provider-kubernetes/lib/deployment'
 import { PersistentVolumeClaim } from '@cdktf/provider-kubernetes/lib/persistent-volume-claim'
@@ -54,135 +42,42 @@ import { Service } from '@cdktf/provider-kubernetes/lib/service'
 import { RandomProvider } from '@cdktf/provider-random/lib/provider'
 import { StringResource } from '@cdktf/provider-random/lib/string-resource'
 import { Uuid } from '@cdktf/provider-random/lib/uuid'
-import { App, LocalBackend, TerraformOutput, TerraformStack, TerraformVariable, Token, VariableType } from 'cdktf'
+import { App, LocalBackend, TerraformStack, TerraformVariable, VariableType } from 'cdktf'
 import { Construct } from 'constructs'
 import * as fs from 'node:fs'
 
-class AWS
+class MyStack
     extends TerraformStack {
-
-    public readonly eksClusterName: string
-    public readonly eksClusterEndpoint: string
-    public readonly eksClusterCaCertificate: string
-    public readonly postgresPassword: string
-    public readonly postgresUser: string
-
     constructor (
         scope: Construct,
         id: string
     ) {
         super( scope, id )
 
+        // load the backend and providers for deployment
         new LocalBackend( this )
 
-        new AwsProvider( this, 'awsProvider' )
+        new KubernetesProvider( this, 'k8s', {
+            configPath: '~/.kube/config'
+        } )
+
         new RandomProvider( this, 'random', {} )
 
-        const eksCluster = new DataAwsIamRole( this, 'EKSClusterRole', {
-            name: 'EKSClusterRole'
-        } )
+        // Postgres construction
 
-        const halfords = new DataAwsIamRole( this, 'aws-elasticbeanstalk-ec2-role', {
-            name: 'aws-elasticbeanstalk-ec2-role'
-        } )
-
-        const halfordsAmazonEc2ContainerRegistryReadOnly =
-            new IamRolePolicyAttachment(
-                this,
-                'halfords-AmazonEC2ContainerRegistryReadOnly',
-                {
-                    policyArn:
-                        'arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly',
-                    role: halfords.name
-                }
-            )
-        const halfordsAmazonEksWorkerNodePolicy = new IamRolePolicyAttachment(
-            this,
-            'halfords-AmazonEKSWorkerNodePolicy',
-            {
-                policyArn: 'arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy',
-                role: halfords.name
-            }
-        )
-        const halfordsAmazonEksCniPolicy = new IamRolePolicyAttachment(
-            this,
-            'halfords-AmazonEKS_CNI_Policy',
-            {
-                policyArn: 'arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy',
-                role: halfords.name
-            }
-        );
-        const defaultVar = new DataAwsVpc( this, 'default', {
-            default: true
-        } )
-        new IamPolicyAttachment( this, 'eks_cluster_policy', {
-            name: 'halfords-cluster-policy',
-            policyArn: 'arn:aws:iam::aws:policy/AmazonEKSClusterPolicy',
-            roles: [ eksCluster.name ]
-        } )
-        const publicSubnet = new DataAwsSubnets( this, 'public', {
-            filter: [
-                {
-                    name: 'vpc-id',
-                    values: [ Token.asString( defaultVar.id ) ]
-                }
-            ]
-        } )
-        const eks = new EksCluster( this, 'eks', {
-            name: 'halfords-eks-cluster',
-            roleArn: eksCluster.arn,
-            vpcConfig: {
-                subnetIds: Token.asList( publicSubnet.ids )
-            }
-        } )
-        const awsEksNodeGroup = new EksNodeGroup( this, 'halfords', {
-            clusterName: eks.name,
-            dependsOn: [
-                halfordsAmazonEksWorkerNodePolicy,
-                halfordsAmazonEksCniPolicy,
-                halfordsAmazonEc2ContainerRegistryReadOnly,
-                eks
-            ],
-            instanceTypes: [ 't2.micro' ],
-            nodeGroupName: 'managed-nodes',
-            nodeRoleArn: halfords.arn,
-            scalingConfig: {
-                desiredSize: 1,
-                maxSize: 2,
-                minSize: 1
+        const postgresVolume = new PersistentVolumeClaim( this, 'postgresPersistentVolumeClaim', {
+            metadata: {
+                name: 'postgres-pvc'
             },
-            subnetIds: Token.asList( publicSubnet.ids )
-        } )
-        /*This allows the Terraform resource name to match the original name. You can remove the call if you don't need them to match.*/
-        awsEksNodeGroup.overrideLogicalId( 'halfords' )
-
-        // RDS
-
-        // Reference VPC and public subnets
-        const vpc = new DataAwsVpc( this, 'vpc-9d4b0cf8', {
-            id: 'vpc-9d4b0cf8'
-        } )
-
-        const subnets = new DataAwsSubnets( this, 'default_subnets', {
-            filter: [
-                {
-                    name: 'vpc-id',
-                    values: [ vpc.id ]
+            spec: {
+                accessModes: [ 'ReadWriteOnce' ],
+                resources: {
+                    requests: {
+                        storage: '10Gi'
+                    }
                 }
-            ]
+            }
         } )
-
-        // Define the database subnet group
-        const dbSubnetGroup = new DbSubnetGroup( this, 'dbSubnetGroup', {
-            name: 'default-db-subnet-group',
-            subnetIds: subnets.ids
-        } )
-
-        // Define the security group for the RDS instance
-        const rdsSecurityGroup = new DataAwsSecurityGroup( this, 'rdsSecurityGroup', {
-            id: 'sg-0e2bf5741a9c594f7'
-        } )
-
         const POSTGRES_USER = new TerraformVariable( this, 'postgres_user', {
             type: VariableType.STRING,
             default: 'postgres'
@@ -190,93 +85,77 @@ class AWS
         const POSTGRES_PASSWORD = new StringResource( this, 'postgres_password', {
             length: 20
         } )
-
-        // Create an output for the PostgreSQL password
-        new TerraformOutput( this, 'postgresPasswordOutput', {
-            value: POSTGRES_PASSWORD.result,
-            description: 'The dynamically generated PostgreSQL password.',
-            sensitive: true
-        } )
-
-        // RDS Cluster
-        const rdsCluster = new RdsCluster( this, 'rdsCluster', {
-            clusterIdentifier: 'halfords-serverless-cluster',
-            engine: 'aurora-postgresql',
-            engineMode: 'serverless',
-            masterUsername: POSTGRES_USER.value,
-            masterPassword: POSTGRES_PASSWORD.result,  // Use a more secure approach for passwords in production
-            dbSubnetGroupName: dbSubnetGroup.name,
-            vpcSecurityGroupIds: [ rdsSecurityGroup.id ],
-
-            scalingConfiguration: {
-                autoPause: true,
-                minCapacity: 2,  // Corresponds to Aurora capacity unit (ACU)
-                maxCapacity: 64,  // Corresponds to Aurora capacity unit (ACU)
-                secondsUntilAutoPause: 300  // Auto pause after 5 minutes of inactivity
+        new Deployment( this, 'postgresDeployment', {
+            metadata: {
+                name: 'postgres',
+                namespace: 'default'
+            },
+            spec: {
+                replicas: '1',
+                selector: {
+                    matchLabels: {
+                        app: 'postgres'
+                    }
+                },
+                template: {
+                    metadata: {
+                        labels: {
+                            app: 'postgres'
+                        }
+                    },
+                    spec: {
+                        container: [
+                            {
+                                name: 'postgres',
+                                image: 'postgres:16.0-bookworm',
+                                env: [
+                                    { name: 'POSTGRES_USER', value: POSTGRES_USER.value },
+                                    { name: 'POSTGRES_PASSWORD', value: POSTGRES_PASSWORD.result }
+                                ],
+                                port: [
+                                    {
+                                        containerPort: 5432
+                                    }
+                                ],
+                                volumeMount: [
+                                    {
+                                        name: 'postgres-storage',
+                                        mountPath: '/var/lib/postgresql/data'
+                                    }
+                                ]
+                            }
+                        ],
+                        volume: [
+                            {
+                                name: 'postgres-storage',
+                                persistentVolumeClaim: {
+                                    claimName: postgresVolume.metadata.name
+                                }
+                            }
+                        ]
+                    }
+                }
             }
         } )
-
-        // RDS Cluster Instance
-        new RdsClusterInstance( this, 'rdsClusterInstance', {
-            clusterIdentifier: rdsCluster.clusterIdentifier,
-            engine: rdsCluster.engine,
-            engineVersion: rdsCluster.engineVersion,
-            instanceClass: 'db.serverless'
+        new Service( this, 'postgresService', {
+            metadata: {
+                name: 'postgres',
+                namespace: 'default'
+            },
+            spec: {
+                selector: {
+                    app: 'postgres'
+                },
+                port: [
+                    {
+                        port: 5432,
+                        targetPort: '5432',
+                        nodePort: 30010
+                    }
+                ],
+                type: 'NodePort'
+            }
         } )
-
-        this.postgresPassword = POSTGRES_PASSWORD.result
-        this.postgresUser = POSTGRES_USER.value
-        this.eksClusterName = eks.name
-        this.eksClusterEndpoint = eks.endpoint
-        this.eksClusterCaCertificate = eks.certificateAuthority.get( 0 ).data
-
-        // Outputs
-        new TerraformOutput( this, 'eksClusterName', {
-            value: this.eksClusterName,
-            description: 'EKS Cluster Name'
-        } )
-
-        new TerraformOutput( this, 'eksClusterEndpoint', {
-            value: this.eksClusterEndpoint,
-            description: 'EKS Cluster Endpoint'
-        } )
-
-        new TerraformOutput( this, 'eksClusterCaCertificate', {
-            value: this.eksClusterCaCertificate,
-            description: 'EKS Cluster CA Certificate'
-        } )
-    }
-}
-
-class Authentication
-    extends TerraformStack {
-    constructor (
-        scope: Construct,
-        id: string,
-        awsStack: AWS
-    ) {
-        super( scope, id )
-
-        new LocalBackend( this )
-
-        new KubernetesProvider( this, 'k8s', {
-            host: awsStack.eksClusterEndpoint,
-            clusterCaCertificate: awsStack.eksClusterCaCertificate,
-            exec: [
-                {
-                    apiVersion: 'client.authentication.k8s.io/v1beta1',
-                    command: 'aws',
-                    args: [
-                        'eks',
-                        'get-token',
-                        '--cluster-name',
-                        awsStack.eksClusterName
-                    ]
-                }
-            ]
-        } )
-
-        new RandomProvider( this, 'random', {} )
 
         // Permify
 
@@ -340,6 +219,205 @@ class Authentication
                 type: 'LoadBalancer'
             }
         } )
+
+        // Docker-mailserver
+
+        // const dockerMailServerConfigMap = new ConfigMap( this, 'dockerMailserverConfigMap', {
+        //     metadata: {
+        //         name: 'dockerMailserver-config',
+        //         namespace: 'default'
+        //     },
+        //     immutable: false,
+        //     data: {
+        //         TLS_LEVEL: "modern",
+        //         POSTSCREEN_ACTION: "drop",
+        //         OVERRIDE_HOSTNAME: "mail.example.com",
+        //         FAIL2BAN_BLOCKTYPE: "drop",
+        //         POSTMASTER_ADDRESS: "postmaster@example.com",
+        //         UPDATE_CHECK_INTERVAL: "10d",
+        //         POSTFIX_INET_PROTOCOLS: "ipv4",
+        //         ENABLE_CLAMAV: '1',
+        //         ENABLE_POSTGREY: '0',
+        //         ENABLE_FAIL2BAN: '1',
+        //         AMAVIS_LOGLEVEL: '-1',
+        //         SPOOF_PROTECTION: '1',
+        //         MOVE_SPAM_TO_JUNK: '1',
+        //         ENABLE_UPDATE_CHECK: '1',
+        //         ENABLE_SPAMASSASSIN: '1',
+        //         SUPERVISOR_LOGLEVEL: "warn",
+        //         SPAMASSASSIN_SPAM_TO_INBOX: '1',
+        //
+        //         SSL_TYPE: "manual",
+        //         SSL_CERT_PATH: "/secrets/ssl/rsa/tls.crt",
+        //         SSL_KEY_PATH: "/secrets/ssl/rsa/tls.key"
+        //     }
+        // } )
+        // const dockerMailServerVolume = new PersistentVolumeClaim( this, 'dockerMailserverPersistentVolumeClaim', {
+        //     metadata: {
+        //         name: 'dockerMailserver-pvc'
+        //     },
+        //     spec: {
+        //         accessModes: [ 'ReadWriteOnce' ],
+        //         resources: {
+        //             requests: {
+        //                 storage: '10Gi'
+        //             }
+        //         }
+        //     }
+        // } )
+        // const dockerMailServerFilesVolume = new PersistentVolumeClaim( this, 'dockerMailserverFilesPersistentVolumeClaim', {
+        //     metadata: {
+        //         name: 'dockerMailserverFiles-pvc'
+        //     },
+        //     spec: {
+        //         accessModes: [ 'ReadWriteOnce' ],
+        //         resources: {
+        //             requests: {
+        //                 storage: '10Gi'
+        //             }
+        //         }
+        //     }
+        // } )
+        // new Deployment( this, 'dockerMailserverDeployment', {
+        //     metadata: {
+        //         name: 'mailserver',
+        //         namespace: 'default'
+        //     },
+        //     spec: {
+        //         replicas: '1',
+        //         selector: {
+        //             matchLabels: {
+        //                 app: 'mailserver'
+        //             }
+        //         },
+        //         template: {
+        //             metadata: {
+        //                 labels: {
+        //                     app: 'mailserver'
+        //                 },
+        //                 annotations: {
+        //                     "container.apparmor.security.beta.kubernetes.io/mailserver": "runtime/default"
+        //                 }
+        //             },
+        //             spec: {
+        //                 container: [
+        //                     {
+        //                         name: 'mailserver',
+        //                         image: 'ghcr.io/docker-mailserver/docker-mailserver:latest',
+        //                         securityContext: {
+        //                             allowPrivilegeEscalation: true,
+        //                             readOnlyRootFilesystem: false,
+        //                             runAsUser: "0",
+        //                             runAsGroup: "0",
+        //                             runAsNonRoot: false,
+        //                             privileged: false,
+        //                             capabilities: {
+        //                                 add: [
+        //                                     'CHOWN',
+        //                                     'FOWNER',
+        //                                     'MKNOD',
+        //                                     'SETGID',
+        //                                     'SETUID',
+        //                                     'DAC_OVERRIDE',
+        //                                     'NET_ADMIN',
+        //                                     'NET_RAW',
+        //                                     'NET_BIND_SERVICE',
+        //                                     'SYS_CHROOT',
+        //                                     'KILL'
+        //                                 ],
+        //                                 drop: ['ALL']
+        //                             },
+        //                             seccompProfile: {
+        //                                 type: 'RuntimeDefault'
+        //                             }
+        //                         },
+        //                         resources: {
+        //                             limits: {
+        //                                 memory: '4Gi',
+        //                                 cpu: '1500m'
+        //                             },
+        //                             requests: {
+        //                                 memory: '2Gi',
+        //                                 cpu: '600m'
+        //                             }
+        //                         },
+        //                         port: [
+        //                             {
+        //                                 name: 'smtp',
+        //                                 containerPort: 25,
+        //                                 protocol: 'TCP'
+        //                             },
+        //                             {
+        //                                 name: 'submissions',
+        //                                 containerPort: 465,
+        //                                 protocol: 'TCP'
+        //                             },
+        //                             {
+        //                                 name: 'submission',
+        //                                 containerPort: 587,
+        //                             },
+        //                             {
+        //                                 name: 'imaps',
+        //                                 containerPort: 993,
+        //                                 protocol: 'TCP'
+        //                             },
+        //                         ],
+        //                         volumeMount: [
+        //                             {
+        //                                 name: 'dockerMailServer-storage',
+        //                                 subPath: 'postfix-accounts.cf',
+        //                                 mountPath: '/tmp/docker-mailserver/postfix-accounts.cf',
+        //                                 readOnly: true
+        //                             }
+        //                         ]
+        //                     }
+        //                 ],
+        //                 restartPolicy: 'Always',
+        //                 volume: [
+        //                     {
+        //                         name: 'dockerMailServer-storage',
+        //                         persistentVolumeClaim: {
+        //                             claimName: dockerMailServerVolume.metadata.name
+        //                         }
+        //                     }
+        //                 ]
+        //             }
+        //         }
+        //     }
+        // } )
+        // new Service( this, 'dockerMailserverService', {
+        //     metadata: {
+        //         name: 'opensearch',
+        //         namespace: 'default'
+        //     },
+        //     spec: {
+        //         selector: {
+        //             app: 'opensearch'
+        //         },
+        //         port: [
+        //             {
+        //                 name: 'smtp',
+        //                 port: 25,
+        //                 targetPort: '25'
+        //             },
+        //             {
+        //                 name: 'submissions',
+        //                 port: 465,
+        //                 targetPort: '465'
+        //             },
+        //             {
+        //                 name: 'submission',
+        //                 port: 587,
+        //                 targetPort: '587'
+        //             },
+        //             {
+        //                 name: 'imaps',
+        //                 port: 993,
+        //                 targetPort: '993'
+        //             },
+        //         ]
+        //     }
+        // } )
 
         // OpenSearch Deployment
 
@@ -432,6 +510,23 @@ class Authentication
 
         // Fusion Auth
 
+        // TODO: figure out why this breaks things
+        // const fusionauthVolume =  new PersistentVolumeClaim(this, 'fusionauthPersistentVolumeClaim', {
+        //     metadata: {
+        //         name: 'fusionauth-pvc',
+        //     },
+        //     spec: {
+        //         accessModes: [
+        //             'ReadWriteOnce'
+        //         ],
+        //         resources: {
+        //             requests: {
+        //                 storage: '10Gi',
+        //             },
+        //         },
+        //         storageClassName: 'standard'
+        //     },
+        // })
         const fusionAuthConfigMap = new ConfigMap( this, 'fusionauthConfigMap', {
             metadata: {
                 name: 'fusionauth-config',
@@ -508,8 +603,8 @@ class Authentication
                                 image: 'fusionauth/fusionauth-app:latest',
                                 env: [
                                     { name: 'DATABASE_URL', value: 'jdbc:postgresql://postgres:5432/fusionauth' },
-                                    { name: 'DATABASE_ROOT_USERNAME', value: awsStack.postgresUser },
-                                    { name: 'DATABASE_ROOT_PASSWORD', value: awsStack.postgresPassword },
+                                    { name: 'DATABASE_ROOT_USERNAME', value: POSTGRES_USER.value },
+                                    { name: 'DATABASE_ROOT_PASSWORD', value: POSTGRES_PASSWORD.result },
                                     { name: 'DATABASE_USERNAME', value: DATABASE_USERNAME.value },
                                     { name: 'DATABASE_PASSWORD', value: DATABASE_PASSWORD.result },
                                     { name: 'FUSIONAUTH_APP_MEMORY', value: FUSIONAUTH_APP_MEMORY.value },
@@ -535,6 +630,10 @@ class Authentication
                                         name: 'fusionauth-config',
                                         mountPath: '/usr/local/fusionauth/kickstart/'
                                     }
+                                    //     {
+                                    //         name: 'fusionauth-storage',
+                                    //         mountPath: "/usr/local/fusionauth/config",
+                                    //     }
                                 ]
                             }
                         ],
@@ -545,6 +644,12 @@ class Authentication
                                     name: fusionAuthConfigMap.metadata.name
                                 }
                             }
+                            //     {
+                            //         name: 'fusionauth-storage',
+                            //         persistentVolumeClaim: {
+                            //             claimName: fusionauthVolume.metadata.name,
+                            //         },
+                            //     }
                         ]
                     }
                 }
@@ -572,6 +677,6 @@ class Authentication
 }
 
 const app = new App()
-const aws = new AWS( app, 'aws' )
-new Authentication( app, 'auth', aws ).dependsOn( aws )
+new MyStack( app, 'k8' )
 app.synth()
+
