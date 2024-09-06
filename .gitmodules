@@ -1,3 +1,0 @@
-[submodule ".devcontainer/mattermost"]
-	path = .devcontainer/mattermost
-	url = https://github.com/mattermost/docker.git
