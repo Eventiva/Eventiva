@@ -1,3 +1,12 @@
 <component name="CopyrightManager">
-  <settings default="Functional Source License, Version 1.1, MIT Future License" />
+  <settings default="Fair Core License, Version 1.0, MIT Future License">
+    <module2copyright>
+      <element module="All" copyright="Fair Core License, Version 1.0, MIT Future License" />
+    </module2copyright>
+    <LanguageOptions name="TypeScript">
+      <option name="addBlankBefore" value="true" />
+      <option name="separateBefore" value="true" />
+      <option name="separateAfter" value="true" />
+    </LanguageOptions>
+  </settings>
 </component>

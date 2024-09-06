@@ -1,5 +1,4 @@
-Eventiva Cooperation Commitment
-Version 1.0
+Eventiva Cooperation Commitment Version 1.1
 
 Before filing or continuing to prosecute any legal proceeding or claim
 (other than a Defensive Action) arising from termination of a Covered
@@ -33,10 +32,8 @@ Definitions
 
 'Covered License' means the GNU General Public License, version 2
 (GPLv2), the GNU Lesser General Public License, version 2.1
-(LGPLv2.1), or the GNU Library General Public License, version 2
-(LGPLv2), all as published by the Free Software Foundation or the
-Functional Source License, Version 1.1, MIT Future License
-(FSL-1.1-MIT) as publiched by the Functional Software, Inc.
+(LGPLv2.1), or the GNU Library General Public License, version 2 (LGPLv2), all as published by the Free Software Foundation; or the
+Functional Source License, Version 1.1, MIT Future License (FSL-1.1-MIT), or the Fair Core License, Version 1.0, MIT Future License (FCL-1.0-MIT) as publiched by Fair.io.
 
 'Defensive Action' means a legal proceeding or claim that We bring
 against you in response to a prior proceeding or claim initiated by
