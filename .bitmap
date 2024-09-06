@@ -770,5 +770,33 @@
             }
         }
     },
+    "helpers/handler-health-check": {
+        "name": "helpers/handler-health-check",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/handler-health-check",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/handler-result": {
+        "name": "helpers/handler-result",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/handler-result",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
     "$schema-version": "17.0.0"
 }

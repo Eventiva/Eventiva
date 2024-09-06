@@ -3,16 +3,17 @@
   <component name="JsonSchemaMappingsProjectConfiguration">
     <state>
       <map>
-        <entry key="coderabbit-overrides.v2">
+        <entry key="Bit Dev">
           <value>
             <SchemaInfo>
               <option name="generatedName" value="New Schema" />
-              <option name="name" value="coderabbit-overrides.v2" />
-              <option name="relativePathToSchema" value="https://storage.googleapis.com/coderabbit_public_assets/coderabbit-overrides.v2.json" />
+              <option name="name" value="Bit Dev" />
+              <option name="relativePathToSchema" value="https://static.bit.dev/teambit/schemas/schema.json" />
+              <option name="schemaVersion" value="JSON Schema 7" />
               <option name="patterns">
                 <list>
                   <Item>
-                    <option name="path" value=".coderabbit.yaml" />
+                    <option name="path" value="workspace.jsonc" />
                   </Item>
                 </list>
               </option>

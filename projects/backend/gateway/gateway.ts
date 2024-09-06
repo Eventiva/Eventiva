@@ -1,34 +1,34 @@
 /*
  * Project: Eventiva
  * File: gateway.ts
- * Last Modified: 06/09/2024, 08:12
+ * Last Modified: 06/09/2024, 16:21
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
- *  and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
+ * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
  *
  * Code of Conduct: This project abides by the Contributor Covenant, v2.0. Please interact in ways that contribute to an open,
- *  welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at
- *  https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
+ * welcoming, diverse, inclusive, and healthy community. Our Code of Conduct can be found at
+ * https://github.com/eventiva/eventiva/blob/develop/CODE_OF_CONDUCT.md
  *
  * Copyright (c) 2024 Eventiva Ltd. All Rights Reserved
  * LICENSE: Fair Core License, Version 1.0, MIT Future License (FCL-1.0-MIT)
  *
  * This program has been provided under confidence of the copyright holder and is licensed for copying, distribution and
  * modification under the terms of the Fair Core License, Version 1.0, MIT Future License (FCL-1.0-MIT) published as the License, or
- *  (at your option) any later version of this license. You must not move, change, disable, or circumvent the license key functionality
- *   in the Software; or modify any portion of the Software protected by the license key to: enable access to the protected
- *   functionality without a valid license key; or remove the protected functionality.This program is distributed in the hope that it will
- *   be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
- *   PARTICULAR PURPOSE. See the Fair Core License, Version 1.0, MIT Future License for more details. You should have received a
- *   copy of the Fair Core License, Version 1.0, MIT Future License along with this program. If not, please write to:
- *   licensing@eventiva.co.uk, see the official website https://fcl.dev/ or Review the GitHub repository
- *   https://github.com/keygen-sh/fcl.dev/
+ * (at your option) any later version of this license. You must not move, change, disable, or circumvent the license key functionality
+ * in the Software; or modify any portion of the Software protected by the license key to: enable access to the protected
+ * functionality without a valid license key; or remove the protected functionality.This program is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+ * PARTICULAR PURPOSE. See the Fair Core License, Version 1.0, MIT Future License for more details. You should have received a
+ * copy of the Fair Core License, Version 1.0, MIT Future License along with this program. If not, please write to:
+ * licensing@eventiva.co.uk, see the official website https://fcl.dev/ or Review the GitHub repository
+ * https://github.com/keygen-sh/fcl.dev/
  *
  * This project abides the Eventiva Cooperation Commitment. Adapted from the GPL Cooperation Commitment (GPLCC). Before filing
- *  or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from termination of a Covered
- *  License, we commit to adhering to the Eventiva Cooperation Commitment. You should have received a copy of the Eventiva
- *  Cooperation Commitment along with this program. If not, please write to: licensing@eventiva.co.uk, or see
- *  https://eventiva.co.uk/licensing/ecc
+ * or continuing to prosecute any legal proceeding or claim (other than a Defensive Action) arising from termination of a Covered
+ * License, we commit to adhering to the Eventiva Cooperation Commitment. You should have received a copy of the Eventiva
+ * Cooperation Commitment along with this program. If not, please write to: licensing@eventiva.co.uk, or see
+ * https://eventiva.co.uk/licensing/ecc
  *
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
@@ -37,6 +37,9 @@ import { ApolloGateway, IntrospectAndCompose } from '@apollo/gateway'
 import { ApolloServer } from '@apollo/server'
 import { expressMiddleware } from '@apollo/server/express4'
 import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'
+import { createHealthCheckHandler } from '@eventiva/utilities.helpers.handler-health-check'
+import { createNotFoundHandler } from '@eventiva/utilities.helpers.handler-not-found'
+import { defaultResultHandler } from '@eventiva/utilities.helpers.handler-result'
 import { ApplicationInstance } from '@teambit/application'
 import cors from 'cors'
 import express from 'express'
@@ -75,12 +78,16 @@ export class DefaultGateway
         if ( !context.services.length ) {
             return { port }
         }
+        const {
+            notFoundHandler,
+            healthCheckHandler
+        } = this.makeCommonEntities()
+
         const app = express()
         const httpServer = createServer( app )
         // Filter services that are actually available
         const availableServices = await Promise.all(
             context.services.map( async ( service ) => {
-                console.log( service )
                 const serviceUrl = ( service.url || `http://localhost:${ service.port }` ) + '/graphql'
                 const isAvailable = await this.isServiceAvailable( serviceUrl )
                 if ( isAvailable ) {
@@ -98,23 +105,30 @@ export class DefaultGateway
             return service !== null
         } )
 
-        console.log( subgraphs )
+        if ( subgraphs.length !== 0 ) {
+            // Create Apollo Gateway with the available services
+            const gateway = new ApolloGateway( {
+                supergraphSdl: new IntrospectAndCompose( { subgraphs } )
+            } )
+            const server = new ApolloServer( {
+                gateway,
+                plugins: [ ApolloServerPluginDrainHttpServer( { httpServer } ) ]
+            } )
 
-        if ( subgraphs.length == 0 ) {
-            console.error( 'No services available to build the supergraph. Exiting.' )
-            return { port }
+            await server.start()
+
+            app.use(
+                '/graphql',
+                express.json(),
+                // expressMiddleware accepts the same arguments:
+                // an Apollo Server instance and optional configuration options
+                expressMiddleware( server, {
+                    context: async ( { req } ) => req
+                } )
+            )
+        } else {
+            console.error( 'No services available to build the supergraph. Skipping.' )
         }
-
-        // Create Apollo Gateway with the available services
-        const gateway = new ApolloGateway( {
-            supergraphSdl: new IntrospectAndCompose( { subgraphs } )
-        } )
-        const server = new ApolloServer( {
-            gateway,
-            plugins: [ ApolloServerPluginDrainHttpServer( { httpServer } ) ]
-        } )
-
-        await server.start()
 
         app.use(
             cors<cors.CorsRequest>( {
@@ -125,16 +139,6 @@ export class DefaultGateway
                     callback( null, true )
                 },
                 credentials: true
-            } )
-        )
-
-        app.use(
-            '/graphql',
-            express.json(),
-            // expressMiddleware accepts the same arguments:
-            // an Apollo Server instance and optional configuration options
-            expressMiddleware( server, {
-                context: async ( { req } ) => req
             } )
         )
 
@@ -152,48 +156,31 @@ export class DefaultGateway
                     res
                 ) => {
                     if ( proxyRes.statusCode === 404 ) {
-                        res.status( 404 )
+                        res.status( 502 )
                         res.json( {
-                            message: `${ appName } reported no resource found`
+                            message: `${ appName }: resource not found.`,
+                            original_response: {
+                                status: proxyRes.statusCode,
+                                message: proxyRes.statusMessage
+                            }
                         } )
                     }
                 }
             } ) )
         } )
 
-        app.get(
-            '/',
-            (
-                _,
-                res
-            ) => {
-                res.status( 200 )
-                return res.json( {
-                    message: 'ok'
-                } )
-            }
-        )
+        app.get( '/', healthCheckHandler )
 
-        app.get(
-            '*',
-            (
-                _,
-                res
-            ) => {
-                res.status( 404 )
-                return res.json( {
-                    message: 'no resource found on gateway'
-                } )
-            }
-        )
+        app.get( '/health-check', healthCheckHandler )
+
+        app.use( notFoundHandler )
 
         await new Promise<void>( ( resolve ) => httpServer.listen( { port }, resolve ) )
         console.log( `🚀 API Gateway server ready at: http://localhost:${ port }` )
 
         return {
-            // url: `http://localhost:${port}`,
+            url: `http://localhost:${ port }`,
             port,
-            // @ts-ignore until releasing bit
             stop: async () => {
                 httpServer.closeAllConnections()
                 httpServer.close()
@@ -219,4 +206,19 @@ export class DefaultGateway
             return false
         }
     }
+
+    private makeCommonEntities () {
+        const errorHandler = defaultResultHandler
+        // const loggingMiddleware = createLoggingMiddleware({ rootLogger, config });
+        // TODO: Implement Logging
+        const healthCheckHandler = createHealthCheckHandler()
+        const notFoundHandler = createNotFoundHandler( { errorHandler } )
+        return {
+            errorHandler,
+            notFoundHandler,
+            healthCheckHandler
+            // loggingMiddleware,
+            // TODO: Implement Logging
+        }
+    };
 }
