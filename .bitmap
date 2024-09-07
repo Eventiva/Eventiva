@@ -798,5 +798,103 @@
             }
         }
     },
+    "helpers/endpoint": {
+        "name": "helpers/endpoint",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/endpoint",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/endpoint-factory": {
+        "name": "helpers/endpoint-factory",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/endpoint-factory",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/input-source": {
+        "name": "helpers/input-source",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/input-source",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/middleware": {
+        "name": "helpers/middleware",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/middleware",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/schema-walker": {
+        "name": "helpers/schema-walker",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/schema-walker",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/zod/deep-checks": {
+        "name": "helpers/zod/deep-checks",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/zod/deep-checks",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
+    "helpers/zod/upload-schema": {
+        "name": "helpers/zod/upload-schema",
+        "scope": "",
+        "version": "",
+        "defaultScope": "eventiva.utilities",
+        "mainFile": "index.ts",
+        "rootDir": "projects/utilities/helpers/zod/upload-schema",
+        "config": {
+            "eventiva.envs/node@5eb3e4234633944b5618958f3d2623d251237102": {},
+            "teambit.envs/envs": {
+                "env": "eventiva.envs/node"
+            }
+        }
+    },
     "$schema-version": "17.0.0"
 }
