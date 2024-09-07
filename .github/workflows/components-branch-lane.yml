@@ -70,7 +70,7 @@ jobs:
           npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
       - name: Initialize Bit
-        uses: bit-tasks/init@v1 # v1
+        uses: bit-tasks/init@v2 # v1
 
       - name: Bit Branch Lane
         uses: bit-tasks/branch-lane@v1 # v1
