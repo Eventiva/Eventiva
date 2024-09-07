@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: result-handler.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 06/09/2024, 16:38
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md

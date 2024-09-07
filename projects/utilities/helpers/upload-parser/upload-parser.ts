@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: upload-parser.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -50,17 +50,16 @@ export type UploadOptions = Pick<
     | 'limits'
 > & {
     /**
-     * @desc The error to throw when the file exceeds the configured fileSize limit (handled by errorHandler).
+     * @description The error to throw when the file exceeds the configured fileSize limit (handled by errorHandler).
      * @see limits
-     * @override limitHandler
      * @example createHttpError(413, "The file is too large")
-     * */
+     */
     limitError?: Error;
     /**
-     * @desc A handler to execute before uploading — it can be used for restrictions by throwing an error.
+     * @description A handler to execute before uploading — it can be used for restrictions by throwing an error.
      * @default undefined
      * @example ({ request }) => { throw createHttpError(403, "Not authorized"); }
-     * */
+     */
     beforeUpload?: BeforeUpload;
 };
 

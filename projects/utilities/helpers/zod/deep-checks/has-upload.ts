@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: handler-health-check.spec.ts
- * Last Modified: 06/09/2024, 13:35
+ * File: has-upload.ts
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -33,8 +33,13 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-// import { handlerHealthCheck } from './handler-health-check.js';
 
-it.skip( 'renders with the correct text', () => {
-    // expect(handlerHealthCheck()).toEqual('hello world');
-} )
+import { IOSchema } from '@eventiva/utilities.helpers.zod.io-schema'
+import { metaSymbol } from '@eventiva/utilities.helpers.zod.metadata'
+import { uploadBrand } from '@eventiva/utilities.helpers.zod.upload-schema'
+import { hasNestedSchema } from './hasNestedSchema.js'
+
+export const hasUpload = ( subject: IOSchema ) =>
+    hasNestedSchema( subject, {
+        condition: ( schema ) => schema._def[ metaSymbol ]?.brand === uploadBrand
+    } )

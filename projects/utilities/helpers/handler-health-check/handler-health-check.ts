@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: handler-health-check.ts
- * Last Modified: 06/09/2024, 13:35
+ * Last Modified: 06/09/2024, 13:12
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md

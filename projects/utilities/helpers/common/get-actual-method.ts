@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: index.ts
- * Last Modified: 06/09/2024, 13:35
+ * File: get-actual-method.ts
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -33,4 +33,8 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-export * from './handler-health-check.js'
+import { type AuxMethod, Method } from '@eventiva/utilities.helpers.http-methods'
+import { Request } from 'express'
+
+export const getActualMethod = ( request: Request ) =>
+    request.method.toLowerCase() as Method | AuxMethod

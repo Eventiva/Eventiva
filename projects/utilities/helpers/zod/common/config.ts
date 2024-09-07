@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: config.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -38,13 +38,33 @@ import type { Method } from '@eventiva/utilities.helpers.http-methods'
 import { Request } from 'express'
 import type { AbstractEndpoint } from './abstract-endpoint.js'
 
+export interface TRequest
+    extends Request {
+    files?: any;
+}
+
+export type InputSource = keyof Pick<
+    TRequest,
+    'query' | 'body' | 'files' | 'params' | 'headers'
+>;
+export type InputSources = Record<Method, InputSource[]>;
+
+export const defaultInputSources: InputSources = {
+    get: [ 'query', 'params' ],
+    post: [ 'body', 'params', 'files' ],
+    put: [ 'body', 'params' ],
+    patch: [ 'body', 'params' ],
+    delete: [ 'query', 'params' ]
+}
+export const fallbackInputSource: InputSource[] = [ 'body', 'query', 'params' ]
+
 export interface CommonConfig<TAG extends string = string> {
     /**
      * @desc Enables cross-origin resource sharing.
      * @link https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
      * @desc You can override the default CORS headers by setting up a provider function here.
      */
-    cors?: HeadersProvider;
+    cors?: boolean | HeadersProvider;
     /**
      * @desc The ResultHandler to use for handling routing, parsing and upload errors
      * @default defaultResultHandler
@@ -65,6 +85,7 @@ export interface CommonConfig<TAG extends string = string> {
     tags?: TagsConfig<TAG>;
 }
 
+type Headers = Record<string, string>;
 type HeadersProvider = ( params: {
     /** @desc The default headers to be overridden. */
     defaultHeaders: Headers;
@@ -72,16 +93,6 @@ type HeadersProvider = ( params: {
     endpoint: AbstractEndpoint;
 } ) => Headers | Promise<Headers>;
 
-interface TRequest
-    extends Request {
-    files?: any;
-}
-
-export type InputSource = keyof Pick<
-    TRequest,
-    'query' | 'body' | 'files' | 'params' | 'headers'
->;
-export type InputSources = Record<Method, InputSource[]>;
 export type TagsConfig<TAG extends string> = Record<
     TAG,
     string | { description: string; url?: string }

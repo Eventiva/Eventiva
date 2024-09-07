@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: logical-container.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -52,14 +52,21 @@ const isLogicalAnd = ( subject: unknown ): subject is LogicalAnd<unknown> =>
     // @ts-ignore
     isObject( subject ) && 'and' in subject
 
-/** @desc combines several LogicalAnds into a one */
+/**
+ * @param subject
+ * @description combines several LogicalAnds into a one
+ */
 const flattenAnds = <T> ( subject: ( T | LogicalAnd<T> )[] ): LogicalAnd<T> => ( {
     and: chain( ( item ) => ( isLogicalAnd( item )
         ? item.and
         : [ item ] ), subject )
 } )
 
-/** @desc creates a LogicalContainer out of another one */
+/**
+ * @param container
+ * @param fn
+ * @description creates a LogicalContainer out of another one
+ */
 export const mapLogicalContainer = <T, S> (
     container: LogicalContainer<T>,
     fn: ( subject: T ) => S
@@ -85,7 +92,10 @@ export const mapLogicalContainer = <T, S> (
     return fn( container )
 }
 
-/** @desc converts LogicalAnd into LogicalOr */
+/**
+ * @param subject
+ * @description converts LogicalAnd into LogicalOr
+ */
 export const andToOr = <T> (
     subject: LogicalAnd<T | LogicalOr<T>>
 ): LogicalOr<T | LogicalAnd<T>> =>
@@ -105,7 +115,11 @@ export const andToOr = <T> (
         { or: [] }
     )
 
-/** @desc reducer, combines two LogicalContainers */
+/**
+ * @param left
+ * @param right
+ * @description reducer, combines two LogicalContainers
+ */
 export const combineContainers = <T> (
     left: LogicalContainer<T>,
     right: LogicalContainer<T>

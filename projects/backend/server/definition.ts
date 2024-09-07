@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: definition.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 06/09/2024, 23:54
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -35,24 +35,6 @@
 
 import { SlotRegistry } from '@bitdev/harmony.harmony'
 import { type BackendContext, DeployOptions, Server } from './server-types.js'
-
-export type NextFunction = () => void;
-
-/**
- * generic middleware type.
- * TODO: improve the abstract type for middlewares
- */
-export type Middleware = (
-    req: any,
-    res: any,
-    next: NextFunction
-) => void;
-export type ErrorMiddleware = (
-    err: any,
-    req: any,
-    res: any,
-    next: NextFunction
-) => void;
 
 export type BackendServerDefinition = {
     /**

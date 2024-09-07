@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: rest.node.runtime.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -38,14 +38,14 @@ import { DatabaseNode } from '@eventiva/utilities.database'
 import { moveRaw } from '@eventiva/utilities.helpers.common'
 import { createNotFoundHandler } from '@eventiva/utilities.helpers.handler-not-found'
 import { createParserFailureHandler } from '@eventiva/utilities.helpers.handler-parser-failed'
+import { defaultResultHandler } from '@eventiva/utilities.helpers.handler-result'
+import { ExpressMiddleware } from '@eventiva/utilities.helpers.middleware'
 import type { Parsers } from '@eventiva/utilities.helpers.parsers'
 import { peerLoader } from '@eventiva/utilities.helpers.peer-loader'
 import { createUploadParsers } from '@eventiva/utilities.helpers.upload-parser'
 import type compression from 'compression'
 import express from 'express'
 import type { RestConfig } from './rest-config.js'
-import { defaultResultHandler } from './result-handler.js'
-
 
 export class RestNode {
     static dependencies = [
@@ -89,11 +89,11 @@ export class RestNode {
         if ( this.config.server.compression ) {
             const compressor = await peerLoader<typeof compression>( 'compression' )
             middlewares.push(
-                compressor(
+                new ExpressMiddleware( compressor(
                     typeof this.config.server.compression === 'object'
                         ? this.config.server.compression
                         : undefined
-                )
+                ) )
             )
         }
 
@@ -119,8 +119,8 @@ export class RestNode {
         const errorHandler = config.errorHandler || defaultResultHandler
         // const loggingMiddleware = createLoggingMiddleware({ rootLogger, config });
         // TODO: Implement Logging
-        const notFoundHandler = createNotFoundHandler( { errorHandler } )
-        const parserFailureHandler = createParserFailureHandler( { errorHandler } )
+        const notFoundHandler = new ExpressMiddleware( createNotFoundHandler( { errorHandler } ) )
+        const parserFailureHandler = { execute: createParserFailureHandler( { errorHandler } ) }
         return {
             errorHandler,
             notFoundHandler,

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: io-schema.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:56
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -33,13 +33,31 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 import type { FlatObject } from '@eventiva/utilities.helpers.common'
+import { Security } from '@eventiva/utilities.helpers.http-security'
+import { LogicalContainer } from '@eventiva/utilities.helpers.logical-container'
+import { copyMeta } from '@eventiva/utilities.helpers.zod.metadata'
 import type { RawSchema } from '@eventiva/utilities.helpers.zod.raw-schema'
+import { Request, Response } from 'express'
 import { z } from 'zod'
 
+export abstract class AbstractMiddleware {
+    public abstract getSecurity (): LogicalContainer<Security> | undefined;
+
+    public abstract getSchema (): IOSchema<'strip'>;
+
+    public abstract execute ( params: {
+        input: unknown;
+        options: FlatObject;
+        request: Request;
+        response: Response;
+        // logger: ActualLogger;
+    } ): Promise<FlatObject>;
+}
+
 /**
- * @desc The type allowed on the top level of Middlewares and Endpoints
+ * @description The type allowed on the top level of Middlewares and Endpoints
  * @param U — only "strip" is allowed for Middlewares due to intersection issue (Zod) #600
- * */
+ */
 export type IOSchema<U extends z.UnknownKeysParam = z.UnknownKeysParam> =
     | BaseObject<U> // z.object()
     | EffectsChain<U> // z.object().refine(), z.object().transform(), z.object().preprocess()
@@ -60,8 +78,28 @@ type EffectsChain<U extends z.UnknownKeysParam> = ObjectBasedEffect<
     BaseObject<U> | EffectsChain<U>
 >;
 
-/** @desc An error related to the input and output schemas declaration */
-export class IOSchemaError
-    extends Error {
-    public override name = 'IOSchemaError'
+
+export const getFinalEndpointInputSchema = <
+    MIN extends IOSchema<'strip'>,
+    IN extends IOSchema,
+> (
+    middlewares: AbstractMiddleware[],
+    input: IN
+): z.ZodIntersection<MIN, IN> => {
+    const allSchemas = middlewares
+        .map( ( mw ) => mw.getSchema() as IOSchema )
+        .concat( input )
+
+    const finalSchema = allSchemas.reduce( (
+        acc,
+        schema
+    ) => acc.and( schema ) )
+
+    return allSchemas.reduce(
+        (
+            acc,
+            schema
+        ) => copyMeta( schema, acc ),
+        finalSchema
+    ) as z.ZodIntersection<MIN, IN>
 }

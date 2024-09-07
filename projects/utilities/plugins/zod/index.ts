@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: index.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:56
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -35,16 +35,16 @@
 
 import { FlatObject } from '@eventiva/utilities.helpers.common'
 import { Intact, Remap } from '@eventiva/utilities.helpers.mapping-helpers'
-import { Metadata, metaSymbol } from '@eventiva/utilities.helpers.zod.metadata'
+import { cloneSchema, Metadata, metaSymbol } from '@eventiva/utilities.helpers.zod.metadata'
 /**
- * @fileoverview Zod Runtime Plugin
+ * @file Zod Runtime Plugin
  * @see https://github.com/colinhacks/zod/blob/90efe7fa6135119224412c7081bd12ef0bccef26/plugin/effect/src/index.ts#L21-L31
- * @desc This code modifies and extends zod's functionality immediately when importing express-zod-api
- * @desc Enables .example() on all schemas (ZodType)
- * @desc Enables .label() on ZodDefault
- * @desc Enables .remap() on ZodObject
- * @desc Stores the argument supplied to .brand() on all schema (runtime distinguishable branded types)
- * */
+ * @description This code modifies and extends zod's functionality immediately when importing express-zod-api
+ * @description Enables .example() on all schemas (ZodType)
+ * @description Enables .label() on ZodDefault
+ * @description Enables .remap() on ZodObject
+ * @description Stores the argument supplied to .brand() on all schema (runtime distinguishable branded types)
+ */
 import { clone, fromPairs, map, pair, pipe, toPairs } from 'ramda'
 import { z } from 'zod'
 
@@ -54,12 +54,12 @@ declare module 'zod' {
     }
 
     interface ZodType {
-        /** @desc Add an example value (before any transformations, can be called multiple times) */
+        /** @description Add an example value (before any transformations, can be called multiple times) */
         example ( example: this['_input'] ): this;
     }
 
     interface ZodDefault<T extends z.ZodTypeAny> {
-        /** @desc Change the default value in the generated Documentation to a label */
+        /** @description Change the default value in the generated Documentation to a label */
         label ( label: string ): this;
     }
 
@@ -167,12 +167,4 @@ if ( !( metaSymbol in globalThis ) ) {
             }
         }
     )
-}
-
-/** @link https://github.com/colinhacks/zod/blob/3e4f71e857e75da722bd7e735b6d657a70682df2/src/types.ts#L485 */
-export const cloneSchema = <T extends z.ZodType> ( schema: T ) => {
-    const copy = schema.describe( schema.description as string )
-    copy._def[ metaSymbol ] = // clone for deep copy, issue #827
-        clone( copy._def[ metaSymbol ] ) || ( { examples: [] } satisfies Metadata )
-    return copy
 }

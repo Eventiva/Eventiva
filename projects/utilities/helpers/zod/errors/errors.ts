@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: errors.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 06/09/2024, 22:32
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -33,9 +33,14 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { IOSchemaError } from '@eventiva/utilities.helpers.zod.io-schema'
 import { isHttpError } from 'http-errors'
 import z from 'zod'
+
+/** @desc An error related to the input and output schemas declaration */
+export class IOSchemaError
+    extends Error {
+    public override name = 'IOSchemaError'
+}
 
 export const getMessageFromError = ( error: Error ): string => {
     if ( error instanceof z.ZodError ) {

@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: raw-schema.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -38,7 +38,10 @@ import { z } from 'zod'
 
 export const rawBrand = Symbol( 'Raw' )
 
-/** Shorthand for z.object({ raw: ez.file("buffer") }) */
+/**
+ * Shorthand for z.object({ raw: ez.file("buffer") })
+ * @param extra
+ */
 export function raw<S extends z.ZodRawShape> ( extra: S = {} as S ) {
     return z.object( { raw: file( 'buffer' ) } ).extend( extra ).brand( rawBrand as symbol )
 }

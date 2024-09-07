@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: rest-config.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -43,48 +43,46 @@ import { ListenOptions } from 'node:net'
 // use this type for your aspect config.
 export interface RestConfig<TAG extends string = string>
     extends CommonConfig<TAG> {
-    /** @desc Server configuration. */
+    /** @description Server configuration. */
     server: {
-        /** @desc Port, UNIX socket or custom options. */
+        /** @description Port, UNIX socket or custom options. */
         listen: number | string | ListenOptions;
         /**
-         * @desc Custom JSON parser.
+         * @description Custom JSON parser.
          * @default express.json()
          * @link https://expressjs.com/en/4x/api.html#express.json
-         * */
+         */
         jsonParser?: RequestHandler;
         /**
-         * @desc Enable or configure uploads handling.
+         * @description Enable or configure uploads handling.
          * @default undefined
-         * @requires express-fileupload
-         * */
+         */
         upload?: boolean | UploadOptions;
         /**
-         * @desc Enable or configure response compression.
+         * @description Enable or configure response compression.
          * @default undefined
-         * @requires compression
          */
         compression?: boolean | CompressionOptions;
         /**
-         * @desc Custom raw parser (assigns Buffer to request body)
+         * @description Custom raw parser (assigns Buffer to request body)
          * @default express.raw()
          * @link https://expressjs.com/en/4x/api.html#express.raw
-         * */
+         */
         rawParser?: RequestHandler;
         /**
-         * @desc A code to execute before processing the Routing of your API (and before parsing).
-         * @desc This can be a good place for express middlewares establishing their own routes.
-         * @desc It can help to avoid making a DIY solution based on the attachRouting() approach.
+         * @description A code to execute before processing the Routing of your API (and before parsing).
+         * @description This can be a good place for express middlewares establishing their own routes.
+         * @description It can help to avoid making a DIY solution based on the attachRouting() approach.
          * @default undefined
          * @example ({ app }) => { app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); }
-         * */
+         */
         beforeRouting?: BeforeRouting;
     };
-    /** @desc Enables HTTPS server as well. */
+    /** @description Enables HTTPS server as well. */
     https?: {
-        /** @desc At least "cert" and "key" options required. */
+        /** @description At least "cert" and "key" options required. */
         options: ServerOptions;
-        /** @desc Port, UNIX socket or custom options. */
+        /** @description Port, UNIX socket or custom options. */
         listen: number | string | ListenOptions;
     };
 }

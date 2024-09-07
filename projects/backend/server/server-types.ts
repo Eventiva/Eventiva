@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: server-types.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -35,9 +35,15 @@
 
 import type { Parsers } from '@eventiva/utilities.helpers.parsers'
 import type { Routing } from '@eventiva/utilities.helpers.routing'
+import { AbstractMiddleware } from '@eventiva/utilities.helpers.zod.io-schema'
 import { ApplicationInstance } from '@teambit/application'
-import { type ErrorMiddleware, Middleware } from './definition.js'
+import { ErrorRequestHandler } from 'express'
 import { GqlSchema } from './gql-schema.js'
+
+
+export interface ErrorMiddleware {
+    execute: ErrorRequestHandler
+}
 
 
 /**
@@ -100,12 +106,12 @@ export type BackendContext = {
     /**
      * middlewares for the service.
      */
-    middlewares?: Array<Middleware | ErrorMiddleware>,
+    middlewares?: Array<AbstractMiddleware | ErrorMiddleware>,
 
     /**
      * middlewares for the service.
      */
-    middlewaresPostRouting?: Array<Middleware | ErrorMiddleware>,
+    middlewaresPostRouting?: Array<AbstractMiddleware | ErrorMiddleware>,
 };
 
 /**

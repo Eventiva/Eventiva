@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: handler-result.ts
- * Last Modified: 06/09/2024, 13:35
+ * Last Modified: 07/09/2024, 03:56
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -68,11 +68,11 @@ export class ResultHandler<
     readonly #negative: NEG | LazyResult<NEG>
 
     constructor ( params: {
-        /** @desc A description of the API response in case of success (schema, status code, MIME type) */
+        /** @description A description of the API response in case of success (schema, status code, MIME type) */
         positive: POS | LazyResult<POS, [ IOSchema ]>;
-        /** @desc A description of the API response in case of error (schema, status code, MIME type) */
+        /** @description A description of the API response in case of error (schema, status code, MIME type) */
         negative: NEG | LazyResult<NEG>;
-        /** @desc The actual implementation to transmit the response in any case */
+        /** @description The actual implementation to transmit the response in any case */
         handler: Handler<z.output<ResultSchema<POS> | ResultSchema<NEG>>>;
     } ) {
         super( params.handler )
@@ -145,7 +145,15 @@ export const defaultResultHandler = new ResultHandler( {
     }
 } )
 
-/** @throws ResultHandlerError when Result is an empty array */
+/**
+ * @param subject
+ * @param features
+ * @param features.variant
+ * @param features.arguments
+ * @param features.statusCodes
+ * @param features.mimeTypes
+ * @throws ResultHandlerError when Result is an empty array
+ */
 export const normalize = <A extends unknown[]> (
     subject: Result | LazyResult<Result, A>,
     features: {

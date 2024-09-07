@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: server.ts
- * Last Modified: 06/09/2024, 16:23
+ * Last Modified: 07/09/2024, 03:55
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -119,7 +119,7 @@ export class DefaultServer
         } ) )
 
         context.middlewares?.forEach( ( middleware ) => {
-            app.use( middleware )
+            app.use( middleware.execute )
         } )
 
         app.use(
@@ -146,7 +146,7 @@ export class DefaultServer
         }
 
         context.middlewaresPostRouting?.forEach( ( middleware ) => {
-            app.use( middleware )
+            app.use( middleware.execute )
         } )
 
         await new Promise<void>( ( resolve ) => httpServer.listen( { port }, resolve ) )

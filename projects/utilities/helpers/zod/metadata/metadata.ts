@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
  * File: metadata.ts
- * Last Modified: 06/09/2024, 16:21
+ * Last Modified: 07/09/2024, 04:00
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -33,6 +33,10 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
+import { combinations } from '@eventiva/utilities.helpers.common'
+import { clone, mergeDeepRight } from 'ramda'
+import { z } from 'zod'
+
 export interface Metadata {
     examples: unknown[];
     /** @override ZodDefault::_def.defaultValue() in depictDefault */
@@ -40,4 +44,32 @@ export interface Metadata {
     brand?: string | number | symbol;
 }
 
-export const metaSymbol = Symbol.for( 'encircle' )
+export const metaSymbol = Symbol.for( 'eventiva' )
+
+export const copyMeta = <A extends z.ZodTypeAny, B extends z.ZodTypeAny> (
+    src: A,
+    dest: B
+): B => {
+    if ( !( metaSymbol in src._def ) ) {
+        return dest
+    }
+    const result = cloneSchema( dest )
+    result._def[ metaSymbol ].examples = combinations(
+        result._def[ metaSymbol ].examples,
+        src._def[ metaSymbol ].examples,
+        ( [ destExample, srcExample ] ) =>
+            typeof destExample === 'object' && typeof srcExample === 'object'
+                ? mergeDeepRight( { ...destExample }, { ...srcExample } )
+                : srcExample // not supposed to be called on non-object schemas
+    )
+    return result
+}
+
+export const cloneSchema = <T extends z.ZodType> ( schema: T ) => {
+    const copy = schema.describe( schema.description as string )
+
+    const def = copy._def as Record<symbol, any>
+    def[ metaSymbol ] = clone( def[ metaSymbol ] ) || ( { examples: [] } as Metadata )
+
+    return copy
+}

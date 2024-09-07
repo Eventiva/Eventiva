@@ -1,7 +1,7 @@
 /*
  * Project: Eventiva
- * File: handler-health-check.ts
- * Last Modified: 06/09/2024, 13:35
+ * File: on-some-union.ts
+ * Last Modified: 06/09/2024, 21:48
  *
  * Contributing: Please read through our contributing guidelines. Included are directions for opening issues, coding standards,
  * and notes on development. These can be found at https://github.com/eventiva/eventiva/blob/develop/CONTRIBUTING.md
@@ -33,16 +33,12 @@
  * DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE
  */
 
-import { Request, Response } from 'express'
+import { z } from 'zod'
+import { Check } from './checks.js'
 
-export const createHealthCheckHandler =
-    () =>
-        async (
-            request: Request,
-            response: Response
-        ) => {
-            response.status( 200 )
-            return response.json( {
-                message: 'ok'
-            } )
-        }
+export const onSomeUnion: Check = (
+    schema:
+        | z.ZodUnion<z.ZodUnionOptions>
+        | z.ZodDiscriminatedUnion<string, z.ZodDiscriminatedUnionOption<string>[]>,
+    { next }
+) => schema.options.some( next )
