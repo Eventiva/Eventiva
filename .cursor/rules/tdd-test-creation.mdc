@@ -1,0 +1,35 @@
+---
+description: TDD policy – builders do not write tests; test-creator agent (schema only); test-runner agent and feedback loop
+alwaysApply: true
+---
+
+# TDD and Test Creation (Eventiva)
+
+When implementing **features or components** in Eventiva, follow this TDD policy. Do not create or modify tests in the same work that implements the feature.
+
+## Rules
+
+1. **Building agent (you when implementing):**
+   - Implement the feature/component only.
+   - Do **not** add or modify tests for that work.
+   - You may write or update **type definitions (schema)** that describe the public API (e.g. `.d.ts`-style or Effect Schema).
+
+2. **Test-creator agent** (separate process/agent):
+   - Creates **all** tests.
+   - Receives **only** the function/API schema (input and output types; no runtime code).
+   - Has no context or workspace access to the implementation.
+
+3. **Test-runner agent** (separate process/agent):
+   - Runs tests against the code.
+   - If tests fail → create a **Linear bug** for implementers (schema + broad explanation only).
+   - If coverage &lt; 100% or unexpected result → create a **Linear task** for the test creator (schema + broad explanation only).
+   - **Never delete existing tests.** Fix code or improve tests; do not remove tests.
+
+## Golden rule
+
+**No existing test should ever be deleted.** If the code fails, fix the code. If coverage or behaviour is insufficient, improve the tests.
+
+## Reference
+
+- Full policy: `docs/learnings/tdd-and-test-creation.md`
+- Plan: Eventiva Learnings and Rebuild plan, "TDD and test creation" and Part D (CI for TDD loop).

@@ -1,0 +1,25 @@
+---
+description: Run GitButler update branches after generating or modifying code
+alwaysApply: true
+---
+
+# GitButler Update Branches
+
+After you **generate code** or **modify files**, run the GitButler update branches MCP tool so branch state stays in sync with the changes.
+
+## When to run
+
+- You created, edited, or deleted source/config/docs files.
+- You finished a set of related edits (e.g. feature, fix, refactor).
+
+## How to run
+
+Call the **`gitbutler_update_branches`** MCP tool (server: `user-gitbutler`) with:
+
+| Parameter | Value |
+|-----------|--------|
+| `fullPrompt` | The exact user prompt that led to these changes |
+| `changesSummary` | Short bullet list of what was changed and why |
+| `currentWorkingDirectory` | Full path to the Git project root (e.g. workspace path) |
+
+Run it once per logical change set, after your edits are done.
