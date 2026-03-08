@@ -161,3 +161,23 @@ Create these initiatives (e.g. via `mcp_linear_save_initiative`):
 8. Further extensions (Accounting, Calendar, etc.) per plan table.
 
 Use this draft with Linear MCP when available, or create issues manually from each section. Link to `docs/learnings/` and the plan where indicated.
+
+---
+
+## Database and Entity Abstraction (Plan: database_and_entity_abstraction)
+
+**Context:** Plan "Database-Backed Entities and Core Entity Abstraction". Initiatives: Extensions and API Mesh, Core.
+
+### Implemented in codebase
+
+- Database service interface in core; in-memory Database layer; CRUD handlers using Database; schema encryption (Schema.encryptedString); base schema fields and status enum; createEntity; database-pg extension (package, layer, impl, table builder); Contact migrated to createEntity + encrypted email; platform provides Database layer; entity method extension registry and runWithExtensions integrated; EmbeddingService interface and no-op/custom layer.
+
+### Deferred (track separately)
+
+- **Title:** Reporting / generateRelations (deferred)
+- **Description:** Dynamic report generation from arbitrary entry points (e.g. generateRelations from common-crm). Deferred to a dedicated plan; do not implement as part of Database and Entity Abstraction.
+- **Implementation notes:** See common-crm reference; plan section "What to defer".
+- **Dependencies:** Entity abstraction (done).
+- **Context:** Plan "Database and Entity Abstraction" section 6; docs/learnings/architecture.md.
+- **TDD:** Schema first when implemented; test-creator agent only.
+

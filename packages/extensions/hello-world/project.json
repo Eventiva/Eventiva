@@ -1,0 +1,19 @@
+{
+  "name": "extensions-hello-world",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/extensions/hello-world/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/extensions/hello-world",
+        "main": "packages/extensions/hello-world/src/index.ts",
+        "tsConfig": "packages/extensions/hello-world/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

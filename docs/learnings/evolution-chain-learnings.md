@@ -32,6 +32,7 @@
 
 - Rebuild Eventiva on **Effect** from the start; use common-crm patterns (Layer, Schema, transform manager, @effect/platform) and avoid redoing the migration later.
 - Plan Part D.B: recreate and **improve** the transform concept from common-crm on Effect (no Bit); use for config- or code-defined models and event-triggered transforms.
+- **Typesafe deployments:** Use strict typing throughout; no `any`. For entity/CRUD and table abstractions, see common-crm `projects/entities/abstraction` (Effect Schema, `BaseClass`/`AllFields`, `ValidateColumns`, type-level required/forbidden fields).
 
 ## References
 

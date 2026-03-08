@@ -24,6 +24,10 @@
 - **i18n** – Include in every iteration; not optional.
 - **Feature flags** – Include in every iteration; not optional.
 
+## Type safety
+
+- **No `any`.** Use Effect Schema and generics for type-safe boundaries (RPC payload/success, entity handlers, config). See `docs/learnings/conventions.md` (Type safety) and common-crm `projects/entities/abstraction` for patterns.
+
 ## References
 
 - Plan: Key constraints; Part C (Cluster, Rebuild by area); Part D (Execution).

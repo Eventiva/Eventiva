@@ -1,0 +1,28 @@
+{
+  "name": "platforms-default",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/platforms/default/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/platforms/default",
+        "main": "packages/platforms/default/src/index.ts",
+        "tsConfig": "packages/platforms/default/tsconfig.lib.json",
+        "assets": []
+      }
+    },
+    "run": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "pnpm exec tsx --tsconfig packages/platforms/default/tsconfig.run.json packages/platforms/default/src/index.ts",
+        "cwd": "{workspaceRoot}"
+      },
+      "configurations": {},
+      "dependsOn": ["build"]
+    }
+  }
+}
