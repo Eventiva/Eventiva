@@ -6,9 +6,9 @@
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
-    "@eventiva/core": "workspace:*",
-    "@eventiva/extensions.hello-world": "workspace:*",
-    "@eventiva/extensions.contact": "workspace:*",
+    "@eventiva/core": "*",
+    "@eventiva/extensions.hello-world": "*",
+    "@eventiva/extensions.contact": "*",
     "@effect/cluster": "^0.56.0",
     "effect": "^3.19.17"
   }

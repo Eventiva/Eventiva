@@ -36,6 +36,11 @@
 - Naming: keep `*.runtime.ts`, `index.ts` as entry where appropriate; drop `*.aspect.ts` in favour of Effect/Nx project names.
 - Preserve component boundaries as Nx projects or packages so "include/exclude" is still config- or list-driven.
 
+## Monorepo / Nx
+
+- **Workspace dependencies:** Use `*` for internal workspace packages in `package.json` (e.g. `"@eventiva/core": "*"`), matching the [Nx TypeScript packages tutorial](https://nx.dev/docs/getting-started/tutorials/typescript-packages-tutorial). Do not use `workspace:*`.
+- **Project relationships:** Nx is the source of truth for which project depends on which. Nx infers the project graph from imports and config; build order, caching, and affected commands follow Nx's graph. The package manager (pnpm) only installs and links; it does not define task or build relationships.
+
 ## Type safety
 
 - **Never use `any` types.** Use proper generics, Effect Schema types, and branded types so deployments and RPC boundaries stay type-safe. If the type system forces a cast, prefer `unknown` and a type guard or a narrow generic; document the escape hatch. Exception: Effect Schema’s `Schema<T, Encoded, Context>` may use `any` for Encoded/Context when they are not relevant (e.g. `Schema<Id, any, any>`); avoid `any` in runtime values and public API boundaries.

@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
-    "@eventiva/core": "workspace:*",
+    "@eventiva/core": "*",
     "@effect/cluster": "^0.56.0",
     "@effect/rpc": "^0.73.1",
     "@effect/workflow": "^0.16.0",
