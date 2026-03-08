@@ -194,7 +194,6 @@ out
 
 # Nuxt.js build / generate output
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -242,7 +241,6 @@ dist
 # See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # compiled output
-dist
 tmp
 out-tsc
 
@@ -288,7 +286,6 @@ Thumbs.db
 node_modules/
 .expo/
 .yarn/
-dist/
 npm-debug.*
 *.jks
 *.p8

@@ -1,0 +1,35 @@
+---
+description: Nx workspace exploration, tasks, and scaffolding. Use when working with projects, targets, or generating code in the monorepo.
+alwaysApply: false
+globs: "**/project.json"
+---
+
+# Nx workspace guidance
+
+AGENTS.md contains the main Nx guidelines (use Nx for tasks, prefix with pnpm, use Nx MCP). This rule adds patterns for exploration and scaffolding.
+
+## Exploration
+
+- List projects: `pnpm nx show projects` (add `--json` for machine-readable).
+- Project config: `pnpm nx show project <name> --json` (do not read project.json directly for full config; use this or Nx MCP).
+- Targets: `pnpm nx show project <name> --json | jq '.targets | keys'`.
+- Affected: `pnpm nx show projects --affected --json`; see docs for `nx affected` and base/head.
+
+## Running tasks
+
+- Single: `pnpm nx run <project>:<target>`.
+- Many: `pnpm nx run-many -t <target> [-p project1,project2] [--exclude=...]`.
+- Affected: `pnpm nx affected -t <target> [--base=main]`.
+
+Use `--skipNxCache`, `--verbose`, `--nxBail` when needed. Prefer `nx run` / `nx run-many` / `nx affected` over running the underlying tool directly.
+
+## Scaffolding
+
+- For new apps/libs or project structure: run `pnpm nx g <generator> --help` then `pnpm nx g <generator> ... --no-interactive`.
+- Prefer local workspace generators over plugin generators when both exist.
+- Run with `--dry-run` first to verify file placement.
+- List plugins: `pnpm nx list`. Add plugin: `pnpm nx add <plugin>`.
+
+## CI
+
+The repo uses `nx run-many -t lint build typecheck` in CI. Use `nx affected` in workflows when you want to run only for changed projects.

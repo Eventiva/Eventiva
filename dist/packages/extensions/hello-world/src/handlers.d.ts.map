@@ -1,0 +1,1 @@
+{"version":3,"file":"handlers.d.ts","sourceRoot":"","sources":["../../../../../packages/extensions/hello-world/src/handlers.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,OAAO,KAAK,MAAM,MAAM,eAAe,CAAA;AAEvC,OAAO,KAAK,EAAE,OAAO,EAAE,MAAM,gBAAgB,CAAA;AAO7C,sGAAsG;AACtG,wBAAgB,eAAe,CAC7B,QAAQ,EAAE,OAAO,CAAC,GAAG,CAAC,GACrB,MAAM,CAAC,MAAM,CAAC,MAAM,EAAE,KAAK,EAAE,KAAK,CAAC,CAYrC"}
