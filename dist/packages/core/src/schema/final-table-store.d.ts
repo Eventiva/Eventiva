@@ -14,6 +14,12 @@ export interface FinalTableStore {
     readonly getAllTables: () => Effect.Effect<Record<string, unknown>>;
     /** Set a table (used only by TableColumnRegistry during finalization). */
     readonly setTable: (tableName: string, table: unknown) => Effect.Effect<void>;
+    /** Get finalized relations by table name. Returns undefined if not found. */
+    readonly getRelations: (tableName: string) => Effect.Effect<unknown | undefined>;
+    /** Get all finalized relations as a record (tableName -> relations). */
+    readonly getAllRelations: () => Effect.Effect<Record<string, unknown>>;
+    /** Set relations (used during Phase 2 finalization). */
+    readonly setRelations: (tableName: string, relations: unknown) => Effect.Effect<void>;
 }
 export declare const FinalTableStore: Context.Tag<FinalTableStore, FinalTableStore>;
 export declare const FinalTableStoreLive: Layer.Layer<FinalTableStore>;

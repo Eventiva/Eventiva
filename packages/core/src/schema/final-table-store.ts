@@ -17,6 +17,13 @@ export interface FinalTableStore {
   readonly getAllTables: () => Effect.Effect<Record<string, unknown>>
   /** Set a table (used only by TableColumnRegistry during finalization). */
   readonly setTable: (tableName: string, table: unknown) => Effect.Effect<void>
+  
+  /** Get finalized relations by table name. Returns undefined if not found. */
+  readonly getRelations: (tableName: string) => Effect.Effect<unknown | undefined>
+  /** Get all finalized relations as a record (tableName -> relations). */
+  readonly getAllRelations: () => Effect.Effect<Record<string, unknown>>
+  /** Set relations (used during Phase 2 finalization). */
+  readonly setRelations: (tableName: string, relations: unknown) => Effect.Effect<void>
 }
 
 export const FinalTableStore = Context.GenericTag<FinalTableStore>("@eventiva/core/FinalTableStore")
@@ -24,25 +31,45 @@ export const FinalTableStore = Context.GenericTag<FinalTableStore>("@eventiva/co
 export const FinalTableStoreLive: Layer.Layer<FinalTableStore> = Layer.effect(
   FinalTableStore,
   Effect.gen(function* () {
-    const ref = yield* Ref.make<Map<string, unknown>>(new Map())
+    const tableRef = yield* Ref.make<Map<string, unknown>>(new Map())
+    const relationsRef = yield* Ref.make<Map<string, unknown>>(new Map())
+
     const store: FinalTableStore = {
       getTable: (tableName) =>
-        Ref.get(ref).pipe(
+        Ref.get(tableRef).pipe(
           Effect.map((m) => m.get(tableName)),
           withSpanAndLog("finalTableStore.getTable", { attributes: { tableName } })
         ),
       getAllTables: () =>
-        Ref.get(ref).pipe(
+        Ref.get(tableRef).pipe(
           Effect.map((m) => Object.fromEntries(m)),
           withSpanAndLog("finalTableStore.getAllTables")
         ),
       setTable: (tableName, table) =>
-        Ref.update(ref, (m) => {
+        Ref.update(tableRef, (m) => {
           const next = new Map(m)
           next.set(tableName, table)
           return next
         }).pipe(
           withSpanAndLog("finalTableStore.setTable", { attributes: { tableName } })
+        ),
+      getRelations: (tableName) =>
+        Ref.get(relationsRef).pipe(
+          Effect.map((m) => m.get(tableName)),
+          withSpanAndLog("finalTableStore.getRelations", { attributes: { tableName } })
+        ),
+      getAllRelations: () =>
+        Ref.get(relationsRef).pipe(
+          Effect.map((m) => Object.fromEntries(m)),
+          withSpanAndLog("finalTableStore.getAllRelations")
+        ),
+      setRelations: (tableName, relations) =>
+        Ref.update(relationsRef, (m) => {
+          const next = new Map(m)
+          next.set(tableName, relations)
+          return next
+        }).pipe(
+          withSpanAndLog("finalTableStore.setRelations", { attributes: { tableName } })
         )
     }
     return store

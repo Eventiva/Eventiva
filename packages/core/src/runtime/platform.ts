@@ -5,10 +5,13 @@
  * composing many core layers by hand.
  * @see docs/learnings/architecture.md
  */
+import { HttpApiSwagger } from "@effect/platform"
 import * as Layer from "effect/Layer"
 import * as Scope from "effect/Scope"
+import { createServer } from "node:http"
 import { ObservabilityLive } from "../observability/layer.js"
 import { clusterLayerDefault } from "../cluster/config.js"
+import { NodeHttpServer } from "@effect/platform-node"
 import { makeEntityEndpointsLayer, type EntityEndpointDescriptor } from "../cluster/entity-endpoints.js"
 import { PiiEncryptionLive } from "../security/index.js"
 import { Database } from "../database/database.js"
@@ -49,7 +52,7 @@ export interface CreatePlatformTemplateOptions {
  */
 export function createPlatformTemplate(
   options: CreatePlatformTemplateOptions
-): Layer.Layer<never, never, unknown> {
+): Layer.Layer<never, any, unknown> {
   const scopeLayer = Layer.scoped(Scope.Scope, Scope.make())
   const schemaConfigLayer = SchemaRegistryConfigLive(options.extensions.length)
   const schemaStack = TableColumnRegistryLive.pipe(
@@ -75,14 +78,18 @@ export function createPlatformTemplate(
     ...options.extensions.map((e) => e.layer),
     StartupBannerLayer as unknown as ExtensionLayer
   ])
-  let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, never, unknown>
+  let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
   const endpoints = options.entityEndpoints ?? []
-  if (endpoints.length > 0) {
+  if (endpoints.length > 0 || options.endpointsPort !== undefined) {
     const port = options.endpointsPort ?? 3000
+    // Provide a default node http server if we are building the endpoints layer
+    const serverLayer = NodeHttpServer.layer(() => createServer(), { port, host: "0.0.0.0" })
+    const swaggerLayer = HttpApiSwagger.layer()
+
     const endpointsLayer = makeEntityEndpointsLayer(endpoints, { port })
-    stack = Layer.merge(stack, endpointsLayer.pipe(Layer.provide(stack))) as Layer.Layer<
+    stack = Layer.merge(stack, endpointsLayer.pipe(Layer.provide(stack), Layer.provide(serverLayer), Layer.provide(swaggerLayer))) as Layer.Layer<
       never,
-      never,
+      any,
       unknown
     >
   }

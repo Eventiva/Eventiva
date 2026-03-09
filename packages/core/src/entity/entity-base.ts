@@ -74,21 +74,20 @@ export type EntityFields = Schema.Struct.Fields
  *   export const ContactLayer = Contact.layer
  */
 export function Base<Self>() {
-  return <Name extends string, Fields extends EntityFields>(name: Name, fields: Fields, options?: BaseEntityOptions) => {
+  return <Name extends string, Fields extends Schema.Struct.Fields>(name: Name, fieldsSchema: Schema.Struct<Fields>, options?: BaseEntityOptions) => {
     const tableName = options?.tableName ?? name
     const prefix = name.toLowerCase() as string
     const idSchema = typeIdSchema(prefix)
     const withDelete = options?.withDelete ?? false
 
-    const fieldsSchema = Schema.Struct(fields)
-    type FieldsType = Schema.Schema.Type<typeof fieldsSchema>
-    type FieldsEncoded = Schema.Schema.Encoded<typeof fieldsSchema>
-    type FieldsContext = Schema.Schema.Context<typeof fieldsSchema>
+    type FieldsType = Schema.Struct.Type<Fields> & Record<string, unknown>
+    type FieldsEncoded = Schema.Struct.Encoded<Fields> & Record<string, unknown>
+    type FieldsContext = Schema.Struct.Context<Fields>
 
     type Id = Schema.Schema.Type<typeof idSchema>
     type IdEncoded = Schema.Schema.Encoded<typeof idSchema>
 
-    const allFields = { id: idSchema, ...fields } as const
+    const allFields = { id: idSchema, ...fieldsSchema.fields } as unknown as { readonly id: typeof idSchema } & Fields
     const BaseSchema = Schema.Class<Self>(name)(allFields)
 
     type RecordType = { readonly id: Id } & FieldsType
@@ -97,7 +96,7 @@ export function Base<Self>() {
 
     const entity = makeCrudEntity<Name, Id, FieldsType>(name, {
       idSchema,
-      fieldsSchema,
+      fieldsSchema: fieldsSchema as unknown as Schema.Schema<FieldsType, any, any>,
       withDelete
     })
 
@@ -105,8 +104,8 @@ export function Base<Self>() {
       entityType: name,
       tableName,
       idSchema,
-      fieldsSchema,
-      recordSchema: BaseSchema as unknown as Schema.Schema<RecordType, RecordEncoded, Schema.Schema.Context<typeof BaseSchema>>,
+      fieldsSchema: fieldsSchema as unknown as Schema.Schema<FieldsType, any, any>,
+      recordSchema: BaseSchema as unknown as Schema.Schema<RecordType, RecordEncoded, Schema.Struct.Context<Fields>>,
       genId: () => typeId(prefix) as Id,
       withDelete,
       _rpcUnion: undefined as unknown as RpcUnion
@@ -133,8 +132,8 @@ export function Base<Self>() {
 
     const layer = entity.toLayer(Effect.succeed(wrappedHandlers as never))
 
-    const insertSchema = fieldsSchema as Schema.Schema<FieldsType, FieldsEncoded, FieldsContext>
-    const partialSchema = Schema.partial(fieldsSchema) as Schema.Schema<Partial<FieldsType>, Partial<FieldsEncoded>, FieldsContext>
+    const insertSchema = fieldsSchema as unknown as Schema.Schema<FieldsType, FieldsEncoded, FieldsContext>
+    const partialSchema = Schema.partial(fieldsSchema as any) as unknown as Schema.Schema<Partial<FieldsType>, Partial<FieldsEncoded>, FieldsContext>
 
     type StaticShape = {
       readonly name: Name

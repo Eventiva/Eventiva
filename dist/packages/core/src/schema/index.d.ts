@@ -8,4 +8,5 @@ export { FinalTableStore, FinalTableStoreLive } from "./final-table-store.js";
 export { type ExtraConfigItem, type MergedColumns, SchemaFinalizer, SchemaFinalizerNoOp, SchemaFinalizerNoOpLayer } from "./schema-finalizer.js";
 export { SchemaRegistryConfig, SchemaRegistryConfigLive } from "./schema-registry-config.js";
 export { TableColumnRegistry, TableColumnRegistryLive, type PendingTableEntry, type TableColumnRegistryState } from "./table-column-registry.js";
+export { TableRelationsRegistry, TableRelationsRegistryLive, type RelationCallback, type TableRelationsRegistryState } from "./table-relations-registry.js";
 //# sourceMappingURL=index.d.ts.map

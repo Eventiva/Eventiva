@@ -1,5 +1,5 @@
 /**
- * Contact extension workflows: on CORE_LOADED publish extension/contact/onLoad;
+ * Contact extension workflows: on CORE_LOADED register columns;
  * on EXTENSIONS_LOADED_TOPIC seed one demo contact if empty and log the list.
  */
 import * as Effect from "effect/Effect"
@@ -8,18 +8,37 @@ import {
   EXTENSIONS_LOADED_TOPIC,
   makeExtensionOnLoadLayer,
   makeExtensionWorkflowLayer,
+  TableColumnRegistry,
+  TableRelationsRegistry,
+  EntityRegistry,
   withSpanAndLog
 } from "@eventiva/core"
-import { Contact, CONTACT_ENTITY_ID } from "./entity.js"
+import { CONTACT_ENTITY_ID, contactColumns } from "./entity.js"
 
 const EXTENSION_ID = "contact"
 
-const OnLoadLayer = makeExtensionOnLoadLayer(EXTENSION_ID)
+const OnLoadLayer = makeExtensionOnLoadLayer(
+  EXTENSION_ID,
+  Effect.gen(function* () {
+    const registry = yield* TableColumnRegistry
+    yield* registry.registerTableColumns("contact", EXTENSION_ID, contactColumns)
+
+    const relationsRegistry = yield* TableRelationsRegistry
+    yield* relationsRegistry.registerRelations("contact", EXTENSION_ID, (helpers: any) => {
+      return {
+        creator: helpers.one.contact({
+          from: helpers.contact.createdBy,
+          to: helpers.contact.id
+        })
+      }
+    })
+  })
+)
 
 // ---- Seed workflow: on EXTENSIONS_LOADED, if contact list empty create one demo, then log list ----
 const contactCreatePayload = {
   fullname: "Jane Doe",
-  dateOfBirth: new Date("1990-05-15"),
+  dateOfBirth: new Date("1990-05-15").toISOString(), // assuming date string for effect schema
   email: "jane@example.com",
   phone: "+1234567890"
 }
@@ -29,16 +48,19 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
   "seed",
   EXTENSIONS_LOADED_TOPIC,
   Effect.gen(function* () {
+    const Contact = EntityRegistry.get("Contact")
     const getClient = yield* Contact.client
     const client = getClient(CONTACT_ENTITY_ID)
-    const list = yield* (client as unknown as { list: (p: object) => Effect.Effect<ReadonlyArray<unknown>> })["list"]({})
+    
+    // @ts-expect-error dynamic methods
+    const list = yield* client.list({})
     if (list.length === 0) {
-      const created = yield* (client as unknown as {
-        create: (p: typeof contactCreatePayload) => Effect.Effect<{ id: string }>
-      })["create"](contactCreatePayload)
+      // @ts-expect-error dynamic methods
+      const created = yield* client.create(contactCreatePayload)
       yield* Effect.log("contact created (demo seed)", { id: created.id, extension: "extensions.contact" })
     }
-    const listAfter = yield* (client as unknown as { list: (p: object) => Effect.Effect<ReadonlyArray<unknown>> })["list"]({})
+    // @ts-expect-error dynamic methods
+    const listAfter = yield* client.list({})
     yield* Effect.log("contacts list", { count: listAfter.length, extension: "extensions.contact" })
   }).pipe(
     withSpanAndLog("ContactSeedLayer")
@@ -46,8 +68,8 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
 )
 
 /**
- * Contact workflow layer: CORE_LOADED -> publish extension/contact/onLoad;
- * EXTENSIONS_LOADED_TOPIC -> seed demo contact and log list. Merge with ContactLayer.
+ * Contact workflow layer: CORE_LOADED -> register columns;
+ * EXTENSIONS_LOADED_TOPIC -> seed demo contact and log list.
  */
 export const ContactWorkflowLayer = Layer.mergeAll(
   OnLoadLayer,

@@ -14,6 +14,7 @@
  *
  * @see docs/learnings/architecture.md
  */
+import { HttpServer } from "@effect/platform";
 import { Sharding } from "@effect/cluster";
 import type * as Entity from "@effect/cluster/Entity";
 import * as Context from "effect/Context";
@@ -47,7 +48,7 @@ export interface EntityEndpointsOptions {
  * Body: { entityId?: string, method: string, payload?: unknown }
  * Response: JSON { success: result } or { error: string }
  */
-export declare function makeEntityEndpointsLayer(descriptors: ReadonlyArray<EntityEndpointDescriptor>, options?: EntityEndpointsOptions): Layer.Layer<EntityEndpointsServer, never, Sharding.Sharding>;
+export declare function makeEntityEndpointsLayer(descriptors: ReadonlyArray<EntityEndpointDescriptor>, options?: EntityEndpointsOptions): Layer.Layer<EntityEndpointsServer, any, Sharding.Sharding | HttpServer.HttpServer>;
 declare const EntityEndpointsServer_base: Context.TagClass<EntityEndpointsServer, "@eventiva/core/EntityEndpointsServer", {
     readonly port: number;
 }>;

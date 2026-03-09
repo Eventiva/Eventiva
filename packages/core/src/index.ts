@@ -12,6 +12,7 @@ export * from './extensions/extension-hooks.js';
 export * from './schema/typeid-schema.js';
 export * from './schema/schema-encryption.js';
 export * from './entity/entity-base.js';
+export * from './entity/entity-registry.js';
 export * from './entity/entity-method-extensions.js';
 export * from './embedding/embedding-service.js';
 export * from './observability/index.js';

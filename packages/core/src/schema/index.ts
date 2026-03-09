@@ -19,3 +19,9 @@ export {
   type PendingTableEntry,
   type TableColumnRegistryState
 } from "./table-column-registry.js"
+export {
+  TableRelationsRegistry,
+  TableRelationsRegistryLive,
+  type RelationCallback,
+  type TableRelationsRegistryState
+} from "./table-relations-registry.js"

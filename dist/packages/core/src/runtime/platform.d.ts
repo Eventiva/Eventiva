@@ -34,5 +34,5 @@ export interface CreatePlatformTemplateOptions {
  * ExtensionHooks + WorkflowEngine + WorkflowRegistry + merged extension layers,
  * and optionally an HTTP server for entity endpoints.
  */
-export declare function createPlatformTemplate(options: CreatePlatformTemplateOptions): Layer.Layer<never, never, unknown>;
+export declare function createPlatformTemplate(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown>;
 //# sourceMappingURL=platform.d.ts.map

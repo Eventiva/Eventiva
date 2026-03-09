@@ -28,6 +28,8 @@ export const typeid = (
     config?: { type: string }
 ) => text( value )
 
+const contactSkeleton = drizzlePgTable('contact', { id: typeid('id', { type: 'contact' }) });
+
 /**
  * Represents the status constants used to indicate the state of an entity.
  *
@@ -271,7 +273,7 @@ export function createTableFinal<
              * Because this references the users table, we must update the users table manually if adding any new
              * fields to this abstraction.
              */
-            // createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => contact.id ),
+            createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => contactSkeleton.id ),
             active: statusEnum( 'active' ).generatedAlwaysAs( (): SQL => sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END` )
         } ),
         ( table: any ) => {
@@ -318,6 +320,7 @@ export function buildTableInternal(
             ).defaultNow().$onUpdate( () => new Date().toISOString() ),
             disabledAt: timestamp( 'disabled_at', { mode: 'string' } ),
             deletedAt: timestamp( 'deleted_at', { mode: 'string' } ),
+            createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => contactSkeleton.id ),
             active: statusEnum( 'active' ).generatedAlwaysAs( (): SQL => sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END` )
         } ),
         ( table: any ) => {

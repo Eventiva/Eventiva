@@ -7,20 +7,17 @@ import * as Layer from "effect/Layer"
 import {
   createPlatformTemplate,
   DatabaseLiveInMemory,
-  makeEntityEndpointDescriptor,
   runMain,
-  type EntityEndpointDescriptor,
   type DefaultRunnerProfile
 } from "@eventiva/core"
 import { HelloWorldLayer } from "@eventiva/extensions.hello-world"
-import { Contact, ContactLayer, CONTACT_ENTITY_ID } from "@eventiva/extensions.contact"
-import type * as Entity from "@effect/cluster/Entity"
+import { ContactLayer } from "@eventiva/extensions.contact"
 
 /**
  * A platform template is a Layer that provides Sharding (and Runner) plus any
  * composed services. Built by createPlatformTemplate from database + extensions + optional HTTP endpoints.
  */
-export type PlatformTemplate = Layer.Layer<never, never, unknown>
+export type PlatformTemplate = Layer.Layer<never, any, unknown>
 
 /**
  * Database implementation. Use DatabaseLiveInMemory for dev/tests; 
@@ -41,19 +38,11 @@ const extensions = [
 export type { DefaultRunnerProfile }
 
 /**
- * Entity endpoints: each gets POST /api/rpc/:pathPrefix. Built with core's makeEntityEndpointDescriptor.
- */
-export const defaultEntityEndpoints: ReadonlyArray<EntityEndpointDescriptor> = [
-  makeEntityEndpointDescriptor(Contact as unknown as Entity.Any, CONTACT_ENTITY_ID, "contacts")
-]
-
-/**
  * Default platform Layer. Customise by changing databaseLayer or extensions above, then re-run.
  */
 export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate({
   databaseLayer,
   extensions,
-  entityEndpoints: defaultEntityEndpoints,
   endpointsPort: 3000
 })
 
@@ -65,4 +54,4 @@ export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate(
  * Example: curl -X POST http://localhost:3000/api/rpc/contacts -H "Content-Type: application/json" -d '{"method":"list","payload":{}}'
  */
 
-runMain(defaultPlatformTemplate)
+runMain(defaultPlatformTemplate as any)

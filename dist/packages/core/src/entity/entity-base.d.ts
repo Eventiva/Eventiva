@@ -59,7 +59,7 @@ export type EntityFields = Schema.Struct.Fields;
  *   export const ContactEntity = Contact.entity
  *   export const ContactLayer = Contact.layer
  */
-export declare function Base<Self>(): <Name extends string, Fields extends EntityFields>(name: Name, fields: Fields, options?: BaseEntityOptions) => {
+export declare function Base<Self>(): <Name extends string, Fields extends Schema.Struct.Fields>(name: Name, fieldsSchema: Schema.Struct<Fields>, options?: BaseEntityOptions) => {
     new (): {
         [x: string]: any;
     };
@@ -68,12 +68,12 @@ export declare function Base<Self>(): <Name extends string, Fields extends Entit
     readonly name: Name;
     readonly tableName: string;
     readonly idSchema: Schema.Schema<`${string}_${string}`, string, never>;
-    readonly fieldsSchema: Schema.Struct<Fields>;
+    readonly fieldsSchema: typeof fieldsSchema;
     readonly recordSchema: Schema.Schema<{
         readonly id: `${string}_${string}`;
-    } & (Schema.Struct.Type<Fields> extends infer T ? { [K in keyof T]: T[K]; } : never), {
+    } & Schema.Struct.Type<Fields> & Record<string, unknown>, {
         readonly id: string;
-    } & (Schema.Struct.Encoded<Fields> extends infer T_1 ? { [K_1 in keyof T_1]: T_1[K_1]; } : never), Schema.Schema.Context<[Self] extends [never] ? "Missing `Self` generic - use `class Self extends Class<Self>()({ ... })`" : Schema.Class<Self, {
+    } & { readonly [K in Exclude<keyof Fields, Schema.Struct.EncodedOptionalKeys<Fields>> as Schema.Struct.Key<Fields, K>]: Schema.Schema.Encoded<Fields[K]>; } & { readonly [K_1 in Schema.Struct.EncodedOptionalKeys<Fields> as Schema.Struct.Key<Fields, K_1>]?: Schema.Schema.Encoded<Fields[K_1]> | undefined; } & Record<string, unknown>, Schema.Schema.Context<[Self] extends [never] ? "Missing `Self` generic - use `class Self extends Class<Self>()({ ... })`" : Schema.Class<Self, {
         readonly id: Schema.Schema<`${string}_${string}`, string, never>;
     } & Fields, Schema.Struct.Encoded<{
         readonly id: Schema.Schema<`${string}_${string}`, string, never>;
@@ -82,8 +82,8 @@ export declare function Base<Self>(): <Name extends string, Fields extends Entit
     } & Fields)["id" | keyof Fields]>, Schema.Struct.Constructor<{
         readonly id: Schema.Schema<`${string}_${string}`, string, never>;
     } & Fields>, {}, {}>>>;
-    readonly insertSchema: Schema.Schema<Schema.Struct.Type<Fields> extends infer T_2 ? { [K in keyof T_2]: T_2[K]; } : never, Schema.Struct.Encoded<Fields> extends infer T_3 ? { [K_1 in keyof T_3]: T_3[K_1]; } : never, Schema.Schema.Context<Fields[keyof Fields]>>;
-    readonly partialSchema: Schema.Schema<Partial<Schema.Struct.Type<Fields> extends infer T_4 ? { [K in keyof T_4]: T_4[K]; } : never>, Partial<Schema.Struct.Encoded<Fields> extends infer T_5 ? { [K_1 in keyof T_5]: T_5[K_1]; } : never>, Schema.Schema.Context<Fields[keyof Fields]>>;
+    readonly insertSchema: Schema.Schema<Schema.Struct.Type<Fields> & Record<string, unknown>, { readonly [K in Exclude<keyof Fields, Schema.Struct.EncodedOptionalKeys<Fields>> as Schema.Struct.Key<Fields, K>]: Schema.Schema.Encoded<Fields[K]>; } & { readonly [K_1 in Schema.Struct.EncodedOptionalKeys<Fields> as Schema.Struct.Key<Fields, K_1>]?: Schema.Schema.Encoded<Fields[K_1]> | undefined; } & Record<string, unknown>, Schema.Schema.Context<Fields[keyof Fields]>>;
+    readonly partialSchema: Schema.Schema<Partial<Schema.Struct.Type<Fields> & Record<string, unknown>>, Partial<{ readonly [K in Exclude<keyof Fields, Schema.Struct.EncodedOptionalKeys<Fields>> as Schema.Struct.Key<Fields, K>]: Schema.Schema.Encoded<Fields[K]>; } & { readonly [K_1 in Schema.Struct.EncodedOptionalKeys<Fields> as Schema.Struct.Key<Fields, K_1>]?: Schema.Schema.Encoded<Fields[K_1]> | undefined; } & Record<string, unknown>>, Schema.Schema.Context<Fields[keyof Fields]>>;
     readonly withDelete: boolean;
     readonly entity: Entity<Name, import("@effect/rpc/Rpc").Any>;
     readonly layer: Layer.Layer<never, never, Database>;
