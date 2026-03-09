@@ -48,7 +48,11 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
   "seed",
   EXTENSIONS_LOADED_TOPIC,
   Effect.gen(function* () {
-    const Contact = EntityRegistry.get("Contact")
+    const Contact = EntityRegistry.tryGet("Contact")
+    if (!Contact) {
+      yield* Effect.log("Contact entity not registered (e.g. in-memory DB with placeholder tables); skipping seed.")
+      return
+    }
     const getClient = yield* Contact.client
     const client = getClient(CONTACT_ENTITY_ID)
     

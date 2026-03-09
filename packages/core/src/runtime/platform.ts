@@ -11,7 +11,7 @@ import { createServer } from "node:http"
 import { ObservabilityLive } from "../observability/layer.js"
 import { clusterLayerDefault } from "../cluster/config.js"
 import { NodeHttpServer } from "@effect/platform-node"
-import { makeEntityEndpointsLayer, type EntityEndpointDescriptor } from "../cluster/entity-endpoints.js"
+import { makeEntityEndpointsLayer, EntityEndpointsServer, type EntityEndpointDescriptor } from "../cluster/entity-endpoints.js"
 import { PiiEncryptionLive } from "../security/index.js"
 import { Database } from "../database/database.js"
 import { ExtensionHooksLive, WorkflowEngineLayerInMemory } from "../extensions/extension-hooks.js"
@@ -23,7 +23,8 @@ import {
   SchemaFinalizer,
   SchemaFinalizerNoOp,
   SchemaRegistryConfigLive,
-  TableColumnRegistryLive
+  TableColumnRegistryLive,
+  TableRelationsRegistryLive
 } from "../schema/index.js"
 
 /**
@@ -56,6 +57,7 @@ export function createPlatformTemplate(
   const schemaConfigLayer = SchemaRegistryConfigLive(options.extensions.length)
   const schemaStack = TableColumnRegistryLive.pipe(
     Layer.provideMerge(FinalTableStoreLive),
+    Layer.provideMerge(TableRelationsRegistryLive),
     Layer.provideMerge(schemaConfigLayer),
     Layer.provideMerge(Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp))
   )
@@ -79,9 +81,9 @@ export function createPlatformTemplate(
   ])
   let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
   const endpoints = options.entityEndpoints ?? []
+  const port = options.endpointsPort ?? 3000
   if (endpoints.length > 0 || options.endpointsPort !== undefined) {
-    const port = options.endpointsPort ?? 3000
-    // Provide Node HTTP server and platform context. HttpApi.Api and Swagger are provided inside makeEntityEndpointsLayer.
+    // Start HTTP server when entity endpoints are provided or endpointsPort is set (for /api/docs, shutdown, etc.)
     const serverLayer = NodeHttpServer.layer(() => createServer(), { port, host: "0.0.0.0" })
     const platformContextLayer = NodeHttpServer.layerContext
 
@@ -94,6 +96,9 @@ export function createPlatformTemplate(
         Layer.provide(platformContextLayer)
       )
     ) as Layer.Layer<never, any, unknown>
+  } else {
+    // No HTTP server: provide dummy so defaultRuntimeProgram's yield* EntityEndpointsServer succeeds
+    stack = Layer.merge(stack, Layer.succeed(EntityEndpointsServer, { port: 0 })) as Layer.Layer<never, any, unknown>
   }
   return stack
 }

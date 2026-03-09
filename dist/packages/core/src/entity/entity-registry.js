@@ -1,39 +1,41 @@
 import * as Schema from "effect/Schema";
-/**
- * Global interface for module augmentation.
- * Extensions should augment this interface to register their entities.
- *
- * @example
- * declare module "@eventiva/core" {
- *   interface RegisteredEntities {
- *     Contact: typeof Contact
- *   }
- * }
- */
-export interface RegisteredEntities {
-}
+// Internal mutable map to hold fully constructed entities.
+// Populated during the core startup phase.
+const entityMap = new Map();
 /**
  * EntityRegistry provides a central container for dynamically generated entities.
  * This resolves circular dependency issues by allowing entities to be retrieved by name.
  */
-export declare const EntityRegistry: {
+export const EntityRegistry = {
     /**
      * Get a fully constructed entity by its registered name.
      * Throws an error if the entity hasn't been registered yet.
      */
-    get: <K extends keyof RegisteredEntities>(name: K) => RegisteredEntities[K];
+    get: (name) => {
+        const entity = entityMap.get(name);
+        if (!entity) {
+            throw new Error(`Entity ${name} not found in EntityRegistry. Make sure it is registered during core startup.`);
+        }
+        return entity;
+    },
     /**
      * Try to get an entity by name. Returns undefined if not registered (e.g. placeholder table skipped).
      */
-    tryGet: <K extends keyof RegisteredEntities>(name: K) => RegisteredEntities[K] | undefined;
+    tryGet: (name) => {
+        return entityMap.get(name);
+    },
     /**
      * Register a fully constructed entity.
      */
-    register: <K extends keyof RegisteredEntities>(name: K, entity: RegisteredEntities[K]) => void;
+    register: (name, entity) => {
+        entityMap.set(name, entity);
+    },
     /**
      * Get all registered entities.
      */
-    getAll: () => ReadonlyMap<string, unknown>;
+    getAll: () => {
+        return entityMap;
+    },
     /**
      * A helper for creating lazy Schema references to entities to avoid module import cycles.
      * Internally uses `Schema.suspend`.
@@ -43,6 +45,11 @@ export declare const EntityRegistry: {
      *   Schema.Array(EntityRegistry.lazy<BrandAlias, BrandAliasEncoded>("BrandAlias"))
      * ))
      */
-    lazy: <Type, Encoded = never>(name: keyof RegisteredEntities) => Schema.Schema<Type, Encoded>;
+    lazy: (name) => {
+        return Schema.suspend(() => {
+            const entity = EntityRegistry.get(name);
+            // Assuming the entity itself acts as a Schema (which is true for our Base() classes)
+            return entity;
+        }).annotations({ identifier: name });
+    }
 };
-//# sourceMappingURL=entity-registry.d.ts.map

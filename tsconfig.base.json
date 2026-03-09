@@ -17,6 +17,7 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
+    "downlevelIteration": true,
     "customConditions": ["@eventiva/source"],
     "paths": {
       "remote1/Module": ["apps/remote1/src/remote-entry.ts"],

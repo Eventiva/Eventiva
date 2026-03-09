@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  effect: 3.19.19
+
 importers:
 
   .:
@@ -27,7 +30,7 @@ importers:
         specifier: ^2.0.0
         version: 2.6.0(@opentelemetry/api@1.9.0)
       effect:
-        specifier: ^3.19.17
+        specifier: 3.19.19
         version: 3.19.19
       expo:
         specifier: ~54.0.0
@@ -232,7 +235,7 @@ importers:
         specifier: 1.0.0-beta.16-ea816b6
         version: 1.0.0-beta.16-ea816b6(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
       effect:
-        specifier: ^3.19.17
+        specifier: 3.19.19
         version: 3.19.19
       tslib:
         specifier: ^2.3.0
@@ -260,7 +263,7 @@ importers:
         specifier: 1.0.0-beta.16-ea816b6
         version: 1.0.0-beta.16-ea816b6(@effect/sql-pg@0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
       effect:
-        specifier: ^3.19.17
+        specifier: 3.19.19
         version: 3.19.19
 
   packages/extensions/contact:
@@ -281,7 +284,7 @@ importers:
         specifier: 1.0.0-beta.16-ea816b6
         version: 1.0.0-beta.16-ea816b6(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
       effect:
-        specifier: ^3.19.17
+        specifier: 3.19.19
         version: 3.19.19
 
   packages/extensions/hello-world:
@@ -299,7 +302,7 @@ importers:
         specifier: workspace:*
         version: link:../../core
       effect:
-        specifier: ^3.19.17
+        specifier: 3.19.19
         version: 3.19.19
 
   packages/platforms/default:
@@ -317,7 +320,7 @@ importers:
         specifier: workspace:*
         version: link:../../extensions/hello-world
       effect:
-        specifier: ^3.19.17
+        specifier: 3.19.19
         version: 3.19.19
 
 packages:
@@ -1171,13 +1174,13 @@ packages:
       '@effect/rpc': ^0.73.1
       '@effect/sql': ^0.49.0
       '@effect/workflow': ^0.16.0
-      effect: ^3.19.17
+      effect: 3.19.19
 
   '@effect/experimental@0.58.0':
     resolution: {integrity: sha512-IEP9sapjF6rFy5TkoqDPc86st/fnqUfjT7Xa3pWJrFGr1hzaMXHo+mWsYOZS9LAOVKnpHuVziDK97EP5qsCHVA==}
     peerDependencies:
       '@effect/platform': ^0.94.0
-      effect: ^3.19.13
+      effect: 3.19.19
       ioredis: ^5
       lmdb: ^3
     peerDependenciesMeta:
@@ -1202,30 +1205,30 @@ packages:
       '@opentelemetry/sdk-trace-node': ^2.0.0
       '@opentelemetry/sdk-trace-web': ^2.0.0
       '@opentelemetry/semantic-conventions': ^1.33.0
-      effect: ^3.19.15
+      effect: 3.19.19
 
   '@effect/platform-node-shared@0.23.1':
     resolution: {integrity: sha512-iI37OQAWKLTtm5yx7vaZGuQsf9HdilPBvtg/qkxvOBsl+wNmhbWgOCo2XPiMqov8rCn6dcJ28w2qPvb2OpW9wg==}
     peerDependencies:
       '@effect/platform': ^0.73.1
-      effect: ^3.12.4
+      effect: 3.19.19
 
   '@effect/platform-node@0.69.1':
     resolution: {integrity: sha512-bEePa4g9DkWRDqTCYq1cdeLFTwK9DvgyAK/jytfTRC24TE/hY45F/w72KVjyPYIUKut0KVIMeNkWIxZKjNmjMA==}
     peerDependencies:
       '@effect/platform': ^0.73.1
-      effect: ^3.12.4
+      effect: 3.19.19
 
   '@effect/platform@0.94.5':
     resolution: {integrity: sha512-z05APUiDDPbodhTkH/RJqOLoCU11bU2IZLfcwLFrld03+ob1VeqRnELQlmueLIYm6NZifHAtjl32V+GRt34y4A==}
     peerDependencies:
-      effect: ^3.19.17
+      effect: 3.19.19
 
   '@effect/rpc@0.73.2':
     resolution: {integrity: sha512-td7LHDgBOYKg+VgGWEelD8rSAmvjXz7am17vfxZROX5qIYuvH7drL/z4p5xQFadhHZ7DYdlFpqdO9ggc77OCIw==}
     peerDependencies:
       '@effect/platform': ^0.94.5
-      effect: ^3.19.18
+      effect: 3.19.19
 
   '@effect/sql-pg@0.34.21':
     resolution: {integrity: sha512-fi+Tf3aBQMkPouCxSqsO7Q7Yg5euWLmfhhJXcwWUueG9IGi9lg8adkYE/4kVmDmzZWLkdVFSqYMvxskQ7hjgkA==}
@@ -1233,21 +1236,21 @@ packages:
       '@effect/experimental': ^0.44.21
       '@effect/platform': ^0.80.21
       '@effect/sql': ^0.33.21
-      effect: ^3.14.21
+      effect: 3.19.19
 
   '@effect/sql@0.21.3':
     resolution: {integrity: sha512-BqgxpeH1JtGfwe59ejsI9p5bxs165MOymhO7FcpIPj5Q7iS3UD/iNJi3KX992RrwOIgEnMm1AsEy9Bs1gQenpw==}
     peerDependencies:
       '@effect/experimental': ^0.32.16
       '@effect/platform': ^0.69.31
-      effect: ^3.10.19
+      effect: 3.19.19
 
   '@effect/sql@0.49.0':
     resolution: {integrity: sha512-9UEKR+z+MrI/qMAmSvb/RiD9KlgIazjZUCDSpwNgm0lEK9/Q6ExEyfziiYFVCPiptp52cBw8uBHRic8hHnwqXA==}
     peerDependencies:
       '@effect/experimental': ^0.58.0
       '@effect/platform': ^0.94.0
-      effect: ^3.19.13
+      effect: 3.19.19
 
   '@effect/workflow@0.16.0':
     resolution: {integrity: sha512-MiAdlxx3TixkgHdbw+Yf1Z3tHAAE0rOQga12kIydJqj05Fnod+W/I+kQGRMY/XWRg+QUsVxhmh1qTr7Ype6lrw==}
@@ -1255,7 +1258,7 @@ packages:
       '@effect/experimental': ^0.58.0
       '@effect/platform': ^0.94.0
       '@effect/rpc': ^0.73.0
-      effect: ^3.19.13
+      effect: 3.19.19
 
   '@emnapi/core@1.8.1':
     resolution: {integrity: sha512-AvT9QFpxK0Zd8J0jopedNm+w/2fIzvtPKPjqyw9jwvBaReTTqPBk9Hixaz7KbjimP+QNz605/XnjFcDAL2pqBg==}

@@ -37,40 +37,59 @@ export const runCoreStartupRaw = Effect.gen(function* () {
   const finalTableStore = yield* FinalTableStore
   const relationsRegistry = yield* TableRelationsRegistry
   const allTables = yield* finalTableStore.getAllTables()
+  // Drizzle defineRelations/extractTablesFromSchema expect table objects with .constructor; filter out null/undefined
+  const safeTables = Object.fromEntries(
+    Object.entries(allTables).filter((entry): entry is [string, object] =>
+      entry[1] != null && typeof entry[1] === "object"
+    )
+  ) as Record<string, unknown>
   const allCallbacksMap = yield* relationsRegistry.getAllCallbacks()
 
   const hasAnyCallbacks = Array.from(allCallbacksMap.values()).some(callbacks => callbacks.length > 0)
   
   if (hasAnyCallbacks) {
-    const mergedRelationsConfig = defineRelations(allTables as any, (helpers: any) => {
-      const config: Record<string, any> = {}
-      for (const [tableName, callbacks] of allCallbacksMap.entries()) {
-        if (callbacks.length > 0) {
-          let merged = {}
-          for (const cb of callbacks) {
-            merged = { ...merged, ...cb(helpers, allTables) }
+    let mergedRelationsConfig: Record<string, { relations?: unknown }>
+    try {
+      mergedRelationsConfig = defineRelations(safeTables as any, (helpers: any) => {
+        const config: Record<string, any> = {}
+        for (const [tableName, callbacks] of allCallbacksMap.entries()) {
+          if (callbacks.length > 0) {
+            let merged = {}
+            for (const cb of callbacks) {
+              merged = { ...merged, ...cb(helpers, safeTables) }
+            }
+            config[tableName] = merged
           }
-          config[tableName] = merged
         }
-      }
-      return config
-    })
+        return config
+      })
+    } catch (e) {
+      // Drizzle defineRelations can throw if a table has null in schema (e.g. "Cannot read properties of null (reading 'constructor')")
+      yield* Effect.logWarning(
+        `Skipping relation resolution due to: ${e instanceof Error ? e.message : String(e)}. Tables: ${Object.keys(safeTables).join(", ")}.`
+      )
+      mergedRelationsConfig = {}
+    }
     
-    for (const [tableName, conf] of Object.entries(mergedRelationsConfig as any)) {
-      yield* finalTableStore.setRelations(tableName, (conf as any).relations)
+    for (const [tableName, conf] of Object.entries(mergedRelationsConfig)) {
+      if (conf?.relations != null) {
+        yield* finalTableStore.setRelations(tableName, conf.relations)
+      }
     }
   }
 
-  for (const [tableName, table] of Object.entries(allTables)) {
-    // Generate schema and populate EntityRegistry
-    const schema = createSelectSchema(table as any)
-    const entityName = tableName.charAt(0).toUpperCase() + tableName.slice(1)
-    
-    // Instantiate Base
-    class DynamicEntity extends Base<any>()(entityName, schema as any, { tableName }) {}
-    
-    // Register entity in EntityRegistry
-    (EntityRegistry.register as any)(entityName, DynamicEntity)
+  for (const [tableName, table] of Object.entries(safeTables)) {
+    // Generate schema and populate EntityRegistry (skip placeholders, e.g. SchemaFinalizerNoOp with in-memory DB)
+    try {
+      const schema = createSelectSchema(table as any)
+      const entityName = tableName.charAt(0).toUpperCase() + tableName.slice(1)
+      class DynamicEntity extends Base<any>()(entityName, schema as any, { tableName }) {}
+      (EntityRegistry.register as any)(entityName, DynamicEntity)
+    } catch (e) {
+      yield* Effect.logWarning(
+        `Skipping entity for table "${tableName}" (not a Drizzle table? use a DB extension with SchemaFinalizer): ${e instanceof Error ? e.message : String(e)}`
+      )
+    }
   }
   yield* Effect.logInfo("Phase 2: DB relations finalized and EntityRegistry populated.")
   
