@@ -27,6 +27,28 @@ import {
 } from "../schema/index.js"
 
 /**
+ * Debug options for isolating issues by disabling core processes.
+ */
+export interface PlatformDebugOptions {
+  /** Disable ObservabilityLive (Logger, Tracer, Metrics) */
+  readonly disableObservability?: boolean
+  /** Disable clusterLayerDefault (TestRunner) */
+  readonly disableCluster?: boolean
+  /** Disable PiiEncryptionLive */
+  readonly disablePiiEncryption?: boolean
+  /** Disable schemaStack (TableColumnRegistry, FinalTableStore, SchemaRegistryConfig, SchemaFinalizer) */
+  readonly disableSchema?: boolean
+  /** Disable databaseLayer */
+  readonly disableDatabase?: boolean
+  /** Disable hooksStack (ExtensionHooksLive, WorkflowEngineLayerInMemory, WorkflowRegistryLive) */
+  readonly disableHooks?: boolean
+  /** Disable StartupBannerLayer */
+  readonly disableStartupBanner?: boolean
+  /** Disable EntityEndpointsServer */
+  readonly disableEntityEndpoints?: boolean
+}
+
+/**
  * Options for createPlatformTemplate. Provide a database layer and an array of
  * extension layers (each with an id for schema markReady); optionally register entity HTTP endpoints.
  */
@@ -42,6 +64,8 @@ export interface CreatePlatformTemplateOptions {
   readonly entityEndpoints?: ReadonlyArray<EntityEndpointDescriptor>
   /** Port for the entity endpoints server (default 3000). */
   readonly endpointsPort?: number
+  /** Debug options for isolating issues by disabling core processes. */
+  readonly debug?: PlatformDebugOptions
 }
 
 /**
@@ -52,34 +76,68 @@ export interface CreatePlatformTemplateOptions {
 export function createPlatformTemplate(
   options: CreatePlatformTemplateOptions
 ): Layer.Layer<never, any, unknown> {
+  const debug = options.debug ?? {}
   const scopeLayer = Layer.scoped(Scope.Scope, Scope.make())
+  
+  // Build schema stack conditionally
   const schemaConfigLayer = SchemaRegistryConfigLive(options.extensions.length)
-  const schemaStack = TableColumnRegistryLive.pipe(
-    Layer.provideMerge(FinalTableStoreLive),
-    Layer.provideMerge(schemaConfigLayer),
-    Layer.provideMerge(Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp))
-  )
-  const hooksStack = Layer.mergeAll(
-    ExtensionHooksLive,
-    WorkflowEngineLayerInMemory,
-    WorkflowRegistryLive
-  )
-  const base = Layer.mergeAll(
-    ObservabilityLive,
-    clusterLayerDefault,
-    PiiEncryptionLive,
-    schemaStack,
-    options.databaseLayer,
-    hooksStack,
-    scopeLayer
-  )
-  const entitiesLayer = mergeEntityLayers([
-    ...options.extensions.map((e) => e.layer),
-    StartupBannerLayer as unknown as ExtensionLayer
-  ])
+  const schemaStack = debug.disableSchema
+    ? Layer.empty
+    : TableColumnRegistryLive.pipe(
+        Layer.provideMerge(FinalTableStoreLive),
+        Layer.provideMerge(schemaConfigLayer),
+        Layer.provideMerge(Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp))
+      )
+  
+  // Build hooks stack conditionally
+  const hooksStack = debug.disableHooks
+    ? Layer.empty
+    : Layer.mergeAll(
+        ExtensionHooksLive,
+        WorkflowEngineLayerInMemory,
+        WorkflowRegistryLive
+      )
+  
+  // Build base layer with conditional components
+  const baseComponents: Array<Layer.Layer<unknown, unknown, unknown>> = []
+  
+  if (!debug.disableObservability) {
+    baseComponents.push(ObservabilityLive)
+  }
+  if (!debug.disableCluster) {
+    baseComponents.push(clusterLayerDefault)
+  }
+  if (!debug.disablePiiEncryption) {
+    baseComponents.push(PiiEncryptionLive)
+  }
+  if (!debug.disableSchema) {
+    baseComponents.push(schemaStack)
+  }
+  if (!debug.disableDatabase) {
+    baseComponents.push(options.databaseLayer)
+  }
+  if (!debug.disableHooks) {
+    baseComponents.push(hooksStack)
+  }
+  baseComponents.push(scopeLayer)
+  
+  const base = baseComponents.length > 0
+    ? Layer.mergeAll(...baseComponents)
+    : scopeLayer
+  
+  // Build entities layer conditionally
+  const entityLayers: ExtensionLayer[] = []
+  if (!debug.disableStartupBanner) {
+    entityLayers.push(StartupBannerLayer as unknown as ExtensionLayer)
+  }
+  entityLayers.push(...options.extensions.map((e) => e.layer))
+  
+  const entitiesLayer = mergeEntityLayers(entityLayers)
   let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
+  
+  // Add entity endpoints conditionally
   const endpoints = options.entityEndpoints ?? []
-  if (endpoints.length > 0 || options.endpointsPort !== undefined) {
+  if (!debug.disableEntityEndpoints && (endpoints.length > 0 || options.endpointsPort !== undefined)) {
     const port = options.endpointsPort ?? 3000
     // Provide Node HTTP server and platform context. HttpApi.Api and Swagger are provided inside makeEntityEndpointsLayer.
     const serverLayer = NodeHttpServer.layer(() => createServer(), { port, host: "0.0.0.0" })

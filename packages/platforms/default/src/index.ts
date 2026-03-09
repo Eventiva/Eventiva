@@ -39,11 +39,24 @@ export type { DefaultRunnerProfile }
 
 /**
  * Default platform Layer. Customise by changing databaseLayer or extensions above, then re-run.
+ * 
+ * DEBUG MODE: Currently all core processes and extensions are disabled for debugging.
+ * Re-enable one by one to identify the problematic process.
  */
 export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate({
   databaseLayer,
-  extensions,
-  endpointsPort: 3000
+  extensions: [], // Disable all extensions for debugging
+  endpointsPort: 3000,
+  debug: {
+    disableObservability: true,
+    disableCluster: true,
+    disablePiiEncryption: true,
+    disableSchema: true,
+    disableDatabase: true,
+    disableHooks: true,
+    disableStartupBanner: true,
+    disableEntityEndpoints: true
+  }
 })
 
 /**

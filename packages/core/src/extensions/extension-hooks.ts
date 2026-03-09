@@ -227,12 +227,19 @@ export function makeExtensionOnLoadLayer<R = never, E = never>(
 /** Backward-compat tag: same service as ExtensionHookPubSub. Use ExtensionHooksLive to provide both. */
 export const ExtensionHooks = Context.GenericTag<ExtensionHookPubSub>("@eventiva/core/ExtensionHooks")
 
-/** Provides both ExtensionHookPubSub and ExtensionHooks (same service). */
+/**
+ * Provides both ExtensionHookPubSub and ExtensionHooks (same service).
+ * Uses a single service instance for both tags to avoid initialization issues.
+ */
 export const ExtensionHooksLive: Layer.Layer<ExtensionHookPubSub, never, never> = Layer.merge(
   ExtensionHookPubSubLive,
-  Layer.effect(ExtensionHooks, Effect.gen(function* () {
-    return yield* ExtensionHookPubSub
-  })).pipe(Layer.provide(ExtensionHookPubSubLive))
+  Layer.effect(
+    ExtensionHooks,
+    Effect.gen(function* () {
+      const pubsub = yield* ExtensionHookPubSub
+      return pubsub
+    })
+  ).pipe(Layer.provide(ExtensionHookPubSubLive))
 )
 
 
