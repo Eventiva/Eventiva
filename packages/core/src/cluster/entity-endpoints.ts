@@ -21,7 +21,6 @@ import * as Effect from "effect/Effect"
 import * as Layer from "effect/Layer"
 import * as Runtime from "effect/Runtime"
 import * as Schema from "effect/Schema"
-import { withSpanAndLog } from "../observability/helpers.js"
 
 /**
  * Descriptor for exposing an entity over HTTP/RPC. Register with the platform
@@ -66,8 +65,9 @@ export function makeEntityEndpointsLayer(
   options: EntityEndpointsOptions = {}
 ): Layer.Layer<EntityEndpointsServer, never, Sharding.Sharding> {
   const port = options.port ?? 3000
-  const startServer = Effect.gen(function* () {
-    yield* Effect.logDebug("Initializing EntityEndpointsServer")
+  return Layer.scoped(
+    EntityEndpointsServer,
+    Effect.gen(function* () {
       yield* Sharding.Sharding
       const runtime = yield* Effect.runtime<Sharding.Sharding>()
       const map = new Map<
@@ -405,15 +405,15 @@ export function makeEntityEndpointsLayer(
       })
       server.listen(port)
       const paths = descriptors.map((d) => `POST /api/rpc/${d.pathPrefix}`)
-      yield* Effect.logDebug("Entity HTTP endpoints up", { port, paths, service: "eventiva-core" })
+      yield* Effect.log("Entity HTTP endpoints up", { port, paths, service: "eventiva-core" })
       yield* Effect.addFinalizer(() =>
         Effect.sync(() => {
           server.close()
         })
       )
-      return { port } as const
-  })
-  return Layer.scoped(EntityEndpointsServer, startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer")))
+      return { port }
+    })
+  )
 }
 
 /**
