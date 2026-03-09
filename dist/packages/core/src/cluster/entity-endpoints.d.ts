@@ -12,6 +12,8 @@
  *   PATCH /api/:pathPrefix/{id} → update (body = patch)
  *   DELETE /api/:pathPrefix/{id} → delete
  *
+ * Uses @effect/platform HttpApi + HttpApiBuilder so HttpApiSwagger can document the API.
+ *
  * @see docs/learnings/architecture.md
  */
 import { HttpServer } from "@effect/platform";
@@ -42,7 +44,7 @@ export interface EntityEndpointsOptions {
 /**
  * Builds a Layer that starts an HTTP server exposing RPC proxy routes for each
  * descriptor. Requires Sharding. Server runs in a scope and is closed when the
- * scope ends.
+ * scope ends. Uses HttpApi + HttpApiBuilder so HttpApi.Api is provided for HttpApiSwagger.
  *
  * Route: POST /api/rpc/:pathPrefix
  * Body: { entityId?: string, method: string, payload?: unknown }
