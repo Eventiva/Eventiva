@@ -33,5 +33,5 @@ export interface WithSpanAndLogOptions {
  * })
  * ```
  */
-export declare function withSpanAndLog<A, E, R>(spanName: string, options?: WithSpanAndLogOptions): (effect: Effect.Effect<A, E, R>) => Effect.Effect<A, E, R>;
+export declare function withSpanAndLog(spanName: string, options?: WithSpanAndLogOptions): <A, E, R>(effect: Effect.Effect<A, E, R>) => Effect.Effect<A, E, R>;
 //# sourceMappingURL=helpers.d.ts.map

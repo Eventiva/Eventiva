@@ -6,14 +6,14 @@
 import * as Effect from "effect/Effect"
 import * as Layer from "effect/Layer"
 import type { ExtensionLayer } from "@eventiva/core"
-import { ExtensionHooks, withExtensionHooksWith } from "@eventiva/core"
+import { ExtensionHooks, withExtensionHooksWith, withSpanAndLog } from "@eventiva/core"
 import { HelloWorld } from "./entity.js"
 import { sayHelloHandler } from "./handlers.js"
 import { HelloWorldWorkflowAndLoadLayer } from "./workflow.js"
 
 export { HelloWorld } from "./entity.js"
 export { sayHelloHandler } from "./handlers.js"
-export { HelloWorldWorkflow, HelloWorldWorkflowAndLoadLayer } from "./workflow.js"
+export { HelloWorldWorkflowAndLoadLayer } from "./workflow.js"
 
 const EXTENSION_ID = "hello-world"
 
@@ -23,7 +23,9 @@ const HelloWorldHandlersLayer = HelloWorld.toLayer(
     return {
       sayHello: withExtensionHooksWith(hooks, EXTENSION_ID, "HelloWorld", "sayHello", sayHelloHandler)
     }
-  })
+  }).pipe(
+    withSpanAndLog("HelloWorldHandlersLayer")
+  )
 )
 
 /**

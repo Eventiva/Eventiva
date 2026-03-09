@@ -1,0 +1,19 @@
+{
+  "name": "@eventiva/databases.pg",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/databases/pg/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/databases/pg",
+        "main": "packages/databases/pg/src/index.ts",
+        "tsConfig": "packages/databases/pg/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "@eventiva/databases.pg",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "dependencies": {
+    "@eventiva/core": "workspace:*",
+    "@effect/sql": "^0.21.0",
+    "@effect/sql-pg": "^0.34.0",
+    "drizzle-orm": "1.0.0-beta.16-ea816b6",
+    "effect": "^3.19.17"
+  }
+}

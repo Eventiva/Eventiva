@@ -5,6 +5,7 @@
  */
 import * as Effect from "effect/Effect"
 import * as Crypto from "node:crypto"
+import { withSpanAndLog } from "../observability/helpers.js"
 
 const INTEGRITY_NONCE_ENV = "EVENTIVA_INTEGRITY_NONCE"
 
@@ -18,6 +19,7 @@ const INTEGRITY_NONCE_ENV = "EVENTIVA_INTEGRITY_NONCE"
  */
 export const runIntegrityChecks: Effect.Effect<void, { _tag: "IntegrityCheckFailed"; reason: string }> =
   Effect.gen(function* () {
+    yield* Effect.logInfo("Starting integrity checks...")
     const nonce = process.env[INTEGRITY_NONCE_ENV]
     if (process.env["NODE_ENV"] === "production" && !nonce) {
       return yield* Effect.fail({
@@ -33,5 +35,5 @@ export const runIntegrityChecks: Effect.Effect<void, { _tag: "IntegrityCheckFail
         reason: "Integrity hash invalid"
       })
     }
-    yield* Effect.log("Integrity checks passed", { security: "eventiva-core" })
-  })
+    yield* Effect.logInfo("Integrity checks passed", { security: "eventiva-core" })
+  }).pipe(withSpanAndLog("runIntegrityChecks"))

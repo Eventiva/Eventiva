@@ -1,0 +1,58 @@
+---
+description: Enforces the use of Effect logging, metrics, and tracing tools for code changes and executions.
+globs: **/*.ts, **/*.tsx
+alwaysApply: false
+---
+
+# Effect Observability (Logging, Metrics, Tracing)
+
+Observability, logging, metrics, and tracing **must** be applied to every code change using the Effect logging, metrics, and tracing tools.
+
+## Function Definitions
+
+Every function definition should correctly implement logging, metrics, and/or tracing using Effect's built-in observability features. 
+
+```typescript
+import { Effect, Metric } from "effect"
+
+// ❌ BAD: No observability
+export const processUser = (userId: string) => 
+  Effect.succeed({ userId, status: "processed" })
+
+// ✅ GOOD: Incorporates logging, tracing, and metrics
+const processCounter = Metric.counter("user_processed_total")
+
+export const processUser = (userId: string) => 
+  Effect.succeed({ userId, status: "processed" }).pipe(
+    Effect.tap((result) => Effect.logInfo("User processed successfully", { result })),
+    Effect.withSpan("processUser", { attributes: { userId } }),
+    Metric.increment(processCounter)
+  )
+```
+
+## External Contributor Code Execution
+
+Anywhere we are asking "external contributors" to provide functions or code for execution, we **must** pipe the output of the execution to the logging, metrics, and tracing tools. This ensures that third-party or untrusted execution is thoroughly monitored.
+
+```typescript
+import { Effect, Metric } from "effect"
+
+const externalExecutionCounter = Metric.counter("external_execution_total")
+
+// ✅ GOOD: Tracking external execution output thoroughly
+export const executeExternalCode = <A, E, R>(
+  externalEffect: Effect.Effect<A, E, R>,
+  executionName: string
+) => 
+  externalEffect.pipe(
+    // Log success or failures
+    Effect.tap((result) => Effect.logInfo(`External execution '${executionName}' completed`, { result })),
+    Effect.tapError((error) => Effect.logError(`External execution '${executionName}' failed`, { error })),
+    
+    // Track via tracing
+    Effect.withSpan("executeExternalCode", { attributes: { executionName } }),
+    
+    // Apply metrics
+    Metric.increment(externalExecutionCounter)
+  )
+```

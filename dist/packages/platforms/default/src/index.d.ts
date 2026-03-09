@@ -3,7 +3,7 @@
  * extensions, and optional entityEndpoints; core handles all merging.
  * @see docs/learnings/architecture.md
  */
-import type * as Layer from "effect/Layer";
+import * as Layer from "effect/Layer";
 import { type EntityEndpointDescriptor, type DefaultRunnerProfile } from "@eventiva/core";
 /**
  * A platform template is a Layer that provides Sharding (and Runner) plus any

@@ -52,6 +52,6 @@ export const WorkflowRegistry = Context.GenericTag<WorkflowRegistryService>("@ev
 const makeRegistry = Effect.gen(function* () {
   const ref = yield* Ref.make<Map<string, (opts: WorkflowExecuteOptions<unknown>) => Effect.Effect<unknown, unknown>>>(new Map())
   return new WorkflowRegistryImpl(ref) as WorkflowRegistryService
-})
+}).pipe(withSpanAndLog("makeRegistry"))
 
 export const WorkflowRegistryLive = Layer.scoped(WorkflowRegistry, makeRegistry)

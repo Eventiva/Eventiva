@@ -62,9 +62,6 @@
     "typescript": "~5.9.2",
     "typescript-eslint": "^8.40.0"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "dependencies": {
     "@effect/cluster": "^0.56.0",
     "@effect/experimental": "^0.58.0",

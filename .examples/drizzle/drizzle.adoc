@@ -1,0 +1,140 @@
+= Drizzle Module (projects/utilities/drizzle)
+
+The `drizzle.node.runtime.ts` file serves as a core integration point for configuring and managing services related to database interactions and logging using the `drizzle-orm` library in a PostgreSQL-based Node.js environment.
+This file provides implementation for services, classes, and the aspects necessary to initialize and maintain the `drizzle` ORM (Object-Relational Mapping), ensuring seamless operation of database queries, logging, and configuration management across modules.
+
+The key goals of this file are:
+
+- To configure and register the required database services.
+- To manage database logging with a focus on queries executed.
+- To define services and entry points required to initialize and register dependencies for database operations using Drizzle ORM.
+- To provide database schema management and connection pooling with support for PostgreSQL replicas.
+
+This section will cover the functionality, services, classes, and methods within this file.
+
+== Services Defined
+
+=== `DrizzleConfigService`
+
+This service provides configuration management specifically for Drizzle by extending the `Context.Tag` framework.
+The service uses a `ConfigMap` to manage configuration objects of the `DrizzleConfig` type and allows seamless retrieval of the configuration for Drizzle's runtime use.
+
+*Specification:*
+
+- **Extends**: `Context.Tag`
+- **Purpose**: Handles configurations specifically for the Drizzle ORM.
+- **Implementation Use**:
+- Wraps `DrizzleConfig` into a `ConfigMap`.
+- Retrieved through layer registration in the `provider()` method within the `DrizzleNode` class.
+
+.Usage Example (in an `Effect` generator)
+[source,typescript]
+----
+const drizzleConfig = yield* DrizzleConfigService;
+----
+
+=== `DB`
+
+The `DB` service configures and maintains the database connection.
+It leverages the `drizzle` ORM along with the defined schema to enable interactions with the database.
+
+*Specification:*
+
+- **Extends**: `Context.Tag`
+- **Purpose**: Provides a typed and ready-to-use connection for performing database operations.
+- **Implementation Use**:
+- Initializes the database connections (primary and replica if applicable).
+- Supports logging integrations via `AspectLogger`.
+
+.Usage Example (in an `Effect` generator)
+[source,typescript]
+----
+const db = yield* DB;
+----
+
+== Classes Defined
+
+=== `AspectLogger`
+
+The `AspectLogger` class implements the `Logger` interface to provide database query logging functionalities, ensuring that all query activities are logged for debugging or monitoring purposes.
+
+*Key Features and Structure:*
+
+- **Constructor Parameters**:
+- `Console`: An instance of `LoggerNode` for logging database operations.
+- `connection_name`: A string representing the name of the database connection (e.g., Primary or Replica).
+- **Methods**:
+- `logQuery(query: string, params: unknown[])`: Logs the execution of database queries using the provided query string and parameters.
+
+.Example:
+[source,typescript]
+----
+const logger = new AspectLogger(Console, "Primary: DatabaseName");
+logger.logQuery("SELECT * FROM users WHERE id = $1;", [1]);
+----
+
+=== `DrizzleNode`
+
+The `DrizzleNode` class acts as the module entry point (Aspect) for managing the default configurations, dependencies, and services associated with database operations.
+
+*Key Features and Structure:*
+
+* **Static Attributes**:
+- `dependencies`: Lists the required dependencies (`LoggerAspect`, `PostgresAspect`) that DrizzleNode relies on.
+- `defaultConfig()`: Retrieves the default configuration for Drizzle using the `Effect` generator function.
+Configurations are loaded via the `DrizzleConfig`.
+* **Static Methods**:
+- `provider(dependancies, config)`: Responsible for registering the layers (`DrizzleConfigService`, `DB`, etc.) and returning them as part of its `EffectProviderReturn`.
+
+== Installation and Database Migrations
+
+The `drizzle.node.runtime.ts` module ties closely with `drizzle-orm` and `drizzle-kit`, which manage database migrations and query generation.
+Below is a guide for installation and running migrations.
+
+=== Installing Drizzle-ORM and Drizzle-Kit
+
+To use this module, you need to install the required dependencies:
+
+.Install globally
+[source,bash]
+----
+npm install drizzle-orm drizzle-kit pg -g
+----
+
+.Install locally
+[source,bash]
+----
+npm install drizzle-orm drizzle-kit pg --save
+----
+
+=== Generating Migrations
+
+Use `drizzle-kit` to auto-generate migration files:
+
+.Generate migrations
+[source,bash]
+----
+drizzle-kit generate
+----
+
+Generated migration files are saved in the specified `out` directory (`./migrations/crm` in this case).
+
+Example generated file structure:
+
+----
+migrations/
+  crm/
+    0001_custom_typeid_domains.sql
+    0002_encircle_id_sequence.sql
+    ...
+----
+
+=== Running Migrations
+
+Apply the migrations to your database:
+
+.Migrate
+[source,bash]
+----
+drizzle-kit migrate
+----

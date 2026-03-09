@@ -6,6 +6,7 @@ import * as Context from "effect/Context"
 import * as Effect from "effect/Effect"
 import * as Layer from "effect/Layer"
 import * as Crypto from "node:crypto"
+import { withSpanAndLog } from "../observability/helpers.js"
 
 const ALGO = "aes-256-gcm"
 const IV_LEN = 12
@@ -82,12 +83,12 @@ export const PiiEncryptionLive: Layer.Layer<PiiEncryption, never> = Layer.sync(
         Effect.try({
           try: () => encryptImpl(key, plaintext),
           catch: (e) => new EncryptionError("Encrypt failed", e)
-        }),
+        }).pipe(withSpanAndLog("PiiEncryption.encrypt")),
       decrypt: (ciphertext: string) =>
         Effect.try({
           try: () => decryptImpl(key, ciphertext),
           catch: (e) => new EncryptionError("Decrypt failed", e)
-        })
+        }).pipe(withSpanAndLog("PiiEncryption.decrypt"))
     }
   }
 )

@@ -1,5 +1,5 @@
 {
-  "name": "extensions-hello-world",
+  "name": "@eventiva/extensions.hello-world",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/extensions/hello-world/src",
   "projectType": "library",

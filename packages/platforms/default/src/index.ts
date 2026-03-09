@@ -3,7 +3,7 @@
  * extensions, and optional entityEndpoints; core handles all merging.
  * @see docs/learnings/architecture.md
  */
-import type * as Layer from "effect/Layer"
+import * as Layer from "effect/Layer"
 import {
   createPlatformTemplate,
   DatabaseLiveInMemory,
@@ -30,9 +30,12 @@ export type PlatformTemplate = Layer.Layer<never, never, unknown>
 const databaseLayer = DatabaseLiveInMemory
 
 /**
- * Extensions to load (entity layers). Core adds the startup banner automatically.
+ * Extensions to load (id used for schema markReady). Core adds the startup banner automatically.
  */
-const extensions = [ContactLayer, HelloWorldLayer]
+const extensions = [
+  { id: "contact", layer: ContactLayer },
+  { id: "hello-world", layer: HelloWorldLayer }
+]
 
 /** Re-export so existing code can use the type from the platform package. */
 export type { DefaultRunnerProfile }

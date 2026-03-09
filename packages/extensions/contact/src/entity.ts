@@ -1,27 +1,30 @@
 /**
- * Contact entity: CRUD from createEntity. No store; platform provides Database layer.
+ * Contact entity: class-based schema and Effect Cluster entity via Base.
+ * Schema uses Effect Classes API (id + fields); Base provides entity and layer.
  */
-import { createEntity } from "@eventiva/core"
-import { ContactFields } from "./model.js"
+import * as Schema from "effect/Schema"
+import { Base, type BaseEncoded, type EntityRpc, encryptedString } from "@eventiva/core"
 
-/** Entity ID for the shared contact entity. Use this when calling Contact client (e.g. client("store")). */
+/** Encoded shape for Contact (storage/wire). */
+export interface ContactEncoded extends BaseEncoded<"Contact"> {
+  readonly fullname: string
+  readonly dateOfBirth: string
+  readonly email: string
+  readonly phone: string
+}
+
+export class Contact extends Base<Contact>()("Contact", {
+  fullname: Schema.String,
+  dateOfBirth: Schema.DateFromString,
+  email: encryptedString,
+  phone: Schema.String
+}, { withDelete: true }) {}
+
+/** Entity ID for the shared contact entity. Use when calling Contact.client("store"). */
 export const CONTACT_ENTITY_ID = "store"
 
-const { entity, layer } = createEntity({
-  name: "Contact",
-  schema: ContactFields,
-  withDelete: true
-})
-
-export const Contact = entity
-export type Contact = typeof Contact
-
-/** RPC union for Contact entity. Use with Request<ExtractTag<ContactRpc, "create">> etc. */
-export type ContactRpc = Contact["protocol"] extends import("@effect/rpc/RpcGroup").RpcGroup<
-  infer R extends import("@effect/rpc/Rpc").Any
->
-  ? R
-  : never
-
-/** Layer that provides Contact entity with CRUD handlers. Requires Database (and PiiEncryption for encrypted email). */
-export const ContactLayer = layer
+export const ContactEntity = Contact.entity
+export const ContactLayer = Contact.layer
+export type ContactRpc = EntityRpc<typeof Contact.entity>
+/** Decoded contact record (id + fields). */
+export type ContactRecord = Schema.Schema.Type<typeof Contact>

@@ -36,20 +36,35 @@ export interface WithSpanAndLogOptions {
  * })
  * ```
  */
-export function withSpanAndLog<A, E, R>(
+export function withSpanAndLog(
   spanName: string,
   options?: WithSpanAndLogOptions
 ) {
-  const metricName = options?.metricName ?? `${spanName}.duration`
+  const name = options?.metricName ?? spanName
+  const metricName = name.replace(/\./g, '_')
   const attrs = options?.attributes ?? {}
-  const timer = Metric.timer(metricName, `Duration of ${spanName}`)
+  
+  const timer = Metric.timer(`${metricName}_duration`)
+  const totalCounter = Metric.counter(`${metricName}_total`)
+  const successCounter = Metric.counter(`${metricName}_success`)
+  const errorCounter = Metric.counter(`${metricName}_error`)
 
-  return (effect: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
-    Effect.withSpan(spanName)(
+  return <A, E, R>(effect: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
+    Effect.withSpan(spanName, { attributes: attrs })(
       Effect.gen(function* () {
-        yield* Effect.log(`entry ${spanName}`, { spanName, ...attrs })
-        const result = yield* effect.pipe(Metric.trackDuration(timer))
-        yield* Effect.log(`exit ${spanName}`, { spanName, ...attrs })
+        yield* Effect.logTrace(`entry ${spanName}`, { spanName, ...attrs })
+        yield* Metric.increment(totalCounter)
+        const result = yield* effect.pipe(
+          Metric.trackDuration(timer),
+          Effect.tap(() => Metric.increment(successCounter)),
+          Effect.tapError((error) => 
+            Effect.gen(function* () {
+              yield* Effect.logError(`error ${spanName}`, { spanName, error, ...attrs })
+              yield* Metric.increment(errorCounter)
+            })
+          )
+        )
+        yield* Effect.logTrace(`exit ${spanName}`, { spanName, ...attrs })
         return result
       })
     )
