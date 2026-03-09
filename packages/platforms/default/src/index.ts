@@ -45,18 +45,21 @@ export type { DefaultRunnerProfile }
  */
 export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate({
   databaseLayer,
-  extensions: [], // Disable all extensions for debugging
+  extensions: [
+    { id: "contact", layer: ContactLayer },
+    { id: "hello-world", layer: HelloWorldLayer }
+  ],
   endpointsPort: 3000,
   debug: {
-    // Step 1: Enable minimum required services
-    disableObservability: false,  // Required for withSpanAndLog
-    disableCluster: true,          // Test without cluster first
-    disablePiiEncryption: true,    // Test without encryption first
-    disableSchema: false,          // Required for runCoreStartup
-    disableDatabase: false,        // Required for runCoreStartup
-    disableHooks: false,            // Required for runCoreStartup
-    disableStartupBanner: true,    // Test without banner first
-    disableEntityEndpoints: true   // Test without endpoints first
+    // All modules re-enabled after fixing ExtensionHooksLive
+    disableObservability: false,   // ✓ Enabled
+    disableCluster: false,         // ✓ Enabled
+    disablePiiEncryption: false,   // ✓ Enabled
+    disableSchema: false,          // ✓ Enabled
+    disableDatabase: false,        // ✓ Enabled
+    disableHooks: false,           // ✓ Enabled (fixed ExtensionHooksLive)
+    disableStartupBanner: false,   // ✓ Enabled
+    disableEntityEndpoints: false  // ✓ Enabled
   }
 })
 
