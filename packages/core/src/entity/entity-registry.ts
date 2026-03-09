@@ -35,6 +35,13 @@ export const EntityRegistry = {
   },
 
   /**
+   * Try to get an entity by name. Returns undefined if not registered (e.g. placeholder table skipped).
+   */
+  tryGet: <K extends keyof RegisteredEntities>(name: K): RegisteredEntities[K] | undefined => {
+    return entityMap.get(name as string) as RegisteredEntities[K] | undefined
+  },
+
+  /**
    * Register a fully constructed entity.
    */
   register: <K extends keyof RegisteredEntities>(name: K, entity: RegisteredEntities[K]): void => {

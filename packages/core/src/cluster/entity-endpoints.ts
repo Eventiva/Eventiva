@@ -46,6 +46,12 @@ const RpcInvokeSuccess = Schema.Struct({
   success: Schema.Unknown
 })
 
+/** Shutdown response. */
+const ShutdownSuccess = Schema.Struct({
+  ok: Schema.Literal(true),
+  message: Schema.String
+})
+
 /** Entity RPC API: one group "EntityRpc", one endpoint POST /api/rpc/:pathPrefix. */
 const EntityRpcEndpoint = HttpApiEndpoint.post("invoke", "/api/rpc/:pathPrefix")
   .setPath(Schema.Struct({ pathPrefix: Schema.String }))
@@ -54,8 +60,15 @@ const EntityRpcEndpoint = HttpApiEndpoint.post("invoke", "/api/rpc/:pathPrefix")
 
 const EntityRpcGroup = HttpApiGroup.make("EntityRpc").add(EntityRpcEndpoint)
 
+/** Shutdown: GET and POST /api/shutdown — return 200 then exit process. */
+const ShutdownGetEndpoint = HttpApiEndpoint.get("shutdownGet", "/api/shutdown").addSuccess(ShutdownSuccess)
+const ShutdownPostEndpoint = HttpApiEndpoint.post("shutdownPost", "/api/shutdown")
+  .setPayload(Schema.Struct({}))
+  .addSuccess(ShutdownSuccess)
+const ShutdownGroup = HttpApiGroup.make("Shutdown").add(ShutdownGetEndpoint).add(ShutdownPostEndpoint)
+
 /** Top-level API used by HttpApiBuilder.serve and HttpApiSwagger. */
-const EntityRpcApi = HttpApi.make("EventivaEntityRpc").add(EntityRpcGroup)
+const EntityRpcApi = HttpApi.make("EventivaEntityRpc").add(EntityRpcGroup).add(ShutdownGroup)
 
 /**
  * Descriptor for exposing an entity over HTTP/RPC. Register with the platform
@@ -175,17 +188,26 @@ export function makeEntityEndpointsLayer(
       )
     )
 
+    const shutdownResponse = { ok: true as const, message: "Shutting down" }
+    const scheduleExit = Effect.sync(() => setTimeout(() => process.exit(0), 100))
+    const shutdownGroupLive = HttpApiBuilder.group(EntityRpcApi, "Shutdown", (handlers) =>
+      handlers
+        .handle("shutdownGet", () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+        .handle("shutdownPost", () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+    )
+
     // Layer that provides HttpApi.Api (required by HttpApiSwagger.layer() and HttpApiBuilder.serve).
-    const apiLayer = HttpApiBuilder.api(EntityRpcApi).pipe(Layer.provide(entityRpcGroupLive))
+    const apiLayer = HttpApiBuilder.api(EntityRpcApi).pipe(
+      Layer.provide(entityRpcGroupLive),
+      Layer.provide(shutdownGroupLive)
+    )
 
-    // Serve the API and mount Swagger; both require HttpApi.Api (provided by apiLayer).
-    // Provide platform context so the server has HttpPlatform and related services.
+    // Serve the API and mount Swagger at /api/docs; both require HttpApi.Api (provided by apiLayer).
     const serveLayer = HttpApiBuilder.serve()
-    const swaggerLayer = HttpApiSwagger.layer()
+    const swaggerLayer = HttpApiSwagger.layer({ path: "/api/docs" })
 
-    const fullServerLayer = serveLayer.pipe(
+    const fullServerLayer = Layer.mergeAll(serveLayer, swaggerLayer).pipe(
       Layer.provide(apiLayer),
-      Layer.provide(swaggerLayer),
       Layer.provide(NodeHttpServer.layerContext)
     )
 

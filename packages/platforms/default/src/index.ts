@@ -29,9 +29,9 @@ const databaseLayer = DatabaseLiveInMemory
 /**
  * Extensions to load (id used for schema markReady). Core adds the startup banner automatically.
  */
-const extensions = [
-  { id: "contact", layer: ContactLayer },
-  { id: "hello-world", layer: HelloWorldLayer }
+const extensions: Array<{ id: string; layer: Layer.Layer<unknown, unknown, unknown> }> = [
+  { id: "hello-world", layer: HelloWorldLayer },
+  { id: "contact", layer: ContactLayer }
 ]
 
 /** Re-export so existing code can use the type from the platform package. */
