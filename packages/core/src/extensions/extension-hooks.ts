@@ -229,7 +229,11 @@ export const ExtensionHooks = Context.GenericTag<ExtensionHookPubSub>("@eventiva
 
 /**
  * Provides both ExtensionHookPubSub and ExtensionHooks (same service).
- * Uses a single service instance for both tags to avoid initialization issues.
+ * 
+ * FIX: Use Layer.merge to combine both layers. The ExtensionHooks layer requires
+ * ExtensionHookPubSub, which we provide via ExtensionHookPubSubLive. By using
+ * Layer.merge (not provideMerge), both layers are built independently and then
+ * merged, avoiding initialization order issues with Context.Tag.initial.
  */
 export const ExtensionHooksLive: Layer.Layer<ExtensionHookPubSub, never, never> = Layer.merge(
   ExtensionHookPubSubLive,

@@ -133,7 +133,10 @@ export function createPlatformTemplate(
   entityLayers.push(...options.extensions.map((e) => e.layer))
   
   const entitiesLayer = mergeEntityLayers(entityLayers)
-  let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
+  // If entitiesLayer is empty, just use base; otherwise provide base to entitiesLayer
+  let stack = entityLayers.length === 0
+    ? base
+    : entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
   
   // Add entity endpoints conditionally
   const endpoints = options.entityEndpoints ?? []

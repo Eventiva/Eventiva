@@ -1,7 +1,8 @@
 /**
- * Default platform: single entry point via createPlatformTemplate. Set databaseLayer,
- * extensions, and optional entityEndpoints; core handles all merging.
- * @see docs/learnings/architecture.md
+ * Debug version of the default platform: enables core processes one by one
+ * to identify which one causes the "Cannot read properties of undefined (reading 'initial')" error.
+ * 
+ * Usage: Modify the debug flags below to enable processes one by one.
  */
 import * as Layer from "effect/Layer"
 import {
@@ -38,25 +39,37 @@ const extensions = [
 export type { DefaultRunnerProfile }
 
 /**
- * Default platform Layer. Customise by changing databaseLayer or extensions above, then re-run.
- * 
- * DEBUG MODE: Currently all core processes and extensions are disabled for debugging.
- * Re-enable one by one to identify the problematic process.
+ * DEBUG: Enable processes one by one to find the problematic one.
+ * Start with all false, then set to true one at a time.
+ */
+const debugConfig = {
+  enableObservability: false,
+  enableCluster: false,
+  enablePiiEncryption: false,
+  enableSchema: false,
+  enableDatabase: false,
+  enableHooks: false,
+  enableStartupBanner: false,
+  enableEntityEndpoints: false,
+  enableExtensions: false
+}
+
+/**
+ * Default platform Layer with debug flags.
  */
 export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate({
   databaseLayer,
-  extensions: [], // Disable all extensions for debugging
-  endpointsPort: 3000,
+  extensions: debugConfig.enableExtensions ? extensions : [],
+  endpointsPort: debugConfig.enableEntityEndpoints ? 3000 : undefined,
   debug: {
-    // Step 1: Enable minimum required services
-    disableObservability: false,  // Required for withSpanAndLog
-    disableCluster: true,          // Test without cluster first
-    disablePiiEncryption: true,    // Test without encryption first
-    disableSchema: false,          // Required for runCoreStartup
-    disableDatabase: false,        // Required for runCoreStartup
-    disableHooks: false,            // Required for runCoreStartup
-    disableStartupBanner: true,    // Test without banner first
-    disableEntityEndpoints: true   // Test without endpoints first
+    disableObservability: !debugConfig.enableObservability,
+    disableCluster: !debugConfig.enableCluster,
+    disablePiiEncryption: !debugConfig.enablePiiEncryption,
+    disableSchema: !debugConfig.enableSchema,
+    disableDatabase: !debugConfig.enableDatabase,
+    disableHooks: !debugConfig.enableHooks,
+    disableStartupBanner: !debugConfig.enableStartupBanner,
+    disableEntityEndpoints: !debugConfig.enableEntityEndpoints
   }
 })
 
@@ -68,4 +81,5 @@ export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate(
  * Example: curl -X POST http://localhost:3000/api/rpc/contacts -H "Content-Type: application/json" -d '{"method":"list","payload":{}}'
  */
 
+console.log("DEBUG CONFIG:", debugConfig)
 runMain(defaultPlatformTemplate as any)
