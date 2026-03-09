@@ -12,9 +12,19 @@
  *   PATCH /api/:pathPrefix/{id} → update (body = patch)
  *   DELETE /api/:pathPrefix/{id} → delete
  *
+ * Uses @effect/platform HttpApi + HttpApiBuilder so HttpApiSwagger can document the API.
+ *
  * @see docs/learnings/architecture.md
  */
-import { HttpRouter, HttpServerRequest, HttpServerResponse, HttpServer } from "@effect/platform"
+import {
+  HttpApi,
+  HttpApiBuilder,
+  HttpApiEndpoint,
+  HttpApiGroup,
+  HttpApiSwagger,
+  HttpServer
+} from "@effect/platform"
+import { NodeHttpServer } from "@effect/platform-node"
 import { Sharding } from "@effect/cluster"
 import type * as Entity from "@effect/cluster/Entity"
 import * as Context from "effect/Context"
@@ -23,6 +33,29 @@ import * as Layer from "effect/Layer"
 import * as Schema from "effect/Schema"
 import { EntityRegistry } from "../entity/entity-registry.js"
 import { withSpanAndLog } from "../observability/helpers.js"
+
+/** Request body for entity RPC invoke. */
+const RpcInvokePayload = Schema.Struct({
+  entityId: Schema.optional(Schema.String),
+  method: Schema.String,
+  payload: Schema.optional(Schema.Unknown)
+})
+
+/** Success response: { success: unknown }. */
+const RpcInvokeSuccess = Schema.Struct({
+  success: Schema.Unknown
+})
+
+/** Entity RPC API: one group "EntityRpc", one endpoint POST /api/rpc/:pathPrefix. */
+const EntityRpcEndpoint = HttpApiEndpoint.post("invoke", "/api/rpc/:pathPrefix")
+  .setPath(Schema.Struct({ pathPrefix: Schema.String }))
+  .setPayload(RpcInvokePayload)
+  .addSuccess(RpcInvokeSuccess)
+
+const EntityRpcGroup = HttpApiGroup.make("EntityRpc").add(EntityRpcEndpoint)
+
+/** Top-level API used by HttpApiBuilder.serve and HttpApiSwagger. */
+const EntityRpcApi = HttpApi.make("EventivaEntityRpc").add(EntityRpcGroup)
 
 /**
  * Descriptor for exposing an entity over HTTP/RPC. Register with the platform
@@ -56,7 +89,7 @@ export interface EntityEndpointsOptions {
 /**
  * Builds a Layer that starts an HTTP server exposing RPC proxy routes for each
  * descriptor. Requires Sharding. Server runs in a scope and is closed when the
- * scope ends.
+ * scope ends. Uses HttpApi + HttpApiBuilder so HttpApi.Api is provided for HttpApiSwagger.
  *
  * Route: POST /api/rpc/:pathPrefix
  * Body: { entityId?: string, method: string, payload?: unknown }
@@ -69,93 +102,112 @@ export function makeEntityEndpointsLayer(
   const port = options.port ?? 3000
   const startServer = Effect.gen(function* () {
     yield* Effect.logDebug("Initializing EntityEndpointsServer")
-      yield* Sharding.Sharding
+    yield* Sharding.Sharding
 
-      // Add all dynamically generated entities to descriptors
-      const allRegisteredEntities = EntityRegistry.getAll()
-      const allDescriptors = [...descriptors]
-      
-      for (const [name, EntityClass] of allRegisteredEntities.entries()) {
-        if (!allDescriptors.some(d => d.entity === (EntityClass as any).entity)) {
-          allDescriptors.push({
-            entity: (EntityClass as any).entity,
-            defaultEntityId: "store", // or some other default
-            pathPrefix: name.toLowerCase() + "s" // naive pluralization
-          })
-        }
-      }
+    // Add all dynamically generated entities to descriptors
+    const allRegisteredEntities = EntityRegistry.getAll()
+    const allDescriptors = [...descriptors]
 
-      const map = new Map<
-        string,
-        {
-          entity: Entity.Any
-          getClient: (entityId: string) => Record<string, (payload: unknown) => Effect.Effect<unknown>>
-          defaultEntityId: string
-        }
-      >()
-      for (const d of allDescriptors) {
-        const entity = d.entity as Entity.Any
-        const getClient = yield* entity.client
-        map.set(d.pathPrefix, {
-          entity,
-          getClient: getClient as unknown as (entityId: string) => Record<string, (payload: unknown) => Effect.Effect<unknown>>,
-          defaultEntityId: d.defaultEntityId
+    for (const [name, EntityClass] of allRegisteredEntities.entries()) {
+      if (!allDescriptors.some((d) => d.entity === (EntityClass as any).entity)) {
+        allDescriptors.push({
+          entity: (EntityClass as any).entity,
+          defaultEntityId: "store",
+          pathPrefix: name.toLowerCase() + "s"
         })
       }
+    }
 
-      // Build an HttpApi
-      // Effect 3.x HttpApi API changed heavily, let's use the router approach we had previously
-      // and mount Swagger manually.
-      const router = HttpRouter.empty.pipe(
-        HttpRouter.post("/api/rpc/:pathPrefix", Effect.gen(function* () {
-          const req = yield* HttpServerRequest.HttpServerRequest
-          const pathPrefix = req.url.split('/')[3]
+    const map = new Map<
+      string,
+      {
+        entity: Entity.Any
+        getClient: (entityId: string) => Record<string, (payload: unknown) => Effect.Effect<unknown>>
+        defaultEntityId: string
+      }
+    >()
+    for (const d of allDescriptors) {
+      const entity = d.entity as Entity.Any
+      const getClient = yield* entity.client
+      map.set(d.pathPrefix, {
+        entity,
+        getClient: getClient as unknown as (
+          entityId: string
+        ) => Record<string, (payload: unknown) => Effect.Effect<unknown>>,
+        defaultEntityId: d.defaultEntityId
+      })
+    }
+
+    // Implement the EntityRpc group: single handler that uses the descriptor map.
+    const entityRpcGroupLive = HttpApiBuilder.group(EntityRpcApi, "EntityRpc", (handlers) =>
+      handlers.handle("invoke", ({ path: { pathPrefix }, payload }) =>
+        Effect.gen(function* () {
           const entry = map.get(pathPrefix)
-          if (!entry) return HttpServerResponse.json({ error: `Unknown pathPrefix: ${pathPrefix}` }, { status: 404 })
-          
-          const bodyResult = yield* req.json.pipe(Effect.either)
-          if (bodyResult._tag === "Left") return HttpServerResponse.json({ error: "Invalid JSON body" }, { status: 400 })
-          
-          const body = bodyResult.right as any
-          const { entityId, method, payload } = body
-          if (typeof method !== "string") return HttpServerResponse.json({ error: "body.method is required" }, { status: 400 })
-          
+          if (!entry)
+            return { success: { error: `Unknown pathPrefix: ${pathPrefix}` } } as {
+              success: unknown
+            }
+          const { entityId, method, payload: payloadData } = payload
+          if (typeof method !== "string")
+            return { success: { error: "body.method is required" } } as { success: unknown }
           const client = entry.getClient(entityId ?? entry.defaultEntityId)
           const fn = client[method]
-          if (typeof fn !== "function") return HttpServerResponse.json({ error: `Unknown method: ${method}` }, { status: 400 })
-          
-          const rpc = entry.entity.protocol.requests.get(method) as { payloadSchema: Schema.Schema<unknown> } | undefined
-          const decodeEffect = rpc?.payloadSchema != null 
-            ? Schema.decodeUnknown(rpc.payloadSchema as any)(payload ?? {})
-            : Effect.succeed(payload ?? {})
-            
+          if (typeof fn !== "function")
+            return { success: { error: `Unknown method: ${method}` } } as { success: unknown }
+          const rpc = entry.entity.protocol.requests.get(method) as
+            | { payloadSchema: Schema.Schema<unknown> }
+            | undefined
+          const decodeEffect =
+            rpc?.payloadSchema != null
+              ? Schema.decodeUnknown(rpc.payloadSchema as Schema.Schema<unknown>)(payloadData ?? {})
+              : Effect.succeed(payloadData ?? {})
           const result = yield* decodeEffect.pipe(
-            Effect.flatMap((decoded: any) => fn(decoded)),
-            Effect.map(success => HttpServerResponse.json({ success })),
-            Effect.catchAll(err => Effect.succeed(HttpServerResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 })))
+            Effect.flatMap((decoded: unknown) => fn(decoded)),
+            Effect.map((success) => ({ success })),
+            Effect.catchAll((err) =>
+              Effect.succeed({
+                success: { error: err instanceof Error ? err.message : String(err) }
+              })
+            )
           )
-          return result
-        }) as any) // suppress handler signature mismatch due to lack of standard payload return types and effect matching
+          return result as { success: unknown }
+        })
       )
-      
-      const app = router.pipe(
-        Effect.catchAll(err => Effect.succeed(HttpServerResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 })))
-      )
-      const serverRouter = HttpServer.serve()(app as any)
-      
-      yield* Layer.build(serverRouter)
-      
-      const paths = allDescriptors.map((d) => `POST /api/rpc/${d.pathPrefix}`)
-      yield* Effect.logDebug("Entity HTTP endpoints up", { paths, service: "eventiva-core" })
-      return { port } as const
+    )
+
+    // Layer that provides HttpApi.Api (required by HttpApiSwagger.layer() and HttpApiBuilder.serve).
+    const apiLayer = HttpApiBuilder.api(EntityRpcApi).pipe(Layer.provide(entityRpcGroupLive))
+
+    // Serve the API and mount Swagger; both require HttpApi.Api (provided by apiLayer).
+    // Provide platform context so the server has HttpPlatform and related services.
+    const serveLayer = HttpApiBuilder.serve()
+    const swaggerLayer = HttpApiSwagger.layer()
+
+    const fullServerLayer = serveLayer.pipe(
+      Layer.provide(apiLayer),
+      Layer.provide(swaggerLayer),
+      Layer.provide(NodeHttpServer.layerContext)
+    )
+
+    yield* Layer.build(fullServerLayer)
+
+    const paths = allDescriptors.map((d) => `POST /api/rpc/${d.pathPrefix}`)
+    yield* Effect.logDebug("Entity HTTP endpoints up", { paths, service: "eventiva-core" })
+    return { port } as const
   })
-  return Layer.scoped(EntityEndpointsServer, startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))) as Layer.Layer<EntityEndpointsServer, any, Sharding.Sharding | HttpServer.HttpServer>
+  return Layer.scoped(
+    EntityEndpointsServer,
+    startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))
+  ) as Layer.Layer<
+    EntityEndpointsServer,
+    any,
+    Sharding.Sharding | HttpServer.HttpServer
+  >
 }
 
 /**
  * Tag for the entity endpoints server (holds port after start). Use for tests or logging.
  */
-export class EntityEndpointsServer extends Context.Tag("@eventiva/core/EntityEndpointsServer")<
-  EntityEndpointsServer,
-  { readonly port: number }
->() {}
+export class EntityEndpointsServer extends Context.Tag(
+  "@eventiva/core/EntityEndpointsServer"
+)<EntityEndpointsServer, { readonly port: number }>() {}

@@ -5,7 +5,6 @@
  * composing many core layers by hand.
  * @see docs/learnings/architecture.md
  */
-import { HttpApiSwagger } from "@effect/platform"
 import * as Layer from "effect/Layer"
 import * as Scope from "effect/Scope"
 import { createServer } from "node:http"
@@ -82,16 +81,19 @@ export function createPlatformTemplate(
   const endpoints = options.entityEndpoints ?? []
   if (endpoints.length > 0 || options.endpointsPort !== undefined) {
     const port = options.endpointsPort ?? 3000
-    // Provide a default node http server if we are building the endpoints layer
+    // Provide Node HTTP server and platform context. HttpApi.Api and Swagger are provided inside makeEntityEndpointsLayer.
     const serverLayer = NodeHttpServer.layer(() => createServer(), { port, host: "0.0.0.0" })
-    const swaggerLayer = HttpApiSwagger.layer()
+    const platformContextLayer = NodeHttpServer.layerContext
 
     const endpointsLayer = makeEntityEndpointsLayer(endpoints, { port })
-    stack = Layer.merge(stack, endpointsLayer.pipe(Layer.provide(stack), Layer.provide(serverLayer), Layer.provide(swaggerLayer))) as Layer.Layer<
-      never,
-      any,
-      unknown
-    >
+    stack = Layer.merge(
+      stack,
+      endpointsLayer.pipe(
+        Layer.provide(stack),
+        Layer.provide(serverLayer),
+        Layer.provide(platformContextLayer)
+      )
+    ) as Layer.Layer<never, any, unknown>
   }
   return stack
 }
