@@ -5,8 +5,10 @@
 import * as Context from "effect/Context"
 import * as Effect from "effect/Effect"
 import * as Layer from "effect/Layer"
+import * as Option from "effect/Option"
 import * as Crypto from "node:crypto"
 import { withSpanAndLog } from "../observability/helpers.js"
+import { RuntimeConfig } from "../config/runtime-config.js"
 
 const ALGO = "aes-256-gcm"
 const IV_LEN = 12
@@ -67,16 +69,19 @@ function makeKey(raw: string): Buffer {
   return padded
 }
 
-export const PiiEncryptionLive: Layer.Layer<PiiEncryption, never> = Layer.sync(
+export const PiiEncryptionLive: Layer.Layer<PiiEncryption, never, RuntimeConfig> = Layer.effect(
   PiiEncryption,
-  () => {
-    const raw = typeof process !== "undefined" ? process.env[ENCRYPTION_KEY_ENV] : undefined
-    if (!raw && process.env?.["NODE_ENV"] === "production") {
+  Effect.gen(function* () {
+    const runtimeConfig = yield* RuntimeConfig
+    const raw = Option.getOrUndefined(runtimeConfig.encryptionKey)
+    if (!raw && runtimeConfig.nodeEnv === "production") {
       throw new Error(`Missing ${ENCRYPTION_KEY_ENV} in production`)
     }
     const key = makeKey(raw ?? DEV_KEY_B64)
     if (!raw) {
-      console.warn("[eventiva-core] Using default dev encryption key; set EVENTIVA_ENCRYPTION_KEY for non-dev")
+      yield* Effect.logWarning(
+        "[eventiva-core] Using default dev encryption key; set EVENTIVA_ENCRYPTION_KEY for non-dev"
+      )
     }
     return {
       encrypt: (plaintext: string) =>
@@ -90,5 +95,5 @@ export const PiiEncryptionLive: Layer.Layer<PiiEncryption, never> = Layer.sync(
           catch: (e) => new EncryptionError("Decrypt failed", e)
         }).pipe(withSpanAndLog("PiiEncryption.decrypt"))
     }
-  }
+  })
 )

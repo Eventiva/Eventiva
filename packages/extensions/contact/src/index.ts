@@ -15,4 +15,5 @@ export {
 
 export const ContactLayer: ExtensionLayer = ContactWorkflowLayer as unknown as ExtensionLayer
 
+export { ContactConfig, ContactConfigLayer } from "./config.js"
 export { ContactWorkflowLayer }

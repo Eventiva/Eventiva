@@ -8,7 +8,7 @@
 import * as Layer from "effect/Layer";
 import { type EntityEndpointDescriptor } from "../cluster/entity-endpoints.js";
 import { Database } from "../database/database.js";
-import { type ExtensionLayer } from "../extensions/extension-registry.js";
+import { type ExtensionRegistration } from "../extensions/extension-registry.js";
 /**
  * Options for createPlatformTemplate. Provide a database layer and an array of
  * extension layers (each with an id for schema markReady); optionally register entity HTTP endpoints.
@@ -20,10 +20,7 @@ export interface CreatePlatformTemplateOptions {
      */
     readonly databaseLayer: Layer.Layer<Database>;
     /** Extensions to load (id used for schema markReady and finalization count). */
-    readonly extensions: ReadonlyArray<{
-        readonly id: string;
-        readonly layer: ExtensionLayer;
-    }>;
+    readonly extensions: ReadonlyArray<ExtensionRegistration>;
     /** When set, an HTTP server is started exposing RPC (and REST for CRUD entities) for these descriptors. */
     readonly entityEndpoints?: ReadonlyArray<EntityEndpointDescriptor>;
     /** Port for the entity endpoints server (default 3000). */

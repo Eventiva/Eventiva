@@ -10,7 +10,16 @@ import * as LayerMerge from "effect/Layer"
  * ExtensionHooks, Scope, Sharding, Logger, Tracer, Metric). Each extension exports one such layer.
  * Requirements (R) and error (E) are often unknown when layers use subscribe-style hooks.
  */
-export type ExtensionLayer = Layer.Layer<unknown, unknown, unknown>
+export type ExtensionLayer = Layer.Layer<never, unknown, unknown>
+/** Optional config layer exported by an extension and loaded at platform startup. */
+export type ExtensionConfigLayer = Layer.Layer<never, unknown, unknown>
+
+/** Extension registration used by platform templates. */
+export interface ExtensionRegistration {
+  readonly id: string
+  readonly layer: ExtensionLayer
+  readonly configLayer?: ExtensionConfigLayer
+}
 
 /**
  * Type for a list of extension layers (runner profile). Use with createPlatformTemplate options.
@@ -22,6 +31,18 @@ export type DefaultRunnerProfile = ReadonlyArray<ExtensionLayer>
  * Use this to compose the set of extensions that a runner process hosts.
  */
 export function mergeEntityLayers(layers: ReadonlyArray<ExtensionLayer>): Layer.Layer<never, never, unknown> {
+  if (layers.length === 0) return LayerMerge.empty
+  if (layers.length === 1) return layers[0] as unknown as Layer.Layer<never, never, unknown>
+  return LayerMerge.mergeAll(layers[0], layers[1], ...layers.slice(2)) as unknown as Layer.Layer<never, never, unknown>
+}
+
+/**
+ * Merges extension config layers so they can be provided by the platform before
+ * extension entities and startup hooks run.
+ */
+export function mergeConfigLayers(
+  layers: ReadonlyArray<ExtensionConfigLayer>
+): Layer.Layer<never, never, unknown> {
   if (layers.length === 0) return LayerMerge.empty
   if (layers.length === 1) return layers[0] as unknown as Layer.Layer<never, never, unknown>
   return LayerMerge.mergeAll(layers[0], layers[1], ...layers.slice(2)) as unknown as Layer.Layer<never, never, unknown>

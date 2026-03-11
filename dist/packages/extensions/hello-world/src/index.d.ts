@@ -1,5 +1,6 @@
 import type { ExtensionLayer } from "@eventiva/core";
 export { HelloWorld } from "./entity.js";
+export { HelloWorldConfig, HelloWorldConfigLayer } from "./config.js";
 export { sayHelloHandler } from "./handlers.js";
 export { HelloWorldWorkflowAndLoadLayer } from "./workflow.js";
 /**

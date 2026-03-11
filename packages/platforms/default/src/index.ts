@@ -8,10 +8,11 @@ import {
   createPlatformTemplate,
   DatabaseLiveInMemory,
   runMain,
-  type DefaultRunnerProfile
+  type DefaultRunnerProfile,
+  type ExtensionRegistration
 } from "@eventiva/core"
-import { HelloWorldLayer } from "@eventiva/extensions.hello-world"
-import { ContactLayer } from "@eventiva/extensions.contact"
+import { HelloWorldConfigLayer, HelloWorldLayer } from "@eventiva/extensions.hello-world"
+import { ContactConfigLayer, ContactLayer } from "@eventiva/extensions.contact"
 
 /**
  * A platform template is a Layer that provides Sharding (and Runner) plus any
@@ -29,9 +30,9 @@ const databaseLayer = DatabaseLiveInMemory
 /**
  * Extensions to load (id used for schema markReady). Core adds the startup banner automatically.
  */
-const extensions: Array<{ id: string; layer: Layer.Layer<unknown, unknown, unknown> }> = [
-  { id: "hello-world", layer: HelloWorldLayer },
-  { id: "contact", layer: ContactLayer }
+const extensions: ReadonlyArray<ExtensionRegistration> = [
+  { id: "hello-world", layer: HelloWorldLayer, configLayer: HelloWorldConfigLayer },
+  { id: "contact", layer: ContactLayer, configLayer: ContactConfigLayer }
 ]
 
 /** Re-export so existing code can use the type from the platform package. */

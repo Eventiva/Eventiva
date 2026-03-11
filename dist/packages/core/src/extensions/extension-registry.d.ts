@@ -8,7 +8,15 @@ import type * as Layer from "effect/Layer";
  * ExtensionHooks, Scope, Sharding, Logger, Tracer, Metric). Each extension exports one such layer.
  * Requirements (R) and error (E) are often unknown when layers use subscribe-style hooks.
  */
-export type ExtensionLayer = Layer.Layer<unknown, unknown, unknown>;
+export type ExtensionLayer = Layer.Layer<never, unknown, unknown>;
+/** Optional config layer exported by an extension and loaded at platform startup. */
+export type ExtensionConfigLayer = Layer.Layer<never, unknown, unknown>;
+/** Extension registration used by platform templates. */
+export interface ExtensionRegistration {
+    readonly id: string;
+    readonly layer: ExtensionLayer;
+    readonly configLayer?: ExtensionConfigLayer;
+}
 /**
  * Type for a list of extension layers (runner profile). Use with createPlatformTemplate options.
  */
@@ -18,6 +26,11 @@ export type DefaultRunnerProfile = ReadonlyArray<ExtensionLayer>;
  * Use this to compose the set of extensions that a runner process hosts.
  */
 export declare function mergeEntityLayers(layers: ReadonlyArray<ExtensionLayer>): Layer.Layer<never, never, unknown>;
+/**
+ * Merges extension config layers so they can be provided by the platform before
+ * extension entities and startup hooks run.
+ */
+export declare function mergeConfigLayers(layers: ReadonlyArray<ExtensionConfigLayer>): Layer.Layer<never, never, unknown>;
 /**
  * A runner profile is a named set of entity layers. A runner process is configured
  * with a profile and only loads those extensions (e.g. "default", "transforms-only").

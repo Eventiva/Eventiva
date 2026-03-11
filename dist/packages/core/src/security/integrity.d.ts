@@ -4,6 +4,7 @@
  * Security module must start before everything else (see .cursor/plans/notes.md).
  */
 import * as Effect from "effect/Effect";
+import { RuntimeConfig } from "../config/runtime-config.js";
 /**
  * Runs integrity checks. Call this before publishing CORE_LOADED_TOPIC.
  * On failure returns a failed Effect (runtime should exit).
@@ -15,5 +16,5 @@ import * as Effect from "effect/Effect";
 export declare const runIntegrityChecks: Effect.Effect<void, {
     _tag: "IntegrityCheckFailed";
     reason: string;
-}>;
+}, RuntimeConfig>;
 //# sourceMappingURL=integrity.d.ts.map

@@ -4,6 +4,7 @@
  */
 import * as Effect from "effect/Effect";
 import { type Request } from "@eventiva/core";
+import { HelloWorldConfig } from "./config.js";
 /** Raw handler for sayHello; wrapped with extension hooks in the layer via withExtensionHooksWith. */
-export declare function sayHelloHandler(envelope: Request<any>): Effect.Effect<string, never, never>;
+export declare function sayHelloHandler(envelope: Request<any>): Effect.Effect<string, never, HelloWorldConfig>;
 //# sourceMappingURL=handlers.d.ts.map

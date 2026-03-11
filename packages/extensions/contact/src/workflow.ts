@@ -13,6 +13,7 @@ import {
   EntityRegistry,
   withSpanAndLog
 } from "@eventiva/core"
+import { ContactConfig } from "./config.js"
 import { CONTACT_ENTITY_ID, contactColumns } from "./entity.js"
 
 const EXTENSION_ID = "contact"
@@ -35,19 +36,16 @@ const OnLoadLayer = makeExtensionOnLoadLayer(
   })
 )
 
-// ---- Seed workflow: on EXTENSIONS_LOADED, if contact list empty create one demo, then log list ----
-const contactCreatePayload = {
-  fullname: "Jane Doe",
-  dateOfBirth: new Date("1990-05-15").toISOString(), // assuming date string for effect schema
-  email: "jane@example.com",
-  phone: "+1234567890"
-}
-
 const ContactSeedLayer = makeExtensionWorkflowLayer(
   EXTENSION_ID,
   "seed",
   EXTENSIONS_LOADED_TOPIC,
   Effect.gen(function* () {
+    const config = yield* ContactConfig
+    if (!config.seedEnabled) {
+      yield* Effect.log("Contact seed disabled by config.")
+      return
+    }
     const Contact = EntityRegistry.tryGet("Contact")
     if (!Contact) {
       yield* Effect.log("Contact entity not registered (e.g. in-memory DB with placeholder tables); skipping seed.")
@@ -59,6 +57,12 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
     // @ts-expect-error dynamic methods
     const list = yield* client.list({})
     if (list.length === 0) {
+      const contactCreatePayload = {
+        fullname: config.seedFullname,
+        dateOfBirth: new Date(config.seedDateOfBirth).toISOString(),
+        email: config.seedEmail,
+        phone: config.seedPhone
+      }
       // @ts-expect-error dynamic methods
       const created = yield* client.create(contactCreatePayload)
       yield* Effect.log("contact created (demo seed)", { id: created.id, extension: "extensions.contact" })
