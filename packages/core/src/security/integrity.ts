@@ -4,8 +4,10 @@
  * Security module must start before everything else (see .cursor/plans/notes.md).
  */
 import * as Effect from "effect/Effect"
+import * as Option from "effect/Option"
 import * as Crypto from "node:crypto"
 import { withSpanAndLog } from "../observability/helpers.js"
+import { RuntimeConfig } from "../config/runtime-config.js"
 
 const INTEGRITY_NONCE_ENV = "EVENTIVA_INTEGRITY_NONCE"
 
@@ -17,11 +19,12 @@ const INTEGRITY_NONCE_ENV = "EVENTIVA_INTEGRITY_NONCE"
  * is present and matches a minimal validation. In production this would be
  * replaced or extended with build-time signing or external attestation.
  */
-export const runIntegrityChecks: Effect.Effect<void, { _tag: "IntegrityCheckFailed"; reason: string }> =
+export const runIntegrityChecks: Effect.Effect<void, { _tag: "IntegrityCheckFailed"; reason: string }, RuntimeConfig> =
   Effect.gen(function* () {
     yield* Effect.logInfo("Starting integrity checks...")
-    const nonce = process.env[INTEGRITY_NONCE_ENV]
-    if (process.env["NODE_ENV"] === "production" && !nonce) {
+    const runtimeConfig = yield* RuntimeConfig
+    const nonce = Option.getOrUndefined(runtimeConfig.integrityNonce)
+    if (runtimeConfig.nodeEnv === "production" && !nonce) {
       return yield* Effect.fail({
         _tag: "IntegrityCheckFailed" as const,
         reason: `Missing ${INTEGRITY_NONCE_ENV} in production`

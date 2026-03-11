@@ -12,6 +12,7 @@ import { sayHelloHandler } from "./handlers.js"
 import { HelloWorldWorkflowAndLoadLayer } from "./workflow.js"
 
 export { HelloWorld } from "./entity.js"
+export { HelloWorldConfig, HelloWorldConfigLayer } from "./config.js"
 export { sayHelloHandler } from "./handlers.js"
 export { HelloWorldWorkflowAndLoadLayer } from "./workflow.js"
 

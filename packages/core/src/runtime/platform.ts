@@ -6,6 +6,7 @@
  * @see docs/learnings/architecture.md
  */
 import * as Layer from "effect/Layer"
+import * as Effect from "effect/Effect"
 import * as Scope from "effect/Scope"
 import { createServer } from "node:http"
 import { ObservabilityLive } from "../observability/layer.js"
@@ -15,9 +16,13 @@ import { makeEntityEndpointsLayer, EntityEndpointsServer, type EntityEndpointDes
 import { PiiEncryptionLive } from "../security/index.js"
 import { Database } from "../database/database.js"
 import { ExtensionHooksLive, WorkflowEngineLayerInMemory } from "../extensions/extension-hooks.js"
-import { mergeEntityLayers, type ExtensionLayer } from "../extensions/extension-registry.js"
+import {
+  mergeConfigLayers,
+  mergeEntityLayers,
+  type ExtensionRegistration
+} from "../extensions/extension-registry.js"
 import { WorkflowRegistryLive } from "../workflow/engine.js"
-import { StartupBannerLayer } from "./startup-banner.js"
+import { RuntimeConfigLive } from "../config/runtime-config.js"
 import {
   FinalTableStoreLive,
   SchemaFinalizer,
@@ -38,7 +43,7 @@ export interface CreatePlatformTemplateOptions {
    */
   readonly databaseLayer: Layer.Layer<Database>
   /** Extensions to load (id used for schema markReady and finalization count). */
-  readonly extensions: ReadonlyArray<{ readonly id: string; readonly layer: ExtensionLayer }>
+  readonly extensions: ReadonlyArray<ExtensionRegistration>
   /** When set, an HTTP server is started exposing RPC (and REST for CRUD entities) for these descriptors. */
   readonly entityEndpoints?: ReadonlyArray<EntityEndpointDescriptor>
   /** Port for the entity endpoints server (default 3000). */
@@ -53,7 +58,17 @@ export interface CreatePlatformTemplateOptions {
 export function createPlatformTemplate(
   options: CreatePlatformTemplateOptions
 ): Layer.Layer<never, any, unknown> {
+  const endpointsPort = options.endpointsPort ?? 3000
   const scopeLayer = Layer.scoped(Scope.Scope, Scope.make())
+  const runtimeConfigLayer = RuntimeConfigLive({ endpointsPort })
+  const piiLayer = PiiEncryptionLive.pipe(
+    Layer.provide(runtimeConfigLayer)
+  )
+  const extensionConfigLayer = mergeConfigLayers(
+    options.extensions.flatMap((extension) =>
+      extension.configLayer ? [extension.configLayer] : []
+    )
+  )
   const schemaConfigLayer = SchemaRegistryConfigLive(options.extensions.length)
   const schemaStack = TableColumnRegistryLive.pipe(
     Layer.provideMerge(FinalTableStoreLive),
@@ -68,32 +83,63 @@ export function createPlatformTemplate(
   )
   const base = Layer.mergeAll(
     ObservabilityLive,
+    runtimeConfigLayer,
+    extensionConfigLayer,
     clusterLayerDefault,
-    PiiEncryptionLive,
+    piiLayer,
     schemaStack,
     options.databaseLayer,
     hooksStack,
     scopeLayer
   )
   const entitiesLayer = mergeEntityLayers([
-    ...options.extensions.map((e) => e.layer),
-    StartupBannerLayer as unknown as ExtensionLayer
+    ...options.extensions.map((e) => e.layer)
   ])
   let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
   const endpoints = options.entityEndpoints ?? []
-  const port = options.endpointsPort ?? 3000
-  if (endpoints.length > 0 || options.endpointsPort !== undefined) {
-    // Start HTTP server when entity endpoints are provided or endpointsPort is set (for /api/docs, shutdown, etc.)
-    const serverLayer = NodeHttpServer.layer(() => createServer(), { port, host: "0.0.0.0" })
+  if (endpoints.length > 0) {
+    // Start HTTP endpoints only when descriptors are provided.
+    const serverLayer = NodeHttpServer.layer(() => createServer(), { port: endpointsPort, host: "0.0.0.0" })
     const platformContextLayer = NodeHttpServer.layerContext
-
-    const endpointsLayer = makeEntityEndpointsLayer(endpoints, { port })
+    const endpointsLayer = makeEntityEndpointsLayer(endpoints, { port: endpointsPort })
+    const providedEndpointsLayer = endpointsLayer.pipe(
+      Layer.provide(stack),
+      Layer.provide(serverLayer),
+      Layer.provide(platformContextLayer)
+    )
+    stack = Layer.merge(stack, providedEndpointsLayer) as Layer.Layer<never, any, unknown>
+  } else if (options.endpointsPort !== undefined) {
+    // Keep port open even without endpoint descriptors.
+    const serverLayer = Layer.scopedDiscard(
+      Effect.acquireRelease(
+        Effect.sync(() => {
+          const server = createServer((_req, res) => {
+            res.statusCode = 200
+            res.end("Eventiva runtime")
+          })
+          server.listen(endpointsPort, "0.0.0.0")
+          return server
+        }),
+        (server) =>
+          Effect.promise(
+            () =>
+              new Promise<void>((resolve, reject) => {
+                server.close((error) => {
+                  if (error) {
+                    reject(error)
+                    return
+                  }
+                  resolve()
+                })
+              })
+          ).pipe(Effect.catchAll(() => Effect.void))
+      )
+    )
     stack = Layer.merge(
       stack,
-      endpointsLayer.pipe(
-        Layer.provide(stack),
-        Layer.provide(serverLayer),
-        Layer.provide(platformContextLayer)
+      Layer.merge(
+        serverLayer,
+        Layer.succeed(EntityEndpointsServer, { port: endpointsPort })
       )
     ) as Layer.Layer<never, any, unknown>
   } else {
