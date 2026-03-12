@@ -10,11 +10,6 @@ updates:
       include: scope
     labels: []
     groups:
-      npm-security:
-        patterns:
-          - "*"
-        update-types:
-          - "security"
       npm-minor-patch:
         patterns:
           - "*"
