@@ -10,6 +10,11 @@ updates:
       include: scope
     labels: []
     groups:
+      npm-security:
+        patterns:
+          - "*"
+        update-types:
+          - "security"
       npm-minor-patch:
         patterns:
           - "*"
@@ -25,14 +30,14 @@ updates:
     commit-message:
       prefix: "maint"
       include: scope
-    labels: [ ]
+    labels: []
 
   - package-ecosystem: github-actions
-    directory: /
+    directory: "/"
     schedule:
       interval: "daily"
       time: "02:00"
     commit-message:
       prefix: "maint"
       include: scope
-    labels: [ ]
+    labels: []
