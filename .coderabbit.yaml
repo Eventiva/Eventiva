@@ -1,25 +1,30 @@
 # yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
-# https://docs.coderabbit.ai/getting-started/yaml-configuration
-# Nx monorepo; CodeRabbit uses its own defaults (no path-specific instructions).
-
-language: "en-GB"
+language: en-GB
 early_access: true
 reviews:
+  profile: assertive
   request_changes_workflow: true
-  high_level_summary: true
-  poem: false
-  review_status: true
-  collapse_walkthrough: false
+  high_level_summary_placeholder: '@gensummary'
+  high_level_summary_in_walkthrough: true
+  auto_title_placeholder: '@gentitle'
+  review_details: true
+  fail_commit_status: true
+  auto_assign_reviewers: true
   auto_review:
-    enabled: true
-    ignore_title_keywords:
-      - "WIP"
-      - "DO NOT MERGE"
-      - "SWEEP"
-    drafts: false
-    base_branches:
-      - main
-      - release/**
-      - develop
+    ignore_usernames:
+      - dependabot
+  finishing_touches:
+    simplify:
+      enabled: true
 chat:
-  auto_reply: true
+  integrations:
+    jira:
+      usage: disabled
+    linear:
+      usage: enabled
+code_generation:
+  docstrings:
+    language: en-GB
+issue_enrichment:
+  auto_enrich:
+    enabled: true
