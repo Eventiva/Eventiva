@@ -1,0 +1,8 @@
+# Trunk configuration - see https://docs.trunk.io/check/configuration
+# Run `trunk init` locally to add or update linters.
+version: "0.1"
+
+lint:
+  enabled:
+    - eslint
+    - prettier

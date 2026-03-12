@@ -13,6 +13,7 @@ jobs:
   release-mastermind:
     name: Release Mastermind
     runs-on: ubuntu-latest
+    if: hashFiles('.github/config.json') != ''
     permissions:
       contents: write
       pull-requests: write
@@ -29,6 +30,8 @@ jobs:
           comment_on_pr: false
           theme: dark
           proc_trace_sys_enable: true
+
+      - uses: actions/checkout@v4
 
       - name: Release Mastermind
         uses: Resnovas/smartcloud@1.0.0-beta.8 # 1.0.0-beta.8

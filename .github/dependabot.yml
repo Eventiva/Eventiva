@@ -1,14 +1,21 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: /
+    directory: "/"
     schedule:
       interval: "daily"
       time: "02:00"
     commit-message:
       prefix: "maint"
       include: scope
-    labels: [ ]
+    labels: []
+    groups:
+      npm-minor-patch:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
 
   - package-ecosystem: "devcontainers"
     directory: "/"
