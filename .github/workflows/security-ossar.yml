@@ -48,11 +48,13 @@ jobs:
           theme: dark
           proc_trace_sys_enable: true
 
-      # checks out the repository
-      - uses: actions/checkout@v6
+      # checks out the repository with an authenticated token
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
-          token: "${{ secrets.BOT_TOKEN || github.token }}"
+          fetch-depth: 1
+          submodules: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Ensure a compatible version of dotnet is installed.
       # The [Microsoft Security Code Analysis CLI](https://aka.ms/mscadocs) is built with dotnet v3.1.201.

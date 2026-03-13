@@ -25,13 +25,11 @@ jobs:
     name: Scorecard analysis
     runs-on: ubuntu-latest
     permissions:
+      contents: read
       # Needed to upload the results to code-scanning dashboard.
       security-events: write
       # Needed to publish results and get a badge (see publish_results below).
       id-token: write
-      # Uncomment the permissions below if installing in a private repository.
-      # contents: read
-      # actions: read
 
     steps:
       - name: Harden Runner
@@ -43,14 +41,14 @@ jobs:
       - uses: actions/checkout@v6
         with:
           submodules: 'recursive'
-          token: "${{ secrets.BOT_TOKEN || github.token }}"
+          token: ${{ github.token }}
 
       - name: "Run analysis"
         uses: ossf/scorecard-action@v2.4.3 # v2.1.2
         with:
           results_file: results.sarif
           results_format: sarif
-          repo_token: ${{ secrets.BOT_TOKEN || github.token }}
+          repo_token: ${{ github.token }}
           publish_results: true
 
       # Upload the results as artifacts (optional). Commenting out will disable uploads of run results in SARIF
