@@ -14,7 +14,8 @@ jobs:
     main:
         runs-on: ubuntu-latest
         env:
-            NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+            # Use main-branch token for pushes to main (more Nx Cloud features); PRs use standard token
+            NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
         steps:
             - uses: actions/checkout@v6
               with:

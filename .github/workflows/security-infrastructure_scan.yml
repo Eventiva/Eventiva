@@ -10,6 +10,9 @@ on:
 permissions:
     contents: read
 
+env:
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
     scanning:
         name: GitGuardian iac scan
@@ -22,6 +25,7 @@ jobs:
 
             - name: Workflow Telemetry
               uses: catchpoint/workflow-telemetry-action@v2.0.0 # v1.8.7
+              continue-on-error: true
               with:
                   github_token: ${{ secrets.BOT_TOKEN || github.token }}
                   comment_on_pr: false
@@ -68,7 +72,7 @@ jobs:
                   npm config set //node-registry.bit.cloud/:_authToken ${{ secrets.BIT_CONFIG_USER_TOKEN }}
 
             - name: GitGuardian iac scan
-              uses: GitGuardian/ggshield/actions/iac # main
+              uses: GitGuardian/ggshield/actions/iac@v1 # main
               with:
                   args: ./terraform/ --minimum-severity CRITICAL # pass arguments to the action. If missing, will scan the current directory
               env:
