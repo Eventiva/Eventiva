@@ -76,6 +76,60 @@ const ShutdownPostEndpoint = HttpApiEndpoint.post('shutdownPost', '/api/shutdown
     .addSuccess(ShutdownSuccess);
 const ShutdownGroup = HttpApiGroup.make('Shutdown').add(ShutdownGetEndpoint).add(ShutdownPostEndpoint);
 
+/** Required handler keys for each entity API group (used by runtime assertion and tests). */
+export const ENTITY_GROUP_REQUIRED_HANDLER_KEYS = [
+    'invoke',
+    'list',
+    'get',
+    'create',
+    'update',
+    'delete',
+] as const;
+
+/**
+ * Validates that a built handlers object has all required entity group keys and each is a function.
+ * Used in the group callback and in unit tests to surface type/shape mismatches early.
+ *
+ * @throws if built is null/not object, has no .handle, has no .handlers iterable, or any required key is missing or not a function
+ */
+export function validateEntityGroupHandlers(
+    built: unknown,
+    groupName: string,
+    requiredKeys: ReadonlyArray<string> = ENTITY_GROUP_REQUIRED_HANDLER_KEYS
+): void {
+    if (typeof built !== 'object' || built === null) {
+        throw new Error(`EntityEndpoints: group "${groupName}" did not return a handlers object`);
+    }
+    const h = built as {
+        handle?: unknown;
+        handlers?: Iterable<{ endpoint?: { name?: string }; handler?: unknown }>;
+    };
+    if (typeof h.handle !== 'function') {
+        throw new Error(
+            `EntityEndpoints: group "${groupName}" handlers.handle is not a function (expected chain of .handle("${requiredKeys.join('", "')}", ...))`
+        );
+    }
+    const handlersIter = h.handlers;
+    if (!handlersIter) {
+        throw new Error(
+            `EntityEndpoints: group "${groupName}" has no handlers array (expected keys: ${requiredKeys.join(', ')})`
+        );
+    }
+    const namesToHandler = new Map<string, unknown>();
+    for (const item of handlersIter) {
+        const name = item?.endpoint?.name;
+        if (name) namesToHandler.set(name, item.handler);
+    }
+    for (const key of requiredKeys) {
+        const fn = namesToHandler.get(key);
+        if (typeof fn !== 'function') {
+            throw new Error(
+                `EntityEndpoints: group "${groupName}" missing or invalid handler "${key}" (expected function; have: ${Array.from(namesToHandler.keys()).join(', ') || 'none'})`
+            );
+        }
+    }
+}
+
 /**
  * Convert a kebab-case path prefix into a PascalCase Swagger group name.
  *
@@ -338,7 +392,6 @@ export function makeEntityEndpointsLayer(
         );
 
         type GroupHandlers = { handle: (name: string, fn: (...args: any[]) => Effect.Effect<any>) => GroupHandlers };
-        const requiredKeys = ['invoke', 'list', 'get', 'create', 'update', 'delete'] as const;
         const entityGroupLayers = yield* Effect.all(
             allDescriptors.map((d) =>
                 Effect.gen(function* () {
@@ -366,15 +419,7 @@ export function makeEntityEndpointsLayer(
                                 .handle('delete', ({ path }: { path: { id: string } }) =>
                                     runClient(p, 'delete', { id: path.id })
                                 );
-                            if (typeof built !== 'object' || built === null) {
-                                throw new Error(`EntityEndpoints: group "${groupName}" did not return a handlers object`);
-                            }
-                            const h = built as { handle?: unknown };
-                            if (typeof h.handle !== 'function') {
-                                throw new Error(
-                                    `EntityEndpoints: group "${groupName}" handlers.handle is not a function (expected chain of .handle("${requiredKeys.join('", "')}", ...))`
-                                );
-                            }
+                            validateEntityGroupHandlers(built, groupName);
                             return built;
                         }
                     );
