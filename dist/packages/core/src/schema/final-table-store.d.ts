@@ -7,6 +7,12 @@
 import * as Context from "effect/Context";
 import * as Effect from "effect/Effect";
 import * as Layer from "effect/Layer";
+/** Relation metadata for entity schema: name, cardinality, and related table. */
+export interface RelationMetadata {
+    readonly relationName: string;
+    readonly cardinality: "one" | "many";
+    readonly relatedTableName: string;
+}
 export interface FinalTableStore {
     /** Get a finalized table by name. Returns undefined if not found. */
     readonly getTable: (tableName: string) => Effect.Effect<unknown | undefined>;
@@ -20,6 +26,10 @@ export interface FinalTableStore {
     readonly getAllRelations: () => Effect.Effect<Record<string, unknown>>;
     /** Set relations (used during Phase 2 finalization). */
     readonly setRelations: (tableName: string, relations: unknown) => Effect.Effect<void>;
+    /** Set relation metadata for a table (used during entity build). */
+    readonly setRelationMetadata: (tableName: string, metadata: ReadonlyArray<RelationMetadata>) => Effect.Effect<void>;
+    /** Get relation metadata for a table. Returns empty array if not found. */
+    readonly getRelationMetadata: (tableName: string) => Effect.Effect<ReadonlyArray<RelationMetadata>>;
 }
 export declare const FinalTableStore: Context.Tag<FinalTableStore, FinalTableStore>;
 export declare const FinalTableStoreLive: Layer.Layer<FinalTableStore>;

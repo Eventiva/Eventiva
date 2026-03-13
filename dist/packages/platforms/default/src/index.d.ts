@@ -14,6 +14,7 @@ export type PlatformTemplate = Layer.Layer<never, any, unknown>;
 export type { DefaultRunnerProfile };
 /**
  * Default platform Layer. Customise by changing databaseLayer or extensions above, then re-run.
+ * Uses SchemaFinalizerPg for real Drizzle tables (needed for Contact entity and relations).
  */
 export declare const defaultPlatformTemplate: PlatformTemplate;
 //# sourceMappingURL=index.d.ts.map

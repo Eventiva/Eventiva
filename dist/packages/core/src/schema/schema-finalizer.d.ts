@@ -12,8 +12,10 @@ export type MergedColumns = Record<string, unknown>;
 /** Extra config per table (e.g. index/constraint callbacks). Stored as unknown in core. */
 export type ExtraConfigItem = unknown;
 export interface SchemaFinalizer {
-    /** Build one table from merged columns and extraConfigs. Returns the built table (PgTable in pg impl). */
-    readonly buildTable: (tableName: string, mergedColumns: MergedColumns, extraConfigs: ReadonlyArray<ExtraConfigItem>) => Effect.Effect<unknown>;
+    /** Build one table from merged columns and extraConfigs. Returns the built table (PgTable in pg impl).
+     * @param getTable - Optional callback to resolve already-built tables (e.g. for FK references). Creator table must be built first.
+     */
+    readonly buildTable: (tableName: string, mergedColumns: MergedColumns, extraConfigs: ReadonlyArray<ExtraConfigItem>, getTable?: (name: string) => unknown) => Effect.Effect<unknown>;
 }
 export declare const SchemaFinalizer: Context.Tag<SchemaFinalizer, SchemaFinalizer>;
 /** No-op implementation when not using a DB with schema (e.g. in-memory). FinalTableStore gets placeholder values. */
