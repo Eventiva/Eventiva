@@ -1,12 +1,4 @@
 ---
-name: ""
-overview: ""
-todos: []
-isProject: false
----
-
----
-
 name: Two-phase bootstrap and runtime
 overview: Introduce a strict two-phase architecture: System 1 (bootstrap) runs DB structuring and entity building and populates EntityRegistry; System 2 (runtime) runs only after System 1 completes, using the built state to expose entity endpoints, cluster, RPC, HTTP, and UI. The two systems never run concurrently.
 todos:
@@ -149,4 +141,3 @@ Either way, the default platform ([packages/platforms/default/src/index.ts](pack
 - **Defer route map per request:** Resolving `pathPrefix` from EntityRegistry on each request is an alternative fix but adds latency and complexity; the two-phase design is cleaner and keeps a single route map build.
 - **Two separate processes:** If later you need System 1 to persist state (e.g. to disk or DB) and System 2 to start in another process, the same split (bootstrap vs runtime) applies; handoff would then be via persisted state or IPC instead of in-memory.
 - **Passing Contact explicitly in entityEndpoints:** Works as a workaround only if Contact were a static import; Contact is created dynamically in runCoreStartup and registered in EntityRegistry, so it cannot be passed as a descriptor before bootstrap. The two-phase approach is the proper fix.
-

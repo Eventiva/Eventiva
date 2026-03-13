@@ -17,7 +17,7 @@ import { NodeRuntime } from '@effect/platform-node';
 import { runCoreStartup } from './run-core-startup.js';
 import { EntityEndpointsServer } from '../cluster/entity-endpoints.js';
 import { ExtensionHookPubSub } from '../extensions/extension-hook-pubsub.js';
-import { RUNTIME_READY_TOPIC } from '../extensions/extension-hook-pubsub.js';
+import { PROCESS_RUNTIME_READY_TOPIC } from '../extensions/extension-hook-pubsub.js';
 import { withSpanAndLog } from '../observability/helpers.js';
 import type { PlatformTemplateTwoPhase } from './platform.js';
 
@@ -41,7 +41,7 @@ export const runtimeOnlyProgram = Effect.gen(function* () {
     yield* EntityEndpointsServer;
     yield* Effect.logInfo('runtime ready; server serving until interrupt');
     const hooks = yield* ExtensionHookPubSub;
-    yield* hooks.publish(RUNTIME_READY_TOPIC, {}).pipe(
+    yield* hooks.publish(PROCESS_RUNTIME_READY_TOPIC, {}).pipe(
         Effect.catchAll(() => Effect.void),
         Effect.fork,
         Effect.asVoid
@@ -75,14 +75,13 @@ export const defaultRuntimeProgram = Effect.gen(function* () {
  */
 export function runMainTwoPhase(template: PlatformTemplateTwoPhase): void {
     const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== 'false';
-    const bootstrapLayer = template.getBootstrapLayer();
+    const bootstrapLayer = useDevTools ? Layer.merge(DevToolsLive, template.getBootstrapLayer()) : template.getBootstrapLayer();
     const runtimeLayer = template.getRuntimeLayer();
     const program = Effect.logInfo('runtime starting', { service: 'eventiva-core' }).pipe(
         Effect.flatMap(() => bootstrapProgram),
         Effect.flatMap(() => runtimeOnlyProgram.pipe(Effect.provide(runtimeLayer)))
     ).pipe(Effect.provide(bootstrapLayer)) as Effect.Effect<void, unknown, never>;
-    const withDevTools = useDevTools ? program.pipe(Effect.provide(DevToolsLive)) : program;
-    NodeRuntime.runMain(Effect.asVoid(withDevTools));
+    NodeRuntime.runMain(Effect.asVoid(program));
 }
 
 /**
@@ -96,8 +95,8 @@ export function runMainTwoPhase(template: PlatformTemplateTwoPhase): void {
  */
 export function runMain(platformLayer: Layer.Layer<never, never, unknown>): void {
     const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== 'false';
-    const withDevTools = useDevTools ? defaultRuntimeProgram.pipe(Effect.provide(DevToolsLive)) : defaultRuntimeProgram;
-    const runnable = withDevTools.pipe(Effect.provide(platformLayer), Effect.asVoid) as Effect.Effect<
+    const layerWithDevTools = useDevTools ? Layer.merge(DevToolsLive, platformLayer) : platformLayer;
+    const runnable = defaultRuntimeProgram.pipe(Effect.provide(layerWithDevTools), Effect.asVoid) as Effect.Effect<
         void,
         unknown,
         never

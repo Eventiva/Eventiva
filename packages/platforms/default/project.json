@@ -18,7 +18,7 @@
         "run": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "pnpm exec tsx --tsconfig packages/platforms/default/tsconfig.run.json packages/platforms/default/src/index.ts",
+                "command": "pnpm exec tsx --tsconfig packages/platforms/default/tsconfig.run.json packages/platforms/default/src/main.ts",
                 "cwd": "{workspaceRoot}"
             },
             "configurations": {},

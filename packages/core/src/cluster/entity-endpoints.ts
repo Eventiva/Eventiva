@@ -257,7 +257,10 @@ export function makeEntityEndpointsLayer(
         const pathPrefixes = allDescriptors.map((d) => d.pathPrefix);
 
         const invokeHandler = (pathPrefix: string) => (args: { payload: { entityId?: string; method: string; payload?: unknown } }) =>
-            Effect.gen(function* () {
+            withSpanAndLog(`entity.invoke:${pathPrefix}`, {
+                attributes: { pathPrefix, entityId: args.payload.entityId, method: args.payload.method },
+                metricName: 'entity.invoke.duration',
+            })(Effect.gen(function* () {
                 const entry = map.get(pathPrefix);
                 if (!entry)
                     return { success: { error: `Unknown pathPrefix: ${pathPrefix}` } } as { success: unknown };
@@ -285,14 +288,17 @@ export function makeEntityEndpointsLayer(
                     )
                 );
                 return result as { success: unknown };
-            });
+            }));
 
         const runClient = (
             pathPrefix: string,
             method: string,
             payload: unknown
         ): Effect.Effect<unknown, never> =>
-            Effect.gen(function* () {
+            withSpanAndLog(`entity.runClient:${pathPrefix}:${method}`, {
+                attributes: { pathPrefix, method },
+                metricName: 'entity.runClient.duration',
+            })(Effect.gen(function* () {
                 const entry = map.get(pathPrefix);
                 if (!entry)
                     return { error: `Unknown pathPrefix: ${pathPrefix}` };
@@ -305,7 +311,7 @@ export function makeEntityEndpointsLayer(
                         Effect.succeed({ error: err instanceof Error ? err.message : String(err) })
                     )
                 );
-            });
+            }));
 
         // Build API with one group per entity (e.g. "Contacts", "HelloWorlds") with concrete paths, plus Shutdown.
         let api = HttpApi.make('EventivaEntityRpc').add(ShutdownGroup) as HttpApi.HttpApi<
@@ -341,7 +347,7 @@ export function makeEntityEndpointsLayer(
                         .handle('get', ({ path }: { path: { id: string } }) => runClient(p, 'get', { id: path.id }))
                         .handle('create', ({ payload }: { payload: unknown }) => runClient(p, 'create', payload))
                         .handle('update', ({ path, payload }: { path: { id: string }; payload: unknown }) =>
-                            runClient(p, 'update', { id: path.id, ...(typeof payload === 'object' && payload !== null ? payload : {}) })
+                            runClient(p, 'update', { id: path.id, patch: (typeof payload === 'object' && payload !== null ? payload : {}) })
                         )
                         .handle('delete', ({ path }: { path: { id: string } }) => runClient(p, 'delete', { id: path.id }))
             );
