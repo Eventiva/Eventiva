@@ -14,8 +14,8 @@ updates:
         patterns:
           - "*"
         update-types:
-          - "minor"
-          - "patch"
+          - minor
+          - patch
 
   - package-ecosystem: devcontainers
     directory: /
