@@ -159,11 +159,11 @@ importers:
         specifier: 7.35.0
         version: 7.35.0(eslint@9.39.4(jiti@2.6.1))
       eslint-plugin-react-hooks:
-        specifier: 5.0.0
-        version: 5.0.0(eslint@9.39.4(jiti@2.6.1))
+        specifier: 7.0.1
+        version: 7.0.1(eslint@9.39.4(jiti@2.6.1))
       jsonc-eslint-parser:
-        specifier: ^2.1.0
-        version: 2.4.2
+        specifier: ^3.1.0
+        version: 3.1.0
       metro-config:
         specifier: ~0.83.0
         version: 0.83.5
@@ -247,7 +247,7 @@ importers:
         version: 2.6.0(@opentelemetry/api@1.9.0)
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
+        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
@@ -278,7 +278,7 @@ importers:
         version: link:../../core
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(2qcox6paizv2csajrjdqk5skle)
+        version: 1.0.0-beta.18-dc9676b(k7dzuhzegecocw3ralcuastdc4)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
@@ -302,7 +302,7 @@ importers:
         version: link:../../databases/pg
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
+        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
@@ -5668,9 +5668,9 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9
 
-  eslint-plugin-react-hooks@5.0.0:
-    resolution: {integrity: sha512-hIOwI+5hYGpJEc4uPRmz2ulCjAGD/N13Lukkh8cLV0i2IRk/bdZDYjgLVHj+U9Z704kLIdIO6iueGvxNur0sgw==}
-    engines: {node: '>=10'}
+  eslint-plugin-react-hooks@7.0.1:
+    resolution: {integrity: sha512-O0d0m04evaNzEPoSW+59Mezf8Qt0InfgGIBJnpC0h3NH/WjUAR7BIKUfysC6todmtiZ/A0oUVS8Gce0WhBrHsA==}
+    engines: {node: '>=18'}
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0 || ^9.0.0
 
@@ -6304,6 +6304,9 @@ packages:
   hermes-compiler@250829098.0.9:
     resolution: {integrity: sha512-hZ5O7PDz1vQ99TS7HD3FJ9zVynfU1y+VWId6U1Pldvd8hmAYrNec/XLPYJKD3dLOW6NXak6aAQAuMuSo3ji0tQ==}
 
+  hermes-estree@0.25.1:
+    resolution: {integrity: sha512-0wUoCcLp+5Ev5pDW2OriHC2MJCbwLwuRx+gAqMTOkGKJJiBCLjtrvy4PWUGn6MIVefecRpzoOZ/UV6iGdOr+Cw==}
+
   hermes-estree@0.29.1:
     resolution: {integrity: sha512-jl+x31n4/w+wEqm0I2r4CMimukLbLQEYpisys5oCre611CI5fc9TxhqkBBCJ1edDG4Kza0f7CgNz8xVMLZQOmQ==}
 
@@ -6312,6 +6315,9 @@ packages:
 
   hermes-estree@0.33.3:
     resolution: {integrity: sha512-6kzYZHCk8Fy1Uc+t3HGYyJn3OL4aeqKLTyina4UFtWl8I0kSL7OmKThaiX+Uh2f8nGw3mo4Ifxg0M5Zk3/Oeqg==}
+
+  hermes-parser@0.25.1:
+    resolution: {integrity: sha512-6pEjquH3rqaI6cYAXYPcz9MS4rY6R4ngRgrgfDshRptUZIc3lw0MCIJIGDj9++mfySOuPTHB4nrSW99BCvOPIA==}
 
   hermes-parser@0.29.1:
     resolution: {integrity: sha512-xBHWmUtRC5e/UL0tI7Ivt2riA/YBq9+SiYFU7C1oBa/j2jYGlIF9043oak1F47ihuDIxQ5nbsKueYJDRY02UgA==}
@@ -7062,6 +7068,10 @@ packages:
   jsonc-eslint-parser@2.4.2:
     resolution: {integrity: sha512-1e4qoRgnn448pRuMvKGsFFymUCquZV0mpGgOyIKNgD3JVDTsVJyRBGH/Fm0tBb8WsWGgmB1mDe6/yJMQM37DUA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+
+  jsonc-eslint-parser@3.1.0:
+    resolution: {integrity: sha512-75EA7EWZExL/j+MDKQrRbdzcRI2HOkRlmUw8fZJc1ioqFEOvBsq7Rt+A6yCxOt9w/TYNpkt52gC6nm/g5tFIng==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
   jsonc-parser@3.2.0:
     resolution: {integrity: sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==}
@@ -9928,6 +9938,15 @@ packages:
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
+
+  zod-validation-error@4.0.2:
+    resolution: {integrity: sha512-Q6/nZLe6jxuU80qb/4uJ4t5v2VEZ44lzQjPDhYJNztRQ4wyWc6VF3D3Kb/fAuPetZQnhS3hnajCf9CsWesghLQ==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      zod: ^3.25.0 || ^4.0.0
+
+  zod@4.3.6:
+    resolution: {integrity: sha512-rftlrkhHZOcjDwkGlnUtZZkvaPHCsDATp4pGpuOOMDaTdDDXF91wuVDJoWoPsKX/3YPQ5fHuF3STjcYyKr+Qhg==}
 
 snapshots:
 
@@ -16122,7 +16141,18 @@ snapshots:
       esbuild: 0.25.12
       jiti: 2.6.1
 
-  drizzle-orm@1.0.0-beta.18-dc9676b(2qcox6paizv2csajrjdqk5skle):
+  drizzle-orm@1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6):
+    dependencies:
+      '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
+      mssql: 11.0.1(@azure/core-client@1.10.1)
+    optionalDependencies:
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@opentelemetry/api': 1.9.0
+      '@sinclair/typebox': 0.34.48
+      postgres: 3.4.8
+      zod: 4.3.6
+
+  drizzle-orm@1.0.0-beta.18-dc9676b(k7dzuhzegecocw3ralcuastdc4):
     dependencies:
       '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
       mssql: 11.0.1(@azure/core-client@1.10.1)
@@ -16132,16 +16162,7 @@ snapshots:
       '@opentelemetry/api': 1.9.0
       '@sinclair/typebox': 0.34.48
       postgres: 3.4.8
-
-  drizzle-orm@1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8):
-    dependencies:
-      '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
-      mssql: 11.0.1(@azure/core-client@1.10.1)
-    optionalDependencies:
-      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@opentelemetry/api': 1.9.0
-      '@sinclair/typebox': 0.34.48
-      postgres: 3.4.8
+      zod: 4.3.6
 
   dtrace-provider@0.8.8:
     dependencies:
@@ -16524,9 +16545,16 @@ snapshots:
       safe-regex-test: 1.1.0
       string.prototype.includes: 2.0.1
 
-  eslint-plugin-react-hooks@5.0.0(eslint@9.39.4(jiti@2.6.1)):
+  eslint-plugin-react-hooks@7.0.1(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
+      '@babel/core': 7.29.0
+      '@babel/parser': 7.29.0
       eslint: 9.39.4(jiti@2.6.1)
+      hermes-parser: 0.25.1
+      zod: 4.3.6
+      zod-validation-error: 4.0.2(zod@4.3.6)
+    transitivePeerDependencies:
+      - supports-color
 
   eslint-plugin-react@7.35.0(eslint@9.39.4(jiti@2.6.1)):
     dependencies:
@@ -17296,11 +17324,17 @@ snapshots:
 
   hermes-compiler@250829098.0.9: {}
 
+  hermes-estree@0.25.1: {}
+
   hermes-estree@0.29.1: {}
 
   hermes-estree@0.32.0: {}
 
   hermes-estree@0.33.3: {}
+
+  hermes-parser@0.25.1:
+    dependencies:
+      hermes-estree: 0.25.1
 
   hermes-parser@0.29.1:
     dependencies:
@@ -18333,6 +18367,12 @@ snapshots:
       acorn: 8.16.0
       eslint-visitor-keys: 3.4.3
       espree: 9.6.1
+      semver: 7.7.4
+
+  jsonc-eslint-parser@3.1.0:
+    dependencies:
+      acorn: 8.16.0
+      eslint-visitor-keys: 5.0.1
       semver: 7.7.4
 
   jsonc-parser@3.2.0: {}
@@ -21767,3 +21807,9 @@ snapshots:
   yn@3.1.1: {}
 
   yocto-queue@0.1.0: {}
+
+  zod-validation-error@4.0.2(zod@4.3.6):
+    dependencies:
+      zod: 4.3.6
+
+  zod@4.3.6: {}
