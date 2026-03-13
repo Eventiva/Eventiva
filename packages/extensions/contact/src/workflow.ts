@@ -1,11 +1,11 @@
 /**
  * Contact extension workflows: on CORE_LOADED register columns;
- * on RUNTIME_READY_TOPIC seed one demo contact if empty and log the list (runs within cluster after server is up).
+ * on PROCESS_RUNTIME_READY_TOPIC seed one demo contact if empty and log the list (runs within cluster after server is up).
  */
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
 import {
-    RUNTIME_READY_TOPIC,
+    PROCESS_RUNTIME_READY_TOPIC,
     makeExtensionOnLoadLayer,
     makeExtensionWorkflowLayer,
     TableColumnRegistry,
@@ -43,7 +43,7 @@ const OnLoadLayer = makeExtensionOnLoadLayer(
 const ContactSeedLayer = makeExtensionWorkflowLayer(
     EXTENSION_ID,
     'seed',
-    RUNTIME_READY_TOPIC,
+    PROCESS_RUNTIME_READY_TOPIC,
     Effect.gen(function* () {
         const config = yield* ContactConfig;
         if (!config.seedEnabled) {
