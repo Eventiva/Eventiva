@@ -7,6 +7,7 @@
  */
 import * as Activity from '@effect/workflow/Activity';
 import * as Workflow from '@effect/workflow/Workflow';
+import { ClusterWorkflowEngine } from '@effect/cluster';
 import * as Context from 'effect/Context';
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
@@ -247,7 +248,6 @@ export const ExtensionHooksLive: Layer.Layer<ExtensionHookPubSub, never, never> 
 );
 
 export { layerMemory as WorkflowEngineLayerInMemory } from '@effect/workflow/WorkflowEngine';
-import { ClusterWorkflowEngine } from '@effect/cluster';
 
 /**
  * ClusterWorkflowEngine layer for durable workflows in a clustered environment.

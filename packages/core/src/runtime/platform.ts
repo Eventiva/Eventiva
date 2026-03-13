@@ -16,7 +16,6 @@ import * as Scope from 'effect/Scope';
 import { createServer } from 'node:http';
 import { ObservabilityLive } from '../observability/layer.js';
 import { clusterLayerDefault } from '../cluster/config.js';
-import { ClusterMetrics } from '@effect/cluster';
 import { NodeHttpServer } from '@effect/platform-node';
 import {
     makeEntityEndpointsLayer,
@@ -132,16 +131,14 @@ function buildBootstrapStack(
         : WorkflowEngineLayerInMemory;
     const hooksStack = Layer.mergeAll(ExtensionHooksLive, workflowEngineLayer, WorkflowRegistryLive);
     // Base observability layer (Logger, Tracer, Metrics)
-    const observabilityLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
+    // Note: ClusterMetrics from @effect/cluster exports individual Gauge metrics
+    // (entities, singletons, runners, runnersHealthy, shards) but not a Layer.
+    // These metrics are automatically registered when cluster components are used.
+    const metricsLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
         ? ObservabilityLive
         : (NodeSdk.layerEmpty as Layer.Layer<never, any, unknown>);
-    
-    // Add ClusterMetrics when cluster is enabled
-    const metricsLayer = isFeatureEnabled(fo, 'CLUSTER')
-        ? Layer.mergeAll(observabilityLayer, ClusterMetrics.layer)
-        : observabilityLayer;
     const baseLayers: Layer.Layer<never, any, unknown>[] = [
-        metricsLayer, // Includes ObservabilityLive + ClusterMetrics (if cluster enabled)
+        metricsLayer, // ObservabilityLive (ClusterMetrics are auto-registered by cluster components)
         runtimeConfigLayer,
         extensionConfigLayer,
         isFeatureEnabled(fo, 'CLUSTER') ? clusterLayerDefault : Layer.empty,
@@ -151,20 +148,20 @@ function buildBootstrapStack(
         hooksStack,
         scopeLayer,
     ];
-    // Merge all base layers and memoize for global reuse
-    // This ensures the same layer instance is used across multiple platform templates
-    const base = Layer.memoize(
-        Layer.mergeAll(
-            baseLayers[0]!,
-            baseLayers[1]!,
-            baseLayers[2]!,
-            baseLayers[3]!,
-            baseLayers[4]!,
-            baseLayers[5]!,
-            baseLayers[6]!,
-            baseLayers[7]!,
-            baseLayers[8]!
-        )
+    // Merge all base layers
+    // Note: Layer.memoize returns an Effect, not a Layer. For memoization,
+    // use Layer.unwrapScoped(Layer.memoize(...)) if needed, but Effect already
+    // memoizes layers by reference identity in dependency graphs.
+    const base = Layer.mergeAll(
+        baseLayers[0]!,
+        baseLayers[1]!,
+        baseLayers[2]!,
+        baseLayers[3]!,
+        baseLayers[4]!,
+        baseLayers[5]!,
+        baseLayers[6]!,
+        baseLayers[7]!,
+        baseLayers[8]!
     );
     const entitiesLayer = isFeatureEnabled(fo, 'EXTENSIONS')
         ? mergeEntityLayers([...options.extensions.map((e) => e.layer)])

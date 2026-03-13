@@ -59,6 +59,7 @@ nx run platforms-default:run
 To test with multiple runners, you can run multiple processes with different entity profiles:
 
 **Terminal 1 (Runner 1 - HelloWorld entities):**
+
 ```bash
 export RUNNER_PROFILE=hello-world
 export RUNNER_PORT=3001
@@ -66,6 +67,7 @@ nx run platforms-default:run
 ```
 
 **Terminal 2 (Runner 2 - Contact entities):**
+
 ```bash
 export RUNNER_PROFILE=contact
 export RUNNER_PORT=3002
@@ -73,6 +75,7 @@ nx run platforms-default:run
 ```
 
 **Terminal 3 (Client/Test):**
+
 ```bash
 # Test that entities are sharded correctly
 curl -X POST http://localhost:3001/api/rpc/hello-worlds -H "Content-Type: application/json" -d '{"method":"sayHello","payload":{}}'
