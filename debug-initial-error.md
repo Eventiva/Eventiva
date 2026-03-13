@@ -27,16 +27,18 @@ Identify which core process or extension causes the error, then fix it. Suspect:
 
 ## Findings
 - Error was "Cannot read properties of undefined (reading 'initial')" in Effect's getFiberRef / fiberRefs.joinAs when a FiberRef from a different/partial Effect module instance was in the refs map.
-- Fixes applied (workarounds in node_modules/effect):
-  1. **fiberRuntime (source + ESM + CJS dist):** Guard + try/catch in getFiberRef when ref is undefined or ref.initial throws; guard in tracer context for currentVersionMismatchErrorLogLevel.
-  2. **fiberRefs (source + ESM dist):** try/catch in joinAs forEach callback to skip entries whose FiberRef is invalid; getOrDefault and findAncestor guards for undefined ref/initial.
-- After these patches, the "initial" error is resolved. Next error: "Service not found: @effect/platform/HttpApi/Api" when building makeEntityEndpointsLayer (layer ordering / provision of HttpApi).
-- pnpm overrides for effect@3.19.19 applied; single effect copy in node_modules.
+- **Root cause:** `fiberRefGet(undefined)` is called when FiberRefs from different Effect instances are merged (e.g. in FiberRefsPatch.patch, Blocked handler, or tracer callback). The FiberRef parameter can be undefined when the refs map has keys from a different module instance.
+- **pnpm patch applied:** `patches/effect@3.19.19.patch` adds:
+  1. **getFiberRef:** Guards for undefined/invalid fiberRef; throws clearer error.
+  2. **joinAs:** Skips entries where fiberRef is null/undefined or has no .initial.
+  3. **tracer callback:** Try-catch around currentVersionMismatchErrorLogLevel getFiberRef; uses Option.none() on failure.
+- **Remaining crash:** After the tracer fix, the crash can still occur from other code paths (e.g. core.fiberRefGet in Blocked handler / FiberRefsPatch). Full fix would require patching core.fiberRefGet or ensuring single Effect instance (e.g. Effect v4 unified versioning).
+- pnpm overrides for effect@3.19.19 applied; patchedDependencies uses the patch.
 
 ### Fixes applied (platform running)
 - **TableRelationsRegistry missing:** runCoreStartup requires TableRelationsRegistry; it was not in the platform schema stack. Added `TableRelationsRegistryLive` to schemaStack in `packages/core/src/runtime/platform.ts` (import + Layer.provideMerge(TableRelationsRegistryLive)).
 - **EntityEndpointsServer missing when no endpoints:** When entityEndpoints is empty we no longer add the HTTP endpoints layer, so EntityEndpointsServer was never provided and defaultRuntimeProgram failed with "Service not found: @eventiva/core/EntityEndpointsServer". Fixed by providing a dummy when no endpoints: `Layer.succeed(EntityEndpointsServer, { port: 0 })` in the else branch in platform.ts.
-- **Result:** Platform runs successfully: core startup completes, "runtime ready; server serving until interrupt". (Exit code 124 in tests is from `timeout 8` killing the process.)
+- **Result:** Platform runs successfully when Observability/HTTP endpoints are not exercised; with full stack the FiberRef crash can still occur.
 
 ### Extensions re-enabled (in-memory DB)
 - With extensions (hello-world, contact) and DatabaseLiveInMemory, SchemaFinalizerNoOp stores placeholder tables (`Object.create(null)`), so drizzle's defineRelations and createSelectSchema threw "Cannot read properties of null (reading 'constructor')".
@@ -44,4 +46,5 @@ Identify which core process or extension causes the error, then fix it. Suspect:
 - **Result:** Platform runs with extensions; contact entity is skipped for in-memory (placeholder table); "Core startup completed successfully", "runtime ready; server serving until interrupt".
 
 ### Next step (separate from "initial" fix)
-- "Service not found: @effect/platform/HttpApi/Api" when building makeEntityEndpointsLayer: layer composition for HttpApiBuilder.serve() + apiLayer may need to provide HttpApi.Api before serve runs; or only add endpoints layer when entityEndpoints.length > 0 (skip HTTP server when only endpointsPort is set).
+- Consider upgrading to Effect v4 beta for unified versioning (eliminates duplicate instance issues).
+- Or extend the patch to wrap core.fiberRefGet / FiberRefsPatch to handle undefined refs.
