@@ -58,6 +58,10 @@ jobs:
           theme: dark
           proc_trace_sys_enable: true
 
+      - name: Set up Git credentials
+        run: |
+          git config --global url."https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
       # checks out the repository
       - uses: actions/checkout@v6
         with:
