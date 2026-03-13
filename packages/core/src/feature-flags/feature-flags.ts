@@ -22,6 +22,18 @@ export const FeatureFlagKeys = {
   DEVTOOLS: "eventiva-devtools",
   CLUSTER: "eventiva-cluster",
   ENTITY_ENDPOINTS: "eventiva-entity-endpoints",
+  /** Within entity endpoints: fetch entity.client for each descriptor (Sharding). */
+  ENTITY_ENDPOINTS_CLIENT_FETCH: "eventiva-entity-endpoints-client-fetch",
+  /** Within entity endpoints: HttpApiSwagger at /api/docs. */
+  ENTITY_ENDPOINTS_SWAGGER: "eventiva-entity-endpoints-swagger",
+  /** Within entity endpoints: HttpApiBuilder.serve (mount API routes). */
+  ENTITY_ENDPOINTS_SERVE: "eventiva-entity-endpoints-serve",
+  /** Within entity endpoints: skip Layer.build(fullServerLayer) – use minimal server instead (debug). */
+  ENTITY_ENDPOINTS_FULL_LAYER_BUILD: "eventiva-entity-endpoints-full-layer-build",
+  /** Within entity endpoints: skip Sharding + entity setup + apiLayer – minimal init (debug). */
+  ENTITY_ENDPOINTS_FULL_INIT: "eventiva-entity-endpoints-full-init",
+  /** Within entity endpoints: skip yield* Sharding.Sharding (debug). */
+  ENTITY_ENDPOINTS_SHARDING: "eventiva-entity-endpoints-sharding",
   SCHEMA_STACK: "eventiva-schema-stack",
   EXTENSIONS: "eventiva-extensions"
 } as const
@@ -54,6 +66,24 @@ function loadConfigFlags(): Record<FeatureFlagKey, boolean> {
       [FeatureFlagKeys.ENTITY_ENDPOINTS]: Config.boolean("EVENTIVA_FEATURE_ENTITY_ENDPOINTS").pipe(
         Config.withDefault(true)
       ),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_CLIENT_FETCH]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_CLIENT_FETCH"
+      ).pipe(Config.withDefault(true)),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_SWAGGER]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER"
+      ).pipe(Config.withDefault(true)),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_SERVE]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SERVE"
+      ).pipe(Config.withDefault(true)),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_FULL_LAYER_BUILD]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD"
+      ).pipe(Config.withDefault(true)),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_FULL_INIT]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT"
+      ).pipe(Config.withDefault(true)),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_SHARDING]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING"
+      ).pipe(Config.withDefault(true)),
       [FeatureFlagKeys.SCHEMA_STACK]: Config.boolean("EVENTIVA_FEATURE_SCHEMA_STACK").pipe(
         Config.withDefault(true)
       ),

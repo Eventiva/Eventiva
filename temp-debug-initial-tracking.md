@@ -23,9 +23,9 @@ Isolate exactly where the `Cannot read properties of undefined (reading 'initial
 | ... | | |
 
 ## Conclusion (so far)
-- **Crash isolated to:** `makeEntityEndpointsLayer` – when entity endpoints are enabled and the HTTP server with HttpApiBuilder/Swagger is built.
-- **Workaround:** Set `EVENTIVA_FEATURE_ENTITY_ENDPOINTS=false` to run without the full HTTP API (uses simple "Eventiva runtime" server on endpointsPort).
-- **Next:** Debug inside makeEntityEndpointsLayer – Layer.build, HttpApiBuilder.serve, HttpApiSwagger, or Sharding/entity client setup.
+- **Crash isolated to:** Running effects inside `makeEntityEndpointsLayer`'s scoped effect. Crash occurs in Effect tracer (fiberRuntime.ts:1397, tracer.ts:101) when `getFiberRef` receives undefined – likely a scope/fiber context issue when the entity endpoints layer is composed.
+- **Workaround:** Set `EVENTIVA_FEATURE_ENTITY_ENDPOINTS=false` to run without the full HTTP API. Or `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT=false` to skip all init (server runs but no routes).
+- **Granular flags added:** ENTITY_ENDPOINTS_CLIENT_FETCH, ENTITY_ENDPOINTS_SWAGGER, ENTITY_ENDPOINTS_FULL_LAYER_BUILD, ENTITY_ENDPOINTS_FULL_INIT, ENTITY_ENDPOINTS_SHARDING.
 
 ## Notes
 - Feature flags: PostHog + Effect config fallback

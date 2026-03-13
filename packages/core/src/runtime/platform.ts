@@ -145,7 +145,10 @@ export function createPlatformTemplate(
     // Start HTTP endpoints only when descriptors are provided.
     const serverLayer = NodeHttpServer.layer(() => createServer(), { port: endpointsPort, host: "0.0.0.0" })
     const platformContextLayer = NodeHttpServer.layerContext
-    const endpointsLayer = makeEntityEndpointsLayer(endpoints, { port: endpointsPort })
+    const endpointsLayer = makeEntityEndpointsLayer(endpoints, {
+      port: endpointsPort,
+      featureOverrides: options.featureOverrides
+    })
     const providedEndpointsLayer = endpointsLayer.pipe(
       Layer.provide(stack),
       Layer.provide(serverLayer),
