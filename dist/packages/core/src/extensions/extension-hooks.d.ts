@@ -9,9 +9,9 @@ import * as Activity from '@effect/workflow/Activity';
 import * as Context from 'effect/Context';
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
-import { ExtensionHookPubSub, ExtensionHookPubSubLive, extensionHookTopic, CORE_LOADED_TOPIC, EXTENSIONS_LOADED_TOPIC, RUNTIME_READY_TOPIC, CORE_SHUTDOWN_TOPIC, type ExtensionCallContext, type ExtensionRegisterContext, type HookListenerRun, type HookPhase } from './extension-hook-pubsub.js';
+import { ExtensionHookPubSub, ExtensionHookPubSubLive, extensionHookTopic, CORE_LOADED_TOPIC, EXTENSIONS_LOADED_TOPIC, PROCESS_RUNTIME_READY_TOPIC, CORE_SHUTDOWN_TOPIC, type ExtensionCallContext, type ExtensionRegisterContext, type HookListenerRun, type HookPhase } from './extension-hook-pubsub.js';
 import { TableColumnRegistry } from '../schema/table-column-registry.js';
-export { ExtensionHookPubSub, ExtensionHookPubSubLive, extensionHookTopic, CORE_LOADED_TOPIC, EXTENSIONS_LOADED_TOPIC, RUNTIME_READY_TOPIC, CORE_SHUTDOWN_TOPIC, type ExtensionCallContext, type ExtensionRegisterContext, type HookListenerRun, type HookPhase, };
+export { ExtensionHookPubSub, ExtensionHookPubSubLive, extensionHookTopic, CORE_LOADED_TOPIC, EXTENSIONS_LOADED_TOPIC, PROCESS_RUNTIME_READY_TOPIC, CORE_SHUTDOWN_TOPIC, type ExtensionCallContext, type ExtensionRegisterContext, type HookListenerRun, type HookPhase, };
 /**
  * Returns a Layer that registers a listener on a hook topic. When the topic is published,
  * the given `run` effect is invoked with (payload, messageId). Use this to avoid repeating

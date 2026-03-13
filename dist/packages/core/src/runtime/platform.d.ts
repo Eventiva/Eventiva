@@ -51,14 +51,23 @@ export interface PlatformTemplateTwoPhase {
     getRuntimeLayer(): Layer.Layer<never, any, unknown>;
 }
 /**
- * Creates a two-phase platform: bootstrap layer (phase 1) and runtime layer (phase 2).
- * Use with runMainTwoPhase() so entity endpoints see EntityRegistry populated by runCoreStartup.
+ * Builds a two-phase platform template exposing separate bootstrap and runtime layers.
+ *
+ * The bootstrap layer performs core startup (including population of the EntityRegistry).
+ * The runtime layer exposes HTTP and entity endpoints and must be started after the bootstrap layer has populated runtime state.
+ *
+ * @returns An object with `getBootstrapLayer()` to obtain the bootstrap layer and `getRuntimeLayer()` to obtain the runtime layer
  */
 export declare function createPlatformTemplateTwoPhase(options: CreatePlatformTemplateOptions): PlatformTemplateTwoPhase;
 /**
- * Builds a single platform Layer (legacy one-phase). Entity endpoints are built when the layer
- * is built, which may be before runCoreStartup runs, so dynamic entities (e.g. Contact) may be
- * missing from the route map. Prefer createPlatformTemplateTwoPhase + runMainTwoPhase.
+ * Create a legacy one-phase platform Layer that combines bootstrap and runtime.
+ *
+ * The returned Layer initialises entity endpoints as part of its construction; because endpoints
+ * are created when the layer is built (not after bootstrap completes), dynamically discovered
+ * entities may be absent from the exposed route map.
+ *
+ * @param options - Configuration for building the platform
+ * @returns A composite Layer that provides the full platform where entity endpoints are initialised during layer construction
  */
 export declare function createPlatformTemplate(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown>;
 //# sourceMappingURL=platform.d.ts.map

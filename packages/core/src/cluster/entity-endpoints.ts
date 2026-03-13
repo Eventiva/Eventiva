@@ -16,15 +16,7 @@
  *
  * @see docs/learnings/architecture.md
  */
-import {
-    HttpApi,
-    HttpApiBuilder,
-    HttpApiEndpoint,
-    HttpApiGroup,
-    HttpApiSwagger,
-    HttpServer,
-    OpenApi,
-} from '@effect/platform';
+import { HttpApi, HttpApiBuilder, HttpApiEndpoint, HttpApiGroup, HttpApiSwagger, HttpServer, OpenApi } from '@effect/platform';
 import { NodeHttpServer } from '@effect/platform-node';
 import { Sharding } from '@effect/cluster';
 import type * as Entity from '@effect/cluster/Entity';
@@ -39,8 +31,7 @@ import { FeatureFlagKeys, type FeatureFlagOverrides } from '../feature-flags/ind
 /** Standard CRUD method names (from makeCrudRpc). String so custom methods work; annotations document the defaults for Swagger. */
 const RpcMethodSchema = Schema.String.pipe(
     Schema.annotations({
-        description:
-            '"list" | "get" | "create" | "update" | "delete" (default CRUD). Other entity-specific methods allowed.',
+        description: '"list" | "get" | "create" | "update" | "delete" (default CRUD). Other entity-specific methods allowed.',
         examples: ['list', 'get', 'create', 'update', 'delete'],
     })
 );
@@ -117,7 +108,10 @@ function makeEntityGroup(pathPrefix: string, groupName: string): HttpApiGroup.Ht
     const invokeE = HttpApiEndpoint.post('invoke', rpcPath)
         .setPayload(RpcInvokePayload)
         .addSuccess(RpcInvokeSuccess)
-        .annotate(OpenApi.Summary, 'Invoke an entity RPC method (CRUD: list, get, create, update, delete)')
+        .annotate(
+            OpenApi.Summary,
+            'Invoke an entity RPC method (CRUD: list, get, create, update, delete)'
+        )
         .annotate(
             OpenApi.Description,
             'Call any entity method by name. Default CRUD: **list** (payload: {}), **get** (payload: { id }), **create** (payload: entity fields), **update** (payload: { id, patch }), **delete** (payload: { id }). Set "method" to the operation and "payload" to the matching shape.'
@@ -262,61 +256,56 @@ export function makeEntityEndpointsLayer(
 
         const pathPrefixes = allDescriptors.map((d) => d.pathPrefix);
 
-        const invokeHandler =
-            (pathPrefix: string) => (args: { payload: { entityId?: string; method: string; payload?: unknown } }) =>
-                withSpanAndLog(`entity.invoke:${pathPrefix}`, {
-                    attributes: { pathPrefix, entityId: args.payload.entityId ?? '', method: args.payload.method },
-                    metricName: 'entity.invoke.duration',
-                })(
-                    Effect.gen(function* () {
-                        const entry = map.get(pathPrefix);
-                        if (!entry)
-                            return { success: { error: `Unknown pathPrefix: ${pathPrefix}` } } as { success: unknown };
-                        const { entityId, method, payload: payloadData } = args.payload;
-                        if (typeof method !== 'string')
-                            return { success: { error: 'body.method is required' } } as { success: unknown };
-                        const client = entry.getClient(entityId ?? entry.defaultEntityId);
-                        const fn = client[method];
-                        if (typeof fn !== 'function')
-                            return { success: { error: `Unknown method: ${method}` } } as { success: unknown };
-                        const rpc = entry.entity.protocol.requests.get(method) as
-                            | { payloadSchema: Schema.Schema<unknown> }
-                            | undefined;
-                        const decodeEffect =
-                            rpc?.payloadSchema != null
-                                ? Schema.decodeUnknown(rpc.payloadSchema as Schema.Schema<unknown>)(payloadData ?? {})
-                                : Effect.succeed(payloadData ?? {});
-                        const result = yield* decodeEffect.pipe(
-                            Effect.flatMap((decoded: unknown) => fn(decoded)),
-                            Effect.map((success) => ({ success })),
-                            Effect.catchAll((err: unknown) =>
-                                Effect.succeed({
-                                    success: { error: err instanceof Error ? err.message : String(err) },
-                                })
-                            )
-                        );
-                        return result as { success: unknown };
-                    })
+        const invokeHandler = (pathPrefix: string) => (args: { payload: { entityId?: string; method: string; payload?: unknown } }) =>
+            Effect.gen(function* () {
+                const entry = map.get(pathPrefix);
+                if (!entry)
+                    return { success: { error: `Unknown pathPrefix: ${pathPrefix}` } } as { success: unknown };
+                const { entityId, method, payload: payloadData } = args.payload;
+                if (typeof method !== 'string')
+                    return { success: { error: 'body.method is required' } } as { success: unknown };
+                const client = entry.getClient(entityId ?? entry.defaultEntityId);
+                const fn = client[method];
+                if (typeof fn !== 'function')
+                    return { success: { error: `Unknown method: ${method}` } } as { success: unknown };
+                const rpc = entry.entity.protocol.requests.get(method) as
+                    | { payloadSchema: Schema.Schema<unknown> }
+                    | undefined;
+                const decodeEffect =
+                    rpc?.payloadSchema != null
+                        ? Schema.decodeUnknown(rpc.payloadSchema as Schema.Schema<unknown>)(payloadData ?? {})
+                        : Effect.succeed(payloadData ?? {});
+                const result = yield* decodeEffect.pipe(
+                    Effect.flatMap((decoded: unknown) => fn(decoded)),
+                    Effect.map((success) => ({ success })),
+                    Effect.catchAll((err: unknown) =>
+                        Effect.succeed({
+                            success: { error: err instanceof Error ? err.message : String(err) },
+                        })
+                    )
                 );
+                return result as { success: unknown };
+            });
 
-        const runClient = (pathPrefix: string, method: string, payload: unknown): Effect.Effect<unknown, never> =>
-            withSpanAndLog(`entity.runClient:${pathPrefix}:${method}`, {
-                attributes: { pathPrefix, method },
-                metricName: 'entity.runClient.duration',
-            })(
-                Effect.gen(function* () {
-                    const entry = map.get(pathPrefix);
-                    if (!entry) return { error: `Unknown pathPrefix: ${pathPrefix}` };
-                    const client = entry.getClient(entry.defaultEntityId);
-                    const fn = client[method];
-                    if (typeof fn !== 'function') return { error: `Unknown method: ${method}` };
-                    return yield* fn(payload).pipe(
-                        Effect.catchAll((err: unknown) =>
-                            Effect.succeed({ error: err instanceof Error ? err.message : String(err) })
-                        )
-                    );
-                })
-            );
+        const runClient = (
+            pathPrefix: string,
+            method: string,
+            payload: unknown
+        ): Effect.Effect<unknown, never> =>
+            Effect.gen(function* () {
+                const entry = map.get(pathPrefix);
+                if (!entry)
+                    return { error: `Unknown pathPrefix: ${pathPrefix}` };
+                const client = entry.getClient(entry.defaultEntityId);
+                const fn = client[method];
+                if (typeof fn !== 'function')
+                    return { error: `Unknown method: ${method}` };
+                return yield* fn(payload).pipe(
+                    Effect.catchAll((err: unknown) =>
+                        Effect.succeed({ error: err instanceof Error ? err.message : String(err) })
+                    )
+                );
+            });
 
         // Build API with one group per entity (e.g. "Contacts", "HelloWorlds") with concrete paths, plus Shutdown.
         let api = HttpApi.make('EventivaEntityRpc').add(ShutdownGroup) as HttpApi.HttpApi<
@@ -332,38 +321,39 @@ export function makeEntityEndpointsLayer(
 
         const shutdownResponse = { ok: true as const, message: 'Shutting down' };
         const scheduleExit = Effect.sync(() => setTimeout(() => process.exit(0), 100));
-        const shutdownGroupLive = HttpApiBuilder.group(
-            api as HttpApi.HttpApi<string, typeof ShutdownGroup, any, any>,
-            'Shutdown',
-            (handlers) =>
-                handlers
-                    .handle('shutdownGet', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
-                    .handle('shutdownPost', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+        const shutdownGroupLive = HttpApiBuilder.group(api as HttpApi.HttpApi<string, typeof ShutdownGroup, any, any>, 'Shutdown', (handlers) =>
+            handlers
+                .handle('shutdownGet', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+                .handle('shutdownPost', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
         );
 
         type GroupHandlers = { handle: (name: string, fn: (...args: any[]) => Effect.Effect<any>) => GroupHandlers };
+        const requiredKeys = ['invoke', 'list', 'get', 'create', 'update', 'delete'] as const;
         const entityGroupLayers = allDescriptors.map((d) => {
             const groupName = pathPrefixToGroupName(d.pathPrefix);
             const p = d.pathPrefix;
-            return (
-                HttpApiBuilder.group as unknown as (
-                    a: unknown,
-                    n: string,
-                    f: (h: GroupHandlers) => GroupHandlers
-                ) => Layer.Layer<unknown, unknown, unknown>
-            )(api, groupName, (handlers) =>
-                handlers
-                    .handle('invoke', invokeHandler(p))
-                    .handle('list', () => runClient(p, 'list', {}))
-                    .handle('get', ({ path }: { path: { id: string } }) => runClient(p, 'get', { id: path.id }))
-                    .handle('create', ({ payload }: { payload: unknown }) => runClient(p, 'create', payload))
-                    .handle('update', ({ path, payload }: { path: { id: string }; payload: unknown }) =>
-                        runClient(p, 'update', {
-                            id: path.id,
-                            patch: typeof payload === 'object' && payload !== null ? payload : {},
-                        })
-                    )
-                    .handle('delete', ({ path }: { path: { id: string } }) => runClient(p, 'delete', { id: path.id }))
+            return ((HttpApiBuilder.group as unknown) as (a: unknown, n: string, f: (h: GroupHandlers) => GroupHandlers) => Layer.Layer<unknown, unknown, unknown>)(
+                api,
+                groupName,
+                (handlers) => {
+                    const built = handlers
+                        .handle('invoke', invokeHandler(p))
+                        .handle('list', () => runClient(p, 'list', {}))
+                        .handle('get', ({ path }: { path: { id: string } }) => runClient(p, 'get', { id: path.id }))
+                        .handle('create', ({ payload }: { payload: unknown }) => runClient(p, 'create', payload))
+                        .handle('update', ({ path, payload }: { path: { id: string }; payload: unknown }) =>
+                            runClient(p, 'update', { id: path.id, ...(typeof payload === 'object' && payload !== null ? payload : {}) })
+                        )
+                        .handle('delete', ({ path }: { path: { id: string } }) => runClient(p, 'delete', { id: path.id }));
+                    if (typeof built !== 'object' || built === null) {
+                        throw new Error(`EntityEndpoints: group "${groupName}" did not return a handlers object`);
+                    }
+                    const h = built as { handle?: unknown };
+                    if (typeof h.handle !== 'function') {
+                        throw new Error(`EntityEndpoints: group "${groupName}" handlers.handle is not a function (expected chain of .handle("${requiredKeys.join('", "')}", ...))`);
+                    }
+                    return built;
+                }
             );
         });
 

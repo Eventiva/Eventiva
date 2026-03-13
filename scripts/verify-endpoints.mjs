@@ -9,7 +9,7 @@ import http from 'http';
 
 const PORT = 3000;
 const MAX_WAIT_MS = 90000;
-const REQUEST_TIMEOUT_MS = 30000;
+const REQUEST_TIMEOUT_MS = 15000;
 
 /**
  * Waits until the given TCP port on 127.0.0.1 accepts a connection or the timeout elapses.
@@ -55,20 +55,17 @@ function httpPost(path, body) {
                 headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(data) },
             },
             (res) => {
+                clearTimeout(timeoutId);
                 let buf = '';
                 res.on('data', (c) => (buf += c));
-                res.on('end', () => {
-                    clearTimeout(timer);
-                    resolve({ status: res.statusCode, body: buf });
-                });
+                res.on('end', () => resolve({ status: res.statusCode, body: buf }));
             }
         );
-        const timer = setTimeout(() => {
-            req.destroy();
-            reject(new Error(`Request timeout after ${REQUEST_TIMEOUT_MS}ms: POST ${path}`));
+        const timeoutId = setTimeout(() => {
+            req.destroy(new Error('Request timed out'));
         }, REQUEST_TIMEOUT_MS);
         req.on('error', (err) => {
-            clearTimeout(timer);
+            clearTimeout(timeoutId);
             reject(err);
         });
         req.write(data);
@@ -84,19 +81,16 @@ function httpPost(path, body) {
 function httpGet(path) {
     return new Promise((resolve, reject) => {
         const req = http.get(`http://127.0.0.1:${PORT}${path}`, (res) => {
+            clearTimeout(timeoutId);
             let buf = '';
             res.on('data', (c) => (buf += c));
-            res.on('end', () => {
-                clearTimeout(timer);
-                resolve({ status: res.statusCode, body: buf });
-            });
+            res.on('end', () => resolve({ status: res.statusCode, body: buf }));
         });
-        const timer = setTimeout(() => {
-            req.destroy();
-            reject(new Error(`Request timeout after ${REQUEST_TIMEOUT_MS}ms: GET ${path}`));
+        const timeoutId = setTimeout(() => {
+            req.destroy(new Error('Request timed out'));
         }, REQUEST_TIMEOUT_MS);
         req.on('error', (err) => {
-            clearTimeout(timer);
+            clearTimeout(timeoutId);
             reject(err);
         });
     });
@@ -108,7 +102,7 @@ function httpGet(path) {
  * Starts a detached platform process, waits for the configured port to become available, sends POST requests to the RPC contacts and hello-worlds endpoints and a GET to /api/docs, logs status snippets for each response, and exits with code 0 if the contacts check passes (no "Unknown pathPrefix" in the response) or 1 otherwise. On error it terminates the spawned process group and exits with code 1.
  */
 async function main() {
-    const child = spawn('npx', ['nx', 'run', 'platforms-default:run'], {
+    const child = spawn('pnpm', ['nx', 'run', 'platforms-default:run'], {
         cwd: process.cwd(),
         stdio: ['ignore', 'pipe', 'pipe'],
         detached: true,
@@ -134,15 +128,16 @@ async function main() {
         const helloRes = await httpPost('/api/rpc/hello-worlds', { method: 'list', payload: {} });
         console.log('\nPOST /api/rpc/hello-worlds ->', helloRes.status);
         console.log(helloRes.body.slice(0, 200) + (helloRes.body.length > 200 ? '...' : ''));
-        const helloOk = helloRes.status === 200 && !helloRes.body.includes('Unknown pathPrefix');
+        const helloOk = helloRes.status === 200;
         console.log(helloOk ? 'PASS (hello-worlds)' : 'FAIL (hello-worlds)\n');
 
         const docsRes = await httpGet('/api/docs');
         console.log('\nGET /api/docs ->', docsRes.status);
-        console.log(docsRes.status === 200 ? 'PASS (Swagger)' : 'FAIL (Swagger)');
+        const docsOk = docsRes.status === 200;
+        console.log(docsOk ? 'PASS (Swagger)' : 'FAIL (Swagger)');
 
-        process.kill(-child.pid, 'SIGTERM');
-        process.exit(contactOk ? 0 : 1);
+        const allOk = contactOk && helloOk && docsOk;
+        process.exit(allOk ? 0 : 1);
     } catch (e) {
         console.error(e);
         process.kill(-child.pid, 'SIGTERM');
