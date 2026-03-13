@@ -17,4 +17,5 @@ export * from './entity/entity-method-extensions.js';
 export * from './embedding/embedding-service.js';
 export * from './observability/index.js';
 export * from './security/index.js';
-export * from './config/runtime-config.js';
+export * from './config/runtime-config.js'
+export * from './feature-flags/index.js';

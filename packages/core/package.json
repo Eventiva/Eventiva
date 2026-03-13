@@ -22,6 +22,7 @@
     "@opentelemetry/sdk-trace-node": "^2.0.0",
     "drizzle-orm": "1.0.0-beta.18-dc9676b",
     "effect": "^3.19.17",
+    "posthog-node": "^5.28.1",
     "tslib": "^2.3.0",
     "typeid-js": "^1.2.0"
   },
