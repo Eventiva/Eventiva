@@ -1,9 +1,9 @@
 name: Management - Github Management
 on:
   issues:
-    types: [ opened, edited, closed, reopened ]
+    types: [opened, edited, closed, reopened]
   pull_request:
-    types: [ opened, edited, closed, reopened, synchronize ]
+    types: [opened, edited, closed, reopened, synchronize]
   merge_group:
 
 permissions:
