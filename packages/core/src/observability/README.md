@@ -14,7 +14,28 @@ No code path may omit observability.
 
 ## Layer
 
-Use `ObservabilityLive` from `./layer.js` as the base for runtime and all entity handlers. It provides Effect `Logger`, `Tracer`, and `Metric` (and OTEL `Resource`) via `@effect/opentelemetry` NodeSdk (Console exporters for dev).
+Use `ObservabilityLive` from `./layer.js` as the base for runtime and all entity handlers. It provides Effect `Logger`, `Tracer`, and `Metric` (and OTEL `Resource`) via `@effect/opentelemetry` NodeSdk.
+
+By default, exports go to **Console** (dev). When `OTEL_EXPORTER_OTLP_ENDPOINT` is set, traces, logs, and metrics are exported via **OTLP HTTP** (e.g. to Firetiger).
+
+## Firetiger / OTLP export
+
+To send traces, logs, and metrics to Firetiger (or any OTLP endpoint):
+
+1. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the ingest base URL (e.g. `https://ingest.cloud.firetiger.com`).
+2. For Basic Auth, either:
+   - Set `OTEL_EXPORTER_OTLP_HEADERS` with `Authorization=Basic <base64(username:password)>`, or
+   - Set `FIRETIGER_USERNAME` and `FIRETIGER_PASSWORD` (we build the Authorization header when both are set).
+
+**Example (env vars):**
+
+```bash
+OTEL_EXPORTER_OTLP_ENDPOINT=https://ingest.cloud.firetiger.com
+FIRETIGER_USERNAME=your-username
+FIRETIGER_PASSWORD=your-password
+```
+
+**Security:** Never commit credentials. Use `.env` (gitignored) or your deployment secrets.
 
 ## Helpers
 
