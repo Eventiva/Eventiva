@@ -75,12 +75,16 @@ export const defaultRuntimeProgram = Effect.gen(function* () {
  */
 export function runMainTwoPhase(template: PlatformTemplateTwoPhase): void {
     const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== 'false';
-    const bootstrapLayer = useDevTools ? Layer.merge(DevToolsLive, template.getBootstrapLayer()) : template.getBootstrapLayer();
+    const bootstrapLayer = useDevTools
+        ? Layer.merge(DevToolsLive, template.getBootstrapLayer())
+        : template.getBootstrapLayer();
     const runtimeLayer = template.getRuntimeLayer();
-    const program = Effect.logInfo('runtime starting', { service: 'eventiva-core' }).pipe(
-        Effect.flatMap(() => bootstrapProgram),
-        Effect.flatMap(() => runtimeOnlyProgram.pipe(Effect.provide(runtimeLayer)))
-    ).pipe(Effect.provide(bootstrapLayer)) as Effect.Effect<void, unknown, never>;
+    const program = Effect.logInfo('runtime starting', { service: 'eventiva-core' })
+        .pipe(
+            Effect.flatMap(() => bootstrapProgram),
+            Effect.flatMap(() => runtimeOnlyProgram.pipe(Effect.provide(runtimeLayer)))
+        )
+        .pipe(Effect.provide(bootstrapLayer)) as Effect.Effect<void, unknown, never>;
     NodeRuntime.runMain(Effect.asVoid(program));
 }
 

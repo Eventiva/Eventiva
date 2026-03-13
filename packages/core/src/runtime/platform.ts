@@ -102,9 +102,7 @@ function isFeatureEnabled(overrides: FeatureFlagOverrides | undefined, key: keyo
  * @param options - Options controlling which sub-layers are included (database layer, extensions, optional schema finalizer, endpoints port and feature flag overrides)
  * @returns A composed `Layer` that provides observability, runtime configuration, PII encryption, extension configuration, optional cluster and schema stacks, the database layer, extension hooks and workflow components, and a scoped lifecycle; extension entity layers are merged on top of this base layer
  */
-function buildBootstrapStack(
-    options: CreatePlatformTemplateOptions
-): Layer.Layer<never, any, unknown> {
+function buildBootstrapStack(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown> {
     const fo = options.featureOverrides;
     const scopeLayer = Layer.scoped(Scope.Scope, Scope.make());
     const endpointsPort = options.endpointsPort ?? 3000;
@@ -176,10 +174,11 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
             port: endpointsPort,
             featureOverrides: options.featureOverrides,
         });
-        return endpointsLayer.pipe(
-            Layer.provide(serverLayer),
-            Layer.provide(platformContextLayer)
-        ) as Layer.Layer<EntityEndpointsServer, any, unknown>;
+        return endpointsLayer.pipe(Layer.provide(serverLayer), Layer.provide(platformContextLayer)) as Layer.Layer<
+            EntityEndpointsServer,
+            any,
+            unknown
+        >;
     }
     if (endpointsPort !== undefined) {
         const serverLayer = Layer.scopedDiscard(
@@ -224,9 +223,7 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
  *
  * @returns An object with `getBootstrapLayer()` to obtain the bootstrap layer and `getRuntimeLayer()` to obtain the runtime layer
  */
-export function createPlatformTemplateTwoPhase(
-    options: CreatePlatformTemplateOptions
-): PlatformTemplateTwoPhase {
+export function createPlatformTemplateTwoPhase(options: CreatePlatformTemplateOptions): PlatformTemplateTwoPhase {
     const bootstrapLayer = buildBootstrapStack(options);
     return {
         getBootstrapLayer: () => bootstrapLayer,
