@@ -3,12 +3,12 @@
 ## File headers (licensing)
 
 - **Every file** has the long **FCL-1.0-MIT** header with:
-  - Contributing link (CONTRIBUTING.md)
-  - Code of Conduct link (CODE_OF_CONDUCT.md)
-  - Copyright Eventiva Ltd
-  - FCL-1.0-MIT license text and key-functionality warning
-  - Eventiva Cooperation Commitment
-  - "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE"
+    - Contributing link (CONTRIBUTING.md)
+    - Code of Conduct link (CODE_OF_CONDUCT.md)
+    - Copyright Eventiva Ltd
+    - FCL-1.0-MIT license text and key-functionality warning
+    - Eventiva Cooperation Commitment
+    - "DELETING THIS NOTICE AUTOMATICALLY VOIDS YOUR LICENSE"
 - **Rebuild requirement:** Keep **one canonical header** (identical in every file except file-specific lines: file name, "Last modified"). No variation in license text.
 
 ## Naming

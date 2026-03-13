@@ -1,4 +1,4 @@
-import { SQL, sql } from 'drizzle-orm'
+import { SQL, sql } from 'drizzle-orm';
 import {
     AnyIndexBuilder,
     CheckBuilder,
@@ -11,10 +11,10 @@ import {
     PrimaryKeyBuilder,
     timestamp,
     UniqueConstraintBuilder,
-    uniqueIndex
-} from 'drizzle-orm/pg-core'
-import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all'
-import { text } from 'drizzle-orm/pg-core'
+    uniqueIndex,
+} from 'drizzle-orm/pg-core';
+import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all';
+import { text } from 'drizzle-orm/pg-core';
 
 /**
  * Creates a text object based on the provided value. (Used by drizzle)
@@ -23,13 +23,10 @@ import { text } from 'drizzle-orm/pg-core'
  * @param config.type - The type of input value, if provided.
  * @returns - A text object derived from the input value.
  */
-export const typeid = (
-    value: string = 'id',
-    config?: { type: string }
-) => text( value )
+export const typeid = (value = 'id', config?: { type: string }) => text(value);
 
 /** Placeholder for createdBy FK when getTable is not available (e.g. createTableFinal standalone). */
-const createdByPlaceholder = drizzlePgTable( '_created_by_placeholder', { id: typeid( 'id', { type: 'contact' } ) } )
+const createdByPlaceholder = drizzlePgTable('_created_by_placeholder', { id: typeid('id', { type: 'contact' }) });
 
 /**
  * Represents the status constants used to indicate the state of an entity.
@@ -42,9 +39,9 @@ const createdByPlaceholder = drizzlePgTable( '_created_by_placeholder', { id: ty
  * properties cannot be modified.
  */
 export const status = {
-    'Inactive': 'inactive',
-    'Active': 'active'
-} as const
+    Inactive: 'inactive',
+    Active: 'active',
+} as const;
 
 /**
  * Status is a TypeScript type that represents a value from the `status` object.
@@ -52,7 +49,7 @@ export const status = {
  * This type is typically used to ensure that certain properties or variables are constrained
  * to valid `status` values as defined within the `status` object.
  */
-export type Status = typeof status[keyof typeof status]
+export type Status = (typeof status)[keyof typeof status];
 
 /**
  * Enum representing the possible statuses for a user.
@@ -67,13 +64,7 @@ export type Status = typeof status[keyof typeof status]
  *
  * This enum is configured and mapped using a PostgreSQL enum type named 'user-status'.
  */
-export const statusEnum = pgEnum(
-    'status',
-    [
-        status.Inactive,
-        status.Active
-    ]
-)
+export const statusEnum = pgEnum('status', [status.Inactive, status.Active]);
 
 /**
  * Represents the required fields that must be present in an object or entity.
@@ -103,13 +94,7 @@ type RequiredFields = 'id';
  * - 'createdBy': Refers to the user or entity responsible for creating the record.
  * - 'active': Indicates the active status of an entity.
  */
-type ForbiddenFields =
-    | 'createdAt'
-    | 'updatedAt'
-    | 'disabledAt'
-    | 'deletedAt'
-    | 'createdBy'
-    | 'active';
+type ForbiddenFields = 'createdAt' | 'updatedAt' | 'disabledAt' | 'deletedAt' | 'createdBy' | 'active';
 
 /**
  * A utility type that ensures required fields in an object type based on specified field constraints.
@@ -118,8 +103,8 @@ type ForbiddenFields =
  * making the specified fields mandatory while retaining the rest of the properties as-is.
  * @template TColumns The object type describing the columns, where each property corresponds to a `PgColumnBuilderBase`.
  */
-type EnsureRequiredFields<TColumns extends Record<string, PgColumnBuilder>> =
-    Required<Pick<TColumns, RequiredFields>> & TColumns;
+type EnsureRequiredFields<TColumns extends Record<string, PgColumnBuilder>> = Required<Pick<TColumns, RequiredFields>> &
+    TColumns;
 
 /**
  * Represents a utility type to exclude forbidden fields from a set of column definitions.
@@ -132,9 +117,7 @@ type EnsureRequiredFields<TColumns extends Record<string, PgColumnBuilder>> =
  * This type is typically used for dynamically filtering out specific columns in a type-safe way.
  */
 type ExcludeForbiddenFields<TColumns extends Record<string, PgColumnBuilder>> = {
-    [Field in keyof TColumns]: Field extends ForbiddenFields
-        ? never
-        : TColumns[Field];
+    [Field in keyof TColumns]: Field extends ForbiddenFields ? never : TColumns[Field];
 };
 
 /**
@@ -155,11 +138,11 @@ type ValidateColumns<TColumns extends Record<string, PgColumnBuilder>> = EnsureR
 >;
 
 export type AllBuilders = {
-    typeid: typeof typeid
-} & ReturnType<typeof getPgColumnBuilders>
+    typeid: typeof typeid;
+} & ReturnType<typeof getPgColumnBuilders>;
 
 export type PgTableExtraConfigValue =
-    AnyIndexBuilder
+    | AnyIndexBuilder
     | CheckBuilder
     | ForeignKeyBuilder
     | PrimaryKeyBuilder
@@ -167,50 +150,59 @@ export type PgTableExtraConfigValue =
     | PgPolicy;
 export type PgTableExtraConfig = Record<string, PgTableExtraConfigValue>;
 
-
 export function testColumns<
     TTableName extends string,
     TColumnsKey extends string,
-    TColumnsMap extends Record<TColumnsKey, PgColumnBuilder>>
-(
-    name: TTableName,
-    db: AllBuilders,
-    columns: ( columnTypes: AllBuilders ) => ValidateColumns<TColumnsMap>
-) {
-    const table = columns( {
+    TColumnsMap extends Record<TColumnsKey, PgColumnBuilder>,
+>(name: TTableName, db: AllBuilders, columns: (columnTypes: AllBuilders) => ValidateColumns<TColumnsMap>) {
+    const table = columns({
         ...db,
-        typeid
-    } )
+        typeid,
+    });
     // Check if columns have an "id" field
-    if ( !( 'id' in table ) ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must include an "id"`
-            + ' field. Please use the importable "typeid" function and the typeid_generate_text() default'
-            + ' function' )
+    if (!('id' in table)) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must include an "id"` +
+                ' field. Please use the importable "typeid" function and the typeid_generate_text() default' +
+                ' function'
+        );
     }
-    if ( 'createdAt' in table ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must not include a "createdAt" field. This would be overwritten by the default settings` )
-    }
-
-    if ( 'updatedAt' in table ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must not include a "updatedAt" field. This would be overwritten by the default settings` )
-    }
-
-    if ( 'disabledAt' in table ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must not include a "disabledAt" field. This would be overwritten by the default settings` )
+    if ('createdAt' in table) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must not include a "createdAt" field. This would be overwritten by the default settings`
+        );
     }
 
-    if ( 'deletedAt' in table ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must not include a "deletedAt" field. This would be overwritten by the default settings` )
+    if ('updatedAt' in table) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must not include a "updatedAt" field. This would be overwritten by the default settings`
+        );
     }
 
-    if ( 'createdBy' in table ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must not include a "createdBy" field. This would be overwritten by the default settings` )
+    if ('disabledAt' in table) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must not include a "disabledAt" field. This would be overwritten by the default settings`
+        );
     }
 
-    if ( 'active' in table ) {
-        throw new Error( `Table definition for ${ name } is incorrect. The column definition must not include an "active" field. This would be overwritten by the default settings which generate the status "Active" or "Inactive" depending on the value of the "deleted_at" field.` )
+    if ('deletedAt' in table) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must not include a "deletedAt" field. This would be overwritten by the default settings`
+        );
     }
-    return table
+
+    if ('createdBy' in table) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must not include a "createdBy" field. This would be overwritten by the default settings`
+        );
+    }
+
+    if ('active' in table) {
+        throw new Error(
+            `Table definition for ${name} is incorrect. The column definition must not include an "active" field. This would be overwritten by the default settings which generate the status "Active" or "Inactive" depending on the value of the "deleted_at" field.`
+        );
+    }
+    return table;
 }
 
 /**
@@ -230,11 +222,11 @@ export function testColumns<
 export function createTableFinal<
     TTableName extends string,
     TColumnsKey extends string,
-    TColumnsMap extends Record<TColumnsKey, PgColumnBuilder>
-> (
+    TColumnsMap extends Record<TColumnsKey, PgColumnBuilder>,
+>(
     name: TTableName,
-    columns: ( columnTypes: AllBuilders ) => ValidateColumns<TColumnsMap>,
-    extraConfig?: ( self: unknown ) => PgTableExtraConfigValue[]
+    columns: (columnTypes: AllBuilders) => ValidateColumns<TColumnsMap>,
+    extraConfig?: (self: unknown) => PgTableExtraConfigValue[]
 ) {
     /**
      * Represents a database table configuration using `pgTable` with predefined columns, indices, and generated fields.
@@ -254,45 +246,45 @@ export function createTableFinal<
      */
     const result = drizzlePgTable(
         name,
-        ( db ) => ( {
+        (db) => ({
             ...testColumns(
                 name,
                 {
                     ...db,
-                    typeid
+                    typeid,
                 },
                 columns
             ),
-            createdAt: timestamp( 'created_at', { mode: 'string' } ).defaultNow(),
-            updatedAt: timestamp(
-                'updated_at',
-                { mode: 'string' }
-            ).defaultNow().$onUpdate( () => new Date().toISOString() ),
-            disabledAt: timestamp( 'disabled_at', { mode: 'string' } ),
-            deletedAt: timestamp( 'deleted_at', { mode: 'string' } ),
+            createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
+            updatedAt: timestamp('updated_at', { mode: 'string' })
+                .defaultNow()
+                .$onUpdate(() => new Date().toISOString()),
+            disabledAt: timestamp('disabled_at', { mode: 'string' }),
+            deletedAt: timestamp('deleted_at', { mode: 'string' }),
             /**
              * Because this references the users table, we must update the users table manually if adding any new
              * fields to this abstraction.
              */
-            createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => createdByPlaceholder.id ),
-            active: statusEnum( 'active' ).generatedAlwaysAs( (): SQL => sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END` )
-        } ),
-        ( table: any ) => {
-            const extra = extraConfig
-                ? extraConfig( table )
-                : []
+            createdBy: typeid('created_by', { type: 'contact' }).references(() => createdByPlaceholder.id),
+            active: statusEnum('active').generatedAlwaysAs(
+                (): SQL =>
+                    sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
+            ),
+        }),
+        (table: any) => {
+            const extra = extraConfig ? extraConfig(table) : [];
 
             return [
                 ...extra,
-                uniqueIndex( `${name}_id_index` ).on( table.id ),
-                index( `${name}_created_at_index` ).on( table.createdAt ),
-                index( `${name}_updated_at_index` ).on( table.updatedAt ),
-                index( `${name}_disabled_at_index` ).on( table.disabledAt ),
-                index( `${name}_deleted_at_index` ).on( table.deletedAt )
-            ]
+                uniqueIndex(`${name}_id_index`).on(table.id),
+                index(`${name}_created_at_index`).on(table.createdAt),
+                index(`${name}_updated_at_index`).on(table.updatedAt),
+                index(`${name}_disabled_at_index`).on(table.disabledAt),
+                index(`${name}_deleted_at_index`).on(table.deletedAt),
+            ];
         }
-    )
-    return result
+    );
+    return result;
 }
 
 /**
@@ -309,56 +301,58 @@ export function createTableFinal<
 export function buildTableInternal(
     name: string,
     mergedColumns: Record<string, PgColumnBuilder>,
-    extraConfigs: ReadonlyArray<( table: any ) => PgTableExtraConfigValue[]>,
-    getTable?: ( tableName: string ) => unknown
+    extraConfigs: ReadonlyArray<(table: any) => PgTableExtraConfigValue[]>,
+    getTable?: (tableName: string) => unknown
 ) {
-    const creatorTable = getTable?.('contact') as { id: typeof createdByPlaceholder.id } | undefined
-    const createdByRef = (): typeof createdByPlaceholder.id =>
-      ( creatorTable?.id ?? createdByPlaceholder.id )
+    const creatorTable = getTable?.('contact') as { id: typeof createdByPlaceholder.id } | undefined;
+    const createdByRef = (): typeof createdByPlaceholder.id => creatorTable?.id ?? createdByPlaceholder.id;
     return drizzlePgTable(
         name,
-        ( db ) => ( {
+        (db) => ({
             ...mergedColumns,
-            createdAt: timestamp( 'created_at', { mode: 'string' } ).defaultNow(),
-            updatedAt: timestamp(
-                'updated_at',
-                { mode: 'string' }
-            ).defaultNow().$onUpdate( () => new Date().toISOString() ),
-            disabledAt: timestamp( 'disabled_at', { mode: 'string' } ),
-            deletedAt: timestamp( 'deleted_at', { mode: 'string' } ),
-            createdBy: typeid( 'created_by', { type: 'contact' } ).references( createdByRef ),
-            active: statusEnum( 'active' ).generatedAlwaysAs( (): SQL => sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END` )
-        } ),
-        ( table: any ) => {
-            const extra = extraConfigs.flatMap( ( cb ) => ( typeof cb === 'function' ? cb( table ) : [] ) )
+            createdAt: timestamp('created_at', { mode: 'string' }).defaultNow(),
+            updatedAt: timestamp('updated_at', { mode: 'string' })
+                .defaultNow()
+                .$onUpdate(() => new Date().toISOString()),
+            disabledAt: timestamp('disabled_at', { mode: 'string' }),
+            deletedAt: timestamp('deleted_at', { mode: 'string' }),
+            createdBy: typeid('created_by', { type: 'contact' }).references(createdByRef),
+            active: statusEnum('active').generatedAlwaysAs(
+                (): SQL =>
+                    sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
+            ),
+        }),
+        (table: any) => {
+            const extra = extraConfigs.flatMap((cb) => (typeof cb === 'function' ? cb(table) : []));
             return [
                 ...extra,
-                uniqueIndex( `${name}_id_index` ).on( table.id ),
-                index( `${name}_created_at_index` ).on( table.createdAt ),
-                index( `${name}_updated_at_index` ).on( table.updatedAt ),
-                index( `${name}_disabled_at_index` ).on( table.disabledAt ),
-                index( `${name}_deleted_at_index` ).on( table.deletedAt )
-            ]
+                uniqueIndex(`${name}_id_index`).on(table.id),
+                index(`${name}_created_at_index`).on(table.createdAt),
+                index(`${name}_updated_at_index`).on(table.updatedAt),
+                index(`${name}_disabled_at_index`).on(table.disabledAt),
+                index(`${name}_deleted_at_index`).on(table.deletedAt),
+            ];
         }
-    )
+    );
 }
 
 export function pgTable<
     TTableName extends string,
     TColumnsKey extends string,
-    TColumnsMap extends Record<TColumnsKey, PgColumnBuilder>
-> (
+    TColumnsMap extends Record<TColumnsKey, PgColumnBuilder>,
+>(
     name: TTableName,
-    columns: ( columnTypes: AllBuilders ) => TColumnsMap,
-    extraConfig?: ( ( self: unknown ) => PgTableExtraConfigValue[] ) | undefined
+    columns: (columnTypes: AllBuilders) => TColumnsMap,
+    extraConfig?: ((self: unknown) => PgTableExtraConfigValue[]) | undefined
 ) {
     const result = drizzlePgTable(
         name,
-        ( db ) => columns( {
-            ...db,
-            typeid
-        } ),
+        (db) =>
+            columns({
+                ...db,
+                typeid,
+            }),
         extraConfig
-    )
-    return result
+    );
+    return result;
 }

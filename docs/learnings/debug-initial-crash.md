@@ -14,17 +14,17 @@ When the Effect runtime crashes with `TypeError: Cannot read properties of undef
 
 Use these env vars to isolate the crash:
 
-| Env var | Default | Effect |
-|---------|---------|--------|
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS` | true | Disable entire entity endpoints. **Workaround:** set to `false` to avoid crash. |
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT` | true | Skip Sharding, entity.client, apiLayer, Layer.build. When false, server runs but no routes. |
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING` | true | Skip `yield* Sharding.Sharding`. |
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_TRACING` | true | Skip `withSpanAndLog` wrapper (debug). |
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_CLIENT_FETCH` | true | Skip `yield* entity.client` for each descriptor. |
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER` | true | Skip HttpApiSwagger at /api/docs. |
-| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD` | true | Skip `Layer.build(fullServerLayer)`. |
-| `EVENTIVA_FEATURE_DEVTOOLS` | true | Skip DevTools layer. |
-| `EVENTIVA_FEATURE_OBSERVABILITY` | true | Use NodeSdk.layerEmpty instead of ObservabilityLive. |
+| Env var                                              | Default | Effect                                                                                      |
+| ---------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------- |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS`                  | true    | Disable entire entity endpoints. **Workaround:** set to `false` to avoid crash.             |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT`        | true    | Skip Sharding, entity.client, apiLayer, Layer.build. When false, server runs but no routes. |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING`         | true    | Skip `yield* Sharding.Sharding`.                                                            |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_TRACING`          | true    | Skip `withSpanAndLog` wrapper (debug).                                                      |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_CLIENT_FETCH`     | true    | Skip `yield* entity.client` for each descriptor.                                            |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER`          | true    | Skip HttpApiSwagger at /api/docs.                                                           |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD` | true    | Skip `Layer.build(fullServerLayer)`.                                                        |
+| `EVENTIVA_FEATURE_DEVTOOLS`                          | true    | Skip DevTools layer.                                                                        |
+| `EVENTIVA_FEATURE_OBSERVABILITY`                     | true    | Use NodeSdk.layerEmpty instead of ObservabilityLive.                                        |
 
 ## Debug process
 

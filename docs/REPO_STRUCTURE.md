@@ -9,7 +9,7 @@ This document describes the repository layout after the Part D.C cleanup and Nx 
 - **nx.json** – Nx root config; default base `main`; targetDefaults for build/lint/test.
 - **docs/** – Learnings (`docs/learnings/`), Linear issues draft (`docs/linear-issues-draft.md`).
 - **.cursor/** – Plans, rules (TDD, learnings reference).
-- **.github/workflows/** – Security and management workflows only (no Bit components-*).
+- **.github/workflows/** – Security and management workflows only (no Bit components-\*).
 
 ## Apps (`apps/`)
 

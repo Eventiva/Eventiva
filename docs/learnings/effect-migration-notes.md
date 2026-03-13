@@ -10,14 +10,14 @@
 
 ## Mapping
 
-| Current (Bit/Eventiva) | Rebuild (Effect) |
-|------------------------|------------------|
-| Aspect | Effect Layer or Service descriptor |
+| Current (Bit/Eventiva)   | Rebuild (Effect)                                       |
+| ------------------------ | ------------------------------------------------------ |
+| Aspect                   | Effect Layer or Service descriptor                     |
 | Slot (BackendSlot, etc.) | Layer merge; optional @effect/cluster for distribution |
-| Zod | Effect Schema |
-| Drizzle (raw) | @effect/sql-pg or Drizzle in Effect Service |
-| Express route/gql | Effect HTTP + GraphQL/OpenAPI/MCP/gRPC |
-| Per-component env | Effect Config (secrets never logged) |
+| Zod                      | Effect Schema                                          |
+| Drizzle (raw)            | @effect/sql-pg or Drizzle in Effect Service            |
+| Express route/gql        | Effect HTTP + GraphQL/OpenAPI/MCP/gRPC                 |
+| Per-component env        | Effect Config (secrets never logged)                   |
 
 ## Tier 1 in every iteration
 

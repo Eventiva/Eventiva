@@ -1,7 +1,7 @@
 ---
 name: Effect CRM framework infrastructure
-overview: "Build the foundational Effect-TS CRM framework in Eventiva: cluster-based entities as extensions with dynamic registration, platform config templates, workflow engine placeholder, built-in logging/metrics/tracing, and a runnable runtime plus a Hello World entity extension to prove the concept."
-date: "2026-03-07"
+overview: 'Build the foundational Effect-TS CRM framework in Eventiva: cluster-based entities as extensions with dynamic registration, platform config templates, workflow engine placeholder, built-in logging/metrics/tracing, and a runnable runtime plus a Hello World entity extension to prove the concept.'
+date: '2026-03-07'
 isProject: false
 ---
 
@@ -75,60 +75,60 @@ isProject: false
 - **Reference:** [@effect/opentelemetry](https://effect-ts.github.io/effect/docs/opentelemetry) — provides Logger, Metrics, Tracer, NodeSdk, OtlpLogger, OtlpMetrics, OtlpTracer, OtlpResource, etc.
 - **Files:** Create `packages/core/src/observability/` (e.g. index.ts, logger.ts or use Otlp/NodeSdk directly, metrics.ts, tracer.ts).
 - **Actions:**
-  - Implement the observability Layer using **@effect/opentelemetry**: provide Effect Logger (e.g. via OtlpLogger or the package's Logger integration), **Metrics** (e.g. OtlpMetrics), **Tracer** (e.g. OtlpTracer). Use NodeSdk for Node so the OpenTelemetry SDK is initialized and logs/metrics/traces are exported (e.g. to OTLP or console).
-  - Export a single Layer (e.g. ObservabilityLive or ObservabilityDefault) that the runtime and **all** entity handlers depend on. Document the "every function" contract: every function must use Tracer (span), Logger (structured log), and Metric (where appropriate).
-  - Provide small helpers or patterns (e.g. `withSpanAndLog(name, effect)`) so that wrapping a function with tracing + logging is one line; metrics can be "record duration" or "increment counter" in the same wrapper.
-  - Add `@effect/opentelemetry` to `packages/core` (and root if needed) in the Dependencies step.
+    - Implement the observability Layer using **@effect/opentelemetry**: provide Effect Logger (e.g. via OtlpLogger or the package's Logger integration), **Metrics** (e.g. OtlpMetrics), **Tracer** (e.g. OtlpTracer). Use NodeSdk for Node so the OpenTelemetry SDK is initialized and logs/metrics/traces are exported (e.g. to OTLP or console).
+    - Export a single Layer (e.g. ObservabilityLive or ObservabilityDefault) that the runtime and **all** entity handlers depend on. Document the "every function" contract: every function must use Tracer (span), Logger (structured log), and Metric (where appropriate).
+    - Provide small helpers or patterns (e.g. `withSpanAndLog(name, effect)`) so that wrapping a function with tracing + logging is one line; metrics can be "record duration" or "increment counter" in the same wrapper.
+    - Add `@effect/opentelemetry` to `packages/core` (and root if needed) in the Dependencies step.
 - **Requirement:** All framework and extension code **must** use the provided Logger, Tracer, and Metrics from context. No raw `console.log`; no function without a span and at least one log; no user-facing or performance-sensitive path without at least one metric.
 
 ## 3. Cluster entities as extensions
 
 - **Files:** packages/core/src/cluster/entities.ts, new packages/core/src/extensions/registry.ts (or equivalent).
 - **Actions:**
-  - In cluster/entities.ts: Document the pattern "one extension = one Entity"; export a helper or type for defining an entity (e.g. ExtensionEntity type alias or a small factory that wraps Entity.make and **requires** Logger, Tracer, and Metrics in handler context so every handler fully implements observability).
-  - In extensions/registry.ts: Provide a way to "collect" entity layers (e.g. a type ExtensionLayer and a function that merges an array of entity layers into one Layer). Support "runner profile": a named set of entity layers (e.g. default, transforms-only) so a runner process can be configured with a profile and only load those extensions. No Bit-style slots; pure Layer merge.
-  - Re-export from packages/core/src/index.ts so that cluster and extensions are the public API for "add an entity extension".
+    - In cluster/entities.ts: Document the pattern "one extension = one Entity"; export a helper or type for defining an entity (e.g. ExtensionEntity type alias or a small factory that wraps Entity.make and **requires** Logger, Tracer, and Metrics in handler context so every handler fully implements observability).
+    - In extensions/registry.ts: Provide a way to "collect" entity layers (e.g. a type ExtensionLayer and a function that merges an array of entity layers into one Layer). Support "runner profile": a named set of entity layers (e.g. default, transforms-only) so a runner process can be configured with a profile and only load those extensions. No Bit-style slots; pure Layer merge.
+    - Re-export from packages/core/src/index.ts so that cluster and extensions are the public API for "add an entity extension".
 
 ## 4. Platform config templates
 
 - **Files:** Create packages/core/src/platforms/ (or packages/core/platforms/): index.ts, default.ts.
 - **Actions:**
-  - default.ts: Export a "default" platform Layer that composes: Observability Layer, Sharding (e.g. from @effect/cluster), SingleRunner (or in-memory runner) for local execution, a list of entity layers – initially only the Hello World entity (see below). Optionally export a "runner profile" (e.g. defaultProfile = [HelloWorldLayer]) so that multi-runner setups can reuse the same list per process.
-  - index.ts: Export DefaultPlatform (or defaultPlatform) and any shared types (e.g. PlatformTemplate = a Layer that provides Sharding + Runner + entities; RunnerProfile = array of entity layers for one process).
-  - Follow conventions.md: file headers, naming (*.runtime.ts if there is a runtime file here).
+    - default.ts: Export a "default" platform Layer that composes: Observability Layer, Sharding (e.g. from @effect/cluster), SingleRunner (or in-memory runner) for local execution, a list of entity layers – initially only the Hello World entity (see below). Optionally export a "runner profile" (e.g. defaultProfile = [HelloWorldLayer]) so that multi-runner setups can reuse the same list per process.
+    - index.ts: Export DefaultPlatform (or defaultPlatform) and any shared types (e.g. PlatformTemplate = a Layer that provides Sharding + Runner + entities; RunnerProfile = array of entity layers for one process).
+    - Follow conventions.md: file headers, naming (\*.runtime.ts if there is a runtime file here).
 
 ## 5. Workflow engine (transform-manager equivalent)
 
 - **Files:** packages/core/src/workflow/engine.ts, packages/core/src/workflow/types.ts.
 - **Actions:**
-  - **Types:** In workflow/types.ts, define a minimal Workflow type (name, payload schema, result/error schemas) and a "workflow registry" service interface: e.g. register(workflow, executeFn) and execute(workflow, options). This mirrors ClusterWorkflowEngine register/execute without requiring cluster persistence in phase 1.
-  - **Engine:** In workflow/engine.ts, provide a Layer that implements this registry (e.g. in-memory map of name → execute function). **Every** register and execute call must run inside a span, with logging and metrics (e.g. workflow.execute.duration). Later this can be replaced or backed by ClusterWorkflowEngine.layer. Export the Layer and the service type so platform templates can include "workflow engine" in the stack and extensions can register workflows.
-  - No concrete workflows (e.g. string/date transforms) in this phase; only the engine and one optional "no-op" workflow to prove registration if desired.
+    - **Types:** In workflow/types.ts, define a minimal Workflow type (name, payload schema, result/error schemas) and a "workflow registry" service interface: e.g. register(workflow, executeFn) and execute(workflow, options). This mirrors ClusterWorkflowEngine register/execute without requiring cluster persistence in phase 1.
+    - **Engine:** In workflow/engine.ts, provide a Layer that implements this registry (e.g. in-memory map of name → execute function). **Every** register and execute call must run inside a span, with logging and metrics (e.g. workflow.execute.duration). Later this can be replaced or backed by ClusterWorkflowEngine.layer. Export the Layer and the service type so platform templates can include "workflow engine" in the stack and extensions can register workflows.
+    - No concrete workflows (e.g. string/date transforms) in this phase; only the engine and one optional "no-op" workflow to prove registration if desired.
 
 ## 6. Runtime entrypoint
 
 - **Files:** Create packages/core/src/runtime.ts (or apps/cluster-runtime/main.ts if you prefer a separate app). If under core, add an Nx target or script to run it (e.g. node dist/packages/core/runtime.js or nx run core:run).
 - **Actions:**
-  - Compose the default platform Layer (observability + Sharding + SingleRunner + entity layers).
-  - Run an Effect program that: (Observability required) Creates a root span for "runtime.start", logs startup with structured fields, and records a metric (e.g. "runtime.started" or "runtime.duration"). Then acquires Sharding (and Runner) from the layer. Gets a client for the Hello World entity and sends one RPC (e.g. sayHello); the handler's span/log/metrics will appear in the same trace. Logs the hello result and records success; then exits cleanly. No code path without span + log + metric.
-  - Use SingleRunner (or equivalent from @effect/cluster) so the test runs in one process without external cluster infra.
-  - Ensure the program exits cleanly after the proof (e.g. one shot then exit, or a short delay then exit).
+    - Compose the default platform Layer (observability + Sharding + SingleRunner + entity layers).
+    - Run an Effect program that: (Observability required) Creates a root span for "runtime.start", logs startup with structured fields, and records a metric (e.g. "runtime.started" or "runtime.duration"). Then acquires Sharding (and Runner) from the layer. Gets a client for the Hello World entity and sends one RPC (e.g. sayHello); the handler's span/log/metrics will appear in the same trace. Logs the hello result and records success; then exits cleanly. No code path without span + log + metric.
+    - Use SingleRunner (or equivalent from @effect/cluster) so the test runs in one process without external cluster infra.
+    - Ensure the program exits cleanly after the proof (e.g. one shot then exit, or a short delay then exit).
 
 ## 7. Hello World extension (first entity)
 
 - **Files:** Create packages/core/src/extensions/hello-world/ (or a separate package packages/extensions/hello-world if you prefer strict boundaries): e.g. entity.ts, handlers.ts, index.ts.
 - **Actions:**
-  - Define an Entity with type "HelloWorld" and one RPC, e.g. sayHello (no args, or return a string for testing).
-  - **Handlers (observability mandatory):** Implement the RPC so that it (1) creates a span (e.g. HelloWorld.sayHello), (2) logs at entry (and optionally exit) with structured fields (e.g. entityId), (3) records at least one metric (e.g. "hello_world.say_hello.count" or duration). Use Logger, Tracer, and Metric from context; no code path without all three. Then perform the "Hello World" log and return success.
-  - Export the entity's toLayer(handlers) as the extension Layer.
-  - Add this Layer to the default platform in platforms/default.ts and run the runtime; confirm one "Hello World" log, a trace with the handler span, and the metric recorded.
+    - Define an Entity with type "HelloWorld" and one RPC, e.g. sayHello (no args, or return a string for testing).
+    - **Handlers (observability mandatory):** Implement the RPC so that it (1) creates a span (e.g. HelloWorld.sayHello), (2) logs at entry (and optionally exit) with structured fields (e.g. entityId), (3) records at least one metric (e.g. "hello_world.say_hello.count" or duration). Use Logger, Tracer, and Metric from context; no code path without all three. Then perform the "Hello World" log and return success.
+    - Export the entity's toLayer(handlers) as the extension Layer.
+    - Add this Layer to the default platform in platforms/default.ts and run the runtime; confirm one "Hello World" log, a trace with the handler span, and the metric recorded.
 
 ## 8. Documentation and conventions
 
 - **Files:** docs/learnings/architecture.md (short update), new docs/plans/2026-03-07-effect-crm-framework-infrastructure.md (this plan saved).
 - **Actions:**
-  - Update architecture.md with one short subsection: "Effect cluster extensions = entities; registration = Layer merge; platform = template Layer (default); workflows = workflow engine + registry. **Observability is priority #1:** every function must use Tracer (span), Logger (structured log), and Metric (where appropriate)."
-  - Save this plan under docs/plans/ with the date and name above.
+    - Update architecture.md with one short subsection: "Effect cluster extensions = entities; registration = Layer merge; platform = template Layer (default); workflows = workflow engine + registry. **Observability is priority #1:** every function must use Tracer (span), Logger (structured log), and Metric (where appropriate)."
+    - Save this plan under docs/plans/ with the date and name above.
 
 ---
 
@@ -168,10 +168,10 @@ flowchart TB
 ## Verification
 
 - Run the runtime (e.g. via Nx run target); expect:
-  - No unhandled errors.
-  - At least one log line containing "Hello World" (from the entity handler).
-  - **Observability:** A trace containing at least the runtime root span and the HelloWorld.sayHello span; at least one metric (e.g. counter or duration) recorded; structured logs with context.
-  - Clean process exit.
+    - No unhandled errors.
+    - At least one log line containing "Hello World" (from the entity handler).
+    - **Observability:** A trace containing at least the runtime root span and the HelloWorld.sayHello span; at least one metric (e.g. counter or duration) recorded; structured logs with context.
+    - Clean process exit.
 - Build: `nx run core:build` succeeds.
 - TDD: Per .cursor/rules/tdd-test-creation.mdc, do not add tests in the same work that implements the feature; a separate test-creator agent can add tests from the public API/schema.
 

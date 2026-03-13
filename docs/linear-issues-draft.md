@@ -180,4 +180,3 @@ Use this draft with Linear MCP when available, or create issues manually from ea
 - **Dependencies:** Entity abstraction (done).
 - **Context:** Plan "Database and Entity Abstraction" section 6; docs/learnings/architecture.md.
 - **TDD:** Schema first when implemented; test-creator agent only.
-

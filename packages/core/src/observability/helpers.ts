@@ -3,17 +3,17 @@
  * Every function in the framework and extensions must use tracing, logging, and metrics.
  * @see Observability "every function" contract in README.md
  */
-import * as Effect from "effect/Effect"
-import * as Metric from "effect/Metric"
+import * as Effect from 'effect/Effect';
+import * as Metric from 'effect/Metric';
 
 /**
  * Options for withSpanAndLog.
  */
 export interface WithSpanAndLogOptions {
-  /** Optional metric name for duration (default: `${spanName}.duration`) */
-  readonly metricName?: string
-  /** Structured fields to include in entry/exit logs */
-  readonly attributes?: Record<string, string | number | boolean>
+    /** Optional metric name for duration (default: `${spanName}.duration`) */
+    readonly metricName?: string;
+    /** Structured fields to include in entry/exit logs */
+    readonly attributes?: Record<string, string | number | boolean>;
 }
 
 /**
@@ -36,36 +36,33 @@ export interface WithSpanAndLogOptions {
  * })
  * ```
  */
-export function withSpanAndLog(
-  spanName: string,
-  options?: WithSpanAndLogOptions
-) {
-  const name = options?.metricName ?? spanName
-  const metricName = name.replace(/\./g, '_')
-  const attrs = options?.attributes ?? {}
-  
-  const timer = Metric.timer(`${metricName}_duration`)
-  const totalCounter = Metric.counter(`${metricName}_total`)
-  const successCounter = Metric.counter(`${metricName}_success`)
-  const errorCounter = Metric.counter(`${metricName}_error`)
+export function withSpanAndLog(spanName: string, options?: WithSpanAndLogOptions) {
+    const name = options?.metricName ?? spanName;
+    const metricName = name.replace(/\./g, '_');
+    const attrs = options?.attributes ?? {};
 
-  return <A, E, R>(effect: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
-    Effect.withSpan(spanName, { attributes: attrs })(
-      Effect.gen(function* () {
-        yield* Effect.logTrace(`entry ${spanName}`, { spanName, ...attrs })
-        yield* Metric.increment(totalCounter)
-        const result = yield* effect.pipe(
-          Metric.trackDuration(timer),
-          Effect.tap(() => Metric.increment(successCounter)),
-          Effect.tapError((error) => 
+    const timer = Metric.timer(`${metricName}_duration`);
+    const totalCounter = Metric.counter(`${metricName}_total`);
+    const successCounter = Metric.counter(`${metricName}_success`);
+    const errorCounter = Metric.counter(`${metricName}_error`);
+
+    return <A, E, R>(effect: Effect.Effect<A, E, R>): Effect.Effect<A, E, R> =>
+        Effect.withSpan(spanName, { attributes: attrs })(
             Effect.gen(function* () {
-              yield* Effect.logError(`error ${spanName}`, { spanName, error, ...attrs })
-              yield* Metric.increment(errorCounter)
+                yield* Effect.logTrace(`entry ${spanName}`, { spanName, ...attrs });
+                yield* Metric.increment(totalCounter);
+                const result = yield* effect.pipe(
+                    Metric.trackDuration(timer),
+                    Effect.tap(() => Metric.increment(successCounter)),
+                    Effect.tapError((error) =>
+                        Effect.gen(function* () {
+                            yield* Effect.logError(`error ${spanName}`, { spanName, error, ...attrs });
+                            yield* Metric.increment(errorCounter);
+                        })
+                    )
+                );
+                yield* Effect.logTrace(`exit ${spanName}`, { spanName, ...attrs });
+                return result;
             })
-          )
-        )
-        yield* Effect.logTrace(`exit ${spanName}`, { spanName, ...attrs })
-        return result
-      })
-    )
+        );
 }

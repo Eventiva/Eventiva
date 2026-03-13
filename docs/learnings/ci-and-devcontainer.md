@@ -8,9 +8,9 @@
 
 ## Workflows to keep (no Bit)
 
-- **security-*** – Snyk, secrets, scorecard, OSSAR, dependency review, defender, infrastructure scan.
+- **security-\*** – Snyk, secrets, scorecard, OSSAR, dependency review, defender, infrastructure scan.
 - **codeql.yml** – CodeQL analysis.
-- **management-*** – GitHub management, CLA.
+- **management-\*** – GitHub management, CLA.
 - **chore-readme-fun.yml** – Chore; can be kept or adapted.
 
 ## DevContainer (current)

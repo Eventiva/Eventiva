@@ -8,9 +8,9 @@ If the same agent that implements a feature or component also writes its tests, 
 
 1. **Building agent** – Implements the feature/component only. It must **not** add or modify tests for that work. It may write or update **type definitions** (schema) that describe the public API.
 2. **Test-creator agent** – A **separate** agent is responsible for creating **all** tests. This agent:
-   - Has **no context or workspace access** to the implementation (no view of runtime code, no repo access).
-   - Receives **only the function/API schema**: **input types** and **output types** (and any error/effect types if relevant). In other words, the same information that would appear in a **`.d.ts`** file—signatures and types only, **no runtime code**.
-   - Produces tests that specify expected behaviour from the contract alone.
+    - Has **no context or workspace access** to the implementation (no view of runtime code, no repo access).
+    - Receives **only the function/API schema**: **input types** and **output types** (and any error/effect types if relevant). In other words, the same information that would appear in a **`.d.ts`** file—signatures and types only, **no runtime code**.
+    - Produces tests that specify expected behaviour from the contract alone.
 3. **Test-runner agent (third agent)** – Runs the tests against the code. Has both tests and code. Does **not** create or delete tests; only runs them and acts on results (see feedback loop below).
 
 ## Schema format for the test creator

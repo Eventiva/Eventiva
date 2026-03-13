@@ -1,1 +1,1 @@
-export * from "./feature-flags.js"
+export * from './feature-flags.js';

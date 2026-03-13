@@ -2,29 +2,29 @@
 language: en-GB
 early_access: true
 reviews:
-  profile: assertive
-  request_changes_workflow: true
-  high_level_summary_placeholder: '@gensummary'
-  high_level_summary_in_walkthrough: true
-  auto_title_placeholder: '@gentitle'
-  review_details: true
-  fail_commit_status: true
-  auto_assign_reviewers: true
-  auto_review:
-    ignore_usernames:
-      - dependabot
-  finishing_touches:
-    simplify:
-      enabled: true
+    profile: assertive
+    request_changes_workflow: true
+    high_level_summary_placeholder: '@gensummary'
+    high_level_summary_in_walkthrough: true
+    auto_title_placeholder: '@gentitle'
+    review_details: true
+    fail_commit_status: true
+    auto_assign_reviewers: true
+    auto_review:
+        ignore_usernames:
+            - dependabot
+    finishing_touches:
+        simplify:
+            enabled: true
 chat:
-  integrations:
-    jira:
-      usage: disabled
-    linear:
-      usage: enabled
+    integrations:
+        jira:
+            usage: disabled
+        linear:
+            usage: enabled
 code_generation:
-  docstrings:
-    language: en-GB
+    docstrings:
+        language: en-GB
 issue_enrichment:
-  auto_enrich:
-    enabled: true
+    auto_enrich:
+        enabled: true

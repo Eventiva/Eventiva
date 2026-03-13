@@ -5,8 +5,8 @@
  * @see docs/plans/2026-03-07-effect-crm-framework-infrastructure.md
  * @see docs/learnings/architecture.md
  */
-import type * as Layer from "effect/Layer"
-import * as TestRunner from "@effect/cluster/TestRunner"
+import type * as Layer from 'effect/Layer';
+import * as TestRunner from '@effect/cluster/TestRunner';
 
 /**
  * Cluster execution mode. Default platform uses "test" (in-memory).
@@ -14,7 +14,7 @@ import * as TestRunner from "@effect/cluster/TestRunner"
  * - single: SingleRunner – single process with real Sharding config (future).
  * - distributed: Sharding + Pods + RunnerStorage – multi-process (future).
  */
-export type ClusterMode = "test" | "single" | "distributed"
+export type ClusterMode = 'test' | 'single' | 'distributed';
 
 /**
  * Default cluster layer for the platform. Provides Sharding and Runner in one process
@@ -22,7 +22,7 @@ export type ClusterMode = "test" | "single" | "distributed"
  * registered with this runner.
  * Use this in platform templates (e.g. defaultPlatform) so cluster setup is centralized.
  */
-export const clusterLayerDefault: Layer.Layer<never, never, never> = TestRunner.layer
+export const clusterLayerDefault: Layer.Layer<never, never, never> = TestRunner.layer;
 
 /** Re-export for platforms that need to reference TestRunner directly. */
-export { TestRunner }
+export { TestRunner };

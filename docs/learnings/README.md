@@ -9,18 +9,19 @@ This folder contains structured learnings from the Eventiva codebase, the evolut
 
 ## Files
 
-| File | Description |
-|------|-------------|
-| [architecture.md](architecture.md) | Backend composition, Gateway → servers, Slot-based composition, platform vs runtimes. |
-| [conventions.md](conventions.md) | File headers (FCL-1.0-MIT), naming, scopes, component boundaries. |
-| [tdd-and-test-creation.md](tdd-and-test-creation.md) | TDD policy: builders do not write tests; test-creator agent (schema only); test-runner agent; feedback loop. |
-| [modular-include-exclude.md](modular-include-exclude.md) | How Bit aspects controlled inclusion; requirements for rebuild (config- or package-list-driven). |
-| [docs-and-apis.md](docs-and-apis.md) | Docs layout, AsciiDoc as source, README.adoc → README.md script requirement, replacing JetClient-style docs. |
-| [ci-and-devcontainer.md](ci-and-devcontainer.md) | Bit-dependent workflows and steps; target state without Bit. |
-| [effect-migration-notes.md](effect-migration-notes.md) | Effect Layer/Schema/Service vs current Zod/Aspect/Slot; i18n and feature flags as tier 1; no `any` types. |
-| [evolution-chain-learnings.md](evolution-chain-learnings.md) | common-crm vs cms vs Eventiva (equivalent files); TypeScript/Effect evolution. |
-| [odoo-extensions-reference.md](odoo-extensions-reference.md) | What to take from Odoo for Eventiva extensions; what to avoid; climb-group-odoo learnings. |
-| [debug-initial-crash.md](debug-initial-crash.md) | Debugging "Cannot read properties of undefined (reading 'initial')" – feature flags, workarounds, dependency audit. |
+| File                                                         | Description                                                                                                         |
+| ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
+| [architecture.md](architecture.md)                           | Backend composition, Gateway → servers, Slot-based composition, platform vs runtimes.                               |
+| [conventions.md](conventions.md)                             | File headers (FCL-1.0-MIT), naming, scopes, component boundaries.                                                   |
+| [tdd-and-test-creation.md](tdd-and-test-creation.md)         | TDD policy: builders do not write tests; test-creator agent (schema only); test-runner agent; feedback loop.        |
+| [modular-include-exclude.md](modular-include-exclude.md)     | How Bit aspects controlled inclusion; requirements for rebuild (config- or package-list-driven).                    |
+| [docs-and-apis.md](docs-and-apis.md)                         | Docs layout, AsciiDoc as source, README.adoc → README.md script requirement, replacing JetClient-style docs.        |
+| [ci-and-devcontainer.md](ci-and-devcontainer.md)             | Bit-dependent workflows and steps; target state without Bit.                                                        |
+| [effect-migration-notes.md](effect-migration-notes.md)       | Effect Layer/Schema/Service vs current Zod/Aspect/Slot; i18n and feature flags as tier 1; no `any` types.           |
+| [evolution-chain-learnings.md](evolution-chain-learnings.md) | common-crm vs cms vs Eventiva (equivalent files); TypeScript/Effect evolution.                                      |
+| [odoo-extensions-reference.md](odoo-extensions-reference.md) | What to take from Odoo for Eventiva extensions; what to avoid; climb-group-odoo learnings.                          |
+| [debug-initial-crash.md](debug-initial-crash.md)             | Debugging "Cannot read properties of undefined (reading 'initial')" – feature flags, workarounds, dependency audit. |
+| [code-quality-sync.md](code-quality-sync.md)                 | EditorConfig, Trunk, and Nx: keep lint/format config in sync; commands for check and fix.                           |
 
 ## How to update
 

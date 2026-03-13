@@ -1,38 +1,34 @@
 {
-  "name": "Eventiva",
-  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
-  "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
-  "postCreateCommand": "pnpm install",
-  "services": {
-    "postgres": {
-      "image": "postgres:16-alpine",
-      "init": true,
-      "ports": ["5432:5432"],
-      "environment": {
-        "POSTGRES_USER": "postgres",
-        "POSTGRES_PASSWORD": "postgres",
-        "POSTGRES_DB": "postgres"
-      },
-      "options": "--health-cmd \"pg_isready -U postgres\" --health-interval 5s --health-timeout 5s --health-retries 5"
+    "name": "Eventiva",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+    "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
+    "postCreateCommand": "pnpm install",
+    "services": {
+        "postgres": {
+            "image": "postgres:16-alpine",
+            "init": true,
+            "ports": ["5432:5432"],
+            "environment": {
+                "POSTGRES_USER": "postgres",
+                "POSTGRES_PASSWORD": "postgres",
+                "POSTGRES_DB": "postgres"
+            },
+            "options": "--health-cmd \"pg_isready -U postgres\" --health-interval 5s --health-timeout 5s --health-retries 5"
+        }
+    },
+    "forwardPorts": [5432],
+    "customizations": {
+        "vscode": {
+            "extensions": ["nrwl.angular-console", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+        }
+    },
+    "remoteEnv": {
+        "NODE_ENV": "development",
+        "DATABASE": "postgres",
+        "HOST": "postgres",
+        "PORT": "5432",
+        "USERNAME": "postgres",
+        "PASSWORD": "postgres",
+        "SSL": "false"
     }
-  },
-  "forwardPorts": [5432],
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "nrwl.angular-console",
-        "dbaeumer.vscode-eslint",
-        "esbenp.prettier-vscode"
-      ]
-    }
-  },
-  "remoteEnv": {
-    "NODE_ENV": "development",
-    "DATABASE": "postgres",
-    "HOST": "postgres",
-    "PORT": "5432",
-    "USERNAME": "postgres",
-    "PASSWORD": "postgres",
-    "SSL": "false"
-  }
 }

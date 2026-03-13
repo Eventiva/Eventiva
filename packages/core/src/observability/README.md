@@ -24,8 +24,8 @@ To send traces, logs, and metrics to Firetiger (or any OTLP endpoint):
 
 1. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the ingest base URL (e.g. `https://ingest.cloud.firetiger.com`).
 2. For Basic Auth, either:
-   - Set `OTEL_EXPORTER_OTLP_HEADERS` with `Authorization=Basic <base64(username:password)>`, or
-   - Set `FIRETIGER_USERNAME` and `FIRETIGER_PASSWORD` (we build the Authorization header when both are set).
+    - Set `OTEL_EXPORTER_OTLP_HEADERS` with `Authorization=Basic <base64(username:password)>`, or
+    - Set `FIRETIGER_USERNAME` and `FIRETIGER_PASSWORD` (we build the Authorization header when both are set).
 
 **Example (env vars):**
 
@@ -44,11 +44,11 @@ FIRETIGER_PASSWORD=your-password
 Example:
 
 ```ts
-import { withSpanAndLog } from "./observability/helpers.js"
+import { withSpanAndLog } from './observability/helpers.js';
 
-const run = withSpanAndLog("HelloWorld.sayHello", {
-  attributes: { entityId: "hello-1" }
-})(sayHelloEffect)
+const run = withSpanAndLog('HelloWorld.sayHello', {
+    attributes: { entityId: 'hello-1' },
+})(sayHelloEffect);
 ```
 
 ## Checklist per function

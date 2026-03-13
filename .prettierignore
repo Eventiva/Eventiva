@@ -3,3 +3,9 @@
 /coverage
 /.nx/cache
 /.nx/workspace-data
+pnpm-lock.yaml
+**/pnpm-lock.yaml
+*.lock
+.cursor/
+.examples/
+patches/

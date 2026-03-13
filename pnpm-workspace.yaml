@@ -1,5 +1,5 @@
 packages:
-  - 'packages/core'
-  - 'packages/extensions/*'
-  - 'packages/databases/*'
-  - 'packages/platforms/*'
+    - 'packages/core'
+    - 'packages/extensions/*'
+    - 'packages/databases/*'
+    - 'packages/platforms/*'

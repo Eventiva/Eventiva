@@ -1,15 +1,15 @@
 {
-  "name": "@eventiva/extensions.hello-world",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "dependencies": {
-    "@eventiva/core": "workspace:*",
-    "@effect/cluster": "^0.56.0",
-    "@effect/rpc": "^0.73.1",
-    "@effect/workflow": "^0.16.0",
-    "effect": "^3.19.17"
-  }
+    "name": "@eventiva/extensions.hello-world",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "main": "./src/index.js",
+    "types": "./src/index.d.ts",
+    "dependencies": {
+        "@eventiva/core": "workspace:*",
+        "@effect/cluster": "^0.56.0",
+        "@effect/rpc": "^0.73.1",
+        "@effect/workflow": "^0.16.0",
+        "effect": "^3.19.17"
+    }
 }

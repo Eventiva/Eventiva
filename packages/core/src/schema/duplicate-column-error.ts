@@ -4,19 +4,19 @@
  * @see docs/learnings/architecture.md, schema/table-column-registry.ts
  */
 export interface DuplicateColumnError {
-  readonly _tag: "DuplicateColumnError"
-  readonly tableName: string
-  readonly columnName: string
-  readonly extensionId: string
+    readonly _tag: 'DuplicateColumnError';
+    readonly tableName: string;
+    readonly columnName: string;
+    readonly extensionId: string;
 }
 
 export const DuplicateColumnError = (
-  tableName: string,
-  columnName: string,
-  extensionId: string
+    tableName: string,
+    columnName: string,
+    extensionId: string
 ): DuplicateColumnError => ({
-  _tag: "DuplicateColumnError",
-  tableName,
-  columnName,
-  extensionId
-})
+    _tag: 'DuplicateColumnError',
+    tableName,
+    columnName,
+    extensionId,
+});

@@ -1,0 +1,39 @@
+{
+    "name": "eventiva",
+    "$schema": "./node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "sourceRoot": ".",
+    "tags": ["scope:repo"],
+    "targets": {
+        "format": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "prettier --write ."
+            }
+        },
+        "format-check": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "prettier --check ."
+            }
+        },
+        "lint-fix": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run-many -t lint --skip-nx-cache --exclude=eventiva -- --fix"
+            }
+        },
+        "check": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run-many -t lint --skip-nx-cache --exclude=eventiva && pnpm exec nx run eventiva:format-check"
+            }
+        },
+        "fix": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run eventiva:format && pnpm exec nx run eventiva:lint-fix"
+            }
+        }
+    }
+}

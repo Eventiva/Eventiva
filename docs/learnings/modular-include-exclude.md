@@ -9,8 +9,8 @@
 ## Rebuild requirements
 
 - **Config-driven or package-list-driven inclusion** – The rebuild must support a way to “include” or “exclude” modules without editing code in many places. Options:
-  - **Manifest/config file** – e.g. `extensions.json` or workspace config listing which extensions (packages) are enabled. Core reads this and composes only those Layers.
-  - **Package list** – Only install or build certain packages (e.g. Nx project graph or pnpm workspace filter); the app only wires what’s present.
+    - **Manifest/config file** – e.g. `extensions.json` or workspace config listing which extensions (packages) are enabled. Core reads this and composes only those Layers.
+    - **Package list** – Only install or build certain packages (e.g. Nx project graph or pnpm workspace filter); the app only wires what’s present.
 - **Odoo-style auto-install** – Plan Part D: if all dependencies of an extension exist on the server, the extension can be automatically installed. So “inclusion” can be dependency-driven as well as explicit.
 - **Single place to toggle** – Avoid scattering “if (featureFlags.x)” across the codebase for structural inclusion; prefer one manifest or one list that defines which modules run.
 

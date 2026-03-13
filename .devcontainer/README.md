@@ -7,15 +7,15 @@
 
 ## Environment variables (set in container)
 
-| Variable   | Value      | Notes                          |
-|-----------|------------|--------------------------------|
-| `NODE_ENV`| development|                                |
-| `DATABASE`| postgres   | DB name                        |
-| `HOST`    | postgres   | Service name (use in container)|
-| `PORT`    | 5432       |                                |
-| `USERNAME`| postgres   |                                |
-| `PASSWORD`| postgres   |                                |
-| `SSL`     | false      | For local dev                  |
+| Variable   | Value       | Notes                           |
+| ---------- | ----------- | ------------------------------- |
+| `NODE_ENV` | development |                                 |
+| `DATABASE` | postgres    | DB name                         |
+| `HOST`     | postgres    | Service name (use in container) |
+| `PORT`     | 5432        |                                 |
+| `USERNAME` | postgres    |                                 |
+| `PASSWORD` | postgres    |                                 |
+| `SSL`      | false       | For local dev                   |
 
 ## Optional env you might add
 

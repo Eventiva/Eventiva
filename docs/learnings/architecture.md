@@ -25,12 +25,12 @@
 
 ## Key files
 
-| Path | Purpose |
-|------|--------|
-| `projects/backend/platform/platform.node.runtime.ts` | PlatformNode, slots, run/deploy |
-| `projects/platforms/default/default.bit-app.ts` | Aspect list: DatabaseAspect, GraphqlAspect, RestAspect (LoggerAspect, etc. commented out) |
-| `projects/backend/server/server-types.ts` | Server, BackendContext, DeployOptions |
-| `projects/backend/gateway/gateway-types.ts` | Gateway, GatewayContext |
+| Path                                                 | Purpose                                                                                   |
+| ---------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `projects/backend/platform/platform.node.runtime.ts` | PlatformNode, slots, run/deploy                                                           |
+| `projects/platforms/default/default.bit-app.ts`      | Aspect list: DatabaseAspect, GraphqlAspect, RestAspect (LoggerAspect, etc. commented out) |
+| `projects/backend/server/server-types.ts`            | Server, BackendContext, DeployOptions                                                     |
+| `projects/backend/gateway/gateway-types.ts`          | Gateway, GatewayContext                                                                   |
 
 ## Rebuild requirements
 

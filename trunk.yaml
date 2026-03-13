@@ -1,8 +1,12 @@
-# Trunk configuration - see https://docs.trunk.io/check/configuration
-# Run `trunk init` locally to add or update linters.
+# Trunk configuration - https://docs.trunk.io/code-quality/overview
+# Run `trunk init` to add/update linters. Keep in sync with .editorconfig, .prettierrc, eslint.config.mjs, and Nx.
 version: '0.1'
 
 lint:
-  enabled:
-    - eslint
-    - prettier
+    enabled:
+        - eslint
+        - prettier
+        # Recommended for TypeScript/monorepo
+        - markdownlint
+        - yamllint
+        - actionlint

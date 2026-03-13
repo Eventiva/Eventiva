@@ -16,75 +16,65 @@
  *
  * @see docs/learnings/architecture.md
  */
-import {
-  HttpApi,
-  HttpApiBuilder,
-  HttpApiEndpoint,
-  HttpApiGroup,
-  HttpApiSwagger,
-  HttpServer
-} from "@effect/platform"
-import { NodeHttpServer } from "@effect/platform-node"
-import { Sharding } from "@effect/cluster"
-import type * as Entity from "@effect/cluster/Entity"
-import * as Context from "effect/Context"
-import * as Effect from "effect/Effect"
-import * as Layer from "effect/Layer"
-import * as Schema from "effect/Schema"
-import { EntityRegistry } from "../entity/entity-registry.js"
-import { withSpanAndLog } from "../observability/helpers.js"
-import {
-  FeatureFlagKeys,
-  type FeatureFlagOverrides
-} from "../feature-flags/index.js"
+import { HttpApi, HttpApiBuilder, HttpApiEndpoint, HttpApiGroup, HttpApiSwagger, HttpServer } from '@effect/platform';
+import { NodeHttpServer } from '@effect/platform-node';
+import { Sharding } from '@effect/cluster';
+import type * as Entity from '@effect/cluster/Entity';
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
+import * as Schema from 'effect/Schema';
+import { EntityRegistry } from '../entity/entity-registry.js';
+import { withSpanAndLog } from '../observability/helpers.js';
+import { FeatureFlagKeys, type FeatureFlagOverrides } from '../feature-flags/index.js';
 
 /** Request body for entity RPC invoke. */
 const RpcInvokePayload = Schema.Struct({
-  entityId: Schema.optional(Schema.String),
-  method: Schema.String,
-  payload: Schema.optional(Schema.Unknown)
-})
+    entityId: Schema.optional(Schema.String),
+    method: Schema.String,
+    payload: Schema.optional(Schema.Unknown),
+});
 
 /** Success response: { success: unknown }. */
 const RpcInvokeSuccess = Schema.Struct({
-  success: Schema.Unknown
-})
+    success: Schema.Unknown,
+});
 
 /** Shutdown response. */
 const ShutdownSuccess = Schema.Struct({
-  ok: Schema.Literal(true),
-  message: Schema.String
-})
+    ok: Schema.Literal(true),
+    message: Schema.String,
+});
 
 /** Entity RPC API: one group "EntityRpc", one endpoint POST /api/rpc/:pathPrefix. */
-const EntityRpcEndpoint = HttpApiEndpoint.post("invoke", "/api/rpc/:pathPrefix")
-  .setPath(Schema.Struct({ pathPrefix: Schema.String }))
-  .setPayload(RpcInvokePayload)
-  .addSuccess(RpcInvokeSuccess)
+const EntityRpcEndpoint = HttpApiEndpoint.post('invoke', '/api/rpc/:pathPrefix')
+    .setPath(Schema.Struct({ pathPrefix: Schema.String }))
+    .setPayload(RpcInvokePayload)
+    .addSuccess(RpcInvokeSuccess);
 
-const EntityRpcGroup = HttpApiGroup.make("EntityRpc").add(EntityRpcEndpoint)
+const EntityRpcGroup = HttpApiGroup.make('EntityRpc').add(EntityRpcEndpoint);
 
 /** Shutdown: GET and POST /api/shutdown — return 200 then exit process. */
-const ShutdownGetEndpoint = HttpApiEndpoint.get("shutdownGet", "/api/shutdown").addSuccess(ShutdownSuccess)
-const ShutdownPostEndpoint = HttpApiEndpoint.post("shutdownPost", "/api/shutdown")
-  .setPayload(Schema.Struct({}))
-  .addSuccess(ShutdownSuccess)
-const ShutdownGroup = HttpApiGroup.make("Shutdown").add(ShutdownGetEndpoint).add(ShutdownPostEndpoint)
+const ShutdownGetEndpoint = HttpApiEndpoint.get('shutdownGet', '/api/shutdown').addSuccess(ShutdownSuccess);
+const ShutdownPostEndpoint = HttpApiEndpoint.post('shutdownPost', '/api/shutdown')
+    .setPayload(Schema.Struct({}))
+    .addSuccess(ShutdownSuccess);
+const ShutdownGroup = HttpApiGroup.make('Shutdown').add(ShutdownGetEndpoint).add(ShutdownPostEndpoint);
 
 /** Top-level API used by HttpApiBuilder.serve and HttpApiSwagger. */
-const EntityRpcApi = HttpApi.make("EventivaEntityRpc").add(EntityRpcGroup).add(ShutdownGroup)
+const EntityRpcApi = HttpApi.make('EventivaEntityRpc').add(EntityRpcGroup).add(ShutdownGroup);
 
 /**
  * Descriptor for exposing an entity over HTTP/RPC. Register with the platform
  * so the gateway creates POST /api/rpc/:pathPrefix for that entity.
  */
 export interface EntityEndpointDescriptor {
-  /** The cluster entity (e.g. Contact). */
-  readonly entity: Entity.Any
-  /** Default entityId when the request omits it (e.g. "store" for Contact). */
-  readonly defaultEntityId: string
-  /** URL path segment (e.g. "contacts"). Request path is /api/rpc/:pathPrefix. */
-  readonly pathPrefix: string
+    /** The cluster entity (e.g. Contact). */
+    readonly entity: Entity.Any;
+    /** Default entityId when the request omits it (e.g. "store" for Contact). */
+    readonly defaultEntityId: string;
+    /** URL path segment (e.g. "contacts"). Request path is /api/rpc/:pathPrefix. */
+    readonly pathPrefix: string;
 }
 
 /**
@@ -92,30 +82,30 @@ export interface EntityEndpointDescriptor {
  * so the HTTP server exposes POST /api/rpc/:pathPrefix for this entity.
  */
 export function makeEntityEndpointDescriptor(
-  entity: Entity.Any,
-  defaultEntityId: string,
-  pathPrefix: string
+    entity: Entity.Any,
+    defaultEntityId: string,
+    pathPrefix: string
 ): EntityEndpointDescriptor {
-  return { entity, defaultEntityId, pathPrefix }
+    return { entity, defaultEntityId, pathPrefix };
 }
 
 export interface EntityEndpointsOptions {
-  readonly port?: number
-  /** Feature flag overrides for debugging. Env: EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER, etc. */
-  readonly featureOverrides?: FeatureFlagOverrides
+    readonly port?: number;
+    /** Feature flag overrides for debugging. Env: EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER, etc. */
+    readonly featureOverrides?: FeatureFlagOverrides;
 }
 
 function isEntityEndpointFlagEnabled(
-  overrides: FeatureFlagOverrides | undefined,
-  key: keyof typeof FeatureFlagKeys
+    overrides: FeatureFlagOverrides | undefined,
+    key: keyof typeof FeatureFlagKeys
 ): boolean {
-  const k = FeatureFlagKeys[key]
-  if (overrides && k in overrides) return overrides[k] ?? true
-  const envKey = `EVENTIVA_FEATURE_${key}` as const
-  const v = process.env[envKey]
-  if (v === "false" || v === "0") return false
-  if (v === "true" || v === "1") return true
-  return true
+    const k = FeatureFlagKeys[key];
+    if (overrides && k in overrides) return overrides[k] ?? true;
+    const envKey = `EVENTIVA_FEATURE_${key}` as const;
+    const v = process.env[envKey];
+    if (v === 'false' || v === '0') return false;
+    if (v === 'true' || v === '1') return true;
+    return true;
 }
 
 /**
@@ -128,159 +118,162 @@ function isEntityEndpointFlagEnabled(
  * Response: JSON { success: result } or { error: string }
  */
 export function makeEntityEndpointsLayer(
-  descriptors: ReadonlyArray<EntityEndpointDescriptor>,
-  options: EntityEndpointsOptions = {}
+    descriptors: ReadonlyArray<EntityEndpointDescriptor>,
+    options: EntityEndpointsOptions = {}
 ): Layer.Layer<EntityEndpointsServer, any, Sharding.Sharding | HttpServer.HttpServer> {
-  const port = options.port ?? 3000
-  const fo = options.featureOverrides
-  const useFullInit = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_FULL_INIT")
-  const startServer = Effect.gen(function* () {
-    // Early return BEFORE any yield* – avoids running effects (tracer) when skipping init.
-    // Crash: getFiberRef(undefined) in tracer when fiberRefs from different Effect instance.
-    if (!useFullInit) {
-      return { port } as const
-    }
-    yield* Effect.logDebug("Initializing EntityEndpointsServer")
-    if (isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_SHARDING")) {
-      yield* Sharding.Sharding
-    } else {
-      yield* Effect.logDebug("EntityEndpointsServer: skipping Sharding (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING=false)")
-    }
+    const port = options.port ?? 3000;
+    const fo = options.featureOverrides;
+    const useFullInit = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_FULL_INIT');
+    const startServer = Effect.gen(function* () {
+        // Early return BEFORE any yield* – avoids running effects (tracer) when skipping init.
+        // Crash: getFiberRef(undefined) in tracer when fiberRefs from different Effect instance.
+        if (!useFullInit) {
+            return { port } as const;
+        }
+        yield* Effect.logDebug('Initializing EntityEndpointsServer');
+        if (isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SHARDING')) {
+            yield* Sharding.Sharding;
+        } else {
+            yield* Effect.logDebug(
+                'EntityEndpointsServer: skipping Sharding (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING=false)'
+            );
+        }
 
-    // Add all dynamically generated entities to descriptors
-    const allRegisteredEntities = EntityRegistry.getAll()
-    const allDescriptors = [...descriptors]
+        // Add all dynamically generated entities to descriptors
+        const allRegisteredEntities = EntityRegistry.getAll();
+        const allDescriptors = [...descriptors];
 
-    for (const [name, EntityClass] of allRegisteredEntities.entries()) {
-      if (!allDescriptors.some((d) => d.entity === (EntityClass as any).entity)) {
-        allDescriptors.push({
-          entity: (EntityClass as any).entity,
-          defaultEntityId: "store",
-          pathPrefix: name.toLowerCase() + "s"
-        })
-      }
-    }
-
-    const map = new Map<
-      string,
-      {
-        entity: Entity.Any
-        getClient: (entityId: string) => Record<string, (payload: unknown) => Effect.Effect<unknown>>
-        defaultEntityId: string
-      }
-    >()
-    if (isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_CLIENT_FETCH")) {
-      for (const d of allDescriptors) {
-        const entity = d.entity as Entity.Any
-        const getClient = yield* entity.client
-        map.set(d.pathPrefix, {
-          entity,
-          getClient: getClient as unknown as (
-            entityId: string
-          ) => Record<string, (payload: unknown) => Effect.Effect<unknown>>,
-          defaultEntityId: d.defaultEntityId
-        })
-      }
-    } else {
-      for (const d of allDescriptors) {
-        map.set(d.pathPrefix, {
-          entity: d.entity as Entity.Any,
-          getClient: () => ({}),
-          defaultEntityId: d.defaultEntityId
-        })
-      }
-    }
-
-    // Implement the EntityRpc group: single handler that uses the descriptor map.
-    const entityRpcGroupLive = HttpApiBuilder.group(EntityRpcApi, "EntityRpc", (handlers) =>
-      handlers.handle("invoke", ({ path: { pathPrefix }, payload }) =>
-        Effect.gen(function* () {
-          const entry = map.get(pathPrefix)
-          if (!entry)
-            return { success: { error: `Unknown pathPrefix: ${pathPrefix}` } } as {
-              success: unknown
+        for (const [name, EntityClass] of allRegisteredEntities.entries()) {
+            if (!allDescriptors.some((d) => d.entity === (EntityClass as any).entity)) {
+                allDescriptors.push({
+                    entity: (EntityClass as any).entity,
+                    defaultEntityId: 'store',
+                    pathPrefix: name.toLowerCase() + 's',
+                });
             }
-          const { entityId, method, payload: payloadData } = payload
-          if (typeof method !== "string")
-            return { success: { error: "body.method is required" } } as { success: unknown }
-          const client = entry.getClient(entityId ?? entry.defaultEntityId)
-          const fn = client[method]
-          if (typeof fn !== "function")
-            return { success: { error: `Unknown method: ${method}` } } as { success: unknown }
-          const rpc = entry.entity.protocol.requests.get(method) as
-            | { payloadSchema: Schema.Schema<unknown> }
-            | undefined
-          const decodeEffect =
-            rpc?.payloadSchema != null
-              ? Schema.decodeUnknown(rpc.payloadSchema as Schema.Schema<unknown>)(payloadData ?? {})
-              : Effect.succeed(payloadData ?? {})
-          const result = yield* decodeEffect.pipe(
-            Effect.flatMap((decoded: unknown) => fn(decoded)),
-            Effect.map((success) => ({ success })),
-            Effect.catchAll((err) =>
-              Effect.succeed({
-                success: { error: err instanceof Error ? err.message : String(err) }
-              })
+        }
+
+        const map = new Map<
+            string,
+            {
+                entity: Entity.Any;
+                getClient: (entityId: string) => Record<string, (payload: unknown) => Effect.Effect<unknown>>;
+                defaultEntityId: string;
+            }
+        >();
+        if (isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_CLIENT_FETCH')) {
+            for (const d of allDescriptors) {
+                const entity = d.entity as Entity.Any;
+                const getClient = yield* entity.client;
+                map.set(d.pathPrefix, {
+                    entity,
+                    getClient: getClient as unknown as (
+                        entityId: string
+                    ) => Record<string, (payload: unknown) => Effect.Effect<unknown>>,
+                    defaultEntityId: d.defaultEntityId,
+                });
+            }
+        } else {
+            for (const d of allDescriptors) {
+                map.set(d.pathPrefix, {
+                    entity: d.entity as Entity.Any,
+                    getClient: () => ({}),
+                    defaultEntityId: d.defaultEntityId,
+                });
+            }
+        }
+
+        // Implement the EntityRpc group: single handler that uses the descriptor map.
+        const entityRpcGroupLive = HttpApiBuilder.group(EntityRpcApi, 'EntityRpc', (handlers) =>
+            handlers.handle('invoke', ({ path: { pathPrefix }, payload }) =>
+                Effect.gen(function* () {
+                    const entry = map.get(pathPrefix);
+                    if (!entry)
+                        return { success: { error: `Unknown pathPrefix: ${pathPrefix}` } } as {
+                            success: unknown;
+                        };
+                    const { entityId, method, payload: payloadData } = payload;
+                    if (typeof method !== 'string')
+                        return { success: { error: 'body.method is required' } } as { success: unknown };
+                    const client = entry.getClient(entityId ?? entry.defaultEntityId);
+                    const fn = client[method];
+                    if (typeof fn !== 'function')
+                        return { success: { error: `Unknown method: ${method}` } } as { success: unknown };
+                    const rpc = entry.entity.protocol.requests.get(method) as
+                        | { payloadSchema: Schema.Schema<unknown> }
+                        | undefined;
+                    const decodeEffect =
+                        rpc?.payloadSchema != null
+                            ? Schema.decodeUnknown(rpc.payloadSchema as Schema.Schema<unknown>)(payloadData ?? {})
+                            : Effect.succeed(payloadData ?? {});
+                    const result = yield* decodeEffect.pipe(
+                        Effect.flatMap((decoded: unknown) => fn(decoded)),
+                        Effect.map((success) => ({ success })),
+                        Effect.catchAll((err) =>
+                            Effect.succeed({
+                                success: { error: err instanceof Error ? err.message : String(err) },
+                            })
+                        )
+                    );
+                    return result as { success: unknown };
+                })
             )
-          )
-          return result as { success: unknown }
-        })
-      )
-    )
+        );
 
-    const shutdownResponse = { ok: true as const, message: "Shutting down" }
-    const scheduleExit = Effect.sync(() => setTimeout(() => process.exit(0), 100))
-    const shutdownGroupLive = HttpApiBuilder.group(EntityRpcApi, "Shutdown", (handlers) =>
-      handlers
-        .handle("shutdownGet", () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
-        .handle("shutdownPost", () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
-    )
+        const shutdownResponse = { ok: true as const, message: 'Shutting down' };
+        const scheduleExit = Effect.sync(() => setTimeout(() => process.exit(0), 100));
+        const shutdownGroupLive = HttpApiBuilder.group(EntityRpcApi, 'Shutdown', (handlers) =>
+            handlers
+                .handle('shutdownGet', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+                .handle('shutdownPost', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+        );
 
-    // Layer that provides HttpApi.Api (required by HttpApiSwagger.layer() and HttpApiBuilder.serve).
-    const apiLayer = HttpApiBuilder.api(EntityRpcApi).pipe(
-      Layer.provide(entityRpcGroupLive),
-      Layer.provide(shutdownGroupLive)
-    )
+        // Layer that provides HttpApi.Api (required by HttpApiSwagger.layer() and HttpApiBuilder.serve).
+        const apiLayer = HttpApiBuilder.api(EntityRpcApi).pipe(
+            Layer.provide(entityRpcGroupLive),
+            Layer.provide(shutdownGroupLive)
+        );
 
-    const useFullLayerBuild = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_FULL_LAYER_BUILD")
-    if (useFullLayerBuild) {
-      // Serve the API and mount Swagger at /api/docs; both require HttpApi.Api (provided by apiLayer).
-      const serveLayer = HttpApiBuilder.serve()
-      const swaggerLayer = HttpApiSwagger.layer({ path: "/api/docs" })
-      const serveAndSwaggerLayers = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_SWAGGER")
-        ? Layer.mergeAll(serveLayer, swaggerLayer)
-        : serveLayer
+        const useFullLayerBuild = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_FULL_LAYER_BUILD');
+        if (useFullLayerBuild) {
+            // Serve the API and mount Swagger at /api/docs; both require HttpApi.Api (provided by apiLayer).
+            const serveLayer = HttpApiBuilder.serve();
+            const swaggerLayer = HttpApiSwagger.layer({ path: '/api/docs' });
+            const serveAndSwaggerLayers = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SWAGGER')
+                ? Layer.mergeAll(serveLayer, swaggerLayer)
+                : serveLayer;
 
-      const fullServerLayer = serveAndSwaggerLayers.pipe(
-        Layer.provide(apiLayer),
-        Layer.provide(NodeHttpServer.layerContext)
-      )
+            const fullServerLayer = serveAndSwaggerLayers.pipe(
+                Layer.provide(apiLayer),
+                Layer.provide(NodeHttpServer.layerContext)
+            );
 
-      yield* Layer.build(fullServerLayer)
-    } else {
-      // Minimal: server is already listening via NodeHttpServer; Layer.build would mount routes.
-      // Skip full layer build to avoid "initial" crash – server responds with 404 for /api/*.
-      yield* Effect.logDebug("EntityEndpointsServer: skipping full layer build (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD=false)")
-    }
+            yield* Layer.build(fullServerLayer);
+        } else {
+            // Minimal: server is already listening via NodeHttpServer; Layer.build would mount routes.
+            // Skip full layer build to avoid "initial" crash – server responds with 404 for /api/*.
+            yield* Effect.logDebug(
+                'EntityEndpointsServer: skipping full layer build (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD=false)'
+            );
+        }
 
-    const paths = allDescriptors.map((d) => `POST /api/rpc/${d.pathPrefix}`)
-    yield* Effect.logDebug("Entity HTTP endpoints up", { paths, service: "eventiva-core" })
-    return { port } as const
-  })
-  const useTracing = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_TRACING")
-  const runEffect = useTracing
-    ? startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))
-    : startServer
-  return Layer.scoped(EntityEndpointsServer, runEffect) as Layer.Layer<
-    EntityEndpointsServer,
-    any,
-    Sharding.Sharding | HttpServer.HttpServer
-  >
+        const paths = allDescriptors.map((d) => `POST /api/rpc/${d.pathPrefix}`);
+        yield* Effect.logDebug('Entity HTTP endpoints up', { paths, service: 'eventiva-core' });
+        return { port } as const;
+    });
+    const useTracing = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_TRACING');
+    const runEffect = useTracing ? startServer.pipe(withSpanAndLog('makeEntityEndpointsLayer')) : startServer;
+    return Layer.scoped(EntityEndpointsServer, runEffect) as Layer.Layer<
+        EntityEndpointsServer,
+        any,
+        Sharding.Sharding | HttpServer.HttpServer
+    >;
 }
 
 /**
  * Tag for the entity endpoints server (holds port after start). Use for tests or logging.
  */
-export class EntityEndpointsServer extends Context.Tag(
-  "@eventiva/core/EntityEndpointsServer"
-)<EntityEndpointsServer, { readonly port: number }>() {}
+export class EntityEndpointsServer extends Context.Tag('@eventiva/core/EntityEndpointsServer')<
+    EntityEndpointsServer,
+    { readonly port: number }
+>() {}

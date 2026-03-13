@@ -1,27 +1,27 @@
-version: "0.2"
-ignorePaths: [ ]
-dictionaryDefinitions: [ ]
-dictionaries: [ ]
+version: '0.2'
+ignorePaths: []
+dictionaryDefinitions: []
+dictionaries: []
 words:
-  - communityid
-  - coobaha
-  - devcontainer
-  - Eventiva
-  - fastify
-  - joggr
-  - learnbit
-  - leasot
-  - pino-old
-  - resourcetypes
-  - serverid
-  - todos
-  - zmodel
-  - zoomable
-ignoreWords: [ ]
-import: [ ]
+    - communityid
+    - coobaha
+    - devcontainer
+    - Eventiva
+    - fastify
+    - joggr
+    - learnbit
+    - leasot
+    - pino-old
+    - resourcetypes
+    - serverid
+    - todos
+    - zmodel
+    - zoomable
+ignoreWords: []
+import: []
 enableFiletypes:
-  - dockercompose
-  - dockerfile
-  - toml
-  - zmodel
+    - dockercompose
+    - dockerfile
+    - toml
+    - zmodel
 language: en,en-GB

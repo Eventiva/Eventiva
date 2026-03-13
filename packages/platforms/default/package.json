@@ -1,16 +1,16 @@
 {
-  "name": "@eventiva/platforms.default",
-  "version": "0.0.1",
-  "private": true,
-  "type": "module",
-  "main": "./src/index.js",
-  "types": "./src/index.d.ts",
-  "dependencies": {
-    "@eventiva/core": "workspace:*",
-    "@eventiva/databases.pg": "workspace:*",
-    "@eventiva/extensions.hello-world": "workspace:*",
-    "@eventiva/extensions.contact": "workspace:*",
-    "@effect/cluster": "^0.56.0",
-    "effect": "^3.19.17"
-  }
+    "name": "@eventiva/platforms.default",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "main": "./src/index.js",
+    "types": "./src/index.d.ts",
+    "dependencies": {
+        "@eventiva/core": "workspace:*",
+        "@eventiva/databases.pg": "workspace:*",
+        "@eventiva/extensions.hello-world": "workspace:*",
+        "@eventiva/extensions.contact": "workspace:*",
+        "@effect/cluster": "^0.56.0",
+        "effect": "^3.19.17"
+    }
 }

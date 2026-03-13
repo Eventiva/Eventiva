@@ -1,30 +1,30 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "composite": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "importHelpers": true,
-    "isolatedModules": true,
-    "lib": ["es2022"],
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "target": "es2022",
-    "downlevelIteration": true,
-    "customConditions": ["@eventiva/source"],
-    "paths": {
-      "remote1/Module": ["apps/remote1/src/remote-entry.ts"],
-      "remote2/Module": ["apps/remote2/src/remote-entry.ts"],
-      "@eventiva/core": ["packages/core/src/index.ts"],
-      "@eventiva/extensions.hello-world": ["packages/extensions/hello-world/src/index.ts"],
-      "@eventiva/platforms.default": ["packages/platforms/default/src/index.ts"]
+    "compilerOptions": {
+        "baseUrl": ".",
+        "composite": true,
+        "declarationMap": true,
+        "emitDeclarationOnly": true,
+        "importHelpers": true,
+        "isolatedModules": true,
+        "lib": ["es2022"],
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
+        "noEmitOnError": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "skipLibCheck": true,
+        "strict": true,
+        "target": "es2022",
+        "downlevelIteration": true,
+        "customConditions": ["@eventiva/source"],
+        "paths": {
+            "remote1/Module": ["apps/remote1/src/remote-entry.ts"],
+            "remote2/Module": ["apps/remote2/src/remote-entry.ts"],
+            "@eventiva/core": ["packages/core/src/index.ts"],
+            "@eventiva/extensions.hello-world": ["packages/extensions/hello-world/src/index.ts"],
+            "@eventiva/platforms.default": ["packages/platforms/default/src/index.ts"]
+        }
     }
-  }
 }
