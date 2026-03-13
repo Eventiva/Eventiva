@@ -22,10 +22,10 @@ Isolate exactly where the `Cannot read properties of undefined (reading 'initial
 | 4 | ENTITY_ENDPOINTS (no HTTP server) | OK – no crash, runtime starts, extensions load |
 | ... | | |
 
-## Conclusion (so far)
-- **Crash isolated to:** Running effects inside `makeEntityEndpointsLayer`'s scoped effect. Crash occurs in Effect tracer (fiberRuntime.ts:1397, tracer.ts:101) when `getFiberRef` receives undefined – likely a scope/fiber context issue when the entity endpoints layer is composed.
-- **Workaround:** Set `EVENTIVA_FEATURE_ENTITY_ENDPOINTS=false` to run without the full HTTP API. Or `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT=false` to skip all init (server runs but no routes).
-- **Granular flags added:** ENTITY_ENDPOINTS_CLIENT_FETCH, ENTITY_ENDPOINTS_SWAGGER, ENTITY_ENDPOINTS_FULL_LAYER_BUILD, ENTITY_ENDPOINTS_FULL_INIT, ENTITY_ENDPOINTS_SHARDING.
+## Conclusion
+- **Crash isolated to:** Running effects inside `makeEntityEndpointsLayer`'s scoped effect. Crash occurs in Effect tracer when `getFiberRef(core.currentVersionMismatchErrorLogLevel)` receives undefined, then in `fiberRefs.joinAs` and `fiberRefs/patch.diff` when iterating over FiberRefs maps with undefined keys.
+- **Fix applied:** pnpm patch to effect@3.19.19 adding defensive guards in getFiberRef, joinAs, and patch.diff. Server now runs with all features enabled.
+- **Granular flags added:** ENTITY_ENDPOINTS_CLIENT_FETCH, ENTITY_ENDPOINTS_SWAGGER, ENTITY_ENDPOINTS_FULL_LAYER_BUILD, ENTITY_ENDPOINTS_FULL_INIT, ENTITY_ENDPOINTS_SHARDING, ENTITY_ENDPOINTS_TRACING.
 
 ## Notes
 - Feature flags: PostHog + Effect config fallback

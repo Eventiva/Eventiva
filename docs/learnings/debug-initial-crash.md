@@ -4,11 +4,11 @@
 
 When the Effect runtime crashes with `TypeError: Cannot read properties of undefined (reading 'initial')`, the crash occurs in `Effect.getFiberRef` when a FiberRef is undefined. This typically indicates a scope/fiber context mismatch when composing layers.
 
-## Root cause (observed)
+## Root cause (confirmed)
 
-- **Location:** `packages/core/src/cluster/entity-endpoints.ts` – `makeEntityEndpointsLayer`
-- **Trigger:** Running effects inside the EntityEndpointsServer's scoped effect. The crash happens in the Effect tracer (every effect triggers the tracer). The tracer callback accesses `getFiberRef(core.currentVersionMismatchErrorLogLevel)` and receives undefined.
-- **Likely cause:** When the entity endpoints layer is composed with `Layer.provide(stack)` and the layer is built, the scoped effect runs in a child scope. FiberRefs from the parent may not merge correctly, or a different Effect instance provides a FiberRef that is undefined in the current context.
+- **Location:** Effect runtime – `fiberRuntime.getFiberRef`, `fiberRefs.joinAs`, `fiberRefs/patch.diff`
+- **Trigger:** Running effects inside the EntityEndpointsServer's scoped effect. The tracer callback accesses `getFiberRef(core.currentVersionMismatchErrorLogLevel)` but `core.currentVersionMismatchErrorLogLevel` is undefined (circular import or Effect instance mismatch). Later, `fiberRefs.joinAs` and `fiberRefs/patch.diff` iterate over FiberRefs maps that contain `undefined` as keys.
+- **Cause:** FiberRefs maps can have `undefined` keys when fiber context is merged across layers (e.g. entity endpoints + platform stack). The Effect runtime does not guard against undefined FiberRefs.
 
 ## Feature flags for debugging
 
@@ -19,6 +19,7 @@ Use these env vars to isolate the crash:
 | `EVENTIVA_FEATURE_ENTITY_ENDPOINTS` | true | Disable entire entity endpoints. **Workaround:** set to `false` to avoid crash. |
 | `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT` | true | Skip Sharding, entity.client, apiLayer, Layer.build. When false, server runs but no routes. |
 | `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING` | true | Skip `yield* Sharding.Sharding`. |
+| `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_TRACING` | true | Skip `withSpanAndLog` wrapper (debug). |
 | `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_CLIENT_FETCH` | true | Skip `yield* entity.client` for each descriptor. |
 | `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER` | true | Skip HttpApiSwagger at /api/docs. |
 | `EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD` | true | Skip `Layer.build(fullServerLayer)`. |
@@ -40,7 +41,17 @@ Ensure a single Effect instance:
 - `.npmrc` with `public-hoist-pattern[]=effect` and `public-hoist-pattern[]=@effect/*`
 - `find node_modules -path '*node_modules/effect'` should return only one path
 
-## Workaround
+## Fix (applied)
+
+A pnpm patch to `effect@3.19.19` adds defensive guards for undefined FiberRefs:
+
+1. **fiberRuntime.getFiberRef:** If `fiberRef == null`, return `Option.none()` (avoids crash when `core.currentVersionMismatchErrorLogLevel` is undefined).
+2. **fiberRefs.joinAs:** Skip entries where `fiberRef == null` in `that.locals.forEach`.
+3. **fiberRefs/patch.diff:** Skip entries where `fiberRef == null` in both `newValue.locals.entries()` and `missingLocals.entries()`.
+
+The patch is in `patches/effect@3.19.19.patch`. Run `pnpm install` to apply it.
+
+## Workaround (if patch is removed)
 
 ```bash
 EVENTIVA_FEATURE_ENTITY_ENDPOINTS=false pnpm exec nx run platforms-default:run

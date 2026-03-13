@@ -135,11 +135,12 @@ export function makeEntityEndpointsLayer(
   const fo = options.featureOverrides
   const useFullInit = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_FULL_INIT")
   const startServer = Effect.gen(function* () {
-    yield* Effect.logDebug("Initializing EntityEndpointsServer")
+    // Early return BEFORE any yield* – avoids running effects (tracer) when skipping init.
+    // Crash: getFiberRef(undefined) in tracer when fiberRefs from different Effect instance.
     if (!useFullInit) {
-      yield* Effect.logDebug("EntityEndpointsServer: skipping full init (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_INIT=false)")
       return { port } as const
     }
+    yield* Effect.logDebug("Initializing EntityEndpointsServer")
     if (isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_SHARDING")) {
       yield* Sharding.Sharding
     } else {
@@ -266,10 +267,11 @@ export function makeEntityEndpointsLayer(
     yield* Effect.logDebug("Entity HTTP endpoints up", { paths, service: "eventiva-core" })
     return { port } as const
   })
-  return Layer.scoped(
-    EntityEndpointsServer,
-    startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))
-  ) as Layer.Layer<
+  const useTracing = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_TRACING")
+  const runEffect = useTracing
+    ? startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))
+    : startServer
+  return Layer.scoped(EntityEndpointsServer, runEffect) as Layer.Layer<
     EntityEndpointsServer,
     any,
     Sharding.Sharding | HttpServer.HttpServer

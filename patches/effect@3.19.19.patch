@@ -1,0 +1,140 @@
+diff --git a/dist/cjs/internal/fiberRefs/patch.js b/dist/cjs/internal/fiberRefs/patch.js
+index 22377e62a0768e0b2cebe8b68145da537efcfcb2..64da7192734acda5e36b94317a7b76d0bcd3a82d 100644
+--- a/dist/cjs/internal/fiberRefs/patch.js
++++ b/dist/cjs/internal/fiberRefs/patch.js
+@@ -28,6 +28,7 @@ const diff = (oldValue, newValue) => {
+   const missingLocals = new Map(oldValue.locals);
+   let patch = empty;
+   for (const [fiberRef, pairs] of newValue.locals.entries()) {
++    if (fiberRef == null) continue;
+     const newValue = Arr.headNonEmpty(pairs)[1];
+     const old = missingLocals.get(fiberRef);
+     if (old !== undefined) {
+@@ -49,6 +50,7 @@ const diff = (oldValue, newValue) => {
+     missingLocals.delete(fiberRef);
+   }
+   for (const [fiberRef] of missingLocals.entries()) {
++    if (fiberRef == null) continue;
+     patch = combine({
+       _tag: OP_REMOVE,
+       fiberRef
+diff --git a/dist/cjs/internal/fiberRefs.js b/dist/cjs/internal/fiberRefs.js
+index cecb9ea23a1e3df589b4f44a09d8ddc92c5fb87a..a78c2f890f1e5cd2b3bd777c4c44977d5147b8ea 100644
+--- a/dist/cjs/internal/fiberRefs.js
++++ b/dist/cjs/internal/fiberRefs.js
+@@ -77,6 +77,7 @@ const findAncestor = (_ref, _parentStack, _childStack, _childModified = false) =
+ const joinAs = exports.joinAs = /*#__PURE__*/(0, _Function.dual)(3, (self, fiberId, that) => {
+   const parentFiberRefs = new Map(self.locals);
+   that.locals.forEach((childStack, fiberRef) => {
++    if (fiberRef == null) return;
+     const childValue = childStack[0][1];
+     if (!childStack[0][0][Equal.symbol](fiberId)) {
+       if (!parentFiberRefs.has(fiberRef)) {
+diff --git a/dist/cjs/internal/fiberRuntime.js b/dist/cjs/internal/fiberRuntime.js
+index 926ffb47eb8730023fcf984313201bd70405c40c..db885daa7475f196143bac111bbb561a7271e3fa 100644
+--- a/dist/cjs/internal/fiberRuntime.js
++++ b/dist/cjs/internal/fiberRuntime.js
+@@ -418,6 +418,9 @@ class FiberRuntime extends Effectable.Class {
+    * log annotations and log level) may not be up-to-date.
+    */
+   getFiberRef(fiberRef) {
++    if (fiberRef == null) {
++      return Option.none();
++    }
+     if (this._fiberRefs.locals.has(fiberRef)) {
+       return this._fiberRefs.locals.get(fiberRef)[0][1];
+     }
+diff --git a/dist/esm/internal/fiberRefs/patch.js b/dist/esm/internal/fiberRefs/patch.js
+index 457cbb829fd8b07f3ae1c204217c860254483a9f..9a1932f33623da86199e820bef830022e301ae31 100644
+--- a/dist/esm/internal/fiberRefs/patch.js
++++ b/dist/esm/internal/fiberRefs/patch.js
+@@ -21,6 +21,7 @@ export const diff = (oldValue, newValue) => {
+   const missingLocals = new Map(oldValue.locals);
+   let patch = empty;
+   for (const [fiberRef, pairs] of newValue.locals.entries()) {
++    if (fiberRef == null) continue;
+     const newValue = Arr.headNonEmpty(pairs)[1];
+     const old = missingLocals.get(fiberRef);
+     if (old !== undefined) {
+@@ -42,6 +43,7 @@ export const diff = (oldValue, newValue) => {
+     missingLocals.delete(fiberRef);
+   }
+   for (const [fiberRef] of missingLocals.entries()) {
++    if (fiberRef == null) continue;
+     patch = combine({
+       _tag: OP_REMOVE,
+       fiberRef
+diff --git a/dist/esm/internal/fiberRefs.js b/dist/esm/internal/fiberRefs.js
+index cd0f746726d326ba0af92437c53d0228dae24dd4..7767efd41e2a8d15390307f67e566974fc416b41 100644
+--- a/dist/esm/internal/fiberRefs.js
++++ b/dist/esm/internal/fiberRefs.js
+@@ -65,6 +65,7 @@ const findAncestor = (_ref, _parentStack, _childStack, _childModified = false) =
+ export const joinAs = /*#__PURE__*/dual(3, (self, fiberId, that) => {
+   const parentFiberRefs = new Map(self.locals);
+   that.locals.forEach((childStack, fiberRef) => {
++    if (fiberRef == null) return;
+     const childValue = childStack[0][1];
+     if (!childStack[0][0][Equal.symbol](fiberId)) {
+       if (!parentFiberRefs.has(fiberRef)) {
+diff --git a/dist/esm/internal/fiberRuntime.js b/dist/esm/internal/fiberRuntime.js
+index b4b6b60da9f0b6b4cacd15c57354e941a9d2dd6e..d7f17763113f749fa90812771f1b1ac48c2a6bca 100644
+--- a/dist/esm/internal/fiberRuntime.js
++++ b/dist/esm/internal/fiberRuntime.js
+@@ -410,6 +410,9 @@ export class FiberRuntime extends Effectable.Class {
+    * log annotations and log level) may not be up-to-date.
+    */
+   getFiberRef(fiberRef) {
++    if (fiberRef == null) {
++      return Option.none();
++    }
+     if (this._fiberRefs.locals.has(fiberRef)) {
+       return this._fiberRefs.locals.get(fiberRef)[0][1];
+     }
+diff --git a/src/internal/fiberRefs/patch.ts b/src/internal/fiberRefs/patch.ts
+index 7a9115e2e0d0148b3fd13d2c15c6fbad6a5c0f0d..76c330f4b13a790cf2e66613fc605fb373bc2ed6 100644
+--- a/src/internal/fiberRefs/patch.ts
++++ b/src/internal/fiberRefs/patch.ts
+@@ -49,6 +49,7 @@ export const diff = (
+   const missingLocals = new Map(oldValue.locals)
+   let patch = empty
+   for (const [fiberRef, pairs] of newValue.locals.entries()) {
++    if (fiberRef == null) continue
+     const newValue = Arr.headNonEmpty(pairs)[1]
+     const old = missingLocals.get(fiberRef)
+     if (old !== undefined) {
+@@ -70,6 +71,7 @@ export const diff = (
+     missingLocals.delete(fiberRef)
+   }
+   for (const [fiberRef] of missingLocals.entries()) {
++    if (fiberRef == null) continue
+     patch = combine({
+       _tag: OP_REMOVE,
+       fiberRef
+diff --git a/src/internal/fiberRefs.ts b/src/internal/fiberRefs.ts
+index 8d9ece313bb6d2cb2dfb6bb55273dc8f71aae90a..3b41147785b15b86e6addb41f9a3f2c14a66b6fe 100644
+--- a/src/internal/fiberRefs.ts
++++ b/src/internal/fiberRefs.ts
+@@ -87,6 +87,7 @@ export const joinAs = dual<
+ >(3, (self, fiberId, that) => {
+   const parentFiberRefs = new Map(self.locals)
+   that.locals.forEach((childStack, fiberRef) => {
++    if (fiberRef == null) return
+     const childValue = childStack[0][1]
+     if (!childStack[0][0][Equal.symbol](fiberId)) {
+       if (!parentFiberRefs.has(fiberRef)) {
+diff --git a/src/internal/fiberRuntime.ts b/src/internal/fiberRuntime.ts
+index d61477c893188083540df995d1ba19986dc92b5a..f6fb5d08d38c9c4e3b769d9b8fe8dc973a6a664c 100644
+--- a/src/internal/fiberRuntime.ts
++++ b/src/internal/fiberRuntime.ts
+@@ -578,6 +578,11 @@ export class FiberRuntime<in out A, in out E = never> extends Effectable.Class<A
+    * log annotations and log level) may not be up-to-date.
+    */
+   getFiberRef<X>(fiberRef: FiberRef.FiberRef<X>): X {
++    if (fiberRef == null) {
++      // Guard: fiberRef undefined when core.currentVersionMismatchErrorLogLevel not yet loaded
++      // (circular import or Effect instance mismatch). Return Option.none() for version-check path.
++      return Option.none() as X
++    }
+     if (this._fiberRefs.locals.has(fiberRef)) {
+       return this._fiberRefs.locals.get(fiberRef)![0][1] as X
+     }

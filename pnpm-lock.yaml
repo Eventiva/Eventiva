@@ -7,22 +7,27 @@ settings:
 overrides:
   effect: 3.19.19
 
+patchedDependencies:
+  effect@3.19.19:
+    hash: oma2rq2jtrt7sjh5e7b6vwjfzq
+    path: patches/effect@3.19.19.patch
+
 importers:
 
   .:
     dependencies:
       '@effect/cluster':
         specifier: ^0.56.0
-        version: 0.56.4(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
       '@effect/experimental':
         specifier: ^0.58.0
-        version: 0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/opentelemetry':
         specifier: ^0.61.0
-        version: 0.61.0(@effect/platform@0.94.5(effect@3.19.19))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19)
+        version: 0.61.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/rpc':
         specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/sdk-logs':
         specifier: ^0.203.0
         version: 0.203.0(@opentelemetry/api@1.9.0)
@@ -31,7 +36,7 @@ importers:
         version: 2.6.0(@opentelemetry/api@1.9.0)
       effect:
         specifier: 3.19.19
-        version: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       expo:
         specifier: ~54.0.0
         version: 54.0.33(@babel/core@7.29.0)(react-native@0.84.1(@babel/core@7.29.0)(@types/react@19.2.14)(react@19.2.4))(react@19.2.4)
@@ -200,25 +205,25 @@ importers:
     dependencies:
       '@effect/cluster':
         specifier: ^0.56.0
-        version: 0.56.4(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
       '@effect/experimental':
         specifier: ^0.58.0
-        version: 0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/opentelemetry':
         specifier: ^0.61.0
-        version: 0.61.0(@effect/platform@0.94.5(effect@3.19.19))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19)
+        version: 0.61.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/platform':
         specifier: ^0.94.5
-        version: 0.94.5(effect@3.19.19)
+        version: 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/platform-node':
         specifier: ^0.69.1
-        version: 0.69.1(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.69.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/rpc':
         specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
-        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/exporter-logs-otlp-http':
         specifier: ^0.213.0
         version: 0.213.0(@opentelemetry/api@1.9.0)
@@ -242,10 +247,10 @@ importers:
         version: 2.6.0(@opentelemetry/api@1.9.0)
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
+        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
       effect:
         specifier: 3.19.19
-        version: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       posthog-node:
         specifier: ^5.28.1
         version: 5.28.1(rxjs@7.8.2)
@@ -264,31 +269,31 @@ importers:
     dependencies:
       '@effect/sql':
         specifier: ^0.21.0
-        version: 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/sql-pg':
         specifier: ^0.34.0
-        version: 0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql-pg@0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
+        version: 1.0.0-beta.18-dc9676b(2qcox6paizv2csajrjdqk5skle)
       effect:
         specifier: 3.19.19
-        version: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
   packages/extensions/contact:
     dependencies:
       '@effect/cluster':
         specifier: ^0.56.0
-        version: 0.56.4(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
       '@effect/rpc':
         specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
-        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
@@ -297,34 +302,34 @@ importers:
         version: link:../../databases/pg
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
+        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
       effect:
         specifier: 3.19.19
-        version: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
   packages/extensions/hello-world:
     dependencies:
       '@effect/cluster':
         specifier: ^0.56.0
-        version: 0.56.4(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
       '@effect/rpc':
         specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
-        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
       effect:
         specifier: 3.19.19
-        version: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
   packages/platforms/default:
     dependencies:
       '@effect/cluster':
         specifier: ^0.56.0
-        version: 0.56.4(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
@@ -339,7 +344,7 @@ importers:
         version: link:../../extensions/hello-world
       effect:
         specifier: 3.19.19
-        version: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
 packages:
 
@@ -11036,26 +11041,26 @@ snapshots:
 
   '@drizzle-team/brocli@0.11.0': {}
 
-  '@effect/cluster@0.56.4(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)':
+  '@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)':
     dependencies:
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/workflow': 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
-      effect: 3.19.19
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/workflow': 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       kubernetes-types: 1.30.0
 
-  '@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)':
+  '@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      effect: 3.19.19
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       uuid: 11.1.0
 
   '@effect/language-service@0.78.0': {}
 
-  '@effect/opentelemetry@0.61.0(@effect/platform@0.94.5(effect@3.19.19))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19)':
+  '@effect/opentelemetry@0.61.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/platform': 0.94.5(effect@3.19.19)
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/resources': 2.6.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-logs': 0.203.0(@opentelemetry/api@1.9.0)
@@ -11064,20 +11069,20 @@ snapshots:
       '@opentelemetry/sdk-trace-node': 2.6.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-web': 2.6.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/semantic-conventions': 1.40.0
-      effect: 3.19.19
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
-  '@effect/platform-node-shared@0.23.1(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)':
+  '@effect/platform-node-shared@0.23.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/platform': 0.94.5(effect@3.19.19)
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@parcel/watcher': 2.5.6
-      effect: 3.19.19
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       multipasta: 0.2.7
 
-  '@effect/platform-node@0.69.1(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)':
+  '@effect/platform-node@0.69.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      '@effect/platform-node-shared': 0.23.1(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      effect: 3.19.19
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform-node-shared': 0.23.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       mime: 3.0.0
       undici: 7.22.0
       ws: 8.18.0
@@ -11085,48 +11090,48 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.94.5(effect@3.19.19)':
+  '@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      effect: 3.19.19
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       find-my-way-ts: 0.1.6
       msgpackr: 1.11.8
       multipasta: 0.2.7
 
-  '@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)':
+  '@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      effect: 3.19.19
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       msgpackr: 1.11.8
 
-  '@effect/sql-pg@0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)':
+  '@effect/sql-pg@0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      '@effect/sql': 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/semantic-conventions': 1.40.0
-      effect: 3.19.19
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       postgres: 3.4.8
 
-  '@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)':
+  '@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/platform': 0.94.5(effect@3.19.19)
+      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/semantic-conventions': 1.40.0
-      effect: 3.19.19
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
-  '@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)':
+  '@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      effect: 3.19.19
+      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       uuid: 11.1.0
 
-  '@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)':
+  '@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
-      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/platform': 0.94.5(effect@3.19.19)
-      '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      effect: 3.19.19
+      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
   '@emnapi/core@1.8.1':
     dependencies:
@@ -16117,23 +16122,23 @@ snapshots:
       esbuild: 0.25.12
       jiti: 2.6.1
 
-  drizzle-orm@1.0.0-beta.18-dc9676b(@effect/sql-pg@0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8):
+  drizzle-orm@1.0.0-beta.18-dc9676b(2qcox6paizv2csajrjdqk5skle):
     dependencies:
       '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
       mssql: 11.0.1(@azure/core-client@1.10.1)
     optionalDependencies:
-      '@effect/sql': 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
-      '@effect/sql-pg': 0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(effect@3.19.19)
+      '@effect/sql': 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql-pg': 0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/api': 1.9.0
       '@sinclair/typebox': 0.34.48
       postgres: 3.4.8
 
-  drizzle-orm@1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8):
+  drizzle-orm@1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8):
     dependencies:
       '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
       mssql: 11.0.1(@azure/core-client@1.10.1)
     optionalDependencies:
-      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19)
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/api': 1.9.0
       '@sinclair/typebox': 0.34.48
       postgres: 3.4.8
@@ -16173,7 +16178,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  effect@3.19.19:
+  effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq):
     dependencies:
       '@standard-schema/spec': 1.1.0
       fast-check: 3.23.2

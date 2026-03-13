@@ -34,6 +34,8 @@ export const FeatureFlagKeys = {
   ENTITY_ENDPOINTS_FULL_INIT: "eventiva-entity-endpoints-full-init",
   /** Within entity endpoints: skip yield* Sharding.Sharding (debug). */
   ENTITY_ENDPOINTS_SHARDING: "eventiva-entity-endpoints-sharding",
+  /** Within entity endpoints: skip withSpanAndLog wrapper (debug tracer). */
+  ENTITY_ENDPOINTS_TRACING: "eventiva-entity-endpoints-tracing",
   SCHEMA_STACK: "eventiva-schema-stack",
   EXTENSIONS: "eventiva-extensions"
 } as const
@@ -83,6 +85,9 @@ function loadConfigFlags(): Record<FeatureFlagKey, boolean> {
       ).pipe(Config.withDefault(true)),
       [FeatureFlagKeys.ENTITY_ENDPOINTS_SHARDING]: Config.boolean(
         "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING"
+      ).pipe(Config.withDefault(true)),
+      [FeatureFlagKeys.ENTITY_ENDPOINTS_TRACING]: Config.boolean(
+        "EVENTIVA_FEATURE_ENTITY_ENDPOINTS_TRACING"
       ).pipe(Config.withDefault(true)),
       [FeatureFlagKeys.SCHEMA_STACK]: Config.boolean("EVENTIVA_FEATURE_SCHEMA_STACK").pipe(
         Config.withDefault(true)
