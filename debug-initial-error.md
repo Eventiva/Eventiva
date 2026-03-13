@@ -26,14 +26,9 @@ Identify which core process or extension causes the error, then fix it. Suspect:
 - EntityEndpointsServer
 
 ## Findings
-- Error was "Cannot read properties of undefined (reading 'initial')" in Effect's getFiberRef / fiberRefs.joinAs when a FiberRef from a different/partial Effect module instance was in the refs map.
-- **Root cause:** `fiberRefGet(undefined)` is called when FiberRefs from different Effect instances are merged (e.g. in FiberRefsPatch.patch, Blocked handler, or tracer callback). The FiberRef parameter can be undefined when the refs map has keys from a different module instance.
-- **pnpm patch applied:** `patches/effect@3.19.19.patch` adds:
-  1. **getFiberRef:** Guards for undefined/invalid fiberRef; throws clearer error.
-  2. **joinAs:** Skips entries where fiberRef is null/undefined or has no .initial.
-  3. **tracer callback:** Try-catch around currentVersionMismatchErrorLogLevel getFiberRef; uses Option.none() on failure.
-- **Remaining crash:** After the tracer fix, the crash can still occur from other code paths (e.g. core.fiberRefGet in Blocked handler / FiberRefsPatch). Full fix would require patching core.fiberRefGet or ensuring single Effect instance (e.g. Effect v4 unified versioning).
-- pnpm overrides for effect@3.19.19 applied; patchedDependencies uses the patch.
+- Error: "Cannot read properties of undefined (reading 'initial')" in Effect's getFiberRef when `fiberRef` is undefined.
+- **Dependency audit (no patch):** Single effect copy confirmed (`find node_modules -path '*node_modules/effect'` → one result). pnpm overrides `effect: "3.19.19"` in place. `.npmrc` public-hoist-pattern for effect and @effect/*. **Crash persists** — likely an Effect runtime bug or edge case, not duplicate instances.
+- **Optional debug patch:** `patches/effect@3.19.19.patch` (if re-added) can provide clearer errors and tracer callback try-catch for debugging.
 
 ### Fixes applied (platform running)
 - **TableRelationsRegistry missing:** runCoreStartup requires TableRelationsRegistry; it was not in the platform schema stack. Added `TableRelationsRegistryLive` to schemaStack in `packages/core/src/runtime/platform.ts` (import + Layer.provideMerge(TableRelationsRegistryLive)).

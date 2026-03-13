@@ -14,9 +14,6 @@
   "pnpm": {
     "overrides": {
       "effect": "3.19.19"
-    },
-    "patchedDependencies": {
-      "effect@3.19.19": "patches/effect@3.19.19.patch"
     }
   },
   "devDependencies": {
