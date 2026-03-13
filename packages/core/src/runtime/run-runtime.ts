@@ -63,10 +63,15 @@ export const defaultRuntimeProgram = Effect.gen(function* () {
 }).pipe(withSpanAndLog('defaultRuntimeProgram'));
 
 /**
- * Runs the two-phase platform: bootstrap (runCoreStartup) with phase 1 layer, then runtime
- * (EntityEndpointsServer) with phase 2 layer in the same scope. Runtime layer is provided only
- * after bootstrap has run, so entity endpoints are built after EntityRegistry is populated and
- * /api/rpc/contacts and Swagger see Contact. DevTools is applied when enabled.
+ * Run a two‑phase platform startup: execute the bootstrap phase, then start the runtime phase within the same process.
+ *
+ * The bootstrap layer from `template` is applied for the initial core startup. After bootstrap completes the runtime
+ * layer from `template` is applied so entity endpoints are constructed with a populated EntityRegistry (so endpoints
+ * such as `/api/rpc/contacts` and generated Swagger reflect registered entities). If the environment variable
+ * `EVENTIVA_FEATURE_DEVTOOLS` is not set to `'false'` DevTools integration is applied before the platform layers.
+ *
+ * @param template - A two‑phase platform template providing `getBootstrapLayer()` and `getRuntimeLayer()` for the
+ *                   bootstrap and runtime phases respectively
  */
 export function runMainTwoPhase(template: PlatformTemplateTwoPhase): void {
     const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== 'false';
@@ -81,12 +86,13 @@ export function runMainTwoPhase(template: PlatformTemplateTwoPhase): void {
 }
 
 /**
- * Runs the default runtime program with DevTools and the given platform layer.
- * DevTools is provided before the platform layer so the tracer (from ObservabilityLive) is patched correctly.
- * Uses NodeRuntime.runMain for process and signal handling.
- * Use this in development when the Effect VS Code / Cursor extension is installed.
- * Set EVENTIVA_FEATURE_DEVTOOLS=false to skip DevTools (e.g. for debugging tracer crashes).
- * For correct entity route map (Contact etc.), prefer runMainTwoPhase(createPlatformTemplateTwoPhase(options)).
+ * Start the default runtime program using the given platform Layer.
+ *
+ * If the environment variable EVENTIVA_FEATURE_DEVTOOLS is not set to 'false', DevToolsLive
+ * is applied before the platform layer so the tracer can be patched correctly.
+ * The function runs the program with process and signal handling via the Node runtime.
+ *
+ * @param platformLayer - The platform Layer to provide to the runtime program
  */
 export function runMain(platformLayer: Layer.Layer<never, never, unknown>): void {
     const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== 'false';

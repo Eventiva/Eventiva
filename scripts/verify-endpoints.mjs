@@ -10,6 +10,12 @@ import http from 'http';
 const PORT = 3000;
 const MAX_WAIT_MS = 90000;
 
+/**
+ * Waits until the given TCP port on 127.0.0.1 accepts a connection or the timeout elapses.
+ * @param {number} port - TCP port number to check.
+ * @param {number} timeoutMs - Maximum wait time in milliseconds.
+ * @returns {Promise<void>} Resolves when a connection to the port is successful, rejects with an Error if the port is not open within `timeoutMs`.
+ */
 function waitForPort(port, timeoutMs) {
     return new Promise((resolve, reject) => {
         const deadline = Date.now() + timeoutMs;
@@ -30,6 +36,12 @@ function waitForPort(port, timeoutMs) {
     });
 }
 
+/**
+ * Send a JSON HTTP POST to the local server at the given path on 127.0.0.1:PORT and return the response.
+ * @param {string} path - Request path, including any leading slash (e.g. `/api/rpc/contacts`).
+ * @param {*} body - Value to be serialized as the JSON request body.
+ * @returns {{status: number, body: string}} The HTTP response status code and the response body as a string.
+ */
 function httpPost(path, body) {
     return new Promise((resolve, reject) => {
         const data = JSON.stringify(body);
@@ -53,6 +65,11 @@ function httpPost(path, body) {
     });
 }
 
+/**
+ * Perform an HTTP GET against the local server and return the response.
+ * @param {string} path - Request path on the local server (should begin with `/`).
+ * @returns {Promise<{status: number, body: string}>} An object with HTTP `status` and response `body`.
+ */
 function httpGet(path) {
     return new Promise((resolve, reject) => {
         http.get(`http://127.0.0.1:${PORT}${path}`, (res) => {
@@ -63,6 +80,11 @@ function httpGet(path) {
     });
 }
 
+/**
+ * Verifies runtime endpoints by starting the platform, probing port 3000, calling specific HTTP endpoints and exiting with success or failure.
+ *
+ * Starts a detached platform process, waits for the configured port to become available, sends POST requests to the RPC contacts and hello-worlds endpoints and a GET to /api/docs, logs status snippets for each response, and exits with code 0 if the contacts check passes (no "Unknown pathPrefix" in the response) or 1 otherwise. On error it terminates the spawned process group and exits with code 1.
+ */
 async function main() {
     const child = spawn('npx', ['nx', 'run', 'platforms-default:run'], {
         cwd: process.cwd(),
