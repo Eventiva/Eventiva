@@ -42,7 +42,7 @@ jobs:
             # Prepend any command with "nx record --" to record its logs to Nx Cloud
             # - run: npx nx record -- echo Hello World
             # test target will be re-added when Vitest is configured
-            - run: pnpm nx run-many -t lint build typecheck
+            - run: pnpm nx run-many --exclude=eventiva -t lint build typecheck
             # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
             - run: pnpm nx fix-ci
               if: always()

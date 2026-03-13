@@ -19,8 +19,7 @@
             "{workspaceRoot}/.editorconfig",
             "{workspaceRoot}/.prettierrc",
             "{workspaceRoot}/.prettierignore",
-            "{workspaceRoot}/eslint.config.mjs",
-            "{workspaceRoot}/trunk.yaml"
+            "{workspaceRoot}/eslint.config.mjs"
         ]
     },
     "nxCloudId": "69ac12dce5a0d35ac110e93a",
