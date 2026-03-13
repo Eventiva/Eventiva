@@ -30,7 +30,7 @@ jobs:
           theme: dark
           proc_trace_sys_enable: true
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check for config
         id: check_config
