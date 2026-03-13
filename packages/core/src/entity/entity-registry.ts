@@ -11,6 +11,8 @@ import * as Schema from 'effect/Schema';
  *   }
  * }
  */
+// This interface is intentionally empty and is extended via declaration merging.
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-empty-interface
 export interface RegisteredEntities {}
 
 // Internal mutable map to hold fully constructed entities.

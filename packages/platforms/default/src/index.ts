@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 /**
  * Default platform: single entry point via createPlatformTemplate. Set databaseLayer,
  * extensions, and optional entityEndpoints; core handles all merging.
