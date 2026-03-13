@@ -299,3 +299,5 @@ npm-debug.*
 web-build/
 cache/
 
+
+vitest.config.*.timestamp*

@@ -36,6 +36,11 @@ Keep lint and format behaviour consistent across the editor, Trunk, and Nx so Tr
 - **Fix and format:**  
   `pnpm fix` → format then lint with `--fix` (or `trunk check --fix` / `trunk fmt`).
 
+## Vitest and Effect
+
+- **Nx:** The `@nx/vitest` plugin infers a `test` target for any project that has a Vitest config (`vitest.config.ts`, `vitest.config.js`, or `vite.config.*` with test config). Run tests with `pnpm nx run-many -t test` or `pnpm nx run <project>:test`.
+- **Effect:** Use `@effect/vitest` in tests: `import { it, expect } from "@effect/vitest"`. Use `it.effect`, `it.live`, `it.scoped`, etc. for Effect-based tests. No global setup is required; use the package in each test file (or a shared test setup file if you add one).
+
 ## Optional: pre-commit hook
 
 To run checks before every commit you can add husky + lint-staged and wire `pnpm check` or `trunk check` to the pre-commit hook. Not added by default; document here if you add it.

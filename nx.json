@@ -68,6 +68,12 @@
             }
         },
         {
+            "plugin": "@nx/vitest",
+            "options": {
+                "testTargetName": "test"
+            }
+        },
+        {
             "plugin": "@nx/cypress/plugin",
             "options": {
                 "targetName": "e2e",
