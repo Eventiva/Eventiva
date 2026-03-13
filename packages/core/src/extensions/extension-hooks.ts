@@ -247,6 +247,23 @@ export const ExtensionHooksLive: Layer.Layer<ExtensionHookPubSub, never, never> 
 );
 
 export { layerMemory as WorkflowEngineLayerInMemory } from '@effect/workflow/WorkflowEngine';
+import { ClusterWorkflowEngine } from '@effect/cluster';
+
+/**
+ * ClusterWorkflowEngine layer for durable workflows in a clustered environment.
+ * Requires Sharding in context. Use this instead of WorkflowEngineLayerInMemory
+ * when running in a cluster setup with sharding enabled.
+ *
+ * @example
+ * ```typescript
+ * const workflowLayer = ClusterWorkflowEngineLayer.pipe(
+ *   Layer.provide(clusterLayerDefault) // Provides Sharding
+ * );
+ * ```
+ *
+ * @see https://effect-ts.github.io/effect/docs/cluster
+ */
+export const ClusterWorkflowEngineLayer = ClusterWorkflowEngine.layer;
 export {
     make as ActivityMake,
     retry as ActivityRetry,

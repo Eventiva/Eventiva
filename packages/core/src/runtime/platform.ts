@@ -16,6 +16,7 @@ import * as Scope from 'effect/Scope';
 import { createServer } from 'node:http';
 import { ObservabilityLive } from '../observability/layer.js';
 import { clusterLayerDefault } from '../cluster/config.js';
+import { ClusterMetrics } from '@effect/cluster';
 import { NodeHttpServer } from '@effect/platform-node';
 import {
     makeEntityEndpointsLayer,
@@ -24,7 +25,11 @@ import {
 } from '../cluster/entity-endpoints.js';
 import { PiiEncryptionLive } from '../security/index.js';
 import { Database } from '../database/database.js';
-import { ExtensionHooksLive, WorkflowEngineLayerInMemory } from '../extensions/extension-hooks.js';
+import {
+    ExtensionHooksLive,
+    WorkflowEngineLayerInMemory,
+    ClusterWorkflowEngineLayer,
+} from '../extensions/extension-hooks.js';
 import { mergeConfigLayers, mergeEntityLayers, type ExtensionRegistration } from '../extensions/extension-registry.js';
 import { WorkflowRegistryLive } from '../workflow/engine.js';
 import { RuntimeConfigLive } from '../config/runtime-config.js';
@@ -121,12 +126,22 @@ function buildBootstrapStack(
         Layer.provideMerge(schemaConfigLayer),
         Layer.provideMerge(schemaFinalizerLayer)
     );
-    const hooksStack = Layer.mergeAll(ExtensionHooksLive, WorkflowEngineLayerInMemory, WorkflowRegistryLive);
+    // Use ClusterWorkflowEngine when cluster is enabled, otherwise use in-memory workflow engine
+    const workflowEngineLayer = isFeatureEnabled(fo, 'CLUSTER')
+        ? ClusterWorkflowEngineLayer.pipe(Layer.provide(clusterLayerDefault))
+        : WorkflowEngineLayerInMemory;
+    const hooksStack = Layer.mergeAll(ExtensionHooksLive, workflowEngineLayer, WorkflowRegistryLive);
+    // Base observability layer (Logger, Tracer, Metrics)
     const observabilityLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
         ? ObservabilityLive
         : (NodeSdk.layerEmpty as Layer.Layer<never, any, unknown>);
+    
+    // Add ClusterMetrics when cluster is enabled
+    const metricsLayer = isFeatureEnabled(fo, 'CLUSTER')
+        ? Layer.mergeAll(observabilityLayer, ClusterMetrics.layer)
+        : observabilityLayer;
     const baseLayers: Layer.Layer<never, any, unknown>[] = [
-        observabilityLayer,
+        metricsLayer, // Includes ObservabilityLive + ClusterMetrics (if cluster enabled)
         runtimeConfigLayer,
         extensionConfigLayer,
         isFeatureEnabled(fo, 'CLUSTER') ? clusterLayerDefault : Layer.empty,
@@ -136,16 +151,20 @@ function buildBootstrapStack(
         hooksStack,
         scopeLayer,
     ];
-    const base = Layer.mergeAll(
-        baseLayers[0]!,
-        baseLayers[1]!,
-        baseLayers[2]!,
-        baseLayers[3]!,
-        baseLayers[4]!,
-        baseLayers[5]!,
-        baseLayers[6]!,
-        baseLayers[7]!,
-        baseLayers[8]!
+    // Merge all base layers and memoize for global reuse
+    // This ensures the same layer instance is used across multiple platform templates
+    const base = Layer.memoize(
+        Layer.mergeAll(
+            baseLayers[0]!,
+            baseLayers[1]!,
+            baseLayers[2]!,
+            baseLayers[3]!,
+            baseLayers[4]!,
+            baseLayers[5]!,
+            baseLayers[6]!,
+            baseLayers[7]!,
+            baseLayers[8]!
+        )
     );
     const entitiesLayer = isFeatureEnabled(fo, 'EXTENSIONS')
         ? mergeEntityLayers([...options.extensions.map((e) => e.layer)])

@@ -1,4 +1,14 @@
-// Placeholder — cluster public API (@effect/cluster integration).
+/**
+ * Cluster public API (@effect/cluster integration).
+ * 
+ * Provides:
+ * - Cluster configuration (TestRunner, SingleRunner, distributed)
+ * - Entity definitions and utilities
+ * - Entity HTTP endpoints
+ * - Cluster models
+ * 
+ * @see https://effect-ts.github.io/effect/docs/cluster
+ */
 
 export * from './config.js';
 export * from './entities.js';
