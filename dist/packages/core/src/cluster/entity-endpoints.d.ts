@@ -20,6 +20,7 @@ import { HttpServer } from '@effect/platform';
 import { Sharding } from '@effect/cluster';
 import type * as Entity from '@effect/cluster/Entity';
 import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
 import { type FeatureFlagOverrides } from '../feature-flags/index.js';
 /**
@@ -37,8 +38,10 @@ export interface EntityEndpointDescriptor {
 /**
  * Build a single entity endpoint descriptor. Pass to createPlatformTemplate entityEndpoints
  * so the HTTP server exposes POST /api/rpc/:pathPrefix for this entity.
+ *
+ * @returns Effect that yields the descriptor (observable span/log/metric).
  */
-export declare function makeEntityEndpointDescriptor(entity: Entity.Any, defaultEntityId: string, pathPrefix: string): EntityEndpointDescriptor;
+export declare function makeEntityEndpointDescriptor(entity: Entity.Any, defaultEntityId: string, pathPrefix: string): Effect.Effect<EntityEndpointDescriptor>;
 export interface EntityEndpointsOptions {
     readonly port?: number;
     /** Feature flag overrides for debugging. Env: EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER, etc. */
