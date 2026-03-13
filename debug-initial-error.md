@@ -26,17 +26,14 @@ Identify which core process or extension causes the error, then fix it. Suspect:
 - EntityEndpointsServer
 
 ## Findings
-- Error was "Cannot read properties of undefined (reading 'initial')" in Effect's getFiberRef / fiberRefs.joinAs when a FiberRef from a different/partial Effect module instance was in the refs map.
-- Fixes applied (workarounds in node_modules/effect):
-  1. **fiberRuntime (source + ESM + CJS dist):** Guard + try/catch in getFiberRef when ref is undefined or ref.initial throws; guard in tracer context for currentVersionMismatchErrorLogLevel.
-  2. **fiberRefs (source + ESM dist):** try/catch in joinAs forEach callback to skip entries whose FiberRef is invalid; getOrDefault and findAncestor guards for undefined ref/initial.
-- After these patches, the "initial" error is resolved. Next error: "Service not found: @effect/platform/HttpApi/Api" when building makeEntityEndpointsLayer (layer ordering / provision of HttpApi).
-- pnpm overrides for effect@3.19.19 applied; single effect copy in node_modules.
+- Error: "Cannot read properties of undefined (reading 'initial')" in Effect's getFiberRef when `fiberRef` is undefined.
+- **Dependency audit (no patch):** Single effect copy confirmed (`find node_modules -path '*node_modules/effect'` → one result). pnpm overrides `effect: "3.19.19"` in place. `.npmrc` public-hoist-pattern for effect and @effect/*. **Crash persists** — likely an Effect runtime bug or edge case, not duplicate instances.
+- **Optional debug patch:** `patches/effect@3.19.19.patch` (if re-added) can provide clearer errors and tracer callback try-catch for debugging.
 
 ### Fixes applied (platform running)
 - **TableRelationsRegistry missing:** runCoreStartup requires TableRelationsRegistry; it was not in the platform schema stack. Added `TableRelationsRegistryLive` to schemaStack in `packages/core/src/runtime/platform.ts` (import + Layer.provideMerge(TableRelationsRegistryLive)).
 - **EntityEndpointsServer missing when no endpoints:** When entityEndpoints is empty we no longer add the HTTP endpoints layer, so EntityEndpointsServer was never provided and defaultRuntimeProgram failed with "Service not found: @eventiva/core/EntityEndpointsServer". Fixed by providing a dummy when no endpoints: `Layer.succeed(EntityEndpointsServer, { port: 0 })` in the else branch in platform.ts.
-- **Result:** Platform runs successfully: core startup completes, "runtime ready; server serving until interrupt". (Exit code 124 in tests is from `timeout 8` killing the process.)
+- **Result:** Platform runs successfully when Observability/HTTP endpoints are not exercised; with full stack the FiberRef crash can still occur.
 
 ### Extensions re-enabled (in-memory DB)
 - With extensions (hello-world, contact) and DatabaseLiveInMemory, SchemaFinalizerNoOp stores placeholder tables (`Object.create(null)`), so drizzle's defineRelations and createSelectSchema threw "Cannot read properties of null (reading 'constructor')".
@@ -44,4 +41,5 @@ Identify which core process or extension causes the error, then fix it. Suspect:
 - **Result:** Platform runs with extensions; contact entity is skipped for in-memory (placeholder table); "Core startup completed successfully", "runtime ready; server serving until interrupt".
 
 ### Next step (separate from "initial" fix)
-- "Service not found: @effect/platform/HttpApi/Api" when building makeEntityEndpointsLayer: layer composition for HttpApiBuilder.serve() + apiLayer may need to provide HttpApi.Api before serve runs; or only add endpoints layer when entityEndpoints.length > 0 (skip HTTP server when only endpointsPort is set).
+- Consider upgrading to Effect v4 beta for unified versioning (eliminates duplicate instance issues).
+- Or extend the patch to wrap core.fiberRefGet / FiberRefsPatch to handle undefined refs.

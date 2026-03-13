@@ -33,6 +33,10 @@ import * as Layer from "effect/Layer"
 import * as Schema from "effect/Schema"
 import { EntityRegistry } from "../entity/entity-registry.js"
 import { withSpanAndLog } from "../observability/helpers.js"
+import {
+  FeatureFlagKeys,
+  type FeatureFlagOverrides
+} from "../feature-flags/index.js"
 
 /** Request body for entity RPC invoke. */
 const RpcInvokePayload = Schema.Struct({
@@ -97,6 +101,21 @@ export function makeEntityEndpointDescriptor(
 
 export interface EntityEndpointsOptions {
   readonly port?: number
+  /** Feature flag overrides for debugging. Env: EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER, etc. */
+  readonly featureOverrides?: FeatureFlagOverrides
+}
+
+function isEntityEndpointFlagEnabled(
+  overrides: FeatureFlagOverrides | undefined,
+  key: keyof typeof FeatureFlagKeys
+): boolean {
+  const k = FeatureFlagKeys[key]
+  if (overrides && k in overrides) return overrides[k] ?? true
+  const envKey = `EVENTIVA_FEATURE_${key}` as const
+  const v = process.env[envKey]
+  if (v === "false" || v === "0") return false
+  if (v === "true" || v === "1") return true
+  return true
 }
 
 /**
@@ -113,9 +132,20 @@ export function makeEntityEndpointsLayer(
   options: EntityEndpointsOptions = {}
 ): Layer.Layer<EntityEndpointsServer, any, Sharding.Sharding | HttpServer.HttpServer> {
   const port = options.port ?? 3000
+  const fo = options.featureOverrides
+  const useFullInit = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_FULL_INIT")
   const startServer = Effect.gen(function* () {
+    // Early return BEFORE any yield* – avoids running effects (tracer) when skipping init.
+    // Crash: getFiberRef(undefined) in tracer when fiberRefs from different Effect instance.
+    if (!useFullInit) {
+      return { port } as const
+    }
     yield* Effect.logDebug("Initializing EntityEndpointsServer")
-    yield* Sharding.Sharding
+    if (isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_SHARDING")) {
+      yield* Sharding.Sharding
+    } else {
+      yield* Effect.logDebug("EntityEndpointsServer: skipping Sharding (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SHARDING=false)")
+    }
 
     // Add all dynamically generated entities to descriptors
     const allRegisteredEntities = EntityRegistry.getAll()
@@ -139,16 +169,26 @@ export function makeEntityEndpointsLayer(
         defaultEntityId: string
       }
     >()
-    for (const d of allDescriptors) {
-      const entity = d.entity as Entity.Any
-      const getClient = yield* entity.client
-      map.set(d.pathPrefix, {
-        entity,
-        getClient: getClient as unknown as (
-          entityId: string
-        ) => Record<string, (payload: unknown) => Effect.Effect<unknown>>,
-        defaultEntityId: d.defaultEntityId
-      })
+    if (isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_CLIENT_FETCH")) {
+      for (const d of allDescriptors) {
+        const entity = d.entity as Entity.Any
+        const getClient = yield* entity.client
+        map.set(d.pathPrefix, {
+          entity,
+          getClient: getClient as unknown as (
+            entityId: string
+          ) => Record<string, (payload: unknown) => Effect.Effect<unknown>>,
+          defaultEntityId: d.defaultEntityId
+        })
+      }
+    } else {
+      for (const d of allDescriptors) {
+        map.set(d.pathPrefix, {
+          entity: d.entity as Entity.Any,
+          getClient: () => ({}),
+          defaultEntityId: d.defaultEntityId
+        })
+      }
     }
 
     // Implement the EntityRpc group: single handler that uses the descriptor map.
@@ -202,25 +242,36 @@ export function makeEntityEndpointsLayer(
       Layer.provide(shutdownGroupLive)
     )
 
-    // Serve the API and mount Swagger at /api/docs; both require HttpApi.Api (provided by apiLayer).
-    const serveLayer = HttpApiBuilder.serve()
-    const swaggerLayer = HttpApiSwagger.layer({ path: "/api/docs" })
+    const useFullLayerBuild = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_FULL_LAYER_BUILD")
+    if (useFullLayerBuild) {
+      // Serve the API and mount Swagger at /api/docs; both require HttpApi.Api (provided by apiLayer).
+      const serveLayer = HttpApiBuilder.serve()
+      const swaggerLayer = HttpApiSwagger.layer({ path: "/api/docs" })
+      const serveAndSwaggerLayers = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_SWAGGER")
+        ? Layer.mergeAll(serveLayer, swaggerLayer)
+        : serveLayer
 
-    const fullServerLayer = Layer.mergeAll(serveLayer, swaggerLayer).pipe(
-      Layer.provide(apiLayer),
-      Layer.provide(NodeHttpServer.layerContext)
-    )
+      const fullServerLayer = serveAndSwaggerLayers.pipe(
+        Layer.provide(apiLayer),
+        Layer.provide(NodeHttpServer.layerContext)
+      )
 
-    yield* Layer.build(fullServerLayer)
+      yield* Layer.build(fullServerLayer)
+    } else {
+      // Minimal: server is already listening via NodeHttpServer; Layer.build would mount routes.
+      // Skip full layer build to avoid "initial" crash – server responds with 404 for /api/*.
+      yield* Effect.logDebug("EntityEndpointsServer: skipping full layer build (EVENTIVA_FEATURE_ENTITY_ENDPOINTS_FULL_LAYER_BUILD=false)")
+    }
 
     const paths = allDescriptors.map((d) => `POST /api/rpc/${d.pathPrefix}`)
     yield* Effect.logDebug("Entity HTTP endpoints up", { paths, service: "eventiva-core" })
     return { port } as const
   })
-  return Layer.scoped(
-    EntityEndpointsServer,
-    startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))
-  ) as Layer.Layer<
+  const useTracing = isEntityEndpointFlagEnabled(fo, "ENTITY_ENDPOINTS_TRACING")
+  const runEffect = useTracing
+    ? startServer.pipe(withSpanAndLog("makeEntityEndpointsLayer"))
+    : startServer
+  return Layer.scoped(EntityEndpointsServer, runEffect) as Layer.Layer<
     EntityEndpointsServer,
     any,
     Sharding.Sharding | HttpServer.HttpServer

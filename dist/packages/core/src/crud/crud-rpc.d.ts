@@ -34,9 +34,7 @@ export declare function makeCrudRpc<Id, Fields>(options: CrudRpcOptions<Id, Fiel
 }>, typeof Schema.Void, Schema.Struct<{
     _tag: Schema.Literal<["NotFound"]>;
     id: Schema.Schema<Id, any, any>;
-}>, never>, Rpc.Rpc<"list", Schema.Struct<{}>, Schema.Array$<Schema.extend<Schema.Schema<Fields, any, any>, Schema.Struct<{
-    id: Schema.Schema<Id, any, any>;
-}>>>, typeof Schema.Never, never>, Rpc.Rpc<"delete", Schema.Struct<{
+}>, never>, Rpc.Rpc<"list", Schema.Struct<{}>, Schema.Array$<Schema.Schema<Fields, any, any>>, typeof Schema.Never, never>, Rpc.Rpc<"delete", Schema.Struct<{
     id: Schema.Schema<Id, any, any>;
 }>, typeof Schema.Void, Schema.Struct<{
     _tag: Schema.Literal<["NotFound"]>;
@@ -54,9 +52,7 @@ export declare function makeCrudRpc<Id, Fields>(options: CrudRpcOptions<Id, Fiel
 }>, typeof Schema.Void, Schema.Struct<{
     _tag: Schema.Literal<["NotFound"]>;
     id: Schema.Schema<Id, any, any>;
-}>, never>, Rpc.Rpc<"list", Schema.Struct<{}>, Schema.Array$<Schema.extend<Schema.Schema<Fields, any, any>, Schema.Struct<{
-    id: Schema.Schema<Id, any, any>;
-}>>>, typeof Schema.Never, never>];
+}>, never>, Rpc.Rpc<"list", Schema.Struct<{}>, Schema.Array$<Schema.Schema<Fields, any, any>>, typeof Schema.Never, never>];
 /**
  * Creates an entity with standard CRUD RPCs (create, get, update, list, optional delete).
  * Extension provides the type name and id/fields schemas; handlers are still provided separately via toLayer(handlers).

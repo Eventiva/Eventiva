@@ -1,4 +1,4 @@
-import { BuildExtraConfigColumns, SQL, sql } from 'drizzle-orm'
+import { SQL, sql } from 'drizzle-orm'
 import {
     AnyIndexBuilder,
     CheckBuilder,
@@ -28,7 +28,8 @@ export const typeid = (
     config?: { type: string }
 ) => text( value )
 
-const contactSkeleton = drizzlePgTable('contact', { id: typeid('id', { type: 'contact' }) });
+/** Placeholder for createdBy FK when getTable is not available (e.g. createTableFinal standalone). */
+const createdByPlaceholder = drizzlePgTable( '_created_by_placeholder', { id: typeid( 'id', { type: 'contact' } ) } )
 
 /**
  * Represents the status constants used to indicate the state of an entity.
@@ -233,7 +234,7 @@ export function createTableFinal<
 > (
     name: TTableName,
     columns: ( columnTypes: AllBuilders ) => ValidateColumns<TColumnsMap>,
-    extraConfig?: ( self: BuildExtraConfigColumns<TTableName, TColumnsMap, 'pg'> ) => PgTableExtraConfigValue[]
+    extraConfig?: ( self: unknown ) => PgTableExtraConfigValue[]
 ) {
     /**
      * Represents a database table configuration using `pgTable` with predefined columns, indices, and generated fields.
@@ -273,7 +274,7 @@ export function createTableFinal<
              * Because this references the users table, we must update the users table manually if adding any new
              * fields to this abstraction.
              */
-            createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => contactSkeleton.id ),
+            createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => createdByPlaceholder.id ),
             active: statusEnum( 'active' ).generatedAlwaysAs( (): SQL => sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END` )
         } ),
         ( table: any ) => {
@@ -297,18 +298,23 @@ export function createTableFinal<
 /**
  * Builds a single Drizzle table from merged columns object and extra config callbacks.
  * Used by SchemaFinalizer and by createTableFinal. Adds standard columns (createdAt, updatedAt, etc.) and standard indexes.
- * Self-referencing tables (e.g. contact → contact) can be supported later via assign-after-construct pattern.
+ * When getTable is provided, createdBy references the real creator table; otherwise uses a placeholder.
  *
  * @param name - Table name
  * @param mergedColumns - Column definitions (must include id). Same shape as second arg to pgTable.
  * @param extraConfigs - Optional array of callbacks (table) => PgTableExtraConfigValue[] to add indexes/constraints
+ * @param getTable - Optional callback to resolve already-built tables (creator table built first). Default creator table name: 'contact'.
  * @returns The built PgTable
  */
 export function buildTableInternal(
     name: string,
     mergedColumns: Record<string, PgColumnBuilder>,
-    extraConfigs: ReadonlyArray<( table: any ) => PgTableExtraConfigValue[]>
+    extraConfigs: ReadonlyArray<( table: any ) => PgTableExtraConfigValue[]>,
+    getTable?: ( tableName: string ) => unknown
 ) {
+    const creatorTable = getTable?.('contact') as { id: typeof createdByPlaceholder.id } | undefined
+    const createdByRef = (): typeof createdByPlaceholder.id =>
+      ( creatorTable?.id ?? createdByPlaceholder.id )
     return drizzlePgTable(
         name,
         ( db ) => ( {
@@ -320,7 +326,7 @@ export function buildTableInternal(
             ).defaultNow().$onUpdate( () => new Date().toISOString() ),
             disabledAt: timestamp( 'disabled_at', { mode: 'string' } ),
             deletedAt: timestamp( 'deleted_at', { mode: 'string' } ),
-            createdBy: typeid( 'created_by', { type: 'contact' } ).references( () => contactSkeleton.id ),
+            createdBy: typeid( 'created_by', { type: 'contact' } ).references( createdByRef ),
             active: statusEnum( 'active' ).generatedAlwaysAs( (): SQL => sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END` )
         } ),
         ( table: any ) => {
@@ -344,7 +350,7 @@ export function pgTable<
 > (
     name: TTableName,
     columns: ( columnTypes: AllBuilders ) => TColumnsMap,
-    extraConfig?: ( ( self: BuildExtraConfigColumns<TTableName, TColumnsMap, 'pg'> ) => PgTableExtraConfigValue[] ) | undefined
+    extraConfig?: ( ( self: unknown ) => PgTableExtraConfigValue[] ) | undefined
 ) {
     const result = drizzlePgTable(
         name,

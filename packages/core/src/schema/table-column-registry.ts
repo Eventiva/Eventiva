@@ -12,6 +12,7 @@ import * as Ref from "effect/Ref"
 import { type DuplicateColumnError, DuplicateColumnError as MakeDuplicateColumnError } from "./duplicate-column-error.js"
 import { FinalTableStore } from "./final-table-store.js"
 import { type ExtraConfigItem, SchemaFinalizer } from "./schema-finalizer.js"
+import { SchemaRegistryConfig } from "./schema-registry-config.js"
 import { withSpanAndLog } from "../observability/helpers.js"
 
 /** Pending entry per table: merged columns and list of extraConfig callbacks. */
@@ -51,20 +52,31 @@ function runFinalization(
   stateRef: Ref.Ref<TableColumnRegistryState>,
   deferred: Deferred.Deferred<void>,
   finalizer: SchemaFinalizer,
-  store: FinalTableStore
+  store: FinalTableStore,
+  creatorTableName: string
 ): Effect.Effect<void> {
   return Effect.gen(function* () {
     const state = yield* Ref.get(stateRef)
     if (state.finalized) return
     yield* Effect.logInfo("Running schema finalization...")
-    const tableNames = Array.from(state.pending.keys()).sort()
+    const tableNames = Array.from(state.pending.keys())
+    tableNames.sort((a, b) => {
+      if (a === creatorTableName) return -1
+      if (b === creatorTableName) return 1
+      return a.localeCompare(b)
+    })
+    const builtTables = new Map<string, unknown>()
+    const getTable = (name: string) => builtTables.get(name)
     for (const tableName of tableNames) {
       const entry = state.pending.get(tableName)!
-      yield* finalizer
-        .buildTable(tableName, entry.columns, entry.extraConfigs)
-        .pipe(
-          Effect.flatMap((table) => store.setTable(tableName, table))
-        )
+      const table = yield* finalizer.buildTable(
+        tableName,
+        entry.columns,
+        entry.extraConfigs,
+        getTable
+      )
+      builtTables.set(tableName, table)
+      yield* store.setTable(tableName, table)
     }
     yield* Ref.update(stateRef, (s) => ({
       ...s,
@@ -77,7 +89,7 @@ function runFinalization(
 export const TableColumnRegistryLive: Layer.Layer<
   TableColumnRegistry,
   never,
-  SchemaFinalizer | FinalTableStore
+  SchemaFinalizer | FinalTableStore | SchemaRegistryConfig
 > = Layer.effect(
   TableColumnRegistry,
   Effect.gen(function* () {
@@ -90,6 +102,8 @@ export const TableColumnRegistryLive: Layer.Layer<
     const deferred = yield* Deferred.make<void>()
     const finalizer = yield* SchemaFinalizer
     const store = yield* FinalTableStore
+    const schemaConfig = yield* SchemaRegistryConfig
+    const creatorTableName = schemaConfig.creatorTableName ?? "contact"
 
     const registry: TableColumnRegistry = {
       registerTableColumns: (tableName, extensionId, columns, extraConfig) =>
@@ -122,7 +136,7 @@ export const TableColumnRegistryLive: Layer.Layer<
           if (n === 0) {
             const state = yield* Ref.get(stateRef)
             if (!state.finalized) {
-              yield* runFinalization(stateRef, deferred, finalizer, store)
+              yield* runFinalization(stateRef, deferred, finalizer, store, creatorTableName)
             }
           }
         }).pipe(withSpanAndLog("setExpectedReadyCount", { attributes: { count: n } })),
@@ -137,7 +151,7 @@ export const TableColumnRegistryLive: Layer.Layer<
           yield* Ref.set(stateRef, { ...state, readyIds: nextReadyIds })
           const nextState = yield* Ref.get(stateRef)
           if (nextState.readyIds.size === nextState.expectedReadyCount && !nextState.finalized) {
-            yield* runFinalization(stateRef, deferred, finalizer, store)
+            yield* runFinalization(stateRef, deferred, finalizer, store, creatorTableName)
           }
         }).pipe(withSpanAndLog("markReady", { attributes: { extensionId } })),
 

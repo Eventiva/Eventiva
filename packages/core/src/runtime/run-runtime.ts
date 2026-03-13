@@ -39,10 +39,14 @@ export const defaultRuntimeProgram = Effect.gen(function* () {
  * DevTools is provided before the platform layer so the tracer (from ObservabilityLive) is patched correctly.
  * Uses NodeRuntime.runMain for process and signal handling.
  * Use this in development when the Effect VS Code / Cursor extension is installed.
+ * Set EVENTIVA_FEATURE_DEVTOOLS=false to skip DevTools (e.g. for debugging tracer crashes).
  */
 export function runMain(platformLayer: Layer.Layer<never, never, unknown>): void {
-  const runnable = defaultRuntimeProgram.pipe(
-    Effect.provide(DevToolsLive),
+  const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== "false"
+  const withDevTools = useDevTools
+    ? defaultRuntimeProgram.pipe(Effect.provide(DevToolsLive))
+    : defaultRuntimeProgram
+  const runnable = withDevTools.pipe(
     Effect.provide(platformLayer),
     Effect.asVoid
   ) as Effect.Effect<void, unknown, never>

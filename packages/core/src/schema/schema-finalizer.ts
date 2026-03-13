@@ -15,11 +15,14 @@ export type MergedColumns = Record<string, unknown>
 export type ExtraConfigItem = unknown
 
 export interface SchemaFinalizer {
-  /** Build one table from merged columns and extraConfigs. Returns the built table (PgTable in pg impl). */
+  /** Build one table from merged columns and extraConfigs. Returns the built table (PgTable in pg impl).
+   * @param getTable - Optional callback to resolve already-built tables (e.g. for FK references). Creator table must be built first.
+   */
   readonly buildTable: (
     tableName: string,
     mergedColumns: MergedColumns,
-    extraConfigs: ReadonlyArray<ExtraConfigItem>
+    extraConfigs: ReadonlyArray<ExtraConfigItem>,
+    getTable?: (name: string) => unknown
   ) => Effect.Effect<unknown>
 }
 

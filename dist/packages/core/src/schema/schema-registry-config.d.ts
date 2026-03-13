@@ -8,7 +8,11 @@ import * as Layer from "effect/Layer";
 export interface SchemaRegistryConfig {
     /** Number of extensions that must call markReady before finalization runs. */
     readonly expectedReadyCount: number;
+    /** Table name that owns createdBy FK (built first so others can reference it). Default 'contact'. */
+    readonly creatorTableName?: string;
 }
 export declare const SchemaRegistryConfig: Context.Tag<SchemaRegistryConfig, SchemaRegistryConfig>;
-export declare function SchemaRegistryConfigLive(expectedReadyCount: number): Layer.Layer<SchemaRegistryConfig>;
+export declare function SchemaRegistryConfigLive(expectedReadyCount: number, options?: {
+    creatorTableName?: string;
+}): Layer.Layer<SchemaRegistryConfig>;
 //# sourceMappingURL=schema-registry-config.d.ts.map

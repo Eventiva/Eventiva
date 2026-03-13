@@ -20,6 +20,7 @@ This folder contains structured learnings from the Eventiva codebase, the evolut
 | [effect-migration-notes.md](effect-migration-notes.md) | Effect Layer/Schema/Service vs current Zod/Aspect/Slot; i18n and feature flags as tier 1; no `any` types. |
 | [evolution-chain-learnings.md](evolution-chain-learnings.md) | common-crm vs cms vs Eventiva (equivalent files); TypeScript/Effect evolution. |
 | [odoo-extensions-reference.md](odoo-extensions-reference.md) | What to take from Odoo for Eventiva extensions; what to avoid; climb-group-odoo learnings. |
+| [debug-initial-crash.md](debug-initial-crash.md) | Debugging "Cannot read properties of undefined (reading 'initial')" – feature flags, workarounds, dependency audit. |
 
 ## How to update
 

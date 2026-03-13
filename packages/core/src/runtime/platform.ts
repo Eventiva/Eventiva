@@ -31,6 +31,11 @@ import {
   TableColumnRegistryLive,
   TableRelationsRegistryLive
 } from "../schema/index.js"
+import {
+  FeatureFlagKeys,
+  type FeatureFlagOverrides
+} from "../feature-flags/index.js"
+import * as NodeSdk from "@effect/opentelemetry/NodeSdk"
 
 /**
  * Options for createPlatformTemplate. Provide a database layer and an array of
@@ -44,10 +49,17 @@ export interface CreatePlatformTemplateOptions {
   readonly databaseLayer: Layer.Layer<Database>
   /** Extensions to load (id used for schema markReady and finalization count). */
   readonly extensions: ReadonlyArray<ExtensionRegistration>
+  /** Schema finalizer for building Drizzle tables. Use SchemaFinalizerPg for real tables; SchemaFinalizerNoOp for in-memory placeholders. */
+  readonly schemaFinalizerLayer?: Layer.Layer<SchemaFinalizer>
   /** When set, an HTTP server is started exposing RPC (and REST for CRUD entities) for these descriptors. */
   readonly entityEndpoints?: ReadonlyArray<EntityEndpointDescriptor>
   /** Port for the entity endpoints server (default 3000). */
   readonly endpointsPort?: number
+  /**
+   * Feature flag overrides for debugging. When a key is false, that feature is disabled.
+   * Env fallback: EVENTIVA_FEATURE_OBSERVABILITY, EVENTIVA_FEATURE_CLUSTER, etc.
+   */
+  readonly featureOverrides?: FeatureFlagOverrides
 }
 
 /**
@@ -55,9 +67,23 @@ export interface CreatePlatformTemplateOptions {
  * ExtensionHooks + WorkflowEngine + WorkflowRegistry + merged extension layers,
  * and optionally an HTTP server for entity endpoints.
  */
+function isFeatureEnabled(
+  overrides: FeatureFlagOverrides | undefined,
+  key: keyof typeof FeatureFlagKeys
+): boolean {
+  const k = FeatureFlagKeys[key]
+  if (overrides && k in overrides) return overrides[k] ?? true
+  const envKey = `EVENTIVA_FEATURE_${key}` as const
+  const v = process.env[envKey]
+  if (v === "false" || v === "0") return false
+  if (v === "true" || v === "1") return true
+  return true
+}
+
 export function createPlatformTemplate(
   options: CreatePlatformTemplateOptions
 ): Layer.Layer<never, any, unknown> {
+  const fo = options.featureOverrides
   const endpointsPort = options.endpointsPort ?? 3000
   const scopeLayer = Layer.scoped(Scope.Scope, Scope.make())
   const runtimeConfigLayer = RuntimeConfigLive({ endpointsPort })
@@ -70,38 +96,59 @@ export function createPlatformTemplate(
     )
   )
   const schemaConfigLayer = SchemaRegistryConfigLive(options.extensions.length)
+  const schemaFinalizerLayer =
+    options.schemaFinalizerLayer ?? Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp)
   const schemaStack = TableColumnRegistryLive.pipe(
     Layer.provideMerge(FinalTableStoreLive),
     Layer.provideMerge(TableRelationsRegistryLive),
     Layer.provideMerge(schemaConfigLayer),
-    Layer.provideMerge(Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp))
+    Layer.provideMerge(schemaFinalizerLayer)
   )
   const hooksStack = Layer.mergeAll(
     ExtensionHooksLive,
     WorkflowEngineLayerInMemory,
     WorkflowRegistryLive
   )
-  const base = Layer.mergeAll(
-    ObservabilityLive,
+  const observabilityLayer = isFeatureEnabled(fo, "OBSERVABILITY")
+    ? ObservabilityLive
+    : (NodeSdk.layerEmpty as Layer.Layer<never, any, unknown>)
+  const baseLayers: Layer.Layer<never, any, unknown>[] = [
+    observabilityLayer,
     runtimeConfigLayer,
     extensionConfigLayer,
-    clusterLayerDefault,
+    isFeatureEnabled(fo, "CLUSTER") ? clusterLayerDefault : Layer.empty,
     piiLayer,
-    schemaStack,
+    isFeatureEnabled(fo, "SCHEMA_STACK") ? schemaStack : Layer.empty,
     options.databaseLayer,
     hooksStack,
     scopeLayer
+  ]
+  const base = Layer.mergeAll(
+    baseLayers[0]!,
+    baseLayers[1]!,
+    baseLayers[2]!,
+    baseLayers[3]!,
+    baseLayers[4]!,
+    baseLayers[5]!,
+    baseLayers[6]!,
+    baseLayers[7]!,
+    baseLayers[8]!
   )
-  const entitiesLayer = mergeEntityLayers([
-    ...options.extensions.map((e) => e.layer)
-  ])
+  const entitiesLayer = isFeatureEnabled(fo, "EXTENSIONS")
+    ? mergeEntityLayers([...options.extensions.map((e) => e.layer)])
+    : Layer.empty
   let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>
-  const endpoints = options.entityEndpoints ?? []
+  const endpoints = isFeatureEnabled(fo, "ENTITY_ENDPOINTS")
+    ? (options.entityEndpoints ?? [])
+    : []
   if (endpoints.length > 0) {
     // Start HTTP endpoints only when descriptors are provided.
     const serverLayer = NodeHttpServer.layer(() => createServer(), { port: endpointsPort, host: "0.0.0.0" })
     const platformContextLayer = NodeHttpServer.layerContext
-    const endpointsLayer = makeEntityEndpointsLayer(endpoints, { port: endpointsPort })
+    const endpointsLayer = makeEntityEndpointsLayer(endpoints, {
+      port: endpointsPort,
+      featureOverrides: options.featureOverrides
+    })
     const providedEndpointsLayer = endpointsLayer.pipe(
       Layer.provide(stack),
       Layer.provide(serverLayer),

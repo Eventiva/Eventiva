@@ -10,6 +10,7 @@ import * as Layer from "effect/Layer";
 import { type DuplicateColumnError } from "./duplicate-column-error.js";
 import { FinalTableStore } from "./final-table-store.js";
 import { type ExtraConfigItem, SchemaFinalizer } from "./schema-finalizer.js";
+import { SchemaRegistryConfig } from "./schema-registry-config.js";
 /** Pending entry per table: merged columns and list of extraConfig callbacks. */
 export interface PendingTableEntry {
     readonly columns: Record<string, unknown>;
@@ -32,5 +33,5 @@ export interface TableColumnRegistry {
     readonly waitUntilFinalized: () => Effect.Effect<void>;
 }
 export declare const TableColumnRegistry: Context.Tag<TableColumnRegistry, TableColumnRegistry>;
-export declare const TableColumnRegistryLive: Layer.Layer<TableColumnRegistry, never, SchemaFinalizer | FinalTableStore>;
+export declare const TableColumnRegistryLive: Layer.Layer<TableColumnRegistry, never, SchemaFinalizer | FinalTableStore | SchemaRegistryConfig>;
 //# sourceMappingURL=table-column-registry.d.ts.map

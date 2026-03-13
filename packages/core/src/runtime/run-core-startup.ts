@@ -10,7 +10,7 @@ import { CORE_LOADED_TOPIC, EXTENSIONS_LOADED_TOPIC, ExtensionHookPubSub } from 
 import { runIntegrityChecks } from "../security/integrity.js"
 import { SchemaRegistryConfig } from "../schema/schema-registry-config.js"
 import { TableColumnRegistry } from "../schema/table-column-registry.js"
-import { FinalTableStore } from "../schema/final-table-store.js"
+import { FinalTableStore, type RelationMetadata } from "../schema/final-table-store.js"
 import { TableRelationsRegistry } from "../schema/table-relations-registry.js"
 import { EntityRegistry } from "../entity/entity-registry.js"
 import { Base } from "../entity/entity-base.js"
@@ -74,6 +74,20 @@ export const runCoreStartupRaw = Effect.gen(function* () {
     for (const [tableName, conf] of Object.entries(mergedRelationsConfig)) {
       if (conf?.relations != null) {
         yield* finalTableStore.setRelations(tableName, conf.relations)
+        const metadata: RelationMetadata[] = []
+        for (const [relationName, relation] of Object.entries(conf.relations)) {
+          const r = relation as { relationType?: string; targetTableName?: string }
+          if (r && typeof r === "object" && r.relationType && r.targetTableName) {
+            metadata.push({
+              relationName,
+              cardinality: r.relationType === "one" ? "one" : "many",
+              relatedTableName: r.targetTableName
+            })
+          }
+        }
+        if (metadata.length > 0) {
+          yield* finalTableStore.setRelationMetadata(tableName, metadata)
+        }
       }
     }
   }
@@ -81,9 +95,10 @@ export const runCoreStartupRaw = Effect.gen(function* () {
   for (const [tableName, table] of Object.entries(safeTables)) {
     // Generate schema and populate EntityRegistry (skip placeholders, e.g. SchemaFinalizerNoOp with in-memory DB)
     try {
-      const schema = createSelectSchema(table as any)
+      const baseSchema = createSelectSchema(table as any)
+      const mergedSchema = baseSchema
       const entityName = tableName.charAt(0).toUpperCase() + tableName.slice(1)
-      class DynamicEntity extends Base<any>()(entityName, schema as any, { tableName }) {}
+      class DynamicEntity extends Base<any>()(entityName, mergedSchema as any, { tableName }) {}
       (EntityRegistry.register as any)(entityName, DynamicEntity)
     } catch (e) {
       yield* Effect.logWarning(

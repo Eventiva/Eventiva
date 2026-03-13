@@ -10,6 +10,13 @@ import * as Layer from "effect/Layer"
 import * as Ref from "effect/Ref"
 import { withSpanAndLog } from "../observability/helpers.js"
 
+/** Relation metadata for entity schema: name, cardinality, and related table. */
+export interface RelationMetadata {
+  readonly relationName: string
+  readonly cardinality: "one" | "many"
+  readonly relatedTableName: string
+}
+
 export interface FinalTableStore {
   /** Get a finalized table by name. Returns undefined if not found. */
   readonly getTable: (tableName: string) => Effect.Effect<unknown | undefined>
@@ -24,6 +31,11 @@ export interface FinalTableStore {
   readonly getAllRelations: () => Effect.Effect<Record<string, unknown>>
   /** Set relations (used during Phase 2 finalization). */
   readonly setRelations: (tableName: string, relations: unknown) => Effect.Effect<void>
+
+  /** Set relation metadata for a table (used during entity build). */
+  readonly setRelationMetadata: (tableName: string, metadata: ReadonlyArray<RelationMetadata>) => Effect.Effect<void>
+  /** Get relation metadata for a table. Returns empty array if not found. */
+  readonly getRelationMetadata: (tableName: string) => Effect.Effect<ReadonlyArray<RelationMetadata>>
 }
 
 export const FinalTableStore = Context.GenericTag<FinalTableStore>("@eventiva/core/FinalTableStore")
@@ -33,6 +45,7 @@ export const FinalTableStoreLive: Layer.Layer<FinalTableStore> = Layer.effect(
   Effect.gen(function* () {
     const tableRef = yield* Ref.make<Map<string, unknown>>(new Map())
     const relationsRef = yield* Ref.make<Map<string, unknown>>(new Map())
+    const relationMetadataRef = yield* Ref.make<Map<string, ReadonlyArray<RelationMetadata>>>(new Map())
 
     const store: FinalTableStore = {
       getTable: (tableName) =>
@@ -70,6 +83,19 @@ export const FinalTableStoreLive: Layer.Layer<FinalTableStore> = Layer.effect(
           return next
         }).pipe(
           withSpanAndLog("finalTableStore.setRelations", { attributes: { tableName } })
+        ),
+      setRelationMetadata: (tableName, metadata) =>
+        Ref.update(relationMetadataRef, (m) => {
+          const next = new Map(m)
+          next.set(tableName, metadata)
+          return next
+        }).pipe(
+          withSpanAndLog("finalTableStore.setRelationMetadata", { attributes: { tableName } })
+        ),
+      getRelationMetadata: (tableName) =>
+        Ref.get(relationMetadataRef).pipe(
+          Effect.map((m) => m.get(tableName) ?? []),
+          withSpanAndLog("finalTableStore.getRelationMetadata", { attributes: { tableName } })
         )
     }
     return store

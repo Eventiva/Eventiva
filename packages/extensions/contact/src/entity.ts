@@ -7,16 +7,24 @@ import { pgTable, text, date } from "drizzle-orm/pg-core"
 import { createSelectSchema } from "drizzle-orm/effect-schema"
 import { Base, type EntityRpc } from "@eventiva/core"
 import * as Schema from "effect/Schema"
+import { typeid } from "@eventiva/databases.pg"
 
 export const contactColumns = {
+  id: typeid("id", { type: "contact" }),
   fullname: text("fullname").notNull(),
   dateOfBirth: date("date_of_birth").notNull(),
   email: text("email").notNull(),
   phone: text("phone").notNull()
 }
 
-// Dummy table to extract the generic schema type for TypeScript
-const dummyTable = pgTable("contact", contactColumns)
+// Dummy table to extract the generic schema type for TypeScript (uses text for id to avoid type conflicts)
+const dummyTable = pgTable("contact", {
+  id: text("id"),
+  fullname: text("fullname").notNull(),
+  dateOfBirth: date("date_of_birth").notNull(),
+  email: text("email").notNull(),
+  phone: text("phone").notNull()
+})
 const ContactSchema = createSelectSchema(dummyTable)
 
 // Dummy class for type extraction
