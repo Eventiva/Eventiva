@@ -5,6 +5,15 @@
     "projectType": "library",
     "tags": [],
     "targets": {
+        "test": {
+            "executor": "@nx/vitest:test",
+            "options": {
+                "configFile": "packages/core/vitest.config.ts"
+            },
+            "configurations": {},
+            "outputs": ["{workspaceRoot}/coverage/packages/core"],
+            "cache": true
+        },
         "build": {
             "executor": "@nx/js:tsc",
             "outputs": ["{options.outputPath}"],
