@@ -5,11 +5,11 @@
  * id + fields schema, CRUD handlers, entity, and layer.
  * @see docs/learnings/architecture.md
  */
-import type { Entity } from "@effect/cluster/Entity";
-import * as Effect from "effect/Effect";
-import * as Layer from "effect/Layer";
-import * as Schema from "effect/Schema";
-import { Database } from "../database/database.js";
+import type { Entity } from '@effect/cluster/Entity';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
+import * as Schema from 'effect/Schema';
+import { Database } from '../database/database.js';
 /** Prefix for TypeID (e.g. "contact"). Lowercase name. */
 export type IdPrefix = string;
 /**
@@ -28,7 +28,7 @@ export interface BaseEncoded<TableName extends string> {
  * export type ContactRpc = EntityRpc<typeof Contact.entity>
  */
 export type EntityRpc<E> = E extends {
-    protocol: import("@effect/rpc/RpcGroup").RpcGroup<infer R extends import("@effect/rpc/Rpc").Any>;
+    protocol: import('@effect/rpc/RpcGroup').RpcGroup<infer R extends import('@effect/rpc/Rpc').Any>;
 } ? R : never;
 /**
  * Options when defining an entity with Base.

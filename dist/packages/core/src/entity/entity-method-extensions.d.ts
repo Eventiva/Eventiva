@@ -4,7 +4,7 @@
  * Used for Odoo-like extension chains (e.g. Contact.update: base then ext1 then ext2).
  * @see docs/learnings/architecture.md
  */
-import * as Effect from "effect/Effect";
+import * as Effect from 'effect/Effect';
 export interface EntityMethodExtensionContext<Req, Res> {
     readonly entityType: string;
     readonly method: string;

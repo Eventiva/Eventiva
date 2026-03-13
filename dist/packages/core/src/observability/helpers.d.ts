@@ -3,7 +3,7 @@
  * Every function in the framework and extensions must use tracing, logging, and metrics.
  * @see Observability "every function" contract in README.md
  */
-import * as Effect from "effect/Effect";
+import * as Effect from 'effect/Effect';
 /**
  * Options for withSpanAndLog.
  */

@@ -16,11 +16,12 @@
  *
  * @see docs/learnings/architecture.md
  */
-import { HttpServer } from "@effect/platform";
-import { Sharding } from "@effect/cluster";
-import type * as Entity from "@effect/cluster/Entity";
-import * as Context from "effect/Context";
-import * as Layer from "effect/Layer";
+import { HttpServer } from '@effect/platform';
+import { Sharding } from '@effect/cluster';
+import type * as Entity from '@effect/cluster/Entity';
+import * as Context from 'effect/Context';
+import * as Layer from 'effect/Layer';
+import { type FeatureFlagOverrides } from '../feature-flags/index.js';
 /**
  * Descriptor for exposing an entity over HTTP/RPC. Register with the platform
  * so the gateway creates POST /api/rpc/:pathPrefix for that entity.
@@ -40,6 +41,8 @@ export interface EntityEndpointDescriptor {
 export declare function makeEntityEndpointDescriptor(entity: Entity.Any, defaultEntityId: string, pathPrefix: string): EntityEndpointDescriptor;
 export interface EntityEndpointsOptions {
     readonly port?: number;
+    /** Feature flag overrides for debugging. Env: EVENTIVA_FEATURE_ENTITY_ENDPOINTS_SWAGGER, etc. */
+    readonly featureOverrides?: FeatureFlagOverrides;
 }
 /**
  * Builds a Layer that starts an HTTP server exposing RPC proxy routes for each

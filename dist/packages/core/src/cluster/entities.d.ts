@@ -3,7 +3,7 @@
  * Handlers must require Logger, Tracer, and Metric in context for observability.
  * @see docs/learnings/architecture.md
  */
-import type * as Entity from "@effect/cluster/Entity";
+import type * as Entity from '@effect/cluster/Entity';
 /**
  * **One extension = one Entity.**
  * Each extension is a single `Entity` (Entity.make(type, protocol)). Registration is
@@ -18,6 +18,6 @@ import type * as Entity from "@effect/cluster/Entity";
  * without span, structured log, and at least one metric where appropriate.
  */
 export type ExtensionEntity = Entity.Any;
-export type { Entity } from "@effect/cluster/Entity";
-export { CurrentAddress, CurrentRunnerAddress, make, type Request } from "@effect/cluster/Entity";
+export type { Entity } from '@effect/cluster/Entity';
+export { CurrentAddress, CurrentRunnerAddress, make, type Request } from '@effect/cluster/Entity';
 //# sourceMappingURL=entities.d.ts.map

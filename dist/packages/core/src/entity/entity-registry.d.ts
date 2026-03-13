@@ -1,4 +1,4 @@
-import * as Schema from "effect/Schema";
+import * as Schema from 'effect/Schema';
 /**
  * Global interface for module augmentation.
  * Extensions should augment this interface to register their entities.

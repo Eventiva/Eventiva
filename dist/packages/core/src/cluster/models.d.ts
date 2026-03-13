@@ -3,7 +3,7 @@
  * A model is a named schema (struct); extensions can extend a base model with extra fields.
  * @see docs/plans/2026-03-07-workflows-models-contact-design.md
  */
-import * as Schema from "effect/Schema";
+import * as Schema from 'effect/Schema';
 /**
  * Descriptor for a named model. The schema is the single source of truth for the model's shape.
  * Use defineModel to create, extendModel to add fields (e.g. extensions that depend on Contact).

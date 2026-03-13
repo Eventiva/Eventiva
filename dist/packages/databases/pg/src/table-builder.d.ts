@@ -30,7 +30,7 @@ export declare const status: {
  * This type is typically used to ensure that certain properties or variables are constrained
  * to valid `status` values as defined within the `status` object.
  */
-export type Status = typeof status[keyof typeof status];
+export type Status = (typeof status)[keyof typeof status];
 /**
  * Enum representing the possible statuses for a user.
  *
@@ -146,7 +146,7 @@ export declare function createTableFinal<TTableName extends string, TColumnsKey 
         name: string;
         tableName: TTableName_1;
         dataType: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dataType"];
-        data: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 3 | 4 | 5 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T_1 ? T_1 extends T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T_1 extends 1 ? (T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] extends infer T_2 ? T_2 extends T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] ? T_2 extends {
+        data: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 5 | 3 | 4 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T_1 ? T_1 extends T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T_1 extends 1 ? (T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] extends infer T_2 ? T_2 extends T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] ? T_2 extends {
             $type: infer U;
         } ? U : T_2 extends {
             data: infer D;
@@ -175,7 +175,7 @@ export declare function createTableFinal<TTableName extends string, TColumnsKey 
         } ? U : T_8 extends {
             data: infer D;
         } ? D : unknown : never : never;
-        driverParam: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 3 | 4 | 5 ? string | (T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T_9 ? T_9 extends T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T_9 extends 1 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][] : T_9 extends 2 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][] : T_9 extends 3 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][] : T_9 extends 4 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][] : T_9 extends 5 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][][] : T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"] : never : never) : T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"];
+        driverParam: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 5 | 3 | 4 ? string | (T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T_9 ? T_9 extends T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T_9 extends 1 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][] : T_9 extends 2 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][] : T_9 extends 3 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][] : T_9 extends 4 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][] : T_9 extends 5 ? T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][][] : T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"] : never : never) : T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"];
         notNull: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["notNull"] extends true ? true : false;
         hasDefault: T[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["hasDefault"] extends true ? true : false;
         isPrimaryKey: false;
@@ -304,7 +304,7 @@ export declare function pgTable<TTableName extends string, TColumnsKey extends s
         name: string;
         tableName: TTableName;
         dataType: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dataType"];
-        data: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 3 | 4 | 5 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T ? T extends TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T extends 1 ? (TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] extends infer T_1 ? T_1 extends TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] ? T_1 extends {
+        data: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 5 | 3 | 4 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T ? T extends TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T extends 1 ? (TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] extends infer T_1 ? T_1 extends TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand] ? T_1 extends {
             $type: infer U;
         } ? U : T_1 extends {
             data: infer D;
@@ -333,7 +333,7 @@ export declare function pgTable<TTableName extends string, TColumnsKey extends s
         } ? U : T_7 extends {
             data: infer D;
         } ? D : unknown : never : never;
-        driverParam: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 3 | 4 | 5 ? string | (TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T_8 ? T_8 extends TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T_8 extends 1 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][] : T_8 extends 2 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][] : T_8 extends 3 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][] : T_8 extends 4 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][] : T_8 extends 5 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][][] : TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"] : never : never) : TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"];
+        driverParam: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends 1 | 2 | 5 | 3 | 4 ? string | (TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] extends infer T_8 ? T_8 extends TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["dimensions"] ? T_8 extends 1 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][] : T_8 extends 2 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][] : T_8 extends 3 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][] : T_8 extends 4 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][] : T_8 extends 5 ? TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"][][][][][] : TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"] : never : never) : TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["driverParam"];
         notNull: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["notNull"] extends true ? true : false;
         hasDefault: TColumnsMap[Key][typeof import("drizzle-orm/pg-core").PgColumnBuilderBrand]["hasDefault"] extends true ? true : false;
         isPrimaryKey: false;

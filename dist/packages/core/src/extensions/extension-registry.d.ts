@@ -2,7 +2,7 @@
  * Extension registry: merge entity layers and runner profiles.
  * Pure Layer merge—no Bit slots. A runner process is configured with a profile (named set of entity layers).
  */
-import type * as Layer from "effect/Layer";
+import type * as Layer from 'effect/Layer';
 /**
  * An extension layer is a Layer that provides entity handlers (and typically requires
  * ExtensionHooks, Scope, Sharding, Logger, Tracer, Metric). Each extension exports one such layer.

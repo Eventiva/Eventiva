@@ -1,8 +1,8 @@
 /**
  * Workflow types: minimal Workflow descriptor and registry service interface.
  */
-import type * as Effect from "effect/Effect";
-import type * as Schema from "effect/Schema";
+import type * as Effect from 'effect/Effect';
+import type * as Schema from 'effect/Schema';
 /**
  * Minimal workflow descriptor: name and schemas for payload, result, and error.
  */

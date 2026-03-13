@@ -1,5 +1,5 @@
-import * as Context from "effect/Context";
-import * as Layer from "effect/Layer";
+import * as Context from 'effect/Context';
+import * as Layer from 'effect/Layer';
 export interface HelloWorldConfig {
     readonly greeting: string;
 }

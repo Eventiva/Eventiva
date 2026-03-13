@@ -1,6 +1,6 @@
-import * as Context from "effect/Context";
-import * as Effect from "effect/Effect";
-import * as Layer from "effect/Layer";
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
 export type RelationCallback = (helpers: any, schema: Record<string, any>) => Record<string, any>;
 export interface TableRelationsRegistryState {
     readonly pending: Map<string, Array<{

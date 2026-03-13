@@ -4,7 +4,7 @@
  * @see docs/learnings/architecture.md, schema/table-column-registry.ts
  */
 export interface DuplicateColumnError {
-    readonly _tag: "DuplicateColumnError";
+    readonly _tag: 'DuplicateColumnError';
     readonly tableName: string;
     readonly columnName: string;
     readonly extensionId: string;

@@ -3,6 +3,11 @@
  * database + extensions + optional HTTP entity endpoints. Use this so platforms
  * (e.g. default) only set databaseLayer, extensions, and options instead of
  * composing many core layers by hand.
+ *
+ * Two-phase model: System 1 (bootstrap) runs DB/schema and runCoreStartup so EntityRegistry
+ * is populated; System 2 (runtime) runs only after bootstrap and adds HTTP + entity endpoints.
+ * Use getBootstrapLayer() and getRuntimeLayer() with runMainTwoPhase() for correct route map.
+ *
  * @see docs/learnings/architecture.md
  */
 import * as Layer from 'effect/Layer';
@@ -60,10 +65,16 @@ export interface CreatePlatformTemplateOptions {
 }
 
 /**
- * Builds a platform Layer that provides Observability + Cluster + Database +
- * ExtensionHooks + WorkflowEngine + WorkflowRegistry + merged extension layers,
- * and optionally an HTTP server for entity endpoints.
+ * Result of createPlatformTemplate with two-phase support. Use getBootstrapLayer() and
+ * getRuntimeLayer() with runMainTwoPhase() so entity endpoints are built after EntityRegistry is populated.
  */
+export interface PlatformTemplateTwoPhase {
+    /** Phase 1: everything runCoreStartup needs (no HTTP, no entity endpoints). Run bootstrap with this. */
+    getBootstrapLayer(): Layer.Layer<never, any, unknown>;
+    /** Phase 2: HTTP server + entity endpoints. Requires bootstrap in scope; provide after bootstrap has run. */
+    getRuntimeLayer(): Layer.Layer<never, any, unknown>;
+}
+
 function isFeatureEnabled(overrides: FeatureFlagOverrides | undefined, key: keyof typeof FeatureFlagKeys): boolean {
     const k = FeatureFlagKeys[key];
     if (overrides && k in overrides) return overrides[k] ?? true;
@@ -74,10 +85,12 @@ function isFeatureEnabled(overrides: FeatureFlagOverrides | undefined, key: keyo
     return true;
 }
 
-export function createPlatformTemplate(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown> {
+function buildBootstrapStack(
+    options: CreatePlatformTemplateOptions
+): Layer.Layer<never, any, unknown> {
     const fo = options.featureOverrides;
-    const endpointsPort = options.endpointsPort ?? 3000;
     const scopeLayer = Layer.scoped(Scope.Scope, Scope.make());
+    const endpointsPort = options.endpointsPort ?? 3000;
     const runtimeConfigLayer = RuntimeConfigLive({ endpointsPort });
     const piiLayer = PiiEncryptionLive.pipe(Layer.provide(runtimeConfigLayer));
     const extensionConfigLayer = mergeConfigLayers(
@@ -120,24 +133,34 @@ export function createPlatformTemplate(options: CreatePlatformTemplateOptions): 
     const entitiesLayer = isFeatureEnabled(fo, 'EXTENSIONS')
         ? mergeEntityLayers([...options.extensions.map((e) => e.layer)])
         : Layer.empty;
-    let stack = entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>;
-    const endpoints = isFeatureEnabled(fo, 'ENTITY_ENDPOINTS') ? (options.entityEndpoints ?? []) : [];
-    if (endpoints.length > 0) {
-        // Start HTTP endpoints only when descriptors are provided.
+    return entitiesLayer.pipe(Layer.provideMerge(base)) as Layer.Layer<never, any, unknown>;
+}
+
+/**
+ * Builds phase 2 layer (HTTP server + entity endpoints only). Requires bootstrap layer in scope.
+ * Provide this after bootstrap has run so EntityRegistry is populated when startServer runs.
+ * Does not include bootstrap; caller runs runtime effect with bootstrap in scope and adds this layer.
+ */
+function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<EntityEndpointsServer, any, unknown> {
+    const fo = options.featureOverrides;
+    const endpointsPort = options.endpointsPort ?? 3000;
+    const useEntityEndpoints = isFeatureEnabled(fo, 'ENTITY_ENDPOINTS');
+    const explicitDescriptors = options.entityEndpoints ?? [];
+    // Build entity endpoints layer when feature is on and port is set. Descriptors can be empty;
+    // makeEntityEndpointsLayer discovers entities from EntityRegistry (populated by runCoreStartup).
+    if (useEntityEndpoints && options.endpointsPort !== undefined) {
         const serverLayer = NodeHttpServer.layer(() => createServer(), { port: endpointsPort, host: '0.0.0.0' });
         const platformContextLayer = NodeHttpServer.layerContext;
-        const endpointsLayer = makeEntityEndpointsLayer(endpoints, {
+        const endpointsLayer = makeEntityEndpointsLayer(explicitDescriptors, {
             port: endpointsPort,
             featureOverrides: options.featureOverrides,
         });
-        const providedEndpointsLayer = endpointsLayer.pipe(
-            Layer.provide(stack),
+        return endpointsLayer.pipe(
             Layer.provide(serverLayer),
             Layer.provide(platformContextLayer)
-        );
-        stack = Layer.merge(stack, providedEndpointsLayer) as Layer.Layer<never, any, unknown>;
-    } else if (options.endpointsPort !== undefined) {
-        // Keep port open even without endpoint descriptors.
+        ) as Layer.Layer<EntityEndpointsServer, any, unknown>;
+    }
+    if (options.endpointsPort !== undefined) {
         const serverLayer = Layer.scopedDiscard(
             Effect.acquireRelease(
                 Effect.sync(() => {
@@ -163,17 +186,39 @@ export function createPlatformTemplate(options: CreatePlatformTemplateOptions): 
                     ).pipe(Effect.catchAll(() => Effect.void))
             )
         );
-        stack = Layer.merge(
-            stack,
-            Layer.merge(serverLayer, Layer.succeed(EntityEndpointsServer, { port: endpointsPort }))
-        ) as Layer.Layer<never, any, unknown>;
-    } else {
-        // No HTTP server: provide dummy so defaultRuntimeProgram's yield* EntityEndpointsServer succeeds
-        stack = Layer.merge(stack, Layer.succeed(EntityEndpointsServer, { port: 0 })) as Layer.Layer<
-            never,
+        return Layer.merge(serverLayer, Layer.succeed(EntityEndpointsServer, { port: endpointsPort })) as Layer.Layer<
+            EntityEndpointsServer,
             any,
             unknown
         >;
     }
-    return stack;
+    return Layer.succeed(EntityEndpointsServer, { port: 0 }) as Layer.Layer<EntityEndpointsServer, any, unknown>;
+}
+
+/**
+ * Creates a two-phase platform: bootstrap layer (phase 1) and runtime layer (phase 2).
+ * Use with runMainTwoPhase() so entity endpoints see EntityRegistry populated by runCoreStartup.
+ */
+export function createPlatformTemplateTwoPhase(
+    options: CreatePlatformTemplateOptions
+): PlatformTemplateTwoPhase {
+    const bootstrapLayer = buildBootstrapStack(options);
+    return {
+        getBootstrapLayer: () => bootstrapLayer,
+        getRuntimeLayer: () => buildRuntimeLayer(options),
+    };
+}
+
+/**
+ * Builds a single platform Layer (legacy one-phase). Entity endpoints are built when the layer
+ * is built, which may be before runCoreStartup runs, so dynamic entities (e.g. Contact) may be
+ * missing from the route map. Prefer createPlatformTemplateTwoPhase + runMainTwoPhase.
+ */
+export function createPlatformTemplate(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown> {
+    const template = createPlatformTemplateTwoPhase(options);
+    return template.getRuntimeLayer().pipe(Layer.provide(template.getBootstrapLayer())) as Layer.Layer<
+        never,
+        any,
+        unknown
+    >;
 }

@@ -61,3 +61,17 @@
 - **Startup order.** **runCoreStartup** runs integrity checks → **setExpectedReadyCount** → publish CORE_LOADED (listeners run, extensions call markReady) → **waitUntilFinalized()** → publish EXTENSIONS_LOADED. So schema is finalized before EXTENSIONS_LOADED.
 - **Out of scope (follow-up).** drizzle-kit generate/migrate and relationships (FK / relations) consume **FinalTableStore.getAllTables()** later; not part of the initial schema-registry flow.
 - **Key paths:** `packages/core/src/schema/` (TableColumnRegistry, FinalTableStore, SchemaFinalizer, SchemaRegistryConfig), `packages/databases/pg/src/create-table.ts`, `packages/databases/pg/src/schema-finalizer-impl.ts`, `packages/core/src/extensions/extension-hooks.ts` (runCoreStartup), `packages/core/src/runtime/platform.ts` (createPlatformTemplate with extensions as `{ id, layer }[]`).
+
+### Two-phase bootstrap and runtime
+
+The runtime is split into two sequential phases so that entity HTTP endpoints see a populated **EntityRegistry**. They never run concurrently.
+
+- **System 1 (bootstrap).** Runs with the **bootstrap layer** only: observability, schema stack, database, extension hooks, merged extension layers. The program runs **runCoreStartup** (integrity, CORE_LOADED, schema finalization, Phase 2 relations, **EntityRegistry** population, EXTENSIONS_LOADED). No HTTP server and no entity-endpoints layer. Output: finalized schema and a full **EntityRegistry** (including dynamic entities such as Contact).
+
+- **System 2 (runtime).** Runs only after bootstrap has completed, in the same process. The program is provided the **runtime layer** (HTTP server + **makeEntityEndpointsLayer**) on top of the existing scope. When the runtime layer is built, **EntityRegistry.getAll()** is called and the route map includes all registered entities; then the server and Swagger stay up.
+
+**Why two phases.** Effect builds layers when they are first required. If the platform layer merges bootstrap and entity endpoints in one go, the endpoints layer is built before the main program runs, so **EntityRegistry** is still empty and dynamic entities (e.g. Contact) are missing from the route map. By running bootstrap first and then providing only the runtime layer (server + entity endpoints) after **runCoreStartup**, the route map is built after **EntityRegistry** is populated.
+
+**Usage.** Use **createPlatformTemplateTwoPhase(options)** to get `getBootstrapLayer()` and `getRuntimeLayer()`, and **runMainTwoPhase(template)** to run bootstrap then runtime in one process. The default platform (`packages/platforms/default`) uses this so `/api/rpc/contacts` and `/api/docs` expose Contact. Legacy **createPlatformTemplate** + **runMain** remain for backward compatibility but may miss dynamic entities in the route map.
+
+- **Key paths:** `packages/core/src/runtime/platform.ts` (createPlatformTemplateTwoPhase, getBootstrapLayer, getRuntimeLayer), `packages/core/src/runtime/run-runtime.ts` (runMainTwoPhase, bootstrapProgram, runtimeOnlyProgram), `packages/core/src/cluster/entity-endpoints.ts` (makeEntityEndpointsLayer, route map built from EntityRegistry.getAll()).

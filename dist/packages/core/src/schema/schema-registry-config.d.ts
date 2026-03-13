@@ -3,8 +3,8 @@
  * Provided by the platform so runCoreStartup can call setExpectedReadyCount before CORE_LOADED.
  * @see docs/learnings/architecture.md, runtime/platform.ts
  */
-import * as Context from "effect/Context";
-import * as Layer from "effect/Layer";
+import * as Context from 'effect/Context';
+import * as Layer from 'effect/Layer';
 export interface SchemaRegistryConfig {
     /** Number of extensions that must call markReady before finalization runs. */
     readonly expectedReadyCount: number;
