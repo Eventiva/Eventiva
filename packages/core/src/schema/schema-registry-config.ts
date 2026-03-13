@@ -9,12 +9,20 @@ import * as Layer from "effect/Layer"
 export interface SchemaRegistryConfig {
   /** Number of extensions that must call markReady before finalization runs. */
   readonly expectedReadyCount: number
+  /** Table name that owns createdBy FK (built first so others can reference it). Default 'contact'. */
+  readonly creatorTableName?: string
 }
 
 export const SchemaRegistryConfig = Context.GenericTag<SchemaRegistryConfig>(
   "@eventiva/core/SchemaRegistryConfig"
 )
 
-export function SchemaRegistryConfigLive(expectedReadyCount: number): Layer.Layer<SchemaRegistryConfig> {
-  return Layer.succeed(SchemaRegistryConfig, { expectedReadyCount })
+export function SchemaRegistryConfigLive(
+  expectedReadyCount: number,
+  options?: { creatorTableName?: string }
+): Layer.Layer<SchemaRegistryConfig> {
+  return Layer.succeed(SchemaRegistryConfig, {
+    expectedReadyCount,
+    creatorTableName: options?.creatorTableName ?? "contact"
+  })
 }

@@ -32,7 +32,8 @@ export function makeCrudRpc<Id, Fields>(
 ) {
   const { idSchema, fieldsSchema, withDelete = false } = options
   const patchSchema = Schema.partial(fieldsSchema) as Schema.Schema<Partial<Fields>, any, any>
-  const listItemSchema = fieldsSchema.pipe(Schema.extend(Schema.Struct({ id: idSchema })))
+  // Use fieldsSchema directly for list items (createSelectSchema includes id); avoid extend to prevent id type conflict
+  const listItemSchema = fieldsSchema
   const errorNotFound = notFoundError(idSchema)
 
   const createRpc = Rpc.make("create", {

@@ -30,6 +30,10 @@ const OnLoadLayer = makeExtensionOnLoadLayer(
         creator: helpers.one.contact({
           from: helpers.contact.createdBy,
           to: helpers.contact.id
+        }),
+        createdContacts: helpers.many.contact({
+          from: helpers.contact.createdBy,
+          to: helpers.contact.id
         })
       }
     })

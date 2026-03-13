@@ -17,11 +17,11 @@ function isExtraConfigFunction(
 export const SchemaFinalizerPg: Layer.Layer<SchemaFinalizer, never> = Layer.succeed(
   SchemaFinalizer,
   {
-    buildTable: ( tableName, mergedColumns, extraConfigs ) =>
+    buildTable: ( tableName, mergedColumns, extraConfigs, getTable ) =>
       Effect.sync( () => {
         const columns = mergedColumns as Record<string, PgColumnBuilder>
         const configFns = extraConfigs.filter( isExtraConfigFunction )
-        return buildTableInternal( tableName, columns, configFns )
+        return buildTableInternal( tableName, columns, configFns, getTable )
       } ).pipe(
         withSpanAndLog("SchemaFinalizerPg.buildTable", { attributes: { tableName } })
       )

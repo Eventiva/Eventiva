@@ -35,7 +35,7 @@ export function createTable<
       ...getPgColumnBuilders(),
       typeid
     }
-    const validatedColumns = testColumns( name, db, columns as Parameters<typeof testColumns>[2] )
+    const validatedColumns = testColumns( name, db, columns as unknown as Parameters<typeof testColumns>[2] )
     yield* registry.registerTableColumns(
       name,
       extensionId,

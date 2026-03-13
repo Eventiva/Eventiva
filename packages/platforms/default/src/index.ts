@@ -7,11 +7,13 @@ import * as Layer from "effect/Layer"
 import {
   createPlatformTemplate,
   DatabaseLiveInMemory,
+  makeEntityEndpointDescriptor,
   runMain,
   type DefaultRunnerProfile,
   type ExtensionRegistration
 } from "@eventiva/core"
-import { HelloWorldConfigLayer, HelloWorldLayer } from "@eventiva/extensions.hello-world"
+import { SchemaFinalizerPg } from "@eventiva/databases.pg"
+import { HelloWorld, HelloWorldConfigLayer, HelloWorldLayer } from "@eventiva/extensions.hello-world"
 import { ContactConfigLayer, ContactLayer } from "@eventiva/extensions.contact"
 
 /**
@@ -40,10 +42,15 @@ export type { DefaultRunnerProfile }
 
 /**
  * Default platform Layer. Customise by changing databaseLayer or extensions above, then re-run.
+ * Uses SchemaFinalizerPg for real Drizzle tables (needed for Contact entity and relations).
  */
 export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate({
   databaseLayer,
   extensions,
+  schemaFinalizerLayer: SchemaFinalizerPg,
+  entityEndpoints: [
+    makeEntityEndpointDescriptor(HelloWorld as any, "store", "hello-worlds")
+  ],
   endpointsPort: 3000
 })
 

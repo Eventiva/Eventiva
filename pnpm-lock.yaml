@@ -289,6 +289,9 @@ importers:
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
+      '@eventiva/databases.pg':
+        specifier: workspace:*
+        version: link:../../databases/pg
       drizzle-orm:
         specifier: 1.0.0-beta.18-dc9676b
         version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@effect/platform@0.94.5(effect@3.19.19))(effect@3.19.19))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)
@@ -322,6 +325,9 @@ importers:
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
+      '@eventiva/databases.pg':
+        specifier: workspace:*
+        version: link:../../databases/pg
       '@eventiva/extensions.contact':
         specifier: workspace:*
         version: link:../../extensions/contact

@@ -44,6 +44,8 @@ export interface CreatePlatformTemplateOptions {
   readonly databaseLayer: Layer.Layer<Database>
   /** Extensions to load (id used for schema markReady and finalization count). */
   readonly extensions: ReadonlyArray<ExtensionRegistration>
+  /** Schema finalizer for building Drizzle tables. Use SchemaFinalizerPg for real tables; SchemaFinalizerNoOp for in-memory placeholders. */
+  readonly schemaFinalizerLayer?: Layer.Layer<SchemaFinalizer>
   /** When set, an HTTP server is started exposing RPC (and REST for CRUD entities) for these descriptors. */
   readonly entityEndpoints?: ReadonlyArray<EntityEndpointDescriptor>
   /** Port for the entity endpoints server (default 3000). */
@@ -70,11 +72,13 @@ export function createPlatformTemplate(
     )
   )
   const schemaConfigLayer = SchemaRegistryConfigLive(options.extensions.length)
+  const schemaFinalizerLayer =
+    options.schemaFinalizerLayer ?? Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp)
   const schemaStack = TableColumnRegistryLive.pipe(
     Layer.provideMerge(FinalTableStoreLive),
     Layer.provideMerge(TableRelationsRegistryLive),
     Layer.provideMerge(schemaConfigLayer),
-    Layer.provideMerge(Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp))
+    Layer.provideMerge(schemaFinalizerLayer)
   )
   const hooksStack = Layer.mergeAll(
     ExtensionHooksLive,
