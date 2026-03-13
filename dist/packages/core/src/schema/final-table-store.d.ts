@@ -4,13 +4,13 @@
  * Used by drizzle-kit integration and relationships later.
  * @see docs/learnings/architecture.md, schema/table-column-registry.ts
  */
-import * as Context from "effect/Context";
-import * as Effect from "effect/Effect";
-import * as Layer from "effect/Layer";
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
 /** Relation metadata for entity schema: name, cardinality, and related table. */
 export interface RelationMetadata {
     readonly relationName: string;
-    readonly cardinality: "one" | "many";
+    readonly cardinality: 'one' | 'many';
     readonly relatedTableName: string;
 }
 export interface FinalTableStore {

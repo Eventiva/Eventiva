@@ -1,5 +1,5 @@
-import * as Schema from "effect/Schema";
-import { PiiEncryption } from "../security/encryption.js";
+import * as Schema from 'effect/Schema';
+import { PiiEncryption } from '../security/encryption.js';
 /**
  * Effect Schema for a string that is encrypted at rest. Decode: decrypt(stored). Encode: encrypt(api).
  * Requires PiiEncryption in context. Use for PII fields (e.g. email) so extensions do not write encode/decode by hand.

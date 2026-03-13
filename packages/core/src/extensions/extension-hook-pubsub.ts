@@ -46,8 +46,11 @@ export function extensionHookTopic(extensionId: string, phase: HookPhase): strin
 /** Topic published by core when the runtime has loaded. Extensions register workflows to listen to this (e.g. hello-world workflow runs and then publishes its own extension/hello-world/onLoad). */
 export const CORE_LOADED_TOPIC = 'core/loaded';
 
-/** Topic published by core after CORE_LOADED has been published and all its listeners have completed. Use for post-load actions (e.g. seeding demo data). */
+/** Topic published by core after CORE_LOADED has been published and all its listeners have completed. Use for post-load actions that do not need the HTTP server or cluster RPC. */
 export const EXTENSIONS_LOADED_TOPIC = 'core/extensions-loaded';
+
+/** Topic published by core after the runtime phase has started (HTTP server and entity endpoints are up). Use for seeding or other work that runs within the cluster (entity client calls). Listeners run in the background; they do not block server readiness. */
+export const RUNTIME_READY_TOPIC = 'core/runtime-ready';
 
 /** Topic published by core when the runtime is shutting down. Extensions can listen for cleanup (e.g. flush buffers). */
 export const CORE_SHUTDOWN_TOPIC = 'core/shutdown';

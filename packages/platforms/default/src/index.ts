@@ -1,20 +1,22 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 /**
- * Default platform: single entry point via createPlatformTemplate. Set databaseLayer,
- * extensions, and optional entityEndpoints; core handles all merging.
+ * Default platform: single entry point via createPlatformTemplateTwoPhase + runMainTwoPhase.
+ * Set databaseLayer, extensions, and optional entityEndpoints; core handles all merging.
+ * Two-phase ensures entity endpoints are built after runCoreStartup so Contact and other
+ * EntityRegistry entities appear in /api/rpc/:pathPrefix and Swagger.
  * @see docs/learnings/architecture.md
  */
 import * as Layer from 'effect/Layer';
 import {
     createPlatformTemplate,
+    createPlatformTemplateTwoPhase,
     DatabaseLiveInMemory,
-    makeEntityEndpointDescriptor,
-    runMain,
+    runMainTwoPhase,
     type DefaultRunnerProfile,
     type ExtensionRegistration,
 } from '@eventiva/core';
 import { SchemaFinalizerPg } from '@eventiva/databases.pg';
-import { HelloWorld, HelloWorldConfigLayer, HelloWorldLayer } from '@eventiva/extensions.hello-world';
+import { HelloWorldConfigLayer, HelloWorldLayer } from '@eventiva/extensions.hello-world';
 import { ContactConfigLayer, ContactLayer } from '@eventiva/extensions.contact';
 
 /**
@@ -41,24 +43,31 @@ const extensions: ReadonlyArray<ExtensionRegistration> = [
 /** Re-export so existing code can use the type from the platform package. */
 export type { DefaultRunnerProfile };
 
-/**
- * Default platform Layer. Customise by changing databaseLayer or extensions above, then re-run.
- * Uses SchemaFinalizerPg for real Drizzle tables (needed for Contact entity and relations).
- */
-export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate({
+const platformOptions = {
     databaseLayer,
     extensions,
     schemaFinalizerLayer: SchemaFinalizerPg,
-    entityEndpoints: [makeEntityEndpointDescriptor(HelloWorld as any, 'store', 'hello-worlds')],
+    entityEndpoints: [], // Entities are discovered from EntityRegistry (populated by runCoreStartup); only extensions that create an entity appear in /api/docs
     endpointsPort: 3000,
-});
+} as const;
 
 /**
- * Runtime entrypoint: run core's default program with DevTools and the default platform layer.
- * Run via: nx run platforms-default:run
+ * Default platform Layer (legacy one-phase). Prefer defaultPlatformTemplateTwoPhase + runMainTwoPhase
+ * so Contact and other dynamic entities are in the entity route map.
+ */
+export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate(platformOptions);
+
+/**
+ * Default platform two-phase template. Use with runMainTwoPhase() so entity endpoints
+ * are built after EntityRegistry is populated (runCoreStartup).
+ */
+export const defaultPlatformTemplateTwoPhase = createPlatformTemplateTwoPhase(platformOptions);
+
+/**
+ * Runtime entrypoint: run two-phase (bootstrap then runtime) so /api/rpc/contacts and
+ * Swagger see Contact. Run via: nx run platforms-default:run
  *
  * Entity endpoints: POST /api/rpc/contacts with body { method, payload } (entityId defaults to "store").
  * Example: curl -X POST http://localhost:3000/api/rpc/contacts -H "Content-Type: application/json" -d '{"method":"list","payload":{}}'
  */
-
-runMain(defaultPlatformTemplate as any);
+runMainTwoPhase(defaultPlatformTemplateTwoPhase);

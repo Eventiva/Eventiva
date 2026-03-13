@@ -1,5 +1,5 @@
-import * as Layer from "effect/Layer";
-import { ExtensionHookPubSub } from "../extensions/extension-hook-pubsub.js";
+import * as Layer from 'effect/Layer';
+import { ExtensionHookPubSub } from '../extensions/extension-hook-pubsub.js';
 /**
  * Layer that registers the core startup banner (wordart + copyright). Requires
  * ExtensionHookPubSub and WorkflowEngine. Merged by createPlatformTemplate.

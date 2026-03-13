@@ -1,6 +1,6 @@
-import * as Context from "effect/Context";
-import * as Layer from "effect/Layer";
-import * as Option from "effect/Option";
+import * as Context from 'effect/Context';
+import * as Layer from 'effect/Layer';
+import * as Option from 'effect/Option';
 export interface RuntimeConfig {
     readonly nodeEnv: string;
     readonly endpointsPort: number;

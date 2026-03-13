@@ -27,13 +27,16 @@ const dummyTable = pgTable('contact', {
 });
 const ContactSchema = createSelectSchema(dummyTable);
 
-// Dummy class for type extraction
-class ContactType extends Base<ContactType>()('Contact', ContactSchema, { withDelete: true }) {}
+/**
+ * Contact entity class: CRUD + cluster entity. Export as value so the platform can
+ * register it with the cluster (ContactEntity.layer) and expose it in entity endpoints.
+ */
+export class ContactEntity extends Base<ContactEntity>()('Contact', ContactSchema, { withDelete: true }) {}
 
 // Augment the global registry so that `EntityRegistry.get("Contact")` returns the correct type.
 declare module '@eventiva/core' {
     export interface RegisteredEntities {
-        Contact: typeof ContactType;
+        Contact: typeof ContactEntity;
     }
 }
 
@@ -41,6 +44,6 @@ declare module '@eventiva/core' {
 export const CONTACT_ENTITY_ID = 'store';
 
 // Export types to be used throughout the extension
-export type Contact = typeof ContactType;
-export type ContactRpc = EntityRpc<typeof ContactType.entity>;
-export type ContactRecord = Schema.Schema.Type<typeof ContactType>;
+export type Contact = typeof ContactEntity;
+export type ContactRpc = EntityRpc<typeof ContactEntity.entity>;
+export type ContactRecord = Schema.Schema.Type<typeof ContactEntity>;

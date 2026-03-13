@@ -4,9 +4,9 @@
  * (e.g. PgDrizzle from database-pg, or in-memory for tests). Core never imports a specific driver.
  * @see docs/learnings/architecture.md
  */
-import * as Context from "effect/Context";
-import * as Effect from "effect/Effect";
-import * as Layer from "effect/Layer";
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
 /**
  * Stored record shape: must have an id field. Used for get/set/list.
  * Id type parameter is the key type (for get/set/delete); the record's id field may be the encoded form (e.g. string for TypeID).

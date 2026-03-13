@@ -3,8 +3,8 @@
  * Extensions provide id + fields schemas and get standard entity RPCs without repeating Rpc.make boilerplate.
  * @see docs/learnings/architecture.md
  */
-import * as Rpc from "@effect/rpc/Rpc";
-import * as Schema from "effect/Schema";
+import * as Rpc from '@effect/rpc/Rpc';
+import * as Schema from 'effect/Schema';
 /**
  * Options for makeCrudRpc / makeCrudEntity. All schemas use Effect Schema.
  * Id and Fields are the decoded (Type) side; Encoded can differ (e.g. DateFromString).
@@ -57,5 +57,5 @@ export declare function makeCrudRpc<Id, Fields>(options: CrudRpcOptions<Id, Fiel
  * Creates an entity with standard CRUD RPCs (create, get, update, list, optional delete).
  * Extension provides the type name and id/fields schemas; handlers are still provided separately via toLayer(handlers).
  */
-export declare function makeCrudEntity<Type extends string, Id, Fields>(typeName: Type, options: CrudRpcOptions<Id, Fields>): import("@effect/cluster/Entity").Entity<Type, Rpc.Any>;
+export declare function makeCrudEntity<Type extends string, Id, Fields>(typeName: Type, options: CrudRpcOptions<Id, Fields>): import('@effect/cluster/Entity').Entity<Type, Rpc.Any>;
 //# sourceMappingURL=crud-rpc.d.ts.map

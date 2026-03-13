@@ -3,9 +3,9 @@
  * Implement with Effect AI (e.g. @effect/ai embeddings); this module defines the interface and a no-op/test layer.
  * @see docs/learnings/architecture.md
  */
-import * as Context from "effect/Context";
-import * as Effect from "effect/Effect";
-import * as Layer from "effect/Layer";
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
 /**
  * Embedding service interface. embed(text) returns a vector (number array) for the text.
  */

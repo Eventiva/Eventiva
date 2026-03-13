@@ -2,8 +2,8 @@
  * HelloWorld entity: one RPC sayHello (no payload, returns string).
  * One extension = one Entity. Observability in handlers (handlers.ts).
  */
-import * as Rpc from "@effect/rpc/Rpc";
-import * as Schema from "effect/Schema";
+import * as Rpc from '@effect/rpc/Rpc';
+import * as Schema from 'effect/Schema';
 /**
  * HelloWorld entity type. Single RPC: sayHello (no args, returns string).
  */

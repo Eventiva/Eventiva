@@ -3,23 +3,23 @@
  * Two modes: (1) makeCrudHandlers uses storeTag + getRef (Ref<Map>). (2) makeCrudHandlersFromDatabase uses Database service and schema encode/decode; platform provides Database layer.
  * @see docs/learnings/architecture.md, docs/learnings/conventions.md (Type safety)
  */
-import * as Context from "effect/Context";
-import * as Effect from "effect/Effect";
-import * as Ref from "effect/Ref";
-import * as Schema from "effect/Schema";
-import type { Request } from "@effect/cluster/Entity";
-import type { ExtractTag } from "@effect/rpc/Rpc";
-import { Database } from "../database/database.js";
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Ref from 'effect/Ref';
+import * as Schema from 'effect/Schema';
+import type { Request } from '@effect/cluster/Entity';
+import type { ExtractTag } from '@effect/rpc/Rpc';
+import { Database } from '../database/database.js';
 /** NotFound error shape for CRUD get/update/delete. */
 export interface NotFound<Id> {
-    readonly _tag: "NotFound";
+    readonly _tag: 'NotFound';
     readonly id: Id;
 }
 /**
  * Options for makeCrudHandlers. Extensions provide store access, encode/decode (e.g. for PII), and id generation.
  * Store can be any service that exposes getRef: Ref<Map<Id, StoredRecord>> (e.g. via getRef(store)).
  */
-export interface CrudHandlersOptions<Id, Fields, StoredRecord, Store, RpcUnion extends import("@effect/rpc/Rpc").Any> {
+export interface CrudHandlersOptions<Id, Fields, StoredRecord, Store, RpcUnion extends import('@effect/rpc/Rpc').Any> {
     /** Entity type name (e.g. "Contact") for spans and metrics. */
     readonly entityType: string;
     /** Context tag for the store service. Use a tag that provides Store (e.g. Context.GenericTag<Store>(...)). Accepts tags with any error type (yield result cast to Store). */
@@ -43,16 +43,16 @@ export interface CrudHandlersOptions<Id, Fields, StoredRecord, Store, RpcUnion e
  */
 export declare function makeCrudHandlers<Id, Fields extends Record<string, unknown>, StoredRecord extends {
     readonly id: Id;
-}, Store, RpcUnion extends import("@effect/rpc/Rpc").Any>(options: CrudHandlersOptions<Id, Fields, StoredRecord, Store, RpcUnion>): {
-    create: (req: Request<ExtractTag<RpcUnion, "create">>) => Effect.Effect<{
+}, Store, RpcUnion extends import('@effect/rpc/Rpc').Any>(options: CrudHandlersOptions<Id, Fields, StoredRecord, Store, RpcUnion>): {
+    create: (req: Request<ExtractTag<RpcUnion, 'create'>>) => Effect.Effect<{
         id: Id;
     }, never, Store | unknown>;
-    get: (req: Request<ExtractTag<RpcUnion, "get">>) => Effect.Effect<Fields, NotFound<Id>, Store | unknown>;
-    update: (req: Request<ExtractTag<RpcUnion, "update">>) => Effect.Effect<void, NotFound<Id>, Store | unknown>;
-    list: (req: Request<ExtractTag<RpcUnion, "list">>) => Effect.Effect<ReadonlyArray<Fields & {
+    get: (req: Request<ExtractTag<RpcUnion, 'get'>>) => Effect.Effect<Fields, NotFound<Id>, Store | unknown>;
+    update: (req: Request<ExtractTag<RpcUnion, 'update'>>) => Effect.Effect<void, NotFound<Id>, Store | unknown>;
+    list: (req: Request<ExtractTag<RpcUnion, 'list'>>) => Effect.Effect<ReadonlyArray<Fields & {
         readonly id: Id;
     }>, never, Store | unknown>;
-    delete: (req: Request<ExtractTag<RpcUnion, "delete">>) => Effect.Effect<void, NotFound<Id>, Store>;
+    delete: (req: Request<ExtractTag<RpcUnion, 'delete'>>) => Effect.Effect<void, NotFound<Id>, Store>;
 };
 /**
  * Options for makeCrudHandlersFromDatabase. Handlers require Database in context.
@@ -62,7 +62,7 @@ export interface CrudHandlersOptionsWithDatabase<Id, Fields extends Record<strin
     readonly id: Id;
 } & Fields, Encoded extends Record<string, unknown> & {
     readonly id: unknown;
-}, RpcUnion extends import("@effect/rpc/Rpc").Any> {
+}, RpcUnion extends import('@effect/rpc/Rpc').Any> {
     readonly entityType: string;
     readonly tableName: string;
     readonly idSchema: Schema.Schema<Id, any, any>;
@@ -82,15 +82,15 @@ export declare function makeCrudHandlersFromDatabase<Id, Fields extends Record<s
     readonly id: Id;
 } & Fields, Encoded extends Record<string, unknown> & {
     readonly id: unknown;
-}, RpcUnion extends import("@effect/rpc/Rpc").Any>(options: CrudHandlersOptionsWithDatabase<Id, Fields, EntityRecord, Encoded, RpcUnion>): {
-    create: (req: Request<ExtractTag<RpcUnion, "create">>) => Effect.Effect<{
+}, RpcUnion extends import('@effect/rpc/Rpc').Any>(options: CrudHandlersOptionsWithDatabase<Id, Fields, EntityRecord, Encoded, RpcUnion>): {
+    create: (req: Request<ExtractTag<RpcUnion, 'create'>>) => Effect.Effect<{
         id: Id;
     }, never, Database | unknown>;
-    get: (req: Request<ExtractTag<RpcUnion, "get">>) => Effect.Effect<Fields, NotFound<Id>, Database | unknown>;
-    update: (req: Request<ExtractTag<RpcUnion, "update">>) => Effect.Effect<void, NotFound<Id>, Database | unknown>;
-    list: (req: Request<ExtractTag<RpcUnion, "list">>) => Effect.Effect<ReadonlyArray<Fields & {
+    get: (req: Request<ExtractTag<RpcUnion, 'get'>>) => Effect.Effect<Fields, NotFound<Id>, Database | unknown>;
+    update: (req: Request<ExtractTag<RpcUnion, 'update'>>) => Effect.Effect<void, NotFound<Id>, Database | unknown>;
+    list: (req: Request<ExtractTag<RpcUnion, 'list'>>) => Effect.Effect<ReadonlyArray<Fields & {
         readonly id: Id;
     }>, never, Database | unknown>;
-    delete: (req: Request<ExtractTag<RpcUnion, "delete">>) => Effect.Effect<void, NotFound<Id>, Database>;
+    delete: (req: Request<ExtractTag<RpcUnion, 'delete'>>) => Effect.Effect<void, NotFound<Id>, Database>;
 };
 //# sourceMappingURL=crud-handlers.d.ts.map

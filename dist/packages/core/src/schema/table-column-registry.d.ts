@@ -4,13 +4,13 @@
  * results are stored in FinalTableStore, and waitUntilFinalized completes.
  * @see docs/learnings/architecture.md
  */
-import * as Context from "effect/Context";
-import * as Effect from "effect/Effect";
-import * as Layer from "effect/Layer";
-import { type DuplicateColumnError } from "./duplicate-column-error.js";
-import { FinalTableStore } from "./final-table-store.js";
-import { type ExtraConfigItem, SchemaFinalizer } from "./schema-finalizer.js";
-import { SchemaRegistryConfig } from "./schema-registry-config.js";
+import * as Context from 'effect/Context';
+import * as Effect from 'effect/Effect';
+import * as Layer from 'effect/Layer';
+import { type DuplicateColumnError } from './duplicate-column-error.js';
+import { FinalTableStore } from './final-table-store.js';
+import { type ExtraConfigItem, SchemaFinalizer } from './schema-finalizer.js';
+import { SchemaRegistryConfig } from './schema-registry-config.js';
 /** Pending entry per table: merged columns and list of extraConfig callbacks. */
 export interface PendingTableEntry {
     readonly columns: Record<string, unknown>;

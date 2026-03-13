@@ -4,7 +4,7 @@
  * Use typeIdSchema(prefix) in model fields and typeId(prefix) to generate new IDs.
  * @see https://github.com/jetify-com/typeid-js
  */
-import * as Schema from "effect/Schema";
+import * as Schema from 'effect/Schema';
 /**
  * Returns an Effect Schema for a TypeID string with the given prefix.
  * Decode: validates that the string is a valid TypeID and has the expected prefix.
