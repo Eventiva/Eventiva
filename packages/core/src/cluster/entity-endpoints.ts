@@ -76,7 +76,12 @@ const ShutdownPostEndpoint = HttpApiEndpoint.post('shutdownPost', '/api/shutdown
     .addSuccess(ShutdownSuccess);
 const ShutdownGroup = HttpApiGroup.make('Shutdown').add(ShutdownGetEndpoint).add(ShutdownPostEndpoint);
 
-/** Turn pathPrefix into a Swagger group name (e.g. "contacts" -> "Contacts", "hello-worlds" -> "HelloWorlds"). */
+/**
+ * Convert a kebab-case path prefix into a PascalCase Swagger group name.
+ *
+ * @param pathPrefix - Kebab-case path segment (for example, "hello-worlds")
+ * @returns The PascalCase group name (for example, "HelloWorlds")
+ */
 function pathPrefixToGroupName(pathPrefix: string): string {
     return pathPrefix
         .split('-')
@@ -87,8 +92,14 @@ function pathPrefixToGroupName(pathPrefix: string): string {
 type PathSeg = `/${string}`;
 
 /**
- * Build one API group for a single entity with concrete paths: /api/rpc/{pathPrefix}, /api/{pathPrefix}, /api/{pathPrefix}/:id.
- * Group identifier is the display name (e.g. "Contacts") for Swagger.
+ * Create an HTTP API group exposing RPC and REST CRUD endpoints for a single entity.
+ *
+ * @param pathPrefix - URL path segment used for the entity (kebab-case, without a leading slash)
+ * @param groupName - Display name used for the Swagger/OpenAPI group
+ * @returns An HttpApiGroup containing:
+ *  - RPC invoke at `/api/rpc/{pathPrefix}`
+ *  - list and create at `/api/{pathPrefix}`
+ *  - get, update and delete at `/api/{pathPrefix}/:id`
  */
 function makeEntityGroup(pathPrefix: string, groupName: string): HttpApiGroup.HttpApiGroup.Any {
     const rpcPath = `/api/rpc/${pathPrefix}` as PathSeg;

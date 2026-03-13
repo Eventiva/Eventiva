@@ -75,6 +75,17 @@ export interface PlatformTemplateTwoPhase {
     getRuntimeLayer(): Layer.Layer<never, any, unknown>;
 }
 
+/**
+ * Determine whether a feature flag is enabled, honouring explicit overrides and environment variables.
+ *
+ * Checks the provided `overrides` map first; if no explicit override is present it reads the environment variable
+ * `EVENTIVA_FEATURE_<KEY>` (accepting `true`/`false` or `1`/`0`). If neither an override nor a recognised environment
+ * value is present the feature is enabled by default.
+ *
+ * @param overrides - Optional map of feature flag overrides keyed by `FeatureFlagKeys`
+ * @param key - The feature flag key to evaluate (a key of `FeatureFlagKeys`)
+ * @returns `true` if the feature is enabled, `false` otherwise.
+ */
 function isFeatureEnabled(overrides: FeatureFlagOverrides | undefined, key: keyof typeof FeatureFlagKeys): boolean {
     const k = FeatureFlagKeys[key];
     if (overrides && k in overrides) return overrides[k] ?? true;
@@ -85,6 +96,12 @@ function isFeatureEnabled(overrides: FeatureFlagOverrides | undefined, key: keyo
     return true;
 }
 
+/**
+ * Build the platform bootstrap layer that initialises core services and configuration used in phase 1.
+ *
+ * @param options - Options controlling which sub-layers are included (database layer, extensions, optional schema finalizer, endpoints port and feature flag overrides)
+ * @returns A composed `Layer` that provides observability, runtime configuration, PII encryption, extension configuration, optional cluster and schema stacks, the database layer, extension hooks and workflow components, and a scoped lifecycle; extension entity layers are merged on top of this base layer
+ */
 function buildBootstrapStack(
     options: CreatePlatformTemplateOptions
 ): Layer.Layer<never, any, unknown> {
@@ -137,9 +154,13 @@ function buildBootstrapStack(
 }
 
 /**
- * Builds phase 2 layer (HTTP server + entity endpoints only). Requires bootstrap layer in scope.
- * Provide this after bootstrap has run so EntityRegistry is populated when startServer runs.
- * Does not include bootstrap; caller runs runtime effect with bootstrap in scope and adds this layer.
+ * Construct the runtime layer that provides the HTTP server and optional entity endpoints; must be provided after bootstrap so the EntityRegistry is populated.
+ *
+ * @param options - Platform template options controlling ports, feature overrides and explicit entity endpoint descriptors
+ * @returns A layer that yields an `EntityEndpointsServer` descriptor:
+ * - If `ENTITY_ENDPOINTS` is enabled and a port is configured, the layer starts an HTTP server and exposes entity endpoints on that port.
+ * - If a port is configured but entity endpoints are disabled, the layer starts an HTTP server that responds with a static message and returns the server descriptor.
+ * - If no port is configured, returns a descriptor with `port: 0` (no server started).
  */
 function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<EntityEndpointsServer, any, unknown> {
     const fo = options.featureOverrides;
@@ -196,8 +217,12 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
 }
 
 /**
- * Creates a two-phase platform: bootstrap layer (phase 1) and runtime layer (phase 2).
- * Use with runMainTwoPhase() so entity endpoints see EntityRegistry populated by runCoreStartup.
+ * Builds a two-phase platform template exposing separate bootstrap and runtime layers.
+ *
+ * The bootstrap layer performs core startup (including population of the EntityRegistry).
+ * The runtime layer exposes HTTP and entity endpoints and must be started after the bootstrap layer has populated runtime state.
+ *
+ * @returns An object with `getBootstrapLayer()` to obtain the bootstrap layer and `getRuntimeLayer()` to obtain the runtime layer
  */
 export function createPlatformTemplateTwoPhase(
     options: CreatePlatformTemplateOptions
@@ -210,9 +235,14 @@ export function createPlatformTemplateTwoPhase(
 }
 
 /**
- * Builds a single platform Layer (legacy one-phase). Entity endpoints are built when the layer
- * is built, which may be before runCoreStartup runs, so dynamic entities (e.g. Contact) may be
- * missing from the route map. Prefer createPlatformTemplateTwoPhase + runMainTwoPhase.
+ * Create a legacy one-phase platform Layer that combines bootstrap and runtime.
+ *
+ * The returned Layer initialises entity endpoints as part of its construction; because endpoints
+ * are created when the layer is built (not after bootstrap completes), dynamically discovered
+ * entities may be absent from the exposed route map.
+ *
+ * @param options - Configuration for building the platform
+ * @returns A composite Layer that provides the full platform where entity endpoints are initialised during layer construction
  */
 export function createPlatformTemplate(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown> {
     const template = createPlatformTemplateTwoPhase(options);
