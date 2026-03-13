@@ -44,4 +44,3 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
           config: .github/config.json
           configRef: main
-
