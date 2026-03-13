@@ -169,7 +169,7 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
     const explicitDescriptors = options.entityEndpoints ?? [];
     // Build entity endpoints layer when feature is on and port is set. Descriptors can be empty;
     // makeEntityEndpointsLayer discovers entities from EntityRegistry (populated by runCoreStartup).
-    if (useEntityEndpoints && options.endpointsPort !== undefined) {
+    if (useEntityEndpoints && endpointsPort !== undefined) {
         const serverLayer = NodeHttpServer.layer(() => createServer(), { port: endpointsPort, host: '0.0.0.0' });
         const platformContextLayer = NodeHttpServer.layerContext;
         const endpointsLayer = makeEntityEndpointsLayer(explicitDescriptors, {
@@ -181,7 +181,7 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
             Layer.provide(platformContextLayer)
         ) as Layer.Layer<EntityEndpointsServer, any, unknown>;
     }
-    if (options.endpointsPort !== undefined) {
+    if (endpointsPort !== undefined) {
         const serverLayer = Layer.scopedDiscard(
             Effect.acquireRelease(
                 Effect.sync(() => {

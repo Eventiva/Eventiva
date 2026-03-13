@@ -9,6 +9,7 @@ import http from 'http';
 
 const PORT = 3000;
 const MAX_WAIT_MS = 90000;
+const REQUEST_TIMEOUT_MS = 30000;
 
 /**
  * Waits until the given TCP port on 127.0.0.1 accepts a connection or the timeout elapses.
@@ -56,10 +57,20 @@ function httpPost(path, body) {
             (res) => {
                 let buf = '';
                 res.on('data', (c) => (buf += c));
-                res.on('end', () => resolve({ status: res.statusCode, body: buf }));
+                res.on('end', () => {
+                    clearTimeout(timer);
+                    resolve({ status: res.statusCode, body: buf });
+                });
             }
         );
-        req.on('error', reject);
+        const timer = setTimeout(() => {
+            req.destroy();
+            reject(new Error(`Request timeout after ${REQUEST_TIMEOUT_MS}ms: POST ${path}`));
+        }, REQUEST_TIMEOUT_MS);
+        req.on('error', (err) => {
+            clearTimeout(timer);
+            reject(err);
+        });
         req.write(data);
         req.end();
     });
@@ -72,11 +83,22 @@ function httpPost(path, body) {
  */
 function httpGet(path) {
     return new Promise((resolve, reject) => {
-        http.get(`http://127.0.0.1:${PORT}${path}`, (res) => {
+        const req = http.get(`http://127.0.0.1:${PORT}${path}`, (res) => {
             let buf = '';
             res.on('data', (c) => (buf += c));
-            res.on('end', () => resolve({ status: res.statusCode, body: buf }));
-        }).on('error', reject);
+            res.on('end', () => {
+                clearTimeout(timer);
+                resolve({ status: res.statusCode, body: buf });
+            });
+        });
+        const timer = setTimeout(() => {
+            req.destroy();
+            reject(new Error(`Request timeout after ${REQUEST_TIMEOUT_MS}ms: GET ${path}`));
+        }, REQUEST_TIMEOUT_MS);
+        req.on('error', (err) => {
+            clearTimeout(timer);
+            reject(err);
+        });
     });
 }
 
@@ -112,12 +134,14 @@ async function main() {
         const helloRes = await httpPost('/api/rpc/hello-worlds', { method: 'list', payload: {} });
         console.log('\nPOST /api/rpc/hello-worlds ->', helloRes.status);
         console.log(helloRes.body.slice(0, 200) + (helloRes.body.length > 200 ? '...' : ''));
-        console.log(helloRes.status === 200 ? 'PASS (hello-worlds)' : 'FAIL (hello-worlds)\n');
+        const helloOk = helloRes.status === 200 && !helloRes.body.includes('Unknown pathPrefix');
+        console.log(helloOk ? 'PASS (hello-worlds)' : 'FAIL (hello-worlds)\n');
 
         const docsRes = await httpGet('/api/docs');
         console.log('\nGET /api/docs ->', docsRes.status);
         console.log(docsRes.status === 200 ? 'PASS (Swagger)' : 'FAIL (Swagger)');
 
+        process.kill(-child.pid, 'SIGTERM');
         process.exit(contactOk ? 0 : 1);
     } catch (e) {
         console.error(e);
