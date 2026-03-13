@@ -19,7 +19,7 @@
   "devDependencies": {
     "@effect/language-service": "^0.78.0",
     "@eslint/js": "^9.8.0",
-    "@expo/cli": "~54.0.16",
+    "@expo/cli": "~55.0.16",
     "@module-federation/enhanced": "^0.21.2",
     "@nx/cypress": "22.5.4",
     "@nx/docker": "22.5.4",
