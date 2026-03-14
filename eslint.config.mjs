@@ -61,6 +61,7 @@ export default [
                     enforceBuildableLibDependency: true,
                     allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
                     depConstraints: [
+                        // Type-based constraints (primary architectural boundaries)
                         {
                             sourceTag: 'type:core',
                             onlyDependOnLibsWithTags: [],
@@ -76,6 +77,19 @@ export default [
                         {
                             sourceTag: 'type:platform',
                             onlyDependOnLibsWithTags: ['type:core', 'type:database', 'type:extension', 'type:platform'],
+                        },
+                        // Layer-based constraints (frontend/backend separation)
+                        {
+                            sourceTag: 'layer:backend',
+                            onlyDependOnLibsWithTags: ['layer:backend', 'layer:shared'],
+                        },
+                        {
+                            sourceTag: 'layer:frontend',
+                            onlyDependOnLibsWithTags: ['layer:frontend', 'layer:shared'],
+                        },
+                        {
+                            sourceTag: 'layer:shared',
+                            onlyDependOnLibsWithTags: ['layer:shared'],
                         },
                     ],
                 },

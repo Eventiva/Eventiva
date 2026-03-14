@@ -5,18 +5,26 @@ alwaysApply: true
 
 # Module Boundaries
 
-When creating or modifying packages in Eventiva, enforce module boundaries based on package type.
+When creating or modifying packages in Eventiva, enforce module boundaries using a multi-tag system.
 
-## Module Types and Tags
+## Tag Structure
 
-Tag all packages in `project.json` with one of:
+All packages should have 2-3 tags in `project.json`:
 
-- `type:core` - Core functionality, can be depended on by any module
-- `type:database` - Database implementations, only platforms can depend on (runtime)
-- `type:extension` - Feature modules, can depend on core and other extensions
-- `type:platform` - Top-level entry points, nothing can depend on these
+1. **Type tag** (required): `type:core`, `type:database`, `type:extension`, or `type:platform`
+2. **Layer tag** (required): `layer:backend`, `layer:frontend`, or `layer:shared`
+3. **Capability tags** (optional, multiple allowed): `capability:entities`, `capability:workflows`, `capability:ui`
+
+Example:
+```json
+{
+  "tags": ["type:extension", "layer:backend", "capability:entities", "capability:workflows"]
+}
+```
 
 ## Dependency Rules
+
+### Type-Based Rules
 
 | Source Type | Can Depend On |
 |------------|---------------|
@@ -25,17 +33,24 @@ Tag all packages in `project.json` with one of:
 | `type:extension` | `type:core`, `type:extension` |
 | `type:platform` | `type:core`, `type:database`, `type:extension`, `type:platform` |
 
+### Layer-Based Rules
+
+| Source Layer | Can Depend On |
+|--------------|---------------|
+| `layer:backend` | `layer:backend`, `layer:shared` |
+| `layer:frontend` | `layer:frontend`, `layer:shared` |
+| `layer:shared` | `layer:shared` |
+
+**Important**: Projects with multiple tags must satisfy ALL applicable constraints.
+
 ## Adding New Packages
 
-1. Determine the module type based on purpose
-2. Add the appropriate tag to `project.json`:
-   ```json
-   {
-     "tags": ["type:extension"]
-   }
-   ```
-3. Verify dependencies comply with rules
-4. Run `pnpm nx lint` to check boundaries
+1. Determine the module type → add `type:*` tag
+2. Determine the layer → add `layer:*` tag
+3. Identify capabilities → add `capability:*` tags
+4. Add all tags to `project.json`
+5. Verify dependencies comply with all rules
+6. Run `pnpm nx lint` to check boundaries
 
 ## DevDependencies Exception
 

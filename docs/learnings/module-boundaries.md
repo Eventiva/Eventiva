@@ -6,9 +6,17 @@ This document describes the module boundary rules and dependency constraints enf
 
 As the Eventiva codebase grows, maintaining clear architectural boundaries prevents dependency chaos and ensures a maintainable structure. Module boundaries enforce which packages can depend on which other packages, based on their type and role in the system.
 
-## Module Types
+## Tag System
 
-We use a tag-based system to categorize modules:
+We use a multi-tag system to categorize modules across three dimensions:
+
+1. **Type** (`type:*`) - Module architectural role
+2. **Layer** (`layer:*`) - Frontend/backend separation
+3. **Capability** (`capability:*`) - What the module provides (entities, workflows, UI)
+
+Projects can have multiple tags (e.g., `["type:extension", "layer:backend", "capability:entities", "capability:workflows"]`).
+
+## Module Types
 
 ### `type:core`
 
@@ -49,7 +57,48 @@ We use a tag-based system to categorize modules:
 - **Can be depended on by**: Nothing (top of dependency tree)
 - **Use case**: Application entry points, platform configurations, runtime orchestration
 
+## Layer Tags
+
+### `layer:backend`
+
+- **Purpose**: Backend/server-side code
+- **Can depend on**: `layer:backend`, `layer:shared`
+- **Use case**: Server logic, API handlers, database operations, business logic
+
+### `layer:frontend`
+
+- **Purpose**: Frontend/client-side code
+- **Can depend on**: `layer:frontend`, `layer:shared`
+- **Use case**: React components, UI libraries, client-side state management
+
+### `layer:shared`
+
+- **Purpose**: Code shared between frontend and backend
+- **Can depend on**: `layer:shared` only
+- **Use case**: Type definitions, validation schemas, shared utilities
+
+## Capability Tags
+
+Capability tags describe what a module provides. A module can have multiple capability tags.
+
+### `capability:entities`
+
+- **Purpose**: Module defines entities (data models with CRUD operations)
+- **Use case**: Entity definitions, schema, CRUD handlers
+
+### `capability:workflows`
+
+- **Purpose**: Module defines workflows (business process automation)
+- **Use case**: Workflow definitions, workflow execution logic
+
+### `capability:ui`
+
+- **Purpose**: Module provides UI components
+- **Use case**: React components, UI libraries, frontend interfaces
+
 ## Dependency Rules Summary
+
+### Type-Based Rules (Primary Architectural Boundaries)
 
 | Source Type | Can Depend On |
 |------------|---------------|
@@ -57,6 +106,21 @@ We use a tag-based system to categorize modules:
 | `type:database` | `type:core` |
 | `type:extension` | `type:core`, `type:extension` |
 | `type:platform` | `type:core`, `type:database`, `type:extension`, `type:platform` |
+
+### Layer-Based Rules (Frontend/Backend Separation)
+
+| Source Layer | Can Depend On |
+|--------------|---------------|
+| `layer:backend` | `layer:backend`, `layer:shared` |
+| `layer:frontend` | `layer:frontend`, `layer:shared` |
+| `layer:shared` | `layer:shared` |
+
+### Multi-Tag Enforcement
+
+Projects with multiple tags must satisfy **all** applicable constraints. For example:
+- A project tagged `["type:extension", "layer:backend"]` must satisfy both:
+  - Type constraint: can depend on `type:core` and `type:extension`
+  - Layer constraint: can depend on `layer:backend` and `layer:shared`
 
 ## Enforcement
 
@@ -66,13 +130,18 @@ Module boundaries are enforced via the `@nx/enforce-module-boundaries` ESLint ru
 
 ### Tagging Projects
 
-Tags are defined in `project.json` files:
+Tags are defined in `project.json` files. Projects typically have 2-3 tags:
 
 ```json
 {
-  "tags": ["type:extension"]
+  "tags": ["type:extension", "layer:backend", "capability:entities", "capability:workflows"]
 }
 ```
+
+**Tag Selection Guidelines:**
+1. **Type tag** (required): Choose one of `type:core`, `type:database`, `type:extension`, `type:platform`
+2. **Layer tag** (required): Choose one of `layer:backend`, `layer:frontend`, `layer:shared`
+3. **Capability tags** (optional, multiple allowed): Add `capability:entities`, `capability:workflows`, `capability:ui` as applicable
 
 ### DevDependencies Exception
 
@@ -106,17 +175,49 @@ Module type tags are synchronized with GitHub labels via smartcloud configuratio
 
 When adding new modules:
 
-1. **Determine the module type** based on its purpose
-2. **Add the appropriate tag** to `project.json`
-3. **Verify dependencies** comply with the rules above
-4. **Run lint** to ensure boundaries are respected: `pnpm nx lint`
+1. **Determine the module type** based on its purpose → add `type:*` tag
+2. **Determine the layer** (frontend/backend/shared) → add `layer:*` tag
+3. **Identify capabilities** (entities/workflows/ui) → add `capability:*` tags
+4. **Add all appropriate tags** to `project.json`
+5. **Verify dependencies** comply with all applicable rules
+6. **Run lint** to ensure boundaries are respected: `pnpm nx lint`
 
 ### Common Patterns
 
-- **Business domain modules** (users, communities, etc.) → `type:extension`
-- **Database adapters** → `type:database`
-- **Shared utilities** → `type:core`
-- **Application entry points** → `type:platform`
+**Backend Extensions:**
+```json
+{
+  "tags": ["type:extension", "layer:backend", "capability:entities", "capability:workflows"]
+}
+```
+
+**Frontend Components:**
+```json
+{
+  "tags": ["type:extension", "layer:frontend", "capability:ui"]
+}
+```
+
+**Shared Types:**
+```json
+{
+  "tags": ["type:core", "layer:shared"]
+}
+```
+
+**Database Adapters:**
+```json
+{
+  "tags": ["type:database", "layer:backend"]
+}
+```
+
+**Platform Entry Points:**
+```json
+{
+  "tags": ["type:platform", "layer:backend"]
+}
+```
 
 ## Related Documentation
 

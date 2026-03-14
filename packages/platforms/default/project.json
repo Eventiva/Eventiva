@@ -3,7 +3,7 @@
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "packages/platforms/default/src",
     "projectType": "library",
-    "tags": ["type:platform"],
+    "tags": ["type:platform", "layer:backend"],
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",

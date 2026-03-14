@@ -3,7 +3,7 @@
     "$schema": "../../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "packages/extensions/hello-world/src",
     "projectType": "library",
-    "tags": ["type:extension"],
+    "tags": ["type:extension", "layer:backend", "capability:entities", "capability:workflows"],
     "targets": {
         "build": {
             "executor": "@nx/js:tsc",

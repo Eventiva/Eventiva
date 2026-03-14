@@ -9,14 +9,14 @@ Configure and enforce module boundaries for Eventiva packages using Nx tags and 
 
 ## Quick Reference
 
-### Module Types
+### Tag Structure
 
-- **`type:core`** - Core functionality, can be depended on by any module
-- **`type:database`** - Database implementations, only platforms can depend on (runtime)
-- **`type:extension`** - Feature modules, can depend on core and other extensions
-- **`type:platform`** - Top-level entry points, nothing can depend on these
+Projects should have 2-3 tags:
+1. **Type** (required): `type:core`, `type:database`, `type:extension`, `type:platform`
+2. **Layer** (required): `layer:backend`, `layer:frontend`, `layer:shared`
+3. **Capability** (optional, multiple): `capability:entities`, `capability:workflows`, `capability:ui`
 
-### Dependency Matrix
+### Type-Based Dependency Matrix
 
 | Source | Can Depend On |
 |--------|---------------|
@@ -25,29 +25,49 @@ Configure and enforce module boundaries for Eventiva packages using Nx tags and 
 | `type:extension` | `type:core`, `type:extension` |
 | `type:platform` | `type:core`, `type:database`, `type:extension`, `type:platform` |
 
+### Layer-Based Dependency Matrix
+
+| Source | Can Depend On |
+|--------|---------------|
+| `layer:backend` | `layer:backend`, `layer:shared` |
+| `layer:frontend` | `layer:frontend`, `layer:shared` |
+| `layer:shared` | `layer:shared` |
+
+**Note**: Projects with multiple tags must satisfy ALL applicable constraints.
+
 ## Adding Tags to Projects
 
-When creating or modifying packages, add the appropriate tag to `project.json`:
+When creating or modifying packages, add 2-3 tags to `project.json`:
 
 ```json
 {
-  "tags": ["type:extension"]
+  "tags": ["type:extension", "layer:backend", "capability:entities", "capability:workflows"]
 }
 ```
 
+**Tag Selection:**
+1. Choose one type tag based on module purpose
+2. Choose one layer tag (backend/frontend/shared)
+3. Add capability tags for what the module provides (entities, workflows, UI)
+
 ## ESLint Configuration
 
-Module boundaries are enforced in `eslint.config.mjs`:
+Module boundaries are enforced in `eslint.config.mjs` with both type and layer constraints:
 
 ```javascript
 '@nx/enforce-module-boundaries': [
   'error',
   {
     depConstraints: [
+      // Type-based constraints
       { sourceTag: 'type:core', onlyDependOnLibsWithTags: [] },
       { sourceTag: 'type:database', onlyDependOnLibsWithTags: ['type:core'] },
       { sourceTag: 'type:extension', onlyDependOnLibsWithTags: ['type:core', 'type:extension'] },
       { sourceTag: 'type:platform', onlyDependOnLibsWithTags: ['type:core', 'type:database', 'type:extension', 'type:platform'] },
+      // Layer-based constraints
+      { sourceTag: 'layer:backend', onlyDependOnLibsWithTags: ['layer:backend', 'layer:shared'] },
+      { sourceTag: 'layer:frontend', onlyDependOnLibsWithTags: ['layer:frontend', 'layer:shared'] },
+      { sourceTag: 'layer:shared', onlyDependOnLibsWithTags: ['layer:shared'] },
     ],
   },
 ],
@@ -58,8 +78,8 @@ Module boundaries are enforced in `eslint.config.mjs`:
 ### Adding a New Extension
 
 1. Create the package structure
-2. Add tag to `project.json`: `"tags": ["type:extension"]`
-3. Add dependencies (only `type:core` and `type:extension`)
+2. Add tags to `project.json`: `"tags": ["type:extension", "layer:backend", "capability:entities", "capability:workflows"]`
+3. Add dependencies (must satisfy both type and layer constraints)
 4. Run `pnpm nx lint` to verify
 
 ### Moving Database Dependency to DevDependencies
@@ -82,7 +102,7 @@ When ESLint reports a violation:
 
 ## GitHub Labels
 
-Module type tags are synchronized with GitHub labels via `.github/config.json`. Labels use the same naming (`type:core`, `type:database`, etc.).
+All tags (type, layer, capability) are synchronized with GitHub labels via `.github/config.json`. Labels use the same naming convention for consistency.
 
 ## Reference
 
