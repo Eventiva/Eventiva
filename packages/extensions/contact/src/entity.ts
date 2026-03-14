@@ -7,7 +7,7 @@ import { pgTable, text, date } from 'drizzle-orm/pg-core';
 import { createSelectSchema } from 'drizzle-orm/effect-schema';
 import { Base, type EntityRpc } from '@eventiva/core';
 import * as Schema from 'effect/Schema';
-import { typeid } from '@eventiva/databases.pg';
+import { typeid } from '@eventiva/databases.shared';
 
 export const contactColumns = {
     id: typeid('id', { type: 'contact' }),

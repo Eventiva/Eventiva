@@ -59,7 +59,10 @@ export default [
                 'error',
                 {
                     enforceBuildableLibDependency: true,
-                    allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
+                    allow: [
+                        '^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$',
+                        '^@eventiva/databases\\.shared$', // Allow extensions to depend on shared database utilities
+                    ],
                     depConstraints: [
                         // Type-based constraints (primary architectural boundaries)
                         {

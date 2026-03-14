@@ -14,19 +14,10 @@ import {
     uniqueIndex,
 } from 'drizzle-orm/pg-core';
 import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all';
-import { text } from 'drizzle-orm/pg-core';
-
-/**
- * Creates a text object based on the provided value. (Used by drizzle)
- * @param value - The input value to be processed.
- * @param [config] - Optional configuration object.
- * @param config.type - The type of input value, if provided.
- * @returns - A text object derived from the input value.
- */
-export const typeid = (value = 'id', config?: { type: string }) => text(value);
+import { typeid as typeidBuilder } from '@eventiva/databases.shared';
 
 /** Placeholder for createdBy FK when getTable is not available (e.g. createTableFinal standalone). */
-const createdByPlaceholder = drizzlePgTable('_created_by_placeholder', { id: typeid('id', { type: 'contact' }) });
+const createdByPlaceholder = drizzlePgTable('_created_by_placeholder', { id: typeidBuilder('id', { type: 'contact' }) });
 
 /**
  * Represents the status constants used to indicate the state of an entity.
@@ -138,7 +129,7 @@ type ValidateColumns<TColumns extends Record<string, PgColumnBuilder>> = EnsureR
 >;
 
 export type AllBuilders = {
-    typeid: typeof typeid;
+    typeid: typeof typeidBuilder;
 } & ReturnType<typeof getPgColumnBuilders>;
 
 export type PgTableExtraConfigValue =
@@ -157,7 +148,7 @@ export function testColumns<
 >(name: TTableName, db: AllBuilders, columns: (columnTypes: AllBuilders) => ValidateColumns<TColumnsMap>) {
     const table = columns({
         ...db,
-        typeid,
+        typeid: typeidBuilder,
     });
     // Check if columns have an "id" field
     if (!('id' in table)) {
@@ -265,7 +256,7 @@ export function createTableFinal<
              * Because this references the users table, we must update the users table manually if adding any new
              * fields to this abstraction.
              */
-            createdBy: typeid('created_by', { type: 'contact' }).references(() => createdByPlaceholder.id),
+            createdBy: typeidBuilder('created_by', { type: 'contact' }).references(() => createdByPlaceholder.id),
             active: statusEnum('active').generatedAlwaysAs(
                 (): SQL =>
                     sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
@@ -316,7 +307,7 @@ export function buildTableInternal(
                 .$onUpdate(() => new Date().toISOString()),
             disabledAt: timestamp('disabled_at', { mode: 'string' }),
             deletedAt: timestamp('deleted_at', { mode: 'string' }),
-            createdBy: typeid('created_by', { type: 'contact' }).references(createdByRef),
+            createdBy: typeidBuilder('created_by', { type: 'contact' }).references(createdByRef),
             active: statusEnum('active').generatedAlwaysAs(
                 (): SQL =>
                     sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
