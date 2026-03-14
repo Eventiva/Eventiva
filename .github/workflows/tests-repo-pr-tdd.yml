@@ -179,6 +179,66 @@ jobs:
                   git commit -m "chore(tdd): sync dist and update tests for ${BRANCH_NAME}"
                   git push -u origin "${BRANCH_NAME}"
 
+            - name: Ensure tests repo PR exists
+              uses: actions/github-script@v8
+              env:
+                  BRANCH_NAME: ${{ github.head_ref }}
+                  TESTS_REPO: Eventiva/tests
+                  MAIN_PR_URL: ${{ github.event.pull_request.html_url }}
+              with:
+                  github-token: ${{ secrets.BOT_TOKEN }}
+                  script: |
+                      const [owner, repo] = (process.env.TESTS_REPO ?? "").split("/");
+                      const headBranch = process.env.BRANCH_NAME;
+
+                      if (!owner || !repo || !headBranch) {
+                        core.setFailed("Missing TESTS_REPO or BRANCH_NAME.");
+                        return;
+                      }
+
+                      const { data: testsRepo } = await github.rest.repos.get({ owner, repo });
+                      const baseBranch = testsRepo.default_branch;
+
+                      if (headBranch === baseBranch) {
+                        core.info("Head branch matches tests repo default branch; skipping PR creation.");
+                        return;
+                      }
+
+                      const headRef = `${owner}:${headBranch}`;
+                      const existing = await github.paginate(github.rest.pulls.list, {
+                        owner,
+                        repo,
+                        state: "open",
+                        head: headRef,
+                        base: baseBranch,
+                        per_page: 100
+                      });
+
+                      if (existing.length > 0) {
+                        core.info(`Open tests repo PR already exists: #${existing[0].number}`);
+                        return;
+                      }
+
+                      const title = `tdd: sync tests for ${headBranch}`;
+                      const body = [
+                        "Automated PR created by Eventiva main-repo TDD workflow.",
+                        "",
+                        `- Main PR: ${process.env.MAIN_PR_URL ?? "n/a"}`,
+                        `- Source branch: \`${headBranch}\``,
+                        `- Target branch: \`${baseBranch}\``
+                      ].join("\n");
+
+                      const created = await github.rest.pulls.create({
+                        owner,
+                        repo,
+                        title,
+                        head: headBranch,
+                        base: baseBranch,
+                        body
+                      });
+
+                      core.info(`Created tests repo PR #${created.data.number}`);
+
     run-tdd-tests:
         name: Run tests via main repo Nx
         runs-on: ubuntu-latest
