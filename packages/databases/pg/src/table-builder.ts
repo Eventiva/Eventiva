@@ -242,7 +242,7 @@ export function createTableFinal<
                 name,
                 {
                     ...db,
-                    typeid,
+                    typeid: typeidBuilder,
                 },
                 columns
             ),
@@ -341,7 +341,7 @@ export function pgTable<
         (db) =>
             columns({
                 ...db,
-                typeid,
+                typeid: typeidBuilder,
             }),
         extraConfig
     );
