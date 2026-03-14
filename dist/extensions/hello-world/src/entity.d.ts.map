@@ -1,0 +1,1 @@
+{"version":3,"file":"entity.d.ts","sourceRoot":"","sources":["../../../../packages/extensions/hello-world/src/entity.ts"],"names":[],"mappings":"AAAA;;;GAGG;AACH,OAAO,KAAK,GAAG,MAAM,iBAAiB,CAAC;AACvC,OAAO,KAAK,MAAM,MAAM,eAAe,CAAC;AAQxC;;GAEG;AACH,eAAO,MAAM,UAAU,yIAAoC,CAAC;AAE5D,MAAM,MAAM,UAAU,GAAG,OAAO,UAAU,CAAC"}

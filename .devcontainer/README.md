@@ -26,6 +26,38 @@
 - **`CI`** – Set to `true` in CI only; some tools (e.g. Nx) change behavior when `CI` is set.
 - **`LOG_LEVEL`** / **`DEBUG`** – For app or library logging (e.g. `DEBUG=*` for verbose output).
 
+## Getting Started
+
+After opening the devcontainer, install dependencies:
+
+```sh
+pnpm install
+```
+
+## Building
+
+Build all packages:
+
+```sh
+pnpm nx run-many -t build
+```
+
+Build a specific package:
+
+```sh
+pnpm nx build <project-name>
+```
+
+## Running Tasks
+
+Common Nx commands:
+
+- **Lint:** `pnpm nx run-many -t lint`
+- **Type check:** `pnpm nx run-many -t typecheck`
+- **Test:** `pnpm nx run-many -t test`
+- **Format:** `pnpm nx run eventiva:format`
+- **Check:** `pnpm nx run eventiva:check`
+
 ## Rebuild
 
 After changing `devcontainer.json` or this README, run **“Dev Containers: Rebuild Container”** from the command palette.
