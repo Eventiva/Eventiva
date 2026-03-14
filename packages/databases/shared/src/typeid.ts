@@ -1,4 +1,5 @@
 import { text } from 'drizzle-orm/pg-core';
+import type { PgColumnBuilder } from 'drizzle-orm/pg-core';
 
 /**
  * Creates a text column builder for TypeID fields in Drizzle ORM.
@@ -24,4 +25,6 @@ import { text } from 'drizzle-orm/pg-core';
  * };
  * ```
  */
-export const typeid = (value = 'id', config?: { type: string }) => text(value);
+export const typeid = (value = 'id', config?: { type: string }): PgColumnBuilder => {
+    return text(value) as PgColumnBuilder;
+};
