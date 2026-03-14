@@ -170,7 +170,14 @@ jobs:
                   \`\`\`
                   EOF
 
-                  agent -p "$(cat "${prompt_file}")" --force
+                  if [ ! -s ../dist-diff.patch ]; then
+                    echo "Dist diff is empty; skipping AI test generation."
+                    exit 0
+                  fi
+
+                  if ! timeout 180 agent -p "$(cat "${prompt_file}")" --force; then
+                    echo "Cursor AI generation timed out or failed; continuing with bootstrap-generated tests."
+                  fi
 
             - name: Commit and push tests repo updates
               env:
