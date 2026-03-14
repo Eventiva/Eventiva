@@ -8,8 +8,7 @@ import { TableColumnRegistry, withSpanAndLog } from '@eventiva/core';
 import { Effect } from 'effect';
 import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all';
 import type { PgColumnBuilder } from 'drizzle-orm/pg-core';
-import { type AllBuilders, type PgTableExtraConfigValue, testColumns } from './table-builder.js';
-import { typeid } from '@eventiva/databases.shared';
+import { type AllBuilders, type PgTableExtraConfigValue, testColumns, typeid } from './table-builder.js';
 
 /**
  * Registers a table with the schema registry. Run inside an Effect that has TableColumnRegistry in context.

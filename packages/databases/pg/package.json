@@ -7,7 +7,6 @@
     "types": "./src/index.d.ts",
     "dependencies": {
         "@eventiva/core": "workspace:*",
-        "@eventiva/databases.shared": "workspace:*",
         "@effect/sql": "^0.21.0",
         "@effect/sql-pg": "^0.34.0",
         "drizzle-orm": "1.0.0-beta.18-dc9676b",
