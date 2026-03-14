@@ -15,6 +15,10 @@ permissions:
 
 env:
     TESTS_REPO: Eventiva/tests
+    # NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
+    # Run without Nx Cloud so CI does not fail when the cloud org is disabled (e.g. over FREE plan).
+    # Remove this and set NX_CLOUD_ACCESS_TOKEN if you upgrade and want cloud cache/distribution.
+    NX_NO_CLOUD: 'true'
 
 jobs:
     build-dist:
