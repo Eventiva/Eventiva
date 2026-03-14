@@ -1,6 +1,5 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import ts from 'typescript';
 
 const targetRoot = path.resolve(process.argv[2] ?? 'tests-repo');
 const distRoot = path.join(targetRoot, 'dist');
@@ -51,120 +50,6 @@ const writeText = async (filePath, value) => {
     await ensureDir(path.dirname(filePath));
     await fs.writeFile(filePath, value, 'utf8');
 };
-
-const walk = async (dir) => {
-    const stat = await fs.stat(dir).catch(() => undefined);
-    if (!stat || !stat.isDirectory()) return [];
-    const entries = await fs.readdir(dir, { withFileTypes: true });
-    const files = [];
-    for (const entry of entries) {
-        const fullPath = path.join(dir, entry.name);
-        if (entry.isDirectory()) {
-            files.push(...(await walk(fullPath)));
-        } else {
-            files.push(fullPath);
-        }
-    }
-    return files;
-};
-
-const isDeclarationFile = (filePath) => filePath.endsWith('.d.ts');
-
-const hasModifier = (node, modifier) => Boolean(node.modifiers?.some((value) => value.kind === modifier));
-
-const getJsDoc = (sourceText, node) => {
-    const ranges = ts.getLeadingCommentRanges(sourceText, node.getFullStart()) ?? [];
-    const jsDocRange = ranges.find((range) => sourceText.slice(range.pos, range.end).startsWith('/**'));
-    if (!jsDocRange) return undefined;
-    return sourceText.slice(jsDocRange.pos, jsDocRange.end);
-};
-
-const parseCallablesFromFile = async (absolutePath, repoRoot) => {
-    const sourceText = await fs.readFile(absolutePath, 'utf8');
-    const sourceFile = ts.createSourceFile(absolutePath, sourceText, ts.ScriptTarget.Latest, true);
-    const relativeFile = path.relative(repoRoot, absolutePath).replaceAll('\\', '/');
-    const callables = [];
-
-    const pushCallable = (idSuffix, node, params, returnType) => {
-        const doc = getJsDoc(sourceText, node) ?? '';
-        const hasExample = doc.includes('@example');
-        const hasRemarks = doc.includes('@remarks');
-        const paramTags = (doc.match(/@param\s+([A-Za-z0-9_]+)/g) ?? []).map((line) =>
-            line.replace('@param', '').trim()
-        );
-        const hasReturns = doc.includes('@returns');
-        callables.push({
-            id: `${relativeFile}#${idSuffix}`,
-            file: relativeFile,
-            name: idSuffix,
-            parameters: params,
-            returnType,
-            hasExample,
-            hasRemarks,
-            hasReturns,
-            paramTags,
-        });
-    };
-
-    const visit = (node) => {
-        if (ts.isFunctionDeclaration(node) && hasModifier(node, ts.SyntaxKind.ExportKeyword) && node.name) {
-            pushCallable(
-                node.name.text,
-                node,
-                node.parameters.map((param) => param.name.getText()),
-                node.type?.getText() ?? 'unknown'
-            );
-        }
-
-        if (ts.isVariableStatement(node) && hasModifier(node, ts.SyntaxKind.ExportKeyword)) {
-            for (const declaration of node.declarationList.declarations) {
-                if (ts.isIdentifier(declaration.name) && declaration.type && ts.isFunctionTypeNode(declaration.type)) {
-                    pushCallable(
-                        declaration.name.text,
-                        node,
-                        declaration.type.parameters.map((param) => param.name.getText()),
-                        declaration.type.type?.getText() ?? 'unknown'
-                    );
-                }
-            }
-        }
-
-        if (ts.isClassDeclaration(node) && hasModifier(node, ts.SyntaxKind.ExportKeyword) && node.name) {
-            for (const member of node.members) {
-                if (ts.isMethodDeclaration(member) && member.name) {
-                    const methodName = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
-                    pushCallable(
-                        `${node.name.text}.${methodName}`,
-                        member,
-                        member.parameters.map((param) => param.name.getText()),
-                        member.type?.getText() ?? 'unknown'
-                    );
-                }
-            }
-        }
-
-        if (ts.isInterfaceDeclaration(node) && hasModifier(node, ts.SyntaxKind.ExportKeyword)) {
-            for (const member of node.members) {
-                if (ts.isMethodSignature(member) && member.name) {
-                    const methodName = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
-                    pushCallable(
-                        `${node.name.text}.${methodName}`,
-                        member,
-                        member.parameters.map((param) => param.name.getText()),
-                        member.type?.getText() ?? 'unknown'
-                    );
-                }
-            }
-        }
-
-        ts.forEachChild(node, visit);
-    };
-
-    visit(sourceFile);
-    return callables;
-};
-
-const normalizeParamName = (value) => value.replace(/^\.{3}/, '').replace(/\?$/, '');
 
 const projectTemplate = ({ projectName, projectRoot, checkScriptPath }) => ({
     name: projectName,
@@ -638,28 +523,10 @@ const buildRootConfig = async () => {
 
 const generateManifest = async (project) => {
     const projectRoot = path.join(targetRoot, project.root);
-    const declarationFiles = (await walk(distRoot)).filter(isDeclarationFile);
-    const callables = (
-        await Promise.all(
-            declarationFiles
-                .filter((absolutePath) => {
-                    const relative = path.relative(targetRoot, absolutePath).replaceAll('\\', '/');
-                    return project.distPrefixes.some((prefix) => relative.startsWith(prefix));
-                })
-                .map((absolutePath) => parseCallablesFromFile(absolutePath, targetRoot))
-        )
-    )
-        .flat()
-        .sort((a, b) => a.id.localeCompare(b.id))
-        .map((entry) => ({
-            id: entry.id,
-            testCases: ['docs-example', 'docs-remarks', 'docs-params', 'docs-returns'],
-        }));
-
     const manifest = {
         project: project.name,
         distPrefixes: project.distPrefixes,
-        entries: callables,
+        entries: [],
     };
 
     await writeJson(path.join(projectRoot, 'api-surface-coverage.json'), manifest);

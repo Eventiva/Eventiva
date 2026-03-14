@@ -321,6 +321,11 @@ jobs:
                     git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
                   fi
 
+            - name: Generate API-surface coverage manifests from dist
+              run: |
+                  set -euo pipefail
+                  pnpm exec node tests/remote/tools/generate-api-surface-coverage.mjs tests/remote
+
             - name: Run Nx tests with coverage gate
               id: run_tests
               run: |
