@@ -10,7 +10,6 @@ import type * as Layer from 'effect/Layer';
 import * as Layer_ from 'effect/Layer';
 import * as TestRunner from '@effect/cluster/TestRunner';
 import * as SingleRunner from '@effect/cluster/SingleRunner';
-import { Sharding } from '@effect/cluster';
 import * as ShardingConfig from '@effect/cluster/ShardingConfig';
 
 /**
@@ -33,17 +32,14 @@ export const clusterLayerDefault: Layer.Layer<never, never, never> = TestRunner.
  * Single runner layer with real sharding configuration. Use for single-process
  * development with real sharding behavior (useful for testing sharding logic).
  * Requires database layer for sharding state persistence.
- * 
+ *
  * Observability: The underlying SingleRunner, Sharding, and ShardingConfig layers
  * provide their own observability (logging, metrics, tracing) when built.
  */
 export function makeSingleRunnerLayer(
-    shardingConfigOverrides?: Partial<ShardingConfig.ShardingConfig.Type>
+    shardingConfigOverrides?: Partial<ShardingConfig.ShardingConfig['Type']>
 ): Layer.Layer<never, never, never> {
-    const config = shardingConfigOverrides ?? { shardsPerGroup: 10, shardGroups: ['default'] };
-    return SingleRunner.layer.pipe(
-        Layer_.provide(Sharding.layer.pipe(Layer_.provide(ShardingConfig.layer(config))))
-    );
+    return SingleRunner.layer({ shardingConfig: shardingConfigOverrides });
 }
 
 /**
