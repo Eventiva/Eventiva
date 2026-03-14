@@ -3,7 +3,6 @@ import path from 'node:path';
 
 const targetRoot = path.resolve(process.argv[2] ?? 'tests-repo');
 const sourceDist = path.resolve(process.argv[3] ?? path.join(process.cwd(), 'dist'));
-const distRoot = sourceDist;
 
 const PROJECTS = [
     {
