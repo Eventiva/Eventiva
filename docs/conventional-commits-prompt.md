@@ -4,7 +4,7 @@
 
 Commit titles should follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
-```
+```text
 <type>(<scope>): <description>
 ```
 
@@ -55,7 +55,7 @@ Commit titles should follow the [Conventional Commits](https://www.conventionalc
 
 For breaking changes, add `!` after the type/scope and include `BREAKING CHANGE:` in the body:
 
-```
+```text
 feat(core)!: change entity API structure
 
 BREAKING CHANGE: Entity.get() now returns Effect instead of Promise
@@ -67,7 +67,7 @@ This triggers a major version bump.
 
 If needed, add a blank line after the title and provide a detailed description:
 
-```
+```text
 feat(core): add entity registry service
 
 The entity registry provides a centralized way to manage

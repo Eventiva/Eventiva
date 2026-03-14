@@ -14,7 +14,7 @@ When making **architectural** or **convention** decisions in Eventiva, read the 
 ## When to use
 
 - Choosing backend composition, Layer/Service boundaries, or cluster design → `architecture.md`, `effect-migration-notes.md`.
-- File headers, naming, licensing → `conventions.md`.
+- File headers, naming, licensing, declaration documentation tags (`@remarks`, `@example`, `@param`, `@returns`) → `conventions.md`.
 - Test strategy, schema-first, who writes tests → `tdd-and-test-creation.md` and `.cursor/rules/tdd-test-creation.mdc`.
 - Module inclusion, extensions, manifest → `modular-include-exclude.md`, `odoo-extensions-reference.md`.
 - Docs format, README.adoc → README.md script → `docs-and-apis.md`.

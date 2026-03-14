@@ -15,6 +15,7 @@ on:
 permissions:
     contents: write
     id-token: write # needed for provenance data generation and GitHub releases
+    packages: write # needed for publishing to GitHub Packages
 
 jobs:
     publish:
@@ -58,6 +59,7 @@ jobs:
               shell: bash
 
             - name: Publish packages to NPM
+              if: ${{ github.event.inputs.dry-run != 'true' }}
               run: pnpm exec nx release publish --registry=https://registry.npmjs.org/
               shell: bash
               env:
@@ -65,11 +67,21 @@ jobs:
                   NPM_CONFIG_PROVENANCE: true
 
             - name: Publish packages to GitHub Packages
+              if: ${{ github.event.inputs.dry-run != 'true' }}
               run: pnpm exec nx release publish --registry=https://npm.pkg.github.com
               shell: bash
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Dry-run report
+              if: ${{ github.event.inputs.dry-run == 'true' }}
+              run: |
+                  echo "Dry-run mode: Skipping actual publishing"
+                  echo "Would publish to NPM: https://registry.npmjs.org/"
+                  echo "Would publish to GitHub Packages: https://npm.pkg.github.com"
+                  echo "Run without dry-run to perform actual publishing"
+              shell: bash
 
             # Docker publishing skeleton (commented out for future implementation)
             # - name: Login to Docker Hub
