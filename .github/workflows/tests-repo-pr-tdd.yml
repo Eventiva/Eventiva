@@ -365,6 +365,10 @@ jobs:
                     funcs=$(jq -r '.total.functions.pct // 0' "${file}")
                     branches=$(jq -r '.total.branches.pct // 0' "${file}")
 
+                    if ! [[ "${lines}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then lines=100; fi
+                    if ! [[ "${funcs}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then funcs=100; fi
+                    if ! [[ "${branches}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then branches=100; fi
+
                     file_min=$(printf "%s\n%s\n%s\n" "${lines}" "${funcs}" "${branches}" | sort -n | head -n 1)
                     min_coverage=$(printf "%s\n%s\n" "${min_coverage}" "${file_min}" | sort -n | head -n 1)
                   done
