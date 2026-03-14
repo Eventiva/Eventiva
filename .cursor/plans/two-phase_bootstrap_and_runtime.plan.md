@@ -1,28 +1,20 @@
 ---
-name: ""
-overview: ""
-todos: []
-isProject: false
----
-
----
-
 name: Two-phase bootstrap and runtime
 overview: Introduce a strict two-phase architecture: System 1 (bootstrap) runs DB structuring and entity building and populates EntityRegistry; System 2 (runtime) runs only after System 1 completes, using the built state to expose entity endpoints, cluster, RPC, HTTP, and UI. The two systems never run concurrently.
 todos:
 
 - id: platform-split-phase1-phase2
 content: "In packages/core/src/runtime/platform.ts, split createPlatformTemplate into phase 1 (bootstrap) and phase 2 (runtime). Phase 1 provides only what runCoreStartup needs (observability, schema stack, database, extension hooks, merged extension layers); phase 2 adds HTTP server and makeEntityEndpointsLayer. Expose getBootstrapLayer()/getRuntimeLayer() or platformPhase1/platformPhase2."
-status: pending
+status: complete
 - id: run-runtime-two-phase
 content: "In packages/core/src/runtime/run-runtime.ts, implement two-phase run: (1) run bootstrap effect with phase 1 layer only (runCoreStartup then exit); (2) run runtime effect with phase 2 layer (yield* EntityEndpointsServer then Effect.never). Update runMain and runRuntime to use this flow; keep DevTools wiring."
-status: pending
+status: complete
 - id: default-platform-wire
 content: "In packages/platforms/default/src/index.ts, switch to the new two-phase API: obtain bootstrap and runtime layers from createPlatformTemplate (or equivalent) and pass them to the updated runMain so /api/rpc/contacts and Swagger see Contact after bootstrap."
-status: pending
+status: complete
 - id: docs-two-phase
 content: "Document the two-phase bootstrap vs runtime model in docs/learnings/architecture.md (or a new doc): System 1 (DB, schema, runCoreStartup, EntityRegistry); System 2 (entity endpoints, cluster, HTTP, RPC, UI); entity endpoints route map is built only after EntityRegistry is populated."
-status: pending
+status: complete
 isProject: false
 
 ---
@@ -149,4 +141,3 @@ Either way, the default platform ([packages/platforms/default/src/index.ts](pack
 - **Defer route map per request:** Resolving `pathPrefix` from EntityRegistry on each request is an alternative fix but adds latency and complexity; the two-phase design is cleaner and keeps a single route map build.
 - **Two separate processes:** If later you need System 1 to persist state (e.g. to disk or DB) and System 2 to start in another process, the same split (bootstrap vs runtime) applies; handoff would then be via persisted state or IPC instead of in-memory.
 - **Passing Contact explicitly in entityEndpoints:** Works as a workaround only if Contact were a static import; Contact is created dynamically in runCoreStartup and registered in EntityRegistry, so it cannot be passed as a descriptor before bootstrap. The two-phase approach is the proper fix.
-

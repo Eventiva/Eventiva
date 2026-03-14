@@ -11,7 +11,6 @@ import {
     createPlatformTemplate,
     createPlatformTemplateTwoPhase,
     DatabaseLiveInMemory,
-    runMainTwoPhase,
     type DefaultRunnerProfile,
     type ExtensionRegistration,
 } from '@eventiva/core';
@@ -62,12 +61,3 @@ export const defaultPlatformTemplate: PlatformTemplate = createPlatformTemplate(
  * are built after EntityRegistry is populated (runCoreStartup).
  */
 export const defaultPlatformTemplateTwoPhase = createPlatformTemplateTwoPhase(platformOptions);
-
-/**
- * Runtime entrypoint: run two-phase (bootstrap then runtime) so /api/rpc/contacts and
- * Swagger see Contact. Run via: nx run platforms-default:run
- *
- * Entity endpoints: POST /api/rpc/contacts with body { method, payload } (entityId defaults to "store").
- * Example: curl -X POST http://localhost:3000/api/rpc/contacts -H "Content-Type: application/json" -d '{"method":"list","payload":{}}'
- */
-runMainTwoPhase(defaultPlatformTemplateTwoPhase);

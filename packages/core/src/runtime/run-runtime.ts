@@ -16,8 +16,7 @@ import { DevTools } from '@effect/experimental';
 import { NodeRuntime } from '@effect/platform-node';
 import { runCoreStartup } from './run-core-startup.js';
 import { EntityEndpointsServer } from '../cluster/entity-endpoints.js';
-import { ExtensionHookPubSub } from '../extensions/extension-hook-pubsub.js';
-import { RUNTIME_READY_TOPIC } from '../extensions/extension-hook-pubsub.js';
+import { ExtensionHookPubSub, PROCESS_RUNTIME_READY_TOPIC } from '../extensions/extension-hook-pubsub.js';
 import { withSpanAndLog } from '../observability/helpers.js';
 import type { PlatformTemplateTwoPhase } from './platform.js';
 
@@ -41,8 +40,10 @@ export const runtimeOnlyProgram = Effect.gen(function* () {
     yield* EntityEndpointsServer;
     yield* Effect.logInfo('runtime ready; server serving until interrupt');
     const hooks = yield* ExtensionHookPubSub;
-    yield* hooks.publish(RUNTIME_READY_TOPIC, {}).pipe(
-        Effect.catchAll(() => Effect.void),
+    yield* hooks.publish(PROCESS_RUNTIME_READY_TOPIC, {}).pipe(
+        Effect.catchAll((err) =>
+            Effect.logDebug('PROCESS_RUNTIME_READY_TOPIC listener failed', { error: String(err) }).pipe(Effect.asVoid)
+        ),
         Effect.fork,
         Effect.asVoid
     );

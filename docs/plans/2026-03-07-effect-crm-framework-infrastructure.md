@@ -107,7 +107,7 @@ isProject: false
 
 ## 6. Runtime entrypoint
 
-- **Files:** Create packages/core/src/runtime.ts (or apps/cluster-runtime/main.ts if you prefer a separate app). If under core, add an Nx target or script to run it (e.g. node dist/packages/core/runtime.js or nx run core:run).
+- **Files:** Create packages/core/src/runtime.ts (or apps/cluster-runtime/main.ts if you prefer a separate app). If under core, add an Nx target or script to run it (e.g. node dist/core/runtime.js or nx run core:run).
 - **Actions:**
     - Compose the default platform Layer (observability + Sharding + SingleRunner + entity layers).
     - Run an Effect program that: (Observability required) Creates a root span for "runtime.start", logs startup with structured fields, and records a metric (e.g. "runtime.started" or "runtime.duration"). Then acquires Sharding (and Runner) from the layer. Gets a client for the Hello World entity and sends one RPC (e.g. sayHello); the handler's span/log/metrics will appear in the same trace. Logs the hello result and records success; then exits cleanly. No code path without span + log + metric.

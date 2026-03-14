@@ -76,6 +76,60 @@ const ShutdownPostEndpoint = HttpApiEndpoint.post('shutdownPost', '/api/shutdown
     .addSuccess(ShutdownSuccess);
 const ShutdownGroup = HttpApiGroup.make('Shutdown').add(ShutdownGetEndpoint).add(ShutdownPostEndpoint);
 
+/** Required handler keys for each entity API group (used by runtime assertion and tests). */
+export const ENTITY_GROUP_REQUIRED_HANDLER_KEYS = [
+    'invoke',
+    'list',
+    'get',
+    'create',
+    'update',
+    'delete',
+] as const;
+
+/**
+ * Validates that a built handlers object has all required entity group keys and each is a function.
+ * Used in the group callback and in unit tests to surface type/shape mismatches early.
+ *
+ * @throws if built is null/not object, has no .handle, has no .handlers iterable, or any required key is missing or not a function
+ */
+export function validateEntityGroupHandlers(
+    built: unknown,
+    groupName: string,
+    requiredKeys: ReadonlyArray<string> = ENTITY_GROUP_REQUIRED_HANDLER_KEYS
+): void {
+    if (typeof built !== 'object' || built === null) {
+        throw new Error(`EntityEndpoints: group "${groupName}" did not return a handlers object`);
+    }
+    const h = built as {
+        handle?: unknown;
+        handlers?: Iterable<{ endpoint?: { name?: string }; handler?: unknown }>;
+    };
+    if (typeof h.handle !== 'function') {
+        throw new Error(
+            `EntityEndpoints: group "${groupName}" handlers.handle is not a function (expected chain of .handle("${requiredKeys.join('", "')}", ...))`
+        );
+    }
+    const handlersIter = h.handlers;
+    if (!handlersIter) {
+        throw new Error(
+            `EntityEndpoints: group "${groupName}" has no handlers array (expected keys: ${requiredKeys.join(', ')})`
+        );
+    }
+    const namesToHandler = new Map<string, unknown>();
+    for (const item of handlersIter) {
+        const name = item?.endpoint?.name;
+        if (name) namesToHandler.set(name, item.handler);
+    }
+    for (const key of requiredKeys) {
+        const fn = namesToHandler.get(key);
+        if (typeof fn !== 'function') {
+            throw new Error(
+                `EntityEndpoints: group "${groupName}" missing or invalid handler "${key}" (expected function; have: ${Array.from(namesToHandler.keys()).join(', ') || 'none'})`
+            );
+        }
+    }
+}
+
 /**
  * Convert a kebab-case path prefix into a PascalCase Swagger group name.
  *
@@ -87,6 +141,13 @@ function pathPrefixToGroupName(pathPrefix: string): string {
         .split('-')
         .map((s) => (s.length > 0 ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s))
         .join('');
+    return Effect.sync(() =>
+        pathPrefix
+            .split('-')
+            .map((s) => (s.length > 0 ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s))
+            .join('')
+    ).pipe(withSpanAndLog('pathPrefixToGroupName', { attributes: { pathPrefix } }));
+>>>>>>> origin/main
 }
 
 type PathSeg = `/${string}`;
@@ -96,11 +157,16 @@ type PathSeg = `/${string}`;
  *
  * @param pathPrefix - URL path segment used for the entity (kebab-case, without a leading slash)
  * @param groupName - Display name used for the Swagger/OpenAPI group
+<<<<<<< HEAD
  * @returns An HttpApiGroup containing:
+=======
+ * @returns Effect that yields an HttpApiGroup containing:
+>>>>>>> origin/main
  *  - RPC invoke at `/api/rpc/{pathPrefix}`
  *  - list and create at `/api/{pathPrefix}`
  *  - get, update and delete at `/api/{pathPrefix}/:id`
  */
+<<<<<<< HEAD
 function makeEntityGroup(pathPrefix: string, groupName: string): HttpApiGroup.HttpApiGroup.Any {
     const rpcPath = `/api/rpc/${pathPrefix}` as PathSeg;
     const listPath = `/api/${pathPrefix}` as PathSeg;
@@ -131,6 +197,40 @@ function makeEntityGroup(pathPrefix: string, groupName: string): HttpApiGroup.Ht
         .add(createE)
         .add(updateE)
         .add(deleteE) as HttpApiGroup.HttpApiGroup.Any;
+=======
+function makeEntityGroup(pathPrefix: string, groupName: string): Effect.Effect<HttpApiGroup.HttpApiGroup.Any> {
+    return Effect.sync(() => {
+        const rpcPath = `/api/rpc/${pathPrefix}` as PathSeg;
+        const listPath = `/api/${pathPrefix}` as PathSeg;
+        const resourcePath = `/api/${pathPrefix}/:id` as PathSeg;
+        const invokeE = HttpApiEndpoint.post('invoke', rpcPath)
+            .setPayload(RpcInvokePayload)
+            .addSuccess(RpcInvokeSuccess)
+            .annotate(
+                OpenApi.Summary,
+                'Invoke an entity RPC method (CRUD: list, get, create, update, delete)'
+            )
+            .annotate(
+                OpenApi.Description,
+                'Call any entity method by name. Default CRUD: **list** (payload: {}), **get** (payload: { id }), **create** (payload: entity fields), **update** (payload: { id, patch }), **delete** (payload: { id }). Set "method" to the operation and "payload" to the matching shape.'
+            );
+        const listE = HttpApiEndpoint.get('list', listPath).addSuccess(JsonSuccess);
+        const getE = HttpApiEndpoint.get('get', resourcePath).setPath(IdPathParam).addSuccess(JsonSuccess);
+        const createE = HttpApiEndpoint.post('create', listPath).setPayload(Schema.Unknown).addSuccess(JsonSuccess);
+        const updateE = HttpApiEndpoint.patch('update', resourcePath)
+            .setPath(IdPathParam)
+            .setPayload(Schema.Unknown)
+            .addSuccess(JsonSuccess);
+        const deleteE = HttpApiEndpoint.del('delete', resourcePath).setPath(IdPathParam).addSuccess(JsonSuccess);
+        return HttpApiGroup.make(groupName)
+            .add(invokeE)
+            .add(listE)
+            .add(getE)
+            .add(createE)
+            .add(updateE)
+            .add(deleteE) as HttpApiGroup.HttpApiGroup.Any;
+    }).pipe(withSpanAndLog('makeEntityGroup', { attributes: { pathPrefix, groupName } }));
+>>>>>>> origin/main
 }
 
 /**
@@ -149,13 +249,17 @@ export interface EntityEndpointDescriptor {
 /**
  * Build a single entity endpoint descriptor. Pass to createPlatformTemplate entityEndpoints
  * so the HTTP server exposes POST /api/rpc/:pathPrefix for this entity.
+ *
+ * @returns Effect that yields the descriptor (observable span/log/metric).
  */
 export function makeEntityEndpointDescriptor(
     entity: Entity.Any,
     defaultEntityId: string,
     pathPrefix: string
-): EntityEndpointDescriptor {
-    return { entity, defaultEntityId, pathPrefix };
+): Effect.Effect<EntityEndpointDescriptor> {
+    return Effect.sync(() => ({ entity, defaultEntityId, pathPrefix })).pipe(
+        withSpanAndLog('makeEntityEndpointDescriptor', { attributes: { pathPrefix } })
+    );
 }
 
 export interface EntityEndpointsOptions {
@@ -167,14 +271,16 @@ export interface EntityEndpointsOptions {
 function isEntityEndpointFlagEnabled(
     overrides: FeatureFlagOverrides | undefined,
     key: keyof typeof FeatureFlagKeys
-): boolean {
-    const k = FeatureFlagKeys[key];
-    if (overrides && k in overrides) return overrides[k] ?? true;
-    const envKey = `EVENTIVA_FEATURE_${key}` as const;
-    const v = process.env[envKey];
-    if (v === 'false' || v === '0') return false;
-    if (v === 'true' || v === '1') return true;
-    return true;
+): Effect.Effect<boolean> {
+    return Effect.sync(() => {
+        const k = FeatureFlagKeys[key];
+        if (overrides && k in overrides) return overrides[k] ?? true;
+        const envKey = `EVENTIVA_FEATURE_${key}` as const;
+        const v = process.env[envKey];
+        if (v === 'false' || v === '0') return false;
+        if (v === 'true' || v === '1') return true;
+        return true;
+    }).pipe(withSpanAndLog('isEntityEndpointFlagEnabled', { attributes: { key: String(key) } }));
 }
 
 /**
@@ -192,15 +298,19 @@ export function makeEntityEndpointsLayer(
 ): Layer.Layer<EntityEndpointsServer, any, Sharding.Sharding | HttpServer.HttpServer> {
     const port = options.port ?? 3000;
     const fo = options.featureOverrides;
-    const useFullInit = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_FULL_INIT');
     const startServer = Effect.gen(function* () {
+        const useFullInit = yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_FULL_INIT');
         // Early return BEFORE any yield* – avoids running effects (tracer) when skipping init.
         // Crash: getFiberRef(undefined) in tracer when fiberRefs from different Effect instance.
         if (!useFullInit) {
             return { port } as const;
         }
         yield* Effect.logInfo('EntityEndpointsServer: initializing...', { service: 'eventiva-core' });
+<<<<<<< HEAD
         if (isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SHARDING')) {
+=======
+        if (yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SHARDING')) {
+>>>>>>> origin/main
             yield* Sharding.Sharding;
         } else {
             yield* Effect.logDebug(
@@ -232,7 +342,7 @@ export function makeEntityEndpointsLayer(
                 defaultEntityId: string;
             }
         >();
-        if (isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_CLIENT_FETCH')) {
+        if (yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_CLIENT_FETCH')) {
             for (const d of allDescriptors) {
                 const entity = d.entity as Entity.Any;
                 const getClient = yield* entity.client;
@@ -315,8 +425,13 @@ export function makeEntityEndpointsLayer(
             any
         >;
         for (const d of allDescriptors) {
+<<<<<<< HEAD
             const groupName = pathPrefixToGroupName(d.pathPrefix);
             api = api.add(makeEntityGroup(d.pathPrefix, groupName)) as typeof api;
+=======
+            const groupName = yield* pathPrefixToGroupName(d.pathPrefix);
+            api = api.add(yield* makeEntityGroup(d.pathPrefix, groupName)) as typeof api;
+>>>>>>> origin/main
         }
 
         const shutdownResponse = { ok: true as const, message: 'Shutting down' };
@@ -328,6 +443,7 @@ export function makeEntityEndpointsLayer(
         );
 
         type GroupHandlers = { handle: (name: string, fn: (...args: any[]) => Effect.Effect<any>) => GroupHandlers };
+<<<<<<< HEAD
         const entityGroupLayers = allDescriptors.map((d) => {
             const groupName = pathPrefixToGroupName(d.pathPrefix);
             const p = d.pathPrefix;
@@ -355,9 +471,54 @@ export function makeEntityEndpointsLayer(
         const apiLayer = HttpApiBuilder.api(api as any).pipe(
             Layer.provide(shutdownGroupLive),
             Layer.provide(mergedEntityGroups)
+=======
+        const entityGroupLayers = yield* Effect.all(
+            allDescriptors.map((d) =>
+                Effect.gen(function* () {
+                    const groupName = yield* pathPrefixToGroupName(d.pathPrefix);
+                    const p = d.pathPrefix;
+                    return ((HttpApiBuilder.group as unknown) as (
+                        a: unknown,
+                        n: string,
+                        f: (h: GroupHandlers) => GroupHandlers
+                    ) => Layer.Layer<unknown, unknown, unknown>)(
+                        api,
+                        groupName,
+                        (handlers) => {
+                            const built = handlers
+                                .handle('invoke', invokeHandler(p))
+                                .handle('list', () => runClient(p, 'list', {}))
+                                .handle('get', ({ path }: { path: { id: string } }) => runClient(p, 'get', { id: path.id }))
+                                .handle('create', ({ payload }: { payload: unknown }) => runClient(p, 'create', payload))
+                                .handle('update', ({ path, payload }: { path: { id: string }; payload: unknown }) =>
+                                    runClient(p, 'update', {
+                                        id: path.id,
+                                        ...(typeof payload === 'object' && payload !== null ? payload : {}),
+                                    })
+                                )
+                                .handle('delete', ({ path }: { path: { id: string } }) =>
+                                    runClient(p, 'delete', { id: path.id })
+                                );
+                            validateEntityGroupHandlers(built, groupName);
+                            return built;
+                        }
+                    );
+                })
+            )
+>>>>>>> origin/main
         );
 
-        const useFullLayerBuild = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_FULL_LAYER_BUILD');
+        const mergedEntityGroups =
+            entityGroupLayers.length > 0
+                ? entityGroupLayers.reduce((acc, layer) => Layer.merge(acc, layer))
+                : Layer.succeedContext(Context.empty());
+
+        const apiLayer = HttpApiBuilder.api(api as any).pipe(
+            Layer.provide(shutdownGroupLive),
+            Layer.provide(mergedEntityGroups)
+        );
+
+        const useFullLayerBuild = yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_FULL_LAYER_BUILD');
         if (useFullLayerBuild) {
             // Serve the API and mount Swagger at /api/docs; both require HttpApi.Api (provided by apiLayer).
             yield* Effect.logInfo('EntityEndpointsServer: building serve + Swagger layer...', {
@@ -365,7 +526,7 @@ export function makeEntityEndpointsLayer(
             });
             const serveLayer = HttpApiBuilder.serve();
             const swaggerLayer = HttpApiSwagger.layer({ path: '/api/docs' });
-            const serveAndSwaggerLayers = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SWAGGER')
+            const serveAndSwaggerLayers = (yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SWAGGER'))
                 ? Layer.mergeAll(serveLayer, swaggerLayer)
                 : serveLayer;
 
@@ -401,8 +562,13 @@ export function makeEntityEndpointsLayer(
         });
         return { port } as const;
     });
-    const useTracing = isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_TRACING');
-    const runEffect = useTracing ? startServer.pipe(withSpanAndLog('makeEntityEndpointsLayer')) : startServer;
+    const runEffect = Effect.gen(function* () {
+        const useTracing = yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_TRACING');
+        if (useTracing) {
+            return yield* startServer.pipe(withSpanAndLog('makeEntityEndpointsLayer'));
+        }
+        return yield* startServer;
+    });
     return Layer.scoped(EntityEndpointsServer, runEffect) as Layer.Layer<
         EntityEndpointsServer,
         any,

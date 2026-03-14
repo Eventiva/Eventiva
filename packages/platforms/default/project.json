@@ -9,7 +9,7 @@
             "executor": "@nx/js:tsc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/packages/platforms/default",
+                "outputPath": "dist/platforms/default",
                 "main": "packages/platforms/default/src/index.ts",
                 "tsConfig": "packages/platforms/default/tsconfig.lib.json",
                 "assets": []
@@ -18,7 +18,7 @@
         "run": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "pnpm exec tsx --tsconfig packages/platforms/default/tsconfig.run.json packages/platforms/default/src/index.ts",
+                "command": "pnpm exec tsx --tsconfig packages/platforms/default/tsconfig.run.json packages/platforms/default/src/main.ts",
                 "cwd": "{workspaceRoot}"
             },
             "configurations": {},

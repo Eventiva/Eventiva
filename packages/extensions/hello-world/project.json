@@ -9,7 +9,7 @@
             "executor": "@nx/js:tsc",
             "outputs": ["{options.outputPath}"],
             "options": {
-                "outputPath": "dist/packages/extensions/hello-world",
+                "outputPath": "dist/extensions/hello-world",
                 "main": "packages/extensions/hello-world/src/index.ts",
                 "tsConfig": "packages/extensions/hello-world/tsconfig.lib.json",
                 "assets": []
