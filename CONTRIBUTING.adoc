@@ -146,9 +146,9 @@ If you are working on a issue which is tracked in the roadmap or issue trackers,
 Code review is a complex process which we undertake over multiple locations to ensure that the code complies with all our current expectations and goals.
 There are a number of resources which we utilise to ensure the pull request is handled as fairly as possible.
 
-- Bit.cloud - Utilized to compare how the proposed version will affect other components and simulate changes across all components that are affected.
 - Discord - Utilized to communicate regarding the proposed changes in a free flowing manor, with quick feedback and immediate response times.
 - GitHub - Utilized to manage the proposed changes, run security checks, run automations, track review approvals and change requests.
+- Nx - Utilized to build, test, lint, and type-check all affected packages in the monorepo.
 
 Once you have submitted a pull request, the following processes are automated:
 
@@ -157,9 +157,9 @@ These suggested changes should be taken as seriously as a real developer telling
 If you disagree with any of the suggestion, simply leave a comment and let us know.
 - Code Analysis: SonarCloud will provide a quality control analysis of the code.
 You should fix any and all issues which this highlights.
-- Branch Preview: Bit will automatically release a new Lane and publish it to Bit.Cloud.
-This will allow you to preview your components and test how the changes you made will affect other elements.
-- Checks: A number of security, code and build steps (20+ at time of writing) will run on your branch.
+- Build and Test: Nx will automatically build all affected packages, run linting, type checking, and tests.
+This ensures that your changes don't break existing functionality and that all packages in the monorepo remain compatible.
+- Checks: A number of security, code and build steps will run on your branch.
 Until these have completed your code can not be merged.
 
 Before you move to manual review from our team, you will have a chance to utilize https://github.com/apps/sweep-ai[SweepAI], which will automatically work on improving things for you.
