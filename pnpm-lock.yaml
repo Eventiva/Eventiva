@@ -273,6 +273,9 @@ importers:
       drizzle-kit:
         specifier: 1.0.0-beta.16-ea816b6
         version: 1.0.0-beta.16-ea816b6
+      vitest:
+        specifier: ^2.1.0
+        version: 2.1.9(@types/node@20.19.9)(jsdom@26.1.0)(less@4.5.1)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)
 
   packages/databases/pg:
     dependencies:
