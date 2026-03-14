@@ -219,10 +219,9 @@ const hasModifier = (node, modifier) =>
     Boolean(node.modifiers?.some((value) => value.kind === modifier));
 
 const getJsDoc = (sourceText, node) => {
-    const ranges = ts.getLeadingCommentRanges(sourceText, node.getFullStart()) ?? [];
-    const jsDocRange = ranges.find((range) => sourceText.slice(range.pos, range.end).startsWith('/**'));
-    if (!jsDocRange) return '';
-    return sourceText.slice(jsDocRange.pos, jsDocRange.end);
+    const prefix = sourceText.slice(0, node.getStart());
+    const match = prefix.match(/\\/\\*\\*[\\s\\S]*?\\*\\/\\s*$/);
+    return match?.[0] ?? '';
 };
 
 const normalizeParamName = (value) => value.replace(/^\\.\\.\\./, '').replace(/\\?$/, '');
