@@ -55,7 +55,7 @@ export function makeSingleRunnerLayer(
  * observability (logging, metrics, tracing) when built. Ensure ObservabilityLive
  * is provided in the layer composition for full observability support.
  */
-export function makeClusterLayer(mode: ClusterMode): Layer.Layer<never, never, never> {
+export function makeClusterLayer(mode: ClusterMode): Layer.Layer<never, never, never> | ReturnType<typeof makeSingleRunnerLayer> {
     switch (mode) {
         case 'test':
             return clusterLayerDefault;
