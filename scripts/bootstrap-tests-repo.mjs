@@ -83,6 +83,7 @@ const projectRoot = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineProject({
     test: {
+        root: projectRoot,
         include: ['src/**/*.spec.ts'],
         environment: 'node',
         globals: false,
