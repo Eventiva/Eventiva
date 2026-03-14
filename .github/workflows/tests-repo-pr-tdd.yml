@@ -96,11 +96,9 @@ jobs:
                       "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
                   )"
 
-                  if git ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null; then
-                    git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
-                  else
-                    git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
-                  fi
+                  # Always rebuild the tests branch from tests repo default branch.
+                  # This keeps the branch clean and effectively rebased on main.
+                  git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
 
                   git config --global --unset-all http.https://github.com/.extraheader || true
                   echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
@@ -202,7 +200,7 @@ jobs:
                   fi
 
                   git commit -m "chore(tdd): sync dist and update tests for ${BRANCH_NAME}"
-                  git push -u origin "${BRANCH_NAME}"
+                  git push --force-with-lease -u origin "${BRANCH_NAME}"
 
             - name: Ensure tests repo PR exists
               uses: actions/github-script@v8
