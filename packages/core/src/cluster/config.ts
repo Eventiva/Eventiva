@@ -35,10 +35,13 @@ export const clusterLayerDefault: Layer.Layer<never, never, never> = TestRunner.
  *
  * Observability: The underlying SingleRunner, Sharding, and ShardingConfig layers
  * provide their own observability (logging, metrics, tracing) when built.
+ *
+ * @returns Layer that provides Sharding, Runners, and MessageStorage.
+ * Requires SqlClient and may fail with ConfigError if sharding config is invalid.
  */
 export function makeSingleRunnerLayer(
     shardingConfigOverrides?: Partial<ShardingConfig.ShardingConfig['Type']>
-): Layer.Layer<never, never, never> {
+): ReturnType<typeof SingleRunner.layer> {
     return SingleRunner.layer({ shardingConfig: shardingConfigOverrides });
 }
 
