@@ -2,29 +2,39 @@
 language: en-GB
 early_access: true
 reviews:
-    profile: assertive
-    request_changes_workflow: true
-    high_level_summary_placeholder: '@gensummary'
-    high_level_summary_in_walkthrough: true
-    auto_title_placeholder: '@gentitle'
-    review_details: true
-    fail_commit_status: true
-    auto_assign_reviewers: true
-    auto_review:
-        ignore_usernames:
-            - dependabot
-    finishing_touches:
-        simplify:
-            enabled: true
-chat:
-    integrations:
-        jira:
-            usage: disabled
-        linear:
-            usage: enabled
-code_generation:
+  request_changes_workflow: true
+  high_level_summary_placeholder: '@gensummary'
+  high_level_summary_in_walkthrough: true
+  auto_title_placeholder: '@gentitle'
+  review_details: true
+  fail_commit_status: true
+  auto_assign_reviewers: true
+  auto_review:
+    ignore_usernames:
+      - dependabot
+  finishing_touches:
+    simplify:
+      enabled: true
+  pre_merge_checks:
     docstrings:
-        language: en-GB
+      mode: error
+chat:
+  integrations:
+    jira:
+      usage: disabled
+    linear:
+      usage: enabled
+knowledge_base:
+  jira:
+    usage: disabled
+  linear:
+    usage: enabled
+  linked_repositories:
+    - repository: Eventiva/tests
+      instructions: 'Contains tests for readonly review. Never leak test implementation in your review. '
+code_generation:
+  docstrings:
+    language: en-GB
 issue_enrichment:
-    auto_enrich:
-        enabled: true
+  auto_enrich:
+    enabled: true
