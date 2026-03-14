@@ -71,15 +71,15 @@ export default [
                         },
                         {
                             sourceTag: 'type:database',
-                            onlyDependOnLibsWithTags: ['type:core'],
+                            onlyDependOnLibsWithTags: ['type:core', "type:shared"],
                         },
                         {
                             sourceTag: 'type:extension',
-                            onlyDependOnLibsWithTags: ['type:core', 'type:extension'],
+                            onlyDependOnLibsWithTags: ['type:core', "type:shared", 'type:extension'],
                         },
                         {
                             sourceTag: 'type:platform',
-                            onlyDependOnLibsWithTags: ['type:core', 'type:database', 'type:extension', 'type:platform'],
+                            onlyDependOnLibsWithTags: ['type:core', "type:shared", 'type:database', 'type:extension', 'type:platform'],
                         },
                         // Layer-based constraints (frontend/backend separation)
                         {
