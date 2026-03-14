@@ -4,6 +4,13 @@
  * publishing to that topic runs all registered run effects (workflow.execute with payload + messageId).
  * Topic names are defined here; use extensionHookTopic(extensionId, phase) for consistency.
  *
+ * **Note on clustering:** This ExtensionHookPubSub is designed for in-process hook communication
+ * (e.g., extension lifecycle hooks, beforeCall/afterCall). For cluster-wide messaging between
+ * distributed entities, use `Message` and `MessageStorage` from `@effect/cluster` instead.
+ * 
+ * - **ExtensionHookPubSub**: Use for local, in-process hooks (onLoad, beforeCall, afterCall, etc.)
+ * - **Message/MessageStorage**: Use for cross-process, cluster-wide messaging between entities
+ *
  * Standard hooks (useful and safe to extend):
  * - core/loaded       — Runtime has finished loading. Extensions register a workflow to run and then publish their own extension/{id}/onLoad.
  * - core/extensions-loaded — Published after CORE_LOADED has been published and all its listeners have completed. Use for post-load actions (e.g. seeding demo data).
@@ -15,6 +22,7 @@
  *
  * All publish and listener runs are automatically traced, logged, and measured (see instrumented makePubSub).
  * @see https://github.com/Effect-TS/effect/tree/main/packages/workflow
+ * @see https://effect-ts.github.io/effect/docs/cluster for cluster-wide messaging with Message/MessageStorage
  */
 import * as Context from 'effect/Context';
 import * as Effect from 'effect/Effect';

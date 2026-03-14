@@ -24,7 +24,11 @@ import {
 } from '../cluster/entity-endpoints.js';
 import { PiiEncryptionLive } from '../security/index.js';
 import { Database } from '../database/database.js';
-import { ExtensionHooksLive, WorkflowEngineLayerInMemory } from '../extensions/extension-hooks.js';
+import {
+    ExtensionHooksLive,
+    WorkflowEngineLayerInMemory,
+    ClusterWorkflowEngineLayer,
+} from '../extensions/extension-hooks.js';
 import { mergeConfigLayers, mergeEntityLayers, type ExtensionRegistration } from '../extensions/extension-registry.js';
 import { WorkflowRegistryLive } from '../workflow/engine.js';
 import { RuntimeConfigLive } from '../config/runtime-config.js';
@@ -102,7 +106,9 @@ function isFeatureEnabled(overrides: FeatureFlagOverrides | undefined, key: keyo
  * @param options - Options controlling which sub-layers are included (database layer, extensions, optional schema finalizer, endpoints port and feature flag overrides)
  * @returns A composed `Layer` that provides observability, runtime configuration, PII encryption, extension configuration, optional cluster and schema stacks, the database layer, extension hooks and workflow components, and a scoped lifecycle; extension entity layers are merged on top of this base layer
  */
-function buildBootstrapStack(options: CreatePlatformTemplateOptions): Layer.Layer<never, any, unknown> {
+function buildBootstrapStack(
+    options: CreatePlatformTemplateOptions
+): Layer.Layer<never, any, unknown> {
     const fo = options.featureOverrides;
     const scopeLayer = Layer.scoped(Scope.Scope, Scope.make());
     const endpointsPort = options.endpointsPort ?? 3000;
@@ -119,12 +125,20 @@ function buildBootstrapStack(options: CreatePlatformTemplateOptions): Layer.Laye
         Layer.provideMerge(schemaConfigLayer),
         Layer.provideMerge(schemaFinalizerLayer)
     );
-    const hooksStack = Layer.mergeAll(ExtensionHooksLive, WorkflowEngineLayerInMemory, WorkflowRegistryLive);
-    const observabilityLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
+    // Use ClusterWorkflowEngine when cluster is enabled, otherwise use in-memory workflow engine
+    const workflowEngineLayer = isFeatureEnabled(fo, 'CLUSTER')
+        ? ClusterWorkflowEngineLayer.pipe(Layer.provide(clusterLayerDefault))
+        : WorkflowEngineLayerInMemory;
+    const hooksStack = Layer.mergeAll(ExtensionHooksLive, workflowEngineLayer, WorkflowRegistryLive);
+    // Base observability layer (Logger, Tracer, Metrics)
+    // Note: ClusterMetrics from @effect/cluster exports individual Gauge metrics
+    // (entities, singletons, runners, runnersHealthy, shards) but not a Layer.
+    // These metrics are automatically registered when cluster components are used.
+    const metricsLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
         ? ObservabilityLive
         : (NodeSdk.layerEmpty as Layer.Layer<never, any, unknown>);
     const baseLayers: Layer.Layer<never, any, unknown>[] = [
-        observabilityLayer,
+        metricsLayer, // ObservabilityLive (ClusterMetrics are auto-registered by cluster components)
         runtimeConfigLayer,
         extensionConfigLayer,
         isFeatureEnabled(fo, 'CLUSTER') ? clusterLayerDefault : Layer.empty,
@@ -134,6 +148,10 @@ function buildBootstrapStack(options: CreatePlatformTemplateOptions): Layer.Laye
         hooksStack,
         scopeLayer,
     ];
+    // Merge all base layers
+    // Note: Layer.memoize returns an Effect, not a Layer. For memoization,
+    // use Layer.unwrapScoped(Layer.memoize(...)) if needed, but Effect already
+    // memoizes layers by reference identity in dependency graphs.
     const base = Layer.mergeAll(
         baseLayers[0]!,
         baseLayers[1]!,
@@ -167,20 +185,19 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
     const explicitDescriptors = options.entityEndpoints ?? [];
     // Build entity endpoints layer when feature is on and port is set. Descriptors can be empty;
     // makeEntityEndpointsLayer discovers entities from EntityRegistry (populated by runCoreStartup).
-    if (useEntityEndpoints && endpointsPort !== undefined) {
+    if (useEntityEndpoints && options.endpointsPort !== undefined) {
         const serverLayer = NodeHttpServer.layer(() => createServer(), { port: endpointsPort, host: '0.0.0.0' });
         const platformContextLayer = NodeHttpServer.layerContext;
         const endpointsLayer = makeEntityEndpointsLayer(explicitDescriptors, {
             port: endpointsPort,
             featureOverrides: options.featureOverrides,
         });
-        return endpointsLayer.pipe(Layer.provide(serverLayer), Layer.provide(platformContextLayer)) as Layer.Layer<
-            EntityEndpointsServer,
-            any,
-            unknown
-        >;
+        return endpointsLayer.pipe(
+            Layer.provide(serverLayer),
+            Layer.provide(platformContextLayer)
+        ) as Layer.Layer<EntityEndpointsServer, any, unknown>;
     }
-    if (endpointsPort !== undefined) {
+    if (options.endpointsPort !== undefined) {
         const serverLayer = Layer.scopedDiscard(
             Effect.acquireRelease(
                 Effect.sync(() => {
@@ -223,7 +240,9 @@ function buildRuntimeLayer(options: CreatePlatformTemplateOptions): Layer.Layer<
  *
  * @returns An object with `getBootstrapLayer()` to obtain the bootstrap layer and `getRuntimeLayer()` to obtain the runtime layer
  */
-export function createPlatformTemplateTwoPhase(options: CreatePlatformTemplateOptions): PlatformTemplateTwoPhase {
+export function createPlatformTemplateTwoPhase(
+    options: CreatePlatformTemplateOptions
+): PlatformTemplateTwoPhase {
     const bootstrapLayer = buildBootstrapStack(options);
     return {
         getBootstrapLayer: () => bootstrapLayer,
