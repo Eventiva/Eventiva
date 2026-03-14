@@ -113,7 +113,7 @@ Create these initiatives (e.g. via `mcp_linear_save_initiative`):
 
 - **Title:** Implement test-creation and test-execution CI workflows (two repos)
 - **Description:** Two repositories: main (code, .d.ts, API contracts) and test (test code). Workflow 1: test-creation – pull definition files from main, create new test files/suites on a branch named to correlate with main branch. Workflow 2: test-execution – pull test code from test repo, run tests against PR, report results to both repos via Linear issues and PR comments. Success: Both workflows run in CI; TDD loop operable.
-- **Implementation notes:** GitHub Actions; Nx for task orchestration; Linear API or MCP for creating bugs/tasks. See plan Part D (5.1, 5.2); docs/learnings/tdd-and-test-creation.md.
+- **Implementation notes:** GitHub Actions; Nx for task orchestration; Linear API or MCP for creating bugs/tasks. See plan Part D (5.1, 5.2); docs/learnings/tdd-and-test-creation.md; docs/plans/2026-03-14-tests-repo-sync-and-tdd-ci.md.
 - **Dependencies:** Nx monorepo; second repo created/configured.
 - **Context:** docs/learnings/tdd-and-test-creation.md.
 - **TDD:** Schema for workflow inputs/outputs; implementer does not write tests for application code covered by these workflows.

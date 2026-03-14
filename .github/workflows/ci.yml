@@ -17,7 +17,7 @@ jobs:
             # NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
             # Run without Nx Cloud so CI does not fail when the cloud org is disabled (e.g. over FREE plan).
             # Remove this and set NX_CLOUD_ACCESS_TOKEN if you upgrade and want cloud cache/distribution.
-            NX_NO_CLOUD: "true"
+            NX_NO_CLOUD: 'true'
         steps:
             - uses: actions/checkout@v6
               with:
@@ -45,6 +45,8 @@ jobs:
             # - run: npx nx record -- echo Hello World
             # test target will be re-added when Vitest is configured
             - run: pnpm nx run-many --exclude=eventiva -t lint build typecheck
+            - run: pnpm run dts:docs:enrich
+            - run: pnpm run dts:docs:check
             # Nx Cloud recommends fixes for failures to help you get CI green faster. Learn more: https://nx.dev/ci/features/self-healing-ci
             - run: pnpm nx fix-ci
               if: always()

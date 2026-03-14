@@ -1,0 +1,24 @@
+# API Contract Documentation Rule
+
+All exported callable contracts must be documented so test-generation agents can rely on `.d.ts` alone.
+
+## Required documentation for exported callables
+
+For each exported function/method/callable contract:
+
+- include `@remarks` describing intent and contract behavior,
+- include a typed `@example` usage snippet,
+- include `@param` for every parameter,
+- include `@returns` when return type is not `void`.
+
+## Dist-first contract enforcement
+
+- Contract comments must be present in declaration output (`dist/**/*.d.ts`).
+- Use:
+    - `pnpm run dts:docs:enrich` to auto-fill missing contract docs,
+    - `pnpm run dts:docs:check` to fail when required tags are missing.
+
+## Testing implications
+
+Contract tests in the tests repo are allowed to use declaration docs as the source of truth.
+Do not require implementation internals when generating tests from declaration contracts.
