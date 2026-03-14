@@ -1,17 +1,21 @@
 {
-  "name": "@eventiva/databases.pg",
+  "name": "@eventiva/extensions.contact",
   "version": "0.0.1",
   "private": true,
   "type": "module",
   "main": "./src/index.js",
   "types": "./src/index.d.ts",
   "dependencies": {
+    "@effect/cluster": "^0.56.0",
+    "@effect/rpc": "^0.73.1",
+    "@effect/workflow": "^0.16.0",
     "@eventiva/core": "workspace:*",
     "@eventiva/databases.shared": "workspace:*",
-    "@effect/sql": "^0.21.0",
-    "@effect/sql-pg": "^0.34.0",
     "drizzle-orm": "1.0.0-beta.18-dc9676b",
     "effect": "^3.19.17"
+  },
+  "devDependencies": {
+    "@eventiva/databases.pg": "workspace:*"
   },
   "module": "./src/index.js"
 }

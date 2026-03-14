@@ -1,15 +1,6 @@
 import { AnyIndexBuilder, CheckBuilder, ForeignKeyBuilder, PgColumnBuilder, PgPolicy, PrimaryKeyBuilder, UniqueConstraintBuilder } from 'drizzle-orm/pg-core';
 import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all';
-/**
- * Creates a text object based on the provided value. (Used by drizzle)
- * @param value - The input value to be processed.
- * @param [config] - Optional configuration object.
- * @param config.type - The type of input value, if provided.
- * @returns - A text object derived from the input value.
- */
-export declare const typeid: (value?: string, config?: {
-    type: string;
-}) => import("drizzle-orm/pg-core").PgTextBuilder<[string, ...string[]]>;
+import { typeid as typeidBuilder } from '@eventiva/databases.shared';
 /**
  * Represents the status constants used to indicate the state of an entity.
  *
@@ -109,7 +100,7 @@ type ExcludeForbiddenFields<TColumns extends Record<string, PgColumnBuilder>> = 
  */
 type ValidateColumns<TColumns extends Record<string, PgColumnBuilder>> = EnsureRequiredFields<ExcludeForbiddenFields<TColumns>>;
 export type AllBuilders = {
-    typeid: typeof typeid;
+    typeid: typeof typeidBuilder;
 } & ReturnType<typeof getPgColumnBuilders>;
 export type PgTableExtraConfigValue = AnyIndexBuilder | CheckBuilder | ForeignKeyBuilder | PrimaryKeyBuilder | UniqueConstraintBuilder | PgPolicy;
 export type PgTableExtraConfig = Record<string, PgTableExtraConfigValue>;

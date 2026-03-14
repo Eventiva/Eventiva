@@ -9,6 +9,7 @@ import {
     PgPolicy,
     pgTable as drizzlePgTable,
     PrimaryKeyBuilder,
+    text,
     timestamp,
     UniqueConstraintBuilder,
     uniqueIndex,
@@ -17,7 +18,7 @@ import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all';
 import { typeid as typeidBuilder } from '@eventiva/databases.shared';
 
 /** Placeholder for createdBy FK when getTable is not available (e.g. createTableFinal standalone). */
-const createdByPlaceholder = drizzlePgTable('_created_by_placeholder', { id: typeidBuilder('id', { type: 'contact' }) });
+const createdByPlaceholder = drizzlePgTable('_created_by_placeholder', { id: text('id') });
 
 /**
  * Represents the status constants used to indicate the state of an entity.
@@ -256,7 +257,7 @@ export function createTableFinal<
              * Because this references the users table, we must update the users table manually if adding any new
              * fields to this abstraction.
              */
-            createdBy: typeidBuilder('created_by', { type: 'contact' }).references(() => createdByPlaceholder.id),
+            createdBy: text('created_by').references(() => createdByPlaceholder.id),
             active: statusEnum('active').generatedAlwaysAs(
                 (): SQL =>
                     sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
@@ -307,7 +308,7 @@ export function buildTableInternal(
                 .$onUpdate(() => new Date().toISOString()),
             disabledAt: timestamp('disabled_at', { mode: 'string' }),
             deletedAt: timestamp('deleted_at', { mode: 'string' }),
-            createdBy: typeidBuilder('created_by', { type: 'contact' }).references(createdByRef),
+            createdBy: text('created_by').references(createdByRef),
             active: statusEnum('active').generatedAlwaysAs(
                 (): SQL =>
                     sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
