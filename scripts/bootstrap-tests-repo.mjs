@@ -492,6 +492,13 @@ const buildRootConfig = async () => {
         private: true,
         type: 'module',
         packageManager: 'pnpm@9.14.2',
+        pnpm: {
+            ...(existingPackage.pnpm ?? {}),
+            overrides: {
+                ...(existingPackage.pnpm?.overrides ?? {}),
+                'jsonpath-plus': existingPackage.pnpm?.overrides?.['jsonpath-plus'] ?? '^10.3.0',
+            },
+        },
         scripts: {
             ...(existingPackage.scripts ?? {}),
             test: "nx run-many -t test --projects='tests-*' --outputStyle=static",
