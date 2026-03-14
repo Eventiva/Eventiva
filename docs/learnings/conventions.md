@@ -45,3 +45,15 @@
 
 - **Never use `any` types.** Use proper generics, Effect Schema types, and branded types so deployments and RPC boundaries stay type-safe. If the type system forces a cast, prefer `unknown` and a type guard or a narrow generic; document the escape hatch. Exception: Effect Schema’s `Schema<T, Encoded, Context>` may use `any` for Encoded/Context when they are not relevant (e.g. `Schema<Id, any, any>`); avoid `any` in runtime values and public API boundaries.
 - **Reference:** common-crm `projects/entities/abstraction` for typesafe entity/table patterns (Effect Schema, validated columns, `BaseClass`/`AllFields`); Effect migration notes for Schema/Layer typing.
+
+## Exported callable docs
+
+- Every exported callable in the contract surface must be documented in declarations (`dist/**/*.d.ts`) with TypeDoc-compatible tags.
+- Required tags per callable:
+    - `@remarks` (contract intent),
+    - `@example` (typed usage snippet),
+    - `@param` for each parameter,
+    - `@returns` for non-void return types.
+- CI enforcement:
+    - `pnpm run dts:docs:enrich` auto-adds missing declaration docs,
+    - `pnpm run dts:docs:check` fails if required tags are still missing.

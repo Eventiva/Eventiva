@@ -12,6 +12,7 @@
 - **Script: README.adoc → README.md** – When the main branch has a pull request that touches documentation, generate **README.md** from **README.adoc** (e.g. in CI or pre-push). Document this in the Linear issue for Documentation and Contributor Experience.
 - **Replacing JetClient-style docs** – Use colocated MDX or similar with a free static generator; or Cursor rules + learnings for API contracts. No paid JetBrains/Qodana requirement for contributors.
 - **API surface** – Rebuild will expose OpenAPI, GraphQL, MCP, gRPC; extensions mesh into all. Docs should describe how to discover and use these (e.g. OpenAPI spec, GraphQL schema, MCP tools).
+- **Declaration docs are mandatory** – Exported callable contracts in `dist/**/*.d.ts` must include `@remarks`, `@example`, per-parameter `@param`, and `@returns` (non-void). Keep this enforced in CI via `dts:docs:enrich` + `dts:docs:check`.
 
 ## References
 

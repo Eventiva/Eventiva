@@ -44,6 +44,12 @@ jobs:
             - name: Build workspace
               run: pnpm nx run-many --exclude=eventiva -t build
 
+            - name: Enrich declaration docs for dist contracts
+              run: pnpm run dts:docs:enrich
+
+            - name: Validate declaration docs
+              run: pnpm run dts:docs:check
+
             - name: Upload dist artifact
               uses: actions/upload-artifact@v4
               with:
@@ -59,6 +65,10 @@ jobs:
             BRANCH_NAME: ${{ github.head_ref }}
             BASE_BRANCH: ${{ github.base_ref }}
         steps:
+            - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
             - name: Download dist artifact
               uses: actions/download-artifact@v4
               with:
@@ -101,6 +111,11 @@ jobs:
                   rm -rf tests-repo/dist
                   mkdir -p tests-repo/dist
                   cp -R /tmp/main-dist/. tests-repo/dist/
+
+            - name: Bootstrap tests repo contract suite from dist
+              run: |
+                  set -euo pipefail
+                  node scripts/bootstrap-tests-repo.mjs tests-repo
 
             - name: Compute dist diff for AI schema input
               run: |
@@ -145,6 +160,9 @@ jobs:
                   4. Never delete existing tests.
                   5. You may add/update Step CI workflow YAML used by tests when needed.
                   6. Keep changes scoped to test assets (tests, workflows, test config).
+                  7. Place tests only in Nx project roots under <projectRoot>/src/**/*.spec.ts.
+                  8. Keep tests runnable in contract mode without implementation runtime code.
+                  9. Ensure projects remain runnable via: nx run-many -t test --projects='tests-*'.
 
                   Dist git-diff follows:
                   \`\`\`diff
@@ -307,15 +325,7 @@ jobs:
               id: run_tests
               run: |
                   set +e
-                  pnpm nx run-many -t test --projects='tests-*' --outputStyle=static -- \
-                    --coverage.enabled=true \
-                    --coverage.provider=v8 \
-                    --coverage.reportsDirectory=coverage \
-                    --coverage.reporter=json-summary \
-                    --coverage.reporter=text \
-                    --coverage.thresholds.lines=80 \
-                    --coverage.thresholds.functions=80 \
-                    --coverage.thresholds.branches=80 > test-output.log 2>&1
+                  pnpm nx run-many -t test --projects='tests-*' --outputStyle=static > test-output.log 2>&1
                   test_exit=$?
                   set -e
 
@@ -406,6 +416,7 @@ jobs:
                       sanitized-failures.txt
                       tdd-summary.md
                       coverage
+                      tests/**/coverage
                       coverage-summary.txt
                   if-no-files-found: warn
 

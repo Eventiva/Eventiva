@@ -17,7 +17,10 @@
         "format:check": "nx run eventiva:format-check",
         "check": "nx run eventiva:check",
         "fix": "nx run eventiva:fix",
-        "test": "nx run-many -t test"
+        "test": "nx run-many -t test",
+        "dts:docs:enrich": "node scripts/enrich-dts-docs.mjs dist",
+        "dts:docs:check": "node scripts/check-dts-docs.mjs dist",
+        "tests:repo:bootstrap": "node scripts/bootstrap-tests-repo.mjs"
     },
     "pnpm": {
         "overrides": {
@@ -48,6 +51,7 @@
         "@rspack/core": "1.6.8",
         "@rspack/dev-server": "^1.1.4",
         "@rspack/plugin-react-refresh": "^1.0.0",
+        "@stepci/runner": "^2.0.7",
         "@swc-node/register": "~1.11.1",
         "@swc/cli": "~0.8.0",
         "@swc/core": "~1.15.5",
