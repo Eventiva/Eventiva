@@ -134,20 +134,15 @@ export function validateEntityGroupHandlers(
  * Convert a kebab-case path prefix into a PascalCase Swagger group name.
  *
  * @param pathPrefix - Kebab-case path segment (for example, "hello-worlds")
- * @returns The PascalCase group name (for example, "HelloWorlds")
+ * @returns Effect that yields the PascalCase group name (for example, "HelloWorlds")
  */
-function pathPrefixToGroupName(pathPrefix: string): string {
-    return pathPrefix
-        .split('-')
-        .map((s) => (s.length > 0 ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s))
-        .join('');
+function pathPrefixToGroupName(pathPrefix: string): Effect.Effect<string> {
     return Effect.sync(() =>
         pathPrefix
             .split('-')
             .map((s) => (s.length > 0 ? s[0].toUpperCase() + s.slice(1).toLowerCase() : s))
             .join('')
     ).pipe(withSpanAndLog('pathPrefixToGroupName', { attributes: { pathPrefix } }));
->>>>>>> origin/main
 }
 
 type PathSeg = `/${string}`;
@@ -157,47 +152,11 @@ type PathSeg = `/${string}`;
  *
  * @param pathPrefix - URL path segment used for the entity (kebab-case, without a leading slash)
  * @param groupName - Display name used for the Swagger/OpenAPI group
-<<<<<<< HEAD
- * @returns An HttpApiGroup containing:
-=======
  * @returns Effect that yields an HttpApiGroup containing:
->>>>>>> origin/main
  *  - RPC invoke at `/api/rpc/{pathPrefix}`
  *  - list and create at `/api/{pathPrefix}`
  *  - get, update and delete at `/api/{pathPrefix}/:id`
  */
-<<<<<<< HEAD
-function makeEntityGroup(pathPrefix: string, groupName: string): HttpApiGroup.HttpApiGroup.Any {
-    const rpcPath = `/api/rpc/${pathPrefix}` as PathSeg;
-    const listPath = `/api/${pathPrefix}` as PathSeg;
-    const resourcePath = `/api/${pathPrefix}/:id` as PathSeg;
-    const invokeE = HttpApiEndpoint.post('invoke', rpcPath)
-        .setPayload(RpcInvokePayload)
-        .addSuccess(RpcInvokeSuccess)
-        .annotate(
-            OpenApi.Summary,
-            'Invoke an entity RPC method (CRUD: list, get, create, update, delete)'
-        )
-        .annotate(
-            OpenApi.Description,
-            'Call any entity method by name. Default CRUD: **list** (payload: {}), **get** (payload: { id }), **create** (payload: entity fields), **update** (payload: { id, patch }), **delete** (payload: { id }). Set "method" to the operation and "payload" to the matching shape.'
-        );
-    const listE = HttpApiEndpoint.get('list', listPath).addSuccess(JsonSuccess);
-    const getE = HttpApiEndpoint.get('get', resourcePath).setPath(IdPathParam).addSuccess(JsonSuccess);
-    const createE = HttpApiEndpoint.post('create', listPath).setPayload(Schema.Unknown).addSuccess(JsonSuccess);
-    const updateE = HttpApiEndpoint.patch('update', resourcePath)
-        .setPath(IdPathParam)
-        .setPayload(Schema.Unknown)
-        .addSuccess(JsonSuccess);
-    const deleteE = HttpApiEndpoint.del('delete', resourcePath).setPath(IdPathParam).addSuccess(JsonSuccess);
-    return HttpApiGroup.make(groupName)
-        .add(invokeE)
-        .add(listE)
-        .add(getE)
-        .add(createE)
-        .add(updateE)
-        .add(deleteE) as HttpApiGroup.HttpApiGroup.Any;
-=======
 function makeEntityGroup(pathPrefix: string, groupName: string): Effect.Effect<HttpApiGroup.HttpApiGroup.Any> {
     return Effect.sync(() => {
         const rpcPath = `/api/rpc/${pathPrefix}` as PathSeg;
@@ -230,7 +189,6 @@ function makeEntityGroup(pathPrefix: string, groupName: string): Effect.Effect<H
             .add(updateE)
             .add(deleteE) as HttpApiGroup.HttpApiGroup.Any;
     }).pipe(withSpanAndLog('makeEntityGroup', { attributes: { pathPrefix, groupName } }));
->>>>>>> origin/main
 }
 
 /**
@@ -306,11 +264,7 @@ export function makeEntityEndpointsLayer(
             return { port } as const;
         }
         yield* Effect.logInfo('EntityEndpointsServer: initializing...', { service: 'eventiva-core' });
-<<<<<<< HEAD
-        if (isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SHARDING')) {
-=======
         if (yield* isEntityEndpointFlagEnabled(fo, 'ENTITY_ENDPOINTS_SHARDING')) {
->>>>>>> origin/main
             yield* Sharding.Sharding;
         } else {
             yield* Effect.logDebug(
@@ -425,13 +379,8 @@ export function makeEntityEndpointsLayer(
             any
         >;
         for (const d of allDescriptors) {
-<<<<<<< HEAD
-            const groupName = pathPrefixToGroupName(d.pathPrefix);
-            api = api.add(makeEntityGroup(d.pathPrefix, groupName)) as typeof api;
-=======
             const groupName = yield* pathPrefixToGroupName(d.pathPrefix);
             api = api.add(yield* makeEntityGroup(d.pathPrefix, groupName)) as typeof api;
->>>>>>> origin/main
         }
 
         const shutdownResponse = { ok: true as const, message: 'Shutting down' };
@@ -443,35 +392,6 @@ export function makeEntityEndpointsLayer(
         );
 
         type GroupHandlers = { handle: (name: string, fn: (...args: any[]) => Effect.Effect<any>) => GroupHandlers };
-<<<<<<< HEAD
-        const entityGroupLayers = allDescriptors.map((d) => {
-            const groupName = pathPrefixToGroupName(d.pathPrefix);
-            const p = d.pathPrefix;
-            return ((HttpApiBuilder.group as unknown) as (a: unknown, n: string, f: (h: GroupHandlers) => GroupHandlers) => Layer.Layer<unknown, unknown, unknown>)(
-                api,
-                groupName,
-                (handlers) =>
-                    handlers
-                        .handle('invoke', invokeHandler(p))
-                        .handle('list', () => runClient(p, 'list', {}))
-                        .handle('get', ({ path }: { path: { id: string } }) => runClient(p, 'get', { id: path.id }))
-                        .handle('create', ({ payload }: { payload: unknown }) => runClient(p, 'create', payload))
-                        .handle('update', ({ path, payload }: { path: { id: string }; payload: unknown }) =>
-                            runClient(p, 'update', { id: path.id, ...(typeof payload === 'object' && payload !== null ? payload : {}) })
-                        )
-                        .handle('delete', ({ path }: { path: { id: string } }) => runClient(p, 'delete', { id: path.id }))
-            );
-        });
-
-        const mergedEntityGroups =
-            entityGroupLayers.length > 0
-                ? entityGroupLayers.reduce((acc, layer) => Layer.merge(acc, layer))
-                : Layer.succeedContext(Context.empty());
-
-        const apiLayer = HttpApiBuilder.api(api as any).pipe(
-            Layer.provide(shutdownGroupLive),
-            Layer.provide(mergedEntityGroups)
-=======
         const entityGroupLayers = yield* Effect.all(
             allDescriptors.map((d) =>
                 Effect.gen(function* () {
@@ -505,7 +425,6 @@ export function makeEntityEndpointsLayer(
                     );
                 })
             )
->>>>>>> origin/main
         );
 
         const mergedEntityGroups =

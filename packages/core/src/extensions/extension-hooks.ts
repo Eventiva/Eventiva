@@ -18,11 +18,7 @@ import {
     extensionHookTopic,
     CORE_LOADED_TOPIC,
     EXTENSIONS_LOADED_TOPIC,
-<<<<<<< HEAD
     PROCESS_RUNTIME_READY_TOPIC,
-=======
-    PROCESS_RUNTIME_READY_TOPIC,
->>>>>>> origin/main
     CORE_SHUTDOWN_TOPIC,
     type ExtensionCallContext,
     type ExtensionRegisterContext,
@@ -38,11 +34,7 @@ export {
     extensionHookTopic,
     CORE_LOADED_TOPIC,
     EXTENSIONS_LOADED_TOPIC,
-<<<<<<< HEAD
     PROCESS_RUNTIME_READY_TOPIC,
-=======
-    PROCESS_RUNTIME_READY_TOPIC,
->>>>>>> origin/main
     CORE_SHUTDOWN_TOPIC,
     type ExtensionCallContext,
     type ExtensionRegisterContext,
