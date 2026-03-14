@@ -75,7 +75,11 @@ const projectTemplate = ({ projectName, projectRoot, checkScriptPath }) => ({
     },
 });
 
-const vitestConfigTemplate = () => `import { defineProject } from 'vitest/config';
+const vitestConfigTemplate = () => `import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { defineProject } from 'vitest/config';
+
+const projectRoot = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineProject({
     test: {
@@ -85,7 +89,9 @@ export default defineProject({
         coverage: {
             enabled: true,
             provider: 'v8',
-            reportsDirectory: 'coverage',
+            all: false,
+            include: ['src/**/*.spec.ts'],
+            reportsDirectory: path.join(projectRoot, 'coverage'),
             reporter: ['text', 'json-summary'],
             thresholds: {
                 lines: 80,
