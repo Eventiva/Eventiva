@@ -147,7 +147,7 @@ jobs:
                     exit 1
                   fi
 
-                  diff_input="$(head -c 200000 ../dist-diff.patch)"
+                  diff_input="$(head -c 30000 ../dist-diff.patch)"
                   prompt_file="../cursor-test-creator-prompt.md"
 
                   cat > "${prompt_file}" <<EOF
