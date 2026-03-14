@@ -497,6 +497,7 @@ const buildRootConfig = async () => {
             overrides: {
                 ...(existingPackage.pnpm?.overrides ?? {}),
                 'jsonpath-plus': existingPackage.pnpm?.overrides?.['jsonpath-plus'] ?? '^10.3.0',
+                'parse-duration': existingPackage.pnpm?.overrides?.['parse-duration'] ?? '^2.1.5',
             },
         },
         scripts: {

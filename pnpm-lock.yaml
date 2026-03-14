@@ -7,6 +7,7 @@ settings:
 overrides:
   effect: 3.19.19
   jsonpath-plus: ^10.3.0
+  parse-duration: ^2.1.5
 
 patchedDependencies:
   effect@3.19.19:
@@ -8400,8 +8401,8 @@ packages:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
 
-  parse-duration@1.1.2:
-    resolution: {integrity: sha512-p8EIONG8L0u7f8GFgfVlL4n8rnChTt8O5FSxgxMz2tjc9FMP199wxVKVB6IbKx11uTbKHACSvaLVIKNnoeNR/A==}
+  parse-duration@2.1.5:
+    resolution: {integrity: sha512-/IX1KRw6zHDOOJrgIz++gvFASbFl7nc8GEXaLdD7d1t1x/GnrK6hh5Fgk8G3RLpkIEi4tsGj9pupGLWNg0EiJA==}
 
   parse-json@5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
@@ -14608,7 +14609,7 @@ snapshots:
       liquidless-faker: 1.1.1
       liquidless-naughtystrings: 1.0.0
       p-limit: 3.1.0
-      parse-duration: 1.1.2
+      parse-duration: 2.1.5
       phasic: 1.0.2
       proxy-agent: 6.5.0
       simple-statistics: 7.8.9
@@ -20548,7 +20549,7 @@ snapshots:
     dependencies:
       callsites: 3.1.0
 
-  parse-duration@1.1.2: {}
+  parse-duration@2.1.5: {}
 
   parse-json@5.2.0:
     dependencies:

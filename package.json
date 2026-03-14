@@ -25,7 +25,8 @@
     "pnpm": {
         "overrides": {
             "effect": "3.19.19",
-            "jsonpath-plus": "^10.3.0"
+            "jsonpath-plus": "^10.3.0",
+            "parse-duration": "^2.1.5"
         },
         "patchedDependencies": {
             "effect@3.19.19": "patches/effect@3.19.19.patch"
