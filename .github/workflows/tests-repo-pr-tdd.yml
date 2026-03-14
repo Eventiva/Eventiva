@@ -1,0 +1,465 @@
+name: Tests Repo PR TDD
+
+on:
+    pull_request:
+        types:
+            - opened
+            - synchronize
+            - reopened
+
+permissions:
+    actions: read
+    checks: write
+    contents: read
+    pull-requests: write
+
+env:
+    TESTS_REPO: Eventiva/tests
+    # NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
+    # Run without Nx Cloud so CI does not fail when the cloud org is disabled (e.g. over FREE plan).
+    # Remove this and set NX_CLOUD_ACCESS_TOKEN if you upgrade and want cloud cache/distribution.
+    NX_NO_CLOUD: 'true'
+
+jobs:
+    build-dist:
+        name: Build and prepare dist
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9.14.2
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Build workspace
+              run: pnpm nx run-many --exclude=eventiva -t build
+
+            - name: Upload dist artifact
+              uses: actions/upload-artifact@v4
+              with:
+                  name: main-dist
+                  path: dist
+                  if-no-files-found: error
+
+    sync-tests-repo:
+        name: Sync dist and generate tests
+        runs-on: ubuntu-latest
+        needs: build-dist
+        env:
+            BRANCH_NAME: ${{ github.head_ref }}
+            BASE_BRANCH: ${{ github.base_ref }}
+        steps:
+            - name: Download dist artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: main-dist
+                  path: /tmp/main-dist
+
+            - name: Checkout tests repo branch
+              id: checkout_tests_repo
+              env:
+                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+              run: |
+                  set -euo pipefail
+
+                  git clone "https://x-access-token:${BOT_TOKEN}@github.com/${TESTS_REPO}.git" tests-repo
+                  cd tests-repo
+
+                  git config user.name "eventiva-bot"
+                  git config user.email "eventiva-bot@users.noreply.github.com"
+                  git fetch --all --prune
+
+                  default_branch="$(
+                    curl -fsSL \
+                      -H "Authorization: Bearer ${BOT_TOKEN}" \
+                      -H "Accept: application/vnd.github+json" \
+                      "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
+                  )"
+
+                  if git ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null; then
+                    git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
+                  else
+                    git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
+                  fi
+
+                  git config --global --unset-all http.https://github.com/.extraheader || true
+                  echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
+
+            - name: Sync dist into tests repo
+              run: |
+                  set -euo pipefail
+                  rm -rf tests-repo/dist
+                  mkdir -p tests-repo/dist
+                  cp -R /tmp/main-dist/. tests-repo/dist/
+
+            - name: Compute dist diff for AI schema input
+              run: |
+                  set -euo pipefail
+                  cd tests-repo
+
+                  git fetch origin "${BASE_BRANCH}" || true
+                  if git show-ref --verify --quiet "refs/remotes/origin/${BASE_BRANCH}"; then
+                    git diff "origin/${BASE_BRANCH}" -- dist > ../dist-diff.patch
+                  else
+                    git diff -- dist > ../dist-diff.patch
+                  fi
+
+            - name: Install Cursor CLI
+              run: |
+                  set -euo pipefail
+                  curl https://cursor.com/install -fsS | bash
+                  echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
+
+            - name: Run AI test-creator from dist diff
+              env:
+                  CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+              run: |
+                  set -euo pipefail
+                  cd tests-repo
+
+                  if ! command -v agent > /dev/null; then
+                    echo "Cursor CLI command 'agent' is unavailable after install."
+                    exit 1
+                  fi
+
+                  diff_input="$(head -c 200000 ../dist-diff.patch)"
+                  prompt_file="../cursor-test-creator-prompt.md"
+
+                  cat > "${prompt_file}" <<EOF
+                  You are the dedicated test-creator agent for Eventiva/tests.
+
+                  Hard requirements:
+                  1. Use only the provided dist git-diff as schema/contract input.
+                  2. Do not inspect or assume implementation internals from the main repo.
+                  3. Add or update tests only for changed/new API surface.
+                  4. Never delete existing tests.
+                  5. You may add/update Step CI workflow YAML used by tests when needed.
+                  6. Keep changes scoped to test assets (tests, workflows, test config).
+
+                  Dist git-diff follows:
+                  \`\`\`diff
+                  ${diff_input}
+                  \`\`\`
+                  EOF
+
+                  agent -p "$(cat "${prompt_file}")" --force
+
+            - name: Commit and push tests repo updates
+              env:
+                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  cd tests-repo
+
+                  git add dist
+                  git add .
+
+                  deleted_non_dist="$(git diff --cached --name-status | awk '$1 == "D" && $2 !~ /^dist\// { print $2 }')"
+                  if [ -n "${deleted_non_dist}" ]; then
+                    echo "Refusing to delete non-dist files:"
+                    printf '%s\n' "${deleted_non_dist}"
+                    exit 1
+                  fi
+
+                  if git diff --cached --quiet; then
+                    echo "No tests repo changes to commit."
+                    exit 0
+                  fi
+
+                  git commit -m "chore(tdd): sync dist and update tests for ${BRANCH_NAME}"
+                  git push -u origin "${BRANCH_NAME}"
+
+            - name: Ensure tests repo PR exists
+              uses: actions/github-script@v8
+              env:
+                  BRANCH_NAME: ${{ github.head_ref }}
+                  TESTS_REPO: Eventiva/tests
+                  MAIN_PR_URL: ${{ github.event.pull_request.html_url }}
+              with:
+                  github-token: ${{ secrets.BOT_TOKEN }}
+                  script: |
+                      const [owner, repo] = (process.env.TESTS_REPO ?? "").split("/");
+                      const headBranch = process.env.BRANCH_NAME;
+
+                      if (!owner || !repo || !headBranch) {
+                        core.setFailed("Missing TESTS_REPO or BRANCH_NAME.");
+                        return;
+                      }
+
+                      const { data: testsRepo } = await github.rest.repos.get({ owner, repo });
+                      const baseBranch = testsRepo.default_branch;
+
+                      if (headBranch === baseBranch) {
+                        core.info("Head branch matches tests repo default branch; skipping PR creation.");
+                        return;
+                      }
+
+                      const headRef = `${owner}:${headBranch}`;
+                      const existing = await github.paginate(github.rest.pulls.list, {
+                        owner,
+                        repo,
+                        state: "open",
+                        head: headRef,
+                        base: baseBranch,
+                        per_page: 100
+                      });
+
+                      if (existing.length > 0) {
+                        core.info(`Open tests repo PR already exists: #${existing[0].number}`);
+                        return;
+                      }
+
+                      const title = `tdd: sync tests for ${headBranch}`;
+                      const body = [
+                        "Automated PR created by Eventiva main-repo TDD workflow.",
+                        "",
+                        `- Main PR: ${process.env.MAIN_PR_URL ?? "n/a"}`,
+                        `- Source branch: \`${headBranch}\``,
+                        `- Target branch: \`${baseBranch}\``
+                      ].join("\n");
+
+                      const created = await github.rest.pulls.create({
+                        owner,
+                        repo,
+                        title,
+                        head: headBranch,
+                        base: baseBranch,
+                        body
+                      });
+
+                      core.info(`Created tests repo PR #${created.data.number}`);
+
+    run-tdd-tests:
+        name: Run tests via main repo Nx
+        runs-on: ubuntu-latest
+        needs: sync-tests-repo
+        outputs:
+            summary: ${{ steps.build_summary.outputs.summary }}
+        env:
+            BRANCH_NAME: ${{ github.head_ref }}
+        steps:
+            - uses: actions/checkout@v6
+              with:
+                  fetch-depth: 0
+
+            - uses: pnpm/action-setup@v4
+              with:
+                  version: 9.14.2
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+
+            - name: Download dist artifact
+              uses: actions/download-artifact@v4
+              with:
+                  name: main-dist
+                  path: /tmp/main-dist
+
+            - name: Restore dist
+              run: |
+                  set -euo pipefail
+                  rm -rf dist
+                  mkdir -p dist
+                  cp -R /tmp/main-dist/. dist/
+
+            - name: Clone tests repo into tests/
+              env:
+                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+              run: |
+                  set -euo pipefail
+
+                  mkdir -p tests
+                  rm -rf tests/remote
+                  git clone "https://x-access-token:${BOT_TOKEN}@github.com/${TESTS_REPO}.git" tests/remote
+
+                  cd tests/remote
+                  git fetch --all --prune
+
+                  default_branch="$(
+                    curl -fsSL \
+                      -H "Authorization: Bearer ${BOT_TOKEN}" \
+                      -H "Accept: application/vnd.github+json" \
+                      "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
+                  )"
+
+                  if git ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null; then
+                    git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
+                  else
+                    git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
+                  fi
+
+            - name: Run Nx tests with coverage gate
+              id: run_tests
+              run: |
+                  set +e
+                  pnpm nx run-many -t test --projects='tests-*' --outputStyle=static -- \
+                    --coverage.enabled=true \
+                    --coverage.provider=v8 \
+                    --coverage.reportsDirectory=coverage \
+                    --coverage.reporter=json-summary \
+                    --coverage.reporter=text \
+                    --coverage.thresholds.lines=80 \
+                    --coverage.thresholds.functions=80 \
+                    --coverage.thresholds.branches=80 > test-output.log 2>&1
+                  test_exit=$?
+                  set -e
+
+                  echo "test_exit=${test_exit}" >> "$GITHUB_OUTPUT"
+
+            - name: Evaluate coverage reports
+              id: coverage
+              run: |
+                  set -euo pipefail
+
+                  shopt -s globstar nullglob
+                  coverage_files=(coverage/**/coverage-summary.json tests/**/coverage/coverage-summary.json tests/.placeholder/coverage/coverage-summary.json)
+
+                  if [ ${#coverage_files[@]} -eq 0 ]; then
+                    echo "coverage_ok=false" >> "$GITHUB_OUTPUT"
+                    echo "coverage_min=0" >> "$GITHUB_OUTPUT"
+                    echo "No coverage summary files were generated." > coverage-summary.txt
+                    exit 0
+                  fi
+
+                  min_coverage=100
+
+                  for file in "${coverage_files[@]}"; do
+                    lines=$(jq -r '.total.lines.pct // 0' "${file}")
+                    funcs=$(jq -r '.total.functions.pct // 0' "${file}")
+                    branches=$(jq -r '.total.branches.pct // 0' "${file}")
+
+                    file_min=$(printf "%s\n%s\n%s\n" "${lines}" "${funcs}" "${branches}" | sort -n | head -n 1)
+                    min_coverage=$(printf "%s\n%s\n" "${min_coverage}" "${file_min}" | sort -n | head -n 1)
+                  done
+
+                  printf "Minimum coverage across reports: %s%%\n" "${min_coverage}" > coverage-summary.txt
+                  echo "coverage_min=${min_coverage}" >> "$GITHUB_OUTPUT"
+
+                  if awk "BEGIN { exit !(${min_coverage} >= 80) }"; then
+                    echo "coverage_ok=true" >> "$GITHUB_OUTPUT"
+                  else
+                    echo "coverage_ok=false" >> "$GITHUB_OUTPUT"
+                  fi
+
+            - name: Build sanitized summary
+              id: build_summary
+              env:
+                  TEST_EXIT: ${{ steps.run_tests.outputs.test_exit }}
+                  COVERAGE_OK: ${{ steps.coverage.outputs.coverage_ok }}
+                  COVERAGE_MIN: ${{ steps.coverage.outputs.coverage_min }}
+              run: |
+                  set -euo pipefail
+
+                  rg -n "FAIL|Error:|AssertionError|Expected|expected" test-output.log --max-count 40 > raw-failures.txt || true
+
+                  sed -E 's#[A-Za-z0-9_./-]+\\.(spec|test)\\.[jt]sx?##g' raw-failures.txt | \
+                    sed -E 's#tests/remote/##g' > sanitized-failures.txt
+
+                  status="passed"
+                  if [ "${TEST_EXIT}" -ne 0 ] || [ "${COVERAGE_OK}" != "true" ]; then
+                    status="failed"
+                  fi
+
+                  {
+                    echo "### TDD tests"
+                    echo "- Status: ${status}"
+                    echo "- Coverage: ${COVERAGE_MIN}% (threshold: 80%)"
+                    if [ -s sanitized-failures.txt ]; then
+                      echo "- Sanitized failures:"
+                      echo '```text'
+                      head -n 20 sanitized-failures.txt
+                      echo '```'
+                    else
+                      echo "- Sanitized failures: none"
+                    fi
+                  } > tdd-summary.md
+
+                  {
+                    echo "summary<<EOF"
+                    cat tdd-summary.md
+                    echo "EOF"
+                  } >> "$GITHUB_OUTPUT"
+
+            - name: Upload test artifacts
+              if: always()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: tdd-test-artifacts
+                  path: |
+                      test-output.log
+                      raw-failures.txt
+                      sanitized-failures.txt
+                      tdd-summary.md
+                      coverage
+                      coverage-summary.txt
+                  if-no-files-found: warn
+
+            - name: Enforce test and coverage gate
+              env:
+                  TEST_EXIT: ${{ steps.run_tests.outputs.test_exit }}
+                  COVERAGE_OK: ${{ steps.coverage.outputs.coverage_ok }}
+              run: |
+                  set -euo pipefail
+                  if [ "${TEST_EXIT}" -ne 0 ]; then
+                    echo "Tests failed."
+                    exit 1
+                  fi
+                  if [ "${COVERAGE_OK}" != "true" ]; then
+                    echo "Coverage is below threshold (80%) or missing."
+                    exit 1
+                  fi
+
+    review-approve:
+        name: Approve PR when TDD passes
+        runs-on: ubuntu-latest
+        needs: run-tdd-tests
+        if: needs.run-tdd-tests.result == 'success'
+        steps:
+            - name: Submit approval review
+              uses: actions/github-script@v8
+              with:
+                  github-token: ${{ secrets.BOT_TOKEN }}
+                  script: |
+                      const body = ${{ toJSON(needs.run-tdd-tests.outputs.summary) }} || "TDD checks passed."
+                      await github.rest.pulls.createReview({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: context.payload.pull_request.number,
+                        event: "APPROVE",
+                        body
+                      })
+
+    review-request-changes:
+        name: Request changes when TDD fails
+        runs-on: ubuntu-latest
+        needs: run-tdd-tests
+        if: always() && needs.run-tdd-tests.result != 'success'
+        steps:
+            - name: Submit request changes review
+              uses: actions/github-script@v8
+              with:
+                  github-token: ${{ secrets.BOT_TOKEN }}
+                  script: |
+                      const body = ${{ toJSON(needs.run-tdd-tests.outputs.summary) }} || "TDD checks failed."
+                      await github.rest.pulls.createReview({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        pull_number: context.payload.pull_request.number,
+                        event: "REQUEST_CHANGES",
+                        body
+                      })
