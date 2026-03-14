@@ -14,8 +14,10 @@ jobs:
     main:
         runs-on: ubuntu-latest
         env:
-            # Use main-branch token for pushes to main (more Nx Cloud features); PRs use standard token
-            NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
+            # NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
+            # Run without Nx Cloud so CI does not fail when the cloud org is disabled (e.g. over FREE plan).
+            # Remove this and set NX_CLOUD_ACCESS_TOKEN if you upgrade and want cloud cache/distribution.
+            NX_NO_CLOUD: "true"
         steps:
             - uses: actions/checkout@v6
               with:
