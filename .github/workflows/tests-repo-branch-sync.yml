@@ -52,11 +52,19 @@ jobs:
                         ref: `heads/${defaultBranch}`
                       });
 
-                      await github.rest.git.createRef({
-                        owner,
-                        repo,
-                        ref: `refs/heads/${branchName}`,
-                        sha: baseRef.object.sha
-                      });
+                      try {
+                        await github.rest.git.createRef({
+                          owner,
+                          repo,
+                          ref: `refs/heads/${branchName}`,
+                          sha: baseRef.object.sha
+                        });
+                      } catch (error) {
+                        if (error.status === 422) {
+                          core.info(`Branch '${branchName}' was created concurrently; treating as success.`);
+                          return;
+                        }
+                        throw error;
+                      }
 
                       core.info(`Created '${branchName}' from '${defaultBranch}'.`);

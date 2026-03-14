@@ -2,7 +2,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const targetRoot = path.resolve(process.argv[2] ?? 'tests-repo');
-const distRoot = path.join(targetRoot, 'dist');
+const sourceDist = path.resolve(process.argv[3] ?? path.join(process.cwd(), 'dist'));
+const distRoot = sourceDist;
 
 const PROJECTS = [
     {
@@ -246,7 +247,7 @@ const pushCallable = (target, sourceText, sourceFile, idSuffix, node, parameters
 const parseCallables = (absolutePath, repoRoot) => {
     const sourceText = fs.readFileSync(absolutePath, 'utf8');
     const sourceFile = ts.createSourceFile(absolutePath, sourceText, ts.ScriptTarget.Latest, true);
-    const relativeFile = path.relative(repoRoot, absolutePath).replaceAll('\\\\\\\\', '/');
+    const relativeFile = path.relative(repoRoot, absolutePath).replaceAll('\\\\', '/');
     const callables = [];
 
     const visit = (node) => {
@@ -281,6 +282,12 @@ const parseCallables = (absolutePath, repoRoot) => {
         if (ts.isClassDeclaration(node) && hasModifier(node, ts.SyntaxKind.ExportKeyword) && node.name) {
             for (const member of node.members) {
                 if (ts.isMethodDeclaration(member) && member.name) {
+                    if (
+                        hasModifier(member, ts.SyntaxKind.PrivateKeyword) ||
+                        hasModifier(member, ts.SyntaxKind.ProtectedKeyword)
+                    ) {
+                        continue;
+                    }
                     const methodName = ts.isIdentifier(member.name) ? member.name.text : member.name.getText();
                     pushCallable(
                         callables,
@@ -320,11 +327,25 @@ const parseCallables = (absolutePath, repoRoot) => {
 };
 
 export const collectProjectCallables = (projectRoot, distPrefixes) => {
-    const repoRoot = path.dirname(projectRoot);
+    const findRepoRoot = (startDir) => {
+        let current = path.resolve(startDir);
+        while (true) {
+            if (fs.existsSync(path.join(current, 'nx.json')) && fs.existsSync(path.join(current, 'dist'))) {
+                return current;
+            }
+            const parent = path.dirname(current);
+            if (parent === current) {
+                return path.resolve(startDir);
+            }
+            current = parent;
+        }
+    };
+
+    const repoRoot = findRepoRoot(projectRoot);
     const distDir = path.join(repoRoot, 'dist');
     const declarationFiles = walk(distDir).filter(isDeclarationFile);
     const matched = declarationFiles.filter((absolutePath) => {
-        const relative = path.relative(repoRoot, absolutePath).replaceAll('\\\\\\\\', '/');
+        const relative = path.relative(repoRoot, absolutePath).replaceAll('\\\\', '/');
         return distPrefixes.some((prefix) => relative.startsWith(prefix));
     });
 
@@ -482,7 +503,8 @@ const buildRootConfig = async () => {
             ...(existingPackage.devDependencies ?? {}),
             nx: existingPackage.devDependencies?.nx ?? '^22.5.4',
             '@nx/vitest': existingPackage.devDependencies?.['@nx/vitest'] ?? '^22.5.4',
-            vitest: existingPackage.devDependencies?.vitest ?? '^2.1.0',
+            vitest: existingPackage.devDependencies?.vitest ?? '^2.1.9',
+            '@vitest/coverage-v8': existingPackage.devDependencies?.['@vitest/coverage-v8'] ?? '^2.1.9',
             '@effect/vitest': existingPackage.devDependencies?.['@effect/vitest'] ?? '^0.27.0',
             typescript: existingPackage.devDependencies?.typescript ?? '^5.9.2',
             '@stepci/runner': existingPackage.devDependencies?.['@stepci/runner'] ?? '^2.0.7',
@@ -580,9 +602,9 @@ const writeProjectFiles = async (project) => {
 };
 
 const main = async () => {
-    const stat = await fs.stat(distRoot).catch(() => undefined);
+    const stat = await fs.stat(sourceDist).catch(() => undefined);
     if (!stat || !stat.isDirectory()) {
-        console.error(`Cannot bootstrap tests repo: dist directory not found at ${distRoot}`);
+        console.error(`Cannot bootstrap tests repo: source dist directory not found at ${sourceDist}`);
         process.exit(1);
     }
 

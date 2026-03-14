@@ -85,7 +85,7 @@
         "typescript": "~5.9.2",
         "typescript-eslint": "^8.40.0",
         "vite": "^7.0.0",
-        "vitest": "^2.1.0"
+        "vitest": "^2.1.9"
     },
     "dependencies": {
         "@effect/cluster": "^0.56.0",

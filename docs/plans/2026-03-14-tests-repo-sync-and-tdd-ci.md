@@ -11,6 +11,7 @@ Build an operational two-repo TDD loop where:
 3. CI keeps branches in sync, updates tests from contract diffs, runs tests against main implementation, and gates PRs.
 
 This plan follows `docs/learnings/tdd-and-test-creation.md`:
+
 - implementers do not write tests for the same feature work,
 - test creation is schema-only,
 - existing tests are never deleted.
@@ -75,7 +76,8 @@ This plan follows `docs/learnings/tdd-and-test-creation.md`:
 - Ensure build output is available (`dist/` artifact or rebuild).
 - Clone tests repo branch into `tests/` in workspace.
 - Run tests from main Nx context (for example `pnpm nx run-many -t test` with tests projects under `tests/`).
-- Enforce coverage threshold (minimum 80%).
+- Enforce execution gate threshold (minimum 80%) so PR execution is blocked when test execution is clearly insufficient.
+- Treat **100% declaration-callable coverage** as the TDD target in the tests repo. If runtime run coverage/contract completeness is below 100% or results are unexpected, test-runner automation must create a follow-up task for test creators (schema + broad explanation + artifact references).
 - Publish artifacts (coverage + machine-readable test result files).
 - Produce sanitized summary for PR reporting.
 
@@ -83,6 +85,8 @@ This plan follows `docs/learnings/tdd-and-test-creation.md`:
 
 - On pass: submit `APPROVE` review with concise status.
 - On fail: submit `REQUEST_CHANGES` with sanitized failure summary.
+- On test execution failure: create a Linear bug task for implementers with schema context, broad explanation, and machine-readable artifact references.
+- On coverage below 100% or unexpected results: create a Linear task for test creators with schema context, broad explanation, and artifact references.
 
 ### 3) Merge sync workflow
 
@@ -110,6 +114,7 @@ This plan follows `docs/learnings/tdd-and-test-creation.md`:
 ## API/integration testing policy
 
 Use Step CI inside Vitest (`@stepci/runner`) for:
+
 - contract checks (e.g. OpenAPI-aligned),
 - SSE coverage where endpoints exist,
 - CO2 checks where relevant.
@@ -137,7 +142,7 @@ Step CI files remain in tests repo and are executed from the main CI run.
 - Any new feature branch in main auto-exists in tests repo.
 - PR updates main `dist` and corresponding tests in tests repo branch.
 - Test creation step uses schema-only input (`dist` diff) and never deletes tests.
-- Main PR is blocked if tests fail or coverage is below threshold.
+- Main PR is blocked if tests fail or execution coverage falls below threshold; additionally, follow-up Linear tasks are created for implementers/test-creators when failures or sub-100%/unexpected outcomes are detected.
 - PR receives sanitized TDD summary and bot review outcome.
 - Merging main PR syncs tests repo default branch.
 
