@@ -32,9 +32,10 @@ After tests are created, the test-runner agent executes them against the impleme
 ## Implications for planning
 
 - Linear issues for features/components must state: “Deliver type definitions (schema) first; tests are created by the separate test-creator agent from schema only; implementer must not write tests for this work; test-runner agent runs tests and creates Linear bugs/tasks per the feedback loop above.”
-- CI: two repos (main = code + schema; test repo = tests). Two workflows: test-creation (pull definitions from main, create tests on a branch); test-execution (pull tests from test repo, run against PR, report to both repos via Linear and PR comments).
+- CI: two repos (main = code + schema; test repo = tests). Two workflows: test-creation (pull definitions from main, create tests on a branch); test-execution (pull tests from test repo, run against PR, report to both repos via Linear and PR comments). Current workflow files in main repo: `.github/workflows/tests-repo-branch-sync.yml`, `.github/workflows/tests-repo-pr-tdd.yml`, `.github/workflows/tests-repo-merge-sync.yml`.
 
 ## References
 
 - Cursor rule: `.cursor/rules/tdd-test-creation.mdc`
 - Plan: Eventiva Learnings and Rebuild plan, “TDD and test creation” and Part D (Execution).
+- Implementation plan: `docs/plans/2026-03-14-tests-repo-sync-and-tdd-ci.md`
