@@ -61,7 +61,6 @@ export default [
                     enforceBuildableLibDependency: true,
                     allow: [
                         '^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$',
-                        '^@eventiva/databases\\.shared$', // Allow extensions to depend on shared database utilities
                     ],
                     depConstraints: [
                         // Type-based constraints (primary architectural boundaries)
@@ -71,15 +70,15 @@ export default [
                         },
                         {
                             sourceTag: 'type:database',
-                            onlyDependOnLibsWithTags: ['type:core', "type:shared"],
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared'],
                         },
                         {
                             sourceTag: 'type:extension',
-                            onlyDependOnLibsWithTags: ['type:core', "type:shared", 'type:extension'],
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:extension'],
                         },
                         {
                             sourceTag: 'type:platform',
-                            onlyDependOnLibsWithTags: ['type:core', "type:shared", 'type:database', 'type:extension', 'type:platform'],
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:database', 'type:extension', 'type:platform'],
                         },
                         // Layer-based constraints (frontend/backend separation)
                         {
