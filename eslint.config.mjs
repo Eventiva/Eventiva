@@ -80,6 +80,10 @@ export default [
                             sourceTag: 'type:platform',
                             onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:database', 'type:extension', 'type:platform'],
                         },
+                        {
+                            sourceTag: 'type:shared',
+                            onlyDependOnLibsWithTags: ['type:shared'],
+                        },
                         // Layer-based constraints (frontend/backend separation)
                         {
                             sourceTag: 'layer:backend',

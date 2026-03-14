@@ -3,6 +3,11 @@ import type { PgColumnBuilder } from 'drizzle-orm/pg-core';
 import * as Effect from 'effect/Effect';
 import * as Metric from 'effect/Metric';
 
+// Metric instances created at module scope for reuse across invocations
+const typeidCounter = Metric.counter('typeid_total');
+const typeidErrorCounter = Metric.counter('typeid_error');
+const typeidDuration = Metric.timer('typeid_duration');
+
 /**
  * Creates a text column builder for TypeID fields in Drizzle ORM.
  * 
@@ -28,9 +33,6 @@ import * as Metric from 'effect/Metric';
  * ```
  */
 export const typeid = (value = 'id', config?: { type: string }): PgColumnBuilder => {
-    const typeidCounter = Metric.counter('typeid_total');
-    const typeidErrorCounter = Metric.counter('typeid_error');
-    const typeidDuration = Metric.timer('typeid_duration');
 
     const effect = Effect.gen(function* () {
         yield* Effect.logInfo('typeid: creating column builder', {
@@ -40,11 +42,18 @@ export const typeid = (value = 'id', config?: { type: string }): PgColumnBuilder
 
         yield* Metric.increment(typeidCounter);
 
-        const columnBuilder = yield* Effect.try({
-            try: () => text(value) as PgColumnBuilder,
-            catch: (error) => error,
-        }).pipe(
+        const columnBuilder = yield* Effect.sync(() => text(value) as PgColumnBuilder).pipe(
             Metric.trackDuration(typeidDuration),
+            Effect.tapDefect((defect) =>
+                Effect.gen(function* () {
+                    yield* Effect.logError('typeid: error creating column builder', {
+                        columnName: value,
+                        typePrefix: config?.type ?? 'unknown',
+                        error: String(defect),
+                    });
+                    yield* Metric.increment(typeidErrorCounter);
+                })
+            ),
             Effect.tapError((error) =>
                 Effect.gen(function* () {
                     yield* Effect.logError('typeid: error creating column builder', {
