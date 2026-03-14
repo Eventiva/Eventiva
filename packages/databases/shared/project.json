@@ -1,0 +1,19 @@
+{
+    "name": "@eventiva/databases.shared",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/databases/shared/src",
+    "projectType": "library",
+    "tags": ["type:database", "type:shared", "layer:backend", "scope:shared"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/databases/shared",
+                "main": "packages/databases/shared/src/index.ts",
+                "tsConfig": "packages/databases/shared/tsconfig.lib.json",
+                "assets": []
+            }
+        }
+    }
+}

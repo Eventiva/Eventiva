@@ -4,6 +4,7 @@
  * @see docs/learnings/architecture.md
  */
 export { createTable } from './create-table.js';
-export { pgTable, buildTableInternal, testColumns, typeid, type AllBuilders } from './table-builder.js';
+export { pgTable, buildTableInternal, testColumns, type AllBuilders } from './table-builder.js';
+export { typeid } from '@eventiva/databases.shared';
 export { SchemaFinalizerPg } from './schema-finalizer-impl.js';
 //# sourceMappingURL=index.d.ts.map

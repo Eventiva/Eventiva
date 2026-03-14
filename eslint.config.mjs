@@ -59,11 +59,43 @@ export default [
                 'error',
                 {
                     enforceBuildableLibDependency: true,
-                    allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
+                    allow: [
+                        '^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$',
+                    ],
                     depConstraints: [
+                        // Type-based constraints (primary architectural boundaries)
                         {
-                            sourceTag: '*',
-                            onlyDependOnLibsWithTags: ['*'],
+                            sourceTag: 'type:core',
+                            onlyDependOnLibsWithTags: [],
+                        },
+                        {
+                            sourceTag: 'type:database',
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared'],
+                        },
+                        {
+                            sourceTag: 'type:extension',
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:extension'],
+                        },
+                        {
+                            sourceTag: 'type:platform',
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:database', 'type:extension', 'type:platform'],
+                        },
+                        {
+                            sourceTag: 'type:shared',
+                            onlyDependOnLibsWithTags: ['type:shared'],
+                        },
+                        // Layer-based constraints (frontend/backend separation)
+                        {
+                            sourceTag: 'layer:backend',
+                            onlyDependOnLibsWithTags: ['layer:backend', 'layer:shared'],
+                        },
+                        {
+                            sourceTag: 'layer:frontend',
+                            onlyDependOnLibsWithTags: ['layer:frontend', 'layer:shared'],
+                        },
+                        {
+                            sourceTag: 'layer:shared',
+                            onlyDependOnLibsWithTags: ['layer:shared'],
                         },
                     ],
                 },
