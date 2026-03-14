@@ -3,7 +3,7 @@
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "sourceRoot": "packages/core/src",
     "projectType": "library",
-    "tags": [],
+    "tags": ["type:core"],
     "targets": {
         "test": {
             "executor": "@nx/vitest:test",

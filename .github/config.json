@@ -1,0 +1,24 @@
+{
+    "labels": [
+        {
+            "name": "type:core",
+            "color": "0E8A16",
+            "description": "Core module - can be depended on by any other module"
+        },
+        {
+            "name": "type:database",
+            "color": "1D76DB",
+            "description": "Database module - can only be depended on by platforms (except devDependencies)"
+        },
+        {
+            "name": "type:extension",
+            "color": "FBCA04",
+            "description": "Extension module - can depend on core and other extensions, can be depended on by extensions and platforms"
+        },
+        {
+            "name": "type:platform",
+            "color": "B60205",
+            "description": "Platform module - top level, nothing can depend on this"
+        }
+    ]
+}

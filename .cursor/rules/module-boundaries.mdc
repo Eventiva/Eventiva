@@ -1,0 +1,47 @@
+---
+description: Module boundary rules and dependency constraints for Eventiva packages
+alwaysApply: true
+---
+
+# Module Boundaries
+
+When creating or modifying packages in Eventiva, enforce module boundaries based on package type.
+
+## Module Types and Tags
+
+Tag all packages in `project.json` with one of:
+
+- `type:core` - Core functionality, can be depended on by any module
+- `type:database` - Database implementations, only platforms can depend on (runtime)
+- `type:extension` - Feature modules, can depend on core and other extensions
+- `type:platform` - Top-level entry points, nothing can depend on these
+
+## Dependency Rules
+
+| Source Type | Can Depend On |
+|------------|---------------|
+| `type:core` | (nothing) |
+| `type:database` | `type:core` |
+| `type:extension` | `type:core`, `type:extension` |
+| `type:platform` | `type:core`, `type:database`, `type:extension`, `type:platform` |
+
+## Adding New Packages
+
+1. Determine the module type based on purpose
+2. Add the appropriate tag to `project.json`:
+   ```json
+   {
+     "tags": ["type:extension"]
+   }
+   ```
+3. Verify dependencies comply with rules
+4. Run `pnpm nx lint` to check boundaries
+
+## DevDependencies Exception
+
+Database packages can be in `devDependencies` for type imports, even if not allowed as runtime dependencies.
+
+## Reference
+
+- Full documentation: `docs/learnings/module-boundaries.md`
+- ESLint rule: `eslint.config.mjs` - `@nx/enforce-module-boundaries`

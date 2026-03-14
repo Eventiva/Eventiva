@@ -62,8 +62,20 @@ export default [
                     allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$'],
                     depConstraints: [
                         {
-                            sourceTag: '*',
-                            onlyDependOnLibsWithTags: ['*'],
+                            sourceTag: 'type:core',
+                            onlyDependOnLibsWithTags: [],
+                        },
+                        {
+                            sourceTag: 'type:database',
+                            onlyDependOnLibsWithTags: ['type:core'],
+                        },
+                        {
+                            sourceTag: 'type:extension',
+                            onlyDependOnLibsWithTags: ['type:core', 'type:extension'],
+                        },
+                        {
+                            sourceTag: 'type:platform',
+                            onlyDependOnLibsWithTags: ['type:core', 'type:database', 'type:extension', 'type:platform'],
                         },
                     ],
                 },
