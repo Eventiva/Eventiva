@@ -310,6 +310,7 @@ jobs:
                   pnpm nx run-many -t test --projects='tests-*' --outputStyle=static -- \
                     --coverage.enabled=true \
                     --coverage.provider=v8 \
+                    --coverage.reportsDirectory=coverage \
                     --coverage.reporter=json-summary \
                     --coverage.reporter=text \
                     --coverage.thresholds.lines=80 \
@@ -326,7 +327,7 @@ jobs:
                   set -euo pipefail
 
                   shopt -s globstar nullglob
-                  coverage_files=(coverage/**/coverage-summary.json tests/**/coverage/coverage-summary.json)
+                  coverage_files=(coverage/**/coverage-summary.json tests/**/coverage/coverage-summary.json tests/.placeholder/coverage/coverage-summary.json)
 
                   if [ ${#coverage_files[@]} -eq 0 ]; then
                     echo "coverage_ok=false" >> "$GITHUB_OUTPUT"
