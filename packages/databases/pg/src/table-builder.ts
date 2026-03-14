@@ -142,6 +142,15 @@ export type PgTableExtraConfigValue =
     | PgPolicy;
 export type PgTableExtraConfig = Record<string, PgTableExtraConfigValue>;
 
+/**
+ * Validates and returns a table's column definitions, enforcing required and forbidden fields.
+ *
+ * @param name - The table name used in error messages
+ * @param db - Builder utilities (including column builders and `typeid`)
+ * @param columns - Callback that receives builders and returns the table's column map
+ * @returns The validated column map for the table
+ * @throws Error if the returned column map does not include an `id` column or if it includes any of the forbidden fields: `createdAt`, `updatedAt`, `disabledAt`, `deletedAt`, `createdBy`, or `active`
+ */
 export function testColumns<
     TTableName extends string,
     TColumnsKey extends string,
@@ -198,18 +207,20 @@ export function testColumns<
 }
 
 /**
- * Creates a database table with specified columns and optional extra configuration.
- * This function ensures required fields are present and applies default configurations
- * to certain fields while restricting the inclusion of specific fields in the column definitions.
- * @param name The name of the table, lowercase without "-" or "_"
- * @param columns A validated object representing the columns of the table.
- *        Must include required fields such as "id", "encircleId", and "embeddingTerm".
- * @param [extraConfig]
- *        An optional function to define extra configurations for the table, extending or modifying the default settings.
- * @throws {Error} If required fields ("id") are missing or if restricted fields
- *        ("createdAt", "updatedAt", "deletedAt", "createdBy", "active") are included.
- *        Thrown errors should also be populated within your IDE type-guarding.
- * @returns The fully configured table with default and customized settings.
+ * Create a PostgreSQL table definition with standard metadata fields, indices and optional extra configuration.
+ *
+ * The provided column factory is validated (must include an `id` column and must not define reserved fields)
+ * and the table is augmented with `createdAt`, `updatedAt`, `disabledAt`, `deletedAt`, `createdBy` and a generated
+ * `active` status, plus standard indices.
+ *
+ * @param name - Table name (lowercase, no "-" or "_")
+ * @param columns - Factory invoked with DB column builders that must return the table's columns. The returned
+ *                  columns must include an `id` column and must not include reserved fields: `createdAt`, `updatedAt`,
+ *                  `disabledAt`, `deletedAt`, `createdBy`, or `active`.
+ * @param extraConfig - Optional callback that receives the constructed table and returns additional table constraints,
+ *                      indices or other extra configuration entries to be applied.
+ * @returns The final pgTable definition including validated columns, standard metadata fields and indices
+ * @throws {Error} If the required `id` column is missing or any reserved fields are present in the provided columns
  */
 export function createTableFinal<
     TTableName extends string,
@@ -328,6 +339,13 @@ export function buildTableInternal(
     );
 }
 
+/**
+ * Create a PostgreSQL table definition using provided column builders and optional extra configuration.
+ *
+ * @param columns - Function that receives an AllBuilders object (collection of column builders; includes `typeid`) and returns the table's column map.
+ * @param extraConfig - Optional function that receives the table `self` and returns additional table configuration items (indexes, constraints, checks, policies, etc.).
+ * @returns The constructed Drizzle PostgreSQL table definition for `name`
+ */
 export function pgTable<
     TTableName extends string,
     TColumnsKey extends string,
