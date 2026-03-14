@@ -132,5 +132,27 @@
             "dependsOn": ["^build"],
             "inputs": ["production", "^production"]
         }
+    },
+    "release": {
+        "version": {
+            "conventionalCommits": true,
+            "updateDependents": "always"
+        },
+        "changelog": {
+            "projectChangelogs": {
+                "createRelease": "github",
+                "file": "{projectRoot}/CHANGELOG.md"
+            },
+            "workspaceChangelog": false
+        },
+        "groups": {
+            "core": {
+                "projects": ["core", "@eventiva/extensions.hello-world", "@eventiva/extensions.contact"],
+                "projectsRelationship": "fixed",
+                "version": {
+                    "updateDependents": "always"
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,87 @@
+name: Publish
+
+on:
+    push:
+        tags:
+            - v*.*.*
+    workflow_dispatch:
+        inputs:
+            dry-run:
+                description: 'Run in dry-run mode (no actual publishing)'
+                required: false
+                default: 'false'
+                type: boolean
+
+permissions:
+    contents: write
+    id-token: write # needed for provenance data generation and GitHub releases
+
+jobs:
+    publish:
+        name: Publish
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+                  filter: tree:0
+
+            - name: Install pnpm
+              uses: pnpm/action-setup@v4
+              with:
+                  version: 9.14.2
+
+            - name: Install Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+                  registry-url: https://registry.npmjs.org/
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
+              shell: bash
+
+            - name: Print Environment Info
+              run: pnpm exec nx report
+              shell: bash
+
+            - name: Configure npm for multiple registries
+              run: |
+                  # Configure GitHub Packages for @eventiva scope
+                  echo "@eventiva:registry=https://npm.pkg.github.com" >> .npmrc
+                  echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> .npmrc
+                  # Configure default NPM registry for non-scoped packages
+                  echo "registry=https://registry.npmjs.org/" >> .npmrc
+                  echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_ACCESS_TOKEN }}" >> .npmrc
+              shell: bash
+
+            - name: Publish packages to NPM
+              run: pnpm exec nx release publish --registry=https://registry.npmjs.org/
+              shell: bash
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_ACCESS_TOKEN }}
+                  NPM_CONFIG_PROVENANCE: true
+
+            - name: Publish packages to GitHub Packages
+              run: pnpm exec nx release publish --registry=https://npm.pkg.github.com
+              shell: bash
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            # Docker publishing skeleton (commented out for future implementation)
+            # - name: Login to Docker Hub
+            #   uses: docker/login-action@v2
+            #   with:
+            #       username: ${{ secrets.DOCKER_USERNAME }}
+            #       password: ${{ secrets.DOCKER_TOKEN }}
+            #
+            # - name: Build and tag Docker images
+            #   run: pnpm exec nx release version --dockerVersionScheme=production
+            #   shell: bash
+            #
+            # - name: Publish Docker images
+            #   run: pnpm exec nx release publish
+            #   shell: bash
