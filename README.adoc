@@ -51,14 +51,6 @@ Our extensive *documentation* can be found at *https://github.com/Eventiva/Event
 [#contributing]
 == Contributing
 
-CAUTION: This project uses https://bit.dev/[Bit.dev] to power some really awesome stuff.
-Some learning is required to contribute
-
-[CAUTION]
---
-This section is being re-written based on the new development environment and major changes to the repository
---
-
 Thank you for taking an interest in contributing.
 We have created development containers (`.devcontainer`) to allow you to jump straight in with coding.
 Everything is configured and ready to go, all you need to do is use one of the supported platforms: https://code.visualstudio.com/docs/remote/containers[VSCode]
@@ -68,11 +60,11 @@ If you want to learn more about precisely what this workflow accomplishes, pleas
 
 Eventiva is built on the following main stack:
 
-* image:https://img.stackshare.io/service/4616/QP1hRAU5_400x400.jpg[Bit,25] https://www.bit.dev[Bit] -- Code Collaboration & Version Control
-* image:https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png[Node.js,25] http://nodejs.org/[Node.js] -- Frameworks (Full Stack)
+* image:https://img.stackshare.io/service/1011/n1JRsFeB_400x400.png[Node.js,25] http://nodejs.org/[Node.js] -- Runtime Environment
 * image:https://img.stackshare.io/service/1612/bynNY5dJ.jpg[TypeScript,25] http://www.typescriptlang.org[TypeScript] -- Languages
-* image:https://img.stackshare.io/service/830/jest.png[Jest,25] http://facebook.github.io/jest/[Jest] -- Javascript Testing Framework
+* image:https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png[Nx,25] https://nx.dev[Nx] -- Monorepo & Build System
 * image:https://img.stackshare.io/service/11563/actions.png[GitHub Actions,25] https://github.com/features/actions[GitHub Actions] -- Continuous Integration
+* image:https://vitest.dev/logo.svg[Vitest,25] https://vitest.dev[Vitest] -- Testing Framework
 * image:https://img.stackshare.io/service/48786/default_8b1119bcbb159cebebc2f6cfc9cd2e359b169d22.jpg[OpenAI,25] https://openai.com/[OpenAI] -- Large Language Models
 * image:https://img.stackshare.io/service/586/n4u37v9t_400x400.png[Docker,25] https://www.docker.com/[Docker] -- Virtual Machine Platforms & Containers
 
@@ -86,14 +78,13 @@ You can access our backlog on our JetBrains Space found here:
 
 === Running Locally & Developing
 
-[CAUTION]
---
-This section is being re-written based on the new development environment and major changes to the repository
---
+==== Prerequisites
 
-==== prerequisites
+* Node.js 20 or later
+* pnpm 9.14.2 (or compatible version)
+* Git
 
-You can choose one of the following methods to get your development platform configured
+You can choose one of the following methods to get your development platform configured:
 
 ==== Codespaces Method (Recommended)
 
@@ -105,12 +96,6 @@ Download the VSCode extension https://marketplace.visualstudio.com/items?itemNam
 
 ==== Devcontainer Method
 
-[WARNING]
---
-`.devcontainer` have been temporarily removed while the current workflow is being adapted.
-These will return, however please bare with us while we make this significant change.
---
-
 The Dev Container lets you use a Docker container as a full-featured development environment.
 Whether you deploy to containers or not, containers make a great development environment because you can:
 
@@ -119,6 +104,74 @@ Whether you deploy to containers or not, containers make a great development env
 * Try out new technologies or clone a copy of a code base without impacting your local setup.
 
 Simply install the https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers[Dev containers extension], clone the repository to your local device, and choose the https://code.visualstudio.com/docs/devcontainers/containers[`Open Devcontainer` option].
+
+The devcontainer includes:
+* Node.js 22
+* pnpm 9.14.2
+* Nx (installed globally)
+* PostgreSQL 16 (service `postgres`, port 5432)
+
+See `.devcontainer/README.md` for more details.
+
+==== Local Setup
+
+If you prefer to set up locally without containers:
+
+. Clone the repository:
++
+[source,bash]
+----
+git clone https://github.com/Eventiva/eventiva.git
+cd eventiva
+----
+
+. Install dependencies:
++
+[source,bash]
+----
+pnpm install
+----
+
+. Build all packages:
++
+[source,bash]
+----
+pnpm nx run-many -t build
+----
+
+. Run linting:
++
+[source,bash]
+----
+pnpm nx run-many -t lint
+----
+
+. Run type checking:
++
+[source,bash]
+----
+pnpm nx run-many -t typecheck
+----
+
+. Run tests:
++
+[source,bash]
+----
+pnpm nx run-many -t test
+----
+
+==== Available Nx Commands
+
+This project uses Nx for task orchestration. Common commands:
+
+* `pnpm nx run-many -t build` - Build all packages
+* `pnpm nx run-many -t lint` - Lint all packages
+* `pnpm nx run-many -t typecheck` - Type check all packages
+* `pnpm nx run-many -t test` - Run tests for all packages
+* `pnpm nx run <project>:<target>` - Run a specific target for a project (e.g., `pnpm nx run core:build`)
+* `pnpm nx graph` - Visualize the project dependency graph
+
+For more information about Nx, see https://nx.dev[nx.dev].
 
 === Contributors ✨
 

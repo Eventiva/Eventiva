@@ -2,64 +2,167 @@
 
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is almost ready ✨.
+Eventiva is an open-source platform for Event Planning and Production logistics, built as an [Nx monorepo](https://nx.dev).
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/nx-api/js?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Getting Started
 
-## Finish your CI setup
+### Prerequisites
 
-[Click here to finish setting up your workspace!](https://cloud.nx.app/connect/jFaC6Wf1DU)
+* Node.js 20 or later
+* pnpm 9.14.2 (or compatible version)
 
-## Generate a library
+### Installation
 
 ```sh
-npx nx g @nx/js:lib packages/pkg1 --publishable --importPath=@my-org/pkg1
+pnpm install
 ```
 
-## Run tasks
+### Building
 
-To build the library use:
+Build all packages:
 
 ```sh
-npx nx build pkg1
+pnpm nx run-many -t build
 ```
 
-To run any task with Nx use:
+Build a specific package:
 
 ```sh
-npx nx <target> <project-name>
+pnpm nx build <project-name>
+```
+
+For example, to build the core package:
+
+```sh
+pnpm nx build core
+```
+
+### Running Tasks
+
+This workspace uses Nx for task orchestration. Common commands:
+
+**Build all packages:**
+```sh
+pnpm nx run-many -t build
+```
+
+**Lint all packages:**
+```sh
+pnpm nx run-many -t lint
+```
+
+**Type check all packages:**
+```sh
+pnpm nx run-many -t typecheck
+```
+
+**Run tests for all packages:**
+```sh
+pnpm nx run-many -t test
+```
+
+**Run a specific target for a project:**
+```sh
+pnpm nx run <project-name>:<target>
+```
+
+For example:
+```sh
+pnpm nx run core:build
+pnpm nx run core:test
+pnpm nx run core:lint
 ```
 
 These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
 
 [More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Versioning and releasing
+### Visualizing the Project Graph
 
-To version and release the library use
+Explore the project dependency graph:
 
+```sh
+pnpm nx graph
 ```
-npx nx release
+
+This opens an interactive visualization of your workspace structure and dependencies.
+
+## Project Structure
+
+This workspace contains the following packages:
+
+* `packages/core` - Core Eventiva functionality
+* `packages/platforms/default` - Default platform implementation
+* `packages/extensions/*` - Extension packages
+* `packages/databases/pg` - PostgreSQL database package
+
+Each package is a separate Nx project with its own build, test, and lint targets.
+
+## Development
+
+### CI/CD
+
+The project uses GitHub Actions for CI. The main workflow runs:
+
+* Linting (`lint`)
+* Building (`build`)
+* Type checking (`typecheck`)
+
+Tests are configured but currently excluded from CI until Vitest is fully configured.
+
+### Code Quality
+
+**Format code:**
+```sh
+pnpm nx run eventiva:format
 ```
 
-Pass `--dry-run` to see what would happen without actually releasing the library.
+**Check formatting:**
+```sh
+pnpm nx run eventiva:format-check
+```
+
+**Fix linting issues:**
+```sh
+pnpm nx run eventiva:lint-fix
+```
+
+**Run all checks:**
+```sh
+pnpm nx run eventiva:check
+```
+
+**Fix all issues:**
+```sh
+pnpm nx run eventiva:fix
+```
+
+## Versioning and Releasing
+
+To version and release packages:
+
+```sh
+pnpm nx release
+```
+
+Pass `--dry-run` to see what would happen without actually releasing.
 
 [Learn more about Nx release &raquo;](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 
-## Keep TypeScript project references up to date
+## TypeScript Project References
 
 Nx automatically updates TypeScript [project references](https://www.typescriptlang.org/docs/handbook/project-references.html) in `tsconfig.json` files to ensure they remain accurate based on your project dependencies (`import` or `require` statements). This sync is automatically done when running tasks such as `build` or `typecheck`, which require updated references to function correctly.
 
-To manually trigger the process to sync the project graph dependencies information to the TypeScript project references, run the following command:
+To manually trigger the sync:
 
 ```sh
-npx nx sync
+pnpm nx sync
 ```
 
-You can enforce that the TypeScript project references are always in the correct state when running in CI by adding a step to your CI job configuration that runs the following command:
+To check if project references are in sync (useful for CI):
 
 ```sh
-npx nx sync:check
+pnpm nx sync:check
 ```
 
 [Learn more about nx sync](https://nx.dev/reference/nx-commands#sync)
