@@ -22,7 +22,6 @@
             "{workspaceRoot}/eslint.config.mjs"
         ]
     },
-    "nxCloudId": "69ac12dce5a0d35ac110e93a",
     "plugins": [
         {
             "plugin": "@nx/js/typescript",
