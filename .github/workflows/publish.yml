@@ -24,10 +24,12 @@ jobs:
         timeout-minutes: 10
         steps:
             - name: Checkout repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
               with:
+                  token: ${{ secrets.BOT_TOKEN }}
                   fetch-depth: 0
                   filter: tree:0
+                  submodules: 'recursive'
 
             - name: Install pnpm
               uses: pnpm/action-setup@v4

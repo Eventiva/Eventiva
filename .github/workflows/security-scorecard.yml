@@ -37,11 +37,11 @@ jobs:
               with:
                   egress-policy: audit
 
-            # checks out the repository
+            # checks out the repository (BOT_TOKEN required to fetch private tests submodule)
             - uses: actions/checkout@v6
               with:
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
-                  token: ${{ github.token }}
 
             - name: 'Run analysis'
               uses: ossf/scorecard-action@v2.4.3 # v2.1.2

@@ -6,7 +6,7 @@ This devcontainer is **for running and writing tests only**. It initializes the 
 
 ## What's Different
 
-- **Tests repository initialized:** The `tests/` submodule is automatically initialized in `postCreateCommand`
+- **Tests submodule:** The `tests/` submodule is initialized in `postCreateCommand`, then the default branch is checked out and pulled so you get the latest from the tests repo.
 - **Same base setup:** Node.js 22, pnpm 9, nx, PostgreSQL 16 (same as main devcontainer)
 - **Test mode flag:** `EVENTIVA_TEST_MODE=true` environment variable is set
 

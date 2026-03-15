@@ -53,6 +53,9 @@ jobs:
 
             - name: Checkout repository
               uses: actions/checkout@v6 # v3.6.0
+              with:
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
+                  submodules: 'recursive'
 
             # Initializes the CodeQL tools for scanning.
             - name: Initialize CodeQL

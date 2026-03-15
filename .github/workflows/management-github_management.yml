@@ -31,6 +31,9 @@ jobs:
                   proc_trace_sys_enable: true
 
             - uses: actions/checkout@v6
+              with:
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
+                  submodules: 'recursive'
 
             - name: Check for config
               id: check_config

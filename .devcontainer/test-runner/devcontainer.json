@@ -3,7 +3,7 @@
     "dockerComposeFile": "compose.yaml",
     "service": "app",
     "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
-    "postCreateCommand": "pnpm install && git submodule update --init tests || echo 'Tests submodule not configured; clone Eventiva/tests manually if needed'",
+    "postCreateCommand": "pnpm install && git submodule update --init tests && (git -C tests fetch origin && BRANCH=$(git -C tests symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's#^refs/remotes/origin/##') && git -C tests checkout ${BRANCH:-main} && git -C tests pull) || echo 'Tests submodule not configured; clone Eventiva/tests manually if needed'",
     "forwardPorts": [5432],
     "customizations": {
         "vscode": {

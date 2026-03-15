@@ -3,6 +3,9 @@
     "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
     "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
     "postCreateCommand": "pnpm install",
+    "mounts": [
+        "source=eventiva-tests-empty,target=/workspaces/Eventiva/tests,type=volume"
+    ],
     "services": {
         "postgres": {
             "image": "postgres:16-alpine",
