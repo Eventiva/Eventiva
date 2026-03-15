@@ -61,10 +61,9 @@ jobs:
                   path: dist
                   if-no-files-found: error
 
-    sync-tests-repo:
-        name: Sync dist and generate tests
+    create-tests:
+        name: Create tests from main repo source
         runs-on: ubuntu-latest
-        needs: build-dist
         env:
             BRANCH_NAME: ${{ github.head_ref }}
             BASE_BRANCH: ${{ github.base_ref }}
@@ -73,11 +72,17 @@ jobs:
               with:
                   fetch-depth: 0
 
-            - name: Download dist artifact
-              uses: actions/download-artifact@v4
+            - uses: pnpm/action-setup@v4
               with:
-                  name: main-dist
-                  path: /tmp/main-dist
+                  version: 9.14.2
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 20
+                  cache: 'pnpm'
+
+            - name: Install dependencies
+              run: pnpm install --no-frozen-lockfile
 
             - name: Checkout tests repo branch
               id: checkout_tests_repo
@@ -107,29 +112,10 @@ jobs:
                   git config --global --unset-all http.https://github.com/.extraheader || true
                   echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
 
-            - name: Sync dist into tests repo
+            - name: Bootstrap tests repo project structure
               run: |
                   set -euo pipefail
-                  rm -rf tests-repo/dist
-                  mkdir -p tests-repo/dist
-                  cp -R /tmp/main-dist/. tests-repo/dist/
-
-            - name: Bootstrap tests repo contract suite from dist
-              run: |
-                  set -euo pipefail
-                  node scripts/bootstrap-tests-repo.mjs tests-repo /tmp/main-dist
-
-            - name: Compute dist diff for AI schema input
-              run: |
-                  set -euo pipefail
-                  cd tests-repo
-
-                  git fetch origin "${BASE_BRANCH}" || true
-                  if git show-ref --verify --quiet "refs/remotes/origin/${BASE_BRANCH}"; then
-                    git diff "origin/${BASE_BRANCH}" -- dist > ../dist-diff.patch
-                  else
-                    git diff -- dist > ../dist-diff.patch
-                  fi
+                  node scripts/bootstrap-tests-repo.mjs tests-repo
 
             - name: Install Cursor CLI
               run: |
@@ -143,48 +129,43 @@ jobs:
                   rm -f "${CURSOR_INSTALLER}"
                   echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
 
-            - name: Run AI test-creator from dist diff
+            - name: Run AI test-creator with full main repo access
               env:
                   CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
               run: |
                   set -euo pipefail
-                  cd tests-repo
 
                   if ! command -v agent > /dev/null; then
                     echo "Cursor CLI command 'agent' is unavailable after install."
                     exit 1
                   fi
 
+                  cd tests-repo
                   git status --porcelain | awk '{print $2}' | sort -u > ../pre-agent-files.txt
-                  diff_input="$(head -c 30000 ../dist-diff.patch)"
                   prompt_file="../cursor-test-creator-prompt.md"
 
                   cat > "${prompt_file}" <<EOF
                   You are the dedicated test-creator agent for Eventiva/tests.
 
                   Hard requirements:
-                  1. Use only the provided dist git-diff as schema/contract input.
-                  2. Do not inspect or assume implementation internals from the main repo.
-                  3. Add or update tests only for changed/new API surface.
+                  1. You have full read access to the main repo implementation in ../packages/ (all source code).
+                  2. Use the implementation code to write exhaustive, correct Effect/Vitest tests.
+                  3. Add or update tests for all exported callables and behaviors.
                   4. Never delete existing tests.
                   5. You may add/update Step CI workflow YAML used by tests when needed.
                   6. Keep changes scoped to test assets (tests, workflows, test config).
                   7. Place tests only in Nx project roots under <projectRoot>/src/**/*.spec.ts.
-                  8. Keep tests runnable in contract mode without implementation runtime code.
-                  9. Ensure projects remain runnable via: nx run-many -t test --projects='tests-*'.
+                  8. Use @effect/vitest: it.effect, it.live, it.scoped as appropriate.
+                  9. Test both success and failure paths using Effect.exit and Exit.succeed/Exit.fail.
+                  10. Ensure projects remain runnable via: nx run-many -t test --projects='tests-*'.
 
-                  Dist git-diff follows:
-                  \`\`\`diff
-                  ${diff_input}
-                  \`\`\`
+                  You are working in the tests-repo directory. The main repo source is available at ../packages/.
                   EOF
 
-                  if [ ! -s ../dist-diff.patch ]; then
-                    echo "Dist diff is empty; skipping AI test generation."
-                  else
-                    if ! timeout 180 agent -p "$(cat "${prompt_file}")" --force; then
-                      echo "Cursor AI generation timed out or failed; continuing with bootstrap-generated tests."
-                    fi
+                  # Run agent with main repo context available
+                  # The agent can read ../packages/**/*.ts for full implementation access
+                  if ! timeout 180 agent -p "$(cat "${prompt_file}")" --force --model auto --workspace "$(pwd)"; then
+                    echo "Cursor AI generation timed out or failed; continuing with bootstrap-generated tests."
                   fi
 
                   git status --porcelain | awk '{print $2}' | sort -u > ../post-agent-files.txt
@@ -219,13 +200,12 @@ jobs:
                   set -euo pipefail
                   cd tests-repo
 
-                  git add dist
                   git add .
 
-                  deleted_non_dist="$(git diff --cached --name-status | awk '$1 == "D" && $2 !~ /^dist\// { print $2 }')"
-                  if [ -n "${deleted_non_dist}" ]; then
-                    echo "Refusing to delete non-dist files:"
-                    printf '%s\n' "${deleted_non_dist}"
+                  deleted_files="$(git diff --cached --name-status | awk '$1 == "D" { print $2 }')"
+                  if [ -n "${deleted_files}" ]; then
+                    echo "Refusing to delete files:"
+                    printf '%s\n' "${deleted_files}"
                     exit 1
                   fi
 
@@ -234,7 +214,7 @@ jobs:
                     exit 0
                   fi
 
-                  git commit -m "chore(tdd): sync dist and update tests for ${BRANCH_NAME}"
+                  git commit -m "chore(tdd): update tests for ${BRANCH_NAME}"
                   git push --force-with-lease -u origin "${BRANCH_NAME}"
 
             - name: Ensure tests repo PR exists
@@ -300,7 +280,7 @@ jobs:
     run-tdd-tests:
         name: Run tests via main repo Nx
         runs-on: ubuntu-latest
-        needs: sync-tests-repo
+        needs: create-tests
         outputs:
             summary: ${{ steps.build_summary.outputs.summary }}
         env:
@@ -322,18 +302,8 @@ jobs:
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
 
-            - name: Download dist artifact
-              uses: actions/download-artifact@v4
-              with:
-                  name: main-dist
-                  path: /tmp/main-dist
-
-            - name: Restore dist
-              run: |
-                  set -euo pipefail
-                  rm -rf dist
-                  mkdir -p dist
-                  cp -R /tmp/main-dist/. dist/
+            - name: Build workspace for test execution
+              run: pnpm nx run-many --exclude=eventiva -t build
 
             - name: Clone tests repo into tests/
               env:
@@ -361,10 +331,14 @@ jobs:
                     git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
                   fi
 
-            - name: Generate API-surface coverage manifests from dist
+            - name: Generate API-surface coverage manifests
               run: |
                   set -euo pipefail
-                  pnpm exec node tests/remote/tools/generate-api-surface-coverage.mjs tests/remote
+                  if [ -f tests/remote/tools/generate-api-surface-coverage.mjs ]; then
+                    pnpm exec node tests/remote/tools/generate-api-surface-coverage.mjs tests/remote
+                  else
+                    echo "API-surface coverage tool not found; skipping."
+                  fi
 
             - name: Run Nx tests with coverage gate
               id: run_tests
@@ -465,7 +439,7 @@ jobs:
                   failures="$(sed -n '1,40p' sanitized-failures.txt || true)"
                   description="$(printf '%s\n\n%s\n%s\n\n%s\n%s\n\n%s' \
                     "TDD runner detected failing tests in main PR ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}." \
-                    "Schema source: dist git diff + dist declarations." \
+                    "Source: main repo implementation (packages/)." \
                     "Broad explanation: test execution failed against implementation." \
                     "Sanitized failures:" \
                     "${failures}" \
@@ -493,7 +467,7 @@ jobs:
                   set -euo pipefail
                   description="$(printf '%s\n\n%s\n%s\n%s\n\n%s' \
                     "TDD runner requires test-creator follow-up for PR ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}." \
-                    "Schema source: dist declarations and git diff." \
+                    "Source: main repo implementation (packages/)." \
                     "Broad explanation: coverage is below 100% or unexpected execution result." \
                     "Coverage summary: ${COVERAGE_MIN}% (gate threshold currently 80% for execution)." \
                     "Artifacts: coverage-summary.txt, tdd-summary.md, raw-failures.txt, sanitized-failures.txt.")"

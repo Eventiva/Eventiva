@@ -1,0 +1,17 @@
+{
+    "name": "tests-core",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "tags": ["scope:tests", "type:core"],
+    "sourceRoot": "tests/core/src",
+    "targets": {
+        "test": {
+            "executor": "@nx/vitest:test",
+            "options": {
+                "configFile": "tests/core/vitest.config.ts"
+            },
+            "outputs": ["{workspaceRoot}/coverage/tests/core"],
+            "cache": true
+        }
+    }
+}

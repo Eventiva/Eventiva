@@ -2,7 +2,6 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const targetRoot = path.resolve(process.argv[2] ?? 'tests-repo');
-const sourceDist = path.resolve(process.argv[3] ?? path.join(process.cwd(), 'dist'));
 
 const PROJECTS = [
     {
@@ -18,10 +17,22 @@ const PROJECTS = [
         distPrefixes: ['dist/packages/extensions/hello-world/src/'],
     },
     {
+        name: 'tests-extensions-contact',
+        packageName: '@eventiva/tests.extensions.contact',
+        root: 'extensions/contact',
+        distPrefixes: ['dist/packages/extensions/contact/src/'],
+    },
+    {
         name: 'tests-databases-pg',
         packageName: '@eventiva/tests.databases.pg',
         root: 'databases/pg',
         distPrefixes: ['dist/packages/databases/pg/src/'],
+    },
+    {
+        name: 'tests-databases-shared',
+        packageName: '@eventiva/tests.databases.shared',
+        root: 'databases/shared',
+        distPrefixes: ['dist/packages/databases/shared/src/'],
     },
     {
         name: 'tests-platforms-default',
@@ -452,10 +463,10 @@ This repository is managed by the main Eventiva TDD workflow.
 
 ## Rules
 
-- Tests are authored from declaration contracts in \`dist/\` only.
+- Tests are authored by the test-creator agent which has full read access to the main repo implementation (packages/).
 - Existing tests are never deleted.
 - Test changes should only touch test files, test workflows, and test configuration.
-- API-surface coverage uses declaration callables as the source of truth.
+- API-surface coverage tracks exported callables from the main repo.
 
 ## Commands
 
@@ -468,8 +479,9 @@ const guardrailsDoc = `# TDD guardrails
 
 ## Source of truth
 
-- Use \`dist/**/*.d.ts\` as the only contract source for generated tests.
-- Do not rely on implementation internals.
+- Test-creator has full read access to main repo source code (packages/**/*.ts).
+- Use the complete implementation plus docstrings to write exhaustive tests.
+- Tests should cover all code paths, edge cases, and error conditions.
 
 ## Test mutation policy
 
@@ -609,12 +621,6 @@ const writeProjectFiles = async (project) => {
 };
 
 const main = async () => {
-    const stat = await fs.stat(sourceDist).catch(() => undefined);
-    if (!stat || !stat.isDirectory()) {
-        console.error(`Cannot bootstrap tests repo: source dist directory not found at ${sourceDist}`);
-        process.exit(1);
-    }
-
     await buildRootConfig();
 
     for (const project of PROJECTS) {

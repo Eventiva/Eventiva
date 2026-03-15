@@ -1,0 +1,17 @@
+{
+    "name": "tests-databases-pg",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "tags": ["scope:tests", "type:database"],
+    "sourceRoot": "tests/databases/pg/src",
+    "targets": {
+        "test": {
+            "executor": "@nx/vitest:test",
+            "options": {
+                "configFile": "tests/databases/pg/vitest.config.ts"
+            },
+            "outputs": ["{workspaceRoot}/coverage/tests/databases/pg"],
+            "cache": true
+        }
+    }
+}
