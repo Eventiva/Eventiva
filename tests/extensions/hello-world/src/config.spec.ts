@@ -49,7 +49,7 @@ describe('extensions/hello-world/config', () => {
 
     describe('HelloWorldConfig tag', () => {
         it.effect('HelloWorldConfig tag is properly defined', () =>
-            Effect.gen(function* () {
+            Effect.sync(() => {
                 const tag = HelloWorldConfig;
                 expect(tag).toBeDefined();
                 expect(tag.key).toBe('@eventiva/extensions.hello-world/HelloWorldConfig');

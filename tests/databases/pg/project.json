@@ -2,7 +2,7 @@
     "name": "tests-databases-pg",
     "$schema": "../../node_modules/nx/schemas/project-schema.json",
     "projectType": "library",
-    "tags": ["scope:tests", "type:database"],
+    "tags": ["scope:tests", "type:platform"],
     "sourceRoot": "tests/databases/pg/src",
     "targets": {
         "test": {
