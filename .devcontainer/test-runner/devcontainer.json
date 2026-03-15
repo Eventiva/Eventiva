@@ -1,21 +1,9 @@
 {
     "name": "Eventiva Test Runner",
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
+    "dockerComposeFile": "compose.yaml",
+    "service": "app",
     "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
     "postCreateCommand": "pnpm install && git submodule update --init tests || echo 'Tests submodule not configured; clone Eventiva/tests manually if needed'",
-    "services": {
-        "postgres": {
-            "image": "postgres:16-alpine",
-            "init": true,
-            "ports": ["5432:5432"],
-            "environment": {
-                "POSTGRES_USER": "postgres",
-                "POSTGRES_PASSWORD": "postgres",
-                "POSTGRES_DB": "postgres"
-            },
-            "options": "--health-cmd \"pg_isready -U postgres\" --health-interval 5s --health-timeout 5s --health-retries 5"
-        }
-    },
     "forwardPorts": [5432],
     "customizations": {
         "vscode": {
