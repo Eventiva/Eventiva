@@ -1,9 +1,13 @@
 # Eventiva Dev Container
 
+This devcontainer is for **implementation work only**. The tests repository is **not** initialized here to ensure AI tools don't use test code as context when implementing features.
+
 - **Node.js 22** (from base image)
 - **pnpm 9** (installed globally in `onCreateCommand`)
 - **nx** (installed globally so `nx` is on PATH; project also has nx via `pnpm install` — use `pnpm exec nx …` for workspace version)
 - **PostgreSQL 16** (service `postgres`, port 5432)
+
+**Note:** To run or write tests, use the test-runner devcontainer (`.devcontainer/test-runner/`) instead.
 
 ## Environment variables (set in container)
 

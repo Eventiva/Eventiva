@@ -1,0 +1,23 @@
+{
+    "name": "Eventiva Test Runner",
+    "dockerComposeFile": "compose.yaml",
+    "service": "app",
+    "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
+    "postCreateCommand": "pnpm install && git submodule update --init tests || echo 'Tests submodule not configured; clone Eventiva/tests manually if needed'",
+    "forwardPorts": [5432],
+    "customizations": {
+        "vscode": {
+            "extensions": ["nrwl.angular-console", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
+        }
+    },
+    "remoteEnv": {
+        "NODE_ENV": "development",
+        "DATABASE": "postgres",
+        "HOST": "postgres",
+        "PORT": "5432",
+        "USERNAME": "postgres",
+        "PASSWORD": "postgres",
+        "SSL": "false",
+        "EVENTIVA_TEST_MODE": "true"
+    }
+}

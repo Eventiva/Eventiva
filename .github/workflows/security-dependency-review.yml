@@ -34,7 +34,9 @@ jobs:
             # checks out the repository (use default GITHUB_TOKEN so git fetch can authenticate)
             - uses: actions/checkout@v6
               with:
-                  submodules: 'recursive'
+                  # Dependency review analyzes manifests from this repository only.
+                  # Avoid recursive submodule checkout for private cross-repo submodules.
+                  submodules: false
 
             - name: 'Dependency Review'
               uses: actions/dependency-review-action@v4.9.0 # v2.5.1
