@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "types": ["node", "vitest/globals"],
+        "noEmit": true,
+        "paths": {
+            "@eventiva/core": ["../../packages/core/src/index.ts"],
+            "@eventiva/core/*": ["../../packages/core/src/*"],
+            "@eventiva/extensions.contact": ["../../packages/extensions/contact/src/index.ts"],
+            "@eventiva/extensions.contact/*": ["../../packages/extensions/contact/src/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "vitest.config.ts"]
+}

@@ -1,0 +1,17 @@
+{
+    "name": "tests-extensions-contact",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "projectType": "library",
+    "tags": ["scope:tests", "type:extension"],
+    "sourceRoot": "tests/extensions/contact/src",
+    "targets": {
+        "test": {
+            "executor": "@nx/vitest:test",
+            "options": {
+                "configFile": "tests/extensions/contact/vitest.config.ts"
+            },
+            "outputs": ["{workspaceRoot}/coverage/tests/extensions/contact"],
+            "cache": true
+        }
+    }
+}

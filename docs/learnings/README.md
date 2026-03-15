@@ -13,7 +13,8 @@ This folder contains structured learnings from the Eventiva codebase, the evolut
 | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | [architecture.md](architecture.md)                           | Backend composition, Gateway → servers, Slot-based composition, platform vs runtimes.                               |
 | [conventions.md](conventions.md)                             | File headers (FCL-1.0-MIT), naming, scopes, component boundaries.                                                   |
-| [tdd-and-test-creation.md](tdd-and-test-creation.md)         | TDD policy: builders do not write tests; test-creator agent (schema only); test-runner agent; feedback loop.        |
+| [tdd-and-test-creation.md](tdd-and-test-creation.md)         | TDD policy: builders do not write tests; test-creator agent (full source access); test-runner agent; feedback loop.  |
+| [effect-vitest-testing.md](effect-vitest-testing.md)         | How to write Effect/Vitest tests using @effect/vitest: it.effect, it.live, it.scoped, TestClock, Exit, etc.          |
 | [modular-include-exclude.md](modular-include-exclude.md)     | How Bit aspects controlled inclusion; requirements for rebuild (config- or package-list-driven).                    |
 | [docs-and-apis.md](docs-and-apis.md)                         | Docs layout, AsciiDoc as source, README.adoc → README.md script requirement, replacing JetClient-style docs.        |
 | [ci-and-devcontainer.md](ci-and-devcontainer.md)             | Bit-dependent workflows and steps; target state without Bit.                                                        |

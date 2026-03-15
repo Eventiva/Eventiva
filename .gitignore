@@ -6,6 +6,7 @@
 tsconfig.json
 !**/config/tsconfig.json
 !tests/.placeholder/tsconfig.json
+!tests/**/tsconfig.json
 .eslintrc.json
 env.pkl
 
