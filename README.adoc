@@ -160,6 +160,24 @@ pnpm nx run-many -t typecheck
 pnpm nx run-many -t test
 ----
 
+==== Tests Repository
+
+Eventiva uses a separate tests repository (`Eventiva/tests`) for all test code.
+This separation ensures that implementation code is written without seeing test expectations,
+leading to more robust software that satisfies real contracts rather than just passing specific tests.
+
+**Important for AI-assisted development:**
+* **Never** clone or initialize the tests repository when doing implementation work with AI tools.
+* The tests repository should only be accessed when:
+  * Running tests locally
+  * Writing or reviewing tests
+  * Working in the test-runner devcontainer
+
+For normal development work, keep the `tests/` folder unpopulated (or use the development devcontainer which excludes tests).
+This ensures AI tools don't use test code as context when implementing features.
+
+See `docs/learnings/tdd-and-test-creation.md` for the full TDD policy.
+
 ==== Available Nx Commands
 
 This project uses Nx for task orchestration. Common commands:
