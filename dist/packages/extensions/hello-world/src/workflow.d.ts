@@ -1,2 +1,0 @@
-export declare const HelloWorldWorkflowAndLoadLayer: import("effect/Layer").Layer<never, never, import("@eventiva/core").TableColumnRegistry | import("@effect/cluster/Sharding").Sharding | import("@eventiva/core").ExtensionHookPubSub>;
-//# sourceMappingURL=workflow.d.ts.map

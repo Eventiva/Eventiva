@@ -1,1 +1,0 @@
-{"version":3,"file":"engine.d.ts","sourceRoot":"","sources":["../../../../../packages/core/src/workflow/engine.ts"],"names":[],"mappings":"AAAA;;GAEG;AACH,OAAO,KAAK,OAAO,MAAM,gBAAgB,CAAC;AAE1C,OAAO,KAAK,KAAK,MAAM,cAAc,CAAC;AAGtC,OAAO,KAAK,EAAoC,gBAAgB,IAAI,uBAAuB,EAAE,MAAM,YAAY,CAAC;AAgDhH,eAAO,MAAM,gBAAgB,+DAAiF,CAAC;AAS/G,eAAO,MAAM,oBAAoB,oDAA+C,CAAC"}
