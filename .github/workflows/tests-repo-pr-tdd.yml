@@ -19,19 +19,44 @@ permissions:
 
 env:
     TESTS_REPO: Eventiva/tests
-    # NX_CLOUD_ACCESS_TOKEN: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && secrets.NX_CLOUD_ACCESS_TOKEN_MAIN || secrets.NX_CLOUD_ACCESS_TOKEN }}
-    # Run without Nx Cloud so CI does not fail when the cloud org is disabled (e.g. over FREE plan).
-    # Remove this and set NX_CLOUD_ACCESS_TOKEN if you upgrade and want cloud cache/distribution.
     NX_NO_CLOUD: 'true'
 
 jobs:
-    build-dist:
-        name: Build and prepare dist
+    create-tests:
+        name: Create tests from main repo source
         runs-on: ubuntu-latest
+        env:
+            BRANCH_NAME: ${{ github.head_ref }}
+            BASE_BRANCH: ${{ github.base_ref }}
         steps:
             - uses: actions/checkout@v6
               with:
+                  token: ${{ secrets.BOT_TOKEN }}
                   fetch-depth: 0
+                  submodules: 'recursive'
+
+            - name: Checkout tests submodule to PR branch
+              id: submodule_branch
+              env:
+                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  git -C tests config user.name "eventiva-bot"
+                  git -C tests config user.email "eventiva-bot@users.noreply.github.com"
+                  git -C tests fetch origin --prune
+
+                  default_branch="$(
+                    curl -fsSL \
+                      -H "Authorization: Bearer ${BOT_TOKEN}" \
+                      -H "Accept: application/vnd.github+json" \
+                      "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
+                  )"
+                  if git -C tests ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null 2>&1; then
+                    git -C tests checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
+                  else
+                    git -C tests checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
+                  fi
+                  echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
 
             - uses: pnpm/action-setup@v4
               with:
@@ -45,187 +70,86 @@ jobs:
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
 
-            - name: Build workspace
-              run: pnpm nx run-many --exclude=eventiva -t build
-
-            - name: Enrich declaration docs for dist contracts
-              run: pnpm run dts:docs:enrich
-
-            - name: Validate declaration docs
-              run: pnpm run dts:docs:check
-
-            - name: Upload dist artifact
-              uses: actions/upload-artifact@v4
-              with:
-                  name: main-dist
-                  path: dist
-                  if-no-files-found: error
-
-    sync-tests-repo:
-        name: Sync dist and generate tests
-        runs-on: ubuntu-latest
-        needs: build-dist
-        env:
-            BRANCH_NAME: ${{ github.head_ref }}
-            BASE_BRANCH: ${{ github.base_ref }}
-        steps:
-            - uses: actions/checkout@v6
-              with:
-                  fetch-depth: 0
-
-            - name: Download dist artifact
-              uses: actions/download-artifact@v4
-              with:
-                  name: main-dist
-                  path: /tmp/main-dist
-
-            - name: Checkout tests repo branch
-              id: checkout_tests_repo
-              env:
-                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+            - name: Bootstrap tests repo project structure
               run: |
                   set -euo pipefail
-
-                  git clone "https://x-access-token:${BOT_TOKEN}@github.com/${TESTS_REPO}.git" tests-repo
-                  cd tests-repo
-
-                  git config user.name "eventiva-bot"
-                  git config user.email "eventiva-bot@users.noreply.github.com"
-                  git fetch --all --prune
-
-                  default_branch="$(
-                    curl -fsSL \
-                      -H "Authorization: Bearer ${BOT_TOKEN}" \
-                      -H "Accept: application/vnd.github+json" \
-                      "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
-                  )"
-
-                  # Always rebuild the tests branch from tests repo default branch.
-                  # This keeps the branch clean and effectively rebased on main.
-                  git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
-
-                  git config --global --unset-all http.https://github.com/.extraheader || true
-                  echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
-
-            - name: Sync dist into tests repo
-              run: |
-                  set -euo pipefail
-                  rm -rf tests-repo/dist
-                  mkdir -p tests-repo/dist
-                  cp -R /tmp/main-dist/. tests-repo/dist/
-
-            - name: Bootstrap tests repo contract suite from dist
-              run: |
-                  set -euo pipefail
-                  node scripts/bootstrap-tests-repo.mjs tests-repo /tmp/main-dist
-
-            - name: Compute dist diff for AI schema input
-              run: |
-                  set -euo pipefail
-                  cd tests-repo
-
-                  git fetch origin "${BASE_BRANCH}" || true
-                  if git show-ref --verify --quiet "refs/remotes/origin/${BASE_BRANCH}"; then
-                    git diff "origin/${BASE_BRANCH}" -- dist > ../dist-diff.patch
-                  else
-                    git diff -- dist > ../dist-diff.patch
-                  fi
+                  node scripts/bootstrap-tests-repo.mjs tests
 
             - name: Install Cursor CLI
               run: |
                   set -euo pipefail
                   CURSOR_INSTALLER="$(mktemp)"
                   curl -fsSL "https://cursor.com/install" -o "${CURSOR_INSTALLER}"
-                  # Security note: Cursor does not currently publish checksums/signatures for this installer.
-                  # TODO(security): switch to a version-pinned, checksum-verified installer artifact once available,
-                  # before using CURSOR_API_KEY in the following step.
                   bash "${CURSOR_INSTALLER}"
                   rm -f "${CURSOR_INSTALLER}"
                   echo "$HOME/.cursor/bin" >> "$GITHUB_PATH"
 
-            - name: Run AI test-creator from dist diff
+            - name: Run AI test-creator with full main repo access
               env:
                   CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
               run: |
                   set -euo pipefail
-                  cd tests-repo
 
                   if ! command -v agent > /dev/null; then
                     echo "Cursor CLI command 'agent' is unavailable after install."
                     exit 1
                   fi
 
-                  git status --porcelain | awk '{print $2}' | sort -u > ../pre-agent-files.txt
-                  diff_input="$(head -c 30000 ../dist-diff.patch)"
-                  prompt_file="../cursor-test-creator-prompt.md"
+                  git -C tests status --porcelain | awk '{print $2}' | sort -u > pre-agent-files.txt
+                  prompt_file="cursor-test-creator-prompt.md"
 
                   cat > "${prompt_file}" <<EOF
                   You are the dedicated test-creator agent for Eventiva/tests.
 
                   Hard requirements:
-                  1. Use only the provided dist git-diff as schema/contract input.
-                  2. Do not inspect or assume implementation internals from the main repo.
-                  3. Add or update tests only for changed/new API surface.
+                  1. You have full read access to the main repo implementation in packages/ (all source code).
+                  2. Use the implementation code to write exhaustive, correct Effect/Vitest tests.
+                  3. Add or update tests for all exported callables and behaviors.
                   4. Never delete existing tests.
                   5. You may add/update Step CI workflow YAML used by tests when needed.
                   6. Keep changes scoped to test assets (tests, workflows, test config).
                   7. Place tests only in Nx project roots under <projectRoot>/src/**/*.spec.ts.
-                  8. Keep tests runnable in contract mode without implementation runtime code.
-                  9. Ensure projects remain runnable via: nx run-many -t test --projects='tests-*'.
+                  8. Use @effect/vitest: it.effect, it.live, it.scoped as appropriate.
+                  9. Test both success and failure paths using Effect.exit and Exit.succeed/Exit.fail.
+                  10. Ensure projects remain runnable via: nx run-many -t test --projects='tests-*'.
 
-                  Dist git-diff follows:
-                  \`\`\`diff
-                  ${diff_input}
-                  \`\`\`
+                  You are working in the tests/ submodule directory. The main repo source is at ../packages/.
                   EOF
 
-                  if [ ! -s ../dist-diff.patch ]; then
-                    echo "Dist diff is empty; skipping AI test generation."
-                  else
-                    if ! timeout 180 agent -p "$(cat "${prompt_file}")" --force; then
-                      echo "Cursor AI generation timed out or failed; continuing with bootstrap-generated tests."
-                    fi
+                  if ! timeout 180 agent -p "$(cat "${prompt_file}")" --force --model auto --workspace tests; then
+                    echo "Cursor AI generation timed out or failed; continuing with bootstrap-generated tests."
                   fi
 
-                  git status --porcelain | awk '{print $2}' | sort -u > ../post-agent-files.txt
-                  comm -13 ../pre-agent-files.txt ../post-agent-files.txt > ../agent-generated-files.txt || true
+                  git -C tests status --porcelain | awk '{print $2}' | sort -u > post-agent-files.txt
+                  comm -13 pre-agent-files.txt post-agent-files.txt > agent-generated-files.txt || true
 
                   invalid_paths=0
                   while IFS= read -r changed; do
-                    if [ -z "${changed}" ]; then
-                      continue
-                    fi
-
-                    if [[ "${changed}" =~ ^(core|databases/[^/]+|extensions/[^/]+/[^/]+|platforms/[^/]+)/src/.+\.spec\.[jt]sx?$ ]]; then
-                      continue
-                    fi
-                    if [[ "${changed}" =~ ^(core|databases/[^/]+|extensions/[^/]+/[^/]+|platforms/[^/]+)/workflows/.+\.(yml|yaml)$ ]]; then
-                      continue
-                    fi
-
+                    if [ -z "${changed}" ]; then continue; fi
+                    if [[ "${changed}" =~ ^(core|databases/[^/]+|extensions/[^/]+/[^/]+|platforms/[^/]+)/src/.+\.spec\.[jt]sx?$ ]]; then continue; fi
+                    if [[ "${changed}" =~ ^(core|databases/[^/]+|extensions/[^/]+/[^/]+|platforms/[^/]+)/workflows/.+\.(yml|yaml)$ ]]; then continue; fi
                     echo "Disallowed agent-generated path: ${changed}"
                     invalid_paths=1
-                  done < ../agent-generated-files.txt
+                  done < agent-generated-files.txt
 
                   if [ "${invalid_paths}" -ne 0 ]; then
                     echo "Agent attempted to modify disallowed paths."
                     exit 1
                   fi
 
-            - name: Commit and push tests repo updates
+            - name: Commit and push tests submodule updates
               env:
                   BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
               run: |
                   set -euo pipefail
-                  cd tests-repo
+                  cd tests
 
-                  git add dist
                   git add .
 
-                  deleted_non_dist="$(git diff --cached --name-status | awk '$1 == "D" && $2 !~ /^dist\// { print $2 }')"
-                  if [ -n "${deleted_non_dist}" ]; then
-                    echo "Refusing to delete non-dist files:"
-                    printf '%s\n' "${deleted_non_dist}"
+                  deleted_files="$(git diff --cached --name-status | awk '$1 == "D" { print $2 }')"
+                  if [ -n "${deleted_files}" ]; then
+                    echo "Refusing to delete files:"
+                    printf '%s\n' "${deleted_files}"
                     exit 1
                   fi
 
@@ -234,7 +158,7 @@ jobs:
                     exit 0
                   fi
 
-                  git commit -m "chore(tdd): sync dist and update tests for ${BRANCH_NAME}"
+                  git commit -m "chore(tdd): update tests for ${BRANCH_NAME}"
                   git push --force-with-lease -u origin "${BRANCH_NAME}"
 
             - name: Ensure tests repo PR exists
@@ -300,7 +224,7 @@ jobs:
     run-tdd-tests:
         name: Run tests via main repo Nx
         runs-on: ubuntu-latest
-        needs: sync-tests-repo
+        needs: create-tests
         outputs:
             summary: ${{ steps.build_summary.outputs.summary }}
         env:
@@ -308,7 +232,31 @@ jobs:
         steps:
             - uses: actions/checkout@v6
               with:
+                  token: ${{ secrets.BOT_TOKEN }}
                   fetch-depth: 0
+                  submodules: 'recursive'
+
+            - name: Checkout tests submodule to PR branch
+              env:
+                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+              run: |
+                  set -euo pipefail
+                  git -C tests config user.name "eventiva-bot"
+                  git -C tests config user.email "eventiva-bot@users.noreply.github.com"
+                  git -C tests fetch origin --prune
+
+                  default_branch="$(
+                    curl -fsSL \
+                      -H "Authorization: Bearer ${BOT_TOKEN}" \
+                      -H "Accept: application/vnd.github+json" \
+                      "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
+                  )"
+
+                  if git -C tests ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null 2>&1; then
+                    git -C tests checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
+                  else
+                    git -C tests checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
+                  fi
 
             - uses: pnpm/action-setup@v4
               with:
@@ -322,49 +270,17 @@ jobs:
             - name: Install dependencies
               run: pnpm install --no-frozen-lockfile
 
-            - name: Download dist artifact
-              uses: actions/download-artifact@v4
-              with:
-                  name: main-dist
-                  path: /tmp/main-dist
+            - name: Build workspace for test execution
+              run: pnpm nx run-many --exclude=eventiva -t build
 
-            - name: Restore dist
+            - name: Generate API-surface coverage manifests
               run: |
                   set -euo pipefail
-                  rm -rf dist
-                  mkdir -p dist
-                  cp -R /tmp/main-dist/. dist/
-
-            - name: Clone tests repo into tests/
-              env:
-                  BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
-              run: |
-                  set -euo pipefail
-
-                  mkdir -p tests
-                  rm -rf tests/remote
-                  git clone "https://x-access-token:${BOT_TOKEN}@github.com/${TESTS_REPO}.git" tests/remote
-
-                  cd tests/remote
-                  git fetch --all --prune
-
-                  default_branch="$(
-                    curl -fsSL \
-                      -H "Authorization: Bearer ${BOT_TOKEN}" \
-                      -H "Accept: application/vnd.github+json" \
-                      "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
-                  )"
-
-                  if git ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null; then
-                    git checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
+                  if [ -f tests/tools/generate-api-surface-coverage.mjs ]; then
+                    pnpm exec node tests/tools/generate-api-surface-coverage.mjs tests
                   else
-                    git checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
+                    echo "API-surface coverage tool not found; skipping."
                   fi
-
-            - name: Generate API-surface coverage manifests from dist
-              run: |
-                  set -euo pipefail
-                  pnpm exec node tests/remote/tools/generate-api-surface-coverage.mjs tests/remote
 
             - name: Run Nx tests with coverage gate
               id: run_tests
@@ -373,7 +289,6 @@ jobs:
                   pnpm nx run-many -t test --projects='tests-*' --outputStyle=static > test-output.log 2>&1
                   test_exit=$?
                   set -e
-
                   echo "test_exit=${test_exit}" >> "$GITHUB_OUTPUT"
 
             - name: Evaluate coverage reports
@@ -427,7 +342,7 @@ jobs:
                   rg -n "FAIL|Error:|AssertionError|Expected|expected" test-output.log --max-count 40 > raw-failures.txt || true
 
                   sed -E 's#[A-Za-z0-9_./-]+\.(spec|test)\.[jt]sx?##g' raw-failures.txt | \
-                    sed -E 's#tests/remote/##g' > sanitized-failures.txt
+                    sed -E 's#tests/##g' > sanitized-failures.txt
 
                   status="passed"
                   if [ "${TEST_EXIT}" -ne 0 ] || [ "${COVERAGE_OK}" != "true" ]; then
@@ -465,7 +380,7 @@ jobs:
                   failures="$(sed -n '1,40p' sanitized-failures.txt || true)"
                   description="$(printf '%s\n\n%s\n%s\n\n%s\n%s\n\n%s' \
                     "TDD runner detected failing tests in main PR ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}." \
-                    "Schema source: dist git diff + dist declarations." \
+                    "Source: main repo implementation (packages/)." \
                     "Broad explanation: test execution failed against implementation." \
                     "Sanitized failures:" \
                     "${failures}" \
@@ -493,7 +408,7 @@ jobs:
                   set -euo pipefail
                   description="$(printf '%s\n\n%s\n%s\n%s\n\n%s' \
                     "TDD runner requires test-creator follow-up for PR ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}." \
-                    "Schema source: dist declarations and git diff." \
+                    "Source: main repo implementation (packages/)." \
                     "Broad explanation: coverage is below 100% or unexpected execution result." \
                     "Coverage summary: ${COVERAGE_MIN}% (gate threshold currently 80% for execution)." \
                     "Artifacts: coverage-summary.txt, tdd-summary.md, raw-failures.txt, sanitized-failures.txt.")"

@@ -8,14 +8,19 @@ If the same agent that implements a feature or component also writes its tests, 
 
 1. **Building agent** – Implements the feature/component only. It must **not** add or modify tests for that work. It may write or update **type definitions** (schema) that describe the public API.
 2. **Test-creator agent** – A **separate** agent is responsible for creating **all** tests. This agent:
-    - Has **no context or workspace access** to the implementation (no view of runtime code, no repo access).
-    - Receives **only the function/API schema**: **input types** and **output types** (and any error/effect types if relevant). In other words, the same information that would appear in a **`.d.ts`** file—signatures and types only, **no runtime code**.
-    - Produces tests that specify expected behaviour from the contract alone.
+    - Has **full read access** to the implementation (main repo source code in `packages/`). This allows it to write exhaustive, correct Effect/Vitest tests that understand the actual implementation behavior.
+    - Uses the **full source code** plus docstrings (from declarations) to understand intended behavior and write comprehensive tests.
+    - Produces tests that specify expected behaviour based on the implementation and documented contracts.
 3. **Test-runner agent (third agent)** – Runs the tests against the code. Has both tests and code. Does **not** create or delete tests; only runs them and acts on results (see feedback loop below).
 
-## Schema format for the test creator
+## Input format for the test creator
 
-Declaration-only: function and method names, parameter types, return types, exported types. No function bodies, no implementation details. Can be extracted from TypeScript (e.g. emitted `.d.ts`) or from Effect Schema/OpenAPI definitions, as long as no runtime code is included.
+The test-creator has **full read access to the main repo source code** (`packages/**/*.ts`). It uses:
+- The complete implementation source code to understand actual behavior
+- Docstrings from declarations (`@remarks`, `@example`, `@param`, `@returns`) to understand intended behavior
+- Type definitions and exported interfaces
+
+This allows the test-creator to write exhaustive, correct tests that cover all code paths, edge cases, and error conditions.
 
 ## Feedback loop (test-runner agent)
 
@@ -31,11 +36,12 @@ After tests are created, the test-runner agent executes them against the impleme
 
 ## Implications for planning
 
-- Linear issues for features/components must state: “Deliver type definitions (schema) first; tests are created by the separate test-creator agent from schema only; implementer must not write tests for this work; test-runner agent runs tests and creates Linear bugs/tasks per the feedback loop above.”
-- CI: two repos (main = code + schema; test repo = tests). Two workflows: test-creation (pull definitions from main, create tests on a branch); test-execution (pull tests from test repo, run against PR, report to both repos via Linear and PR comments). Current workflow files in main repo: `.github/workflows/tests-repo-branch-sync.yml`, `.github/workflows/tests-repo-pr-tdd.yml`, `.github/workflows/tests-repo-merge-sync.yml`.
+- Linear issues for features/components must state: “Deliver implementation code with complete docstrings; tests are created by the separate test-creator agent which has full read access to the implementation; implementer must not write tests for this work and must never have access to the tests repo when doing implementation work; test-runner agent runs tests and creates Linear bugs/tasks per the feedback loop above.”
+- CI: two repos (main = code; test repo = tests). Two workflows: test-creation (test-creator has full read access to main repo source, writes tests to tests repo); test-execution (pull tests from test repo, run against main repo implementation, report to both repos via Linear and PR comments). **Critical:** Implementation workflows (build, lint, typecheck) must **never** clone or access the tests repo, so the builder/implementer AI never sees test code. Current workflow files in main repo: `.github/workflows/tests-repo-branch-sync.yml`, `.github/workflows/tests-repo-pr-tdd.yml`, `.github/workflows/tests-repo-merge-sync.yml`.
 
 ## References
 
 - Cursor rule: `.cursor/rules/tdd-test-creation.mdc`
+- Effect Vitest testing guide: `docs/learnings/effect-vitest-testing.md`
 - Plan: Eventiva Learnings and Rebuild plan, “TDD and test creation” and Part D (Execution).
 - Implementation plan: `docs/plans/2026-03-14-tests-repo-sync-and-tdd-ci.md`
