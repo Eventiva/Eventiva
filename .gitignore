@@ -303,3 +303,4 @@ cache/
 dist
 
 vitest.config.*.timestamp*
+.pnpm-store/
