@@ -106,6 +106,7 @@ export default [
         files: ['**/*.spec.ts', '**/*.spec.tsx'],
         rules: {
             'require-yield': 'off',
+            '@typescript-eslint/no-empty-function': 'off',
         },
     },
     {
