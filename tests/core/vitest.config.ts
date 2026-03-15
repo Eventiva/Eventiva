@@ -10,37 +10,9 @@ export default defineProject({
     plugins: [
         tsconfigPaths({
             root: workspaceRoot,
-            projects: [path.join(workspaceRoot, 'tsconfig.base.json')],
+            projects: [path.join(workspaceRoot, 'tsconfig.base.json'), path.join(projectRoot, 'tsconfig.json')],
         }),
     ],
-    resolve: {
-        alias: [
-            {
-                find: /^@eventiva\/core$/,
-                replacement: path.resolve(workspaceRoot, 'packages/core/src/index.ts'),
-            },
-            {
-                find: /^@eventiva\/core\/(.+)$/,
-                replacement: path.resolve(workspaceRoot, 'packages/core/src/$1.ts'),
-            },
-            {
-                find: /^@eventiva\/databases\.shared$/,
-                replacement: path.resolve(workspaceRoot, 'packages/databases/shared/src/index.ts'),
-            },
-            {
-                find: /^@eventiva\/databases\.shared\/(.+)$/,
-                replacement: path.resolve(workspaceRoot, 'packages/databases/shared/src/$1.ts'),
-            },
-            {
-                find: /^@eventiva\/extensions\.hello-world$/,
-                replacement: path.resolve(workspaceRoot, 'packages/extensions/hello-world/src/index.ts'),
-            },
-            {
-                find: /^@eventiva\/extensions\.hello-world\/(.+)$/,
-                replacement: path.resolve(workspaceRoot, 'packages/extensions/hello-world/src/$1.ts'),
-            },
-        ],
-    },
     test: {
         root: projectRoot,
         include: ['src/**/*.spec.ts'],

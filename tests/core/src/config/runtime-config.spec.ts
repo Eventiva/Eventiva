@@ -1,4 +1,5 @@
-import { describe, it, expect } from '@effect/vitest';
+import { describe, expect } from 'vitest';
+import { it } from '@effect/vitest';
 import { Effect, Exit, Layer, Option } from 'effect';
 import { RuntimeConfig, RuntimeConfigLive, type RuntimeConfigOptions } from '@eventiva/core';
 
