@@ -20,6 +20,10 @@ inputs:
     description: Sparse checkout filter (e.g. tree:0). Omit for full clone.
     required: false
     default: ''
+  registry-url:
+    description: NPM registry URL (e.g. for publish workflows)
+    required: false
+    default: ''
 
 runs:
   using: composite
@@ -36,9 +40,17 @@ runs:
         version: 9.14.2
 
     - uses: actions/setup-node@v6
+      if: inputs.registry-url == ''
       with:
         node-version: 20
         cache: 'pnpm'
+
+    - uses: actions/setup-node@v6
+      if: inputs.registry-url != ''
+      with:
+        node-version: 20
+        cache: 'pnpm'
+        registry-url: ${{ inputs.registry-url }}
 
     - run: pnpm install --no-frozen-lockfile
       shell: bash

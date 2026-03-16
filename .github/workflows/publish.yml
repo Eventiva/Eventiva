@@ -23,28 +23,13 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 10
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v6
+            - uses: ./.github/actions/ci-setup
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
-                  fetch-depth: 0
-                  filter: tree:0
+                  fetch-depth: '0'
                   submodules: 'recursive'
-
-            - name: Install pnpm
-              uses: pnpm/action-setup@v4
-              with:
-                  version: 9.14.2
-
-            - name: Install Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  registry-url: https://registry.npmjs.org/
-
-            - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
-              shell: bash
+                  filter: 'tree:0'
+                  registry-url: 'https://registry.npmjs.org/'
 
             - name: Print Environment Info
               run: pnpm exec nx report

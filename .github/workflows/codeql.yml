@@ -46,13 +46,11 @@ jobs:
                 # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
         steps:
-            - name: Harden Runner
-              uses: step-security/harden-runner@v2.15.1 # v2.6.1
+            - uses: ./.github/actions/security-preamble
               with:
-                  egress-policy: audit
+                  skip-telemetry: 'true'
 
-            - name: Checkout repository
-              uses: actions/checkout@v6 # v3.6.0
+            - uses: ./.github/actions/checkout-repo
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'

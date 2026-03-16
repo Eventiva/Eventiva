@@ -1,0 +1,31 @@
+# Shared security preamble: Harden Runner + optional Workflow Telemetry.
+# Use at the start of security and management workflows.
+name: Security Preamble
+description: Harden Runner and optional workflow telemetry
+
+inputs:
+  skip-telemetry:
+    description: Skip Workflow Telemetry step
+    required: false
+    default: 'false'
+  egress-policy:
+    description: Harden Runner egress policy
+    required: false
+    default: 'audit'
+
+runs:
+  using: composite
+  steps:
+    - name: Harden Runner
+      uses: step-security/harden-runner@v2.15.1
+      with:
+        egress-policy: ${{ inputs.egress-policy }}
+
+    - name: Workflow Telemetry
+      if: inputs.skip-telemetry != 'true'
+      uses: catchpoint/workflow-telemetry-action@v2.0.0
+      with:
+        github_token: ${{ secrets.BOT_TOKEN || github.token }}
+        comment_on_pr: false
+        theme: dark
+        proc_trace_sys_enable: true
