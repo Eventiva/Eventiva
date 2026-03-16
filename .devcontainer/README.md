@@ -1,9 +1,15 @@
 # Eventiva Dev Container
 
+This devcontainer is for **implementation work only**. The **tests folder is not mounted** here (an empty volume overlays `tests/`) so the tests subrepository is never visible and AI tools don't use test code as context when implementing features.
+
 - **Node.js 22** (from base image)
 - **pnpm 9** (installed globally in `onCreateCommand`)
 - **nx** (installed globally so `nx` is on PATH; project also has nx via `pnpm install` — use `pnpm exec nx …` for workspace version)
 - **PostgreSQL 16** (service `postgres`, port 5432)
+
+**Note:** To run or write tests, use the test-runner devcontainer (`.devcontainer/test-runner/`) instead.
+
+If you open the repo from a folder not named `Eventiva`, the empty overlay for `tests/` may not apply; update the `mounts` entry in `devcontainer.json` so the target path matches your workspace folder (e.g. `/workspaces/your-folder-name/tests`).
 
 ## Environment variables (set in container)
 

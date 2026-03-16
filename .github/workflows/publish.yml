@@ -22,27 +22,24 @@ jobs:
         name: Publish
         runs-on: ubuntu-latest
         timeout-minutes: 10
+        env:
+            NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+            - uses: actions/checkout@v6
               with:
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
                   fetch-depth: 0
                   filter: tree:0
+                  submodules: 'recursive'
 
-            - name: Install pnpm
-              uses: pnpm/action-setup@v4
+            - uses: ./.github/actions/ci-setup
               with:
-                  version: 9.14.2
-
-            - name: Install Node
-              uses: actions/setup-node@v4
-              with:
-                  node-version: 20
-                  registry-url: https://registry.npmjs.org/
-
-            - name: Install dependencies
-              run: pnpm install --no-frozen-lockfile
-              shell: bash
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
+                  fetch-depth: '0'
+                  submodules: 'recursive'
+                  filter: 'tree:0'
+                  registry-url: 'https://registry.npmjs.org/'
+                  skip-checkout: 'true'
 
             - name: Print Environment Info
               run: pnpm exec nx report

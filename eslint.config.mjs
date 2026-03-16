@@ -63,6 +63,19 @@ export default [
                         '^.*/eslint(\\.base)?\\.config\\.[cm]?[jt]s$',
                     ],
                     depConstraints: [
+                        // Test projects may depend on any implementation package
+                        {
+                            sourceTag: 'scope:tests',
+                            onlyDependOnLibsWithTags: [
+                                'type:core',
+                                'type:database',
+                                'type:extension',
+                                'type:platform',
+                                'type:shared',
+                                'layer:backend',
+                                'layer:shared',
+                            ],
+                        },
                         // Type-based constraints (primary architectural boundaries)
                         {
                             sourceTag: 'type:core',
@@ -106,5 +119,15 @@ export default [
         files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts', '**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
         // Override or add rules here
         rules: {},
+    },
+    // Test files: relax rules that conflict with Effect/Vitest patterns
+    {
+        files: ['**/*.spec.ts', '**/*.spec.tsx'],
+        rules: {
+            'require-yield': 'off',
+            '@typescript-eslint/no-empty-function': 'off',
+            '@typescript-eslint/no-unused-vars': 'warn',
+            '@typescript-eslint/no-explicit-any': 'warn',
+        },
     },
 ];

@@ -18,51 +18,21 @@ jobs:
         name: GitGuardian iac scan
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v6
+              with:
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
+                  submodules: 'recursive'
+
             - name: Harden Runner
-              uses: step-security/harden-runner@v2.15.1 # v2.6.1
+              uses: step-security/harden-runner@v2.15.1
               with:
                   egress-policy: audit
 
-            - name: Workflow Telemetry
-              uses: catchpoint/workflow-telemetry-action@v2.0.0 # v1.8.7
-              continue-on-error: true
+            - uses: ./.github/actions/git-ssh-setup
               with:
-                  github_token: ${{ secrets.BOT_TOKEN || github.token }}
-                  comment_on_pr: false
-                  theme: dark
-                  proc_trace_sys_enable: true
-
-            # checks out the repository
-            - uses: actions/checkout@v6
-              with:
-                  submodules: 'recursive'
-                  token: '${{ secrets.BOT_TOKEN || github.token }}'
-
-            - name: Create SSH key
-              run: |
-                  mkdir -p ~/.ssh/
-                  echo "${{ secrets.BOT_GIT_SSH_KEY }}" > ~/.ssh/id_rsa
-                  chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan github.com >> ~/.ssh/known_hosts
-                  chmod 644 ~/.ssh/known_hosts
-
-            # ensure git is using the ssh key
-            - name: Ensure git is using the SSH key
-              run: |
-                  eval "$(ssh-agent -s)"
-                  ssh-add ~/.ssh/id_rsa
-                  ssh-add -l | grep -q "$(ssh-keygen -lf ~/.ssh/id_rsa | awk '{print $2}')" || (echo "Failed to add SSH key" && exit 1)
-
-            # setup git to use the ssh key
-            - name: Setup git & npm
-              run: |
-                  git config --global user.name ${{secrets.GIT_USER_NAME}}
-                  git config --global user.email ${{secrets.GIT_USER_EMAIL}}
-                  git config --global core.sshCommand "ssh -i ~/.ssh/id_rsa -o UserKnownHostsFile=~/.ssh/known_hosts"
-                  git config --global gpg.format ssh
-                  git config --global user.signingkey ~/.ssh/id_rsa
-                  git config --global commit.gpgsign true
-                  git config --global tag.gpgsign true
+                  ssh-key: ${{ secrets.BOT_GIT_SSH_KEY }}
+                  user-name: ${{ secrets.GIT_USER_NAME }}
+                  user-email: ${{ secrets.GIT_USER_EMAIL }}
 
             - name: Setup NPM Registry
               run: |

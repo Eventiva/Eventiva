@@ -1,0 +1,50 @@
+# Checkout tests submodule to the PR branch (or default if branch doesn't exist).
+# Uses git submodule commands for proper submodule handling.
+# Required after main repo checkout when running TDD on a PR.
+name: Checkout Tests Branch
+description: Switch tests submodule to PR-matching branch
+
+inputs:
+  tests-repo:
+    description: Tests repo owner/name (e.g. Eventiva/tests)
+    required: true
+  branch-name:
+    description: Branch to checkout (e.g. PR head ref)
+    required: true
+  bot-token:
+    description: Token for GitHub API (required for private repos)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout tests submodule to PR branch
+      id: submodule_branch
+      env:
+        TESTS_REPO: ${{ inputs.tests-repo }}
+        BRANCH_NAME: ${{ inputs.branch-name }}
+        BOT_TOKEN: ${{ inputs.bot-token }}
+      run: |
+        set -euo pipefail
+
+        # Configure submodule for commits (when create-tests pushes)
+        git -C tests config user.name "eventiva-bot"
+        git -C tests config user.email "eventiva-bot@users.noreply.github.com"
+
+        # Get default branch (for fallback when PR branch doesn't exist yet)
+        default_branch="$(
+          curl -fsSL \
+            -H "Authorization: Bearer ${BOT_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
+        )"
+        echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
+
+        # Configure submodule to track PR branch, then update
+        git config submodule.tests.branch "${BRANCH_NAME}"
+        if ! git submodule update --remote tests 2>/dev/null; then
+          # PR branch doesn't exist yet (e.g. first run), fall back to default
+          git config submodule.tests.branch "${default_branch}"
+          git submodule update --remote tests
+        fi
+      shell: bash

@@ -46,6 +46,25 @@ You must have agreed to the code of conduct and DCO before your contributions ca
 * Submit and Ensure each contribution is created on its own branch to ensure we can follow http://semver.org/[Semantic Versioning]
 * Be welcoming to newcomers and encourage diverse new contributors from all backgrounds
 
+[#TestsRepository]
+== Tests Repository
+
+Eventiva uses a separate tests repository (`Eventiva/tests`) for all test code.
+This separation ensures that implementation code is written without seeing test expectations,
+leading to more robust software that satisfies real contracts rather than just passing specific tests.
+
+**Critical rule for AI-assisted development:**
+* **Never** clone, initialize, or access the tests repository when doing implementation work with AI tools.
+* The tests repository should only be accessed when:
+  * Running tests locally (use the test-runner devcontainer)
+  * Writing or reviewing tests
+  * Working in a dedicated test-writing environment
+
+For normal development work (implementation, features, bug fixes), keep the `tests/` folder unpopulated.
+This ensures AI tools don't use test code as context when implementing features, which would lead to code that "beats the tests" instead of satisfying the real contract.
+
+See `docs/learnings/tdd-and-test-creation.md` for the full TDD policy and `docs/learnings/effect-vitest-testing.md` for how to write Effect/Vitest tests.
+
 [#beginners]
 == Beginners
 
