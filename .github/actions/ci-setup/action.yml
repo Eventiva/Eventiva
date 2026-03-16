@@ -1,0 +1,69 @@
+# Shared CI setup: checkout, pnpm, node, install.
+# Use for main checks and TDD jobs to avoid duplication.
+name: CI Setup
+description: Checkout repo, setup pnpm/node, install dependencies
+
+inputs:
+  token:
+    description: Token for checkout (BOT_TOKEN for private submodules)
+    required: false
+    default: ''
+  fetch-depth:
+    description: Git fetch depth (0 = full history)
+    required: false
+    default: '0'
+  submodules:
+    description: Submodule checkout mode
+    required: false
+    default: 'false'
+  filter:
+    description: Sparse checkout filter (e.g. tree:0). Omit for full clone.
+    required: false
+    default: ''
+  registry-url:
+    description: NPM registry URL (e.g. for publish workflows)
+    required: false
+    default: ''
+  skip-checkout:
+    description: Skip checkout (use when actions/checkout already ran first for local actions)
+    required: false
+    default: 'false'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v6
+      if: inputs.skip-checkout != 'true'
+      with:
+        token: ${{ inputs.token || github.token }}
+        fetch-depth: ${{ inputs.fetch-depth }}
+        submodules: ${{ inputs.submodules }}
+        filter: ${{ inputs.filter }}
+
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 9.14.2
+
+    - uses: actions/setup-node@v6
+      if: inputs.registry-url == ''
+      with:
+        node-version: 20
+        cache: 'pnpm'
+
+    - uses: actions/setup-node@v6
+      if: inputs.registry-url != ''
+      with:
+        node-version: 20
+        cache: 'pnpm'
+        registry-url: ${{ inputs.registry-url }}
+
+    - name: Cache Nx
+      uses: actions/cache@v4
+      with:
+        path: .nx/cache
+        key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'nx.json') }}
+        restore-keys: |
+          nx-${{ runner.os }}-
+
+    - run: pnpm install --no-frozen-lockfile
+      shell: bash

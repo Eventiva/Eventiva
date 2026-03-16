@@ -1,0 +1,113 @@
+name: Tests Repo Sync
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+    types:
+      - closed
+
+permissions:
+  contents: read
+
+env:
+  TESTS_REPO: Eventiva/tests
+
+jobs:
+  ensure-branch:
+    name: Ensure matching branch exists in tests repo
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ensure branch exists
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.BOT_TOKEN }}
+          script: |
+            const branchName = context.ref.replace("refs/heads/", "");
+            const [owner, repo] = (process.env.TESTS_REPO ?? "").split("/");
+
+            if (!owner || !repo) {
+              core.setFailed("TESTS_REPO must be set as <owner>/<repo>.");
+              return;
+            }
+
+            core.info(`Ensuring branch '${branchName}' exists in ${owner}/${repo}`);
+
+            const { data: testsRepo } = await github.rest.repos.get({ owner, repo });
+            const defaultBranch = testsRepo.default_branch;
+
+            try {
+              await github.rest.git.getRef({
+                owner,
+                repo,
+                ref: `heads/${branchName}`
+              });
+              core.info(`Branch '${branchName}' already exists in ${owner}/${repo}.`);
+              return;
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error;
+              }
+            }
+
+            const { data: baseRef } = await github.rest.git.getRef({
+              owner,
+              repo,
+              ref: `heads/${defaultBranch}`
+            });
+
+            try {
+              await github.rest.git.createRef({
+                owner,
+                repo,
+                ref: `refs/heads/${branchName}`,
+                sha: baseRef.object.sha
+              });
+            } catch (error) {
+              if (error.status === 422) {
+                core.info(`Branch '${branchName}' was created concurrently; treating as success.`);
+                return;
+              }
+              throw error;
+            }
+
+            core.info(`Created '${branchName}' from '${defaultBranch}'.`);
+
+  merge-on-pr-close:
+    name: Merge tests branch when main PR is merged
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge matching branch into tests repo default branch
+        uses: actions/github-script@v8
+        with:
+          github-token: ${{ secrets.BOT_TOKEN }}
+          script: |
+            const headBranch = context.payload.pull_request.head.ref;
+            const [owner, repo] = (process.env.TESTS_REPO ?? "").split("/");
+
+            if (!owner || !repo) {
+              core.setFailed("TESTS_REPO must be set as <owner>/<repo>.");
+              return;
+            }
+
+            const { data: testsRepo } = await github.rest.repos.get({ owner, repo });
+            const base = testsRepo.default_branch;
+
+            try {
+              const result = await github.request("POST /repos/{owner}/{repo}/merges", {
+                owner,
+                repo,
+                base,
+                head: headBranch
+              });
+              core.info(`Merged ${headBranch} into ${base} in ${owner}/${repo}: ${result.status}`);
+            } catch (error) {
+              if ([404, 409, 422].includes(error.status)) {
+                core.warning(`Skipping merge sync (${error.status}): ${error.message}`);
+                return;
+              }
+              throw error;
+            }

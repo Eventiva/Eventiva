@@ -17,23 +17,15 @@ jobs:
             contents: write
             pull-requests: write
         steps:
-            - name: Harden Runner
-              uses: step-security/harden-runner@v2.15.1 # v2.6.1
-              with:
-                  egress-policy: audit
-
-            - name: Workflow Telemetry
-              uses: catchpoint/workflow-telemetry-action@v2.0.0 # v1.8.7
-              with:
-                  github_token: ${{ secrets.BOT_TOKEN || github.token }}
-                  comment_on_pr: false
-                  theme: dark
-                  proc_trace_sys_enable: true
-
             - uses: actions/checkout@v6
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
+
+            - name: Harden Runner
+              uses: step-security/harden-runner@v2.15.1
+              with:
+                  egress-policy: audit
 
             - name: Check for config
               id: check_config
