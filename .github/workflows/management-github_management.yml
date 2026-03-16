@@ -17,12 +17,12 @@ jobs:
             contents: write
             pull-requests: write
         steps:
-            - uses: ./.github/actions/security-preamble
-
-            - uses: ./.github/actions/checkout-repo
+            - uses: actions/checkout@v6
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
+
+            - uses: ./.github/actions/security-preamble
 
             - name: Check for config
               id: check_config

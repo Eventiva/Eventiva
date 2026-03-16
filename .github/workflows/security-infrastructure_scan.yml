@@ -18,12 +18,12 @@ jobs:
         name: GitGuardian iac scan
         runs-on: ubuntu-latest
         steps:
-            - uses: ./.github/actions/security-preamble
-
-            - uses: ./.github/actions/checkout-repo
+            - uses: actions/checkout@v6
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
+
+            - uses: ./.github/actions/security-preamble
 
             - uses: ./.github/actions/git-ssh-setup
               with:

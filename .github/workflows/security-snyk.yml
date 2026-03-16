@@ -42,12 +42,12 @@ jobs:
             security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
             actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
         steps:
-            - uses: ./.github/actions/security-preamble
-
-            - uses: ./.github/actions/checkout-repo
+            - uses: actions/checkout@v6
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
+
+            - uses: ./.github/actions/security-preamble
 
             - uses: ./.github/actions/git-ssh-setup
               with:

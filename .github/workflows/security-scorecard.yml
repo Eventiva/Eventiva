@@ -32,14 +32,14 @@ jobs:
             id-token: write
 
         steps:
-            - uses: ./.github/actions/security-preamble
-              with:
-                  skip-telemetry: 'true'
-
-            - uses: ./.github/actions/checkout-repo
+            - uses: actions/checkout@v6
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
+
+            - uses: ./.github/actions/security-preamble
+              with:
+                  skip-telemetry: 'true'
 
             - name: 'Run analysis'
               uses: ossf/scorecard-action@v2.4.3 # v2.1.2

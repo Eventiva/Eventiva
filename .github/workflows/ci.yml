@@ -25,12 +25,20 @@ jobs:
     name: Lint, build, typecheck
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          fetch-depth: 0
+          filter: tree:0
+          submodules: 'recursive'
+
       - uses: ./.github/actions/ci-setup
         with:
           token: ${{ secrets.BOT_TOKEN }}
           fetch-depth: '0'
           submodules: 'recursive'
           filter: 'tree:0'
+          skip-checkout: 'true'
 
       - run: pnpm nx run-many --exclude=eventiva -t lint build typecheck
       - run: pnpm run dts:docs:enrich
@@ -45,11 +53,18 @@ jobs:
     env:
       BRANCH_NAME: ${{ github.head_ref }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.BOT_TOKEN || github.token }}
+          fetch-depth: 0
+          submodules: 'recursive'
+
       - uses: ./.github/actions/ci-setup
         with:
           token: ${{ secrets.BOT_TOKEN || github.token }}
           fetch-depth: '0'
           submodules: 'recursive'
+          skip-checkout: 'true'
 
       - uses: ./.github/actions/checkout-tests-branch
         with:
@@ -216,11 +231,18 @@ jobs:
     env:
       BRANCH_NAME: ${{ github.head_ref }}
     steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.BOT_TOKEN || github.token }}
+          fetch-depth: 0
+          submodules: 'recursive'
+
       - uses: ./.github/actions/ci-setup
         with:
           token: ${{ secrets.BOT_TOKEN || github.token }}
           fetch-depth: '0'
           submodules: 'recursive'
+          skip-checkout: 'true'
 
       - uses: ./.github/actions/checkout-tests-branch
         with:

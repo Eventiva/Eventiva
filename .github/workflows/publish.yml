@@ -23,6 +23,13 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 10
         steps:
+            - uses: actions/checkout@v6
+              with:
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
+                  fetch-depth: 0
+                  filter: tree:0
+                  submodules: 'recursive'
+
             - uses: ./.github/actions/ci-setup
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
@@ -30,6 +37,7 @@ jobs:
                   submodules: 'recursive'
                   filter: 'tree:0'
                   registry-url: 'https://registry.npmjs.org/'
+                  skip-checkout: 'true'
 
             - name: Print Environment Info
               run: pnpm exec nx report

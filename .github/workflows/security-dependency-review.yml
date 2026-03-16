@@ -18,12 +18,12 @@ jobs:
     dependency-review:
         runs-on: ubuntu-latest
         steps:
-            - uses: ./.github/actions/security-preamble
-
-            - uses: ./.github/actions/checkout-repo
+            - uses: actions/checkout@v6
               with:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
+
+            - uses: ./.github/actions/security-preamble
 
             - name: 'Dependency Review'
               uses: actions/dependency-review-action@v4.9.0 # v2.5.1
