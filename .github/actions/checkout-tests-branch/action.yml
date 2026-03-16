@@ -1,0 +1,44 @@
+# Checkout tests submodule to the PR branch (or default if branch doesn't exist).
+# Required after main repo checkout when running TDD on a PR.
+name: Checkout Tests Branch
+description: Switch tests submodule to PR-matching branch
+
+inputs:
+  tests-repo:
+    description: Tests repo owner/name (e.g. Eventiva/tests)
+    required: true
+  branch-name:
+    description: Branch to checkout (e.g. PR head ref)
+    required: true
+  bot-token:
+    description: Token for GitHub API (required for private repos)
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout tests submodule to PR branch
+      id: submodule_branch
+      env:
+        TESTS_REPO: ${{ inputs.tests-repo }}
+        BRANCH_NAME: ${{ inputs.branch-name }}
+        BOT_TOKEN: ${{ inputs.bot-token }}
+      run: |
+        set -euo pipefail
+        git -C tests config user.name "eventiva-bot"
+        git -C tests config user.email "eventiva-bot@users.noreply.github.com"
+        git -C tests fetch origin --prune
+
+        default_branch="$(
+          curl -fsSL \
+            -H "Authorization: Bearer ${BOT_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${TESTS_REPO}" | jq -r '.default_branch'
+        )"
+        if git -C tests ls-remote --exit-code --heads origin "${BRANCH_NAME}" > /dev/null 2>&1; then
+          git -C tests checkout -B "${BRANCH_NAME}" "origin/${BRANCH_NAME}"
+        else
+          git -C tests checkout -B "${BRANCH_NAME}" "origin/${default_branch}"
+        fi
+        echo "default_branch=${default_branch}" >> "$GITHUB_OUTPUT"
+      shell: bash

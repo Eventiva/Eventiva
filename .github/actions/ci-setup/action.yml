@@ -1,0 +1,44 @@
+# Shared CI setup: checkout, pnpm, node, install.
+# Use for main checks and TDD jobs to avoid duplication.
+name: CI Setup
+description: Checkout repo, setup pnpm/node, install dependencies
+
+inputs:
+  token:
+    description: Token for checkout (BOT_TOKEN for private submodules)
+    required: false
+    default: ''
+  fetch-depth:
+    description: Git fetch depth (0 = full history)
+    required: false
+    default: '0'
+  submodules:
+    description: Submodule checkout mode
+    required: false
+    default: 'false'
+  filter:
+    description: Sparse checkout filter (e.g. tree:0). Omit for full clone.
+    required: false
+    default: ''
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v6
+      with:
+        token: ${{ inputs.token || github.token }}
+        fetch-depth: ${{ inputs.fetch-depth }}
+        submodules: ${{ inputs.submodules }}
+        filter: ${{ inputs.filter }}
+
+    - uses: pnpm/action-setup@v4
+      with:
+        version: 9.14.2
+
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 20
+        cache: 'pnpm'
+
+    - run: pnpm install --no-frozen-lockfile
+      shell: bash
