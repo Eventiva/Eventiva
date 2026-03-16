@@ -28,7 +28,10 @@ jobs:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
 
-            - uses: ./.github/actions/security-preamble
+            - name: Harden Runner
+              uses: step-security/harden-runner@v2.15.1
+              with:
+                  egress-policy: audit
 
             - uses: ./.github/actions/git-ssh-setup
               with:

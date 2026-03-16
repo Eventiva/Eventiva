@@ -37,9 +37,10 @@ jobs:
                   token: ${{ secrets.BOT_TOKEN || github.token }}
                   submodules: 'recursive'
 
-            - uses: ./.github/actions/security-preamble
+            - name: Harden Runner
+              uses: step-security/harden-runner@v2.15.1
               with:
-                  skip-telemetry: 'true'
+                  egress-policy: audit
 
             - name: 'Run analysis'
               uses: ossf/scorecard-action@v2.4.3 # v2.1.2
