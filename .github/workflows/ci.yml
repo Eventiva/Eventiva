@@ -18,6 +18,7 @@ permissions:
 
 env:
   NX_NO_CLOUD: 'true'
+  NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'
   TESTS_REPO: Eventiva/tests
 
 jobs:

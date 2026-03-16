@@ -57,5 +57,13 @@ runs:
         cache: 'pnpm'
         registry-url: ${{ inputs.registry-url }}
 
+    - name: Cache Nx
+      uses: actions/cache@v4
+      with:
+        path: .nx/cache
+        key: nx-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml', 'nx.json') }}
+        restore-keys: |
+          nx-${{ runner.os }}-
+
     - run: pnpm install --no-frozen-lockfile
       shell: bash
