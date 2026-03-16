@@ -29,9 +29,10 @@ jobs:
             BRANCH_NAME: ${{ github.head_ref }}
             BASE_BRANCH: ${{ github.base_ref }}
         steps:
+            # BOT_TOKEN required to fetch private tests submodule; fallback allows job to start when unset.
             - uses: actions/checkout@v6
               with:
-                  token: ${{ secrets.BOT_TOKEN }}
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
                   fetch-depth: 0
                   submodules: 'recursive'
 
@@ -230,9 +231,10 @@ jobs:
         env:
             BRANCH_NAME: ${{ github.head_ref }}
         steps:
+            # Same fallback as create-tests: BOT_TOKEN needed for tests submodule fetch.
             - uses: actions/checkout@v6
               with:
-                  token: ${{ secrets.BOT_TOKEN }}
+                  token: ${{ secrets.BOT_TOKEN || github.token }}
                   fetch-depth: 0
                   submodules: 'recursive'
 
