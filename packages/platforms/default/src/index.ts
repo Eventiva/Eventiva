@@ -10,11 +10,16 @@ import * as Layer from 'effect/Layer';
 import {
     createPlatformTemplate,
     createPlatformTemplateTwoPhase,
+    Database,
     DatabaseLiveInMemory,
     type DefaultRunnerProfile,
     type ExtensionRegistration,
 } from '@eventiva/core';
-import { SchemaFinalizerPg } from '@eventiva/databases.pg';
+import {
+    PgDatabaseLayer,
+    PgClientLayerDefault,
+    SchemaFinalizerPg,
+} from '@eventiva/databases.pg';
 import { HelloWorldConfigLayer, HelloWorldLayer } from '@eventiva/extensions.hello-world';
 import { ContactConfigLayer, ContactLayer } from '@eventiva/extensions.contact';
 
@@ -29,7 +34,10 @@ export type PlatformTemplate = Layer.Layer<never, any, unknown>;
  * replace with pgDatabaseLayer from @eventiva/extensions.database-pg for PostgreSQL.
  * replace with mySQLDatabaseLayer from @eventiva/extensions.database-mysql for MySQL.
  */
-const databaseLayer = DatabaseLiveInMemory;
+const databaseLayer: Layer.Layer<Database> =
+    process.env['DATABASE'] === 'postgres'
+        ? (PgDatabaseLayer.pipe(Layer.provide(PgClientLayerDefault)) as Layer.Layer<Database>)
+        : DatabaseLiveInMemory;
 
 /**
  * Extensions to load (id used for schema markReady). Core adds the startup banner automatically.
