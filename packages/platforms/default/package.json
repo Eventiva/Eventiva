@@ -10,7 +10,7 @@
         "@eventiva/databases.pg": "workspace:*",
         "@eventiva/extensions.hello-world": "workspace:*",
         "@eventiva/extensions.contact": "workspace:*",
-        "@effect/cluster": "^0.56.0",
+        "@effect/cluster": "^0.57.0",
         "effect": "^3.19.17"
     }
 }
