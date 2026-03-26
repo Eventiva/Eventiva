@@ -6,9 +6,9 @@
     "main": "./src/index.js",
     "types": "./src/index.d.ts",
     "dependencies": {
-        "@effect/cluster": "^0.56.0",
-        "@effect/rpc": "^0.73.1",
-        "@effect/workflow": "^0.16.0",
+        "@effect/cluster": "^0.58.0",
+        "@effect/rpc": "^0.75.0",
+        "@effect/workflow": "^0.18.0",
         "@eventiva/core": "workspace:*",
         "@eventiva/databases.shared": "workspace:*",
         "drizzle-orm": "1.0.0-beta.18-dc9676b",
