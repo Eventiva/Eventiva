@@ -8,6 +8,8 @@ import * as Context from 'effect/Context';
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
 
+import { withSpanAndLog } from '../observability/helpers.js';
+
 /** Column set shape (same as second arg to pgTable). Core uses unknown to avoid depending on Drizzle. */
 export type MergedColumns = Record<string, unknown>;
 
@@ -32,7 +34,8 @@ export const SchemaFinalizer = Context.GenericTag<SchemaFinalizer>('@eventiva/co
 
 /** No-op implementation when not using a DB with schema (e.g. in-memory). FinalTableStore gets placeholder values. */
 export const SchemaFinalizerNoOp: SchemaFinalizer = {
-    buildTable: () => Effect.succeed(Object.create(null)),
+    buildTable: () =>
+        Effect.succeed(Object.create(null)).pipe(withSpanAndLog('SchemaFinalizerNoOp.buildTable')),
 };
 
 export const SchemaFinalizerNoOpLayer = Layer.succeed(SchemaFinalizer, SchemaFinalizerNoOp);
