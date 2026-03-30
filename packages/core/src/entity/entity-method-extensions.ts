@@ -77,7 +77,16 @@ export function runWithExtensions<Req, A, E, R>(
             baseResult: result,
         };
         for (const ext of exts) {
-            yield* ext.run(ctx);
+            yield* ext.run(ctx).pipe(
+                withSpanAndLog('entityMethodExtension.run', {
+                    attributes: {
+                        entityType,
+                        method,
+                        extensionId: ext.extensionId,
+                        priority: ext.priority,
+                    },
+                })
+            );
         }
         return result;
     }).pipe(withSpanAndLog('runWithExtensions', { attributes: { entityType, method } }));
