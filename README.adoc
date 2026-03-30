@@ -160,6 +160,28 @@ pnpm nx run-many -t typecheck
 pnpm nx run-many -t test
 ----
 
+==== Run the PostgreSQL platform
+
+The main backend entry point is the `platforms-postgresql` Nx project. From the repository root, after dependencies are installed (and ideally after a successful build), start it with:
+
+[source,bash]
+----
+npx nx run platforms-postgresql:run
+----
+
+This target builds the platform library (if needed) and executes `packages/platforms/postgresql/src/index.ts` via `tsx`.
+The process stays running (HTTP entity endpoints on port 3000 by default, or `EVENTIVA_HTTP_PORT` if set); stop it with kbd:[Ctrl+C].
+If Nx reports a non-zero exit after you interrupt or kill the process, that is expected.
+
+If you use pnpm as the package manager (recommended for this repo), the equivalent is:
+
+[source,bash]
+----
+pnpm nx run platforms-postgresql:run
+----
+
+Environment variables such as `EVENTIVA_DATABASE`, `DATABASE`, and database connection settings apply as documented in the platform (`packages/platforms/postgresql`) and `@eventiva/databases.shared` (backend registry and dialect facades). The Postgres backend is registered in `packages/platforms/postgresql/src/register-database-backends.ts`.
+
 ==== Tests Repository
 
 Eventiva uses a separate tests repository (`Eventiva/tests`) for all test code.
@@ -186,6 +208,7 @@ This project uses Nx for task orchestration. Common commands:
 * `pnpm nx run-many -t lint` - Lint all packages
 * `pnpm nx run-many -t typecheck` - Type check all packages
 * `pnpm nx run-many -t test` - Run tests for all packages
+* `npx nx run platforms-postgresql:run` - **Run the PostgreSQL platform** (backend entry point; builds first via target `dependsOn`)
 * `pnpm nx run <project>:<target>` - Run a specific target for a project (e.g., `pnpm nx run core:build`)
 * `pnpm nx graph` - Visualize the project dependency graph
 

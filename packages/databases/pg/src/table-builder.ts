@@ -15,7 +15,7 @@ import {
     uniqueIndex,
 } from 'drizzle-orm/pg-core';
 import { getPgColumnBuilders } from 'drizzle-orm/pg-core/columns/all';
-import { typeid as typeidBuilder } from '@eventiva/databases.shared';
+import { typeid as typeidBuilder } from './typeid.js';
 
 /** Placeholder for createdBy FK when getTable is not available (e.g. createTableFinal standalone). */
 const createdByPlaceholder = drizzlePgTable('_created_by_placeholder', { id: text('id') });
@@ -125,7 +125,7 @@ type ExcludeForbiddenFields<TColumns extends Record<string, PgColumnBuilder>> = 
  * TColumns: Represents a set of column definitions extending the base type `PgColumnBuilderBase`.
  * The returned type enforces adherence to required fields while excluding forbidden ones.
  */
-type ValidateColumns<TColumns extends Record<string, PgColumnBuilder>> = EnsureRequiredFields<
+export type ValidateColumns<TColumns extends Record<string, PgColumnBuilder>> = EnsureRequiredFields<
     ExcludeForbiddenFields<TColumns>
 >;
 
@@ -229,7 +229,9 @@ export function createTableFinal<
 >(
     name: TTableName,
     columns: (columnTypes: AllBuilders) => ValidateColumns<TColumnsMap>,
-    extraConfig?: (self: unknown) => PgTableExtraConfigValue[]
+    extraConfig?: (self: unknown) => PgTableExtraConfigValue[],
+    /** When `name` matches, `created_by` FK targets this table's `id` (self-reference). */
+    creatorTableName: string = 'contact'
 ) {
     /**
      * Represents a database table configuration using `pgTable` with predefined columns, indices, and generated fields.
@@ -247,7 +249,10 @@ export function createTableFinal<
      * Table indices:
      * - `createdAtIndex` - An index on the `createdAt` column for optimized querying by creation date.
      */
-    const result = drizzlePgTable(
+    let selfTable!: ReturnType<typeof drizzlePgTable>;
+    const createdByRef = (): typeof createdByPlaceholder.id =>
+        name === creatorTableName ? selfTable.id : createdByPlaceholder.id;
+    selfTable = drizzlePgTable(
         name,
         (db) => ({
             ...testColumns(
@@ -264,11 +269,7 @@ export function createTableFinal<
                 .$onUpdate(() => new Date().toISOString()),
             disabledAt: timestamp('disabled_at', { mode: 'string' }),
             deletedAt: timestamp('deleted_at', { mode: 'string' }),
-            /**
-             * Because this references the users table, we must update the users table manually if adding any new
-             * fields to this abstraction.
-             */
-            createdBy: text('created_by').references(() => createdByPlaceholder.id),
+            createdBy: text('created_by').references(createdByRef),
             active: statusEnum('active').generatedAlwaysAs(
                 (): SQL =>
                     sql`CASE WHEN deleted_at IS NULL AND disabled_at IS NULL THEN 'active'::status ELSE 'inactive'::status END`
@@ -287,29 +288,38 @@ export function createTableFinal<
             ];
         }
     );
-    return result;
+    return selfTable;
 }
 
 /**
  * Builds a single Drizzle table from merged columns object and extra config callbacks.
  * Used by SchemaFinalizer and by createTableFinal. Adds standard columns (createdAt, updatedAt, etc.) and standard indexes.
- * When getTable is provided, createdBy references the real creator table; otherwise uses a placeholder.
+ * When building the creator table (see `creatorTableName`), `created_by` self-references that table's `id`.
+ * Other tables reference the already-built creator table via `getTable(creatorTableName)`.
  *
  * @param name - Table name
  * @param mergedColumns - Column definitions (must include id). Same shape as second arg to pgTable.
  * @param extraConfigs - Optional array of callbacks (table) => PgTableExtraConfigValue[] to add indexes/constraints
- * @param getTable - Optional callback to resolve already-built tables (creator table built first). Default creator table name: 'contact'.
+ * @param getTable - Optional callback to resolve already-built tables (creator table built first).
+ * @param creatorTableName - Creator table (default `contact`). Must match `SchemaRegistryConfig.creatorTableName`.
  * @returns The built PgTable
  */
 export function buildTableInternal(
     name: string,
     mergedColumns: Record<string, PgColumnBuilder>,
     extraConfigs: ReadonlyArray<(table: any) => PgTableExtraConfigValue[]>,
-    getTable?: (tableName: string) => unknown
+    getTable?: (tableName: string) => unknown,
+    creatorTableName: string = 'contact'
 ) {
-    const creatorTable = getTable?.('contact') as { id: typeof createdByPlaceholder.id } | undefined;
-    const createdByRef = (): typeof createdByPlaceholder.id => creatorTable?.id ?? createdByPlaceholder.id;
-    return drizzlePgTable(
+    let selfTable!: ReturnType<typeof drizzlePgTable>;
+    const createdByRef = (): typeof createdByPlaceholder.id => {
+        if (name === creatorTableName) {
+            return selfTable.id;
+        }
+        const creator = getTable?.(creatorTableName) as { id: typeof createdByPlaceholder.id } | undefined;
+        return creator?.id ?? createdByPlaceholder.id;
+    };
+    selfTable = drizzlePgTable(
         name,
         (db) => ({
             ...mergedColumns,
@@ -337,6 +347,7 @@ export function buildTableInternal(
             ];
         }
     );
+    return selfTable;
 }
 
 /**

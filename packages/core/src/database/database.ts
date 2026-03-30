@@ -1,14 +1,11 @@
 /**
  * Database service interface for entity persistence.
  * Core store/CRUD logic calls this service; the platform provides the implementation via Effect Layers
- * (e.g. PgDrizzle from database-pg, or in-memory for tests). Core never imports a specific driver.
+ * (e.g. Drizzle-backed drivers in `@eventiva/databases.pg` / `@eventiva/databases.sqlite`). Core never imports a specific driver.
  * @see docs/learnings/architecture.md
  */
 import * as Context from 'effect/Context';
 import * as Effect from 'effect/Effect';
-import * as Layer from 'effect/Layer';
-import * as Ref from 'effect/Ref';
-import { withSpanAndLog } from '../observability/helpers.js';
 
 /**
  * Stored record shape: must have an id field. Used for get/set/list.
@@ -18,7 +15,7 @@ export type StoredRecord<Id = unknown> = { readonly id: unknown } & Record<strin
 
 /**
  * Driver-agnostic interface for entity table storage.
- * Implementations use Effect SQL + Drizzle (or in-memory Ref) to persist records keyed by table name and id.
+ * Implementations use Effect SQL + Drizzle to persist records keyed by table name and id.
  */
 export interface Database {
     /** Get a record by table name and id. Returns null if not found. R is the stored (possibly encoded) shape. */
@@ -35,61 +32,3 @@ export interface Database {
 }
 
 export const Database = Context.GenericTag<Database>('@eventiva/core/Database');
-
-/** Key for the in-memory map: tableName -> id string -> record */
-function idKey(id: unknown): string {
-    return typeof id === 'string' ? id : String(id);
-}
-
-/**
- * In-memory Database layer. Uses a single Ref<Map<tableName, Map<idKey, record>>>.
- * Use in tests or when no persistent DB is configured; platform can merge this instead of PgDrizzle.
- */
-export const DatabaseLiveInMemory: Layer.Layer<Database> = Layer.scoped(
-    Database,
-    Effect.gen(function* () {
-        const ref = yield* Ref.make<Map<string, Map<string, StoredRecord<unknown>>>>(new Map());
-        const database: Database = {
-            get: <Id, R extends StoredRecord<Id>>(tableName: string, id: Id) =>
-                Ref.get(ref).pipe(
-                    Effect.map((tables) => {
-                        const table = tables.get(tableName);
-                        if (!table) return null;
-                        const record = table.get(idKey(id));
-                        return record != null ? (record as R) : null;
-                    }),
-                    withSpanAndLog('database.get', { attributes: { tableName } })
-                ),
-            set: (tableName, id, record) =>
-                Ref.update(ref, (tables) => {
-                    const next = new Map(tables);
-                    const table = next.get(tableName) ?? new Map();
-                    const nextTable = new Map(table);
-                    nextTable.set(idKey(id), record as StoredRecord<unknown>);
-                    next.set(tableName, nextTable);
-                    return next;
-                }).pipe(withSpanAndLog('database.set', { attributes: { tableName } })),
-            delete: (tableName, id) =>
-                Ref.update(ref, (tables) => {
-                    const next = new Map(tables);
-                    const table = next.get(tableName);
-                    if (table) {
-                        const nextTable = new Map(table);
-                        nextTable.delete(idKey(id));
-                        next.set(tableName, nextTable);
-                    }
-                    return next;
-                }).pipe(withSpanAndLog('database.delete', { attributes: { tableName } })),
-            list: <Id, R extends StoredRecord<Id>>(tableName: string) =>
-                Ref.get(ref).pipe(
-                    Effect.map((tables) => {
-                        const table = tables.get(tableName);
-                        const arr = table ? Array.from(table.values()) : [];
-                        return arr as unknown as ReadonlyArray<R>;
-                    }),
-                    withSpanAndLog('database.list', { attributes: { tableName } })
-                ),
-        };
-        return database;
-    })
-);

@@ -14,7 +14,7 @@ import {
     withSpanAndLog,
 } from '@eventiva/core';
 import { ContactConfig } from './config.js';
-import { CONTACT_ENTITY_ID, contactColumns } from './entity.js';
+import { CONTACT_ENTITY_ID, contactRegistryColumns } from './entity.js';
 
 const EXTENSION_ID = 'contact';
 
@@ -22,9 +22,10 @@ const OnLoadLayer = makeExtensionOnLoadLayer(
     EXTENSION_ID,
     Effect.gen(function* () {
         const registry = yield* TableColumnRegistry;
-        yield* registry.registerTableColumns('contact', EXTENSION_ID, contactColumns);
+        yield* registry.registerTableColumns('contact', EXTENSION_ID, contactRegistryColumns);
 
         const relationsRegistry = yield* TableRelationsRegistry;
+        /** Drizzle relations: `created_by` FK is `contact.id` (self-reference when contact is the creator table). */
         yield* relationsRegistry.registerRelations('contact', EXTENSION_ID, (helpers: any) => {
             return {
                 creator: helpers.one.contact({
@@ -53,7 +54,7 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
         const Contact = EntityRegistry.tryGet('Contact');
         if (!Contact) {
             yield* Effect.log(
-                'Contact entity not registered (e.g. in-memory DB with placeholder tables); skipping seed.'
+                'Contact entity not registered (schema finalization or EntityRegistry population may have failed); skipping seed.'
             );
             return;
         }
@@ -63,8 +64,13 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
         // @ts-expect-error dynamic methods
         const list = yield* client.list({});
         if (list.length === 0) {
+            const full = config.seedFullname.trim();
+            const sp = full.indexOf(' ');
+            const firstname = sp === -1 ? (full || 'Jane') : full.slice(0, sp);
+            const lastname = sp === -1 ? 'Doe' : full.slice(sp + 1).trim() || 'Doe';
             const contactCreatePayload = {
-                fullname: config.seedFullname,
+                firstname,
+                lastname,
                 dateOfBirth: new Date(config.seedDateOfBirth).toISOString(),
                 email: config.seedEmail,
                 phone: config.seedPhone,

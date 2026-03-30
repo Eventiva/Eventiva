@@ -1,0 +1,52 @@
+{
+    "name": "platforms-postgresql",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/platforms/postgresql/src",
+    "projectType": "library",
+    "tags": ["type:platform", "layer:backend"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/platforms/postgresql",
+                "main": "packages/platforms/postgresql/src/index.ts",
+                "tsConfig": "packages/platforms/postgresql/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "run": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec tsx --tsconfig packages/platforms/postgresql/tsconfig.run.json packages/platforms/postgresql/src/index.ts",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "PGPORT": "5432",
+                    "PGUSER": "postgres",
+                    "PGPASSWORD": "postgres",
+                    "HOST": "localhost",
+                    "DATABASE": "postgres"
+                }
+            },
+            "configurations": {},
+            "dependsOn": ["build"]
+        },
+        "verify-pg-e2e": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/pg-e2e-via-nx.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "CONTACT_SEED_ENABLED": "false",
+                    "EVENTIVA_DATABASE": "postgres",
+                    "PGPORT": "5432",
+                    "PGUSER": "postgres",
+                    "PGPASSWORD": "postgres",
+                    "HOST": "localhost",
+                    "DATABASE": "postgres"
+                }
+            },
+            "dependsOn": ["build"]
+        }
+    }
+}

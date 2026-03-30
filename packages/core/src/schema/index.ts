@@ -25,3 +25,9 @@ export {
     type RelationCallback,
     type TableRelationsRegistryState,
 } from './table-relations-registry.js';
+export {
+    RuntimeSchemaDDL,
+    RuntimeSchemaDDLNoOp,
+    RuntimeSchemaDDLNoOpLayer,
+    type RuntimeSchemaDDLService,
+} from './runtime-schema-ddl.js';

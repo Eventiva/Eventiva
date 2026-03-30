@@ -1,0 +1,12 @@
+---
+description: When creating or significantly changing a monorepo package or extension, delegate to documentation-creator for docs/ updates
+alwaysApply: true
+---
+
+# Package and module documentation
+
+When you **create** or **significantly change** an Nx project in this repository—a package, library, application, or Odoo-style extension under `packages/` (including `type:extension`, `type:core`, `type:database`, or `type:platform`)—delegate to the **documentation-creator** subagent so documentation stays current.
+
+The subagent adds or updates Markdown under the repository **`docs/`** tree (hub **`docs/readme.md`**, reusable parts under **`docs/parts/`**, longer composed docs under **`docs/assembled/`**). Follow its full instructions in [`.cursor/agents/documentation-creator.md`](.cursor/agents/documentation-creator.md).
+
+**Do not** skip this when the change affects public behaviour, configuration, dependencies, or how other developers adopt the package. For architecture or boundary conventions already covered in **`docs/learnings/`**, link there instead of duplicating.

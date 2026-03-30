@@ -1,0 +1,19 @@
+{
+    "name": "@eventiva/databases.sqlite",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/databases/sqlite/src",
+    "projectType": "library",
+    "tags": ["type:database", "layer:backend"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/databases/sqlite",
+                "main": "packages/databases/sqlite/src/index.ts",
+                "tsConfig": "packages/databases/sqlite/tsconfig.lib.json",
+                "assets": []
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+---
+description: External service integrations — dedicated @eventiva/integrations.* packages; never dump vendor clients into @eventiva/core for convenience. Complements module-boundaries.mdc.
+alwaysApply: true
+---
+
+# Integration packages vs `@eventiva/core`
+
+## Purpose
+
+**Third-party service integrations** (analytics, error reporting, email, payments, webhooks, etc.) must live in a **dedicated workspace package**, not in `@eventiva/core`, unless an explicit exception is documented below.
+
+`@eventiva/core` holds **domain-agnostic** platform building blocks (shared types, cluster/RPC/workflow wiring, cross-cutting primitives **without** a specific vendor SDK as the main artifact). **Vendor SDKs, API clients, and service-specific config belong in `@eventiva/integrations.<vendor>`** (or the repo’s agreed `integrations` package naming)—not “in core because it’s faster.”
+
+**Tagging, layer rules, and which package types may depend on which** are **only** in `.cursor/rules/module-boundaries.mdc` (and `docs/learnings/module-boundaries.md`). Apply those tags to every new integration package; this rule does not restate that matrix.
+
+## Default placement (correct “service core”)
+
+1. **Create** `packages/integrations/<vendor>` (or equivalent) with name **`@eventiva/integrations.<vendor>`**.
+2. If the repo has no integrations glob yet, add **`packages/integrations/*`** to root `pnpm-workspace.yaml` when introducing the first package.
+3. **Own** the vendor **`dependencies`** (npm package for that API) **only** in that integration package—**not** in `@eventiva/core` and not duplicated across feature extensions.
+4. **Tag** the package per Module Boundaries:
+   - **`type:core`** if it has **no** workspace dependencies (vendor + generic code only).
+   - **`type:extension`** if it must depend on **`@eventiva/core`** (or other allowed workspace deps). Keep it **integration-only**—no domain hooks; feature extensions depend on it, not the reverse.
+5. **Wire** the product by adding **`workspace:*`** deps where composition happens (feature extensions that call the integration; **platform** if the runnable app must load it). Use pnpm workspace commands—see `.cursor/skills/link-workspace-packages/SKILL.md`.
+
+## Feature extensions
+
+- **Thin**: map domain events or handlers → APIs exported by `@eventiva/integrations.<vendor>` (or shared abstractions that package provides).
+- **No** second copy of the vendor client in the extension.
+- **No** imports from `@eventiva/extensions.*` **into** integration packages (extensions consume integrations).
+
+## Platform
+
+Platform packages **compose** (list `workspace:*` deps, register runtime). They **do not** host vendor client implementations—that stays in `@eventiva/integrations.*`.
+
+## Explicit exception (rare)
+
+Placing vendor-specific code in `@eventiva/core` is **discouraged**. Only do so if the team has recorded a **short, time-bounded rationale** (e.g. in PR description or ticket) and a follow-up to extract to `@eventiva/integrations.*`. **Do not** use “it was easier” as the sole reason.
+
+## After changes
+
+Verify **module boundaries** and workspace wiring using the workflow in **Module Boundaries** (e.g. `pnpm nx lint` and correct `project.json` tags)—see `.cursor/rules/module-boundaries.mdc`.
+
+## Quick checklist
+
+- [ ] New vendor integration → **`@eventiva/integrations.<vendor>`** (or agreed path), not default **`@eventiva/core`**.
+- [ ] Vendor SDK declared **once**, in that integration package.
+- [ ] Tags and `dependencies` satisfy **Module Boundaries**; integration layer does not import domain extensions.
+- [ ] Platform / extensions **declare** `workspace:*` links via package manager, not `tsconfig` path hacks.
+
+## Reference
+
+- Tags and dependency matrix: `.cursor/rules/module-boundaries.mdc`
+- Linking: `.cursor/skills/link-workspace-packages/SKILL.md`
