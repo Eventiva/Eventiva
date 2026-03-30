@@ -2,11 +2,14 @@
  * Feature flag abstraction: PostHog + Effect Config fallback.
  * Use to toggle features for debugging or gradual rollout.
  *
- * Env:
- * - POSTHOG_API_KEY: when set, use PostHog for flags
- * - EVENTIVA_FEATURE_<KEY>: local override (true|false), e.g. EVENTIVA_FEATURE_OBSERVABILITY=false
+ * Env (flat keys; see `loadConfigFlags` and repository `.env.example`):
+ * - `POSTHOG_API_KEY` / `POSTHOG_PROJECT_API_KEY` — when set, resolve flags via PostHog
+ * - `POSTHOG_HOST` — ingest host (default `https://us.i.posthog.com`)
+ * - `EVENTIVA_FEATURE_DISTINCT_ID` — PostHog distinct id (default `server`)
+ * - `EVENTIVA_FEATURE_OBSERVABILITY`, `EVENTIVA_FEATURE_DEVTOOLS`, `EVENTIVA_FEATURE_CLUSTER`, …
+ *   (boolean strings; each maps to a `FeatureFlagKeys` entry)
  *
- * @see temp-debug-initial-tracking.md for debug usage
+ * @see https://effect.website/docs/configuration/#loading-configuration-from-environment-variables
  */
 import * as Config from 'effect/Config';
 import * as ConfigProvider from 'effect/ConfigProvider';

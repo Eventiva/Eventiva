@@ -1,8 +1,10 @@
 /**
  * PgClient layer for PostgreSQL. Use with PgDatabaseLayer so the platform has a real DB.
- * Default config reads from env: HOST, PGPORT (preferred) or PORT, PGUSER (preferred) or USERNAME, PGPASSWORD (preferred) or PASSWORD, DATABASE, SSL.
- * Use PGPORT when generic PORT is reserved for HTTP. Use PGUSER when USERNAME is set to the OS login (common on Linux) and is not a Postgres role.
+ * Default config reads from `process.env` (not Effect `Config`): `HOST`, `PGPORT` (preferred) or `PORT`,
+ * `PGUSER` (preferred) or `USERNAME`, `PGPASSWORD` (preferred) or `PASSWORD`, `DATABASE`, `SSL`.
+ * Use `PGPORT` when generic `PORT` is reserved for HTTP. Use `PGUSER` when `USERNAME` is the OS login.
  *
+ * Catalog: repository root `.env.example`.
  * @see https://effect-ts.github.io/effect/docs/sql-pg
  */
 import { PgClient } from '@effect/sql-pg';

@@ -1,14 +1,20 @@
 /**
- * Startup banner: prints Eventiva wordart, By Resnovas wordart, and copyright as part of
- * the core startup sequence. Listens to extension/hello-world/onLoad and
- * extension/hello-world/afterCall so the banner runs when the hello-world extension
- * loads and after sayHello. Merged into the platform by createPlatformTemplate.
+ * Startup banner: logs Eventiva wordart, By Resnovas wordart, and copyright via `Effect.logInfo`
+ * (same tee as other logs: console + EVENTIVA_LOG_FILE).
+ *
+ * Word art uses **one string per `logInfo`** plus `Effect.annotateLogs` for metadata. Passing
+ * `logInfo(string, object)` makes the message a tuple, so `Inspectable.toStringUnknown` serializes
+ * it as `[...]` and multiline ASCII breaks; real newlines are preserved only for a single string.
+ *
+ * Listens on extension/hello-world/onLoad and extension/hello-world/afterCall using **in-process**
+ * pubsub only. Do **not** use `Workflow.execute` here when the platform uses ClusterWorkflowEngine:
+ * cluster message persistence calls `JSON.stringify` on envelopes and throws on `BigInt`, which
+ * caused "Defect in entity, restarting" and hid banner output.
+ *
+ * Wired in `createPlatformTemplate` (hooks stack).
  */
-import * as Activity from '@effect/workflow/Activity';
-import * as Workflow from '@effect/workflow/Workflow';
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
-import * as Schema from 'effect/Schema';
 import { withSpanAndLog } from '../observability/helpers.js';
 import {
     ExtensionHookPubSub,
@@ -38,89 +44,54 @@ const COPYRIGHT_STATEMENT = '© 2026 Eventiva. All rights reserved.';
 
 const HELLO_WORLD = 'hello-world';
 
-// ---- OnLoad: log and print all three banners ----
-const OnLoadPayload = Schema.Struct({ messageId: Schema.optional(Schema.String) });
-type OnLoadPayload = Schema.Schema.Type<typeof OnLoadPayload>;
+function logBannerWordartAndCopyright(): Effect.Effect<void> {
+    return Effect.gen(function* () {
+        // One string per log — `Effect.logInfo(a, b)` turns the message into a tuple and
+        // `Inspectable.toStringUnknown` flattens newlines. Metadata goes on `annotateLogs`.
+        yield* Effect.logInfo(EVENTIVA_WORDART).pipe(
+            Effect.annotateLogs({ service: 'eventiva-core', banner: 'eventiva-wordart' })
+        );
+        yield* Effect.logInfo(BY_RESNOVAS_WORDART).pipe(
+            Effect.annotateLogs({ service: 'eventiva-core', banner: 'by-resnovas-wordart' })
+        );
+        yield* Effect.logInfo(COPYRIGHT_STATEMENT).pipe(
+            Effect.annotateLogs({ service: 'eventiva-core', banner: 'copyright' })
+        );
+    });
+}
 
-const StartupBannerOnLoadWorkflow = Workflow.make({
-    name: 'core/startup-banner/onLoad',
-    payload: OnLoadPayload,
-    idempotencyKey: (p) => p.messageId ?? 'onLoad',
-    success: Schema.Void,
-    error: Schema.Never,
-});
+function logBannerOnExtensionHelloWorldOnLoad(): Effect.Effect<void> {
+    return Effect.gen(function* () {
+        yield* Effect.logInfo('Eventiva startup banner (core)', { service: 'eventiva-core' });
+        yield* logBannerWordartAndCopyright();
+    });
+}
 
-const StartupBannerOnLoadWorkflowLayer = StartupBannerOnLoadWorkflow.toLayer(
-    Effect.fn((_payload: OnLoadPayload, _executionId: string) =>
-        Effect.gen(function* () {
-            yield* Activity.make({
-                name: 'core/startup-banner/onLoad-log',
-                execute: Effect.logInfo('Eventiva startup banner (core)', { service: 'eventiva-core' }),
-            });
-            yield* Effect.sync(() => {
-                console.log(EVENTIVA_WORDART);
-                console.log(BY_RESNOVAS_WORDART);
-                console.log(COPYRIGHT_STATEMENT);
-            });
-        }).pipe(withSpanAndLog('startupBannerOnLoadWorkflow'))
-    )
-);
-
-// ---- AfterCall: on HelloWorld sayHello, print all three again ----
-const AfterCallPayload = Schema.Struct({
-    messageId: Schema.optional(Schema.String),
-    context: Schema.optional(Schema.Unknown),
-});
-type AfterCallPayload = Schema.Schema.Type<typeof AfterCallPayload>;
-
-const StartupBannerAfterCallWorkflow = Workflow.make({
-    name: 'core/startup-banner/afterCall',
-    payload: AfterCallPayload,
-    idempotencyKey: (p) => p.messageId ?? JSON.stringify(p.context),
-    success: Schema.Void,
-    error: Schema.Never,
-});
-
-const StartupBannerAfterCallWorkflowLayer = StartupBannerAfterCallWorkflow.toLayer(
-    Effect.fn((payload: AfterCallPayload, _executionId: string) =>
-        Effect.gen(function* () {
-            yield* Activity.make({
-                name: 'core/startup-banner/afterCall',
-                execute: Effect.gen(function* () {
-                    const ctx = payload.context as ExtensionCallContext | undefined;
-                    if (ctx?.entityType === 'HelloWorld' && ctx?.method === 'sayHello') {
-                        yield* Effect.logInfo('Printing startup banner for HelloWorld');
-                        yield* Effect.sync(() => {
-                            console.log(EVENTIVA_WORDART);
-                            console.log(BY_RESNOVAS_WORDART);
-                            console.log(COPYRIGHT_STATEMENT);
-                        });
-                    }
-                }),
-            });
-        }).pipe(withSpanAndLog('startupBannerAfterCallWorkflow'))
-    )
-);
-
-const RegisterListenersLayer = Layer.effectDiscard(
+/**
+ * Layer that registers startup banner listeners on the in-process hook PubSub.
+ * Requires ExtensionHookPubSub. Does not register cluster workflows.
+ */
+export const StartupBannerLayer = Layer.effectDiscard(
     Effect.gen(function* () {
         yield* Effect.logInfo('Registering startup banner listeners');
         const pubsub = yield* ExtensionHookPubSub;
         yield* pubsub.listenTo(extensionHookTopic(HELLO_WORLD, 'onLoad'), (_payload, messageId) =>
-            StartupBannerOnLoadWorkflow.execute({ messageId }).pipe(Effect.asVoid)
+            logBannerOnExtensionHelloWorldOnLoad().pipe(
+                withSpanAndLog('startupBannerOnLoad', { attributes: { messageId: messageId ?? 'none' } }),
+                Effect.asVoid
+            )
         );
         yield* pubsub.listenTo(extensionHookTopic(HELLO_WORLD, 'afterCall'), (payload, messageId) =>
-            StartupBannerAfterCallWorkflow.execute({ context: payload, messageId }).pipe(Effect.asVoid)
+            Effect.gen(function* () {
+                const ctx = payload as ExtensionCallContext | undefined;
+                if (ctx?.entityType === 'HelloWorld' && ctx?.method === 'sayHello') {
+                    yield* Effect.logInfo('Printing startup banner for HelloWorld');
+                    yield* logBannerWordartAndCopyright();
+                }
+            }).pipe(
+                withSpanAndLog('startupBannerAfterCall', { attributes: { messageId: messageId ?? 'none' } }),
+                Effect.asVoid
+            )
         );
     }).pipe(withSpanAndLog('registerStartupBannerListeners'))
-);
-
-/**
- * Layer that registers the core startup banner (wordart + copyright). Requires
- * ExtensionHookPubSub and WorkflowEngine. Merged by createPlatformTemplate.
- */
-export const StartupBannerLayer = Layer.mergeAll(
-    StartupBannerOnLoadWorkflowLayer,
-    StartupBannerAfterCallWorkflowLayer,
-    RegisterListenersLayer
 );

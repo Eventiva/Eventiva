@@ -21,11 +21,20 @@
                 "command": "pnpm exec tsx --tsconfig packages/platforms/postgresql/tsconfig.run.json packages/platforms/postgresql/src/index.ts",
                 "cwd": "{workspaceRoot}",
                 "env": {
+                    "NODE_ENV": "development",
+                    "EVENTIVA_DATABASE": "postgres",
+                    "EVENTIVA_HTTP_PORT": "3000",
                     "PGPORT": "5432",
                     "PGUSER": "postgres",
                     "PGPASSWORD": "postgres",
                     "HOST": "localhost",
-                    "DATABASE": "postgres"
+                    "DATABASE": "postgres",
+                    "SSL": "false",
+                    "CONTACT_SEED_ENABLED": "true",
+                    "EVENTIVA_LOG_FILE": "/tmp/eventiva-effect.log",
+                    "EVENTIVA_FEATURE_DEVTOOLS": "true",
+                    "EVENTIVA_FEATURE_OBSERVABILITY": "true",
+                    "EVENTIVA_LOG_CONSOLE_MIN_LEVEL": "Trace"
                 }
             },
             "configurations": {},
@@ -37,13 +46,17 @@
                 "command": "node scripts/pg-e2e-via-nx.mjs",
                 "cwd": "{workspaceRoot}",
                 "env": {
-                    "CONTACT_SEED_ENABLED": "false",
+                    "NODE_ENV": "development",
                     "EVENTIVA_DATABASE": "postgres",
+                    "EVENTIVA_HTTP_PORT": "3000",
+                    "CONTACT_SEED_ENABLED": "false",
                     "PGPORT": "5432",
                     "PGUSER": "postgres",
                     "PGPASSWORD": "postgres",
                     "HOST": "localhost",
-                    "DATABASE": "postgres"
+                    "DATABASE": "postgres",
+                    "SSL": "false",
+                    "EVENTIVA_FEATURE_DEVTOOLS": "true"
                 }
             },
             "dependsOn": ["build"]

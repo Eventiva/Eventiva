@@ -1,11 +1,10 @@
 /**
- * Contact extension config loaded from Effect Config.
- * Env keys:
- * - CONTACT_SEED_ENABLED
- * - CONTACT_SEED_FULLNAME
- * - CONTACT_SEED_DATE_OF_BIRTH
- * - CONTACT_SEED_EMAIL
- * - CONTACT_SEED_PHONE
+ * Contact extension config loaded from Effect `Config.nested(..., 'CONTACT')`.
+ * With default path delimiter `_`, each key becomes `CONTACT_<NAME>` in the environment
+ * (e.g. `SEED_ENABLED` → `CONTACT_SEED_ENABLED`).
+ *
+ * @see https://effect.website/docs/configuration/#using-nested-configuration-namespaces
+ * Full catalog: repository root `.env.example`.
  */
 import * as Config from 'effect/Config';
 import * as ConfigProvider from 'effect/ConfigProvider';

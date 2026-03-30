@@ -13,7 +13,7 @@ import type * as Entity from '@effect/cluster/Entity';
  * and its own Layer for independent scaling and sharding.
  *
  * **Observability in handlers:** Every handler must run with Logger, Tracer, and
- * Metric in context. Use the ObservabilityLive layer and ensure handler effects
+ * Metric in context. Use the ObservabilityStackLive layer and ensure handler effects
  * require `Logger`, `Tracer`, and `Metric` (e.g. use `withSpanAndLog` or
  * Effect.withSpan + Effect.log + Metric in each handler). No handler may ship
  * without span, structured log, and at least one metric where appropriate.

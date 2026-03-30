@@ -1,6 +1,7 @@
 /**
  * SQLite file path from env for the default platform. Forks can provide their own layer.
  * `EVENTIVA_SQLITE_PATH` — file path or `:memory:` (default `./.data/eventiva.sqlite`).
+ * Catalog: repository root `.env.example`.
  */
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
