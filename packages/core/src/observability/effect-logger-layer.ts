@@ -1,80 +1,71 @@
 /**
- * Optional Effect `Logger` wiring: console format and/or JSON lines file sink.
- * Uses `Logger.zip` to combine a console logger with a file sink (structured logs as JSON per line).
- *
- * Environment:
- * - `EVENTIVA_LOG_FORMAT` — `default` | `string` | `logfmt` | `pretty` | `json` | `structured`
- * - `EVENTIVA_LOG_FILE` — if set, append one JSON object per log line (same shape as `jsonLogger`)
+ * Effect `Logger` wiring: **console** uses Effect's built-in pretty logger (TTY/grouped output);
+ * **file** appends one formatted line per log (JSON/logfmt/etc. via `EVENTIVA_LOG_FORMAT_FILE`).
+ * OpenTelemetry log export is unchanged (NodeSdk adds its own logger).
  *
  * @see https://effect.website/docs/observability/logging/#custom-loggers
  */
-import { appendFileSync, mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
+import { appendFileSync } from 'node:fs';
+import type { ConfigError } from 'effect/ConfigError';
+import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
+import * as LogLevel from 'effect/LogLevel';
 import * as Logger from 'effect/Logger';
+import { ensureDirForFile } from './ensure-dir.js';
+import { formatEffectLogLine } from './log-format.js';
+import type { ObservabilityConfig } from './observability-config.js';
+import { loadObservabilityConfig } from './observability-config.js';
 
-export type EffectLogFormat = 'default' | 'string' | 'logfmt' | 'pretty' | 'json' | 'structured';
-
-function parseLogFormat(raw: string | undefined): EffectLogFormat {
-    const v = (raw ?? 'default').trim().toLowerCase();
-    if (
-        v === 'default' ||
-        v === 'string' ||
-        v === 'logfmt' ||
-        v === 'pretty' ||
-        v === 'json' ||
-        v === 'structured'
-    ) {
-        return v;
-    }
-    return 'default';
-}
-
-function consoleLoggerForFormat(format: EffectLogFormat): Logger.Logger<unknown, void> {
-    switch (format) {
-        case 'default':
-            return Logger.defaultLogger;
-        case 'string':
-            return Logger.stringLogger;
-        case 'logfmt':
-            return Logger.logfmtLogger;
-        case 'pretty':
-            return Logger.prettyLogger();
-        case 'json':
-            return Logger.jsonLogger
-        case 'structured':
-            return Logger.structuredLogger
-        default:
-            return Logger.prettyLogger();;
-    }
-}
+export type { EffectLogFormat } from './log-format.js';
 
 /**
- * Append each log as one JSON line (Effect `jsonLogger` output).
+ * Console sink: delegates to Effect's built-in {@link Logger.prettyLoggerDefault} so multiline
+ * messages (e.g. startup banner) render like stock Effect, not JSON/logfmt.
  */
-function jsonLinesFileLogger(filePath: string): Logger.Logger<unknown, void> {
-    mkdirSync(dirname(filePath), { recursive: true });
-    return Logger.map(Logger.structuredLogger, (line) => {
-        appendFileSync(filePath, JSON.stringify(line) + '\n', 'utf-8');
+function consoleLoggerFromConfig(cfg: ObservabilityConfig): Logger.Logger<unknown, void> {
+    if (!cfg.effectLogConsole) {
+        return Logger.none;
+    }
+    return Logger.make<unknown, void>((options) => {
+        if (!LogLevel.greaterThanEqual(options.logLevel, cfg.effectLogConsoleMinLevel)) {
+            return;
+        }
+        Logger.prettyLoggerDefault.log(options);
     });
 }
 
 /**
- * Returns a layer that replaces `Logger.defaultLogger` when `EVENTIVA_LOG_FILE` is set
- * and/or `EVENTIVA_LOG_FORMAT` is not `default`. Otherwise `Layer.empty`.
+ * File-only audit line (structured); does not write to stdout.
  */
-export function effectLoggerLayerFromEnv(): Layer.Layer<never> {
-    const filePath = process.env.EVENTIVA_LOG_FILE?.trim();
-    const format = parseLogFormat(process.env.EVENTIVA_LOG_FORMAT);
-    const useFile = Boolean(filePath && filePath.length > 0);
-    const useCustomFormat = format !== 'default';
+function fileLoggerFromConfig(cfg: ObservabilityConfig): Logger.Logger<unknown, void> {
+    return Logger.make<unknown, void>((options) => {
+        if (!LogLevel.greaterThanEqual(options.logLevel, cfg.effectLogFileMinLevel)) {
+            return;
+        }
+        const line = formatEffectLogLine(cfg.effectLogFileFormat, options);
+        try {
+            ensureDirForFile(cfg.effectLogFile);
+            appendFileSync(cfg.effectLogFile, `${line}\n`, 'utf-8');
+        } catch (err) {
+            console.error('[eventiva] effect log file write failed:', cfg.effectLogFile, err);
+        }
+    });
+}
 
-    if (!useFile && !useCustomFormat) {
-        return Layer.empty;
-    }
+/**
+ * Replaces `Logger.defaultLogger` with the console sink and **adds** a file logger.
+ * Does not replace or remove {@link Logger.prettyLoggerDefault} (it stays unused unless referenced here).
+ */
+export function effectLoggerLayerFromConfig(cfg: ObservabilityConfig): Layer.Layer<never> {
+    return Logger.add(fileLoggerFromConfig(cfg)).pipe(
+        Layer.provideMerge(Logger.replace(Logger.defaultLogger, consoleLoggerFromConfig(cfg)))
+    );
+}
 
-    const consoleLog = consoleLoggerForFormat(format);
-    const combined = useFile && filePath ? Logger.zip(consoleLog, jsonLinesFileLogger(filePath)) : consoleLog;
-
-    return Logger.replace(Logger.defaultLogger, combined);
+/**
+ * Logger wiring from env only (no OTEL). For sync/bootstrap code paths that cannot provide
+ * the full observability stack (e.g. column builders). Prefer `ObservabilityStackLive` in runtimes.
+ */
+export function effectLoggerLayerFromEnv(): Layer.Layer<never, ConfigError, never> {
+    return Layer.unwrapEffect(Effect.map(loadObservabilityConfig, effectLoggerLayerFromConfig));
 }

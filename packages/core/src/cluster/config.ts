@@ -52,7 +52,7 @@ export function makeSingleRunnerLayer(
  * - 'distributed': Not yet implemented (requires Pods + RunnerStorage)
  * 
  * Observability: All cluster layers (TestRunner, SingleRunner) provide their own
- * observability (logging, metrics, tracing) when built. Ensure ObservabilityLive
+ * observability (logging, metrics, tracing) when built. Ensure ObservabilityStackLive
  * is provided in the layer composition for full observability support.
  */
 export function makeClusterLayer(mode: ClusterMode): Layer.Layer<never, never, never> | ReturnType<typeof makeSingleRunnerLayer> {
@@ -93,7 +93,7 @@ export const globalClusterLayer = Layer_.memoize(clusterLayerDefault);
  * 
  * @example
  * ```typescript
- * const memoizedEffect = memoizeLayer(ObservabilityLive);
+ * const memoizedEffect = memoizeLayer(ObservabilityStackLive);
  * const globalObservabilityLayer = Layer.unwrapScoped(memoizedEffect);
  * ```
  */

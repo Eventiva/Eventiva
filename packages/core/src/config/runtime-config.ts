@@ -25,10 +25,15 @@ const envConfigProvider = ConfigProvider.fromEnv();
 
 /**
  * Loads runtime config from environment variables and startup options.
- * Env keys:
- * - NODE_ENV
- * - EVENTIVA_INTEGRITY_NONCE
- * - EVENTIVA_ENCRYPTION_KEY
+ *
+ * Env keys (flat; `ConfigProvider.fromEnv()`):
+ * - `NODE_ENV` — default `development`
+ * - `EVENTIVA_INTEGRITY_NONCE` — optional integrity check nonce
+ * - `EVENTIVA_ENCRYPTION_KEY` — optional PII encryption material
+ *
+ * HTTP listen port is not loaded here; platforms pass `endpointsPort` (e.g. from `EVENTIVA_HTTP_PORT`).
+ * Catalog: repository root `.env.example`.
+ * @see https://effect.website/docs/configuration/#loading-configuration-from-environment-variables
  */
 export function RuntimeConfigLive(options: RuntimeConfigOptions): Layer.Layer<RuntimeConfig> {
     const [nodeEnv, integrityNonce, encryptionKey] = Effect.runSync(

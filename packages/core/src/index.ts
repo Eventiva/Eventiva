@@ -2,6 +2,7 @@ export * from './schema/index.js';
 export * from './runtime/platform.js';
 export * from './runtime/run-runtime.js';
 export * from './runtime/run-core-startup.js';
+export * from './runtime/startup-banner.js';
 export * from './database/database.js';
 export * from './crud/crud-rpc.js';
 export * from './crud/crud-handlers.js';

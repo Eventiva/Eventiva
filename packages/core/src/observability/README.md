@@ -14,9 +14,11 @@ No code path may omit observability.
 
 ## Layer
 
-Use `ObservabilityLive` from `./layer.js` as the base for runtime and all entity handlers. It provides Effect `Logger`, `Tracer`, and `Metric` (and OTEL `Resource`) via `@effect/opentelemetry` NodeSdk.
+Use `ObservabilityStackLive` from `./layer.js` as the base for runtime and all entity handlers. It provides Effect `Logger`, `Tracer`, and `Metric` (and OTEL `Resource`) via `@effect/opentelemetry` NodeSdk.
 
-By default, exports go to **Console** (dev). When `OTEL_EXPORTER_OTLP_ENDPOINT` is set, traces, logs, and metrics are exported via **OTLP HTTP** (e.g. to Firetiger).
+Application logs on **stdout** use Effect’s built-in **pretty** logger. The **audit file** (`EVENTIVA_LOG_FILE`) uses structured lines (`EVENTIVA_LOG_FORMAT_FILE`, default JSON). `ObservabilityLive` is an alias for `ObservabilityStackLive`.
+
+When `OTEL_EXPORTER_OTLP_ENDPOINT` is set, traces, logs, and metrics are exported via **OTLP HTTP** (e.g. to Firetiger).
 
 ## Firetiger / OTLP export
 
