@@ -91,6 +91,8 @@ export function activateDatabaseBackend(id: string): DatabaseStack {
  * 2. `EVENTIVA_DATABASE_DIALECT=sqlite` (legacy)
  * 3. `DATABASE=postgres` (legacy)
  * 4. `postgres`
+ *
+ * Catalog: repository root `.env.example`.
  */
 export function resolveActiveDatabaseBackendId(): string {
     const raw = process.env.EVENTIVA_DATABASE?.trim().toLowerCase();

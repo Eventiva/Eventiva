@@ -1,3 +1,4 @@
+import { effectLoggerLayerFromEnv } from '@eventiva/core';
 import * as Effect from 'effect/Effect';
 import * as Metric from 'effect/Metric';
 
@@ -55,5 +56,5 @@ export function runTypeidColumn<C>(options: {
         })
     );
 
-    return Effect.runSync(effect);
+    return Effect.runSync(effect.pipe(Effect.provide(effectLoggerLayerFromEnv())));
 }

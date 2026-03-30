@@ -14,8 +14,7 @@ import * as Layer from 'effect/Layer';
 import * as Effect from 'effect/Effect';
 import * as Scope from 'effect/Scope';
 import { createServer } from 'node:http';
-import { ObservabilityLive } from '../observability/layer.js';
-import { effectLoggerLayerFromEnv } from '../observability/effect-logger-layer.js';
+import { ObservabilityStackLive } from '../observability/layer.js';
 import { clusterLayerDefault } from '../cluster/config.js';
 import { NodeHttpServer } from '@effect/platform-node';
 import {
@@ -30,6 +29,7 @@ import {
     WorkflowEngineLayerInMemory,
     ClusterWorkflowEngineLayer,
 } from '../extensions/extension-hooks.js';
+import { StartupBannerLayer } from './startup-banner.js';
 import { mergeConfigLayers, mergeEntityLayers, type ExtensionRegistration } from '../extensions/extension-registry.js';
 import { WorkflowRegistryLive } from '../workflow/engine.js';
 import { RuntimeConfigLive } from '../config/runtime-config.js';
@@ -134,18 +134,24 @@ function buildBootstrapStack(
     const workflowEngineLayer = isFeatureEnabled(fo, 'CLUSTER')
         ? ClusterWorkflowEngineLayer.pipe(Layer.provide(clusterLayerDefault))
         : WorkflowEngineLayerInMemory;
-    const hooksStack = Layer.mergeAll(ExtensionHooksLive, workflowEngineLayer, WorkflowRegistryLive);
+    // StartupBannerLayer must not merge in parallel with ExtensionHooksLive: it needs ExtensionHookPubSub
+    // and WorkflowEngine from the hooks stack (sequenced provideMerge).
+    const hooksStack = StartupBannerLayer.pipe(
+        Layer.provideMerge(Layer.mergeAll(ExtensionHooksLive, workflowEngineLayer, WorkflowRegistryLive))
+    );
     // Base observability layer (Logger, Tracer, Metrics)
     // Note: ClusterMetrics from @effect/cluster exports individual Gauge metrics
     // (entities, singletons, runners, runnersHealthy, shards) but not a Layer.
     // These metrics are automatically registered when cluster components are used.
-    const metricsLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
-        ? ObservabilityLive
+    /** Effect Logger + OTEL (traces, metrics, logs); OTLP when configured, plus local format mirrors. */
+    const observabilityLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
+        ? ObservabilityStackLive
         : (NodeSdk.layerEmpty as Layer.Layer<never, any, unknown>);
-    const effectLogLayer = effectLoggerLayerFromEnv() as Layer.Layer<never, any, unknown>;
+    // Do not put observability inside mergeAll with PII / hooks: parallel Layer scopes race on
+    // FiberRef currentLoggers, so layers that log during Layer.effect (e.g. PiiEncryptionLive) can
+    // run with default/pretty loggers while the tee is not installed — stdout shows timestamp=… lines
+    // that never reach EVENTIVA_LOG_FILE. Sequencing observability outermost fixes that.
     const baseLayers: Layer.Layer<never, any, unknown>[] = [
-        effectLogLayer,
-        metricsLayer, // ObservabilityLive (ClusterMetrics are auto-registered by cluster components)
         runtimeConfigLayer,
         extensionConfigLayer,
         isFeatureEnabled(fo, 'CLUSTER') ? clusterLayerDefault : Layer.empty,
@@ -156,7 +162,12 @@ function buildBootstrapStack(
         hooksStack,
         scopeLayer,
     ];
-    const base = Layer.mergeAll(...(baseLayers as [Layer.Layer<never, any, unknown>, ...Layer.Layer<never, any, unknown>[]]));
+    const baseMerged = Layer.mergeAll(
+        ...(baseLayers as [Layer.Layer<never, any, unknown>, ...Layer.Layer<never, any, unknown>[]])
+    );
+    const base = isFeatureEnabled(fo, 'OBSERVABILITY')
+        ? baseMerged.pipe(Layer.provideMerge(observabilityLayer))
+        : baseMerged;
     const entitiesLayer = isFeatureEnabled(fo, 'EXTENSIONS')
         ? mergeEntityLayers([...options.extensions.map((e) => e.layer)])
         : Layer.empty;

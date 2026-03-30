@@ -78,11 +78,18 @@ const ContactSeedLayer = makeExtensionWorkflowLayer(
             // @ts-expect-error dynamic methods
             const created = yield* client.create(contactCreatePayload);
             yield* Effect.log('contact created (demo seed)', { id: created.id, extension: 'extensions.contact' });
+        } else {
+            yield* Effect.log('contacts already exists', { count: list.length, extension: 'extensions.contact' });
         }
         // @ts-expect-error dynamic methods
         const listAfter = yield* client.list({});
         yield* Effect.log('contacts list', { count: listAfter.length, extension: 'extensions.contact' });
-    }).pipe(withSpanAndLog('ContactSeedLayer'))
+    }).pipe(
+        Effect.tap(() =>
+            Effect.logInfo('Contact seed phase finished.', { extension: 'extensions.contact' })
+        ),
+        withSpanAndLog('ContactSeedLayer')
+    )
 );
 
 /**

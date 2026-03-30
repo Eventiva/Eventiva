@@ -1,7 +1,9 @@
 /**
- * Hello-world extension config loaded from Effect Config.
- * Env keys:
- * - HELLO_WORLD_GREETING
+ * Hello-world extension config: `Config.nested(Config.string('GREETING'), 'HELLO_WORLD')`
+ * → environment variable `HELLO_WORLD_GREETING`.
+ *
+ * @see https://effect.website/docs/configuration/#using-nested-configuration-namespaces
+ * Full catalog: repository root `.env.example`.
  */
 import * as Config from 'effect/Config';
 import * as ConfigProvider from 'effect/ConfigProvider';

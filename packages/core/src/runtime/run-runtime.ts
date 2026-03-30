@@ -83,7 +83,9 @@ export function runPlatform(template: PlatformTemplateTwoPhase): void {
         Effect.flatMap(() => runtimeOnlyProgram.pipe(Effect.provide(runtimeLayer)))
     ).pipe(Effect.provide(bootstrapLayer)) as Effect.Effect<void, unknown, never>;
     const withDevTools = useDevTools ? program.pipe(Effect.provide(DevToolsLive)) : program;
-    NodeRuntime.runMain(Effect.asVoid(withDevTools));
+    // Platform replaces defaultLogger with pretty delegation + file logger; runMain must not run addPrettyLogger
+    // or it would no-op (defaultLogger not in the set) or duplicate pretty. See effect-logger-layer.ts.
+    NodeRuntime.runMain(Effect.asVoid(withDevTools), { disablePrettyLogger: true });
 }
 
 /**
@@ -103,7 +105,7 @@ export function runMain(platformLayer: Layer.Layer<never, never, unknown>): void
         unknown,
         never
     >;
-    NodeRuntime.runMain(runnable);
+    NodeRuntime.runMain(runnable, { disablePrettyLogger: true });
 }
 
 /**

@@ -114,10 +114,19 @@ function makePubSub(ref: Ref.Ref<Map<string, Array<HookListenerRun>>>): Extensio
                         attributes: { topic, messageId: id },
                         metricName: 'extension_hooks.publish.duration',
                     })(
-                        Effect.all(
-                            list.map((run) => instrumentListenerRun(topic, id, run, payload)),
-                            { concurrency: 'unbounded' }
-                        ).pipe(Effect.asVoid)
+                        // Run listeners sequentially on the publishing fiber so FiberRefs (including Logger) stay aligned
+                        // with workflows forked from these effects; unbounded concurrency forked children that could miss custom loggers.
+                        list
+                            .reduce(
+                                (acc, run) =>
+                                    acc.pipe(
+                                        Effect.flatMap(() =>
+                                            instrumentListenerRun(topic, id, run, payload)
+                                        )
+                                    ),
+                                Effect.void as Effect.Effect<void, unknown, unknown>
+                            )
+                            .pipe(Effect.asVoid)
                     );
                 })
             ),
