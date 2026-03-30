@@ -17,12 +17,14 @@ export type ExtraConfigItem = unknown;
 export interface SchemaFinalizer {
     /** Build one table from merged columns and extraConfigs. Returns the built table (PgTable in pg impl).
      * @param getTable - Optional callback to resolve already-built tables (e.g. for FK references). Creator table must be built first.
+     * @param creatorTableName - Table that owns `created_by` (default `contact`). When building that table, `created_by` self-references `id`; other tables reference the creator table.
      */
     readonly buildTable: (
         tableName: string,
         mergedColumns: MergedColumns,
         extraConfigs: ReadonlyArray<ExtraConfigItem>,
-        getTable?: (name: string) => unknown
+        getTable?: (name: string) => unknown,
+        creatorTableName?: string
     ) => Effect.Effect<unknown>;
 }
 

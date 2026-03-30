@@ -3,10 +3,25 @@
  * Use layers from drizzle-orm/effect-postgres (re-exported here) instead of custom postgres handlers.
  * @see docs/learnings/architecture.md
  */
-export { createTable } from './create-table.js';
-export { pgTable, buildTableInternal, testColumns, type AllBuilders } from './table-builder.js';
-export { typeid } from '@eventiva/databases.shared';
+export { createTable, defineExtensionTable } from './create-table.js';
+export { pgDialect } from './dialect.js';
+export {
+    pgTable,
+    buildTableInternal,
+    createTableFinal,
+    testColumns,
+    status,
+    type AllBuilders,
+    type Status,
+    type PgTableExtraConfigValue,
+    type ValidateColumns,
+} from './table-builder.js';
+export { typeid } from './typeid.js';
 export { SchemaFinalizerPg } from './schema-finalizer-impl.js';
+export { platformDatabaseBackendDefinition } from './backend.js';
+
+/** Use from extensions so Effect Schema table helpers share the same `drizzle-orm` instance as this package. */
+export { createInsertSchema, createSelectSchema } from 'drizzle-orm/effect-schema';
 
 /** Drizzle effect-postgres driver and migrator (use these layers instead of custom postgres handlers). */
 export {

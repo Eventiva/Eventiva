@@ -54,7 +54,7 @@ The patch is in `patches/effect@3.19.19.patch`. Run `pnpm install` to apply it.
 ## Workaround (if patch is removed)
 
 ```bash
-EVENTIVA_FEATURE_ENTITY_ENDPOINTS=false pnpm exec nx run platforms-default:run
+EVENTIVA_FEATURE_ENTITY_ENDPOINTS=false pnpm exec nx run platforms-postgresql:run
 ```
 
 This runs the platform with a minimal HTTP server (plain "Eventiva runtime" response) and avoids the crash.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Verify RPC/HTTP endpoints and /api/docs after two-phase startup.
- * Spawns platforms-default:run, waits for port 3000, then curls contacts, hello-worlds, and /api/docs.
+ * Spawns platforms-postgresql:run, waits for port 3000, then curls contacts, hello-worlds, and /api/docs.
  */
 import { spawn } from 'child_process';
 import { createConnection } from 'net';
@@ -102,7 +102,7 @@ function httpGet(path) {
  * Starts a detached platform process, waits for the configured port to become available, sends POST requests to the RPC contacts and hello-worlds endpoints and a GET to /api/docs, logs status snippets for each response, and exits with code 0 if the contacts check passes (no "Unknown pathPrefix" in the response) or 1 otherwise. On error it terminates the spawned process group and exits with code 1.
  */
 async function main() {
-    const child = spawn('pnpm', ['nx', 'run', 'platforms-default:run'], {
+    const child = spawn('pnpm', ['nx', 'run', 'platforms-postgresql:run'], {
         cwd: process.cwd(),
         stdio: ['ignore', 'pipe', 'pipe'],
         detached: true,

@@ -4,8 +4,9 @@
  * Requires ExtensionHookPubSub, SchemaRegistryConfig, and TableColumnRegistry in context.
  */
 import * as Effect from 'effect/Effect';
+import * as Schema from 'effect/Schema';
 import { defineRelations } from 'drizzle-orm/relations';
-import { createSelectSchema } from 'drizzle-orm/effect-schema';
+import { createInsertSchema, createSelectSchema } from 'drizzle-orm/effect-schema';
 import {
     CORE_LOADED_TOPIC,
     EXTENSIONS_LOADED_TOPIC,
@@ -16,6 +17,7 @@ import { SchemaRegistryConfig } from '../schema/schema-registry-config.js';
 import { TableColumnRegistry } from '../schema/table-column-registry.js';
 import { FinalTableStore, type RelationMetadata } from '../schema/final-table-store.js';
 import { TableRelationsRegistry } from '../schema/table-relations-registry.js';
+import { RuntimeSchemaDDL } from '../schema/runtime-schema-ddl.js';
 import { EntityRegistry } from '../entity/entity-registry.js';
 import { Base } from '../entity/entity-base.js';
 import { withSpanAndLog } from '../observability/helpers.js';
@@ -36,6 +38,12 @@ export const runCoreStartupRaw = Effect.gen(function* () {
 
     yield* registry.waitUntilFinalized();
     yield* Effect.logInfo('Phase 1: Base DB tables finalized.');
+
+    const schemaDdl = yield* RuntimeSchemaDDL;
+    yield* schemaDdl.sync().pipe(
+        Effect.tap(() => Effect.logInfo('Runtime schema DDL applied.')),
+        withSpanAndLog('runtimeSchemaDDL.sync')
+    );
 
     // Phase 2: Resolve DB relations and populate EntityRegistry
     const finalTableStore = yield* FinalTableStore;
@@ -97,12 +105,18 @@ export const runCoreStartupRaw = Effect.gen(function* () {
     }
 
     for (const [tableName, table] of Object.entries(safeTables)) {
-        // Generate schema and populate EntityRegistry (skip placeholders, e.g. SchemaFinalizerNoOp with in-memory DB)
+        // Generate schema and populate EntityRegistry (skip placeholders when SchemaFinalizerNoOp / no real tables)
         try {
             const baseSchema = createSelectSchema(table as any);
             const mergedSchema = baseSchema;
+            /** PK columns (e.g. typeid) make insert schema require `id`; handlers use `genId()` — omit for RPC/REST create bodies. */
+            const createPayloadSchema = createInsertSchema(table as any).pipe(Schema.omit('id'));
             const entityName = tableName.charAt(0).toUpperCase() + tableName.slice(1);
-            class DynamicEntity extends Base<any>()(entityName, mergedSchema as any, { tableName }) {}
+            class DynamicEntity extends Base<any>()(entityName, mergedSchema as any, {
+                tableName,
+                createPayloadSchema: createPayloadSchema as any,
+                withDelete: true,
+            }) {}
             (EntityRegistry.register as any)(entityName, DynamicEntity);
         } catch (e) {
             yield* Effect.logWarning(

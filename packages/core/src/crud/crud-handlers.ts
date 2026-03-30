@@ -233,11 +233,11 @@ export function makeCrudHandlersFromDatabase<
     options: CrudHandlersOptionsWithDatabase<Id, Fields, EntityRecord, Encoded, RpcUnion>
 ): {
     create: (req: Request<ExtractTag<RpcUnion, 'create'>>) => Effect.Effect<{ id: Id }, never, Database | unknown>;
-    get: (req: Request<ExtractTag<RpcUnion, 'get'>>) => Effect.Effect<Fields, NotFound<Id>, Database | unknown>;
+    get: (req: Request<ExtractTag<RpcUnion, 'get'>>) => Effect.Effect<EntityRecord, NotFound<Id>, Database | unknown>;
     update: (req: Request<ExtractTag<RpcUnion, 'update'>>) => Effect.Effect<void, NotFound<Id>, Database | unknown>;
     list: (
         req: Request<ExtractTag<RpcUnion, 'list'>>
-    ) => Effect.Effect<ReadonlyArray<Fields & { readonly id: Id }>, never, Database | unknown>;
+    ) => Effect.Effect<ReadonlyArray<EntityRecord>, never, Database | unknown>;
     delete: (req: Request<ExtractTag<RpcUnion, 'delete'>>) => Effect.Effect<void, NotFound<Id>, Database>;
 } {
     const { entityType, tableName, recordSchema, genId, withDelete = false } = options;
@@ -254,9 +254,27 @@ export function makeCrudHandlersFromDatabase<
         })(
             Effect.gen(function* () {
                 const db = yield* Database;
+                /** Cluster decodes create RPC with createPayloadSchema before the handler runs. */
                 const payload = req.payload as Fields;
                 const id = genId();
-                const record = { ...payload, id } as EntityRecord;
+                const now = new Date().toISOString();
+                const raw: Record<string, unknown> = {
+                    disabledAt: null,
+                    deletedAt: null,
+                    createdBy: null,
+                    ...(payload as Record<string, unknown>),
+                    id,
+                };
+                if (raw['createdAt'] == null || raw['createdAt'] === '') {
+                    raw['createdAt'] = now;
+                }
+                if (raw['updatedAt'] == null || raw['updatedAt'] === '') {
+                    raw['updatedAt'] = now;
+                }
+                if (raw['active'] === undefined) {
+                    raw['active'] = 'active';
+                }
+                const record = raw as EntityRecord;
                 const encoded = yield* encodeRecord(record);
                 yield* db.set(tableName, id, encoded);
                 return { id } as { id: Id };
@@ -265,7 +283,7 @@ export function makeCrudHandlersFromDatabase<
 
     const getHandler = (
         req: Request<ExtractTag<RpcUnion, 'get'>>
-    ): Effect.Effect<Fields, NotFound<Id>, Database | unknown> =>
+    ): Effect.Effect<EntityRecord, NotFound<Id>, Database | unknown> =>
         withSpanAndLog(`${entityType}.get`, {
             metricName: `${entityType.toLowerCase()}.get.duration`,
             attributes: { entityId: req.address.entityId },
@@ -278,10 +296,9 @@ export function makeCrudHandlersFromDatabase<
                     return yield* Effect.fail({ _tag: 'NotFound' as const, id });
                 }
                 const decoded = yield* decodeRecord(stored);
-                const { id: _id, ...fields } = decoded;
-                return fields as Fields;
+                return decoded;
             })
-        ) as Effect.Effect<Fields, NotFound<Id>, Database | unknown>;
+        ) as Effect.Effect<EntityRecord, NotFound<Id>, Database | unknown>;
 
     const updateHandler = (
         req: Request<ExtractTag<RpcUnion, 'update'>>
@@ -306,7 +323,7 @@ export function makeCrudHandlersFromDatabase<
 
     const listHandler = (
         req: Request<ExtractTag<RpcUnion, 'list'>>
-    ): Effect.Effect<ReadonlyArray<Fields & { readonly id: Id }>, never, Database | unknown> =>
+    ): Effect.Effect<ReadonlyArray<EntityRecord>, never, Database | unknown> =>
         withSpanAndLog(`${entityType}.list`, {
             metricName: `${entityType.toLowerCase()}.list.duration`,
             attributes: { entityId: req.address.entityId },
@@ -314,15 +331,14 @@ export function makeCrudHandlersFromDatabase<
             Effect.gen(function* () {
                 const db = yield* Database;
                 const storedList = yield* db.list<Id, Encoded>(tableName);
-                const out: Array<Fields & { readonly id: Id }> = [];
+                const out: Array<EntityRecord> = [];
                 for (const stored of storedList) {
                     const decoded = yield* decodeRecord(stored);
-                    const { id, ...fields } = decoded;
-                    out.push({ ...fields, id } as Fields & { readonly id: Id });
+                    out.push(decoded);
                 }
                 return out;
             })
-        ) as Effect.Effect<ReadonlyArray<Fields & { readonly id: Id }>, never, Database | unknown>;
+        ) as Effect.Effect<ReadonlyArray<EntityRecord>, never, Database | unknown>;
 
     const deleteHandler = (req: Request<ExtractTag<RpcUnion, 'delete'>>): Effect.Effect<void, NotFound<Id>, Database> =>
         withSpanAndLog(`${entityType}.delete`, {
@@ -350,11 +366,11 @@ export function makeCrudHandlersFromDatabase<
 
     return handlers as {
         create: (req: Request<ExtractTag<RpcUnion, 'create'>>) => Effect.Effect<{ id: Id }, never, Database | unknown>;
-        get: (req: Request<ExtractTag<RpcUnion, 'get'>>) => Effect.Effect<Fields, NotFound<Id>, Database | unknown>;
+        get: (req: Request<ExtractTag<RpcUnion, 'get'>>) => Effect.Effect<EntityRecord, NotFound<Id>, Database | unknown>;
         update: (req: Request<ExtractTag<RpcUnion, 'update'>>) => Effect.Effect<void, NotFound<Id>, Database | unknown>;
         list: (
             req: Request<ExtractTag<RpcUnion, 'list'>>
-        ) => Effect.Effect<ReadonlyArray<Fields & { readonly id: Id }>, never, Database | unknown>;
+        ) => Effect.Effect<ReadonlyArray<EntityRecord>, never, Database | unknown>;
         delete: (req: Request<ExtractTag<RpcUnion, 'delete'>>) => Effect.Effect<void, NotFound<Id>, Database>;
     };
 }

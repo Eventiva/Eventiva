@@ -1,6 +1,7 @@
 /**
  * PgClient layer for PostgreSQL. Use with PgDatabaseLayer so the platform has a real DB.
- * Default config reads from env: HOST, PORT, USERNAME, PASSWORD, DATABASE, SSL (e.g. from devcontainer).
+ * Default config reads from env: HOST, PGPORT (preferred) or PORT, PGUSER (preferred) or USERNAME, PGPASSWORD (preferred) or PASSWORD, DATABASE, SSL.
+ * Use PGPORT when generic PORT is reserved for HTTP. Use PGUSER when USERNAME is set to the OS login (common on Linux) and is not a Postgres role.
  *
  * @see https://effect-ts.github.io/effect/docs/sql-pg
  */
@@ -18,16 +19,16 @@ export interface PgClientConfigFromEnv {
 
 /**
  * Build PgClient config from process.env (e.g. devcontainer remoteEnv).
- * Uses DATABASE, HOST, PORT, USERNAME, PASSWORD, SSL.
+ * Uses DATABASE, HOST, PGPORT (else PORT), PGUSER (else USERNAME), PASSWORD, SSL.
  */
 export function pgClientConfigFromEnv(env: NodeJS.ProcessEnv = process.env): PgClientConfigFromEnv {
-    const port = env['PORT'];
+    const portRaw = env['PGPORT'] ?? env['PORT'];
     return {
         host: env['HOST'] ?? 'localhost',
-        port: port ? parseInt(port, 10) : 5432,
+        port: portRaw ? parseInt(portRaw, 10) : 5432,
         database: env['DATABASE'] ?? 'postgres',
-        username: env['USERNAME'] ?? 'postgres',
-        password: env['PASSWORD'] ?? 'postgres',
+        username: env['PGUSER'] ?? env['USERNAME'] ?? 'postgres',
+        password: env['PGPASSWORD'] ?? env['PASSWORD'] ?? 'postgres',
         ssl: env['SSL'] === 'true',
     };
 }

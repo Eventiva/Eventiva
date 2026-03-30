@@ -19,7 +19,7 @@ Identify which core process or extension causes the error, then fix it. Suspect:
 
 ### Step 2: Disable all extensions
 
-- Platform lists extensions in `packages/platforms/default/src/index.ts`: contact, hello-world
+- Platform lists extensions in `packages/platforms/postgresql/src/index.ts`: contact, hello-world
 - Empty extensions array = only StartupBannerLayer from core
 
 ### Step 3: Core processes (from platform.ts / run-core-startup)

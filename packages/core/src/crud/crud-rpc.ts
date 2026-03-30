@@ -17,8 +17,13 @@ const notFoundError = <Id>(idSchema: Schema.Schema<Id, any, any>) =>
 export interface CrudRpcOptions<Id, Fields> {
     /** Schema for the entity ID (e.g. ContactIdSchema from typeIdSchema("contact")). */
     readonly idSchema: Schema.Schema<Id, any, any>;
-    /** Schema for the entity fields (create payload and get success). */
+    /** Full record / select shape (list items, get success, decode from DB). */
     readonly fieldsSchema: Schema.Schema<Fields, any, any>;
+    /**
+     * RPC body for `create` (Drizzle insert shape: no id / generated columns).
+     * When omitted, defaults to `fieldsSchema` (legacy; often too wide for `createSelectSchema` tables).
+     */
+    readonly createPayloadSchema?: Schema.Schema<any, any, any>;
     /** If true, includes a "delete" RPC (payload: { id }, success: void, error: NotFound). Default false. */
     readonly withDelete?: boolean;
 }
@@ -28,14 +33,14 @@ export interface CrudRpcOptions<Id, Fields> {
  * Returns a const tuple so Entity.make preserves specific RPC types for handler and client inference.
  */
 export function makeCrudRpc<Id, Fields>(options: CrudRpcOptions<Id, Fields>) {
-    const { idSchema, fieldsSchema, withDelete = false } = options;
-    const patchSchema = Schema.partial(fieldsSchema) as Schema.Schema<Partial<Fields>, any, any>;
+    const { idSchema, fieldsSchema, createPayloadSchema = fieldsSchema, withDelete = false } = options;
+    const patchSchema = Schema.partial(createPayloadSchema) as unknown as Schema.Schema<Partial<Fields>, any, any>;
     // Use fieldsSchema directly for list items (createSelectSchema includes id); avoid extend to prevent id type conflict
     const listItemSchema = fieldsSchema;
     const errorNotFound = notFoundError(idSchema);
 
     const createRpc = Rpc.make('create', {
-        payload: fieldsSchema,
+        payload: createPayloadSchema,
         success: Schema.Struct({ id: idSchema }),
     });
 

@@ -29,7 +29,7 @@ Example:
 | Source Type | Can Depend On |
 |------------|---------------|
 | `type:core` | (nothing) |
-| `type:database` | `type:core` |
+| `type:database` | `type:core`, `type:shared`, `type:database` |
 | `type:extension` | `type:core`, `type:extension` |
 | `type:platform` | `type:core`, `type:database`, `type:extension`, `type:platform` |
 

@@ -304,3 +304,6 @@ dist
 
 vitest.config.*.timestamp*
 .pnpm-store/
+.claude/worktrees
+.claude/settings.local.json
+.data/

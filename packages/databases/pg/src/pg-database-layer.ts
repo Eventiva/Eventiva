@@ -11,14 +11,20 @@ import * as Deferred from 'effect/Deferred';
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
 import * as Ref from 'effect/Ref';
-import { eq } from 'drizzle-orm';
+import { eq, getTableColumns } from 'drizzle-orm';
 import { PgClient } from '@effect/sql-pg';
 import { makeWithDefaults } from './drizzle-pg.js';
 
 /** Tables from FinalTableStore are Drizzle PgTable; we use them with eq(table.id, id). */
 function getTable(schema: Record<string, unknown>, tableName: string): Record<string, unknown> | undefined {
     const t = schema[tableName];
-    if (!t || typeof t !== 'object' || !('id' in t)) return undefined;
+    if (t == null || typeof t !== 'object') return undefined;
+    try {
+        const cols = getTableColumns(t as never);
+        if (!('id' in cols)) return undefined;
+    } catch {
+        return undefined;
+    }
     return t as Record<string, unknown>;
 }
 
@@ -39,11 +45,10 @@ export const PgDatabaseLayer: Layer.Layer<Database, never, typeof PgClient | typ
                 const newD = yield* Deferred.make<any, never>();
                 yield* Ref.set(dbRef, newD);
                 const store = yield* FinalTableStore;
-                const [tables, relations] = yield* Effect.all([
-                    store.getAllTables(),
-                    store.getAllRelations(),
-                ]);
-                const db = yield* makeWithDefaults({ schema: tables as any, relations: relations as any });
+                const tables = yield* store.getAllTables();
+                // FinalTableStore holds per-table relation maps from defineRelations; EffectPgDatabase expects
+                // drizzle's extracted relational config shape. CRUD paths only use select/from on concrete tables.
+                const db = yield* makeWithDefaults({ schema: tables as any, relations: {} });
                 yield* Deferred.succeed(newD, db);
                 return yield* Deferred.await(newD);
             });
@@ -71,7 +76,12 @@ export const PgDatabaseLayer: Layer.Layer<Database, never, typeof PgClient | typ
                         const table = getTable(tables, tableName);
                         if (!table) return;
                         yield* (db as any).delete(table).where(eq((table as any).id, id));
-                        yield* (db as any).insert(table).values(record as Record<string, unknown>);
+                        const row = record as Record<string, unknown>;
+                        const { active: _generatedActive, ...withoutActive } = row;
+                        const insertValues = Object.fromEntries(
+                            Object.entries(withoutActive).filter(([, v]) => v !== undefined)
+                        );
+                        yield* (db as any).insert(table).values(insertValues);
                     }).pipe(
                         Effect.catchAll((e) => Effect.die(e)),
                         withSpanAndLog('database.set', { attributes: { tableName } })

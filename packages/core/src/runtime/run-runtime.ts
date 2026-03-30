@@ -74,7 +74,7 @@ export const defaultRuntimeProgram = Effect.gen(function* () {
  * @param template - A two‑phase platform template providing `getBootstrapLayer()` and `getRuntimeLayer()` for the
  *                   bootstrap and runtime phases respectively
  */
-export function runMainTwoPhase(template: PlatformTemplateTwoPhase): void {
+export function runPlatform(template: PlatformTemplateTwoPhase): void {
     const useDevTools = process.env.EVENTIVA_FEATURE_DEVTOOLS !== 'false';
     const bootstrapLayer = template.getBootstrapLayer();
     const runtimeLayer = template.getRuntimeLayer();

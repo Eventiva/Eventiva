@@ -83,11 +83,12 @@ export default [
                         },
                         {
                             sourceTag: 'type:database',
-                            onlyDependOnLibsWithTags: ['type:core', 'type:shared'],
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:database'],
                         },
                         {
                             sourceTag: 'type:extension',
-                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:extension'],
+                            // type:database: schema helpers (e.g. defineExtensionTable) and shared column facades
+                            onlyDependOnLibsWithTags: ['type:core', 'type:shared', 'type:extension', 'type:database'],
                         },
                         {
                             sourceTag: 'type:platform',

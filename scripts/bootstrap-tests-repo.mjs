@@ -35,10 +35,10 @@ const PROJECTS = [
         distPrefixes: ['dist/packages/databases/shared/src/'],
     },
     {
-        name: 'tests-platforms-default',
-        packageName: '@eventiva/tests.platforms.default',
-        root: 'platforms/default',
-        distPrefixes: ['dist/packages/platforms/default/src/'],
+        name: 'tests-platforms-postgresql',
+        packageName: '@eventiva/tests.platforms.postgresql',
+        root: 'platforms/postgresql',
+        distPrefixes: ['dist/packages/platforms/postgresql/src/'],
     },
 ];
 

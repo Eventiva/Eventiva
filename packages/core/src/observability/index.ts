@@ -4,3 +4,4 @@
  */
 export * from './layer.js';
 export * from './helpers.js';
+export * from './effect-logger-layer.js';
