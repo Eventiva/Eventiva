@@ -7,6 +7,8 @@ import * as Context from 'effect/Context';
 import * as Effect from 'effect/Effect';
 import * as Layer from 'effect/Layer';
 
+import { withSpanAndLog } from '../observability/helpers.js';
+
 /**
  * Embedding service interface. embed(text) returns a vector (number array) for the text.
  */
@@ -20,7 +22,8 @@ export const EmbeddingService = Context.GenericTag<EmbeddingService>('@eventiva/
  * No-op EmbeddingService: returns an empty vector. Use in tests or when embeddings are not configured.
  */
 export const EmbeddingServiceLiveNoop: Layer.Layer<EmbeddingService> = Layer.succeed(EmbeddingService, {
-    embed: () => Effect.succeed([] as readonly number[]),
+    embed: () =>
+        Effect.succeed([] as readonly number[]).pipe(withSpanAndLog('EmbeddingService.noop.embed')),
 });
 
 /**
@@ -30,5 +33,10 @@ export const EmbeddingServiceLiveNoop: Layer.Layer<EmbeddingService> = Layer.suc
 export function EmbeddingServiceLive(
     embed: (text: string) => Effect.Effect<readonly number[]>
 ): Layer.Layer<EmbeddingService> {
-    return Layer.succeed(EmbeddingService, { embed });
+    return Layer.succeed(EmbeddingService, {
+        embed: (text: string) =>
+            embed(text).pipe(
+                withSpanAndLog('EmbeddingService.embed', { attributes: { textLength: text.length } })
+            ),
+    });
 }

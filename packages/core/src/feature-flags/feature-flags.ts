@@ -19,6 +19,8 @@ import * as Layer from 'effect/Layer';
 import * as Option from 'effect/Option';
 import { PostHog } from 'posthog-node';
 
+import { withSpanAndLog } from '../observability/helpers.js';
+
 /** Flag keys used for platform feature toggles. */
 export const FeatureFlagKeys = {
     OBSERVABILITY: 'eventiva-observability',
@@ -130,7 +132,7 @@ export function FeatureFlagsLive(overrides?: FeatureFlagOverrides): Layer.Layer<
                         if (enabled !== undefined) return enabled;
                     }
                     return configFlags[key] ?? true;
-                }),
+                }).pipe(withSpanAndLog('FeatureFlags.isEnabled', { attributes: { key } })),
         };
     });
 }
@@ -144,7 +146,9 @@ export function FeatureFlagsLiveConfigOnly(overrides?: FeatureFlagOverrides): La
         const configFlags = loadConfigFlags();
         return {
             isEnabled: (key: FeatureFlagKey) =>
-                Effect.succeed(overrides && key in overrides ? (overrides[key] ?? true) : (configFlags[key] ?? true)),
+                Effect.succeed(overrides && key in overrides ? (overrides[key] ?? true) : (configFlags[key] ?? true)).pipe(
+                    withSpanAndLog('FeatureFlags.isEnabled', { attributes: { key } })
+                ),
         };
     });
 }
