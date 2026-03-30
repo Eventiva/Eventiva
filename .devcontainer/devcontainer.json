@@ -1,37 +1,23 @@
 {
-    "name": "Eventiva",
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:1-22-bookworm",
-    "onCreateCommand": "npm install -g pnpm@9 && pnpm add -g nx",
-    "postCreateCommand": "pnpm install",
-    "mounts": [
-        "source=eventiva-tests-empty,target=/workspaces/Eventiva/tests,type=volume"
-    ],
-    "services": {
-        "postgres": {
-            "image": "postgres:16-alpine",
-            "init": true,
-            "ports": ["5432:5432"],
-            "environment": {
-                "POSTGRES_USER": "postgres",
-                "POSTGRES_PASSWORD": "postgres",
-                "POSTGRES_DB": "postgres"
-            },
-            "options": "--health-cmd \"pg_isready -U postgres\" --health-interval 5s --health-timeout 5s --health-retries 5"
-        }
-    },
-    "forwardPorts": [5432],
-    "customizations": {
-        "vscode": {
-            "extensions": ["nrwl.angular-console", "dbaeumer.vscode-eslint", "esbenp.prettier-vscode"]
-        }
-    },
-    "remoteEnv": {
-        "NODE_ENV": "development",
-        "DATABASE": "postgres",
-        "HOST": "postgres",
-        "PORT": "5432",
-        "USERNAME": "postgres",
-        "PASSWORD": "postgres",
-        "SSL": "false"
+  "name": "Eventiva",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
+  "forwardPorts": [3000, 5432],
+  "onCreateCommand": "pnpm add -g nx",
+  "postCreateCommand": "pnpm install",
+  "mounts": [
+    "source=eventiva-tests-empty,target=/workspace/tests,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-azuretools.vscode-docker",
+        "nrwl.angular-console",
+        "ckolkman.vscode-postgres"
+      ]
     }
+  }
 }

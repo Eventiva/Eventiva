@@ -39,7 +39,7 @@ This is the default mode. All entities run in a single process with in-memory sh
 
 ```bash
 # Run the default platform (uses TestRunner)
-pnpm nx run platforms-default:run
+pnpm nx run platforms-postgresql:run
 ```
 
 ### Option 2: SingleRunner (Single Process, Real Sharding)
@@ -51,7 +51,7 @@ Use this to test sharding logic in a single process with real sharding behavior.
 export CLUSTER_MODE=single
 
 # Run the platform
-pnpm nx run platforms-default:run
+pnpm nx run platforms-postgresql:run
 ```
 
 ### Option 3: Multiple TestRunner Instances (Testing)
@@ -63,7 +63,7 @@ To test with multiple runners, you can run multiple processes with different ent
 ```bash
 export RUNNER_PROFILE=hello-world
 export RUNNER_PORT=3001
-pnpm nx run platforms-default:run
+pnpm nx run platforms-postgresql:run
 ```
 
 **Terminal 2 (Runner 2 - Contact entities):**
@@ -71,7 +71,7 @@ pnpm nx run platforms-default:run
 ```bash
 export RUNNER_PROFILE=contact
 export RUNNER_PORT=3002
-pnpm nx run platforms-default:run
+pnpm nx run platforms-postgresql:run
 ```
 
 **Terminal 3 (Client/Test):**
@@ -152,7 +152,7 @@ Check the logs for cluster initialization:
 export DEBUG=@effect/cluster*
 
 # Run with verbose output
-pnpm nx run platforms-default:run
+pnpm nx run platforms-postgresql:run
 ```
 
 ## Next Steps

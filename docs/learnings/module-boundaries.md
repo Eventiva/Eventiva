@@ -29,10 +29,10 @@ Projects can have multiple tags (e.g., `["type:extension", "layer:backend", "cap
 
 ### `type:database`
 
-**Examples**: `@eventiva/databases.pg`
+**Examples**: `@eventiva/databases.pg`, `@eventiva/databases.shared`
 
 - **Purpose**: Database implementations and adapters
-- **Can depend on**: `type:core` only
+- **Can depend on**: `type:core`, `type:shared`
 - **Can be depended on by**: `type:platform` only (runtime dependencies)
 - **DevDependencies**: Other modules may include database packages in `devDependencies` for type imports during development
 - **Use case**: Database drivers, connection pools, database-specific schemas
@@ -50,7 +50,7 @@ Projects can have multiple tags (e.g., `["type:extension", "layer:backend", "cap
 
 ### `type:platform`
 
-**Examples**: `@eventiva/platforms.default`
+**Examples**: `@eventiva/platforms.postgresql`
 
 - **Purpose**: Top-level application/platform entry points
 - **Can depend on**: All module types (`type:core`, `type:database`, `type:extension`, `type:platform`)
@@ -103,7 +103,7 @@ Capability tags describe what a module provides. A module can have multiple capa
 | Source Type | Can Depend On |
 |------------|---------------|
 | `type:core` | (nothing) |
-| `type:database` | `type:core` |
+| `type:database` | `type:core`, `type:shared`, `type:database` |
 | `type:extension` | `type:core`, `type:extension` |
 | `type:platform` | `type:core`, `type:database`, `type:extension`, `type:platform` |
 
@@ -153,13 +153,13 @@ While runtime dependencies are strictly enforced, `devDependencies` are allowed 
 
 - `@eventiva/extensions.users` → `@eventiva/extensions.contact` (extension depends on extension)
 - `@eventiva/extensions.contact` → `@eventiva/core` (extension depends on core)
-- `@eventiva/platforms.default` → `@eventiva/databases.pg` (platform depends on database)
-- `@eventiva/platforms.default` → `@eventiva/extensions.contact` (platform depends on extension)
+- `@eventiva/platforms.postgresql` → `@eventiva/databases.pg` (platform depends on database)
+- `@eventiva/platforms.postgresql` → `@eventiva/extensions.contact` (platform depends on extension)
 
 ### ❌ Invalid Dependencies
 
 - `@eventiva/extensions.contact` → `@eventiva/databases.pg` (extension cannot depend on database in runtime)
-- `@eventiva/extensions.contact` → `@eventiva/platforms.default` (extension cannot depend on platform)
+- `@eventiva/extensions.contact` → `@eventiva/platforms.postgresql` (extension cannot depend on platform)
 - `@eventiva/core` → `@eventiva/extensions.contact` (core cannot depend on extensions)
 - `@eventiva/databases.pg` → `@eventiva/extensions.contact` (database cannot depend on extensions)
 

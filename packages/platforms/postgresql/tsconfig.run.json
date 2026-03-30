@@ -1,0 +1,13 @@
+{
+    "extends": "./tsconfig.lib.json",
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@eventiva/core": ["../../../core/src/index.ts"],
+            "@eventiva/databases.shared": ["../../../databases/shared/src/index.ts"],
+            "@eventiva/databases.pg": ["../../../databases/pg/src/index.ts"],
+            "@eventiva/extensions.hello-world": ["../../../extensions/hello-world/src/index.ts"],
+            "@eventiva/extensions.contact": ["../../../extensions/contact/src/index.ts"]
+        }
+    }
+}

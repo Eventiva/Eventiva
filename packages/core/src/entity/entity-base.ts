@@ -50,6 +50,11 @@ export interface BaseEntityOptions {
     readonly tableName?: string;
     /** If true, includes delete RPC and handler. Default false. */
     readonly withDelete?: boolean;
+    /**
+     * RPC `create` payload (e.g. Drizzle `createInsertSchema` for the table).
+     * Use when `fieldsSchema` is a full select shape from `createSelectSchema`.
+     */
+    readonly createPayloadSchema?: Schema.Schema<any, any, any>;
 }
 
 /**
@@ -103,6 +108,7 @@ export function Base<Self>() {
         const entity = makeCrudEntity<Name, Id, FieldsType>(name, {
             idSchema,
             fieldsSchema: fieldsSchema as unknown as Schema.Schema<FieldsType, any, any>,
+            createPayloadSchema: options?.createPayloadSchema,
             withDelete,
         });
 
@@ -145,7 +151,10 @@ export function Base<Self>() {
 
         const layer = entity.toLayer(Effect.succeed(wrappedHandlers as never));
 
-        const insertSchema = fieldsSchema as unknown as Schema.Schema<FieldsType, FieldsEncoded, FieldsContext>;
+        /** REST/OpenAPI create body: Drizzle insert shape when provided, not the full select schema. */
+        const insertSchema = (
+            options?.createPayloadSchema ?? fieldsSchema
+        ) as unknown as Schema.Schema<FieldsType, FieldsEncoded, FieldsContext>;
         const partialSchema = Schema.partial(fieldsSchema as any) as unknown as Schema.Schema<
             Partial<FieldsType>,
             Partial<FieldsEncoded>,

@@ -50,24 +50,171 @@ const RpcInvokePayload = Schema.Struct({
     description: 'RPC invoke body. Use "method" to choose the CRUD operation; "payload" shape depends on method.',
 });
 
-/** Success response: { success: unknown }. */
-const RpcInvokeSuccess = Schema.Struct({
-    success: Schema.Unknown,
-}).annotations({
-    description: 'Result of the RPC call. list: array of items; get: single item; create: { id }; update/delete: void.',
-});
-
 /** Shutdown response. */
 const ShutdownSuccess = Schema.Struct({
     ok: Schema.Literal(true),
     message: Schema.String,
 });
 
-/** JSON success for REST list/get/create/update/delete. */
-const JsonSuccess = Schema.Unknown;
+/** Optional static schemas from `Base()` entity classes (record with id, insert, partial patch, id). */
+interface EntityClassOpenApiStatics {
+    readonly recordSchema?: Schema.Schema.Any;
+    readonly insertSchema?: Schema.Schema.Any;
+    readonly partialSchema?: Schema.Schema.Any;
+    readonly idSchema?: Schema.Schema.Any;
+}
 
-/** Path param :id for get/update/delete. */
-const IdPathParam = Schema.Struct({ id: Schema.String });
+interface RpcWithSchemas {
+    readonly payloadSchema: Schema.Schema.Any;
+    readonly successSchema: Schema.Schema.Any;
+}
+
+function getRpcDefinition(entity: Entity.Any, method: string): RpcWithSchemas | undefined {
+    const r = entity.protocol.requests.get(method) as RpcWithSchemas | undefined;
+    if (r?.payloadSchema != null && r?.successSchema != null) return r;
+    return undefined;
+}
+
+/**
+ * OpenAPI/HttpApi schemas for one entity: derived from cluster RPC definitions plus optional Base() class statics
+ * (so list/get show full records including `id` when the class exposes `recordSchema`).
+ */
+export interface EntityOpenApiSchemas {
+    readonly idPath: Schema.Schema.Any;
+    readonly listSuccess: Schema.Schema.Any;
+    readonly getSuccess: Schema.Schema.Any;
+    readonly createPayload: Schema.Schema.Any;
+    readonly createSuccess: Schema.Schema.Any;
+    readonly updatePayload: Schema.Schema.Any;
+    readonly updateSuccess: Schema.Schema.Any;
+    readonly deleteSuccess: Schema.Schema.Any;
+    readonly rpcInvokePayload: Schema.Schema.Any;
+    readonly rpcInvokeSuccess: Schema.Schema.Any;
+}
+
+export function buildEntityOpenApiSchemas(
+    entity: Entity.Any,
+    entityClass?: unknown
+): EntityOpenApiSchemas {
+    const statics = entityClass as EntityClassOpenApiStatics | undefined;
+    const idSchema = statics?.idSchema ?? Schema.String;
+
+    const listRpc = getRpcDefinition(entity, 'list');
+    const getRpcDef = getRpcDefinition(entity, 'get');
+    const createRpc = getRpcDefinition(entity, 'create');
+    const updateRpc = getRpcDefinition(entity, 'update');
+    const deleteRpc = getRpcDefinition(entity, 'delete');
+
+    const listItemSchema =
+        statics?.recordSchema ?? getRpcDef?.successSchema ?? (listRpc?.successSchema as Schema.Schema.Any) ?? Schema.Unknown;
+    const listSuccess = Schema.Array(listItemSchema);
+    const getSuccess = statics?.recordSchema ?? getRpcDef?.successSchema ?? Schema.Unknown;
+
+    const createPayload = statics?.insertSchema ?? createRpc?.payloadSchema ?? Schema.Unknown;
+    const createSuccess =
+        createRpc?.successSchema ?? Schema.Struct({ id: Schema.String }).annotations({ description: 'New entity id.' });
+
+    let updatePayload: Schema.Schema.Any = Schema.Unknown;
+    if (statics?.partialSchema != null) {
+        updatePayload = statics.partialSchema;
+    } else if (updateRpc?.payloadSchema != null) {
+        const pickPatch = Schema.pick as unknown as (
+            key: 'patch'
+        ) => (s: Schema.Schema.Any) => Schema.Schema.Any;
+        updatePayload = pickPatch('patch')(updateRpc.payloadSchema);
+    }
+    const updateSuccess = updateRpc?.successSchema ?? Schema.Void;
+    const deleteSuccess = deleteRpc?.successSchema ?? Schema.Void;
+
+    const entityIdField = Schema.optional(Schema.String).annotations({
+        description: 'Entity ID. Omit for default (e.g. "store" for single-entity resources).',
+    });
+
+    const invokeVariants: Schema.Schema.Any[] = [
+        Schema.Struct({
+            entityId: entityIdField,
+            method: Schema.Literal('list'),
+            payload: Schema.optional(Schema.Struct({})),
+        }),
+        Schema.Struct({
+            entityId: entityIdField,
+            method: Schema.Literal('get'),
+            payload: Schema.Struct({ id: idSchema }),
+        }),
+        Schema.Struct({
+            entityId: entityIdField,
+            method: Schema.Literal('create'),
+            payload: createPayload,
+        }),
+        Schema.Struct({
+            entityId: entityIdField,
+            method: Schema.Literal('update'),
+            payload:
+                updateRpc?.payloadSchema ??
+                Schema.Struct({
+                    id: idSchema,
+                    patch: updatePayload,
+                }),
+        }),
+    ];
+    if (deleteRpc != null) {
+        invokeVariants.push(
+            Schema.Struct({
+                entityId: entityIdField,
+                method: Schema.Literal('delete'),
+                payload: Schema.Struct({ id: idSchema }),
+            })
+        );
+    }
+
+    const rpcInvokePayload =
+        invokeVariants.length >= 2
+            ? (Schema.Union(...(invokeVariants as [Schema.Schema.Any, Schema.Schema.Any, ...Schema.Schema.Any[]])) as Schema.Schema.Any).annotations(
+                  {
+                      description:
+                          'RPC invoke body: **method** selects the operation; **payload** must match that method (list: omit or `{}`, get/delete: `{ id }`, create: entity fields, update: `{ id, patch }`).',
+                  }
+              )
+            : RpcInvokePayload;
+
+    const rpcInvokeSuccess = Schema.Struct({
+        success: Schema.Union(
+            listSuccess,
+            getSuccess,
+            createSuccess,
+            updateSuccess,
+            Schema.Struct({ error: Schema.String }).annotations({ description: 'Handler or validation error message.' })
+        ) as Schema.Schema.Any,
+    }).annotations({
+        description:
+            'RPC result. On success: **list** — array of records; **get** — one record; **create** — `{ id }`; **update**/**delete** — empty; on failure — `{ error: string }` inside **success**.',
+    });
+
+    return {
+        idPath: Schema.Struct({ id: idSchema }),
+        listSuccess,
+        getSuccess,
+        createPayload,
+        createSuccess,
+        updatePayload,
+        updateSuccess,
+        deleteSuccess,
+        rpcInvokePayload,
+        rpcInvokeSuccess,
+    };
+}
+
+function resolveEntityClassForOpenApi(
+    d: EntityEndpointDescriptor,
+    registered: ReadonlyMap<string, unknown>
+): unknown {
+    if (d.entityClass !== undefined) return d.entityClass;
+    for (const EntityClass of registered.values()) {
+        const ec = EntityClass as { entity?: Entity.Any };
+        if (ec.entity === d.entity) return EntityClass;
+    }
+    return undefined;
+}
 
 /** Shutdown: GET and POST /api/shutdown — return 200 then exit process. */
 const ShutdownGetEndpoint = HttpApiEndpoint.get('shutdownGet', '/api/shutdown').addSuccess(ShutdownSuccess);
@@ -157,14 +304,18 @@ type PathSeg = `/${string}`;
  *  - list and create at `/api/{pathPrefix}`
  *  - get, update and delete at `/api/{pathPrefix}/:id`
  */
-function makeEntityGroup(pathPrefix: string, groupName: string): Effect.Effect<HttpApiGroup.HttpApiGroup.Any> {
+function makeEntityGroup(
+    pathPrefix: string,
+    groupName: string,
+    openApi: EntityOpenApiSchemas
+): Effect.Effect<HttpApiGroup.HttpApiGroup.Any> {
     return Effect.sync(() => {
         const rpcPath = `/api/rpc/${pathPrefix}` as PathSeg;
         const listPath = `/api/${pathPrefix}` as PathSeg;
         const resourcePath = `/api/${pathPrefix}/:id` as PathSeg;
         const invokeE = HttpApiEndpoint.post('invoke', rpcPath)
-            .setPayload(RpcInvokePayload)
-            .addSuccess(RpcInvokeSuccess)
+            .setPayload(openApi.rpcInvokePayload)
+            .addSuccess(openApi.rpcInvokeSuccess)
             .annotate(
                 OpenApi.Summary,
                 'Invoke an entity RPC method (CRUD: list, get, create, update, delete)'
@@ -173,14 +324,18 @@ function makeEntityGroup(pathPrefix: string, groupName: string): Effect.Effect<H
                 OpenApi.Description,
                 'Call any entity method by name. Default CRUD: **list** (payload: {}), **get** (payload: { id }), **create** (payload: entity fields), **update** (payload: { id, patch }), **delete** (payload: { id }). Set "method" to the operation and "payload" to the matching shape.'
             );
-        const listE = HttpApiEndpoint.get('list', listPath).addSuccess(JsonSuccess);
-        const getE = HttpApiEndpoint.get('get', resourcePath).setPath(IdPathParam).addSuccess(JsonSuccess);
-        const createE = HttpApiEndpoint.post('create', listPath).setPayload(Schema.Unknown).addSuccess(JsonSuccess);
+        const listE = HttpApiEndpoint.get('list', listPath).addSuccess(openApi.listSuccess);
+        const getE = HttpApiEndpoint.get('get', resourcePath).setPath(openApi.idPath).addSuccess(openApi.getSuccess);
+        const createE = HttpApiEndpoint.post('create', listPath)
+            .setPayload(openApi.createPayload)
+            .addSuccess(openApi.createSuccess);
         const updateE = HttpApiEndpoint.patch('update', resourcePath)
-            .setPath(IdPathParam)
-            .setPayload(Schema.Unknown)
-            .addSuccess(JsonSuccess);
-        const deleteE = HttpApiEndpoint.del('delete', resourcePath).setPath(IdPathParam).addSuccess(JsonSuccess);
+            .setPath(openApi.idPath)
+            .setPayload(openApi.updatePayload)
+            .addSuccess(openApi.updateSuccess);
+        const deleteE = HttpApiEndpoint.del('delete', resourcePath)
+            .setPath(openApi.idPath)
+            .addSuccess(openApi.deleteSuccess);
         return HttpApiGroup.make(groupName)
             .add(invokeE)
             .add(listE)
@@ -202,6 +357,11 @@ export interface EntityEndpointDescriptor {
     readonly defaultEntityId: string;
     /** URL path segment (e.g. "contacts"). Request path is /api/rpc/:pathPrefix. */
     readonly pathPrefix: string;
+    /**
+     * Optional `Base()` entity class (e.g. `typeof Contact`). Improves OpenAPI: full record (including `id`),
+     * insert body, and patch body for REST and RPC invoke.
+     */
+    readonly entityClass?: unknown;
 }
 
 /**
@@ -284,6 +444,7 @@ export function makeEntityEndpointsLayer(
                     entity: (EntityClass as any).entity,
                     defaultEntityId: 'store',
                     pathPrefix: name.toLowerCase() + 's',
+                    entityClass: EntityClass,
                 });
             }
         }
@@ -380,7 +541,11 @@ export function makeEntityEndpointsLayer(
         >;
         for (const d of allDescriptors) {
             const groupName = yield* pathPrefixToGroupName(d.pathPrefix);
-            api = api.add(yield* makeEntityGroup(d.pathPrefix, groupName)) as typeof api;
+            const openApi = buildEntityOpenApiSchemas(
+                d.entity,
+                resolveEntityClassForOpenApi(d, allRegisteredEntities)
+            );
+            api = api.add(yield* makeEntityGroup(d.pathPrefix, groupName, openApi)) as typeof api;
         }
 
         const shutdownResponse = { ok: true as const, message: 'Shutting down' };
@@ -413,7 +578,10 @@ export function makeEntityEndpointsLayer(
                                 .handle('update', ({ path, payload }: { path: { id: string }; payload: unknown }) =>
                                     runClient(p, 'update', {
                                         id: path.id,
-                                        ...(typeof payload === 'object' && payload !== null ? payload : {}),
+                                        patch:
+                                            typeof payload === 'object' && payload !== null && !Array.isArray(payload)
+                                                ? (payload as Record<string, unknown>)
+                                                : {},
                                     })
                                 )
                                 .handle('delete', ({ path }: { path: { id: string } }) =>

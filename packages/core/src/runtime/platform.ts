@@ -15,6 +15,7 @@ import * as Effect from 'effect/Effect';
 import * as Scope from 'effect/Scope';
 import { createServer } from 'node:http';
 import { ObservabilityLive } from '../observability/layer.js';
+import { effectLoggerLayerFromEnv } from '../observability/effect-logger-layer.js';
 import { clusterLayerDefault } from '../cluster/config.js';
 import { NodeHttpServer } from '@effect/platform-node';
 import {
@@ -34,11 +35,13 @@ import { WorkflowRegistryLive } from '../workflow/engine.js';
 import { RuntimeConfigLive } from '../config/runtime-config.js';
 import {
     FinalTableStoreLive,
+    RuntimeSchemaDDLNoOpLayer,
     SchemaFinalizer,
     SchemaFinalizerNoOp,
     SchemaRegistryConfigLive,
     TableColumnRegistryLive,
     TableRelationsRegistryLive,
+    type RuntimeSchemaDDLService,
 } from '../schema/index.js';
 import { FeatureFlagKeys, type FeatureFlagOverrides } from '../feature-flags/index.js';
 import * as NodeSdk from '@effect/opentelemetry/NodeSdk';
@@ -49,14 +52,15 @@ import * as NodeSdk from '@effect/opentelemetry/NodeSdk';
  */
 export interface CreatePlatformTemplateOptions {
     /**
-     * Database implementation. Use DatabaseLiveInMemory for dev/tests; replace with
-     * a layer that includes SchemaFinalizer (e.g. SchemaFinalizerPg from @eventiva/databases.pg) for PostgreSQL.
+     * Database implementation from the active platform backend (e.g. PgDatabaseLayer or SqliteDatabaseLayer).
      */
     readonly databaseLayer: Layer.Layer<Database>;
     /** Extensions to load (id used for schema markReady and finalization count). */
     readonly extensions: ReadonlyArray<ExtensionRegistration>;
-    /** Schema finalizer for building Drizzle tables. Use SchemaFinalizerPg for real tables; SchemaFinalizerNoOp for in-memory placeholders. */
+    /** Schema finalizer for building Drizzle tables (e.g. SchemaFinalizerPg). Omit only when SCHEMA_STACK is disabled; defaults to SchemaFinalizerNoOp. */
     readonly schemaFinalizerLayer?: Layer.Layer<SchemaFinalizer>;
+    /** After table finalization, apply DDL to the physical DB (drizzle-kit). Defaults to no-op. */
+    readonly runtimeSchemaDDLLayer?: Layer.Layer<RuntimeSchemaDDLService>;
     /** When set, an HTTP server is started exposing RPC (and REST for CRUD entities) for these descriptors. */
     readonly entityEndpoints?: ReadonlyArray<EntityEndpointDescriptor>;
     /** Port for the entity endpoints server (default 3000). */
@@ -125,6 +129,7 @@ function buildBootstrapStack(
         Layer.provideMerge(schemaConfigLayer),
         Layer.provideMerge(schemaFinalizerLayer)
     );
+    const runtimeSchemaDdlLayer = options.runtimeSchemaDDLLayer ?? RuntimeSchemaDDLNoOpLayer;
     // Use ClusterWorkflowEngine when cluster is enabled, otherwise use in-memory workflow engine
     const workflowEngineLayer = isFeatureEnabled(fo, 'CLUSTER')
         ? ClusterWorkflowEngineLayer.pipe(Layer.provide(clusterLayerDefault))
@@ -137,7 +142,9 @@ function buildBootstrapStack(
     const metricsLayer = isFeatureEnabled(fo, 'OBSERVABILITY')
         ? ObservabilityLive
         : (NodeSdk.layerEmpty as Layer.Layer<never, any, unknown>);
+    const effectLogLayer = effectLoggerLayerFromEnv() as Layer.Layer<never, any, unknown>;
     const baseLayers: Layer.Layer<never, any, unknown>[] = [
+        effectLogLayer,
         metricsLayer, // ObservabilityLive (ClusterMetrics are auto-registered by cluster components)
         runtimeConfigLayer,
         extensionConfigLayer,
@@ -145,24 +152,11 @@ function buildBootstrapStack(
         piiLayer,
         isFeatureEnabled(fo, 'SCHEMA_STACK') ? schemaStack : Layer.empty,
         options.databaseLayer,
+        isFeatureEnabled(fo, 'SCHEMA_STACK') ? runtimeSchemaDdlLayer : RuntimeSchemaDDLNoOpLayer,
         hooksStack,
         scopeLayer,
     ];
-    // Merge all base layers
-    // Note: Layer.memoize returns an Effect, not a Layer. For memoization,
-    // use Layer.unwrapScoped(Layer.memoize(...)) if needed, but Effect already
-    // memoizes layers by reference identity in dependency graphs.
-    const base = Layer.mergeAll(
-        baseLayers[0]!,
-        baseLayers[1]!,
-        baseLayers[2]!,
-        baseLayers[3]!,
-        baseLayers[4]!,
-        baseLayers[5]!,
-        baseLayers[6]!,
-        baseLayers[7]!,
-        baseLayers[8]!
-    );
+    const base = Layer.mergeAll(...(baseLayers as [Layer.Layer<never, any, unknown>, ...Layer.Layer<never, any, unknown>[]]));
     const entitiesLayer = isFeatureEnabled(fo, 'EXTENSIONS')
         ? mergeEntityLayers([...options.extensions.map((e) => e.layer)])
         : Layer.empty;

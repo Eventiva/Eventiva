@@ -70,7 +70,13 @@ function runFinalization(
         const getTable = (name: string) => builtTables.get(name);
         for (const tableName of tableNames) {
             const entry = state.pending.get(tableName)!;
-            const table = yield* finalizer.buildTable(tableName, entry.columns, entry.extraConfigs, getTable);
+            const table = yield* finalizer.buildTable(
+                tableName,
+                entry.columns,
+                entry.extraConfigs,
+                getTable,
+                creatorTableName
+            );
             builtTables.set(tableName, table);
             yield* store.setTable(tableName, table);
         }

@@ -1,0 +1,28 @@
+{
+    "name": "platforms-sqlite-demo",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/platforms/sqlite-demo/src",
+    "projectType": "library",
+    "tags": ["type:platform", "layer:backend"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/platforms/sqlite-demo",
+                "main": "packages/platforms/sqlite-demo/src/index.ts",
+                "tsConfig": "packages/platforms/sqlite-demo/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "run": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec tsx --tsconfig packages/platforms/sqlite-demo/tsconfig.run.json packages/platforms/sqlite-demo/src/index.ts",
+                "cwd": "{workspaceRoot}"
+            },
+            "configurations": {},
+            "dependsOn": ["build"]
+        }
+    }
+}
