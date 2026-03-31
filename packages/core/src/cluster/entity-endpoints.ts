@@ -549,11 +549,31 @@ export function makeEntityEndpointsLayer(
         }
 
         const shutdownResponse = { ok: true as const, message: 'Shutting down' };
-        const scheduleExit = Effect.sync(() => setTimeout(() => process.exit(0), 100));
+
+        /** Logs to stderr (console) and Effect log so shutdown is visible before `process.exit` (buffers flush on newline). */
+        const shutdownHandler = (method: 'GET' | 'POST') =>
+            Effect.succeed(shutdownResponse).pipe(
+                Effect.tap(() =>
+                    Effect.logInfo(`Shutdown: ${method} /api/shutdown — scheduling process exit`, {
+                        service: 'eventiva-core',
+                        endpoint: '/api/shutdown',
+                        httpMethod: method,
+                    })
+                ),
+                Effect.tap(() =>
+                    Effect.sync(() => {
+                        console.info(
+                            `[eventiva-core] Shutdown requested (${method} /api/shutdown); exiting in 100ms`
+                        );
+                        setTimeout(() => process.exit(0), 100);
+                    })
+                )
+            );
+
         const shutdownGroupLive = HttpApiBuilder.group(api as HttpApi.HttpApi<string, typeof ShutdownGroup, any, any>, 'Shutdown', (handlers) =>
             handlers
-                .handle('shutdownGet', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
-                .handle('shutdownPost', () => Effect.succeed(shutdownResponse).pipe(Effect.tap(() => scheduleExit)))
+                .handle('shutdownGet', () => shutdownHandler('GET'))
+                .handle('shutdownPost', () => shutdownHandler('POST'))
         );
 
         type GroupHandlers = { handle: (name: string, fn: (...args: any[]) => Effect.Effect<any>) => GroupHandlers };

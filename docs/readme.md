@@ -1,7 +1,7 @@
 ---
-revnumber: "1.2"
-revdate: "2026-03-28"
-revremark: "Postgres E2E verification notes in testing doc; local-dev documents psql DDL and env vars."
+revnumber: "1.3"
+revdate: "2026-03-31"
+revremark: "Documented cluster-first local runtime, cluster lifecycle commands, and cluster-mode Postgres E2E gate."
 ---
 
 # Eventiva documentation hub
@@ -20,6 +20,7 @@ This folder holds **Markdown** guides and reusable **parts** for day-to-day work
 | Topic | Document |
 | ----- | -------- |
 | Local dev: Postgres vs SQLite, env vars, postgresql vs sqlite-demo platform | [`parts/local-dev/database-backends-and-platforms.md`](parts/local-dev/database-backends-and-platforms.md) |
+| Local runtime in cluster mode: start, lifecycle targets, manifests, and regression gate | [`parts/local-dev/postgresql-cluster-runtime.md`](parts/local-dev/postgresql-cluster-runtime.md) |
 | Contact REST + RPC curl examples (default HTTP **3000**, override with `EVENTIVA_HTTP_PORT`) | [`testing-entity-http-endpoints.md`](testing-entity-http-endpoints.md) |
 
 ### Learnings (architecture and conventions)
