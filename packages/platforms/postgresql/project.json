@@ -18,11 +18,20 @@
         "run": {
             "executor": "nx:run-commands",
             "options": {
+                "command": "node scripts/cluster/logs-cluster-all.mjs",
+                "cwd": "{workspaceRoot}"
+            },
+            "dependsOn": ["cluster:wait"]
+        },
+        "run-local": {
+            "executor": "nx:run-commands",
+            "options": {
                 "command": "pnpm exec tsx --tsconfig packages/platforms/postgresql/tsconfig.run.json packages/platforms/postgresql/src/index.ts",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "NODE_ENV": "development",
                     "EVENTIVA_DATABASE": "postgres",
+                    "EVENTIVA_CLUSTER_MODE": "distributed",
                     "EVENTIVA_HTTP_PORT": "3000",
                     "PGPORT": "5432",
                     "PGUSER": "postgres",
@@ -39,6 +48,71 @@
             },
             "configurations": {},
             "dependsOn": ["build"]
+        },
+        "cluster:render": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/render-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_RUNTIME_IMAGE": "docker.io/eventiva/runtime:local"
+                }
+            }
+        },
+        "cluster:apply": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/apply-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}"
+            },
+            "dependsOn": ["cluster:render", "cluster:images:build"]
+        },
+        "cluster:images:build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/build-local-images.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_RUNTIME_IMAGE": "docker.io/eventiva/runtime:local"
+                }
+            },
+            "dependsOn": ["build"]
+        },
+        "cluster:wait": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/wait-for-cluster-rollout.mjs",
+                "cwd": "{workspaceRoot}"
+            },
+            "dependsOn": ["cluster:apply"]
+        },
+        "cluster:delete": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/delete-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "cluster:status": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/status-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "cluster:logs": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/logs-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "cluster:logs:all": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/logs-cluster-all.mjs",
+                "cwd": "{workspaceRoot}"
+            }
         },
         "verify-pg-e2e": {
             "executor": "nx:run-commands",

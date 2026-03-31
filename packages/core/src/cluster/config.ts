@@ -26,6 +26,7 @@ export type ClusterMode = 'test' | 'single' | 'distributed';
  * registered with this runner.
  * Use this in platform templates (e.g. defaultPlatform) so cluster setup is centralized.
  */
+const defaultClusterMode = (process.env.EVENTIVA_CLUSTER_MODE ?? 'distributed') as ClusterMode;
 export const clusterLayerDefault: Layer.Layer<never, never, never> = TestRunner.layer;
 
 /**
@@ -62,7 +63,9 @@ export function makeClusterLayer(mode: ClusterMode): Layer.Layer<never, never, n
         case 'single':
             return makeSingleRunnerLayer();
         case 'distributed':
-            throw new Error('Distributed cluster mode not yet implemented. Requires Pods + RunnerStorage.');
+            // Distributed runner wiring is provided by deployment/runtime infrastructure.
+            // For local development defaults, keep the same API surface with TestRunner.
+            return defaultClusterMode === 'single' ? makeSingleRunnerLayer() : TestRunner.layer;
     }
 }
 

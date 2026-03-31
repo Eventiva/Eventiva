@@ -14,7 +14,7 @@ export * from './schema/typeid-schema.js';
 export * from './schema/schema-encryption.js';
 export * from './entity/entity-base.js';
 export * from './entity/entity-registry.js';
-export * from './entity/entity-method-extensions.js';
+export * from './transforms/index.js';
 export * from './embedding/embedding-service.js';
 export * from './observability/index.js';
 export * from './security/index.js';

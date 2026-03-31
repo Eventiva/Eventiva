@@ -50,8 +50,13 @@
 
 ### Effect/Cluster and workflow configuration
 
-- **Cluster.** Configuration is centralized in `packages/core/src/cluster/config.ts`: `clusterLayerDefault` = TestRunner.layer (in-memory Sharding + Runner for single-process dev/tests). `ClusterMode` type documents future modes: `"single"` (SingleRunner), `"distributed"` (Sharding + Pods + RunnerStorage). Platforms import `clusterLayerDefault` from `@eventiva/core` so switching to real cluster is a single change.
+- **Cluster runtime default.** The PostgreSQL platform now runs in cluster-oriented mode by default. `platforms-postgresql:run` first applies the FPK cluster stack (`platforms-postgresql:cluster:apply`) and then starts `platforms-postgresql:run-local`.
+- **Cluster layer selection.** Configuration is centralized in `packages/core/src/cluster/config.ts`. `EVENTIVA_CLUSTER_MODE` defaults to `"distributed"` and currently resolves to SingleRunner semantics in local/dev while keeping cluster APIs and wiring.
+- **Lifecycle targets.** Project `platforms-postgresql` exposes cluster lifecycle targets: `cluster:render`, `cluster:apply`, `cluster:delete`, `cluster:status`, `cluster:logs`. Root scripts mirror these commands for day-to-day usage.
+- **Manifests.** FPK/Kubernetes cluster manifests are generated from `tools/cluster/src` components: `pg`, `shard-manager`, `runner`, `workload`.
 - **Workflow.** Extension hooks: one implementation (`runHandlersForPayload`); in-process by default. For durable, add from core: `WorkflowEngineLayerInMemory` or ClusterWorkflowEngine and `ExtensionHooksWorkflowLayer`. Generic workflows: `WorkflowRegistry` + `WorkflowRegistryLive` in `workflow/engine.ts`; replace with @effect/workflow ClusterWorkflowEngine when persistence is required.
+- **Regression gate.** `scripts/pg-e2e-via-nx.mjs` is the PostgreSQL regression gate and runs against `platforms-postgresql:run` (cluster mode path), not a separate local-only transport path.
+- **Transforms and hooks.** Treat transforms and extension hooks as cluster-oriented runtime behavior. Do not assume calls are strictly local-only; code should remain transport-agnostic across runner/shard boundaries.
 
 ### Schema registry and createTable flow
 

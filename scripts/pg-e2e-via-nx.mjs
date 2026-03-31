@@ -10,6 +10,9 @@
  * - PG_E2E_RESET=1 — `DELETE FROM contact` before run (data only; does not fix stale FKs)
  * - PG_E2E_SCHEMA_RESET=1 — `DROP TABLE contact` + `_created_by_placeholder` then restart (required after
  *   `created_by` FK target changes; `CREATE TABLE IF NOT EXISTS` never migrates existing tables)
+ * - PG_E2E_SKIP_PLATFORM_START=1 — do not spawn `nx run platforms-postgresql:run`; use an API already reachable
+ *   on `PG_E2E_HTTP_HOST`:`EVENTIVA_HTTP_PORT` (e.g. after `kubectl port-forward` from the cluster workload).
+ *   Use `SKIP_PSQL=1` unless Postgres is port-forwarded to localhost or psql targets the cluster DB.
  */
 import { spawn, spawnSync } from 'child_process';
 import { createConnection } from 'net';
@@ -18,6 +21,9 @@ import { execFileSync } from 'child_process';
 
 /** Entity HTTP server port (must match `EVENTIVA_HTTP_PORT` on the platform). */
 const HTTP_PORT = Number(process.env.EVENTIVA_HTTP_PORT ?? 3000);
+/** Host for HTTP checks (use 127.0.0.1 with kubectl port-forward). */
+const HTTP_HOST = process.env.PG_E2E_HTTP_HOST ?? '127.0.0.1';
+const SKIP_PLATFORM_START = process.env.PG_E2E_SKIP_PLATFORM_START === '1';
 const MAX_WAIT_MS = 120000;
 /** Cluster entity round-trips can exceed 20s on cold start; keep generous for CI/local. */
 const REQUEST_TIMEOUT_MS = Number(process.env.PG_E2E_HTTP_TIMEOUT_MS ?? 90000);
@@ -26,7 +32,7 @@ function waitForPort(port, timeoutMs) {
     return new Promise((resolve, reject) => {
         const deadline = Date.now() + timeoutMs;
         const tryConnect = () => {
-            const socket = createConnection(port, '127.0.0.1', () => {
+            const socket = createConnection(port, HTTP_HOST, () => {
                 socket.destroy();
                 resolve();
             });
@@ -47,7 +53,7 @@ function httpRequest(method, path, body) {
         const data = body != null ? JSON.stringify(body) : undefined;
         const req = http.request(
             {
-                hostname: '127.0.0.1',
+                hostname: HTTP_HOST,
                 port: HTTP_PORT,
                 path,
                 method,
@@ -182,6 +188,7 @@ function mergeChildEnv() {
         ...process.env,
         CONTACT_SEED_ENABLED: process.env.CONTACT_SEED_ENABLED ?? 'false',
         EVENTIVA_DATABASE: process.env.EVENTIVA_DATABASE ?? 'postgres',
+        EVENTIVA_CLUSTER_MODE: process.env.EVENTIVA_CLUSTER_MODE ?? 'distributed',
         PGPORT: process.env.PGPORT ?? '5432',
         PGUSER: process.env.PGUSER ?? 'postgres',
         PGPASSWORD: process.env.PGPASSWORD ?? 'postgres',
@@ -221,25 +228,34 @@ async function main() {
         );
     }
 
-    const child = spawn('pnpm', ['nx', 'run', 'platforms-postgresql:run'], {
-        cwd: process.cwd(),
-        stdio: ['ignore', 'pipe', 'pipe'],
-        detached: true,
-        env: childEnv,
-    });
-    child.unref();
+    let child = null;
+    if (!SKIP_PLATFORM_START) {
+        child = spawn('pnpm', ['nx', 'run', 'platforms-postgresql:run'], {
+            cwd: process.cwd(),
+            stdio: ['ignore', 'pipe', 'pipe'],
+            detached: true,
+            env: childEnv,
+        });
+        child.unref();
+    }
 
     try {
-        console.log('Waiting for HTTP', HTTP_PORT, '(nx run platforms-postgresql:run)...');
+        if (SKIP_PLATFORM_START) {
+            console.log(
+                `Waiting for HTTP ${HTTP_HOST}:${HTTP_PORT} (PG_E2E_SKIP_PLATFORM_START=1; ensure port-forward or local server)...`
+            );
+        } else {
+            console.log('Waiting for HTTP', HTTP_PORT, '(nx run platforms-postgresql:run)...');
+        }
         await waitForPort(HTTP_PORT, MAX_WAIT_MS);
 
         if (!psqlDescribeContact(childEnv)) {
-            process.kill(-child.pid, 'SIGTERM');
+            if (child?.pid) process.kill(-child.pid, 'SIGTERM');
             process.exit(1);
         }
 
         if (!psqlVerifyContactCreatedByFk(childEnv)) {
-            process.kill(-child.pid, 'SIGTERM');
+            if (child?.pid) process.kill(-child.pid, 'SIGTERM');
             process.exit(1);
         }
 
@@ -341,13 +357,17 @@ async function main() {
         if (docs.status !== 200) throw new Error(`GET /api/docs -> ${docs.status}`);
         console.log('PASS GET /api/docs');
 
-        console.log('\nAll Postgres E2E checks passed (via nx run platforms-postgresql:run).');
-        process.kill(-child.pid, 'SIGTERM');
+        console.log(
+            SKIP_PLATFORM_START
+                ? '\nAll Postgres E2E checks passed (external server).'
+                : '\nAll Postgres E2E checks passed (via nx run platforms-postgresql:run).'
+        );
+        if (child?.pid) process.kill(-child.pid, 'SIGTERM');
         process.exit(0);
     } catch (e) {
         console.error(e);
         try {
-            process.kill(-child.pid, 'SIGTERM');
+            if (child?.pid) process.kill(-child.pid, 'SIGTERM');
         } catch {
             /* ignore */
         }
