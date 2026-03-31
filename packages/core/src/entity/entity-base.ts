@@ -14,8 +14,10 @@ import * as Schema from 'effect/Schema';
 import { makeCrudEntity } from '../crud/crud-rpc.js';
 import { makeCrudHandlersFromDatabase, type NotFound } from '../crud/crud-handlers.js';
 import { Database } from '../database/database.js';
-import { runWithExtensions } from './entity-method-extensions.js';
 import { typeId, typeIdSchema } from '../schema/typeid-schema.js';
+import { ExtensionHookPubSub } from '../extensions/extension-hook-pubsub.js';
+import { runTransforms } from '../transforms/transform-runner.js';
+import { withSpanAndLog } from '../observability/helpers.js';
 
 /** Prefix for TypeID (e.g. "contact"). Lowercase name. */
 export type IdPrefix = string;
@@ -133,7 +135,48 @@ export function Base<Self>() {
                 h: (req: Req) => Effect.Effect<A, E, R>
             ): ((req: Req) => Effect.Effect<A, E, R>) =>
             (req: Req) =>
-                runWithExtensions(name, method, h, req as Req & { address: { entityId: string }; payload: unknown });
+                Effect.gen(function* () {
+                    const hooks = yield* ExtensionHookPubSub;
+                    const withAddress = req as Req & { address: { entityId: string }; payload: unknown };
+                    const scope = `entity:${name}:${method}`;
+                    const entityId = withAddress.address?.entityId ?? 'unknown';
+                    yield* hooks
+                        .publish(`entity/${name}/beforeCall`, {
+                            entityType: name,
+                            method,
+                            entityId,
+                            request: withAddress,
+                        })
+                        .pipe(Effect.catchAll(() => Effect.void));
+
+                    const pre = yield* runTransforms(scope, 'pre', withAddress.payload).pipe(
+                        Effect.catchAll(() => Effect.succeed({ original: withAddress.payload, current: withAddress.payload, steps: [] }))
+                    );
+                    const transformedRequest = {
+                        ...(withAddress as object),
+                        payload: pre.current,
+                    } as Req;
+
+                    const base = yield* h(transformedRequest);
+
+                    const post = yield* runTransforms(scope, 'post', base).pipe(
+                        Effect.catchAll(() => Effect.succeed({ original: base, current: base, steps: [] }))
+                    );
+
+                    yield* hooks
+                        .publish(`entity/${name}/afterCall`, {
+                            entityType: name,
+                            method,
+                            entityId,
+                            request: transformedRequest,
+                            transformSteps: [...pre.steps, ...post.steps],
+                        })
+                        .pipe(Effect.catchAll(() => Effect.void));
+
+                    return post.current as A;
+                }).pipe(
+                    withSpanAndLog('entity.wrap', { attributes: { entityType: name, method } })
+                ) as Effect.Effect<A, E, R>;
 
         const wrappedHandlers = {
             create: wrap('create', handlers.create),

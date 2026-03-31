@@ -12,6 +12,7 @@
         "@effect/sql-pg": "^0.34.0",
         "drizzle-kit": "1.0.0-beta.18-dc9676b",
         "drizzle-orm": "1.0.0-beta.18-dc9676b",
-        "effect": "^3.19.17"
+        "effect": "^3.19.17",
+        "postgres": "^3.4.8"
     }
 }

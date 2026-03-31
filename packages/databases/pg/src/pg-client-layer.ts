@@ -1,7 +1,8 @@
 /**
  * PgClient layer for PostgreSQL. Use with PgDatabaseLayer so the platform has a real DB.
- * Default config reads from `process.env` (not Effect `Config`): `HOST`, `PGPORT` (preferred) or `PORT`,
- * `PGUSER` (preferred) or `USERNAME`, `PGPASSWORD` (preferred) or `PASSWORD`, `DATABASE`, `SSL`.
+ * Default config reads from `process.env` (not Effect `Config`): `PGHOST` or `DB_HOST` (preferred) else `HOST`,
+ * `PGPORT` (preferred) or `PORT`, `PGUSER` (preferred) or `USERNAME`, `PGPASSWORD` (preferred) or `PASSWORD`,
+ * `PGDATABASE` or `DB_DATABASE` or `DATABASE`, `SSL`.
  * Use `PGPORT` when generic `PORT` is reserved for HTTP. Use `PGUSER` when `USERNAME` is the OS login.
  *
  * Catalog: repository root `.env.example`.
@@ -21,14 +22,15 @@ export interface PgClientConfigFromEnv {
 
 /**
  * Build PgClient config from process.env (e.g. devcontainer remoteEnv).
- * Uses DATABASE, HOST, PGPORT (else PORT), PGUSER (else USERNAME), PASSWORD, SSL.
+ * Uses PGHOST / DB_HOST / HOST (last is often HTTP bind or pod IP — prefer PGHOST for DB), PGPORT (else PORT),
+ * PGDATABASE / DB_DATABASE / DATABASE, PGUSER (else USERNAME), PASSWORD, SSL.
  */
 export function pgClientConfigFromEnv(env: NodeJS.ProcessEnv = process.env): PgClientConfigFromEnv {
     const portRaw = env['PGPORT'] ?? env['PORT'];
     return {
-        host: env['HOST'] ?? 'localhost',
+        host: env['PGHOST'] ?? env['DB_HOST'] ?? env['HOST'] ?? 'localhost',
         port: portRaw ? parseInt(portRaw, 10) : 5432,
-        database: env['DATABASE'] ?? 'postgres',
+        database: env['PGDATABASE'] ?? env['DB_DATABASE'] ?? env['DATABASE'] ?? 'postgres',
         username: env['PGUSER'] ?? env['USERNAME'] ?? 'postgres',
         password: env['PGPASSWORD'] ?? env['PASSWORD'] ?? 'postgres',
         ssl: env['SSL'] === 'true',
