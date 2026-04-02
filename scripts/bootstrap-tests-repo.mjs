@@ -8,7 +8,7 @@ const PROJECTS = [
         name: 'tests-core',
         packageName: '@eventiva/tests.core',
         root: 'core',
-        distPrefixes: ['dist/packages/core/src/'],
+        distPrefixes: ['dist/core/'],
     },
     {
         name: 'tests-extensions-hello-world',
@@ -38,7 +38,7 @@ const PROJECTS = [
         name: 'tests-platforms-postgresql',
         packageName: '@eventiva/tests.platforms.postgresql',
         root: 'platforms/postgresql',
-        distPrefixes: ['dist/packages/platforms/postgresql/src/'],
+        distPrefixes: ['dist/platforms/postgresql/'],
     },
 ];
 

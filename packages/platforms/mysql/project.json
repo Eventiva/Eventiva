@@ -1,0 +1,108 @@
+{
+    "name": "platforms-mysql",
+    "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/platforms/mysql/src",
+    "projectType": "library",
+    "tags": ["type:platform", "layer:backend"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/platforms/mysql",
+                "main": "packages/platforms/mysql/src/index.ts",
+                "tsConfig": "packages/platforms/mysql/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "run": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/logs-cluster-all.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_CLUSTER_LOG_PROFILE": "mysql"
+                }
+            },
+            "dependsOn": ["cluster:wait"]
+        },
+        "run-local": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec tsx --tsconfig packages/platforms/mysql/tsconfig.run.json packages/platforms/mysql/src/platform.ts",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "NODE_ENV": "development",
+                    "CLUSTER_APP_MODE": "battleship",
+                    "DB_DATABASE": "effect_cluster",
+                    "DB_USER": "cluster",
+                    "DB_PASSWORD": "cluster",
+                    "DB_HOST": "localhost",
+                    "DB_PORT": "3306"
+                }
+            },
+            "dependsOn": ["build"]
+        },
+        "cluster:render": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/render-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_RUNTIME_IMAGE_MYSQL": "docker.io/eventiva/runtime-mysql:local"
+                }
+            }
+        },
+        "cluster:apply": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/apply-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_CLUSTER_STACK": "mysql"
+                }
+            },
+            "dependsOn": ["cluster:render", "cluster:images:build"]
+        },
+        "cluster:images:build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/build-local-images.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_RUNTIME_IMAGE_MYSQL": "docker.io/eventiva/runtime-mysql:local",
+                    "EVENTIVA_CLUSTER_STACK": "mysql"
+                }
+            },
+            "dependsOn": ["build"]
+        },
+        "cluster:wait": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/wait-for-cluster-rollout.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_CLUSTER_STACK": "mysql"
+                }
+            },
+            "dependsOn": ["cluster:apply"]
+        },
+        "cluster:delete": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/delete-fpk-cluster.mjs",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "cluster:logs:all": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node scripts/cluster/logs-cluster-all.mjs",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_CLUSTER_LOG_PROFILE": "mysql"
+                }
+            }
+        }
+    }
+}

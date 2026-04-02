@@ -1,0 +1,15 @@
+FROM node:22-alpine
+WORKDIR /app
+
+RUN corepack enable
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml nx.json tsconfig.base.json eslint.config.mjs ./
+COPY patches ./patches
+COPY packages ./packages
+COPY scripts ./scripts
+
+RUN pnpm install --frozen-lockfile
+RUN pnpm nx run-many -t build -p core,platforms-mysql --skip-nx-cache
+
+ENV NODE_ENV=production
+CMD ["pnpm","exec","tsx","--tsconfig","packages/platforms/mysql/tsconfig.run.json","packages/platforms/mysql/src/platform.ts"]

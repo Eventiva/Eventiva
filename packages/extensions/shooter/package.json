@@ -1,0 +1,15 @@
+{
+  "name": "@eventiva/extensions.shooter",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "dependencies": {
+    "@eventiva/core": "workspace:*",
+    "@effect/platform-node": "0.104.0",
+    "@effect/sql": "0.49.0",
+    "effect": "3.19.19",
+    "tslib": "^2.3.0"
+  }
+}

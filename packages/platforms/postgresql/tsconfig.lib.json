@@ -1,10 +1,21 @@
 {
     "extends": "../../../tsconfig.base.json",
     "compilerOptions": {
-        "baseUrl": ".",
-        "outDir": "../../dist/out-tsc",
+        "baseUrl": "../../../",
+        "paths": {
+            "@eventiva/core": ["packages/core/src/index.ts"],
+            "@eventiva/extensions.runner": ["packages/extensions/runner/src/index.ts"],
+            "@eventiva/extensions.shooter": ["packages/extensions/shooter/src/index.ts"],
+            "@eventiva/extensions.slow-shooter": ["packages/extensions/slow-shooter/src/index.ts"],
+            "@eventiva/extensions.speed-shooter": ["packages/extensions/speed-shooter/src/index.ts"],
+            "@eventiva/platforms.postgresql": ["packages/platforms/postgresql/src/index.ts"],
+            "@eventiva/platforms.postgresql/platform": ["packages/platforms/postgresql/src/platform.ts"]
+        },
+        "outDir": "../../../dist/platforms/postgresql",
+        "rootDir": "src",
         "declaration": true,
-        "types": ["node"]
+        "declarationMap": true
     },
-    "include": ["src/**/*.ts"]
+    "include": ["src/**/*.ts"],
+    "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }

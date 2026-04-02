@@ -23,6 +23,8 @@ const container = pipe(
         DB_HOST: 'postgres.postgres.svc',
         SHARD_MANAGER_HOST: clusterEnv.SHARD_MANAGER_HOST,
         HOST: { fieldRef: { fieldPath: 'status.podIP' } },
+        EVENTIVA_CLUSTER_RUNNER_RPC_PORT: clusterEnv.EVENTIVA_CLUSTER_RUNNER_RPC_PORT,
+        EVENTIVA_CLUSTER_RUNNER_RPC_BIND_HOST: clusterEnv.EVENTIVA_CLUSTER_RUNNER_RPC_BIND_HOST,
         EVENTIVA_HTTP_PORT: clusterEnv.EVENTIVA_HTTP_PORT,
         EVENTIVA_CLUSTER_MODE: clusterEnv.EVENTIVA_CLUSTER_MODE,
     }),
