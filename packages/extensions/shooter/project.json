@@ -1,0 +1,19 @@
+{
+  "name": "extensions-shooter",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/extensions/shooter/src",
+  "projectType": "library",
+  "tags": ["type:extension", "layer:backend"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/extensions/shooter",
+        "main": "packages/extensions/shooter/src/index.ts",
+        "tsConfig": "packages/extensions/shooter/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

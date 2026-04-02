@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
+        "plugins": [
+            {
+                "name": "@effect/language-service"
+            }
+        ],
         "baseUrl": ".",
         "composite": true,
         "declarationMap": true,
@@ -23,10 +28,16 @@
             "remote1/Module": ["apps/remote1/src/remote-entry.ts"],
             "remote2/Module": ["apps/remote2/src/remote-entry.ts"],
             "@eventiva/core": ["packages/core/src/index.ts"],
-            "@eventiva/extensions.hello-world": ["packages/extensions/hello-world/src/index.ts"],
+            "@eventiva/extensions.runner": ["packages/extensions/runner/src/index.ts"],
+            "@eventiva/extensions.shooter": ["packages/extensions/shooter/src/index.ts"],
+            "@eventiva/extensions.slow-shooter": ["packages/extensions/slow-shooter/src/index.ts"],
+            "@eventiva/extensions.speed-shooter": ["packages/extensions/speed-shooter/src/index.ts"],
+            "@eventiva/extensions.copyright-notice": ["packages/extensions/copyright-notice/src/index.ts"],
+            "@eventiva/extensions.example-transform": ["packages/extensions/example-transform/src/index.ts"],
             "@eventiva/platforms.postgresql": ["packages/platforms/postgresql/src/index.ts"],
             "@eventiva/platforms.postgresql/platform": ["packages/platforms/postgresql/src/platform.ts"],
-            "@eventiva/platforms.sqlite-demo": ["packages/platforms/sqlite-demo/src/index.ts"]
+            "@eventiva/platforms.mysql": ["packages/platforms/mysql/src/index.ts"],
+            "@eventiva/platforms.mysql/platform": ["packages/platforms/mysql/src/platform.ts"]
         }
     }
 }

@@ -1,0 +1,15 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "../../../",
+    "paths": {
+      "@eventiva/core": ["packages/core/src/index.ts"]
+    },
+    "outDir": "../../../dist/extensions/speed-shooter",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
+}

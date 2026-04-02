@@ -5,15 +5,6 @@
     "projectType": "library",
     "tags": ["type:core", "layer:backend", "capability:entities", "capability:workflows"],
     "targets": {
-        "test": {
-            "executor": "@nx/vitest:test",
-            "options": {
-                "configFile": "packages/core/vitest.config.ts"
-            },
-            "configurations": {},
-            "outputs": ["{workspaceRoot}/coverage/packages/core"],
-            "cache": true
-        },
         "build": {
             "executor": "@nx/js:tsc",
             "outputs": ["{options.outputPath}"],
@@ -21,7 +12,7 @@
                 "outputPath": "dist/core",
                 "main": "packages/core/src/index.ts",
                 "tsConfig": "packages/core/tsconfig.lib.json",
-                "assets": ["packages/core/*.md"]
+                "assets": []
             }
         }
     }

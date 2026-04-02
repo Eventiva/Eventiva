@@ -146,7 +146,7 @@
         },
         "groups": {
             "core": {
-                "projects": ["core", "@eventiva/extensions.hello-world", "@eventiva/extensions.contact"],
+                "projects": ["core", "platforms-postgresql", "platforms-mysql"],
                 "projectsRelationship": "fixed",
                 "version": {
                     "updateDependents": "always"

@@ -21,12 +21,16 @@
         "cluster:render": "pnpm nx run platforms-postgresql:cluster:render",
         "cluster:apply": "pnpm nx run platforms-postgresql:cluster:apply",
         "cluster:images:build": "node scripts/cluster/build-local-images.mjs",
+        "cluster:mysql:build": "pnpm nx run platforms-mysql:build",
         "cluster:wait": "pnpm nx run platforms-postgresql:cluster:wait",
         "cluster:delete": "pnpm nx run platforms-postgresql:cluster:delete",
+        "cluster:scale-down": "pnpm nx run platforms-postgresql:cluster:scale-down",
         "cluster:status": "pnpm nx run platforms-postgresql:cluster:status",
         "cluster:logs": "pnpm nx run platforms-postgresql:cluster:logs",
         "cluster:logs:all": "pnpm nx run platforms-postgresql:cluster:logs:all",
+        "cluster:port-forward": "pnpm nx run platforms-postgresql:cluster:port-forward",
         "cluster:run": "pnpm nx run platforms-postgresql:run",
+        "cluster:run:mysql": "pnpm nx run platforms-mysql:run",
         "dev": "pnpm nx run platforms-postgresql:run",
         "dts:docs:enrich": "node scripts/enrich-dts-docs.mjs dist",
         "dts:docs:check": "node scripts/check-dts-docs.mjs dist",
@@ -34,6 +38,7 @@
     },
     "pnpm": {
         "overrides": {
+            "@effect/sql": "0.49.0",
             "effect": "3.19.19",
             "jsonpath-plus": "^10.3.0",
             "parse-duration": "^2.1.5"
