@@ -102,6 +102,10 @@ curl -sS "http://127.0.0.1:3000/api/docs" | head
 
 Stop the forward with Ctrl+C.
 
+**One command for Postgres + HTTP + runner RPC:** `pnpm cluster:port-forward` (or `pnpm nx run platforms-postgresql:cluster:port-forward`) runs `scripts/cluster/port-forward-fpk-cluster.mjs`. Optional env: `EVENTIVA_PF_PG_PORT`, `EVENTIVA_PF_HTTP_PORT`, `EVENTIVA_PF_RUNNER_RPC_PORT`, `EVENTIVA_PF_SKIP_RUNNER_RPC=1`.
+
+`pnpm dev` / `pnpm cluster:run` sets `EVENTIVA_CLUSTER_PORT_FORWARD=1` so `logs-cluster-all` starts the same forwards while tailing cluster logs. For logs only without forwards, use `pnpm nx run platforms-postgresql:cluster:logs:all` or `EVENTIVA_CLUSTER_PORT_FORWARD=0`.
+
 To hit Postgres from your host (optional, e.g. `psql` or GUI clients):
 
 ```bash

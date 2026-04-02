@@ -5,6 +5,7 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
+  '@effect/sql': 0.49.0
   effect: 3.19.19
   jsonpath-plus: ^10.3.0
   parse-duration: ^2.1.5
@@ -236,41 +237,35 @@ importers:
   packages/core:
     dependencies:
       '@effect/cluster':
-        specifier: ^0.56.0
-        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
+        specifier: 0.56.4
+        version: 0.56.4(rf7fihpfbe4ms373qswzqseh7e)
       '@effect/experimental':
         specifier: ^0.58.0
         version: 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/opentelemetry':
-        specifier: ^0.61.0
+        specifier: 0.61.0
         version: 0.61.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-logs@0.203.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-web@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/platform':
-        specifier: ^0.94.5
+        specifier: 0.94.5
         version: 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/platform-node':
-        specifier: ^0.69.1
-        version: 0.69.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+        specifier: 0.104.0
+        version: 0.104.0(@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/rpc':
-        specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+        specifier: 0.73.1
+        version: 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql':
+        specifier: 0.49.0
+        version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
-        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@opentelemetry/api':
         specifier: ^1.9.0
         version: 1.9.0
-      '@opentelemetry/core':
-        specifier: ^1.30.0
-        version: 1.30.1(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-logs-otlp-http':
-        specifier: ^0.213.0
-        version: 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-metrics-otlp-http':
-        specifier: ^0.213.0
-        version: 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/exporter-trace-otlp-http':
-        specifier: ^0.213.0
-        version: 0.213.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources':
+        specifier: ^2.0.0
+        version: 2.6.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-logs':
         specifier: ^0.203.0
         version: 0.203.0(@opentelemetry/api@1.9.0)
@@ -278,181 +273,212 @@ importers:
         specifier: ^2.0.0
         version: 2.6.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-base':
-        specifier: ^2.6.0
+        specifier: ^2.0.0
         version: 2.6.0(@opentelemetry/api@1.9.0)
-      drizzle-orm:
-        specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/better-sqlite3@7.6.13)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(better-sqlite3@11.10.0)(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6)
+      '@opentelemetry/sdk-trace-node':
+        specifier: ^2.0.0
+        version: 2.6.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions':
+        specifier: ^1.33.0
+        version: 1.40.0
+      '@sentry/node':
+        specifier: ^9.0.0
+        version: 9.47.1
+      '@sentry/opentelemetry':
+        specifier: ^9.0.0
+        version: 9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-      posthog-node:
-        specifier: ^5.28.1
-        version: 5.28.1(rxjs@7.8.2)
       tslib:
         specifier: ^2.3.0
         version: 2.8.1
-      typeid-js:
-        specifier: ^1.2.0
-        version: 1.2.0
-    devDependencies:
-      drizzle-kit:
-        specifier: 1.0.0-beta.16-ea816b6
-        version: 1.0.0-beta.16-ea816b6
-      vitest:
-        specifier: ^2.1.0
-        version: 2.1.9(@types/node@20.19.9)(jsdom@26.1.0)(less@4.5.1)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)
 
-  packages/databases/pg:
+  packages/extensions/copyright-notice:
     dependencies:
+      '@eventiva/core':
+        specifier: workspace:*
+        version: link:../../core
+      effect:
+        specifier: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
+  packages/extensions/example-transform:
+    dependencies:
+      '@eventiva/core':
+        specifier: workspace:*
+        version: link:../../core
+      effect:
+        specifier: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
+  packages/extensions/runner:
+    dependencies:
+      '@effect/cluster':
+        specifier: 0.56.4
+        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
+      '@effect/platform-node':
+        specifier: 0.104.0
+        version: 0.104.0(@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@eventiva/core':
+        specifier: workspace:*
+        version: link:../../core
+      effect:
+        specifier: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
+  packages/extensions/shooter:
+    dependencies:
+      '@effect/platform-node':
+        specifier: 0.104.0
+        version: 0.104.0(@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/sql':
-        specifier: ^0.21.0
-        version: 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/sql-pg':
-        specifier: ^0.34.0
-        version: 0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+        specifier: 0.49.0
+        version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
-      '@eventiva/databases.shared':
-        specifier: workspace:*
-        version: link:../shared
-      drizzle-kit:
-        specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b
-      drizzle-orm:
-        specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(fjwyrn3u35t2vgdckq45mc2y3e)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-      postgres:
-        specifier: ^3.4.8
-        version: 3.4.8
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
-  packages/databases/shared:
+  packages/extensions/slow-shooter:
     dependencies:
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
-      drizzle-orm:
-        specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/better-sqlite3@7.6.13)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(better-sqlite3@11.10.0)(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
-  packages/databases/sqlite:
+  packages/extensions/speed-shooter:
     dependencies:
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
-      '@eventiva/databases.shared':
-        specifier: workspace:*
-        version: link:../shared
-      better-sqlite3:
-        specifier: ^11.10.0
-        version: 11.10.0
-      drizzle-orm:
-        specifier: 1.0.0-beta.18-dc9676b
-        version: 1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/better-sqlite3@7.6.13)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(better-sqlite3@11.10.0)(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6)
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-    devDependencies:
-      '@types/better-sqlite3':
-        specifier: ^7.6.13
-        version: 7.6.13
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
-  packages/extensions/contact:
+  packages/platforms/mysql:
     dependencies:
       '@effect/cluster':
-        specifier: ^0.56.0
-        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
+        specifier: 0.56.4
+        version: 0.56.4(rf7fihpfbe4ms373qswzqseh7e)
+      '@effect/platform':
+        specifier: 0.94.5
+        version: 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform-node':
+        specifier: 0.104.0
+        version: 0.104.0(@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/rpc':
-        specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+        specifier: 0.73.1
+        version: 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql':
+        specifier: 0.49.0
+        version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql-mysql2':
+        specifier: ^0.49.0
+        version: 0.49.1(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@types/node@20.19.9)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
-        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
-      '@eventiva/databases.pg':
+      '@eventiva/extensions.copyright-notice':
         specifier: workspace:*
-        version: link:../../databases/pg
-      '@eventiva/databases.shared':
+        version: link:../../extensions/copyright-notice
+      '@eventiva/extensions.example-transform':
         specifier: workspace:*
-        version: link:../../databases/shared
+        version: link:../../extensions/example-transform
+      '@eventiva/extensions.runner':
+        specifier: workspace:*
+        version: link:../../extensions/runner
+      '@eventiva/extensions.shooter':
+        specifier: workspace:*
+        version: link:../../extensions/shooter
+      '@eventiva/extensions.slow-shooter':
+        specifier: workspace:*
+        version: link:../../extensions/slow-shooter
+      '@eventiva/extensions.speed-shooter':
+        specifier: workspace:*
+        version: link:../../extensions/speed-shooter
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-
-  packages/extensions/hello-world:
-    dependencies:
-      '@effect/cluster':
-        specifier: ^0.56.0
-        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
-      '@effect/rpc':
-        specifier: ^0.73.1
-        version: 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/workflow':
-        specifier: ^0.16.0
-        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@eventiva/core':
-        specifier: workspace:*
-        version: link:../../core
-      effect:
-        specifier: 3.19.19
-        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
   packages/platforms/postgresql:
     dependencies:
       '@effect/cluster':
-        specifier: ^0.56.0
-        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
+        specifier: 0.56.4
+        version: 0.56.4(rf7fihpfbe4ms373qswzqseh7e)
+      '@effect/platform':
+        specifier: 0.94.5
+        version: 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform-node':
+        specifier: 0.104.0
+        version: 0.104.0(@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc':
+        specifier: 0.73.1
+        version: 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql':
+        specifier: 0.49.0
+        version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql-pg':
+        specifier: ^0.49.0
+        version: 0.49.7(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/workflow':
+        specifier: ^0.16.0
+        version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
-      '@eventiva/databases.pg':
+      '@eventiva/extensions.copyright-notice':
         specifier: workspace:*
-        version: link:../../databases/pg
-      '@eventiva/databases.shared':
+        version: link:../../extensions/copyright-notice
+      '@eventiva/extensions.example-transform':
         specifier: workspace:*
-        version: link:../../databases/shared
-      '@eventiva/extensions.contact':
+        version: link:../../extensions/example-transform
+      '@eventiva/extensions.runner':
         specifier: workspace:*
-        version: link:../../extensions/contact
-      '@eventiva/extensions.hello-world':
+        version: link:../../extensions/runner
+      '@eventiva/extensions.shooter':
         specifier: workspace:*
-        version: link:../../extensions/hello-world
+        version: link:../../extensions/shooter
+      '@eventiva/extensions.slow-shooter':
+        specifier: workspace:*
+        version: link:../../extensions/slow-shooter
+      '@eventiva/extensions.speed-shooter':
+        specifier: workspace:*
+        version: link:../../extensions/speed-shooter
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-
-  packages/platforms/sqlite-demo:
-    dependencies:
-      '@effect/cluster':
-        specifier: ^0.56.0
-        version: 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
-      '@eventiva/core':
-        specifier: workspace:*
-        version: link:../../core
-      '@eventiva/databases.shared':
-        specifier: workspace:*
-        version: link:../../databases/shared
-      '@eventiva/databases.sqlite':
-        specifier: workspace:*
-        version: link:../../databases/sqlite
-      '@eventiva/extensions.contact':
-        specifier: workspace:*
-        version: link:../../extensions/contact
-      '@eventiva/extensions.hello-world':
-        specifier: workspace:*
-        version: link:../../extensions/hello-world
-      effect:
-        specifier: 3.19.19
-        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
 
 packages:
 
@@ -477,77 +503,6 @@ packages:
 
   '@asamuzakjp/css-color@3.2.0':
     resolution: {integrity: sha512-K1A6z8tS3XsmCMM86xoWdn7Fkdn9m6RSVtocUrJYIwZnFVkng/PvkEoWtOWmP+Scc6saYWHWZYbndEEXxl24jw==}
-
-  '@azure-rest/core-client@2.5.1':
-    resolution: {integrity: sha512-EHaOXW0RYDKS5CFffnixdyRPak5ytiCtU7uXDcP/uiY+A6jFRwNGzzJBiznkCzvi5EYpY+YWinieqHb0oY916A==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/abort-controller@2.1.2':
-    resolution: {integrity: sha512-nBrLsEWm4J2u5LpAPjxADTlq3trDgVZZXHNKabeXZtpq3d3AbN/KGO82R87rdDz5/lYB024rtEf10/q0urNgsA==}
-    engines: {node: '>=18.0.0'}
-
-  '@azure/core-auth@1.10.1':
-    resolution: {integrity: sha512-ykRMW8PjVAn+RS6ww5cmK9U2CyH9p4Q88YJwvUslfuMmN98w/2rdGRLPqJYObapBCdzBVeDgYWdJnFPFb7qzpg==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/core-client@1.10.1':
-    resolution: {integrity: sha512-Nh5PhEOeY6PrnxNPsEHRr9eimxLwgLlpmguQaHKBinFYA/RU9+kOYVOQqOrTsCL+KSxrLLl1gD8Dk5BFW/7l/w==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/core-http-compat@2.3.2':
-    resolution: {integrity: sha512-Tf6ltdKzOJEgxZeWLCjMxrxbodB/ZeCbzzA1A2qHbhzAjzjHoBVSUeSl/baT/oHAxhc4qdqVaDKnc2+iE932gw==}
-    engines: {node: '>=20.0.0'}
-    peerDependencies:
-      '@azure/core-client': ^1.10.0
-      '@azure/core-rest-pipeline': ^1.22.0
-
-  '@azure/core-lro@2.7.2':
-    resolution: {integrity: sha512-0YIpccoX8m/k00O7mDDMdJpbr6mf1yWo2dfmxt5A8XVZVVMz2SSKaEbMCeJRvgQ0IaSlqhjT47p4hVIRRy90xw==}
-    engines: {node: '>=18.0.0'}
-
-  '@azure/core-paging@1.6.2':
-    resolution: {integrity: sha512-YKWi9YuCU04B55h25cnOYZHxXYtEvQEbKST5vqRga7hWY9ydd3FZHdeQF8pyh+acWZvppw13M/LMGx0LABUVMA==}
-    engines: {node: '>=18.0.0'}
-
-  '@azure/core-rest-pipeline@1.23.0':
-    resolution: {integrity: sha512-Evs1INHo+jUjwHi1T6SG6Ua/LHOQBCLuKEEE6efIpt4ZOoNonaT1kP32GoOcdNDbfqsD2445CPri3MubBy5DEQ==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/core-tracing@1.3.1':
-    resolution: {integrity: sha512-9MWKevR7Hz8kNzzPLfX4EAtGM2b8mr50HPDBvio96bURP/9C+HjdH3sBlLSNNrvRAr5/k/svoH457gB5IKpmwQ==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/core-util@1.13.1':
-    resolution: {integrity: sha512-XPArKLzsvl0Hf0CaGyKHUyVgF7oDnhKoP85Xv6M4StF/1AhfORhZudHtOyf2s+FcbuQ9dPRAjB8J2KvRRMUK2A==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/identity@4.13.0':
-    resolution: {integrity: sha512-uWC0fssc+hs1TGGVkkghiaFkkS7NkTxfnCH+Hdg+yTehTpMcehpok4PgUKKdyCH+9ldu6FhiHRv84Ntqj1vVcw==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/keyvault-common@2.0.0':
-    resolution: {integrity: sha512-wRLVaroQtOqfg60cxkzUkGKrKMsCP6uYXAOomOIysSMyt1/YM0eUn9LqieAWM8DLcU4+07Fio2YGpPeqUbpP9w==}
-    engines: {node: '>=18.0.0'}
-
-  '@azure/keyvault-keys@4.10.0':
-    resolution: {integrity: sha512-eDT7iXoBTRZ2n3fLiftuGJFD+yjkiB1GNqzU2KbY1TLYeXeSPVTVgn2eJ5vmRTZ11978jy2Kg2wI7xa9Tyr8ag==}
-    engines: {node: '>=18.0.0'}
-
-  '@azure/logger@1.3.0':
-    resolution: {integrity: sha512-fCqPIfOcLE+CGqGPd66c8bZpwAji98tZ4JI9i/mlTNTlsIWslCfpg48s/ypyLxZTump5sypjrKn2/kY7q8oAbA==}
-    engines: {node: '>=20.0.0'}
-
-  '@azure/msal-browser@4.29.0':
-    resolution: {integrity: sha512-/f3eHkSNUTl6DLQHm+bKecjBKcRQxbd/XLx8lvSYp8Nl/HRyPuIPOijt9Dt0sH50/SxOwQ62RnFCmFlGK+bR/w==}
-    engines: {node: '>=0.8.0'}
-
-  '@azure/msal-common@15.15.0':
-    resolution: {integrity: sha512-/n+bN0AKlVa+AOcETkJSKj38+bvFs78BaP4rNtv3MJCmPH0YrHiskMRe74OhyZ5DZjGISlFyxqvf9/4QVEi2tw==}
-    engines: {node: '>=0.8.0'}
-
-  '@azure/msal-node@3.8.8':
-    resolution: {integrity: sha512-+f1VrJH1iI517t4zgmuhqORja0bL6LDQXfBqkjuMmfTYXTQQnh1EvwwxO3UbKLT05N0obF72SRHFrC1RBDv5Gg==}
-    engines: {node: '>=16'}
 
   '@babel/code-frame@7.10.4':
     resolution: {integrity: sha512-vG6SvB6oYEhvgisZNFRmRCUkLz11c7rp+tbNTynGqc6mS1d5ATd/sGyV6W0KZZnXRKMTzZDRgQT3Ou9jhpAfUg==}
@@ -1305,15 +1260,12 @@ packages:
   '@drizzle-team/brocli@0.10.2':
     resolution: {integrity: sha512-z33Il7l5dKjUgGULTqBsQBQwckHh5AbIuxhdsIxDDiZAzBOrZO6q9ogcWC65kU382AfynTfgNumVcNIjuIua6w==}
 
-  '@drizzle-team/brocli@0.11.0':
-    resolution: {integrity: sha512-hD3pekGiPg0WPCCGAZmusBBJsDqGUR66Y452YgQsZOnkdQ7ViEPKuyP4huUGEZQefp8g34RRodXYmJ2TbCH+tg==}
-
   '@effect/cluster@0.56.4':
     resolution: {integrity: sha512-7Je5/JlbZOlsSxsbKjr97dJed2cNGWsb+TLNgMcr5mRDbcWlFOTUGvsrisEJV6waosYLIg+2omPdvnvRoYKdhA==}
     peerDependencies:
       '@effect/platform': ^0.94.5
       '@effect/rpc': ^0.73.1
-      '@effect/sql': ^0.49.0
+      '@effect/sql': 0.49.0
       '@effect/workflow': ^0.16.0
       effect: 3.19.19
 
@@ -1348,21 +1300,33 @@ packages:
       '@opentelemetry/semantic-conventions': ^1.33.0
       effect: 3.19.19
 
-  '@effect/platform-node-shared@0.23.1':
-    resolution: {integrity: sha512-iI37OQAWKLTtm5yx7vaZGuQsf9HdilPBvtg/qkxvOBsl+wNmhbWgOCo2XPiMqov8rCn6dcJ28w2qPvb2OpW9wg==}
+  '@effect/platform-node-shared@0.57.1':
+    resolution: {integrity: sha512-oX/bApMdoKsyrDiNdJxo7U9Rz1RXsjRv+ecfAPp1qGlSdGIo32wVRvJ2XCHqYj0sqaYJS0pU0/GCulRfVGuJag==}
     peerDependencies:
-      '@effect/platform': ^0.73.1
+      '@effect/cluster': ^0.56.1
+      '@effect/platform': ^0.94.2
+      '@effect/rpc': ^0.73.0
+      '@effect/sql': 0.49.0
       effect: 3.19.19
 
-  '@effect/platform-node@0.69.1':
-    resolution: {integrity: sha512-bEePa4g9DkWRDqTCYq1cdeLFTwK9DvgyAK/jytfTRC24TE/hY45F/w72KVjyPYIUKut0KVIMeNkWIxZKjNmjMA==}
+  '@effect/platform-node@0.104.0':
+    resolution: {integrity: sha512-2ZkUDDTxLD95ARdYIKBx4tdIIgqA3cwb3jlnVVBxmHUf0Pg5N2HdMuD0Q+CXQ7Q94FDwnLW3ZvaSfxDh6FvrNw==}
     peerDependencies:
-      '@effect/platform': ^0.73.1
+      '@effect/cluster': ^0.56.0
+      '@effect/platform': ^0.94.0
+      '@effect/rpc': ^0.73.0
+      '@effect/sql': 0.49.0
       effect: 3.19.19
 
   '@effect/platform@0.94.5':
     resolution: {integrity: sha512-z05APUiDDPbodhTkH/RJqOLoCU11bU2IZLfcwLFrld03+ob1VeqRnELQlmueLIYm6NZifHAtjl32V+GRt34y4A==}
     peerDependencies:
+      effect: 3.19.19
+
+  '@effect/rpc@0.73.1':
+    resolution: {integrity: sha512-1Pn6GJl+gCdVl0O38zK8wU/I5UsG6RArDKd8Ndx8BhntZAPIBbuUFgG7KlAKTJjumBTO/YOEgKYdwma0rJq/Tw==}
+    peerDependencies:
+      '@effect/platform': ^0.94.5
       effect: 3.19.19
 
   '@effect/rpc@0.73.2':
@@ -1371,19 +1335,20 @@ packages:
       '@effect/platform': ^0.94.5
       effect: 3.19.19
 
-  '@effect/sql-pg@0.34.21':
-    resolution: {integrity: sha512-fi+Tf3aBQMkPouCxSqsO7Q7Yg5euWLmfhhJXcwWUueG9IGi9lg8adkYE/4kVmDmzZWLkdVFSqYMvxskQ7hjgkA==}
+  '@effect/sql-mysql2@0.49.1':
+    resolution: {integrity: sha512-zJ6Zq6RmyFsmeRk31RmPTBH+VKPgsWkTdtRLdZSu1876tNJJCPfp6cw3ds9pLa8CZ09AL/JguR1NNaVjM1V/RA==}
     peerDependencies:
-      '@effect/experimental': ^0.44.21
-      '@effect/platform': ^0.80.21
-      '@effect/sql': ^0.33.21
+      '@effect/experimental': ^0.57.5
+      '@effect/platform': ^0.93.4
+      '@effect/sql': 0.49.0
       effect: 3.19.19
 
-  '@effect/sql@0.21.3':
-    resolution: {integrity: sha512-BqgxpeH1JtGfwe59ejsI9p5bxs165MOymhO7FcpIPj5Q7iS3UD/iNJi3KX992RrwOIgEnMm1AsEy9Bs1gQenpw==}
+  '@effect/sql-pg@0.49.7':
+    resolution: {integrity: sha512-7yGHEcSTj3jo7EZxC4cEXUno+/pgbEjjY5WLrx0Nfta07Vu6CTplcSOQ5KA24HwkclBidNwfX7LWghc04kAgUQ==}
     peerDependencies:
-      '@effect/experimental': ^0.32.16
-      '@effect/platform': ^0.69.31
+      '@effect/experimental': ^0.57.5
+      '@effect/platform': ^0.93.4
+      '@effect/sql': 0.49.0
       effect: 3.19.19
 
   '@effect/sql@0.49.0':
@@ -2520,15 +2485,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.9':
     resolution: {integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==}
 
-  '@js-joda/core@5.7.0':
-    resolution: {integrity: sha512-WBu4ULVVxySLLzK1Ppq+OdfP+adRS4ntmDQT915rzDJ++i95gc2jZkM5B6LWEAwN3lGXpfie3yPABozdD3K3Vg==}
-
   '@js-sdsl/ordered-map@4.4.2':
     resolution: {integrity: sha512-iUKgm52T8HOE/makSxjqoWhe95ZJA1/G1sYsGev2JDKUSS14KAgg1LHb+Ba+IPow0xflbnSkOsZcO08C7w1gYw==}
-
-  '@js-temporal/polyfill@0.5.1':
-    resolution: {integrity: sha512-hloP58zRVCRSpgDxmqCWJNlizAlUgJFqG2ypq79DCvyv9tHjRYMDOcPFjzfl/A1/YxDvRCZz8wvZvmapQnKwFQ==}
-    engines: {node: '>=12'}
 
   '@jsdevtools/ono@7.1.3':
     resolution: {integrity: sha512-4JQNk+3mVzK3xh2rqd6RB4J46qUR19azEHBneZyTZM+c456qOrbbM/5xcR8huNCCcbVt7+UmizG6GuUvPvKUYg==}
@@ -3202,13 +3160,19 @@ packages:
     resolution: {integrity: sha512-9B9RU0H7Ya1Dx/Rkyc4stuBZSGVQF27WigitInx2QQoj6KUpEFYPKoWjdFTunJYxmXmh17HeBvbMa1EhGyPmqQ==}
     engines: {node: '>=8.0.0'}
 
-  '@opentelemetry/api-logs@0.213.0':
-    resolution: {integrity: sha512-zRM5/Qj6G84Ej3F1yt33xBVY/3tnMxtL1fiDIxYbDWYaZ/eudVw3/PBiZ8G7JwUxXxjW8gU4g6LnOyfGKYHYgw==}
-    engines: {node: '>=8.0.0'}
+  '@opentelemetry/api-logs@0.57.2':
+    resolution: {integrity: sha512-uIX52NnTM0iBh84MShlpouI7UKqkZ7MrUszTmaypHBu4r7NofznSnQRfJ+uUeDtQDj6w8eFGg5KBLDAwAPz1+A==}
+    engines: {node: '>=14'}
 
   '@opentelemetry/api@1.9.0':
     resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
     engines: {node: '>=8.0.0'}
+
+  '@opentelemetry/context-async-hooks@1.30.1':
+    resolution: {integrity: sha512-s5vvxXPVdjqS3kTLKMeBMvop9hbWkwzBpu+mUO2M7sZtlkyDJGwFe33wRKnbaYDo8ExRVBIIdwIGrqpxHuKttA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
   '@opentelemetry/context-async-hooks@2.6.0':
     resolution: {integrity: sha512-L8UyDwqpTcbkIK5cgwDRDYDoEhQoj8wp8BwsO19w3LB1Z41yEQm2VJyNfAi9DrLP/YTqXqWpKHyZfR9/tFYo1Q==}
@@ -3234,35 +3198,153 @@ packages:
     peerDependencies:
       '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
-  '@opentelemetry/exporter-logs-otlp-http@0.213.0':
-    resolution: {integrity: sha512-vqDVSpLp09ZzcFIdb7QZrEFPxUlO3GzdhBKLstq3jhYB5ow3+ZtV5V0ngSdi/0BZs+J5WPiN1+UDV4X5zD/GzA==}
-    engines: {node: ^18.19.0 || >=20.6.0}
+  '@opentelemetry/instrumentation-amqplib@0.46.1':
+    resolution: {integrity: sha512-AyXVnlCf/xV3K/rNumzKxZqsULyITJH6OVLiW6730JPRqWA7Zc9bvYoVNpN6iOpTU8CasH34SU/ksVJmObFibQ==}
+    engines: {node: '>=14'}
     peerDependencies:
       '@opentelemetry/api': ^1.3.0
 
-  '@opentelemetry/exporter-metrics-otlp-http@0.213.0':
-    resolution: {integrity: sha512-yw3fTIw4KQIRXC/ZyYQq5gtA3Ogfdfz/g5HVgleobQAcjUUE8Nj3spGMx8iQPp+S+u6/js7BixufRkXhzLmpJA==}
-    engines: {node: ^18.19.0 || >=20.6.0}
+  '@opentelemetry/instrumentation-connect@0.43.1':
+    resolution: {integrity: sha512-ht7YGWQuV5BopMcw5Q2hXn3I8eG8TH0J/kc/GMcW4CuNTgiP6wCu44BOnucJWL3CmFWaRHI//vWyAhaC8BwePw==}
+    engines: {node: '>=14'}
     peerDependencies:
       '@opentelemetry/api': ^1.3.0
 
-  '@opentelemetry/exporter-trace-otlp-http@0.213.0':
-    resolution: {integrity: sha512-tnRmJD39aWrE/Sp7F6AbRNAjKHToDkAqBi6i0lESpGWz3G+f4bhVAV6mgSXH2o18lrDVJXo6jf9bAywQw43wRA==}
-    engines: {node: ^18.19.0 || >=20.6.0}
+  '@opentelemetry/instrumentation-dataloader@0.16.1':
+    resolution: {integrity: sha512-K/qU4CjnzOpNkkKO4DfCLSQshejRNAJtd4esgigo/50nxCB6XCyi1dhAblUHM9jG5dRm8eu0FB+t87nIo99LYQ==}
+    engines: {node: '>=14'}
     peerDependencies:
       '@opentelemetry/api': ^1.3.0
 
-  '@opentelemetry/otlp-exporter-base@0.213.0':
-    resolution: {integrity: sha512-MegxAP1/n09Ob2dQvY5NBDVjAFkZRuKtWKxYev1R2M8hrsgXzQGkaMgoEKeUOyQ0FUyYcO29UOnYdQWmWa0PXg==}
-    engines: {node: ^18.19.0 || >=20.6.0}
+  '@opentelemetry/instrumentation-express@0.47.1':
+    resolution: {integrity: sha512-QNXPTWteDclR2B4pDFpz0TNghgB33UMjUt14B+BZPmtH1MwUFAfLHBaP5If0Z5NZC+jaH8oF2glgYjrmhZWmSw==}
+    engines: {node: '>=14'}
     peerDependencies:
       '@opentelemetry/api': ^1.3.0
 
-  '@opentelemetry/otlp-transformer@0.213.0':
-    resolution: {integrity: sha512-RSuAlxFFPjeK4d5Y6ps8L2WhaQI6CXWllIjvo5nkAlBpmq2XdYWEBGiAbOF4nDs8CX4QblJDv5BbMUft3sEfDw==}
-    engines: {node: ^18.19.0 || >=20.6.0}
+  '@opentelemetry/instrumentation-fs@0.19.1':
+    resolution: {integrity: sha512-6g0FhB3B9UobAR60BGTcXg4IHZ6aaYJzp0Ki5FhnxyAPt8Ns+9SSvgcrnsN2eGmk3RWG5vYycUGOEApycQL24A==}
+    engines: {node: '>=14'}
     peerDependencies:
       '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-generic-pool@0.43.1':
+    resolution: {integrity: sha512-M6qGYsp1cURtvVLGDrPPZemMFEbuMmCXgQYTReC/IbimV5sGrLBjB+/hANUpRZjX67nGLdKSVLZuQQAiNz+sww==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-graphql@0.47.1':
+    resolution: {integrity: sha512-EGQRWMGqwiuVma8ZLAZnExQ7sBvbOx0N/AE/nlafISPs8S+QtXX+Viy6dcQwVWwYHQPAcuY3bFt3xgoAwb4ZNQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-hapi@0.45.2':
+    resolution: {integrity: sha512-7Ehow/7Wp3aoyCrZwQpU7a2CnoMq0XhIcioFuKjBb0PLYfBfmTsFTUyatlHu0fRxhwcRsSQRTvEhmZu8CppBpQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-http@0.57.2':
+    resolution: {integrity: sha512-1Uz5iJ9ZAlFOiPuwYg29Bf7bJJc/GeoeJIFKJYQf67nTVKFe8RHbEtxgkOmK4UGZNHKXcpW4P8cWBYzBn1USpg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-ioredis@0.47.1':
+    resolution: {integrity: sha512-OtFGSN+kgk/aoKgdkKQnBsQFDiG8WdCxu+UrHr0bXScdAmtSzLSraLo7wFIb25RVHfRWvzI5kZomqJYEg/l1iA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-kafkajs@0.7.1':
+    resolution: {integrity: sha512-OtjaKs8H7oysfErajdYr1yuWSjMAectT7Dwr+axIoZqT9lmEOkD/H/3rgAs8h/NIuEi2imSXD+vL4MZtOuJfqQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-knex@0.44.1':
+    resolution: {integrity: sha512-U4dQxkNhvPexffjEmGwCq68FuftFK15JgUF05y/HlK3M6W/G2iEaACIfXdSnwVNe9Qh0sPfw8LbOPxrWzGWGMQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-koa@0.47.1':
+    resolution: {integrity: sha512-l/c+Z9F86cOiPJUllUCt09v+kICKvT+Vg1vOAJHtHPsJIzurGayucfCMq2acd/A/yxeNWunl9d9eqZ0G+XiI6A==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-lru-memoizer@0.44.1':
+    resolution: {integrity: sha512-5MPkYCvG2yw7WONEjYj5lr5JFehTobW7wX+ZUFy81oF2lr9IPfZk9qO+FTaM0bGEiymwfLwKe6jE15nHn1nmHg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-mongodb@0.52.0':
+    resolution: {integrity: sha512-1xmAqOtRUQGR7QfJFfGV/M2kC7wmI2WgZdpru8hJl3S0r4hW0n3OQpEHlSGXJAaNFyvT+ilnwkT+g5L4ljHR6g==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-mongoose@0.46.1':
+    resolution: {integrity: sha512-3kINtW1LUTPkiXFRSSBmva1SXzS/72we/jL22N+BnF3DFcoewkdkHPYOIdAAk9gSicJ4d5Ojtt1/HeibEc5OQg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-mysql2@0.45.2':
+    resolution: {integrity: sha512-h6Ad60FjCYdJZ5DTz1Lk2VmQsShiViKe0G7sYikb0GHI0NVvApp2XQNRHNjEMz87roFttGPLHOYVPlfy+yVIhQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-mysql@0.45.1':
+    resolution: {integrity: sha512-TKp4hQ8iKQsY7vnp/j0yJJ4ZsP109Ht6l4RHTj0lNEG1TfgTrIH5vJMbgmoYXWzNHAqBH2e7fncN12p3BP8LFg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-pg@0.51.1':
+    resolution: {integrity: sha512-QxgjSrxyWZc7Vk+qGSfsejPVFL1AgAJdSBMYZdDUbwg730D09ub3PXScB9d04vIqPriZ+0dqzjmQx0yWKiCi2Q==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-redis-4@0.46.1':
+    resolution: {integrity: sha512-UMqleEoabYMsWoTkqyt9WAzXwZ4BlFZHO40wr3d5ZvtjKCHlD4YXLm+6OLCeIi/HkX7EXvQaz8gtAwkwwSEvcQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-tedious@0.18.1':
+    resolution: {integrity: sha512-5Cuy/nj0HBaH+ZJ4leuD7RjgvA844aY2WW+B5uLcWtxGjRZl3MNLuxnNg5DYWZNPO+NafSSnra0q49KWAHsKBg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/instrumentation-undici@0.10.1':
+    resolution: {integrity: sha512-rkOGikPEyRpMCmNu9AQuV5dtRlDmJp2dK5sw8roVshAGoB6hH/3QjDtRhdwd75SsJwgynWUNRUYe0wAkTo16tQ==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.7.0
+
+  '@opentelemetry/instrumentation@0.57.2':
+    resolution: {integrity: sha512-BdBGhQBh8IjZ2oIIX6F2/Q3LKm/FDDKi6ccYKcBTeilh6SNdNKveDOLk73BkSJjQLJk6qe4Yh+hHw1UPhCDdrg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.3.0
+
+  '@opentelemetry/redis-common@0.36.2':
+    resolution: {integrity: sha512-faYX1N0gpLhej/6nyp6bgRjzAKXn5GOEMYY7YhciSfCoITAktLUtQ36d24QEWNA1/WA1y6qQunCe0OhHRkVl9g==}
+    engines: {node: '>=14'}
+
+  '@opentelemetry/resources@1.30.1':
+    resolution: {integrity: sha512-5UxZqiAgLYGFjS4s9qm5mBVo433u+dSPUFWVWXmLAD4wB65oMCoXaJP1KJa9DIYYMeHu3z4BZcStG3LC593cWA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
   '@opentelemetry/resources@2.0.1':
     resolution: {integrity: sha512-dZOB3R6zvBwDKnHDTB4X1xtMArB/d324VsbiPkX/Yu0Q8T2xceRthoIVFhJdvgVM2QhGVUyX9tzwiNxGtoBJUw==}
@@ -3282,17 +3364,17 @@ packages:
     peerDependencies:
       '@opentelemetry/api': '>=1.4.0 <1.10.0'
 
-  '@opentelemetry/sdk-logs@0.213.0':
-    resolution: {integrity: sha512-00xlU3GZXo3kXKve4DLdrAL0NAFUaZ9appU/mn00S/5kSUdAvyYsORaDUfR04Mp2CLagAOhrzfUvYozY/EZX2g==}
-    engines: {node: ^18.19.0 || >=20.6.0}
-    peerDependencies:
-      '@opentelemetry/api': '>=1.4.0 <1.10.0'
-
   '@opentelemetry/sdk-metrics@2.6.0':
     resolution: {integrity: sha512-CicxWZxX6z35HR83jl+PLgtFgUrKRQ9LCXyxgenMnz5A1lgYWfAog7VtdOvGkJYyQgMNPhXQwkYrDLujk7z1Iw==}
     engines: {node: ^18.19.0 || >=20.6.0}
     peerDependencies:
       '@opentelemetry/api': '>=1.9.0 <1.10.0'
+
+  '@opentelemetry/sdk-trace-base@1.30.1':
+    resolution: {integrity: sha512-jVPgBbH1gCy2Lb7X0AVQ8XAfgg0pJ4nvl8/IiQA6nxOsPvS+0zMJaFSs2ltXe0J6C8dqjcnpyqINDJmU30+uOg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': '>=1.0.0 <1.10.0'
 
   '@opentelemetry/sdk-trace-base@2.6.0':
     resolution: {integrity: sha512-g/OZVkqlxllgFM7qMKqbPV9c1DUPhQ7d4n3pgZFcrnrNft9eJXZM2TNHTPYREJBrtNdRytYyvwjgL5geDKl3EQ==}
@@ -3319,6 +3401,12 @@ packages:
   '@opentelemetry/semantic-conventions@1.40.0':
     resolution: {integrity: sha512-cifvXDhcqMwwTlTK04GBNeIe7yyo28Mfby85QXFe1Yk8nmi36Ab/5UQwptOx84SsoGNRg+EVSjwzfSZMy6pmlw==}
     engines: {node: '>=14'}
+
+  '@opentelemetry/sql-common@0.40.1':
+    resolution: {integrity: sha512-nSDlnHSqzC3pXn/wZEZVLuAuJ1MYMXPBwtv2qAbCa3847SaHItdE7SzUq/Jtb0KZmh1zfAbNi3AAMjztTT4Ugg==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
 
   '@oxc-resolver/binding-android-arm-eabi@11.19.1':
     resolution: {integrity: sha512-aUs47y+xyXHUKlbhqHUjBABjvycq6YSD7bpxSW7vplUmdzAlJ93yXY6ZR0c1o1x5A/QKbENCvs3+NlY8IpIVzg==}
@@ -3518,8 +3606,10 @@ packages:
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
 
-  '@posthog/core@1.23.3':
-    resolution: {integrity: sha512-nehG2nig9qiU4lEUIyfXQLaBnylm5wdDiIBsp2tBFJX5BcUHNAXSwpkHjKLQ9TDfik0HW1HwZ2mY/3hJgJNToQ==}
+  '@prisma/instrumentation@6.11.1':
+    resolution: {integrity: sha512-mrZOev24EDhnefmnZX7WVVT7v+r9LttPRqf54ONvj6re4XMF7wFTpK2tLJi4XHB7fFp/6xhYbgRel8YV7gQiyA==}
+    peerDependencies:
+      '@opentelemetry/api': ^1.8
 
   '@protobufjs/aspromise@1.1.2':
     resolution: {integrity: sha512-j+gKExEuLmKwvz3OgROXtrJ2UG2x8Ch2YZUxahh+s1F2HZ+wAceUNLkvy6zKCPVRkU++ZWQrdxsUeQXmcg4uoQ==}
@@ -3932,6 +4022,36 @@ packages:
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
 
+  '@sentry/core@9.47.1':
+    resolution: {integrity: sha512-KX62+qIt4xgy8eHKHiikfhz2p5fOciXd0Cl+dNzhgPFq8klq4MGMNaf148GB3M/vBqP4nw/eFvRMAayFCgdRQw==}
+    engines: {node: '>=18'}
+
+  '@sentry/node-core@9.47.1':
+    resolution: {integrity: sha512-7TEOiCGkyShJ8CKtsri9lbgMCbB+qNts2Xq37itiMPN2m+lIukK3OX//L8DC5nfKYZlgikrefS63/vJtm669hQ==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.9.0
+      '@opentelemetry/context-async-hooks': ^1.30.1 || ^2.0.0
+      '@opentelemetry/core': ^1.30.1 || ^2.0.0
+      '@opentelemetry/instrumentation': '>=0.57.1 <1'
+      '@opentelemetry/resources': ^1.30.1 || ^2.0.0
+      '@opentelemetry/sdk-trace-base': ^1.30.1 || ^2.0.0
+      '@opentelemetry/semantic-conventions': ^1.34.0
+
+  '@sentry/node@9.47.1':
+    resolution: {integrity: sha512-CDbkasBz3fnWRKSFs6mmaRepM2pa+tbZkrqhPWifFfIkJDidtVW40p6OnquTvPXyPAszCnDZRnZT14xyvNmKPQ==}
+    engines: {node: '>=18'}
+
+  '@sentry/opentelemetry@9.47.1':
+    resolution: {integrity: sha512-STtFpjF7lwzeoedDJV+5XA6P89BfmFwFftmHSGSe3UTI8z8IoiR5yB6X2vCjSPvXlfeOs13qCNNCEZyznxM8Xw==}
+    engines: {node: '>=18'}
+    peerDependencies:
+      '@opentelemetry/api': ^1.9.0
+      '@opentelemetry/context-async-hooks': ^1.30.1 || ^2.0.0
+      '@opentelemetry/core': ^1.30.1 || ^2.0.0
+      '@opentelemetry/sdk-trace-base': ^1.30.1 || ^2.0.0
+      '@opentelemetry/semantic-conventions': ^1.34.0
+
   '@sinclair/typebox@0.27.10':
     resolution: {integrity: sha512-MTBk/3jGLNB2tVxv6uLlFh1iu64iYOQ2PbdOSK3NW8JZsmlaOh2q6sdtKowBhfw8QFLmYNzTW4/oK4uATIi6ZA==}
 
@@ -4155,9 +4275,6 @@ packages:
     resolution: {integrity: sha512-+PmQX0PiAYPMeVYe237LJAYvOMYW1j2rH5YROyS3b4CTVJum34HfRvKvAzozHAQG0TnHNdUfY9nCeUyRAs//cw==}
     engines: {node: '>=14.16'}
 
-  '@tediousjs/connection-string@0.5.0':
-    resolution: {integrity: sha512-7qSgZbincDDDFyRweCIEvZULFAw5iz/DeunhvuxpL31nfntX3P4Yd4HkHBRg9H8CdqY1e5WFN1PZIz/REL9MVQ==}
-
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
     engines: {node: '>=18'}
@@ -4222,9 +4339,6 @@ packages:
 
   '@types/babel__traverse@7.28.0':
     resolution: {integrity: sha512-8PvcXf70gTDZBgt9ptxJ8elBeBjcLOAcOtoO/mPJjtji1+CdGbHgm77om1GrsPxsiE+uXIpNSK64UYaIwQXd4Q==}
-
-  '@types/better-sqlite3@7.6.13':
-    resolution: {integrity: sha512-NMv9ASNARoKksWtsq/SHakpYAYnhBrQgGD8zkLYk/jaK8jUGn08CfEdTRgYhMypUQAfzSP8W6gNLe0q19/t4VA==}
 
   '@types/body-parser@1.19.6':
     resolution: {integrity: sha512-HLFeCYgz89uk22N5Qg3dvGvsv46B8GLvKKo1zKG4NybA8U2DiEO3w9lqGg29t/tfLRJpJ6iQxnVw4OnB7MoM9g==}
@@ -4295,8 +4409,8 @@ packages:
   '@types/mime@1.3.5':
     resolution: {integrity: sha512-/pyBZWSLD2n0dcHE3hq8s8ZvcETHtEuF+3E7XVt0Ig2nvsVQXdghHVcEkIWjy9A0wKfTn97a/PSDYohKIlnP/w==}
 
-  '@types/mssql@9.1.9':
-    resolution: {integrity: sha512-P0nCgw6vzY23UxZMnbI4N7fnLGANt4LI4yvxze1paPj+LuN28cFv5EI+QidP8udnId/BKhkcRhm/BleNsjK65A==}
+  '@types/mysql@2.15.26':
+    resolution: {integrity: sha512-DSLCOXhkvfS5WNNPbfn2KdICAmk8lLc+/PNvnPnF7gOdMZCxopXduqv0OQ13y/yA/zXTSikZZqVgybUxOEg6YQ==}
 
   '@types/node-forge@1.3.14':
     resolution: {integrity: sha512-mhVF2BnD4BO+jtOp7z1CdzaK4mbuK0LLQYAvdOLqHTavxFNq4zA1EmYkpnFjP8HOUzedfQkRnp0E2ulSAYSzAw==}
@@ -4309,6 +4423,12 @@ packages:
 
   '@types/parse-json@4.0.2':
     resolution: {integrity: sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==}
+
+  '@types/pg-pool@2.0.6':
+    resolution: {integrity: sha512-TaAUE5rq2VQYxab5Ts7WZhKNmuN78Q6PiFonTDdpbx8a1H0M1vhy3rhiMjl+e2iHmogyMw7jZF4FrE6eJUy5HQ==}
+
+  '@types/pg@8.6.1':
+    resolution: {integrity: sha512-1Kc4oAGzAl7uqUStZCDvaLFqZrW9qWSjXOmBfdgyBP5La7Us6Mg4GBvRlSoaZMhQF/zSj1C8CtKMBkoiT8eL8w==}
 
   '@types/qs@6.15.0':
     resolution: {integrity: sha512-JawvT8iBVWpzTrz3EGw9BTQFg3BQNmwERdKE22vlTxawwtbyUSlMppvZYKLZzB5zgACXdXxbD3m1bXaMqP/9ow==}
@@ -4323,9 +4443,6 @@ packages:
 
   '@types/react@19.2.14':
     resolution: {integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w==}
-
-  '@types/readable-stream@4.0.23':
-    resolution: {integrity: sha512-wwXrtQvbMHxCbBgjHaMGEmImFTQxxpfMOR/ZoQnXxB1woqkUbdLGFDgauo00Py9IudiaqSeiBiulSV9i6XIPig==}
 
   '@types/resolve@1.20.2':
     resolution: {integrity: sha512-60BCwRFOZCQhDncwQdxxeOEEkbc5dIMccYLwbxsS4TUNeVECQ/pBJ0j09mrHOl/JJvpRPGwO9SvE4nR2Nb/a4Q==}
@@ -4351,6 +4468,9 @@ packages:
   '@types/serve-static@1.15.10':
     resolution: {integrity: sha512-tRs1dB+g8Itk72rlSI2ZrW6vZg0YrLI81iQSTkMmOqnqCaNr/8Ek4VwWcN5vZgCYWbg/JJSGBlUaYGAOP73qBw==}
 
+  '@types/shimmer@1.2.0':
+    resolution: {integrity: sha512-UE7oxhQLLd9gub6JKIAhDq06T0F6FnztwMNRvYgjeQSBeMc1ZG/tA47EwfduvkuQS8apbkM/lpLpWsaCeYsXVg==}
+
   '@types/sinonjs__fake-timers@8.1.1':
     resolution: {integrity: sha512-0kSuKjAS0TrGLJ0M/+8MaFkGsQhZpB6pxOmvS3K8FYI72K//YmdfoW9X2qPsAKh1mkwxGD5zib9s1FIFed6E8g==}
 
@@ -4365,6 +4485,9 @@ packages:
 
   '@types/symlink-or-copy@1.2.2':
     resolution: {integrity: sha512-MQ1AnmTLOncwEf9IVU+B2e4Hchrku5N67NkgcAHW0p3sdzPe0FNMANxEm6OJUzPniEQGkeT3OROLlCwZJLWFZA==}
+
+  '@types/tedious@4.0.14':
+    resolution: {integrity: sha512-KHPsfX/FoVbUGbyYvk1q9MMQHLPeRZhRJZdO45Q4YjvFkv4hMNghCWTvy7rdKessBsmtz4euWCWAB6/tVpI1Iw==}
 
   '@types/tmp@0.2.6':
     resolution: {integrity: sha512-chhaNf2oKHlRkDGt+tiKE2Z5aJ6qalm7Z9rlLdBwmOiAAf09YQvvoLXjWK4HWPF1xU/fqvMgfNfpVoBscA/tKA==}
@@ -4445,10 +4568,6 @@ packages:
   '@typescript-eslint/visitor-keys@8.56.1':
     resolution: {integrity: sha512-KiROIzYdEV85YygXw6BI/Dx4fnBlFQu6Mq4QE4MOH9fFnhohw6wX/OAvDY2/C+ut0I3RSPKenvZJIVYqJNkhEw==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
-
-  '@typespec/ts-http-runtime@0.3.4':
-    resolution: {integrity: sha512-CI0NhTrz4EBaa0U+HaaUZrJhPoso8sG7ZFya8uQoBA57fjzrjRSv87ekCjLZOFExN+gXE/z0xuN2QfH4H2HrLQ==}
-    engines: {node: '>=20.0.0'}
 
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
@@ -4727,6 +4846,11 @@ packages:
     resolution: {integrity: sha512-5cvg6CtKwfgdmVqY1WIiXKc3Q1bkRqGLi+2W/6ao+6Y7gu/RCwRuAhGEzh5B4KlszSuTLgZYuqFqo5bImjNKng==}
     engines: {node: '>= 0.6'}
 
+  acorn-import-attributes@1.9.5:
+    resolution: {integrity: sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ==}
+    peerDependencies:
+      acorn: ^8
+
   acorn-import-phases@1.0.4:
     resolution: {integrity: sha512-wKmbr/DDiIXzEOiWrTTUcDm24kQ2vGfZQvM2fwg2vXqR5uW6aapr7ObPtj1th32b9u90/Pf4AItvdTh42fBmVQ==}
     engines: {node: '>=10.13.0'}
@@ -4953,6 +5077,10 @@ packages:
   aws-sign2@0.7.0:
     resolution: {integrity: sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==}
 
+  aws-ssl-profiles@1.1.2:
+    resolution: {integrity: sha512-NZKeq9AfyQvEeNlN0zSYAaWrmBffJh3IELMZfRpJVWgrpEbtEpnjvzqBPf+mxoI287JohRDoa+/nsfqqiZmF6g==}
+    engines: {node: '>= 6.0.0'}
+
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
@@ -5156,9 +5284,6 @@ packages:
     resolution: {integrity: sha512-aVNobHnJqLiUelTaHat9DZ1qM2w0C0Eym4LPI/3JxOnSokGVdsl1T1kN7TFvsEAD8G47A6VKQ0TVHqbBnYMJlQ==}
     engines: {node: '>=12.0.0'}
 
-  better-sqlite3@11.10.0:
-    resolution: {integrity: sha512-EwhOpyXiOEL/lKzHz9AW1msWFNzGc/z+LzeB3/jnFJpxu+th2yqvzsSWas1v9jgs9+xiXJcD5A8CJxAG2TaghQ==}
-
   big-integer@1.6.52:
     resolution: {integrity: sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==}
     engines: {node: '>=0.6'}
@@ -5178,14 +5303,8 @@ packages:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
     engines: {node: '>=8'}
 
-  bindings@1.5.0:
-    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
-
   bl@4.1.0:
     resolution: {integrity: sha512-1W07cM9gS6DcLperZfFSj+bWLtaPGSOHWhPiGzXmvVJbRLdG82sH/Kn8EtW1VqWVA54AKf2h5k5BbnIbwF3h6w==}
-
-  bl@6.1.6:
-    resolution: {integrity: sha512-jLsPgN/YSvPUg9UX0Kd73CXpm2Psg9FxMeCSXnk3WBO3CMT10JMwijubhGfHCnFu6TPn1ei3b975dxv7K2pWVg==}
 
   blob-util@2.0.2:
     resolution: {integrity: sha512-T7JQa+zsXXEa6/8ZhHcQEW1UFfVM49Ts65uBkFL6fz2QmrElqmbajIDJvuA0tEhRe5eIjpV9ZF+0RfZR9voJFQ==}
@@ -5247,17 +5366,11 @@ packages:
   buffer-crc32@0.2.13:
     resolution: {integrity: sha512-VO9Ht/+p3SN7SKWqcrgEzjGbRSJYTx+Q1pTQC0wrWqHx0vpJraQ6GtHx8tvcg1rlK1byhU5gccxgOgj7B0TDkQ==}
 
-  buffer-equal-constant-time@1.0.1:
-    resolution: {integrity: sha512-zRpUiDwd/xk6ADqPMATG8vc9VPrkck7T07OIx0gnjmJAnHnTVXNQG3vfvWNuiZIkwu9KrKdA1iJKfsfTVxE6NA==}
-
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
 
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
-
-  buffer@6.0.3:
-    resolution: {integrity: sha512-FTiCpNxtwiZZHEZbcbTIcZjERVICn9yq/pDFkTl95/AxzD1naBctN7YO68riM/gLSDY7sdrMby8hofADYuuqOA==}
 
   bundle-name@4.1.0:
     resolution: {integrity: sha512-tjwM5exMg6BGRI+kNmTntNsvdZS1X8BFYS6tnJ2hdH0kVxM6/eVZ2xy+FqStSWvYmtfFMDLIxurorHwDKfDz5Q==}
@@ -5449,9 +5562,6 @@ packages:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
-  chownr@1.1.4:
-    resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
-
   chownr@3.0.0:
     resolution: {integrity: sha512-+IxzY9BZOQd/XuYPRmrvEVjF/nqj5kgT4kEq7VofrDoM1MxoRjEWkrCC3EtLi59TVawxTAn+orJwFQcrqEN1+g==}
     engines: {node: '>=18'}
@@ -5478,6 +5588,9 @@ packages:
   ci-info@4.4.0:
     resolution: {integrity: sha512-77PSwercCZU2Fc4sX94eF8k8Pxte6JAwL4/ICZLFjJLqegs7kCuAsqqj/70NQF6TvDpgFjkubQB2FW2ZZddvQg==}
     engines: {node: '>=8'}
+
+  cjs-module-lexer@1.4.3:
+    resolution: {integrity: sha512-9z8TZaGM1pfswYeXrUpzPrkx8UnWYdhJclsiYMm6x/w5+nN+8Tf/LnAgfLGQCm59qAOxU8WwHEq2vNwF6i4j+Q==}
 
   cjs-module-lexer@2.2.0:
     resolution: {integrity: sha512-4bHTS2YuzUvtoLjdy+98ykbNB5jS0+07EvFNXerqZQJ89F7DI6ET7OQo/HJuW6K0aVsKA9hj9/RVb2kQVOrPDQ==}
@@ -5905,6 +6018,10 @@ packages:
   delegates@1.0.0:
     resolution: {integrity: sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==}
 
+  denque@2.1.0:
+    resolution: {integrity: sha512-HVQE3AAb/pxF8fQAoiqpvg9i3evqug3hoiwakOyZAwJm+6vZehbkYXZ0l4JxS+I3QxM97v5aaRNhj8v5oBhekw==}
+    engines: {node: '>=0.10'}
+
   depd@1.1.2:
     resolution: {integrity: sha512-7emPTl6Dpo6JRXOXjLRxck+FlLRX5847cLKEn00PLAgc3g2hTZZgr+e4c2v6QpSmLeFP3n5yUo7ft6avBK/5jQ==}
     engines: {node: '>= 0.6'}
@@ -6000,129 +6117,6 @@ packages:
     resolution: {integrity: sha512-7OZcmQUrdGI+DUNNsKBn1aW8qSoKuTH7d0mYgSP8bAzdFzKoovxEFnoGQp2dVs82EOJeYycqRtciopszwUf8bw==}
     hasBin: true
 
-  drizzle-kit@1.0.0-beta.16-ea816b6:
-    resolution: {integrity: sha512-GiJQqCNPZP8Kk+i7/sFa3rtXbq26tLDNi3LbMx9aoLuwF2ofk8CS7cySUGdI+r4J3q0a568quC8FZeaFTCw4IA==}
-    hasBin: true
-
-  drizzle-kit@1.0.0-beta.18-dc9676b:
-    resolution: {integrity: sha512-ppmN8t5JsO3BsilQRpMqW4vI2K1esH+/GDRLhpwrQecmDsthTsk92MOnHVH72lwR8G900f6vQ3eKiB4d9UNNUw==}
-    hasBin: true
-
-  drizzle-orm@1.0.0-beta.18-dc9676b:
-    resolution: {integrity: sha512-XXo8eh9Uk+YdOjErIoH9syZVQqs5bPjcbItsKRunBfV8ClsYeN9tN2fJEUgv6I/E7cMxga264wZhxFzXbSvziQ==}
-    peerDependencies:
-      '@aws-sdk/client-rds-data': '>=3'
-      '@cloudflare/workers-types': '>=4'
-      '@effect/sql': ^0.48.5
-      '@effect/sql-pg': ^0.49.7
-      '@electric-sql/pglite': '>=0.2.0'
-      '@libsql/client': '>=0.10.0'
-      '@libsql/client-wasm': '>=0.10.0'
-      '@neondatabase/serverless': '>=0.10.0'
-      '@op-engineering/op-sqlite': '>=2'
-      '@opentelemetry/api': ^1.4.1
-      '@planetscale/database': '>=1.13'
-      '@sinclair/typebox': '>=0.34.8'
-      '@sqlitecloud/drivers': '>=1.0.653'
-      '@tidbcloud/serverless': '*'
-      '@tursodatabase/database': '>=0.2.1'
-      '@tursodatabase/database-common': '>=0.2.1'
-      '@tursodatabase/database-wasm': '>=0.2.1'
-      '@types/better-sqlite3': '*'
-      '@types/mssql': ^9.1.4
-      '@types/pg': '*'
-      '@types/sql.js': '*'
-      '@upstash/redis': '>=1.34.7'
-      '@vercel/postgres': '>=0.8.0'
-      '@xata.io/client': '*'
-      arktype: '>=2.0.0'
-      better-sqlite3: '>=9.3.0'
-      bun-types: '*'
-      expo-sqlite: '>=14.0.0'
-      gel: '>=2'
-      mssql: ^11.0.1
-      mysql2: '>=2'
-      pg: '>=8'
-      postgres: '>=3'
-      sql.js: '>=1'
-      sqlite3: '>=5'
-      typebox: '>=1.0.0'
-      valibot: '>=1.0.0-beta.7'
-      zod: ^3.25.0 || ^4.0.0
-    peerDependenciesMeta:
-      '@aws-sdk/client-rds-data':
-        optional: true
-      '@cloudflare/workers-types':
-        optional: true
-      '@effect/sql':
-        optional: true
-      '@effect/sql-pg':
-        optional: true
-      '@electric-sql/pglite':
-        optional: true
-      '@libsql/client':
-        optional: true
-      '@libsql/client-wasm':
-        optional: true
-      '@neondatabase/serverless':
-        optional: true
-      '@op-engineering/op-sqlite':
-        optional: true
-      '@opentelemetry/api':
-        optional: true
-      '@planetscale/database':
-        optional: true
-      '@sinclair/typebox':
-        optional: true
-      '@sqlitecloud/drivers':
-        optional: true
-      '@tidbcloud/serverless':
-        optional: true
-      '@tursodatabase/database':
-        optional: true
-      '@tursodatabase/database-common':
-        optional: true
-      '@tursodatabase/database-wasm':
-        optional: true
-      '@types/better-sqlite3':
-        optional: true
-      '@types/pg':
-        optional: true
-      '@types/sql.js':
-        optional: true
-      '@upstash/redis':
-        optional: true
-      '@vercel/postgres':
-        optional: true
-      '@xata.io/client':
-        optional: true
-      arktype:
-        optional: true
-      better-sqlite3:
-        optional: true
-      bun-types:
-        optional: true
-      expo-sqlite:
-        optional: true
-      gel:
-        optional: true
-      mysql2:
-        optional: true
-      pg:
-        optional: true
-      postgres:
-        optional: true
-      sql.js:
-        optional: true
-      sqlite3:
-        optional: true
-      typebox:
-        optional: true
-      valibot:
-        optional: true
-      zod:
-        optional: true
-
   dtrace-provider@0.8.8:
     resolution: {integrity: sha512-b7Z7cNtHPhH9EJhNNbbeqTcXB8LGFFZhq1PGgEvpeHlzd36bhbdTWoE/Ba/YguqpBSlAPKnARWhVlhunCMwfxg==}
     engines: {node: '>=0.10'}
@@ -6146,9 +6140,6 @@ packages:
 
   ecc-jsbn@0.1.2:
     resolution: {integrity: sha512-eh9O+hwRHNbG4BLTjEl3nw044CkGm5X6LoaCf7LPp7UU8Qrt47JYNi6nPX8xjW97TKGKm1ouctg0QSpZe9qrnw==}
-
-  ecdsa-sig-formatter@1.0.11:
-    resolution: {integrity: sha512-nagl3RYrbNv6kQkeJIpt6NJZy8twLB/2vtz6yN9Z4vRKHN4/QZJIEbqohALSgwKdnksuY3k5Addp5lg8sVoVcQ==}
 
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
@@ -6511,10 +6502,6 @@ packages:
     resolution: {integrity: sha512-+I6B/IkJc1o/2tiURyz/ivu/O0nKNEArIUB5O7zBrlDVJr22SCLH3xTeEry428LvFhRzIA1g8izguxJ/gbNcVQ==}
     engines: {node: '>= 0.8.0'}
 
-  expand-template@2.0.3:
-    resolution: {integrity: sha512-XYfuKMvj4O35f/pOXLObndIRvyQ+/+6AhODh+OKWj9S9498pHHn/IMszH+gt0fBCRWMNfk1ZSp5x3AifmnI2vg==}
-    engines: {node: '>=6'}
-
   expand-tilde@2.0.2:
     resolution: {integrity: sha512-A5EmesHW6rfnZ9ysHQjPdJRni0SRar0tjtG5MNtm9n5TUvsYU8oozprtRD4AqHxcZWWlVuAmQo2nWKfN9oyjTw==}
     engines: {node: '>=0.10.0'}
@@ -6685,9 +6672,6 @@ packages:
     resolution: {integrity: sha512-BfHZtG/l9iMm4Ecianu7P8HRD2tBHLtjXinm4X62XBOYzi7CYA7jyqfJzOvXHqzVrVPYqBo2/GvbARMaaJkKVg==}
     engines: {node: '>=18'}
 
-  file-uri-to-path@1.0.0:
-    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
-
   filelist@1.0.6:
     resolution: {integrity: sha512-5giy2PkLYY1cP39p17Ech+2xlpTRL9HLspOfEgm0L6CwBXBTgsK5ou0JtzYuepxkaQ/tvhCFIJ5uXo0OrM2DxA==}
 
@@ -6789,6 +6773,9 @@ packages:
     resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
     engines: {node: '>= 6'}
 
+  forwarded-parse@2.1.2:
+    resolution: {integrity: sha512-alTFZZQDKMporBH77856pXgzhEzaUVmLCDk+egLgIgHst3Tpndzz8MnKe+GzRJRfvVdn69HhpW7cmXzvtLvJAw==}
+
   forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
@@ -6855,6 +6842,9 @@ packages:
     resolution: {integrity: sha512-2Sp1hWuO8m5fqeFDusyhKqYPT+7rGLw34N3qonDcdRP8+n7M7Gl/yKp/q7oCxnnJ6pWCectOmLFJpsMU/++KrQ==}
     engines: {node: '>=8.3.0'}
 
+  generate-function@2.3.1:
+    resolution: {integrity: sha512-eeB5GfMNeevm/GRYq20ShmsaGcmI81kIX2K9XQx5miC8KdHaC6Jm0qQ8ZNeGOi7wYB8OsdxKs+Y2oVuTFuVwKQ==}
+
   generator-function@2.0.1:
     resolution: {integrity: sha512-SFdFmIJi+ybC0vjlHN0ZGVGHc3lgE0DxPAT0djjVg+kjOnSqclqmj0KQ7ykTOLP6YxoqOvuAODGdcHJn+43q3g==}
     engines: {node: '>= 0.4'}
@@ -6907,9 +6897,6 @@ packages:
 
   getpass@0.1.7:
     resolution: {integrity: sha512-0fzj9JxOLfJ+XGLhR8ze3unN0KZCgZwiSSDz168VERjK8Wl8kVSdcu2kspd4s4wtAa1y/qrVRiAA0WclVsu0ng==}
-
-  github-from-package@0.0.0:
-    resolution: {integrity: sha512-SyHy3T1v2NUXn29OsWdxmK6RwHD+vkj3v8en8AOBZ1wBQ/hCAQ5bAQTD02kW4W9tUp/3Qh6J8r9EvntiyCmOOw==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -7235,6 +7222,9 @@ packages:
     resolution: {integrity: sha512-TR3KfrTZTYLPB6jUjfx6MF9WcWrHL9su5TObK4ZkYgBdWKPOFoSoQIdEuTuR82pmtxH2spWG9h6etwfr1pLBqQ==}
     engines: {node: '>=6'}
 
+  import-in-the-middle@1.15.0:
+    resolution: {integrity: sha512-bpQy+CrsRmYmoPMAE/0G33iwRqwW4ouqdRg8jgbH3aKuCtOc8lxgmYXg2dMM92CRiGP660EtBcymH/eVUpCSaA==}
+
   import-local@3.2.0:
     resolution: {integrity: sha512-2SPlun1JUPWoM6t3F0dw0FkCF/jWY8kttcY4f599GLTSjh2OCuuhdTkJQsEcZzBqbXZGKMK2OqW1oZsjtf/gQA==}
     engines: {node: '>=8'}
@@ -7419,6 +7409,9 @@ packages:
 
   is-potential-custom-element-name@1.0.1:
     resolution: {integrity: sha512-bCYeRA2rVibKZd+s2625gGnGF/t7DSqDs4dP7CrLA1m7jKWz6pps0LpYLJN8Q64HtmPKJ1hrN3nzPNKFEKOUiQ==}
+
+  is-property@1.0.2:
+    resolution: {integrity: sha512-Ks/IoX00TtClbGQr4TWXemAnktAQvYB7HzcCxDGqEZU6oCmb2INHuOoKxbtR+HFkmYWBKv/dOZtGRiAjDhj92g==}
 
   is-reference@1.2.1:
     resolution: {integrity: sha512-U82MsXXiFIrjCK4otLT+o2NA2Cd2g5MLoOVXUZjIOhLurrRxpEXzI8O0KZHr3IjLvlAH1kTPYSuqer5T9ZVBKQ==}
@@ -7755,9 +7748,6 @@ packages:
     resolution: {integrity: sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==}
     hasBin: true
 
-  js-md4@0.3.2:
-    resolution: {integrity: sha512-/GDnfQYsltsjRswQhN9fhv3EMw2sCpUdrdxyWDOUK7eyD++r3gRhzgiQgc/x4MAv2i1iuQ4lxO5mvqM3vj4bwA==}
-
   js-message@1.0.7:
     resolution: {integrity: sha512-efJLHhLjIyKRewNS9EGZ4UpI8NguuL6fKkhRxVuMmrGV2xN/0APGdQYwLFky5w9naebSZ0OwAGp0G6/2Cg90rA==}
     engines: {node: '>=0.6.0'}
@@ -7776,9 +7766,6 @@ packages:
   js-yaml@4.1.1:
     resolution: {integrity: sha512-qQKT4zQxXl8lLwBtHMWwaTcGfFOZviOJet3Oy/xmGk2gZH677CJM9EvtfdSkgWcATZhj/55JZ0rmy3myCT5lsA==}
     hasBin: true
-
-  jsbi@4.3.2:
-    resolution: {integrity: sha512-9fqMSQbhJykSeii05nxKl4m6Eqn2P6rOlYiS+C5Dr/HPIU/7yZxu5qzbs40tgaFORiw2Amd0mirjxatXYMkIew==}
 
   jsbn@0.1.1:
     resolution: {integrity: sha512-UVU9dibq2JcFWxQPA6KCqj5O42VOmAY3zQUfEKxU0KpTGXwNoCjkX1e13eHNvw/xPynt6pU0rZ1htjWTNTSXsg==}
@@ -7860,10 +7847,6 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  jsonwebtoken@9.0.3:
-    resolution: {integrity: sha512-MT/xP0CrubFRNLNKvxJ2BYfy53Zkm++5bX9dtuPbqAeQpTVe0MQTFhao8+Cp//EmJp244xt6Drw/GVEGCUj40g==}
-    engines: {node: '>=12', npm: '>=6'}
-
   jsprim@2.0.2:
     resolution: {integrity: sha512-gqXddjPqQ6G40VdnI6T6yObEC+pDNvyP95wdQhkWkg7crHH3km5qP1FsOXEkzEQwnz6gz5qGTn1c2Y52wP3OyQ==}
     engines: {'0': node >=0.6.0}
@@ -7871,12 +7854,6 @@ packages:
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
-
-  jwa@2.0.1:
-    resolution: {integrity: sha512-hRF04fqJIP8Abbkq5NKGN0Bbr3JxlQ+qhZufXVr0DvujKy93ZCbXZMHDL4EOtodSbCWxOqR8MS1tXA5hwqCXDg==}
-
-  jws@4.0.1:
-    resolution: {integrity: sha512-EKI/M/yqPncGUUh44xz0PxSidXFr/+r0pA70+gIYhjv+et7yxM+s29Y+VGDkovRofQem0fs7Uvf4+YmAdyRduA==}
 
   keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
@@ -8089,29 +8066,11 @@ packages:
   lodash.groupby@4.6.0:
     resolution: {integrity: sha512-5dcWxm23+VAoz+awKmBaiBvzox8+RqMgFhi7UvX9DHZr2HdxHXM/Wrf8cfKpsW37RNrvtPn6hSwNqurSILbmJw==}
 
-  lodash.includes@4.3.0:
-    resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
-
-  lodash.isboolean@3.0.3:
-    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
-
   lodash.isfunction@3.0.9:
     resolution: {integrity: sha512-AirXNj15uRIMMPihnkInB4i3NHeb4iBtNg9WRWuK2o31S+ePwwNmDPaTL3o7dTJ+VXNZim7rFs4rxN4YU1oUJw==}
 
-  lodash.isinteger@4.0.4:
-    resolution: {integrity: sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==}
-
   lodash.isnil@4.0.0:
     resolution: {integrity: sha512-up2Mzq3545mwVnMhTDMdfoG1OurpA/s5t88JmQX809eH3C8491iu2sfKhTfhQtKY78oPNhiaHJUpT/dUDAAtng==}
-
-  lodash.isnumber@3.0.3:
-    resolution: {integrity: sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==}
-
-  lodash.isplainobject@4.0.6:
-    resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
-
-  lodash.isstring@4.0.1:
-    resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
 
   lodash.isundefined@3.0.1:
     resolution: {integrity: sha512-MXB1is3s899/cD8jheYYE2V9qTHwKvt+npCwpD+1Sxm3Q3cECXCiYHjeHWXNwr6Q0SOBPrYUDxendrO6goVTEA==}
@@ -8188,6 +8147,10 @@ packages:
   lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
     engines: {node: '>=12'}
+
+  lru.min@1.1.4:
+    resolution: {integrity: sha512-DqC6n3QQ77zdFpCMASA1a3Jlb64Hv2N2DciFGkO/4L9+q/IpIAuRlKOvCXabtRW6cQf8usbmM6BE/TOPysCdIA==}
+    engines: {bun: '>=1.0.0', deno: '>=1.30.0', node: '>=8.0.0'}
 
   luxon@3.7.2:
     resolution: {integrity: sha512-vtEhXh/gNjI9Yg1u4jX/0YVPMvxzHuGgCm6tC5kZyb08yjGWGnqAjGJvcXbqQR2P3MyMEFnRbpcdFS6PBcLqew==}
@@ -8463,9 +8426,6 @@ packages:
     resolution: {integrity: sha512-KZxYo1BUkWD2TVFLr0MQoM8vUUigWD3LlD83a/75BqC+4qE0Hb1Vo5v1FgcfaNXvfXzr+5EhQ6ing/CaBijTlw==}
     engines: {node: '>= 18'}
 
-  mkdirp-classic@0.5.3:
-    resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
-
   mkdirp@0.5.6:
     resolution: {integrity: sha512-FP+p8RB8OWpF3YZBCrP5gtADmtXApB5AMLn+vdyA+PyxCjrCs00mjyUozssO33cwDeT3wNGdLxJ5M//YqtHAJw==}
     hasBin: true
@@ -8474,6 +8434,9 @@ packages:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
     hasBin: true
+
+  module-details-from-path@1.0.4:
+    resolution: {integrity: sha512-EGWKgxALGMgzvxYF1UyGTy0HXX/2vHLkw6+NvDKW2jypWbHpjQuj4UMcqQWXHERJhVGKikolT06G3bcKe4fi7w==}
 
   moment@2.30.1:
     resolution: {integrity: sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==}
@@ -8492,13 +8455,8 @@ packages:
     resolution: {integrity: sha512-P0efT1C9jIdVRefqjzOQ9Xml57zpOXnIuS+csaB4MdZbTdmGDLo8XhzBG1N7aO11gKDDkJvBLULeFTo46wwreA==}
     hasBin: true
 
-  msgpackr@1.11.8:
-    resolution: {integrity: sha512-bC4UGzHhVvgDNS7kn9tV8fAucIYUBuGojcaLiz7v+P63Lmtm0Xeji8B/8tYKddALXxJLpwIeBmUN3u64C4YkRA==}
-
-  mssql@11.0.1:
-    resolution: {integrity: sha512-KlGNsugoT90enKlR8/G36H0kTxPthDhmtNUCwEHvgRza5Cjpjoj+P2X6eMpFUDN7pFrJZsKadL4x990G8RBE1w==}
-    engines: {node: '>=18'}
-    hasBin: true
+  msgpackr@1.11.9:
+    resolution: {integrity: sha512-FkoAAyyA6HM8wL882EcEyFZ9s7hVADSwG9xrVx3dxxNQAtgADTrJoEWivID82Iv1zWDsv/OtbrrcZAzGzOMdNw==}
 
   multi-sort-stream@1.0.4:
     resolution: {integrity: sha512-hAZ8JOEQFbgdLe8HWZbb7gdZg0/yAIHF00Qfo3kd0rXFv96nXe+/bPTrKHZ2QMHugGX4FiAyET1Lt+jiB+7Qlg==}
@@ -8517,8 +8475,18 @@ packages:
     resolution: {integrity: sha512-at/ZndSy3xEGJ8i0ygALh8ru9qy7gWW1cmkaqBN29JmMlIvM//MEO9y1sk/avxuwnPcfhkejkLsuPxH81BrkSg==}
     engines: {node: '>=0.8.0'}
 
+  mysql2@3.20.0:
+    resolution: {integrity: sha512-eCLUs7BNbgA6nf/MZXsaBO1SfGs0LtLVrJD3WeWq+jPLDWkSufTD+aGMwykfUVPdZnblaUK1a8G/P63cl9FkKg==}
+    engines: {node: '>= 8.0'}
+    peerDependencies:
+      '@types/node': '>= 8'
+
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
+
+  named-placeholders@1.1.6:
+    resolution: {integrity: sha512-Tz09sEL2EEuv5fFowm419c1+a/jSMiBjI9gHxVLrVdbUkkNUUfjsVYs9pVZu5oCon/kmRh9TfLEObFtkVxmY0w==}
+    engines: {node: '>=8.0.0'}
 
   nan@2.25.0:
     resolution: {integrity: sha512-0M90Ag7Xn5KMLLZ7zliPWP3rT90P6PN+IzVFS0VqmnPktBk3700xUVv8Ikm9EUaUE5SDWdp/BIxdENzVznpm1g==}
@@ -8528,16 +8496,10 @@ packages:
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  napi-build-utils@2.0.0:
-    resolution: {integrity: sha512-GEbrYkbfF7MoNaoh2iGG84Mnf/WZfB0GdGEsM8wz7Expx/LlWf5U8t9nvJKXSp3qr5IsEbK04cBGhol/KwOsWA==}
-
   napi-postinstall@0.3.4:
     resolution: {integrity: sha512-PHI5f1O0EP5xJ9gQmFGMS6IZcrVvTjpXjz7Na41gTE7eE2hK11lg04CECCYEEjdc17EV4DO+fkGEtt7TpTaTiQ==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
     hasBin: true
-
-  native-duplexpair@1.0.0:
-    resolution: {integrity: sha512-E7QQoM+3jvNtlmyfqRZ0/U75VFgCls+fSkbml2MpgWkWyz3ox8Y58gNhfuziuQYGNNQAbFZJQck55LHCnCK6CA==}
 
   natural-compare@1.4.0:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
@@ -8575,10 +8537,6 @@ packages:
 
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
-
-  node-abi@3.89.0:
-    resolution: {integrity: sha512-6u9UwL0HlAl21+agMN3YAMXcKByMqwGx+pq+P76vii5f7hTPtKDp08/H9py6DY+cfDw7kQNTGEj/rly3IgbNQA==}
-    engines: {node: '>=10'}
 
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
@@ -8913,6 +8871,56 @@ packages:
   performance-now@2.1.0:
     resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
 
+  pg-cloudflare@1.3.0:
+    resolution: {integrity: sha512-6lswVVSztmHiRtD6I8hw4qP/nDm1EJbKMRhf3HCYaqud7frGysPv7FYJ5noZQdhQtN2xJnimfMtvQq21pdbzyQ==}
+
+  pg-connection-string@2.12.0:
+    resolution: {integrity: sha512-U7qg+bpswf3Cs5xLzRqbXbQl85ng0mfSV/J0nnA31MCLgvEaAo7CIhmeyrmJpOr7o+zm0rXK+hNnT5l9RHkCkQ==}
+
+  pg-connection-string@2.9.1:
+    resolution: {integrity: sha512-nkc6NpDcvPVpZXxrreI/FOtX3XemeLl8E0qFr6F2Lrm/I8WOnaWNhIPK2Z7OHpw7gh5XJThi6j6ppgNoaT1w4w==}
+
+  pg-cursor@2.19.0:
+    resolution: {integrity: sha512-J5cF1MUz7LRJ9emOqF/06QjabMHMZy587rSPF0UuA8rCwKeeYl2co8Pp+6k5UU9YrAYHMzWkLxilfZB0hqsWWw==}
+    peerDependencies:
+      pg: ^8
+
+  pg-int8@1.0.1:
+    resolution: {integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==}
+    engines: {node: '>=4.0.0'}
+
+  pg-numeric@1.0.2:
+    resolution: {integrity: sha512-BM/Thnrw5jm2kKLE5uJkXqqExRUY/toLHda65XgFTBTFYZyopbKjBe29Ii3RbkvlsMoFwD+tHeGaCjjv0gHlyw==}
+    engines: {node: '>=4'}
+
+  pg-pool@3.13.0:
+    resolution: {integrity: sha512-gB+R+Xud1gLFuRD/QgOIgGOBE2KCQPaPwkzBBGC9oG69pHTkhQeIuejVIk3/cnDyX39av2AxomQiyPT13WKHQA==}
+    peerDependencies:
+      pg: '>=8.0'
+
+  pg-protocol@1.13.0:
+    resolution: {integrity: sha512-zzdvXfS6v89r6v7OcFCHfHlyG/wvry1ALxZo4LqgUoy7W9xhBDMaqOuMiF3qEV45VqsN6rdlcehHrfDtlCPc8w==}
+
+  pg-types@2.2.0:
+    resolution: {integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==}
+    engines: {node: '>=4'}
+
+  pg-types@4.1.0:
+    resolution: {integrity: sha512-o2XFanIMy/3+mThw69O8d4n1E5zsLhdO+OPqswezu7Z5ekP4hYDqlDjlmOpYMbzY2Br0ufCwJLdDIXeNVwcWFg==}
+    engines: {node: '>=10'}
+
+  pg@8.20.0:
+    resolution: {integrity: sha512-ldhMxz2r8fl/6QkXnBD3CR9/xg694oT6DZQ2s6c/RI28OjtSOpxnPrUCGOBJ46RCUxcWdx3p6kw/xnDHjKvaRA==}
+    engines: {node: '>= 16.0.0'}
+    peerDependencies:
+      pg-native: '>=3.0.1'
+    peerDependenciesMeta:
+      pg-native:
+        optional: true
+
+  pgpass@1.0.5:
+    resolution: {integrity: sha512-FdW9r/jQZhSeohs1Z3sI1yxFQNFvMcnmfuj4WBMUTxOrAyLMaTcE1aAMBiTlbMNaXvBCQuVi0R7hd8udDSP7ug==}
+
   phasic@1.0.2:
     resolution: {integrity: sha512-w6SMgis3+3YriNWQY/uvZxujRVdNH5G9vi6I9xROKjzOUEQmRFa1QGMXCZ4Riu9EgNrI5plPncfqAY57JaCDuQ==}
 
@@ -9071,24 +9079,40 @@ packages:
     resolution: {integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postgres@3.4.8:
-    resolution: {integrity: sha512-d+JFcLM17njZaOLkv6SCev7uoLaBtfK86vMUXhW1Z4glPWh4jozno9APvW/XKFJ3CCxVoC7OL38BqRydtu5nGg==}
+  postgres-array@2.0.0:
+    resolution: {integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==}
+    engines: {node: '>=4'}
+
+  postgres-array@3.0.4:
+    resolution: {integrity: sha512-nAUSGfSDGOaOAEGwqsRY27GPOea7CNipJPOA7lPbdEpx5Kg3qzdP0AaWC5MlhTWV9s4hFX39nomVZ+C4tnGOJQ==}
     engines: {node: '>=12'}
 
-  posthog-node@5.28.1:
-    resolution: {integrity: sha512-dfUaeNwKc/YZI/vbP5IJSMuMprPLbtzWM/ZQFkuyWj0fhU3PW0VmxNO1gkqy48SsUauamczEPBKTQRYZVLcacg==}
-    engines: {node: ^20.20.0 || >=22.22.0}
-    peerDependencies:
-      rxjs: ^7.0.0
-    peerDependenciesMeta:
-      rxjs:
-        optional: true
+  postgres-bytea@1.0.1:
+    resolution: {integrity: sha512-5+5HqXnsZPE65IJZSMkZtURARZelel2oXUEO8rH83VS/hxH5vv1uHquPg5wZs8yMAfdv971IU+kcPUczi7NVBQ==}
+    engines: {node: '>=0.10.0'}
 
-  prebuild-install@7.1.3:
-    resolution: {integrity: sha512-8Mf2cbV7x1cXPUILADGI3wuhfqWvtiLA1iclTDbFRZkgRQS0NqsPZphna9V+HyTEadheuPmjaJMsbzKQFOzLug==}
-    engines: {node: '>=10'}
-    deprecated: No longer maintained. Please contact the author of the relevant native addon; alternatives are available.
-    hasBin: true
+  postgres-bytea@3.0.0:
+    resolution: {integrity: sha512-CNd4jim9RFPkObHSjVHlVrxoVQXz7quwNFpz7RY1okNNme49+sVyiTvTRobiLV548Hx/hb1BG+iE7h9493WzFw==}
+    engines: {node: '>= 6'}
+
+  postgres-date@1.0.7:
+    resolution: {integrity: sha512-suDmjLVQg78nMK2UZ454hAG+OAW+HQPZ6n++TNDUX+L0+uUlLywnoxJKDou51Zm+zTCjrCl0Nq6J9C5hP9vK/Q==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-date@2.1.0:
+    resolution: {integrity: sha512-K7Juri8gtgXVcDfZttFKVmhglp7epKb1K4pgrkLxehjqkrgPhfG6OO8LHLkfaqkbpjNRnra018XwAr1yQFWGcA==}
+    engines: {node: '>=12'}
+
+  postgres-interval@1.2.0:
+    resolution: {integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==}
+    engines: {node: '>=0.10.0'}
+
+  postgres-interval@3.0.0:
+    resolution: {integrity: sha512-BSNDnbyZCXSxgA+1f5UU2GmwhoI0aU5yMxRGO8CdFEcY2BQF9xm/7MqKnYoM1nJDk8nONNWDk9WeSmePFhQdlw==}
+    engines: {node: '>=12'}
+
+  postgres-range@1.1.4:
+    resolution: {integrity: sha512-i/hbxIE9803Alj/6ytL7UHQxRvZkI9O4Sy+J3HGc4F4oo/2eQAjTSNJ0bfxyse3bH0nuVesCk+3IRLaMtG3H6w==}
 
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -9286,10 +9310,6 @@ packages:
     resolution: {integrity: sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==}
     engines: {node: '>= 6'}
 
-  readable-stream@4.7.0:
-    resolution: {integrity: sha512-oIGGmcpTLwPga8Bn6/Z75SVaH1z5dUut2ibSyAMVhmUggWpmDn2dapB0n7f8nwaSiRtepAsfJyfXIO5DCVAODg==}
-    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-
   readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
@@ -9337,6 +9357,10 @@ packages:
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+
+  require-in-the-middle@7.5.2:
+    resolution: {integrity: sha512-gAZ+kLqBdHarXB64XpAe2VCjB7rIRv+mU8tfRWziHRJ5umKsIHN2tLLv6EtMw7WCdP19S0ERVMldNvxYCHnhSQ==}
+    engines: {node: '>=8.6.0'}
 
   requireg@0.2.2:
     resolution: {integrity: sha512-nYzyjnFcPNGR3lx9lwPPPnuQxv6JWEZd2Ci0u9opN7N5zUEPIhY/GbL3vMGOr2UXwEg9WwSyV9X9Y/kLFgPsOg==}
@@ -9726,6 +9750,9 @@ packages:
     resolution: {integrity: sha512-ObmnIF4hXNg1BqhnHmgbDETF8dLPCggZWBjkQfhZpbszZnYur5DUljTcCHii5LC3J5E0yeO/1LIMyH+UvHQgyw==}
     engines: {node: '>= 0.4'}
 
+  shimmer@1.2.1:
+    resolution: {integrity: sha512-sQTKC1Re/rM6XyFM6fIAGHRPVGvyXfgzIDvzoq608vM+jeyVD0Tu1E6Np0Kc2zAIFWIj963V2800iF/9LPieQw==}
+
   side-channel-list@1.0.0:
     resolution: {integrity: sha512-FCLHtRD/gnpCiCHEiJLOwdmFP+wzCmDEkc9y7NsYxeF4u7Btsn1ZuwgwJGxImImHicJArLP4R0yX4c2KCrMrTA==}
     engines: {node: '>= 0.4'}
@@ -9751,12 +9778,6 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
-
-  simple-concat@1.0.1:
-    resolution: {integrity: sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==}
-
-  simple-get@4.0.1:
-    resolution: {integrity: sha512-brv7p5WgH0jmQJr1ZDDfKDOSeWWg+OVypG99A/5vYGPqJ6pxiaHLy8nxtFjBA7oMa01ebA9gfh1uMCFqOuXxvA==}
 
   simple-plist@1.3.1:
     resolution: {integrity: sha512-iMSw5i0XseMnrhtIzRb7XpQEXepa9xhWxGUojHBL43SIpQuDQkh3Wpy67ZbDzZVr6EKxvwVChnVpdl8hEVLDiw==}
@@ -9854,11 +9875,16 @@ packages:
     resolution: {integrity: sha512-r46gZQZQV+Kl9oItvl1JZZqJKGr+oEkB08A6BzkiR7593/7IbtuncXHd2YoYeTsG4157ZssMu9KYvUHLcjcDoA==}
     engines: {node: '>=6.0.0'}
 
+  split2@4.2.0:
+    resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
+    engines: {node: '>= 10.x'}
+
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
 
-  sprintf-js@1.1.3:
-    resolution: {integrity: sha512-Oo+0REFV59/rz3gfJNKQiBlwfHaSESl1pcGyABQsnnIfWOFt6JNj5gCog2U6MLZ//IGYD+nA8nI+mTShREReaA==}
+  sql-escaper@1.3.3:
+    resolution: {integrity: sha512-BsTCV265VpTp8tm1wyIm1xqQCS+Q9NHx2Sr+WcnUrgLrQ6yiDIvHYJV5gHxsj1lMBy2zm5twLaZao8Jd+S8JJw==}
+    engines: {bun: '>=1.0.0', deno: '>=2.0.0', node: '>=12.0.0'}
 
   sshpk@1.18.0:
     resolution: {integrity: sha512-2p2KJZTSqQ/I3+HX42EpYOa2l3f8Erv8MWKsy2I9uf4wA7yFIkXRffYdsx86y6z4vHtV8u7g+pPlr8/4ouAxsQ==}
@@ -10086,9 +10112,6 @@ packages:
     resolution: {integrity: sha512-g9ljZiwki/LfxmQADO3dEY1CbpmXT5Hm2fJ+QaGKwSXUylMybePR7/67YW7jOrrvjEgL1Fmz5kzyAjWVWLlucg==}
     engines: {node: '>=6'}
 
-  tar-fs@2.1.4:
-    resolution: {integrity: sha512-mDAjwmZdh7LTT6pNleZ05Yt65HC3E+NiQzl672vQG38jIrehtJk/J3mNwIg+vShQPcLF/LV7CMnDW6vjj6sfYQ==}
-
   tar-stream@2.2.0:
     resolution: {integrity: sha512-ujeqbceABgwMZxEJnk2HDY2DlnUZ+9oEcb1KzTVfYHio0UE6dG71n60d8D2I4qNvleWrrXpmjpt7vZeF1LnMZQ==}
     engines: {node: '>=6'}
@@ -10099,18 +10122,6 @@ packages:
   tar@7.5.10:
     resolution: {integrity: sha512-8mOPs1//5q/rlkNSPcCegA6hiHJYDmSLEI8aMH/CdSQJNWztHC9WHNam5zdQlfpTwB9Xp7IBEsHfV5LKMJGVAw==}
     engines: {node: '>=18'}
-
-  tarn@3.0.2:
-    resolution: {integrity: sha512-51LAVKUSZSVfI05vjPESNc5vwqqZpbXCsU+/+wxlOrUjk2SnFTt97v9ZgQrD4YmxYW1Px6w2KjaDitCfkvgxMQ==}
-    engines: {node: '>=8.0.0'}
-
-  tedious@18.6.2:
-    resolution: {integrity: sha512-g7jC56o3MzLkE3lHkaFe2ZdOVFBahq5bsB60/M4NYUbocw/MCrS89IOEQUFr+ba6pb8ZHczZ/VqCyYeYq0xBAg==}
-    engines: {node: '>=18'}
-
-  tedious@19.2.1:
-    resolution: {integrity: sha512-pk1Q16Yl62iocuQB+RWbg6rFUFkIyzqOFQ6NfysCltRvQqKwfurgj8v/f2X+CKvDhSL4IJ0cCOfCHDg9PWEEYA==}
-    engines: {node: '>=18.17'}
 
   teex@1.0.1:
     resolution: {integrity: sha512-eYE6iEI62Ni1H8oIa7KlDU6uQBtqr4Eajni3wX7rpfXD8ysFx8z0+dri+KWEPWpBsxXfxu58x/0jvTVT1ekOSg==}
@@ -10388,9 +10399,6 @@ packages:
     resolution: {integrity: sha512-3KS2b+kL7fsuk/eJZ7EQdnEmQoaho/r6KUef7hxvltNA5DR8NAUM+8wJMbJyZ4G9/7i3v5zPBIMN5aybAh2/Jg==}
     engines: {node: '>= 0.4'}
 
-  typeid-js@1.2.0:
-    resolution: {integrity: sha512-t76ZucAnvGC60ea/HjVsB0TSoB0cw9yjnfurUgtInXQWUI/VcrlZGpO23KN3iSe8yOGUgb1zr7W7uEzJ3hSljA==}
-
   typescript-eslint@8.56.1:
     resolution: {integrity: sha512-U4lM6pjmBX7J5wk4szltF7I1cGBHXZopnAXCMXb3+fZ3B/0Z3hq3wS/CCUB2NZBNAExK92mCU2tEohWuwVMsDQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -10501,10 +10509,6 @@ packages:
   utils-merge@1.0.1:
     resolution: {integrity: sha512-pMZTvIkT1d+TFGvDOqodOclx0QWkkgi6Tdoa8gC8ffGAAqz9pzPTZWAybbsHHoED/ztMtkv/VoYTYyShUn81hA==}
     engines: {node: '>= 0.4.0'}
-
-  uuid@10.0.0:
-    resolution: {integrity: sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==}
-    hasBin: true
 
   uuid@11.1.0:
     resolution: {integrity: sha512-0/A9rDy9P7cJ+8w1c9WD9V//9Wj15Ce2MPz8Ri6032usz+NfePxx5AcN3bN+r6ZL6jEo066/yNYB3tn4pQEx+A==}
@@ -10908,6 +10912,10 @@ packages:
     resolution: {integrity: sha512-rxMJhSIoiO8vXcWvSifKqhvV96GjiD5wYb8/QHdoRyQvraTpp4IEv944nhGausZZ3u7dhQXteZuZbaqfpB7uYw==}
     engines: {node: '>=0.6.0'}
 
+  xtend@4.0.2:
+    resolution: {integrity: sha512-LKYU1iAXJXUgAXn9URjiu+MWhyUXHsvfp7mcuYm9dSUKK0/CjtrUwFAxD82/mCWbtLsGjFIad0wIsod4zrTAEQ==}
+    engines: {node: '>=0.4'}
+
   y18n@5.0.8:
     resolution: {integrity: sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==}
     engines: {node: '>=10'}
@@ -10990,150 +10998,6 @@ snapshots:
       '@csstools/css-tokenizer': 3.0.4
       lru-cache: 10.4.3
     optional: true
-
-  '@azure-rest/core-client@2.5.1':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
-      '@azure/core-tracing': 1.3.1
-      '@typespec/ts-http-runtime': 0.3.4
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/abort-controller@2.1.2':
-    dependencies:
-      tslib: 2.8.1
-
-  '@azure/core-auth@1.10.1':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-util': 1.13.1
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/core-client@1.10.1':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
-      '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/core-http-compat@2.3.2(@azure/core-client@1.10.1)(@azure/core-rest-pipeline@1.23.0)':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-client': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
-
-  '@azure/core-lro@2.7.2':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/core-paging@1.6.2':
-    dependencies:
-      tslib: 2.8.1
-
-  '@azure/core-rest-pipeline@1.23.0':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
-      '@typespec/ts-http-runtime': 0.3.4
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/core-tracing@1.3.1':
-    dependencies:
-      tslib: 2.8.1
-
-  '@azure/core-util@1.13.1':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@typespec/ts-http-runtime': 0.3.4
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/identity@4.13.0':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-client': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
-      '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
-      '@azure/msal-browser': 4.29.0
-      '@azure/msal-node': 3.8.8
-      open: 10.2.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/keyvault-common@2.0.0':
-    dependencies:
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-client': 1.10.1
-      '@azure/core-rest-pipeline': 1.23.0
-      '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/logger': 1.3.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/keyvault-keys@4.10.0(@azure/core-client@1.10.1)':
-    dependencies:
-      '@azure-rest/core-client': 2.5.1
-      '@azure/abort-controller': 2.1.2
-      '@azure/core-auth': 1.10.1
-      '@azure/core-http-compat': 2.3.2(@azure/core-client@1.10.1)(@azure/core-rest-pipeline@1.23.0)
-      '@azure/core-lro': 2.7.2
-      '@azure/core-paging': 1.6.2
-      '@azure/core-rest-pipeline': 1.23.0
-      '@azure/core-tracing': 1.3.1
-      '@azure/core-util': 1.13.1
-      '@azure/keyvault-common': 2.0.0
-      '@azure/logger': 1.3.0
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - '@azure/core-client'
-      - supports-color
-
-  '@azure/logger@1.3.0':
-    dependencies:
-      '@typespec/ts-http-runtime': 0.3.4
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
-
-  '@azure/msal-browser@4.29.0':
-    dependencies:
-      '@azure/msal-common': 15.15.0
-
-  '@azure/msal-common@15.15.0': {}
-
-  '@azure/msal-node@3.8.8':
-    dependencies:
-      '@azure/msal-common': 15.15.0
-      jsonwebtoken: 9.0.3
-      uuid: 8.3.2
 
   '@babel/code-frame@7.10.4':
     dependencies:
@@ -12087,14 +11951,21 @@ snapshots:
 
   '@drizzle-team/brocli@0.10.2': {}
 
-  '@drizzle-team/brocli@0.11.0': {}
-
   '@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)':
     dependencies:
       '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow': 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      kubernetes-types: 1.30.0
+
+  '@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e)':
+    dependencies:
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/workflow': 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       kubernetes-types: 1.30.0
 
@@ -12119,21 +11990,60 @@ snapshots:
       '@opentelemetry/semantic-conventions': 1.40.0
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
-  '@effect/platform-node-shared@0.23.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+  '@effect/platform-node-shared@0.57.1(@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
+      '@effect/cluster': 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
       '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@parcel/watcher': 2.5.6
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       multipasta: 0.2.7
+      ws: 8.19.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
 
-  '@effect/platform-node@0.69.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+  '@effect/platform-node-shared@0.57.1(@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
+      '@effect/cluster': 0.56.4(rf7fihpfbe4ms373qswzqseh7e)
       '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/platform-node-shared': 0.23.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@parcel/watcher': 2.5.6
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      multipasta: 0.2.7
+      ws: 8.19.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@effect/platform-node@0.104.0(@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+    dependencies:
+      '@effect/cluster': 0.56.4(6adhocbgbua4rk4zmlwrzpyyjq)
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform-node-shared': 0.57.1(@effect/cluster@0.56.4(6adhocbgbua4rk4zmlwrzpyyjq))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       mime: 3.0.0
       undici: 7.22.0
-      ws: 8.18.0
+      ws: 8.19.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@effect/platform-node@0.104.0(@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+    dependencies:
+      '@effect/cluster': 0.56.4(rf7fihpfbe4ms373qswzqseh7e)
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform-node-shared': 0.57.1(@effect/cluster@0.56.4(rf7fihpfbe4ms373qswzqseh7e))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      mime: 3.0.0
+      undici: 7.22.0
+      ws: 8.19.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -12142,30 +12052,44 @@ snapshots:
     dependencies:
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       find-my-way-ts: 0.1.6
-      msgpackr: 1.11.8
+      msgpackr: 1.11.9
       multipasta: 0.2.7
+
+  '@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+    dependencies:
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      msgpackr: 1.11.9
 
   '@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
       '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-      msgpackr: 1.11.8
+      msgpackr: 1.11.9
 
-  '@effect/sql-pg@0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+  '@effect/sql-mysql2@0.49.1(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@types/node@20.19.9)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
       '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/sql': 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@opentelemetry/semantic-conventions': 1.40.0
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
-      postgres: 3.4.8
+      mysql2: 3.20.0(@types/node@20.19.9)
+    transitivePeerDependencies:
+      - '@types/node'
 
-  '@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+  '@effect/sql-pg@0.49.7(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
       '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@opentelemetry/semantic-conventions': 1.40.0
+      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      pg: 8.20.0
+      pg-connection-string: 2.9.1
+      pg-cursor: 2.19.0(pg@8.20.0)
+      pg-pool: 3.13.0(pg@8.20.0)
+      pg-types: 4.1.0
+    transitivePeerDependencies:
+      - pg-native
 
   '@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
@@ -12178,6 +12102,13 @@ snapshots:
     dependencies:
       effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
       vitest: 2.1.9(@types/node@20.19.9)(jsdom@26.1.0)(less@4.5.1)(lightningcss@1.31.1)(sass-embedded@1.97.3)(sass@1.97.3)(terser@5.46.0)
+
+  '@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
+    dependencies:
+      '@effect/experimental': 0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/platform': 0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/rpc': 0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
 
   '@effect/workflow@0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.2(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))':
     dependencies:
@@ -13313,13 +13244,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@js-joda/core@5.7.0': {}
-
   '@js-sdsl/ordered-map@4.4.2': {}
-
-  '@js-temporal/polyfill@0.5.1':
-    dependencies:
-      jsbi: 4.3.2
 
   '@jsdevtools/ono@7.1.3': {}
 
@@ -14557,11 +14482,15 @@ snapshots:
     dependencies:
       '@opentelemetry/api': 1.9.0
 
-  '@opentelemetry/api-logs@0.213.0':
+  '@opentelemetry/api-logs@0.57.2':
     dependencies:
       '@opentelemetry/api': 1.9.0
 
   '@opentelemetry/api@1.9.0': {}
+
+  '@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
 
   '@opentelemetry/context-async-hooks@2.6.0(@opentelemetry/api@1.9.0)':
     dependencies:
@@ -14582,49 +14511,216 @@ snapshots:
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/semantic-conventions': 1.40.0
 
-  '@opentelemetry/exporter-logs-otlp-http@0.213.0(@opentelemetry/api@1.9.0)':
+  '@opentelemetry/instrumentation-amqplib@0.46.1(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@opentelemetry/api-logs': 0.213.0
-      '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-exporter-base': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-transformer': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-logs': 0.213.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
 
-  '@opentelemetry/exporter-metrics-otlp-http@0.213.0(@opentelemetry/api@1.9.0)':
+  '@opentelemetry/instrumentation-connect@0.43.1(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-exporter-base': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-transformer': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-metrics': 2.6.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@types/connect': 3.4.38
+    transitivePeerDependencies:
+      - supports-color
 
-  '@opentelemetry/exporter-trace-otlp-http@0.213.0(@opentelemetry/api@1.9.0)':
+  '@opentelemetry/instrumentation-dataloader@0.16.1(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-exporter-base': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-transformer': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-trace-base': 2.6.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
 
-  '@opentelemetry/otlp-exporter-base@0.213.0(@opentelemetry/api@1.9.0)':
+  '@opentelemetry/instrumentation-express@0.47.1(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/otlp-transformer': 0.213.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
 
-  '@opentelemetry/otlp-transformer@0.213.0(@opentelemetry/api@1.9.0)':
+  '@opentelemetry/instrumentation-fs@0.19.1(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
-      '@opentelemetry/api-logs': 0.213.0
-      '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-logs': 0.213.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-metrics': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/sdk-trace-base': 2.6.0(@opentelemetry/api@1.9.0)
-      protobufjs: 7.5.4
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-generic-pool@0.43.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-graphql@0.47.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-hapi@0.45.2(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-http@0.57.2(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.28.0
+      forwarded-parse: 2.1.2
+      semver: 7.7.4
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-ioredis@0.47.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/redis-common': 0.36.2
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-kafkajs@0.7.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-knex@0.44.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-koa@0.47.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-lru-memoizer@0.44.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-mongodb@0.52.0(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-mongoose@0.46.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-mysql2@0.45.2(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@opentelemetry/sql-common': 0.40.1(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-mysql@0.45.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@types/mysql': 2.15.26
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-pg@0.51.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@opentelemetry/sql-common': 0.40.1(@opentelemetry/api@1.9.0)
+      '@types/pg': 8.6.1
+      '@types/pg-pool': 2.0.6
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-redis-4@0.46.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/redis-common': 0.36.2
+      '@opentelemetry/semantic-conventions': 1.40.0
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-tedious@0.18.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@types/tedious': 4.0.14
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation-undici@0.10.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/instrumentation@0.57.2(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/api-logs': 0.57.2
+      '@types/shimmer': 1.2.0
+      import-in-the-middle: 1.15.0
+      require-in-the-middle: 7.5.2
+      semver: 7.7.4
+      shimmer: 1.2.1
+    transitivePeerDependencies:
+      - supports-color
+
+  '@opentelemetry/redis-common@0.36.2': {}
+
+  '@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.28.0
 
   '@opentelemetry/resources@2.0.1(@opentelemetry/api@1.9.0)':
     dependencies:
@@ -14645,19 +14741,18 @@ snapshots:
       '@opentelemetry/core': 2.0.1(@opentelemetry/api@1.9.0)
       '@opentelemetry/resources': 2.0.1(@opentelemetry/api@1.9.0)
 
-  '@opentelemetry/sdk-logs@0.213.0(@opentelemetry/api@1.9.0)':
-    dependencies:
-      '@opentelemetry/api': 1.9.0
-      '@opentelemetry/api-logs': 0.213.0
-      '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/resources': 2.6.0(@opentelemetry/api@1.9.0)
-      '@opentelemetry/semantic-conventions': 1.40.0
-
   '@opentelemetry/sdk-metrics@2.6.0(@opentelemetry/api@1.9.0)':
     dependencies:
       '@opentelemetry/api': 1.9.0
       '@opentelemetry/core': 2.6.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/resources': 2.6.0(@opentelemetry/api@1.9.0)
+
+  '@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.28.0
 
   '@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0)':
     dependencies:
@@ -14682,6 +14777,11 @@ snapshots:
   '@opentelemetry/semantic-conventions@1.28.0': {}
 
   '@opentelemetry/semantic-conventions@1.40.0': {}
+
+  '@opentelemetry/sql-common@0.40.1(@opentelemetry/api@1.9.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
 
   '@oxc-resolver/binding-android-arm-eabi@11.19.1':
     optional: true
@@ -14819,9 +14919,12 @@ snapshots:
 
   '@polka/url@1.0.0-next.29': {}
 
-  '@posthog/core@1.23.3':
+  '@prisma/instrumentation@6.11.1(@opentelemetry/api@1.9.0)':
     dependencies:
-      cross-spawn: 7.0.6
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+    transitivePeerDependencies:
+      - supports-color
 
   '@protobufjs/aspromise@1.1.2': {}
 
@@ -15071,7 +15174,7 @@ snapshots:
     dependencies:
       '@types/estree': 1.0.8
       estree-walker: 2.0.2
-      picomatch: 4.0.2
+      picomatch: 4.0.3
     optionalDependencies:
       rollup: 4.59.0
 
@@ -15286,6 +15389,79 @@ snapshots:
       react-refresh: 0.14.2
 
   '@rtsao/scc@1.1.0': {}
+
+  '@sentry/core@9.47.1': {}
+
+  '@sentry/node-core@9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.57.2(@opentelemetry/api@1.9.0))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/context-async-hooks': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-trace-base': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@sentry/core': 9.47.1
+      '@sentry/opentelemetry': 9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)
+      import-in-the-middle: 1.15.0
+
+  '@sentry/node@9.47.1':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/context-async-hooks': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-amqplib': 0.46.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-connect': 0.43.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-dataloader': 0.16.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-express': 0.47.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-fs': 0.19.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-generic-pool': 0.43.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-graphql': 0.47.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-hapi': 0.45.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-http': 0.57.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-ioredis': 0.47.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-kafkajs': 0.7.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-knex': 0.44.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-koa': 0.47.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-lru-memoizer': 0.44.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-mongodb': 0.52.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-mongoose': 0.46.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-mysql': 0.45.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-mysql2': 0.45.2(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-pg': 0.51.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-redis-4': 0.46.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-tedious': 0.18.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/instrumentation-undici': 0.10.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/resources': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-trace-base': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@prisma/instrumentation': 6.11.1(@opentelemetry/api@1.9.0)
+      '@sentry/core': 9.47.1
+      '@sentry/node-core': 9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/instrumentation@0.57.2(@opentelemetry/api@1.9.0))(@opentelemetry/resources@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)
+      '@sentry/opentelemetry': 9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)
+      import-in-the-middle: 1.15.0
+      minimatch: 9.0.9
+    transitivePeerDependencies:
+      - supports-color
+
+  '@sentry/opentelemetry@9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/context-async-hooks': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-trace-base': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@sentry/core': 9.47.1
+
+  '@sentry/opentelemetry@9.47.1(@opentelemetry/api@1.9.0)(@opentelemetry/context-async-hooks@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/core@1.30.1(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.6.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.40.0)':
+    dependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/context-async-hooks': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/core': 1.30.1(@opentelemetry/api@1.9.0)
+      '@opentelemetry/sdk-trace-base': 2.6.0(@opentelemetry/api@1.9.0)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      '@sentry/core': 9.47.1
 
   '@sinclair/typebox@0.27.10': {}
 
@@ -15548,8 +15724,6 @@ snapshots:
     dependencies:
       defer-to-connect: 2.0.1
 
-  '@tediousjs/connection-string@0.5.0': {}
-
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.29.0
@@ -15628,10 +15802,6 @@ snapshots:
   '@types/babel__traverse@7.28.0':
     dependencies:
       '@babel/types': 7.29.0
-
-  '@types/better-sqlite3@7.6.13':
-    dependencies:
-      '@types/node': 20.19.9
 
   '@types/body-parser@1.19.6':
     dependencies:
@@ -15727,14 +15897,9 @@ snapshots:
 
   '@types/mime@1.3.5': {}
 
-  '@types/mssql@9.1.9(@azure/core-client@1.10.1)':
+  '@types/mysql@2.15.26':
     dependencies:
       '@types/node': 20.19.9
-      tarn: 3.0.2
-      tedious: 19.2.1(@azure/core-client@1.10.1)
-    transitivePeerDependencies:
-      - '@azure/core-client'
-      - supports-color
 
   '@types/node-forge@1.3.14':
     dependencies:
@@ -15748,6 +15913,16 @@ snapshots:
 
   '@types/parse-json@4.0.2': {}
 
+  '@types/pg-pool@2.0.6':
+    dependencies:
+      '@types/pg': 8.6.1
+
+  '@types/pg@8.6.1':
+    dependencies:
+      '@types/node': 20.19.9
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
+
   '@types/qs@6.15.0': {}
 
   '@types/range-parser@1.2.7': {}
@@ -15759,10 +15934,6 @@ snapshots:
   '@types/react@19.2.14':
     dependencies:
       csstype: 3.2.3
-
-  '@types/readable-stream@4.0.23':
-    dependencies:
-      '@types/node': 20.19.9
 
   '@types/resolve@1.20.2': {}
 
@@ -15793,6 +15964,8 @@ snapshots:
       '@types/node': 20.19.9
       '@types/send': 0.17.6
 
+  '@types/shimmer@1.2.0': {}
+
   '@types/sinonjs__fake-timers@8.1.1': {}
 
   '@types/sizzle@2.3.10': {}
@@ -15804,6 +15977,10 @@ snapshots:
   '@types/stack-utils@2.0.3': {}
 
   '@types/symlink-or-copy@1.2.2': {}
+
+  '@types/tedious@4.0.14':
+    dependencies:
+      '@types/node': 20.19.9
 
   '@types/tmp@0.2.6': {}
 
@@ -15918,14 +16095,6 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.56.1
       eslint-visitor-keys: 5.0.1
-
-  '@typespec/ts-http-runtime@0.3.4':
-    dependencies:
-      http-proxy-agent: 7.0.2
-      https-proxy-agent: 7.0.6
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - supports-color
 
   '@ungap/structured-clone@1.3.0': {}
 
@@ -16282,6 +16451,10 @@ snapshots:
       mime-types: 3.0.2
       negotiator: 1.0.0
 
+  acorn-import-attributes@1.9.5(acorn@8.16.0):
+    dependencies:
+      acorn: 8.16.0
+
   acorn-import-phases@1.0.4(acorn@8.16.0):
     dependencies:
       acorn: 8.16.0
@@ -16499,6 +16672,8 @@ snapshots:
       possible-typed-array-names: 1.1.0
 
   aws-sign2@0.7.0: {}
+
+  aws-ssl-profiles@1.1.2: {}
 
   aws4@1.13.2: {}
 
@@ -16771,11 +16946,6 @@ snapshots:
     dependencies:
       open: 8.4.2
 
-  better-sqlite3@11.10.0:
-    dependencies:
-      bindings: 1.5.0
-      prebuild-install: 7.1.3
-
   big-integer@1.6.52: {}
 
   big.js@5.2.2: {}
@@ -16793,22 +16963,11 @@ snapshots:
 
   binary-extensions@2.3.0: {}
 
-  bindings@1.5.0:
-    dependencies:
-      file-uri-to-path: 1.0.0
-
   bl@4.1.0:
     dependencies:
       buffer: 5.7.1
       inherits: 2.0.4
       readable-stream: 3.6.2
-
-  bl@6.1.6:
-    dependencies:
-      '@types/readable-stream': 4.0.23
-      buffer: 6.0.3
-      inherits: 2.0.4
-      readable-stream: 4.7.0
 
   blob-util@2.0.2: {}
 
@@ -16886,16 +17045,9 @@ snapshots:
 
   buffer-crc32@0.2.13: {}
 
-  buffer-equal-constant-time@1.0.1: {}
-
   buffer-from@1.1.2: {}
 
   buffer@5.7.1:
-    dependencies:
-      base64-js: 1.5.1
-      ieee754: 1.2.1
-
-  buffer@6.0.3:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
@@ -17135,8 +17287,6 @@ snapshots:
     dependencies:
       readdirp: 4.1.2
 
-  chownr@1.1.4: {}
-
   chownr@3.0.0: {}
 
   chrome-launcher@0.15.2:
@@ -17166,6 +17316,8 @@ snapshots:
   ci-info@3.9.0: {}
 
   ci-info@4.4.0: {}
+
+  cjs-module-lexer@1.4.3: {}
 
   cjs-module-lexer@2.2.0:
     optional: true
@@ -17624,6 +17776,8 @@ snapshots:
 
   delegates@1.0.0: {}
 
+  denque@2.1.0: {}
+
   depd@1.1.2: {}
 
   depd@2.0.0: {}
@@ -17754,48 +17908,6 @@ snapshots:
       esbuild: 0.25.12
       tsx: 4.21.0
 
-  drizzle-kit@1.0.0-beta.16-ea816b6:
-    dependencies:
-      '@drizzle-team/brocli': 0.11.0
-      '@js-temporal/polyfill': 0.5.1
-      esbuild: 0.25.12
-      jiti: 2.6.1
-
-  drizzle-kit@1.0.0-beta.18-dc9676b:
-    dependencies:
-      '@drizzle-team/brocli': 0.11.0
-      '@js-temporal/polyfill': 0.5.1
-      esbuild: 0.25.12
-      get-tsconfig: 4.13.6
-      jiti: 2.6.1
-
-  drizzle-orm@1.0.0-beta.18-dc9676b(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@opentelemetry/api@1.9.0)(@sinclair/typebox@0.34.48)(@types/better-sqlite3@7.6.13)(@types/mssql@9.1.9(@azure/core-client@1.10.1))(better-sqlite3@11.10.0)(mssql@11.0.1(@azure/core-client@1.10.1))(postgres@3.4.8)(zod@4.3.6):
-    dependencies:
-      '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
-      mssql: 11.0.1(@azure/core-client@1.10.1)
-    optionalDependencies:
-      '@effect/sql': 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@opentelemetry/api': 1.9.0
-      '@sinclair/typebox': 0.34.48
-      '@types/better-sqlite3': 7.6.13
-      better-sqlite3: 11.10.0
-      postgres: 3.4.8
-      zod: 4.3.6
-
-  drizzle-orm@1.0.0-beta.18-dc9676b(fjwyrn3u35t2vgdckq45mc2y3e):
-    dependencies:
-      '@types/mssql': 9.1.9(@azure/core-client@1.10.1)
-      mssql: 11.0.1(@azure/core-client@1.10.1)
-    optionalDependencies:
-      '@effect/sql': 0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/sql-pg': 0.34.21(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.21.3(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@opentelemetry/api': 1.9.0
-      '@sinclair/typebox': 0.34.48
-      '@types/better-sqlite3': 7.6.13
-      better-sqlite3: 11.10.0
-      postgres: 3.4.8
-      zod: 4.3.6
-
   dtrace-provider@0.8.8:
     dependencies:
       nan: 2.25.0
@@ -17823,10 +17935,6 @@ snapshots:
     dependencies:
       jsbn: 0.1.1
       safer-buffer: 2.1.2
-
-  ecdsa-sig-formatter@1.0.11:
-    dependencies:
-      safe-buffer: 5.2.1
 
   ee-first@1.1.1: {}
 
@@ -18432,8 +18540,6 @@ snapshots:
   exit-x@0.2.2:
     optional: true
 
-  expand-template@2.0.3: {}
-
   expand-tilde@2.0.2:
     dependencies:
       homedir-polyfill: 1.0.3
@@ -18662,8 +18768,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  file-uri-to-path@1.0.0: {}
-
   filelist@1.0.6:
     dependencies:
       minimatch: 5.1.9
@@ -18775,6 +18879,8 @@ snapshots:
       hasown: 2.0.2
       mime-types: 2.1.35
 
+  forwarded-parse@2.1.2: {}
+
   forwarded@0.2.0: {}
 
   fp-ts@2.16.11: {}
@@ -18848,6 +18954,10 @@ snapshots:
   funpermaproxy@1.1.0:
     optional: true
 
+  generate-function@2.3.1:
+    dependencies:
+      is-property: 1.0.2
+
   generator-function@2.0.1: {}
 
   generic-names@4.0.0:
@@ -18907,8 +19017,6 @@ snapshots:
   getpass@0.1.7:
     dependencies:
       assert-plus: 1.0.0
-
-  github-from-package@0.0.0: {}
 
   glob-parent@5.1.2:
     dependencies:
@@ -19305,6 +19413,13 @@ snapshots:
       parent-module: 1.0.1
       resolve-from: 4.0.0
 
+  import-in-the-middle@1.15.0:
+    dependencies:
+      acorn: 8.16.0
+      acorn-import-attributes: 1.9.5(acorn@8.16.0)
+      cjs-module-lexer: 1.4.3
+      module-details-from-path: 1.0.4
+
   import-local@3.2.0:
     dependencies:
       pkg-dir: 4.2.0
@@ -19463,6 +19578,8 @@ snapshots:
 
   is-potential-custom-element-name@1.0.1:
     optional: true
+
+  is-property@1.0.2: {}
 
   is-reference@1.2.1:
     dependencies:
@@ -20065,8 +20182,6 @@ snapshots:
 
   jiti@2.6.1: {}
 
-  js-md4@0.3.2: {}
-
   js-message@1.0.7:
     optional: true
 
@@ -20085,8 +20200,6 @@ snapshots:
   js-yaml@4.1.1:
     dependencies:
       argparse: 2.0.1
-
-  jsbi@4.3.2: {}
 
   jsbn@0.1.1: {}
 
@@ -20178,19 +20291,6 @@ snapshots:
       '@jsep-plugin/regex': 1.0.4(jsep@1.4.0)
       jsep: 1.4.0
 
-  jsonwebtoken@9.0.3:
-    dependencies:
-      jws: 4.0.1
-      lodash.includes: 4.3.0
-      lodash.isboolean: 3.0.3
-      lodash.isinteger: 4.0.4
-      lodash.isnumber: 3.0.3
-      lodash.isplainobject: 4.0.6
-      lodash.isstring: 4.0.1
-      lodash.once: 4.1.1
-      ms: 2.1.3
-      semver: 7.7.4
-
   jsprim@2.0.2:
     dependencies:
       assert-plus: 1.0.0
@@ -20204,17 +20304,6 @@ snapshots:
       array.prototype.flat: 1.3.3
       object.assign: 4.1.7
       object.values: 1.2.1
-
-  jwa@2.0.1:
-    dependencies:
-      buffer-equal-constant-time: 1.0.1
-      ecdsa-sig-formatter: 1.0.11
-      safe-buffer: 5.2.1
-
-  jws@4.0.1:
-    dependencies:
-      jwa: 2.0.1
-      safe-buffer: 5.2.1
 
   keygrip@1.1.0:
     dependencies:
@@ -20417,21 +20506,9 @@ snapshots:
 
   lodash.groupby@4.6.0: {}
 
-  lodash.includes@4.3.0: {}
-
-  lodash.isboolean@3.0.3: {}
-
   lodash.isfunction@3.0.9: {}
 
-  lodash.isinteger@4.0.4: {}
-
   lodash.isnil@4.0.0: {}
-
-  lodash.isnumber@3.0.3: {}
-
-  lodash.isplainobject@4.0.6: {}
-
-  lodash.isstring@4.0.1: {}
 
   lodash.isundefined@3.0.1: {}
 
@@ -20508,6 +20585,8 @@ snapshots:
       yallist: 3.1.1
 
   lru-cache@7.18.3: {}
+
+  lru.min@1.1.4: {}
 
   luxon@3.7.2: {}
 
@@ -20990,14 +21069,14 @@ snapshots:
     dependencies:
       minipass: 7.1.3
 
-  mkdirp-classic@0.5.3: {}
-
   mkdirp@0.5.6:
     dependencies:
       minimist: 1.2.8
     optional: true
 
   mkdirp@1.0.4: {}
+
+  module-details-from-path@1.0.4: {}
 
   moment@2.30.1:
     optional: true
@@ -21020,21 +21099,9 @@ snapshots:
       '@msgpackr-extract/msgpackr-extract-win32-x64': 3.0.3
     optional: true
 
-  msgpackr@1.11.8:
+  msgpackr@1.11.9:
     optionalDependencies:
       msgpackr-extract: 3.0.3
-
-  mssql@11.0.1(@azure/core-client@1.10.1):
-    dependencies:
-      '@tediousjs/connection-string': 0.5.0
-      commander: 11.1.0
-      debug: 4.4.3(supports-color@8.1.1)
-      rfdc: 1.4.1
-      tarn: 3.0.2
-      tedious: 18.6.2(@azure/core-client@1.10.1)
-    transitivePeerDependencies:
-      - '@azure/core-client'
-      - supports-color
 
   multi-sort-stream@1.0.4:
     optional: true
@@ -21059,23 +21126,35 @@ snapshots:
       rimraf: 2.4.5
     optional: true
 
+  mysql2@3.20.0(@types/node@20.19.9):
+    dependencies:
+      '@types/node': 20.19.9
+      aws-ssl-profiles: 1.1.2
+      denque: 2.1.0
+      generate-function: 2.3.1
+      iconv-lite: 0.7.2
+      long: 5.3.2
+      lru.min: 1.1.4
+      named-placeholders: 1.1.6
+      sql-escaper: 1.3.3
+
   mz@2.7.0:
     dependencies:
       any-promise: 1.3.0
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
+  named-placeholders@1.1.6:
+    dependencies:
+      lru.min: 1.1.4
+
   nan@2.25.0:
     optional: true
 
   nanoid@3.3.11: {}
 
-  napi-build-utils@2.0.0: {}
-
   napi-postinstall@0.3.4:
     optional: true
-
-  native-duplexpair@1.0.0: {}
 
   natural-compare@1.4.0: {}
 
@@ -21104,10 +21183,6 @@ snapshots:
     dependencies:
       lower-case: 2.0.2
       tslib: 2.8.1
-
-  node-abi@3.89.0:
-    dependencies:
-      semver: 7.7.4
 
   node-addon-api@7.1.1: {}
 
@@ -21520,6 +21595,59 @@ snapshots:
 
   performance-now@2.1.0: {}
 
+  pg-cloudflare@1.3.0:
+    optional: true
+
+  pg-connection-string@2.12.0: {}
+
+  pg-connection-string@2.9.1: {}
+
+  pg-cursor@2.19.0(pg@8.20.0):
+    dependencies:
+      pg: 8.20.0
+
+  pg-int8@1.0.1: {}
+
+  pg-numeric@1.0.2: {}
+
+  pg-pool@3.13.0(pg@8.20.0):
+    dependencies:
+      pg: 8.20.0
+
+  pg-protocol@1.13.0: {}
+
+  pg-types@2.2.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 2.0.0
+      postgres-bytea: 1.0.1
+      postgres-date: 1.0.7
+      postgres-interval: 1.2.0
+
+  pg-types@4.1.0:
+    dependencies:
+      pg-int8: 1.0.1
+      pg-numeric: 1.0.2
+      postgres-array: 3.0.4
+      postgres-bytea: 3.0.0
+      postgres-date: 2.1.0
+      postgres-interval: 3.0.0
+      postgres-range: 1.1.4
+
+  pg@8.20.0:
+    dependencies:
+      pg-connection-string: 2.12.0
+      pg-pool: 3.13.0(pg@8.20.0)
+      pg-protocol: 1.13.0
+      pg-types: 2.2.0
+      pgpass: 1.0.5
+    optionalDependencies:
+      pg-cloudflare: 1.3.0
+
+  pgpass@1.0.5:
+    dependencies:
+      split2: 4.2.0
+
   phasic@1.0.2: {}
 
   picocolors@1.1.1: {}
@@ -21668,28 +21796,27 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  postgres@3.4.8: {}
+  postgres-array@2.0.0: {}
 
-  posthog-node@5.28.1(rxjs@7.8.2):
-    dependencies:
-      '@posthog/core': 1.23.3
-    optionalDependencies:
-      rxjs: 7.8.2
+  postgres-array@3.0.4: {}
 
-  prebuild-install@7.1.3:
+  postgres-bytea@1.0.1: {}
+
+  postgres-bytea@3.0.0:
     dependencies:
-      detect-libc: 2.1.2
-      expand-template: 2.0.3
-      github-from-package: 0.0.0
-      minimist: 1.2.8
-      mkdirp-classic: 0.5.3
-      napi-build-utils: 2.0.0
-      node-abi: 3.89.0
-      pump: 3.0.4
-      rc: 1.2.8
-      simple-get: 4.0.1
-      tar-fs: 2.1.4
-      tunnel-agent: 0.6.0
+      obuf: 1.1.2
+
+  postgres-date@1.0.7: {}
+
+  postgres-date@2.1.0: {}
+
+  postgres-interval@1.2.0:
+    dependencies:
+      xtend: 4.0.2
+
+  postgres-interval@3.0.0: {}
+
+  postgres-range@1.1.4: {}
 
   prelude-ls@1.2.1: {}
 
@@ -21947,14 +22074,6 @@ snapshots:
       string_decoder: 1.3.0
       util-deprecate: 1.0.2
 
-  readable-stream@4.7.0:
-    dependencies:
-      abort-controller: 3.0.0
-      buffer: 6.0.3
-      events: 3.3.0
-      process: 0.11.10
-      string_decoder: 1.3.0
-
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
@@ -22011,6 +22130,14 @@ snapshots:
   require-directory@2.1.1: {}
 
   require-from-string@2.0.2: {}
+
+  require-in-the-middle@7.5.2:
+    dependencies:
+      debug: 4.4.3(supports-color@8.1.1)
+      module-details-from-path: 1.0.4
+      resolve: 1.22.11
+    transitivePeerDependencies:
+      - supports-color
 
   requireg@0.2.2:
     dependencies:
@@ -22421,6 +22548,8 @@ snapshots:
 
   shell-quote@1.8.3: {}
 
+  shimmer@1.2.1: {}
+
   side-channel-list@1.0.0:
     dependencies:
       es-errors: 1.3.0
@@ -22454,14 +22583,6 @@ snapshots:
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
-
-  simple-concat@1.0.1: {}
-
-  simple-get@4.0.1:
-    dependencies:
-      decompress-response: 6.0.0
-      once: 1.4.0
-      simple-concat: 1.0.1
 
   simple-plist@1.3.1:
     dependencies:
@@ -22582,9 +22703,11 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  split2@4.2.0: {}
+
   sprintf-js@1.0.3: {}
 
-  sprintf-js@1.1.3: {}
+  sql-escaper@1.3.3: {}
 
   sshpk@1.18.0:
     dependencies:
@@ -22881,13 +23004,6 @@ snapshots:
 
   tapable@2.3.0: {}
 
-  tar-fs@2.1.4:
-    dependencies:
-      chownr: 1.1.4
-      mkdirp-classic: 0.5.3
-      pump: 3.0.4
-      tar-stream: 2.2.0
-
   tar-stream@2.2.0:
     dependencies:
       bl: 4.1.0
@@ -22914,40 +23030,6 @@ snapshots:
       minipass: 7.1.3
       minizlib: 3.1.0
       yallist: 5.0.0
-
-  tarn@3.0.2: {}
-
-  tedious@18.6.2(@azure/core-client@1.10.1):
-    dependencies:
-      '@azure/core-auth': 1.10.1
-      '@azure/identity': 4.13.0
-      '@azure/keyvault-keys': 4.10.0(@azure/core-client@1.10.1)
-      '@js-joda/core': 5.7.0
-      '@types/node': 20.19.9
-      bl: 6.1.6
-      iconv-lite: 0.6.3
-      js-md4: 0.3.2
-      native-duplexpair: 1.0.0
-      sprintf-js: 1.1.3
-    transitivePeerDependencies:
-      - '@azure/core-client'
-      - supports-color
-
-  tedious@19.2.1(@azure/core-client@1.10.1):
-    dependencies:
-      '@azure/core-auth': 1.10.1
-      '@azure/identity': 4.13.0
-      '@azure/keyvault-keys': 4.10.0(@azure/core-client@1.10.1)
-      '@js-joda/core': 5.7.0
-      '@types/node': 20.19.9
-      bl: 6.1.6
-      iconv-lite: 0.7.2
-      js-md4: 0.3.2
-      native-duplexpair: 1.0.0
-      sprintf-js: 1.1.3
-    transitivePeerDependencies:
-      - '@azure/core-client'
-      - supports-color
 
   teex@1.0.1:
     dependencies:
@@ -23252,10 +23334,6 @@ snapshots:
       possible-typed-array-names: 1.1.0
       reflect.getprototypeof: 1.0.10
 
-  typeid-js@1.2.0:
-    dependencies:
-      uuid: 10.0.0
-
   typescript-eslint@8.56.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3):
     dependencies:
       '@typescript-eslint/eslint-plugin': 8.56.1(@typescript-eslint/parser@8.56.1(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3))(eslint@9.39.4(jiti@2.6.1))(typescript@5.9.3)
@@ -23366,8 +23444,6 @@ snapshots:
   util-deprecate@1.0.2: {}
 
   utils-merge@1.0.1: {}
-
-  uuid@10.0.0: {}
 
   uuid@11.1.0: {}
 
@@ -23818,6 +23894,8 @@ snapshots:
     optional: true
 
   xpath@0.0.32: {}
+
+  xtend@4.0.2: {}
 
   y18n@5.0.8: {}
 

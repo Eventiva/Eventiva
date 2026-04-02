@@ -31,6 +31,8 @@ const container = pipe(
         DB_HOST: 'postgres.postgres.svc',
         SHARD_MANAGER_HOST: process.env.SHARD_MANAGER_HOST ?? 'shard-manager.shard-manager.svc',
         HOST: { fieldRef: { fieldPath: 'status.podIP' } },
+        EVENTIVA_CLUSTER_RUNNER_RPC_PORT: process.env.EVENTIVA_CLUSTER_RUNNER_RPC_PORT ?? '34431',
+        EVENTIVA_CLUSTER_RUNNER_RPC_BIND_HOST: process.env.EVENTIVA_CLUSTER_RUNNER_RPC_BIND_HOST ?? '0.0.0.0',
         EVENTIVA_CLUSTER_MODE: process.env.EVENTIVA_CLUSTER_MODE ?? 'distributed',
         // Keep heap below cgroup memory limit (see setResourceLimits below).
         NODE_OPTIONS: '--max-old-space-size=448',

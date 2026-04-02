@@ -1,22 +1,52 @@
-export * from './schema/index.js';
-export * from './runtime/platform.js';
-export * from './runtime/run-runtime.js';
-export * from './runtime/run-core-startup.js';
-export * from './runtime/startup-banner.js';
-export * from './database/database.js';
-export * from './crud/crud-rpc.js';
-export * from './crud/crud-handlers.js';
-export * from './cluster/index.js';
-export * from './workflow/index.js';
-export * from './extensions/extension-registry.js';
-export * from './extensions/extension-hooks.js';
-export * from './schema/typeid-schema.js';
-export * from './schema/schema-encryption.js';
-export * from './entity/entity-base.js';
-export * from './entity/entity-registry.js';
-export * from './transforms/index.js';
-export * from './embedding/embedding-service.js';
-export * from './observability/index.js';
-export * from './security/index.js';
-export * from './config/runtime-config.js';
-export * from './feature-flags/index.js';
+/**
+ * @eventiva/core — cluster demo schema + observability + shared platform context types.
+ * Battleship runners/shooters live in `@eventiva/extensions.*`; process entrypoints in `@eventiva/platforms.*`.
+ */
+export {
+  clusterAppModeConfig,
+  clusterAppModes,
+  type ClusterAppMode,
+} from "./config/cluster-app-mode.js"
+export { Battleship, DelayedBullet, DeliverAtBullet } from "./schema.js"
+export {
+  type BattleshipPlatformContext,
+  type PlatformContext,
+} from "./platform/battleship-platform-context.js"
+export {
+  HookRegistry,
+  HookRegistryLive,
+  TransformRegistry,
+  TransformRegistryLive,
+  appendTransformStep,
+  appendTransformStepsFromDiff,
+  cloneTransformSnapshot,
+  collectDeepDiffs,
+  emptyTransformContext,
+  hookScopeEquals,
+  joinTransformPath,
+  type LeafDiff,
+  runnerOnLoadHooksLayer,
+  shardingRegistrationHooksLayer,
+  type HookHandler,
+  type HookPhase,
+  type HookScope,
+  type TransformContext,
+  type TransformFn,
+  type TransformStep,
+} from "./hooks/index.js"
+export {
+  makeClusterSqlClientLayer,
+  makeClusterSqlRunnerLayer,
+} from "./cluster/sql-socket-layers.js"
+export {
+  defaultEffectDevToolsWsUrl,
+  dualLoggerLayer,
+  effectDevToolsEnabledFromEnv,
+  effectDevToolsLayer,
+  effectDevToolsLayerFromEnv,
+  effectDevToolsWsUrlFromEnv,
+  observabilityLayers,
+  tracingLayer,
+  type WithSpanAndLogOptions,
+  withSpanAndLog,
+} from "./observability/index.js"

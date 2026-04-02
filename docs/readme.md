@@ -1,7 +1,7 @@
 ---
-revnumber: "1.3"
-revdate: "2026-03-31"
-revremark: "Documented cluster-first local runtime, cluster lifecycle commands, and cluster-mode Postgres E2E gate."
+revnumber: "1.4"
+revdate: "2026-04-02"
+revremark: "Added hooks and transforms (battleship) developer part; hub links to glossary and demo extensions."
 ---
 
 # Eventiva documentation hub
@@ -21,6 +21,7 @@ This folder holds **Markdown** guides and reusable **parts** for day-to-day work
 | ----- | -------- |
 | Local dev: Postgres vs SQLite, env vars, postgresql vs sqlite-demo platform | [`parts/local-dev/database-backends-and-platforms.md`](parts/local-dev/database-backends-and-platforms.md) |
 | Local runtime in cluster mode: start, lifecycle targets, manifests, and regression gate | [`parts/local-dev/postgresql-cluster-runtime.md`](parts/local-dev/postgresql-cluster-runtime.md) |
+| Hooks and transforms (battleship demo): glossary, registries, platform wiring, demo extensions | [`parts/backend/hooks-and-transforms-battleship.md`](parts/backend/hooks-and-transforms-battleship.md) |
 | Contact REST + RPC curl examples (default HTTP **3000**, override with `EVENTIVA_HTTP_PORT`) | [`testing-entity-http-endpoints.md`](testing-entity-http-endpoints.md) |
 
 ### Learnings (architecture and conventions)

@@ -1,0 +1,19 @@
+{
+  "name": "extensions-example-transform",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/extensions/example-transform/src",
+  "projectType": "library",
+  "tags": ["type:extension", "layer:backend"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/extensions/example-transform",
+        "main": "packages/extensions/example-transform/src/index.ts",
+        "tsConfig": "packages/extensions/example-transform/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

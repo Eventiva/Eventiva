@@ -1,8 +1,2 @@
-/**
- * PostgreSQL platform entry: imports `./platform.js` and calls `runPlatform`.
- * @see docs/learnings/architecture.md
- */
-import { runPlatform } from '@eventiva/core';
-import { platform } from './platform.js';
-
-runPlatform(platform);
+/** PostgreSQL platform: SQL layer and re-exports for tooling. */
+export { SqlLayer } from "./sql.js"

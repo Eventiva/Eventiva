@@ -1,0 +1,19 @@
+{
+  "name": "extensions-copyright-notice",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/extensions/copyright-notice/src",
+  "projectType": "library",
+  "tags": ["type:extension", "layer:backend"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/extensions/copyright-notice",
+        "main": "packages/extensions/copyright-notice/src/index.ts",
+        "tsConfig": "packages/extensions/copyright-notice/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

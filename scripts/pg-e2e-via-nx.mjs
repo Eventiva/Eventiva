@@ -13,6 +13,8 @@
  * - PG_E2E_SKIP_PLATFORM_START=1 — do not spawn `nx run platforms-postgresql:run`; use an API already reachable
  *   on `PG_E2E_HTTP_HOST`:`EVENTIVA_HTTP_PORT` (e.g. after `kubectl port-forward` from the cluster workload).
  *   Use `SKIP_PSQL=1` unless Postgres is port-forwarded to localhost or psql targets the cluster DB.
+ * - PG_E2E_SKIP_RUNNER_RPC_WAIT=1 — do not wait for `EVENTIVA_CLUSTER_RUNNER_RPC_PORT` (TCP inter-runner RPC).
+ * - PG_E2E_RUNNER_RPC_HOST — host for runner RPC wait (default: same as `PG_E2E_HTTP_HOST`).
  */
 import { spawn, spawnSync } from 'child_process';
 import { createConnection } from 'net';
@@ -23,22 +25,26 @@ import { execFileSync } from 'child_process';
 const HTTP_PORT = Number(process.env.EVENTIVA_HTTP_PORT ?? 3000);
 /** Host for HTTP checks (use 127.0.0.1 with kubectl port-forward). */
 const HTTP_HOST = process.env.PG_E2E_HTTP_HOST ?? '127.0.0.1';
+/** TCP port for @effect/cluster runner RPC (`SocketRunner`); must match `EVENTIVA_CLUSTER_RUNNER_RPC_PORT`. */
+const RUNNER_RPC_PORT = Number(process.env.EVENTIVA_CLUSTER_RUNNER_RPC_PORT ?? '34431');
+const RUNNER_RPC_HOST = process.env.PG_E2E_RUNNER_RPC_HOST ?? HTTP_HOST;
 const SKIP_PLATFORM_START = process.env.PG_E2E_SKIP_PLATFORM_START === '1';
+const SKIP_RUNNER_RPC_WAIT = process.env.PG_E2E_SKIP_RUNNER_RPC_WAIT === '1';
 const MAX_WAIT_MS = 120000;
 /** Cluster entity round-trips can exceed 20s on cold start; keep generous for CI/local. */
 const REQUEST_TIMEOUT_MS = Number(process.env.PG_E2E_HTTP_TIMEOUT_MS ?? 90000);
 
-function waitForPort(port, timeoutMs) {
+function waitForPort(port, timeoutMs, host = HTTP_HOST) {
     return new Promise((resolve, reject) => {
         const deadline = Date.now() + timeoutMs;
         const tryConnect = () => {
-            const socket = createConnection(port, HTTP_HOST, () => {
+            const socket = createConnection(port, host, () => {
                 socket.destroy();
                 resolve();
             });
             socket.on('error', () => {
                 if (Date.now() > deadline) {
-                    reject(new Error(`Port ${port} not open after ${timeoutMs}ms`));
+                    reject(new Error(`Port ${host}:${port} not open after ${timeoutMs}ms`));
                     return;
                 }
                 setTimeout(tryConnect, 1500);
@@ -228,15 +234,28 @@ async function main() {
         );
     }
 
+    const logPlatform = process.env.PG_E2E_LOG_PLATFORM === '1';
+    const terminatePlatformChild = (c) => {
+        if (!c?.pid) return;
+        try {
+            if (logPlatform) {
+                c.kill('SIGTERM');
+            } else {
+                process.kill(-c.pid, 'SIGTERM');
+            }
+        } catch (_) {}
+    };
     let child = null;
     if (!SKIP_PLATFORM_START) {
         child = spawn('pnpm', ['nx', 'run', 'platforms-postgresql:run'], {
             cwd: process.cwd(),
-            stdio: ['ignore', 'pipe', 'pipe'],
-            detached: true,
+            stdio: logPlatform ? 'inherit' : ['ignore', 'pipe', 'pipe'],
+            detached: !logPlatform,
             env: childEnv,
         });
-        child.unref();
+        if (!logPlatform) {
+            child.unref();
+        }
     }
 
     try {
@@ -249,13 +268,19 @@ async function main() {
         }
         await waitForPort(HTTP_PORT, MAX_WAIT_MS);
 
+        if (!SKIP_RUNNER_RPC_WAIT) {
+            console.log('Waiting for runner RPC TCP', `${RUNNER_RPC_HOST}:${RUNNER_RPC_PORT}`, '...');
+            await waitForPort(RUNNER_RPC_PORT, MAX_WAIT_MS, RUNNER_RPC_HOST);
+            console.log('PASS runner RPC TCP listening');
+        }
+
         if (!psqlDescribeContact(childEnv)) {
-            if (child?.pid) process.kill(-child.pid, 'SIGTERM');
+            terminatePlatformChild(child);
             process.exit(1);
         }
 
         if (!psqlVerifyContactCreatedByFk(childEnv)) {
-            if (child?.pid) process.kill(-child.pid, 'SIGTERM');
+            terminatePlatformChild(child);
             process.exit(1);
         }
 
@@ -362,12 +387,12 @@ async function main() {
                 ? '\nAll Postgres E2E checks passed (external server).'
                 : '\nAll Postgres E2E checks passed (via nx run platforms-postgresql:run).'
         );
-        if (child?.pid) process.kill(-child.pid, 'SIGTERM');
+        terminatePlatformChild(child);
         process.exit(0);
     } catch (e) {
         console.error(e);
         try {
-            if (child?.pid) process.kill(-child.pid, 'SIGTERM');
+            terminatePlatformChild(child);
         } catch {
             /* ignore */
         }

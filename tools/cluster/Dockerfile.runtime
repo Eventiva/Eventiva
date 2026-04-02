@@ -9,7 +9,7 @@ COPY packages ./packages
 COPY scripts ./scripts
 
 RUN pnpm install --frozen-lockfile
-RUN pnpm nx run platforms-postgresql:build
+RUN pnpm nx run-many -t build -p core,platforms-postgresql --skip-nx-cache
 
 ENV NODE_ENV=production
-CMD ["pnpm","exec","tsx","--tsconfig","packages/platforms/postgresql/tsconfig.run.json","packages/platforms/postgresql/src/index.ts"]
+CMD ["pnpm","exec","tsx","--tsconfig","packages/platforms/postgresql/tsconfig.run.json","packages/platforms/postgresql/src/platform.ts"]
