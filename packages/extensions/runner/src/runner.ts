@@ -1,6 +1,6 @@
 import { Entity, Singleton } from "@effect/cluster"
 import {
-  Battleship,
+  DemoEntity,
   HookRegistry,
   HookRegistryLive,
   TransformRegistry,
@@ -13,9 +13,10 @@ import {
   type PlatformContext,
   withSpanAndLog,
 } from "@eventiva/core"
+import { clusterHookKafkaStackFromEnv } from "@eventiva/integrations.kafka"
 import { Effect, Layer, Schedule } from "effect"
 
-const BattleshipLive = Battleship.toLayer(
+const DemoEntityLive = DemoEntity.toLayer(
   Effect.gen(function* () {
     const address = yield* Entity.CurrentAddress
 
@@ -39,7 +40,7 @@ const BattleshipLive = Battleship.toLayer(
         tctx = yield* transforms.runPre("Shoot", tctx)
         const payload = tctx.current
 
-        yield* withSpanAndLog("Battleship.Shoot", {
+        yield* withSpanAndLog("DemoEntity.Shoot", {
           attributes: {
             address: String(address),
             target: payload.target,
@@ -71,7 +72,7 @@ const BattleshipLive = Battleship.toLayer(
       }),
 
       ShootWithDelay: Effect.fnUntraced(function* (envelope) {
-        yield* withSpanAndLog("Battleship.ShootWithDelay", {
+        yield* withSpanAndLog("DemoEntity.ShootWithDelay", {
           attributes: {
             address: String(address),
             target: envelope.payload.target,
@@ -86,7 +87,7 @@ const BattleshipLive = Battleship.toLayer(
       }),
 
       ShootAt: Effect.fnUntraced(function* (envelope) {
-        yield* withSpanAndLog("Battleship.ShootAt", {
+        yield* withSpanAndLog("DemoEntity.ShootAt", {
           attributes: {
             address: String(address),
             target: envelope.payload.target,
@@ -115,33 +116,36 @@ const CronShip = Singleton.make(
   ),
 )
 
-/** Battleship server entity layers (cluster runner provides Sharding, registries, etc.). */
-export const battleshipEntitiesLayer = Layer.mergeAll(BattleshipLive, CronShip)
+/** Demo RPC entity layers (cluster runner provides Sharding, registries, etc.). */
+export const demoEntityLayers = Layer.mergeAll(DemoEntityLive, CronShip)
 
 /**
- * Cluster server + battleship entities when `CLUSTER_APP_MODE` is `battleship` or `runner`.
+ * Cluster server + demo entities when `CLUSTER_APP_MODE` is `primary` or `runner`.
  */
-export function makeRunnerBattleshipEntry(
+export function makeRunnerEntry(
   ctx: PlatformContext,
 ): Effect.Effect<void, unknown, never> {
   return Effect.gen(function* () {
     const mode = yield* clusterAppModeConfig
-    if (mode !== "battleship" && mode !== "runner") {
+    if (mode !== "primary" && mode !== "runner") {
       return
     }
     const ext = ctx.extensionLayers ?? Layer.empty
+    const kafkaBootstrap = ctx.kafkaHookBootstrapLayer ?? Layer.empty
     /**
      * `Layer.mergeAll` can build siblings in an order where extension layers
-     * (`copyrightNoticeLayer`, `exampleTransformLayer`) run before `HookRegistryLive`
+     * (`CopyrightNoticeExtension`, `ExampleTransformExtension`) run before `HookRegistryLive`
      * is available, causing "Service not found: HookRegistry" at runtime.
      * Chain with `provideMerge` so registries wrap dependents deterministically.
      */
-    const stack = battleshipEntitiesLayer.pipe(
+    const stack = demoEntityLayers.pipe(
       Layer.provideMerge(runnerOnLoadHooksLayer),
       Layer.provideMerge(shardingRegistrationHooksLayer),
       Layer.provideMerge(ext),
       Layer.provideMerge(TransformRegistryLive),
       Layer.provideMerge(HookRegistryLive),
+      Layer.provideMerge(clusterHookKafkaStackFromEnv()),
+      Layer.provideMerge(kafkaBootstrap),
     ).pipe(
       Layer.provideMerge(makeClusterSqlRunnerLayer(ctx.sqlLayer)),
       Layer.provide(ctx.observabilityLayer),

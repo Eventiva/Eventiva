@@ -1,17 +1,38 @@
 /**
  * @eventiva/core — cluster demo schema + observability + shared platform context types.
- * Battleship runners/shooters live in `@eventiva/extensions.*`; process entrypoints in `@eventiva/platforms.*`.
+ * Runners and shooters live in `@eventiva/extensions.*`; process entrypoints in `@eventiva/platforms.*`.
  */
 export {
   clusterAppModeConfig,
   clusterAppModes,
   type ClusterAppMode,
 } from "./config/cluster-app-mode.js"
-export { Battleship, DelayedBullet, DeliverAtBullet } from "./schema.js"
+export { clusterExtensionsProfileFromEnv } from "./config/cluster-extensions-profile.js"
 export {
-  type BattleshipPlatformContext,
-  type PlatformContext,
-} from "./platform/battleship-platform-context.js"
+  clusterExtensionIdConfig,
+  clusterHookBusConfig,
+  clusterHookBusValues,
+  clusterHookDispatchTopicConfig,
+  clusterHookDispatchTopicDefault,
+  type ClusterHookBus,
+} from "./config/cluster-hook-config.js"
+export { DemoEntity, DelayedBullet, DeliverAtBullet } from "./schema.js"
+export { type PlatformContext } from "./platform/platform-context.js"
+export { ClusterPlatformContext } from "./platform/cluster-platform-context.js"
+export type { ClusterAppEntry } from "./platform/cluster-app-entry.js"
+export {
+  mysqlClusterSqlLayer,
+  postgresClusterSqlLayer,
+} from "./platform/cluster-sql-layers.js"
+export {
+  clusterPlatformApplicationLaunch,
+  clusterPlatformMainEffect,
+  runClusterPlatformIfEsmMain,
+} from "./platform/cluster-platform-main.js"
+export {
+  clusterPlatformContextSync,
+  clusterPlatformMainFor,
+} from "./platform/cluster-database-platform.js"
 export {
   HookRegistry,
   HookRegistryLive,
@@ -27,6 +48,12 @@ export {
   type LeafDiff,
   runnerOnLoadHooksLayer,
   shardingRegistrationHooksLayer,
+  type HookDispatchEnvelope,
+  HookDispatchEnvelopeSchema,
+  decodeHookDispatchEnvelope,
+  encodeHookDispatchEnvelope,
+  hookDispatchEnvelopeVersion,
+  makeHookDispatchEnvelope,
   type HookHandler,
   type HookPhase,
   type HookScope,
@@ -39,6 +66,7 @@ export {
   makeClusterSqlRunnerLayer,
 } from "./cluster/sql-socket-layers.js"
 export {
+  clusterObservabilityLayer,
   defaultEffectDevToolsWsUrl,
   dualLoggerLayer,
   effectDevToolsEnabledFromEnv,

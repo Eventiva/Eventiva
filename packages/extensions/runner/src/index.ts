@@ -1,1 +1,2 @@
-export { battleshipEntitiesLayer, makeRunnerBattleshipEntry } from "./runner.js"
+export { demoEntityLayers, makeRunnerEntry } from "./runner.js"
+export { RunnerExtension } from "./runner-extension.js"

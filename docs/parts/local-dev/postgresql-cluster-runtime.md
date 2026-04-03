@@ -15,6 +15,7 @@ This guide is for running the PostgreSQL platform in local development using the
   - `cluster:status`
   - `cluster:logs`
 - Matching root scripts are available in `package.json` for the same lifecycle commands.
+- The PostgreSQL (and MySQL) apply profile includes a **Kafka API broker** (`tools/cluster/src/kafka`, Redpanda) before database workloads so hook dispatch can use `CLUSTER_HOOK_BUS=kafka`. See [Kafka hook dispatch](./kafka-hook-dispatch.md).
 
 ## Prerequisites
 

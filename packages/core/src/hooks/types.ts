@@ -15,6 +15,7 @@ export type HookScope =
   | { readonly _tag: "entityType"; readonly entityType: string }
   | { readonly _tag: "singleton"; readonly name: string }
   | { readonly _tag: "rpc"; readonly rpcName: string }
+  | { readonly _tag: "extension"; readonly extensionId: string }
 
 export function hookScopeEquals(a: HookScope, b: HookScope): boolean {
   if (a._tag !== b._tag) return false
@@ -27,6 +28,8 @@ export function hookScopeEquals(a: HookScope, b: HookScope): boolean {
       return b._tag === "singleton" && a.name === b.name
     case "rpc":
       return b._tag === "rpc" && a.rpcName === b.rpcName
+    case "extension":
+      return b._tag === "extension" && a.extensionId === b.extensionId
     default:
       return false
   }

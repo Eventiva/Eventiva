@@ -33,7 +33,7 @@
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "NODE_ENV": "development",
-                    "CLUSTER_APP_MODE": "battleship",
+                    "CLUSTER_APP_MODE": "primary",
                     "DB_DATABASE": "effect_cluster",
                     "DB_USER": "cluster",
                     "DB_PASSWORD": "cluster",

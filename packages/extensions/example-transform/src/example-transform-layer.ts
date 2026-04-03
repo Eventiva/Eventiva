@@ -1,10 +1,10 @@
 import {
   TransformRegistry,
-  type BattleshipPlatformContext,
+  TransformRegistryLive,
+  type PlatformContext,
   clusterAppModeConfig,
 } from "@eventiva/core"
-import * as Effect from "effect/Effect"
-import * as Layer from "effect/Layer"
+import { Effect } from "effect"
 
 const EXTENSION_ID = "eventiva.example-transform"
 const TRANSFORM_ID = "retarget-shoot-target"
@@ -13,10 +13,15 @@ type ShootPayload = { readonly target: number }
 
 /**
  * Demo pre-transform: maps `target` into a deterministic band so logs show transform audit.
+ * Dependencies are declared so `Default` is self-contained for platform `Layer.mergeAll`.
+ *
+ * @see https://effect.website/docs/requirements-management/layers/#simplifying-service-definitions-with-effectservice
  */
-export const exampleTransformLayer: Layer.Layer<never, never, TransformRegistry> =
-  Layer.effectDiscard(
-    Effect.gen(function* () {
+export class ExampleTransformExtension extends Effect.Service<ExampleTransformExtension>()(
+  "@eventiva/extensions/ExampleTransformExtension",
+  {
+    dependencies: [TransformRegistryLive],
+    effect: Effect.gen(function* () {
       const registry = yield* TransformRegistry
       yield* registry.registerPre<ShootPayload>(
         "Shoot",
@@ -29,15 +34,19 @@ export const exampleTransformLayer: Layer.Layer<never, never, TransformRegistry>
             return ctx
           }),
       )
+      return {
+        _tag: "@eventiva/extensions/ExampleTransformExtension" as const,
+      }
     }),
-  )
+  },
+) {}
 
 export function makeExampleTransformEntry(
-  _ctx: BattleshipPlatformContext,
+  _ctx: PlatformContext,
 ): Effect.Effect<void, unknown, never> {
   return Effect.gen(function* () {
     const mode = yield* clusterAppModeConfig
-    if (mode !== "battleship" && mode !== "runner") {
+    if (mode !== "primary" && mode !== "runner") {
       return
     }
   })

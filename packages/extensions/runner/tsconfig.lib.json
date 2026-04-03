@@ -3,7 +3,8 @@
   "compilerOptions": {
     "baseUrl": "../../../",
     "paths": {
-      "@eventiva/core": ["packages/core/src/index.ts"]
+      "@eventiva/core": ["packages/core/src/index.ts"],
+      "@eventiva/integrations.kafka": ["packages/integrations/kafka/src/index.ts"]
     },
     "outDir": "../../../dist/extensions/runner",
     "rootDir": "src",

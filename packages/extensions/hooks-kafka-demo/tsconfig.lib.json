@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "../../../",
+    "paths": {
+      "@eventiva/core": ["packages/core/src/index.ts"],
+      "@eventiva/integrations.kafka": ["packages/integrations/kafka/src/index.ts"]
+    },
+    "outDir": "../../../dist/extensions/hooks-kafka-demo",
+    "rootDir": "src",
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
+}

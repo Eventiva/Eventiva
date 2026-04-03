@@ -30,3 +30,8 @@ export function observabilityLayers(
     Logger.minimumLogLevel(logLevel),
   ) as Layer.Layer<unknown, PlatformError, never>
 }
+
+/**
+ * Default observability stack for `packages/platforms/*` cluster processes (same as {@link observabilityLayers}() with defaults).
+ */
+export const clusterObservabilityLayer = observabilityLayers()

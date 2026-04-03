@@ -1,6 +1,10 @@
-import { HookRegistry, type BattleshipPlatformContext, clusterAppModeConfig } from "@eventiva/core"
-import * as Effect from "effect/Effect"
-import * as Layer from "effect/Layer"
+import {
+  HookRegistry,
+  HookRegistryLive,
+  type PlatformContext,
+  clusterAppModeConfig,
+} from "@eventiva/core"
+import { Effect } from "effect"
 import {
   BY_RESNOVAS_WORDART,
   COPYRIGHT_STATEMENT,
@@ -22,22 +26,32 @@ function logBanner(): Effect.Effect<void, never, never> {
 }
 
 /**
- * Registers `onLoad` (runner scope) to print wordart + copyright.
+ * Demo extension: registers runner `onLoad` to print wordart + copyright.
+ * Dependencies are declared so `Default` is self-contained for platform `Layer.mergeAll`.
+ *
+ * @see https://effect.website/docs/requirements-management/layers/#simplifying-service-definitions-with-effectservice
  */
-export const copyrightNoticeLayer: Layer.Layer<never, never, HookRegistry> = Layer.effectDiscard(
-  Effect.gen(function* () {
-    const hooks = yield* HookRegistry
-    yield* hooks.register({ _tag: "runner" }, "onLoad", (_payload) => logBanner())
-  }),
-)
+export class CopyrightNoticeExtension extends Effect.Service<CopyrightNoticeExtension>()(
+  "@eventiva/extensions/CopyrightNoticeExtension",
+  {
+    dependencies: [HookRegistryLive],
+    effect: Effect.gen(function* () {
+      const hooks = yield* HookRegistry
+      yield* hooks.register({ _tag: "runner" }, "onLoad", (_payload) => logBanner())
+      return {
+        _tag: "@eventiva/extensions/CopyrightNoticeExtension" as const,
+      }
+    }),
+  },
+) {}
 
-/** No-op entry — real work is `copyrightNoticeLayer` merged via `PlatformContext.extensionLayers`. */
+/** No-op entry — real work is {@link CopyrightNoticeExtension} merged via `PlatformContext.extensionLayers`. */
 export function makeCopyrightNoticeEntry(
-  _ctx: BattleshipPlatformContext,
+  _ctx: PlatformContext,
 ): Effect.Effect<void, unknown, never> {
   return Effect.gen(function* () {
     const mode = yield* clusterAppModeConfig
-    if (mode !== "battleship" && mode !== "runner") {
+    if (mode !== "primary" && mode !== "runner") {
       return
     }
   })
