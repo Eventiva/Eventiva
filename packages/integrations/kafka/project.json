@@ -1,0 +1,19 @@
+{
+  "name": "integrations-kafka",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/integrations/kafka/src",
+  "projectType": "library",
+  "tags": ["type:extension", "layer:backend"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/integrations/kafka",
+        "main": "packages/integrations/kafka/src/index.ts",
+        "tsConfig": "packages/integrations/kafka/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

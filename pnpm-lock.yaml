@@ -257,6 +257,12 @@ importers:
       '@effect/sql':
         specifier: 0.49.0
         version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql-mysql2':
+        specifier: ^0.49.0
+        version: 0.49.1(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@types/node@20.19.9)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
+      '@effect/sql-pg':
+        specifier: ^0.49.0
+        version: 0.49.7(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
         version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
@@ -318,6 +324,21 @@ importers:
         specifier: ^2.3.0
         version: 2.8.1
 
+  packages/extensions/hooks-kafka-demo:
+    dependencies:
+      '@eventiva/core':
+        specifier: workspace:*
+        version: link:../../core
+      '@eventiva/integrations.kafka':
+        specifier: workspace:*
+        version: link:../../integrations/kafka
+      effect:
+        specifier: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
   packages/extensions/runner:
     dependencies:
       '@effect/cluster':
@@ -329,6 +350,9 @@ importers:
       '@eventiva/core':
         specifier: workspace:*
         version: link:../../core
+      '@eventiva/integrations.kafka':
+        specifier: workspace:*
+        version: link:../../integrations/kafka
       effect:
         specifier: 3.19.19
         version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
@@ -378,6 +402,24 @@ importers:
         specifier: ^2.3.0
         version: 2.8.1
 
+  packages/integrations/kafka:
+    dependencies:
+      '@eventiva/core':
+        specifier: workspace:*
+        version: link:../../core
+      effect:
+        specifier: 3.19.19
+        version: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+      effect-kafka:
+        specifier: ^0.9.0
+        version: 0.9.0(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))(kafkajs@2.2.4)
+      kafkajs:
+        specifier: ^2.2.4
+        version: 2.2.4
+      tslib:
+        specifier: ^2.3.0
+        version: 2.8.1
+
   packages/platforms/mysql:
     dependencies:
       '@effect/cluster':
@@ -395,9 +437,6 @@ importers:
       '@effect/sql':
         specifier: 0.49.0
         version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/sql-mysql2':
-        specifier: ^0.49.0
-        version: 0.49.1(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@types/node@20.19.9)(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
         version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
@@ -410,6 +449,9 @@ importers:
       '@eventiva/extensions.example-transform':
         specifier: workspace:*
         version: link:../../extensions/example-transform
+      '@eventiva/extensions.hooks-kafka-demo':
+        specifier: workspace:^
+        version: link:../../extensions/hooks-kafka-demo
       '@eventiva/extensions.runner':
         specifier: workspace:*
         version: link:../../extensions/runner
@@ -446,9 +488,6 @@ importers:
       '@effect/sql':
         specifier: 0.49.0
         version: 0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
-      '@effect/sql-pg':
-        specifier: ^0.49.0
-        version: 0.49.7(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/sql@0.49.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
       '@effect/workflow':
         specifier: ^0.16.0
         version: 0.16.0(@effect/experimental@0.58.0(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(@effect/rpc@0.73.1(@effect/platform@0.94.5(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)))(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))
@@ -461,6 +500,9 @@ importers:
       '@eventiva/extensions.example-transform':
         specifier: workspace:*
         version: link:../../extensions/example-transform
+      '@eventiva/extensions.hooks-kafka-demo':
+        specifier: workspace:^
+        version: link:../../extensions/hooks-kafka-demo
       '@eventiva/extensions.runner':
         specifier: workspace:*
         version: link:../../extensions/runner
@@ -6144,6 +6186,21 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
+  effect-kafka@0.9.0:
+    resolution: {integrity: sha512-TNxtl5l8YKiAc30tjiJTuTy5Qq58MJ0qNM0rZz3HjIvGCwQC9qLfTnr0LaYPycCzWq1MLfDxHnfjMIh8rkxZeQ==}
+    peerDependencies:
+      '@confluentinc/kafka-javascript': ^1
+      '@platformatic/kafka': ^1.7
+      effect: 3.19.19
+      kafkajs: ^2
+    peerDependenciesMeta:
+      '@confluentinc/kafka-javascript':
+        optional: true
+      '@platformatic/kafka':
+        optional: true
+      kafkajs:
+        optional: true
+
   effect@3.19.19:
     resolution: {integrity: sha512-Yc8U/SVXo2dHnaP7zNBlAo83h/nzSJpi7vph6Hzyl4ulgMBIgPmz3UzOjb9sBgpFE00gC0iETR244sfXDNLHRg==}
 
@@ -7854,6 +7911,10 @@ packages:
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
+
+  kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
 
   keygrip@1.1.0:
     resolution: {integrity: sha512-iYSchDJ+liQ8iwbSI2QqsQOvqv58eJCEanyJPJi+Khyu8smkcKSFUCbPwzFcL7YVtZ6eONjqRX/38caJ7QjRAQ==}
@@ -17938,6 +17999,12 @@ snapshots:
 
   ee-first@1.1.1: {}
 
+  effect-kafka@0.9.0(effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq))(kafkajs@2.2.4):
+    dependencies:
+      effect: 3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq)
+    optionalDependencies:
+      kafkajs: 2.2.4
+
   effect@3.19.19(patch_hash=oma2rq2jtrt7sjh5e7b6vwjfzq):
     dependencies:
       '@standard-schema/spec': 1.1.0
@@ -20304,6 +20371,8 @@ snapshots:
       array.prototype.flat: 1.3.3
       object.assign: 4.1.7
       object.values: 1.2.1
+
+  kafkajs@2.2.4: {}
 
   keygrip@1.1.0:
     dependencies:

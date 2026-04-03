@@ -112,7 +112,7 @@ Extend `[BattleshipPlatformContext](packages/core/src/platform/battleship-platfo
 ### `@eventiva/extensions.example-transform`
 
 - Register a **pre-transform** on `**Shoot`** that adjusts `target` (e.g. force to a fixed demo value or `mod`/offset) and append a **TransformStep** with a clear `path` (e.g. `"/target"`).
-- Log **before/after** at `INFO` so `[kubectl logs](scripts/cluster/legacy/logs-cluster-all.mjs)` shows retargeting under load.
+- Log **before/after** at `INFO` so `[kubectl logs](scripts/cluster/logs-cluster-all.mjs)` shows retargeting under load.
 - **Export** `makeExampleTransformEntry`.
 
 ## Compose on platforms

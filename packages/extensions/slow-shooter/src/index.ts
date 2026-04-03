@@ -3,3 +3,5 @@ export {
   slowShooterProgram,
   slowShooterProvided,
 } from "./slow-shooter.js"
+export { SlowShooterExtension } from "./slow-shooter-extension.js"
+export { SlowShooterExtension } from "./slow-shooter-extension.js"

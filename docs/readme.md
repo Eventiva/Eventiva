@@ -1,7 +1,7 @@
 ---
-revnumber: "1.4"
-revdate: "2026-04-02"
-revremark: "Added hooks and transforms (battleship) developer part; hub links to glossary and demo extensions."
+revnumber: "1.7"
+revdate: "2026-04-03"
+revremark: "Kafka hook dispatch part: hooks-kafka-demo extension, platform bootstrap layer, log grep."
 ---
 
 # Eventiva documentation hub
@@ -21,7 +21,10 @@ This folder holds **Markdown** guides and reusable **parts** for day-to-day work
 | ----- | -------- |
 | Local dev: Postgres vs SQLite, env vars, postgresql vs sqlite-demo platform | [`parts/local-dev/database-backends-and-platforms.md`](parts/local-dev/database-backends-and-platforms.md) |
 | Local runtime in cluster mode: start, lifecycle targets, manifests, and regression gate | [`parts/local-dev/postgresql-cluster-runtime.md`](parts/local-dev/postgresql-cluster-runtime.md) |
-| Hooks and transforms (battleship demo): glossary, registries, platform wiring, demo extensions | [`parts/backend/hooks-and-transforms-battleship.md`](parts/backend/hooks-and-transforms-battleship.md) |
+| Cluster hook fan-out (Kafka): topic, consumer groups, FPK dev broker, demo extension (`hooks-kafka-demo`), TLS/ACLs/retention, fallbacks | [`parts/local-dev/kafka-hook-dispatch.md`](parts/local-dev/kafka-hook-dispatch.md) |
+| Strimzi Kafka: FPK vendor/apply pattern for staging–prod (no ad-hoc kubectl as primary) | [`parts/local-dev/kafka-strimzi-fpk-pattern.md`](parts/local-dev/kafka-strimzi-fpk-pattern.md) |
+| Effect cluster SQL tables (`cluster_*`), sharding parity, optional participant registry | [`parts/local-dev/effect-cluster-sql-tables.md`](parts/local-dev/effect-cluster-sql-tables.md) |
+| Hooks and transforms (cluster demo): glossary, registries, platform wiring, demo extensions | [`parts/backend/hooks-and-transforms-battleship.md`](parts/backend/hooks-and-transforms-battleship.md) |
 | Contact REST + RPC curl examples (default HTTP **3000**, override with `EVENTIVA_HTTP_PORT`) | [`testing-entity-http-endpoints.md`](testing-entity-http-endpoints.md) |
 
 ### Learnings (architecture and conventions)

@@ -23,6 +23,10 @@ export const clusterEnv = {
     EVENTIVA_CLUSTER_MODE: process.env.EVENTIVA_CLUSTER_MODE ?? 'distributed',
 }
 
+/** In-cluster Kafka API (Redpanda dev broker); override for Strimzi bootstrap in other envs. */
+export const kafkaBootstrapServers =
+    process.env.KAFKA_BOOTSTRAP_SERVERS ?? 'redpanda.kafka.svc.cluster.local:9092'
+
 /**
  * Dev-only key kept for compatibility if workload expects it; cluster demo does not require it.
  */

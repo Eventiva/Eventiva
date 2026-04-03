@@ -1,6 +1,11 @@
 import * as K from '@fpk/k8s';
 import { pipe } from 'effect';
-import { clusterEnv, localClusterEncryptionKeyB64, mysqlCredentials } from '../shared/env';
+import {
+    clusterEnv,
+    kafkaBootstrapServers,
+    localClusterEncryptionKeyB64,
+    mysqlCredentials,
+} from '../shared/env';
 
 const name = 'battleships-mysql';
 const image =
@@ -15,7 +20,7 @@ const container = pipe(
     K.setImagePullPolicy('IfNotPresent'),
     K.concatEnv({
         NODE_ENV: 'development',
-        CLUSTER_APP_MODE: 'battleship',
+        CLUSTER_APP_MODE: 'primary',
         EVENTIVA_ENCRYPTION_KEY: localClusterEncryptionKeyB64,
         DB_USER: mysqlCredentials.DB_USER,
         DB_PASSWORD: mysqlCredentials.DB_PASSWORD,
@@ -27,6 +32,11 @@ const container = pipe(
         EVENTIVA_CLUSTER_RUNNER_RPC_PORT: clusterEnv.EVENTIVA_CLUSTER_RUNNER_RPC_PORT,
         EVENTIVA_CLUSTER_RUNNER_RPC_BIND_HOST: clusterEnv.EVENTIVA_CLUSTER_RUNNER_RPC_BIND_HOST,
         EVENTIVA_CLUSTER_MODE: clusterEnv.EVENTIVA_CLUSTER_MODE,
+        CLUSTER_HOOK_BUS: process.env.CLUSTER_HOOK_BUS ?? 'kafka',
+        KAFKA_BOOTSTRAP_SERVERS: kafkaBootstrapServers,
+        EVENTIVA_HOOK_DISPATCH_TOPIC: process.env.EVENTIVA_HOOK_DISPATCH_TOPIC ?? 'eventiva.hook.dispatch',
+        CLUSTER_EXTENSION_ID: process.env.CLUSTER_EXTENSION_ID ?? '',
+        EVENTIVA_CLUSTER_EXTENSIONS: process.env.EVENTIVA_CLUSTER_EXTENSIONS ?? 'all',
     }),
     K.setResourceRequests({
         cpu: '200m',
@@ -46,7 +56,7 @@ const container = pipe(
     }),
 );
 
-const deployment = pipe(
+const deploymentAfterMysql = pipe(
     K.deploymentWithContainer(name, container),
     K.appendInitContainer({
         name: 'wait-for-mysql',
@@ -59,6 +69,22 @@ const deployment = pipe(
     }),
     K.setReplicas(1),
 );
+
+const deployment =
+    process.env.CLUSTER_HOOK_BUS === 'kafka'
+        ? pipe(
+              deploymentAfterMysql,
+              K.appendInitContainer({
+                  name: 'wait-for-kafka',
+                  image: process.env.EVENTIVA_KAFKA_WAIT_IMAGE ?? 'bash:5.2',
+                  command: [
+                      'bash',
+                      '-c',
+                      'for i in $(seq 1 90); do (echo >/dev/tcp/redpanda.kafka.svc/9092) >/dev/null 2>&1 && exit 0; sleep 2; done; echo "timeout kafka"; exit 1',
+                  ],
+              }),
+          )
+        : deploymentAfterMysql;
 
 export default K.withNamespace(name)({
     '10-deployment': deployment,

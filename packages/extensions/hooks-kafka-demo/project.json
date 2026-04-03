@@ -1,0 +1,19 @@
+{
+  "name": "extensions-hooks-kafka-demo",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/extensions/hooks-kafka-demo/src",
+  "projectType": "library",
+  "tags": ["type:extension", "layer:backend"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/extensions/hooks-kafka-demo",
+        "main": "packages/extensions/hooks-kafka-demo/src/index.ts",
+        "tsConfig": "packages/extensions/hooks-kafka-demo/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}
