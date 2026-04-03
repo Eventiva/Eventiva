@@ -109,6 +109,8 @@ Keep the platform package to a **small, fixed set** of files:
 - Keep stable entrypoint names (wrapper/forwarders) temporarily where needed so root scripts/Nx targets do not break abruptly.
 - Replace active Nx targets to call the new implementation paths as they are introduced.
 
+> **Update:** The `scripts/cluster/legacy/` shim described above was later removed; implementations live directly in `scripts/cluster/*.mjs` (no `legacy/` subfolder).
+
 1. Create fresh `packages/core` from working example
 
 - Copy **only** the domain/demo modules listed in **Core vs platform source layout** from `[/run/media/tgtgamer/Dev/Eventiva/Examples/cluster-docker/src/effect-days](/run/media/tgtgamer/Dev/Eventiva/Examples/cluster-docker/src/effect-days)` (and any minimal shared helpers core still needs) into `[/run/media/tgtgamer/Dev/Eventiva/packages/core/src](/run/media/tgtgamer/Dev/Eventiva/packages/core/src)`.

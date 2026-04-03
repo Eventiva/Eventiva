@@ -1,6 +1,6 @@
 import {
-  Battleship,
-  type BattleshipPlatformContext,
+  DemoEntity,
+  type PlatformContext,
   clusterAppModeConfig,
   makeClusterSqlClientLayer,
   withSpanAndLog,
@@ -11,7 +11,7 @@ const getTarget = () => Math.floor(Math.random() * 1000)
 
 export const speedShooterProgram = withSpanAndLog("speedShooterProgram")(
   Effect.gen(function* () {
-    const client = yield* Battleship.client
+    const client = yield* DemoEntity.client
     let counter = 0
 
     const semaphore = yield* Effect.makeSemaphore(30)
@@ -40,7 +40,7 @@ export const speedShooterProgram = withSpanAndLog("speedShooterProgram")(
 
 /** High-concurrency shooter when `CLUSTER_APP_MODE` is `speed-shooter`. */
 export function makeSpeedShooterEntry(
-  ctx: BattleshipPlatformContext,
+  ctx: PlatformContext,
 ): Effect.Effect<void, unknown, never> {
   return Effect.gen(function* () {
     const mode = yield* clusterAppModeConfig

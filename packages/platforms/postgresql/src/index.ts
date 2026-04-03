@@ -1,2 +1,2 @@
-/** PostgreSQL platform: SQL layer and re-exports for tooling. */
-export { SqlLayer } from "./sql.js"
+/** Build artefact entry; the cluster process runs `platform.ts`. */
+export { PostgresqlClusterPlatform } from "./platform.js"

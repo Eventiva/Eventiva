@@ -34,10 +34,12 @@
             "@eventiva/extensions.speed-shooter": ["packages/extensions/speed-shooter/src/index.ts"],
             "@eventiva/extensions.copyright-notice": ["packages/extensions/copyright-notice/src/index.ts"],
             "@eventiva/extensions.example-transform": ["packages/extensions/example-transform/src/index.ts"],
+            "@eventiva/extensions.hooks-kafka-demo": ["packages/extensions/hooks-kafka-demo/src/index.ts"],
             "@eventiva/platforms.postgresql": ["packages/platforms/postgresql/src/index.ts"],
             "@eventiva/platforms.postgresql/platform": ["packages/platforms/postgresql/src/platform.ts"],
             "@eventiva/platforms.mysql": ["packages/platforms/mysql/src/index.ts"],
-            "@eventiva/platforms.mysql/platform": ["packages/platforms/mysql/src/platform.ts"]
+            "@eventiva/platforms.mysql/platform": ["packages/platforms/mysql/src/platform.ts"],
+            "@eventiva/integrations.kafka": ["packages/integrations/kafka/src/index.ts"]
         }
     }
 }

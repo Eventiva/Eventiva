@@ -1,6 +1,6 @@
 import {
-  Battleship,
-  type BattleshipPlatformContext,
+  DemoEntity,
+  type PlatformContext,
   clusterAppModeConfig,
   makeClusterSqlClientLayer,
   withSpanAndLog,
@@ -12,7 +12,7 @@ const getTarget = () => Math.floor(Math.random() * 1000)
 
 export const shooterProgram = withSpanAndLog("shooterProgram")(
   Effect.gen(function* () {
-    const client = yield* Battleship.client
+    const client = yield* DemoEntity.client
 
     while (true) {
       const ship = getShipId()
@@ -25,7 +25,7 @@ export const shooterProgram = withSpanAndLog("shooterProgram")(
 
 /** Basic shooter client loop when `CLUSTER_APP_MODE` is `shooter`. */
 export function makeShooterEntry(
-  ctx: BattleshipPlatformContext,
+  ctx: PlatformContext,
 ): Effect.Effect<void, unknown, never> {
   return Effect.gen(function* () {
     const mode = yield* clusterAppModeConfig

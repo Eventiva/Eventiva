@@ -1,6 +1,6 @@
 import {
-  Battleship,
-  type BattleshipPlatformContext,
+  DemoEntity,
+  type PlatformContext,
   clusterAppModeConfig,
   makeClusterSqlClientLayer,
   withSpanAndLog,
@@ -9,7 +9,7 @@ import { Config, Effect, Iterable, Layer } from "effect"
 
 export const slowShooterProgram = withSpanAndLog("slowShooterProgram")(
   Effect.gen(function* () {
-    const client = yield* Battleship.client
+    const client = yield* DemoEntity.client
     const start = yield* Config.integer("START_SHIP")
 
     yield* Effect.forEach(
@@ -52,7 +52,7 @@ export function slowShooterProvided<E, R>(
  * Forks the long-running program then blocks forever so the process does not fall through to “unknown mode”.
  */
 export function makeSlowShooterEntry(
-  ctx: BattleshipPlatformContext,
+  ctx: PlatformContext,
 ): Effect.Effect<void, unknown, never> {
   return Effect.gen(function* () {
     const mode = yield* clusterAppModeConfig

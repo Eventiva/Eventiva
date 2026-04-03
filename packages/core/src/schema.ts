@@ -29,7 +29,7 @@ export class DeliverAtBullet
   }
 }
 
-export const Battleship = Entity.make("Battleship", [
+export const DemoEntity = Entity.make("DemoEntity", [
   Rpc.make("Shoot", {
     payload: { target: Schema.Int },
   }).annotate(ClusterSchema.Persisted, false),

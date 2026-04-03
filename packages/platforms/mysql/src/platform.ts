@@ -1,28 +1,62 @@
-import { NodeRuntime } from "@effect/platform-node"
 import {
-  clusterAppModeConfig,
-  observabilityLayers,
+  clusterExtensionsProfileFromEnv,
+  clusterObservabilityLayer,
+  clusterPlatformContextSync,
+  clusterPlatformMainFor,
+  mysqlClusterSqlLayer,
+  runClusterPlatformIfEsmMain,
 } from "@eventiva/core"
-import { ConfigProvider, Effect } from "effect"
+import { CopyrightNoticeExtension } from "@eventiva/extensions.copyright-notice"
+import { ExampleTransformExtension } from "@eventiva/extensions.example-transform"
 import {
-  battleshipClusterAppEntries,
-  battleshipExtensionLayers,
-} from "./extensions.js"
-import { SqlLayer } from "./sql.js"
+  hooksKafkaDemoBootstrapLayer,
+  HooksKafkaDemoRegistrationExtension,
+} from "@eventiva/extensions.hooks-kafka-demo"
+import { RunnerExtension } from "@eventiva/extensions.runner"
+import { ShooterExtension } from "@eventiva/extensions.shooter"
+import { SlowShooterExtension } from "@eventiva/extensions.slow-shooter"
+import { SpeedShooterExtension } from "@eventiva/extensions.speed-shooter"
+import { Effect, Layer } from "effect"
 
-const observabilityLive = observabilityLayers()
+const profile = clusterExtensionsProfileFromEnv()
 
-const program = Effect.gen(function* () {
-  const ctx = {
-    sqlLayer: SqlLayer,
-    observabilityLayer: observabilityLive,
-    extensionLayers: battleshipExtensionLayers,
-  }
-  for (const entry of battleshipClusterAppEntries) {
-    yield* entry(ctx)
-  }
-  const mode = yield* clusterAppModeConfig
-  yield* Effect.dieMessage(`Unknown CLUSTER_APP_MODE: ${String(mode)}`)
-}).pipe(Effect.withConfigProvider(ConfigProvider.fromEnv()))
+const hookRegistrationLayers = (
+  profile === "copyright-notice"
+    ? Layer.mergeAll(
+        CopyrightNoticeExtension.Default,
+        HooksKafkaDemoRegistrationExtension.Default,
+      )
+    : profile === "example-transform"
+      ? Layer.mergeAll(
+          ExampleTransformExtension.Default,
+          HooksKafkaDemoRegistrationExtension.Default,
+        )
+      : Layer.mergeAll(
+          CopyrightNoticeExtension.Default,
+          ExampleTransformExtension.Default,
+          HooksKafkaDemoRegistrationExtension.Default,
+        )
+) as Layer.Layer<any, any, any>
 
-NodeRuntime.runMain(program)
+const applicationLayers = Layer.mergeAll(
+  RunnerExtension.Default,
+  ShooterExtension.Default,
+  SpeedShooterExtension.Default,
+  SlowShooterExtension.Default,
+) as Layer.Layer<unknown, unknown, never>
+
+export class MysqlClusterPlatform extends Effect.Service<MysqlClusterPlatform>()(
+  "eventiva/platform/mysql/ClusterPlatform",
+  {
+    sync: clusterPlatformContextSync({
+      sqlLayer: mysqlClusterSqlLayer,
+      observabilityLayer: clusterObservabilityLayer,
+      hookSidecarLayers: hookRegistrationLayers,
+      kafkaHookBootstrapLayer: hooksKafkaDemoBootstrapLayer,
+    }),
+  },
+) {}
+
+export const mysqlClusterMain = clusterPlatformMainFor(MysqlClusterPlatform, applicationLayers)
+
+runClusterPlatformIfEsmMain(import.meta.url, mysqlClusterMain)
