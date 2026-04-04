@@ -65,7 +65,6 @@
         "@fpk/cli": "^0.1.58",
         "@fpk/k8s": "^0.7.0",
         "@module-federation/enhanced": "^0.21.2",
-        "@nx/devkit": "22.5.4",
         "@nx/cypress": "22.5.4",
         "@nx/docker": "22.5.4",
         "@nx/eslint": "22.5.4",
