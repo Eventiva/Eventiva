@@ -20,7 +20,7 @@
 
 ## Local Postgres inspection (agents and contributors)
 
-When Postgres runs on the same machine as the repo (devcontainer, laptop, or CI runner with a service container), use the **`psql` CLI** to verify schema state. The app and `scripts/pg-e2e-via-nx.mjs` use **`HOST` / `DATABASE`** (and `pgClientConfigFromEnv`) for the Node client, but **`psql` and libpq use `PGHOST` / `PGDATABASE`** — set both or align them, or checks may hit a different database than the platform.
+When Postgres runs on the same machine as the repo (devcontainer, laptop, or CI runner with a service container), use the **`psql` CLI** to verify schema state. The app and `packages/cluster-tooling/cli/pg-e2e-via-nx.ts` use **`HOST` / `DATABASE`** (and `pgClientConfigFromEnv`) for the Node client, but **`psql` and libpq use `PGHOST` / `PGDATABASE`** — set both or align them, or checks may hit a different database than the platform.
 
 Useful commands:
 

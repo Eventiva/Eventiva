@@ -15,7 +15,7 @@ This guide is for running the PostgreSQL platform in local development using the
   - `cluster:status`
   - `cluster:logs`
 - Matching root scripts are available in `package.json` for the same lifecycle commands.
-- The PostgreSQL (and MySQL) apply profile includes a **Kafka API broker** (`tools/cluster/src/kafka`, Redpanda) before database workloads so hook dispatch can use `CLUSTER_HOOK_BUS=kafka`. See [Kafka hook dispatch](./kafka-hook-dispatch.md).
+- The PostgreSQL (and MySQL) apply profile includes a **Kafka API broker** (`packages/cluster-tooling/fpk/src/kafka`, Redpanda) before database workloads so hook dispatch can use `CLUSTER_HOOK_BUS=kafka`. See [Kafka hook dispatch](./kafka-hook-dispatch.md).
 
 ## Prerequisites
 
@@ -76,14 +76,14 @@ pnpm nx run platforms-postgresql:cluster:delete
 
 Cluster manifests are defined under:
 
-- `tools/cluster/src/pg`
-- `tools/cluster/src/shard-manager`
-- `tools/cluster/src/runner`
-- `tools/cluster/src/workload`
+- `packages/cluster-tooling/fpk/src/pg`
+- `packages/cluster-tooling/fpk/src/shard-manager`
+- `packages/cluster-tooling/fpk/src/runner`
+- `packages/cluster-tooling/fpk/src/workload`
 
 Shared environment helpers for these manifests live in:
 
-- `tools/cluster/src/shared/env.ts`
+- `packages/cluster-tooling/fpk/src/shared/env.ts`
 
 ## HTTP from your host (curl / browser)
 
@@ -103,7 +103,7 @@ curl -sS "http://127.0.0.1:3000/api/docs" | head
 
 Stop the forward with Ctrl+C.
 
-**One command for Postgres + HTTP + runner RPC:** `pnpm cluster:port-forward` (or `pnpm nx run platforms-postgresql:cluster:port-forward`) runs `scripts/cluster/port-forward-fpk-cluster.mjs`. Optional env: `EVENTIVA_PF_PG_PORT`, `EVENTIVA_PF_HTTP_PORT`, `EVENTIVA_PF_RUNNER_RPC_PORT`, `EVENTIVA_PF_SKIP_RUNNER_RPC=1`.
+**One command for Postgres + HTTP + runner RPC:** `pnpm cluster:port-forward` (or `pnpm nx run platforms-postgresql:cluster:port-forward`) runs `packages/cluster-tooling/cli/port-forward-fpk-cluster.ts`. Optional env: `EVENTIVA_PF_PG_PORT`, `EVENTIVA_PF_HTTP_PORT`, `EVENTIVA_PF_RUNNER_RPC_PORT`, `EVENTIVA_PF_SKIP_RUNNER_RPC=1`.
 
 `pnpm dev` / `pnpm cluster:run` sets `EVENTIVA_CLUSTER_PORT_FORWARD=1` so `logs-cluster-all` starts the same forwards while tailing cluster logs. For logs only without forwards, use `pnpm nx run platforms-postgresql:cluster:logs:all` or `EVENTIVA_CLUSTER_PORT_FORWARD=0`.
 
@@ -118,12 +118,12 @@ kubectl port-forward -n postgres svc/postgres 5432:5432
 
 The regression gate is:
 
-- `scripts/pg-e2e-via-nx.mjs`
+- `packages/cluster-tooling/cli/pg-e2e-via-nx.ts`
 
 Run it with:
 
 ```bash
-node scripts/pg-e2e-via-nx.mjs
+pnpm exec tsx packages/cluster-tooling/cli/pg-e2e-via-nx.ts
 ```
 
 or through Nx:
@@ -138,7 +138,7 @@ By default this boots `platforms-postgresql:run` (cluster apply + log follow) an
 
 ```bash
 kubectl port-forward -n eventiva-workload deployment/eventiva-workload 3000:3000   # terminal 1
-PG_E2E_SKIP_PLATFORM_START=1 SKIP_PSQL=1 node scripts/pg-e2e-via-nx.mjs               # terminal 2
+PG_E2E_SKIP_PLATFORM_START=1 SKIP_PSQL=1 pnpm exec tsx packages/cluster-tooling/cli/pg-e2e-via-nx.ts               # terminal 2
 ```
 
 Use `SKIP_PSQL=1` unless you have forwarded Postgres to localhost and want the script’s `psql` checks. Override `EVENTIVA_HTTP_PORT` if the workload uses a non-default port.

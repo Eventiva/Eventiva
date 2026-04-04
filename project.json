@@ -34,6 +34,13 @@
             "options": {
                 "command": "pnpm exec nx run eventiva:format && pnpm exec nx run eventiva:lint-fix"
             }
+        },
+        "local-ci:cluster": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run cluster-tooling:local-ci",
+                "cwd": "{workspaceRoot}"
+            }
         }
     }
 }

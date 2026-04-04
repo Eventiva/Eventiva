@@ -1,5 +1,7 @@
 packages:
     - 'packages/core'
+    - 'packages/cluster-tooling'
+    - 'packages/test-repo'
     - 'packages/extensions/*'
     - 'packages/integrations/*'
     - 'packages/platforms/*'

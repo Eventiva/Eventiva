@@ -18,7 +18,7 @@
         "run": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/logs-cluster-all.mjs",
+                "command": "pnpm exec nx run cluster-tooling:logs-cluster-all",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "EVENTIVA_CLUSTER_LOG_PROFILE": "postgresql"
@@ -43,10 +43,24 @@
             },
             "dependsOn": ["build"]
         },
+        "run:local-fiber": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec tsx --tsconfig packages/platforms/postgresql/tsconfig.run.json packages/platforms/postgresql/src/platform.ts",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "NODE_ENV": "development",
+                    "CLUSTER_HOOK_BUS": "off",
+                    "EVENTIVA_CLUSTER_INFRASTRUCTURE": "local",
+                    "EVENTIVA_RUNTIME_TIER": "local"
+                }
+            },
+            "dependsOn": ["build"]
+        },
         "cluster:render": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/render-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:render-fpk",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "EVENTIVA_RUNTIME_IMAGE": "docker.io/eventiva/runtime:local"
@@ -56,7 +70,7 @@
         "cluster:apply": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/apply-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:apply-fpk",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "EVENTIVA_CLUSTER_STACK": "postgresql"
@@ -67,7 +81,7 @@
         "cluster:images:build": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/build-local-images.mjs",
+                "command": "pnpm exec nx run cluster-tooling:build-local-images",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "EVENTIVA_RUNTIME_IMAGE": "docker.io/eventiva/runtime:local",
@@ -79,7 +93,7 @@
         "cluster:wait": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/wait-for-cluster-rollout.mjs",
+                "command": "pnpm exec nx run cluster-tooling:wait-rollout",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "EVENTIVA_CLUSTER_STACK": "postgresql"
@@ -90,35 +104,35 @@
         "cluster:delete": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/delete-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:delete-fpk",
                 "cwd": "{workspaceRoot}"
             }
         },
         "cluster:scale-down": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/scale-down-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:scale-down-fpk",
                 "cwd": "{workspaceRoot}"
             }
         },
         "cluster:status": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/status-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:status-fpk",
                 "cwd": "{workspaceRoot}"
             }
         },
         "cluster:logs": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/logs-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:logs-fpk",
                 "cwd": "{workspaceRoot}"
             }
         },
         "cluster:logs:all": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/logs-cluster-all.mjs",
+                "command": "pnpm exec nx run cluster-tooling:logs-cluster-all",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "EVENTIVA_CLUSTER_LOG_PROFILE": "postgresql"
@@ -128,14 +142,14 @@
         "cluster:port-forward": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/cluster/port-forward-fpk-cluster.mjs",
+                "command": "pnpm exec nx run cluster-tooling:port-forward-fpk",
                 "cwd": "{workspaceRoot}"
             }
         },
         "verify-pg-e2e": {
             "executor": "nx:run-commands",
             "options": {
-                "command": "node scripts/pg-e2e-via-nx.mjs",
+                "command": "pnpm exec nx run cluster-tooling:pg-e2e",
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "NODE_ENV": "development",

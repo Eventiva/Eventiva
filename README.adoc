@@ -160,25 +160,38 @@ pnpm nx run-many -t typecheck
 pnpm nx run-many -t test
 ----
 
+==== Effect cluster demo: three ways to run
+
+The packaged **battleship** cluster demo (runner + shooters) can be run **locally** (single process, in-memory cluster storage), via **Docker Compose**, or on **Kubernetes** (FPK). Full commands, env vars, and log regression checks are in link:docs/parts/local-dev/three-tier-platform-runtime.md[docs/parts/local-dev/three-tier-platform-runtime.md] (also linked from link:docs/readme.md[docs/readme.md]).
+
+[cols="1,2",options="header"]
+|===
+|Tier |Typical command
+
+|Local (no Kafka hook bus)
+|`pnpm nx run platforms-postgresql:run:local-fiber`
+
+|Docker Compose
+|`pnpm exec nx run cluster-tooling:build-local-images` then `pnpm exec nx run cluster-tooling:compose-up`
+
+|Kubernetes (FPK)
+|`pnpm cluster:apply` / `pnpm cluster:wait` then `pnpm cluster:logs:all` (see link:docs/parts/local-dev/postgresql-cluster-runtime.md[postgresql-cluster-runtime.md])
+|===
+
+**Regression:** aggregated logs should eventually contain `Boom!`, `Shooting at`, `Shot at`, and `Shots fired:` (substring match). For Compose use `pnpm exec nx run cluster-tooling:compose-verify-demo-logs` after workloads have warmed up; allow extra time for slow-shooter (`Shot at` follows a long delay).
+
 ==== Run the PostgreSQL platform
 
-The main backend entry point is the `platforms-postgresql` Nx project. From the repository root, after dependencies are installed (and ideally after a successful build), start it with:
+The `platforms-postgresql` Nx project is the main PostgreSQL platform library and cluster entrypoints. The default `pnpm dev` / `pnpm nx run platforms-postgresql:run` target streams **Kubernetes** cluster logs when a cluster is deployed (see link:docs/parts/local-dev/postgresql-cluster-runtime.md[postgresql-cluster-runtime.md]). For a **single-machine** demo without K8s, use `pnpm nx run platforms-postgresql:run:local-fiber` instead (see the table above).
+
+To build the library from the repository root:
 
 [source,bash]
 ----
-npx nx run platforms-postgresql:run
+pnpm nx run platforms-postgresql:build
 ----
 
-This target builds the platform library (if needed) and executes `packages/platforms/postgresql/src/index.ts` via `tsx`.
-The process stays running (HTTP entity endpoints on port 3000 by default, or `EVENTIVA_HTTP_PORT` if set); stop it with kbd:[Ctrl+C].
-If Nx reports a non-zero exit after you interrupt or kill the process, that is expected.
-
-If you use pnpm as the package manager (recommended for this repo), the equivalent is:
-
-[source,bash]
-----
-pnpm nx run platforms-postgresql:run
-----
+Other HTTP / workload entrypoints and ports are documented under `packages/platforms/postgresql` and link:docs/parts/local-dev/database-backends-and-platforms.md[database-backends-and-platforms.md].
 
 Environment variables such as `EVENTIVA_DATABASE`, `DATABASE`, and database connection settings apply as documented in the platform (`packages/platforms/postgresql`) and `@eventiva/databases.shared` (backend registry and dialect facades). The Postgres backend is registered in `packages/platforms/postgresql/src/register-database-backends.ts`.
 
@@ -208,7 +221,8 @@ This project uses Nx for task orchestration. Common commands:
 * `pnpm nx run-many -t lint` - Lint all packages
 * `pnpm nx run-many -t typecheck` - Type check all packages
 * `pnpm nx run-many -t test` - Run tests for all packages
-* `npx nx run platforms-postgresql:run` - **Run the PostgreSQL platform** (backend entry point; builds first via target `dependsOn`)
+* `pnpm nx run platforms-postgresql:run:local-fiber` - **Local colocated cluster demo** (single process; `CLUSTER_HOOK_BUS=off`)
+* `npx nx run platforms-postgresql:run` - **Tail Kubernetes cluster logs** when a cluster is deployed (see cluster runtime docs)
 * `pnpm nx run <project>:<target>` - Run a specific target for a project (e.g., `pnpm nx run core:build`)
 * `pnpm nx graph` - Visualize the project dependency graph
 

@@ -10,20 +10,20 @@ Multi-extension hook fan-out uses a single Kafka topic. Each extension deploymen
 
 ## Dev broker (FPK)
 
-- Module: [`tools/cluster/src/kafka`](../../../tools/cluster/src/kafka/index.ts) — single-node **Redpanda** (Kafka API), namespace `kafka`.
+- Module: [`packages/cluster-tooling/fpk/src/kafka`](../../../packages/cluster-tooling/fpk/src/kafka/index.ts) — single-node **Redpanda** (Kafka API), namespace `kafka`.
 - **Topic + retention:** a **Job** (`hook-dispatch-topic-init`) creates `eventiva.hook.dispatch` (or `EVENTIVA_HOOK_DISPATCH_TOPIC` at **render** time) and sets `retention.ms` from `EVENTIVA_HOOK_TOPIC_RETENTION_MS` (default **72h**). Prefer delete cleanup; compaction only if you explicitly need it.
-- Render: `node scripts/cluster/render-fpk-cluster.mjs` → `tools/cluster/out/kafka/`.
-- Apply: `EVENTIVA_CLUSTER_STACK=postgresql` (or `mysql`) includes `kafka` first in [`apply-fpk-cluster.mjs`](../../../scripts/cluster/apply-fpk-cluster.mjs).
-- **Rollout wait:** [`wait-for-cluster-rollout.mjs`](../../../scripts/cluster/wait-for-cluster-rollout.mjs) waits on `kafka/redpanda` for the `postgresql` / `mysql` / `full` stacks.
-- Default bootstrap for pods: `redpanda.kafka.svc.cluster.local:9092` (see `tools/cluster/src/shared/env.ts` → `kafkaBootstrapServers`).
-- **Host debugging:** `EVENTIVA_PF_KAFKA=1 node scripts/cluster/port-forward-fpk-cluster.mjs` forwards `kafka/svc/redpanda` to `127.0.0.1:9094` (override with `EVENTIVA_PF_KAFKA_PORT`).
+- Render: `pnpm exec tsx packages/cluster-tooling/cli/render-fpk-cluster.ts` → `packages/cluster-tooling/fpk/out/kafka/`.
+- Apply: `EVENTIVA_CLUSTER_STACK=postgresql` (or `mysql`) includes `kafka` first in [`apply-fpk-cluster.ts`](../../../packages/cluster-tooling/cli/apply-fpk-cluster.ts).
+- **Rollout wait:** [`wait-for-cluster-rollout.ts`](../../../packages/cluster-tooling/cli/wait-for-cluster-rollout.ts) waits on `kafka/redpanda` for the `postgresql` / `mysql` / `full` stacks.
+- Default bootstrap for pods: `redpanda.kafka.svc.cluster.local:9092` (see `packages/cluster-tooling/fpk/src/shared/env.ts` → `kafkaBootstrapServers`).
+- **Host debugging:** `EVENTIVA_PF_KAFKA=1 pnpm exec tsx packages/cluster-tooling/cli/port-forward-fpk-cluster.ts` forwards `kafka/svc/redpanda` to `127.0.0.1:9094` (override with `EVENTIVA_PF_KAFKA_PORT`).
 
 ## TLS (Strimzi / staging–prod)
 
 - Dev manifest uses **PLAINTEXT** on port 9092.
 - Staging/production: use **Strimzi** listeners on **TLS** (e.g. 9093), mount CA / user certs from Secrets into Eventiva pods, set `KAFKA_TLS=true` and `KAFKA_SSL_CA_PATH` / cert paths per `.env.example`.
 - Pin operator and Kafka versions; document upgrade tests on staging.
-- **FPK + Strimzi:** see [kafka-strimzi-fpk-pattern.md](./kafka-strimzi-fpk-pattern.md) (vendor CRs / operator YAML into `tools/cluster/src`, render + apply only through the FPK pipeline).
+- **FPK + Strimzi:** see [kafka-strimzi-fpk-pattern.md](./kafka-strimzi-fpk-pattern.md) (vendor CRs / operator YAML into `packages/cluster-tooling/fpk/src`, render + apply only through the FPK pipeline).
 
 ## Retention
 
@@ -78,7 +78,7 @@ This package shows the full hook bus path end-to-end: **handlers** plus **bootst
 
 **Platform wiring:** PostgreSQL and MySQL platforms set `PlatformContext.kafkaHookBootstrapLayer` to `hooksKafkaDemoBootstrapLayer` (see `packages/platforms/postgresql/src/platform.ts` and `packages/platforms/mysql/src/platform.ts`). The runner merges that layer after the Kafka stack so a `Producer` is available.
 
-**Defaults:** `CLUSTER_HOOK_BUS` defaults to **`kafka`** in application config ([`cluster-hook-config.ts`](../../../packages/core/src/config/cluster-hook-config.ts)) and in FPK runner render defaults ([`tools/cluster/src/battleships/index.ts`](../../../tools/cluster/src/battleships/index.ts), [`battleships-mysql`](../../../tools/cluster/src/battleships-mysql/index.ts)). Override with `CLUSTER_HOOK_BUS=off` to disable the bus.
+**Defaults:** `CLUSTER_HOOK_BUS` defaults to **`kafka`** in application config ([`cluster-hook-config.ts`](../../../packages/core/src/config/cluster-hook-config.ts)) and in FPK runner render defaults ([`packages/cluster-tooling/fpk/src/battleships/index.ts`](../../../packages/cluster-tooling/fpk/src/battleships/index.ts), [`battleships-mysql`](../../../packages/cluster-tooling/fpk/src/battleships-mysql/index.ts)). Override with `CLUSTER_HOOK_BUS=off` to disable the bus.
 
 **Logs to grep:** demo code prefixes messages with **`[hooks-kafka-demo]`** (registration handlers and bootstrap publish confirmations). Example: `grep '\[hooks-kafka-demo\]'` on runner logs.
 

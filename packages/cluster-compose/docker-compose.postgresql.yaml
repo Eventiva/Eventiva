@@ -1,0 +1,205 @@
+# PostgreSQL cluster demo stack without Kubernetes (Compose / Podman Compose).
+# Prerequisites: `pnpm exec nx run cluster-tooling:build-local-images` (image `docker.io/eventiva/runtime:local`).
+# Usage: `pnpm exec nx run cluster-tooling:compose-up` from the repo root.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 3s
+      timeout: 5s
+      retries: 40
+
+  kafka:
+    image: docker.redpanda.com/redpandadata/redpanda:v24.2.11
+    command:
+      - redpanda
+      - start
+      - --smp=1
+      - --memory=768M
+      - --reserve-memory=0M
+      - --overprovisioned
+      - --node-id=0
+      - --check=false
+      - --kafka-addr
+      - PLAINTEXT://0.0.0.0:9092
+      - --advertise-kafka-addr
+      - PLAINTEXT://kafka:9092
+    healthcheck:
+      test: ['CMD-SHELL', 'rpk cluster info --brokers 127.0.0.1:9092 >/dev/null 2>&1']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 15s
+
+  shard-manager:
+    image: docker.io/eventiva/runtime:local
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: development
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGHOST: postgres
+      PGPORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      SHARD_MANAGER_HOST: shard-manager
+      HOST: shard-manager
+      PORT: '8080'
+      LISTEN_HOST: 0.0.0.0
+      LISTEN_PORT: '8080'
+      SHARDS_PER_GROUP: '2'
+      EVENTIVA_ENCRYPTION_KEY: ZGV2LWtleS0zMmJ5dGVzLWZvci1ldmVudGl2YS1waWk=
+    command:
+      - pnpm
+      - exec
+      - tsx
+      - --tsconfig
+      - packages/platforms/postgresql/tsconfig.run.json
+      - packages/platforms/postgresql/src/shardManager.ts
+
+  battleships:
+    image: docker.io/eventiva/runtime:local
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+      shard-manager:
+        condition: service_started
+    environment:
+      NODE_ENV: development
+      CLUSTER_APP_MODE: primary
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGHOST: postgres
+      PGPORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      SHARD_MANAGER_HOST: shard-manager
+      HOST: battleships
+      CLUSTER_HOOK_BUS: kafka
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      EVENTIVA_HOOK_DISPATCH_TOPIC: eventiva.hook.dispatch
+      SHARDS_PER_GROUP: '2'
+      EVENTIVA_ENCRYPTION_KEY: ZGV2LWtleS0zMmJ5dGVzLWZvci1ldmVudGl2YS1waWk=
+    command:
+      - pnpm
+      - exec
+      - tsx
+      - --tsconfig
+      - packages/platforms/postgresql/tsconfig.run.json
+      - packages/platforms/postgresql/src/platform.ts
+
+  shooter:
+    image: docker.io/eventiva/runtime:local
+    depends_on:
+      - postgres
+      - shard-manager
+      - battleships
+    environment:
+      NODE_ENV: development
+      CLUSTER_APP_MODE: shooter
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGHOST: postgres
+      PGPORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      SHARD_MANAGER_HOST: shard-manager
+      HOST: shooter
+      SHARDS_PER_GROUP: '2'
+      SHOOTER_MAX_SHOOTS: '5'
+      EVENTIVA_ENCRYPTION_KEY: ZGV2LWtleS0zMmJ5dGVzLWZvci1ldmVudGl2YS1waWk=
+    command:
+      - pnpm
+      - exec
+      - tsx
+      - --tsconfig
+      - packages/platforms/postgresql/tsconfig.run.json
+      - packages/platforms/postgresql/src/platform.ts
+
+  speed-shooter:
+    image: docker.io/eventiva/runtime:local
+    depends_on:
+      - postgres
+      - shard-manager
+      - battleships
+    environment:
+      NODE_ENV: development
+      CLUSTER_APP_MODE: speed-shooter
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGHOST: postgres
+      PGPORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      SHARD_MANAGER_HOST: shard-manager
+      HOST: speed-shooter
+      SHARDS_PER_GROUP: '2'
+      SHOOTER_MAX_SHOOTS: '5'
+      SPEED_SHOOTER_ENTITY_COUNT: '80'
+      SPEED_SHOOTER_CONCURRENCY: '15'
+      EVENTIVA_ENCRYPTION_KEY: ZGV2LWtleS0zMmJ5dGVzLWZvci1ldmVudGl2YS1waWk=
+    command:
+      - pnpm
+      - exec
+      - tsx
+      - --tsconfig
+      - packages/platforms/postgresql/tsconfig.run.json
+      - packages/platforms/postgresql/src/platform.ts
+
+  slow-shooter:
+    image: docker.io/eventiva/runtime:local
+    depends_on:
+      - postgres
+      - shard-manager
+      - battleships
+    environment:
+      NODE_ENV: development
+      CLUSTER_APP_MODE: slow-shooter
+      START_SHIP: '0'
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: postgres
+      PGHOST: postgres
+      PGPORT: '5432'
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: postgres
+      DB_HOST: postgres
+      DB_PORT: '5432'
+      SHARD_MANAGER_HOST: shard-manager
+      HOST: slow-shooter
+      SHARDS_PER_GROUP: '2'
+      EVENTIVA_ENCRYPTION_KEY: ZGV2LWtleS0zMmJ5dGVzLWZvci1ldmVudGl2YS1waWk=
+    command:
+      - pnpm
+      - exec
+      - tsx
+      - --tsconfig
+      - packages/platforms/postgresql/tsconfig.run.json
+      - packages/platforms/postgresql/src/platform.ts

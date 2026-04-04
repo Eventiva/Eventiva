@@ -1,0 +1,16 @@
+{
+    "name": "test-repo-tooling",
+    "version": "0.0.1",
+    "generators": {
+        "bootstrap-tests-repo": {
+            "factory": "./src/generators/bootstrap-tests-repo/generator.ts#bootstrapTestsRepoGenerator",
+            "schema": "./src/generators/bootstrap-tests-repo/schema.json",
+            "description": "Bootstrap external tests workspace (Nx, Vitest, cluster-e2e seed, contract tools)."
+        },
+        "scaffold-package-tests": {
+            "factory": "./src/generators/scaffold-package-tests/generator.ts#scaffoldPackageTestsGenerator",
+            "schema": "./src/generators/scaffold-package-tests/schema.json",
+            "description": "Scaffold mirrored Vitest projects under tests/ for known packages/* entries."
+        }
+    }
+}

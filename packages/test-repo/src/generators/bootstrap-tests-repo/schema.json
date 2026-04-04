@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "cli": "nx",
+    "id": "bootstrap-tests-repo",
+    "title": "Bootstrap tests workspace layout",
+    "type": "object",
+    "properties": {
+        "directory": {
+            "type": "string",
+            "description": "Directory relative to workspace root (e.g. tests or tests-repo)",
+            "default": "tests-repo",
+            "$default": {
+                "$source": "argv",
+                "index": 0
+            },
+            "x-priority": "important"
+        }
+    },
+    "additionalProperties": false
+}

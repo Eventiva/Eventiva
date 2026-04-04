@@ -1,0 +1,16 @@
+{
+    "name": "test-repo-tooling",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/test-repo/src",
+    "projectType": "library",
+    "tags": ["type:core", "layer:shared", "scope:tools"],
+    "targets": {
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": ["packages/test-repo/**/*.ts"]
+            }
+        }
+    }
+}
