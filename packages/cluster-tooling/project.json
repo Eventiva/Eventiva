@@ -1,0 +1,190 @@
+{
+    "name": "cluster-tooling",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "packages/cluster-tooling/src",
+    "projectType": "library",
+    "tags": ["type:core", "layer:shared", "scope:tools"],
+    "targets": {
+        "build": {
+            "executor": "@nx/js:tsc",
+            "outputs": ["{options.outputPath}"],
+            "options": {
+                "outputPath": "dist/cluster-tooling",
+                "main": "packages/cluster-tooling/src/index.ts",
+                "tsConfig": "packages/cluster-tooling/tsconfig.lib.json",
+                "assets": []
+            }
+        },
+        "lint": {
+            "executor": "@nx/eslint:lint",
+            "outputs": ["{options.outputFile}"],
+            "options": {
+                "lintFilePatterns": [
+                    "packages/cluster-tooling/**/*.ts",
+                    "packages/cluster-tooling/cli/**/*.ts"
+                ]
+            }
+        },
+        "docker:build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run cluster-tooling:build-local-images",
+                "cwd": "{workspaceRoot}",
+                "env": {
+                    "EVENTIVA_CLUSTER_STACK": "postgresql",
+                    "EVENTIVA_RUNTIME_IMAGE": "docker.io/eventiva/runtime:local"
+                }
+            }
+        },
+        "dts-docs:enrich": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node packages/cluster-tooling/dts-docs/enrich-dts-docs.mjs dist",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "dts-docs:check": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "node packages/cluster-tooling/dts-docs/check-dts-docs.mjs dist",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "render-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/render-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "apply-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/apply-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "wait-rollout": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/wait-for-cluster-rollout.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "delete-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/delete-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "build-local-images": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/build-local-images.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "logs-cluster-all": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/logs-cluster-all.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "logs-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/logs-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "port-forward-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/port-forward-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "scale-down-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/scale-down-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "status-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/status-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "run-fpk": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/run-fpk-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "pg-e2e": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/pg-e2e-via-nx.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "local-ci": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "pnpm exec tsx packages/cluster-tooling/cli/local-ci-cluster.ts",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "compose-up": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "docker compose -f packages/cluster-compose/docker-compose.postgresql.yaml --project-name eventiva-pg up -d",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "compose-down": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "docker compose -f packages/cluster-compose/docker-compose.postgresql.yaml --project-name eventiva-pg down",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "compose-logs": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "docker compose -f packages/cluster-compose/docker-compose.postgresql.yaml --project-name eventiva-pg logs --no-color --tail=2000",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "compose-verify-demo-logs": {
+            "executor": "nx:run-commands",
+            "cache": false,
+            "options": {
+                "command": "sh -c 'docker compose -f packages/cluster-compose/docker-compose.postgresql.yaml --project-name eventiva-pg logs --no-color --tail=4000 2>&1 | pnpm exec tsx packages/cluster-tooling/cli/verify-cluster-demo-logs.ts'",
+                "cwd": "{workspaceRoot}"
+            }
+        }
+    }
+}

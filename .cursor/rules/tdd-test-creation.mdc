@@ -1,17 +1,19 @@
 ---
-description: TDD policy – builders do not write tests; test-creator agent (full source access); test-runner agent and feedback loop
+description: TDD policy – transition: tests may ship with implementation; optional future split test-creator/test-runner; golden rule – never delete tests
 alwaysApply: true
 ---
 
 # TDD and Test Creation (Eventiva)
 
-When implementing **features or components** in Eventiva, follow this TDD policy. Do not create or modify tests in the same work that implements the feature.
+**Transition:** Implementers **may** add or update tests in the same change as features (Vitest / `@effect/vitest` under `tests/**`) until strict separation is re-enabled. See `docs/learnings/tdd-and-test-creation.md`.
 
-## Rules
+When enforcing the **strict** model (below), use the following.
+
+## Rules (strict / target end-state)
 
 1. **Building agent (you when implementing):**
    - Implement the feature/component only.
-   - Do **not** add or modify tests for that work.
+   - Do **not** add or modify tests for that work (when strict mode is on).
    - You may write or update **type definitions (schema)** that describe the public API (e.g. `.d.ts`-style or Effect Schema).
    - **Critical:** You must **never** have access to the tests repo when doing implementation work. The tests repo must not be cloned or accessible in your workspace.
 

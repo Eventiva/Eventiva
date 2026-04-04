@@ -21,6 +21,10 @@ env:
   NX_REJECT_UNKNOWN_LOCAL_CACHE: '0'
   TESTS_REPO: Eventiva/tests
 
+# Full Kubernetes cluster E2E (FPK apply, port-forward, Vitest tests-cluster-e2e) is intended to mirror
+# `pnpm local-ci:cluster` / `pnpm nx run eventiva:local-ci:cluster` locally. A GitHub-hosted cluster job is
+# deferred until CI infrastructure exists; `tests-cluster-e2e` skips unless EVENTIVA_CLUSTER_E2E=1.
+
 jobs:
   main:
     name: Lint, build, typecheck
@@ -74,7 +78,7 @@ jobs:
           bot-token: ${{ secrets.BOT_TOKEN }}
 
       - name: Bootstrap tests repo project structure
-        run: node scripts/bootstrap-tests-repo.mjs tests
+        run: pnpm exec nx g @eventiva/test-repo-tooling:bootstrap-tests-repo tests --no-interactive
 
       - name: Install Cursor CLI
         run: |
@@ -231,6 +235,7 @@ jobs:
       summary: ${{ steps.build_summary.outputs.summary }}
     env:
       BRANCH_NAME: ${{ github.head_ref }}
+      COVERAGE_STRICT: '1'
     steps:
       - uses: actions/checkout@v6
         with:
@@ -263,16 +268,16 @@ jobs:
             echo "API-surface coverage tool not found; skipping."
           fi
 
-      - name: Run Nx tests with coverage gate
+      - name: Run Nx tests with 100% function coverage (Vitest strict)
         id: run_tests
         run: |
           set +e
-          pnpm nx run-many -t test --projects='tests-*' --outputStyle=static > test-output.log 2>&1
+          pnpm nx run-many -t test --projects=tag:scope:tests --output-style=static -- --coverage > test-output.log 2>&1
           test_exit=$?
           set -e
           echo "test_exit=${test_exit}" >> "$GITHUB_OUTPUT"
 
-      - name: Evaluate coverage reports
+      - name: Evaluate coverage reports (100% functions per summary)
         id: coverage
         run: |
           set -euo pipefail
@@ -282,30 +287,25 @@ jobs:
 
           if [ ${#coverage_files[@]} -eq 0 ]; then
             echo "coverage_ok=false" >> "$GITHUB_OUTPUT"
-            echo "coverage_min=0" >> "$GITHUB_OUTPUT"
+            echo "coverage_min_funcs=0" >> "$GITHUB_OUTPUT"
             echo "No coverage summary files were generated." > coverage-summary.txt
             exit 0
           fi
 
-          min_coverage=100
+          min_funcs=100
 
           for file in "${coverage_files[@]}"; do
-            lines=$(jq -r '.total.lines.pct // 0' "${file}")
             funcs=$(jq -r '.total.functions.pct // 0' "${file}")
-            branches=$(jq -r '.total.branches.pct // 0' "${file}")
 
-            if ! [[ "${lines}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then lines=100; fi
-            if ! [[ "${funcs}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then funcs=100; fi
-            if ! [[ "${branches}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then branches=100; fi
+            if ! [[ "${funcs}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then funcs=0; fi
 
-            file_min=$(printf "%s\n%s\n%s\n" "${lines}" "${funcs}" "${branches}" | sort -n | head -n 1)
-            min_coverage=$(printf "%s\n%s\n" "${min_coverage}" "${file_min}" | sort -n | head -n 1)
+            min_funcs=$(printf "%s\n%s\n" "${min_funcs}" "${funcs}" | sort -n | head -n 1)
           done
 
-          printf "Minimum coverage across reports: %s%%\n" "${min_coverage}" > coverage-summary.txt
-          echo "coverage_min=${min_coverage}" >> "$GITHUB_OUTPUT"
+          printf "Minimum function coverage across reports: %s%% (gate: 100%%)\n" "${min_funcs}" > coverage-summary.txt
+          echo "coverage_min_funcs=${min_funcs}" >> "$GITHUB_OUTPUT"
 
-          if awk "BEGIN { exit !(${min_coverage} >= 80) }"; then
+          if awk "BEGIN { exit !(${min_funcs} >= 100) }"; then
             echo "coverage_ok=true" >> "$GITHUB_OUTPUT"
           else
             echo "coverage_ok=false" >> "$GITHUB_OUTPUT"
@@ -316,7 +316,7 @@ jobs:
         env:
           TEST_EXIT: ${{ steps.run_tests.outputs.test_exit }}
           COVERAGE_OK: ${{ steps.coverage.outputs.coverage_ok }}
-          COVERAGE_MIN: ${{ steps.coverage.outputs.coverage_min }}
+          COVERAGE_MIN_FUNCS: ${{ steps.coverage.outputs.coverage_min_funcs }}
         run: |
           set -euo pipefail
 
@@ -333,7 +333,7 @@ jobs:
           {
             echo "### TDD tests"
             echo "- Status: ${status}"
-            echo "- Coverage: ${COVERAGE_MIN}% (threshold: 80%)"
+            echo "- Function coverage: ${COVERAGE_MIN_FUNCS}% (gate: 100%; matches pnpm test:coverage:strict)"
             if [ -s sanitized-failures.txt ]; then
               echo "- Sanitized failures:"
               echo '```text'
@@ -378,12 +378,12 @@ jobs:
             -H "Content-Type: application/json" \
             -d "${payload}" > /tmp/linear-bug-response.json
 
-      - name: Create Linear task for test creators when coverage < 100% or unexpected
-        if: (steps.coverage.outputs.coverage_ok != 'true' || steps.coverage.outputs.coverage_min != '100' || steps.run_tests.outputs.test_exit != '0') && secrets.LINEAR_API_KEY != '' && secrets.LINEAR_TEAM_ID != ''
+      - name: Create Linear task for test creators when function coverage < 100% or unexpected
+        if: (steps.coverage.outputs.coverage_ok != 'true' || steps.coverage.outputs.coverage_min_funcs != '100' || steps.run_tests.outputs.test_exit != '0') && secrets.LINEAR_API_KEY != '' && secrets.LINEAR_TEAM_ID != ''
         env:
           LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
           LINEAR_TEAM_ID: ${{ secrets.LINEAR_TEAM_ID }}
-          COVERAGE_MIN: ${{ steps.coverage.outputs.coverage_min }}
+          COVERAGE_MIN_FUNCS: ${{ steps.coverage.outputs.coverage_min_funcs }}
         continue-on-error: true
         run: |
           set -euo pipefail
@@ -391,7 +391,7 @@ jobs:
             "TDD runner requires test-creator follow-up for PR ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/pull/${{ github.event.pull_request.number }}." \
             "Source: main repo implementation (packages/)." \
             "Broad explanation: coverage is below 100% or unexpected execution result." \
-            "Coverage summary: ${COVERAGE_MIN}% (gate threshold currently 80% for execution)." \
+            "Function coverage summary: ${COVERAGE_MIN_FUNCS}% (gate: 100%; Vitest COVERAGE_STRICT + summary JSON)." \
             "Artifacts: coverage-summary.txt, tdd-summary.md, raw-failures.txt, sanitized-failures.txt.")"
 
           payload="$(jq -n \
@@ -431,7 +431,7 @@ jobs:
             exit 1
           fi
           if [ "${COVERAGE_OK}" != "true" ]; then
-            echo "Coverage is below threshold (80%) or missing."
+            echo "Function coverage is below 100% or coverage summaries are missing."
             exit 1
           fi
 

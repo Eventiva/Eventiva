@@ -1,7 +1,7 @@
 ---
 revnumber: "1.7"
 revdate: "2026-04-03"
-revremark: "Kafka hook dispatch part: hooks-kafka-demo extension, platform bootstrap layer, log grep."
+revremark: "Hub: local-cluster-ci notes per-package tests + test:e2e run-many."
 ---
 
 # Eventiva documentation hub
@@ -21,6 +21,8 @@ This folder holds **Markdown** guides and reusable **parts** for day-to-day work
 | ----- | -------- |
 | Local dev: Postgres vs SQLite, env vars, postgresql vs sqlite-demo platform | [`parts/local-dev/database-backends-and-platforms.md`](parts/local-dev/database-backends-and-platforms.md) |
 | Local runtime in cluster mode: start, lifecycle targets, manifests, and regression gate | [`parts/local-dev/postgresql-cluster-runtime.md`](parts/local-dev/postgresql-cluster-runtime.md) |
+| Three-tier runtime: local colocated process, Docker Compose, Kubernetes + demo log checks | [`parts/local-dev/three-tier-platform-runtime.md`](parts/local-dev/three-tier-platform-runtime.md) |
+| Local full-cluster E2E parity (`pnpm local-ci:cluster`, `nx run-many -t test:e2e`, `tests/**` mirrors + `tests-cluster-e2e`, deferred remote CI) | [`parts/local-dev/local-cluster-ci.md`](parts/local-dev/local-cluster-ci.md) |
 | Cluster hook fan-out (Kafka): topic, consumer groups, FPK dev broker, demo extension (`hooks-kafka-demo`), TLS/ACLs/retention, fallbacks | [`parts/local-dev/kafka-hook-dispatch.md`](parts/local-dev/kafka-hook-dispatch.md) |
 | Strimzi Kafka: FPK vendor/apply pattern for staging–prod (no ad-hoc kubectl as primary) | [`parts/local-dev/kafka-strimzi-fpk-pattern.md`](parts/local-dev/kafka-strimzi-fpk-pattern.md) |
 | Effect cluster SQL tables (`cluster_*`), sharding parity, optional participant registry | [`parts/local-dev/effect-cluster-sql-tables.md`](parts/local-dev/effect-cluster-sql-tables.md) |

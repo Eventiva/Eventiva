@@ -1,9 +1,12 @@
+/**
+ * PostgreSQL cluster platform entry.
+ *
+ * `EVENTIVA_CLUSTER_INFRASTRUCTURE`: `distributed` (default) — Postgres-backed cluster; `local` — in-memory cluster (`CLUSTER_HOOK_BUS=off` typical).
+ */
 import {
-  clusterObservabilityLayer,
-  clusterPlatformContextSync,
-  clusterPlatformMainFor,
-  postgresClusterSqlLayer,
-  runClusterPlatformIfEsmMain,
+  createPlatform,
+  defaultClusterObservability,
+  postgresqlDatabase,
 } from "@eventiva/core"
 import { CopyrightNoticeExtension } from "@eventiva/extensions.copyright-notice"
 import { ExampleTransformExtension } from "@eventiva/extensions.example-transform"
@@ -11,17 +14,17 @@ import {
   hooksKafkaDemoBootstrapLayer,
   HooksKafkaDemoRegistrationExtension,
 } from "@eventiva/extensions.hooks-kafka-demo"
-import { RunnerExtension } from "@eventiva/extensions.runner"
-import { ShooterExtension } from "@eventiva/extensions.shooter"
-import { SlowShooterExtension } from "@eventiva/extensions.slow-shooter"
-import { SpeedShooterExtension } from "@eventiva/extensions.speed-shooter"
-import { Effect, Layer } from "effect"
+import { demoEntityLayers as entityLayers, RunnerExtension } from "@eventiva/extensions.runner"
+import { shooterProgram, ShooterExtension } from "@eventiva/extensions.shooter"
+import { slowShooterProgram, SlowShooterExtension } from "@eventiva/extensions.slow-shooter"
+import { speedShooterProgram, SpeedShooterExtension } from "@eventiva/extensions.speed-shooter"
+import { Layer } from "effect"
 
 const hookRegistrationLayers = Layer.mergeAll(
   CopyrightNoticeExtension.Default,
   ExampleTransformExtension.Default,
   HooksKafkaDemoRegistrationExtension.Default,
-) as Layer.Layer<any, any, any>
+) as Layer.Layer<unknown, unknown, never>
 
 const applicationLayers = Layer.mergeAll(
   RunnerExtension.Default,
@@ -30,20 +33,19 @@ const applicationLayers = Layer.mergeAll(
   SlowShooterExtension.Default,
 ) as Layer.Layer<unknown, unknown, never>
 
-export class PostgresqlClusterPlatform extends Effect.Service<PostgresqlClusterPlatform>()(
-  "eventiva/platform/postgresql/ClusterPlatform",
-  {
-    sync: clusterPlatformContextSync({
-      sqlLayer: postgresClusterSqlLayer,
-      observabilityLayer: clusterObservabilityLayer,
-      hookSidecarLayers: hookRegistrationLayers,
-      kafkaHookBootstrapLayer: hooksKafkaDemoBootstrapLayer,
-    }),
-  },
-) {}
-
-
-runClusterPlatformIfEsmMain(import.meta.url, clusterPlatformMainFor(
-  PostgresqlClusterPlatform,
+const { Platform: PostgresqlClusterPlatform, runIfMain } = createPlatform({
+  serviceId: "eventiva/platform/postgresql/ClusterPlatform",
+  database: postgresqlDatabase(),
+  observability: defaultClusterObservability(),
+  hookRegistrationLayers,
   applicationLayers,
-))
+  kafkaHookBootstrapLayer: hooksKafkaDemoBootstrapLayer,
+  localColocated: {
+    entityLayers: entityLayers as unknown as Layer.Layer<any, any, any>,
+    shooterPrograms: [shooterProgram, speedShooterProgram, slowShooterProgram],
+  },
+})
+
+runIfMain(import.meta.url)
+
+export { PostgresqlClusterPlatform }
