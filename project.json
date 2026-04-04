@@ -41,6 +41,69 @@
                 "command": "pnpm exec nx run cluster-tooling:local-ci",
                 "cwd": "{workspaceRoot}"
             }
+        },
+        "platform:run:local-fiber": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run platforms-postgresql:run:local-fiber",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:run:local": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run platforms-postgresql:run-local",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:container:images-build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run platforms-postgresql:cluster:images:build",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:container:compose-up": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run cluster-tooling:compose-up",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:container:compose-down": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run cluster-tooling:compose-down",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:container:compose-logs": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run cluster-tooling:compose-logs",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:kubernetes:images-build": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run platforms-postgresql:cluster:images:build",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:kubernetes:apply": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run platforms-postgresql:cluster:apply",
+                "cwd": "{workspaceRoot}"
+            }
+        },
+        "platform:kubernetes:wait": {
+            "executor": "nx:run-commands",
+            "options": {
+                "command": "pnpm exec nx run platforms-postgresql:cluster:wait",
+                "cwd": "{workspaceRoot}"
+            }
         }
     }
 }

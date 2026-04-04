@@ -162,20 +162,20 @@ pnpm nx run-many -t test
 
 ==== Effect cluster demo: three ways to run
 
-The packaged **battleship** cluster demo (runner + shooters) can be run **locally** (single process, in-memory cluster storage), via **Docker Compose**, or on **Kubernetes** (FPK). Full commands, env vars, and log regression checks are in link:docs/parts/local-dev/three-tier-platform-runtime.md[docs/parts/local-dev/three-tier-platform-runtime.md] (also linked from link:docs/readme.md[docs/readme.md]).
+The packaged **battleship** cluster demo (runner + shooters) can be run **locally** (single process, in-memory cluster storage), via **Docker Compose**, or on **Kubernetes** (FPK). **Tooling prerequisites** (Node.js, pnpm, Docker/Podman, Compose, kubectl/Kind) and **canonical `pnpm platform:*` scripts** are in link:README.md[README.md] at the repository root. Full commands, env vars, and log regression checks are in link:docs/parts/local-dev/three-tier-platform-runtime.md[docs/parts/local-dev/three-tier-platform-runtime.md] (also linked from link:docs/readme.md[docs/readme.md]). The same flows are exposed as Nx targets on the root `eventiva` project (for example `pnpm exec nx run eventiva:platform:run:local-fiber`).
 
 [cols="1,2",options="header"]
 |===
 |Tier |Typical command
 
 |Local (no Kafka hook bus)
-|`pnpm nx run platforms-postgresql:run:local-fiber`
+|`pnpm platform:run:local-fiber` (or `pnpm nx run platforms-postgresql:run:local-fiber`)
 
 |Docker Compose
-|`pnpm exec nx run cluster-tooling:build-local-images` then `pnpm exec nx run cluster-tooling:compose-up`
+|`pnpm platform:container:images-build` then `pnpm platform:container:compose-up`
 
 |Kubernetes (FPK)
-|`pnpm cluster:apply` / `pnpm cluster:wait` then `pnpm cluster:logs:all` (see link:docs/parts/local-dev/postgresql-cluster-runtime.md[postgresql-cluster-runtime.md])
+|`pnpm platform:kubernetes:apply` / `pnpm platform:kubernetes:wait` then `pnpm cluster:logs:all` (aliases: `pnpm cluster:apply` / `pnpm cluster:wait`; see link:docs/parts/local-dev/postgresql-cluster-runtime.md[postgresql-cluster-runtime.md])
 |===
 
 **Regression:** aggregated logs should eventually contain `Boom!`, `Shooting at`, `Shot at`, and `Shots fired:` (substring match). For Compose use `pnpm exec nx run cluster-tooling:compose-verify-demo-logs` after workloads have warmed up; allow extra time for slow-shooter (`Shot at` follows a long delay).

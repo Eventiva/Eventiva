@@ -10,7 +10,7 @@ import { Config, Effect, Iterable, Layer } from "effect"
 export const slowShooterProgram = withSpanAndLog("slowShooterProgram")(
   Effect.gen(function* () {
     const client = yield* DemoEntity.client
-    const start = yield* Config.integer("START_SHIP")
+    const start = yield* Config.integer("START_SHIP").pipe(Config.withDefault(0))
 
     yield* Effect.forEach(
       Iterable.range(start, start + 9),

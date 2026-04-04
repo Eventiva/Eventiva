@@ -15,6 +15,12 @@ This folder holds **Markdown** guides and reusable **parts** for day-to-day work
 
 ## Table of contents
 
+### Repository root
+
+| Topic | Document |
+| ----- | -------- |
+| Prerequisites (Node, pnpm, Docker/Podman, Kubernetes) and **`pnpm platform:*`** demo commands | [`../README.md`](../README.md) |
+
 ### Procedural parts (`docs/parts/`)
 
 | Topic | Document |
@@ -41,4 +47,5 @@ Plans, drafts, and legacy notes may appear alongside this hub. Prefer this **rea
 ## How this hub relates to repository roots
 
 - **`README.adoc`** at the repo root remains the AsciiDoc-oriented project overview (see learnings on docs workflow if you change publishing).
+- **`README.md`** at the repo root is the Markdown entry for **installing prerequisites** (Node.js, pnpm, Docker/Podman, Kubernetes) and **`pnpm platform:*` scripts** for the three-tier PostgreSQL cluster demo.
 - **`docs/readme.md`** (this file) is the entry point for Markdown under **`docs/`**.
