@@ -2,6 +2,8 @@
 
 Optional metadata: set `EVENTIVA_RUNTIME_TIER` to `local`, `compose`, or `kubernetes` for documentation and tooling alignment (see `@eventiva/core` `runtimeTierConfig`). For the PostgreSQL platform entry, **distributed vs in-process cluster** is selected with **`EVENTIVA_CLUSTER_INFRASTRUCTURE`** (`distributed` default, or `local`); `EVENTIVA_RUNTIME_TIER` remains informational unless tooling reads it.
 
+**Prerequisites and install links:** see the repository root [`README.md`](../../../README.md) for Node.js, [pnpm](https://pnpm.io/installation) / [Corepack](https://nodejs.org/api/corepack.html), [Docker](https://docs.docker.com/get-docker/) + [Compose](https://docs.docker.com/compose/install/), [Podman](https://podman.io/getting-started/installation) + [Podman Compose](https://docs.podman.io/en/latest/markdown/podman-compose.1.html), [kubectl](https://kubernetes.io/docs/tasks/tools/), and [Kind](https://kind.sigs.k8s.io/docs/user/quick-start/). Canonical **`pnpm platform:*`** aliases are listed there and wired to Nx targets on the root `eventiva` project.
+
 ## When to use which tier
 
 | Tier | Audience | Prerequisites |
