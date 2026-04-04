@@ -16,6 +16,11 @@ export {
   clusterHookDispatchTopicDefault,
   type ClusterHookBus,
 } from "./config/cluster-hook-config.js"
+export {
+  runtimeTierConfig,
+  runtimeTierValues,
+  type RuntimeTier,
+} from "./config/runtime-tier.js"
 export { DemoEntity, DelayedBullet, DeliverAtBullet } from "./schema.js"
 export { type PlatformContext } from "./platform/platform-context.js"
 export { ClusterPlatformContext } from "./platform/cluster-platform-context.js"
@@ -33,6 +38,17 @@ export {
   clusterPlatformContextSync,
   clusterPlatformMainFor,
 } from "./platform/cluster-database-platform.js"
+export {
+  createClusterDatabasePlatform,
+  createPlatform,
+  defaultClusterObservability,
+  postgresqlDatabase,
+  type CreateClusterDatabasePlatformConfig,
+  type ClusterDatabasePlatformHandle,
+} from "./platform/create-cluster-database-platform.js"
+export { buildColocatedEntityPipeline } from "./platform/colocated-entity-pipeline.js"
+export { localColocatedClusterStack } from "./platform/local-colocated-cluster-stack.js"
+export { localColocatedSupervisedLaunch } from "./platform/local-colocated-supervised-launch.js"
 export {
   HookRegistry,
   HookRegistryLive,
@@ -65,6 +81,10 @@ export {
   makeClusterSqlClientLayer,
   makeClusterSqlRunnerLayer,
 } from "./cluster/sql-socket-layers.js"
+export {
+  makeClusterLocalClientLayer,
+  makeClusterLocalRunnerLayer,
+} from "./cluster/local-socket-layers.js"
 export {
   clusterObservabilityLayer,
   defaultEffectDevToolsWsUrl,

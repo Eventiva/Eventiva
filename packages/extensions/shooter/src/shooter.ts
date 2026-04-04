@@ -5,19 +5,25 @@ import {
   makeClusterSqlClientLayer,
   withSpanAndLog,
 } from "@eventiva/core"
-import { Effect, Layer } from "effect"
-
-const getShipId = () => `ship-${Math.floor(Math.random() * 1000)}`
-const getTarget = () => Math.floor(Math.random() * 1000)
+import { Config, Effect, Layer, Option } from "effect"
 
 export const shooterProgram = withSpanAndLog("shooterProgram")(
   Effect.gen(function* () {
     const client = yield* DemoEntity.client
+    const maxOpt = yield* Config.option(Config.integer("SHOOTER_MAX_SHOOTS"))
 
+    let fired = 0
     while (true) {
-      const ship = getShipId()
+      if (Option.isSome(maxOpt) && fired >= maxOpt.value) {
+        yield* Effect.log(
+          `shooter: reached SHOOTER_MAX_SHOOTS (${maxOpt.value}), idling`,
+        )
+        yield* Effect.never
+      }
+      const ship = `ship-${Math.floor(Math.random() * 1000)}`
       yield* Effect.log(`Shooting at ${ship}`)
-      yield* client(ship).Shoot({ target: getTarget() })
+      yield* client(ship).Shoot({ target: Math.floor(Math.random() * 1000) })
+      fired++
       yield* Effect.sleep(1000)
     }
   }),

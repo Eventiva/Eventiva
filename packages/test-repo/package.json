@@ -1,0 +1,11 @@
+{
+    "name": "@eventiva/test-repo-tooling",
+    "version": "0.0.1",
+    "private": true,
+    "description": "Nx local generators: bootstrap external tests workspace and scaffold mirrored package tests",
+    "type": "module",
+    "generators": "./generators.json",
+    "peerDependencies": {
+        "nx": "^22.5.4"
+    }
+}

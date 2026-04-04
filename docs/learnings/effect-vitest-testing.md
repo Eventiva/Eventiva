@@ -228,10 +228,7 @@ it.effect("with custom logger", () =>
 
 ### Test Location
 
-Tests live under `tests/<package-path>/src/**/*.spec.ts`, mirroring the `packages/<package-path>/src/**/*.ts` structure.
-
-Example:
-- `packages/core/src/cluster/config.ts` → `tests/core/src/cluster/config.spec.ts`
+Prefer tests next to implementation under `packages/**` (e.g. `*.spec.ts` beside sources), or dedicated integration projects such as **`tests/cluster-e2e`** for live cluster checks (see `docs/parts/local-dev/local-cluster-ci.md`).
 
 ### Test Structure
 

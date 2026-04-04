@@ -11,7 +11,8 @@ import {
   EVENTIVA_WORDART,
 } from "./wordart.js"
 
-function logBanner(): Effect.Effect<void, never, never> {
+/** Logs ASCII wordart + copyright (runner onLoad). Exported for unit coverage. */
+export function logCopyrightNoticeBanner(): Effect.Effect<void, never, never> {
   return Effect.gen(function* () {
     yield* Effect.logInfo(EVENTIVA_WORDART).pipe(
       Effect.annotateLogs({ service: "eventiva", banner: "eventiva-wordart" }),
@@ -37,7 +38,7 @@ export class CopyrightNoticeExtension extends Effect.Service<CopyrightNoticeExte
     dependencies: [HookRegistryLive],
     effect: Effect.gen(function* () {
       const hooks = yield* HookRegistry
-      yield* hooks.register({ _tag: "runner" }, "onLoad", (_payload) => logBanner())
+      yield* hooks.register({ _tag: "runner" }, "onLoad", (_payload) => logCopyrightNoticeBanner())
       return {
         _tag: "@eventiva/extensions/CopyrightNoticeExtension" as const,
       }

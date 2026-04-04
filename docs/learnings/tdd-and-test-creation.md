@@ -2,7 +2,13 @@
 
 This document defines the TDD policy for the Eventiva rebuild. It must be reflected in Linear issue descriptions, in Cursor rules, and in automation (test-creator and test-runner agents).
 
-## Rule: builders do not write tests
+## Transition (current)
+
+Until the team re-enforces strict separation, **implementers may add or update tests in the same change as implementation** (especially Vitest / `@effect/vitest` tests under `tests/**`). The **golden rule** below still applies: do not delete tests to silence failures.
+
+**Local full-cluster E2E** (FPK render/apply, rollout wait, port-forward, `tests-cluster-e2e` with `EVENTIVA_CLUSTER_E2E=1`) is documented in `docs/parts/local-dev/local-cluster-ci.md` and run via `pnpm local-ci:cluster`. Remote GitHub Actions for a live cluster is deferred until infrastructure exists; PR CI does not require a cluster.
+
+## Rule: builders do not write tests (target end-state)
 
 If the same agent that implements a feature or component also writes its tests, it tends to optimise tests to the implementation (tests that pass rather than tests that specify behaviour). To avoid that:
 

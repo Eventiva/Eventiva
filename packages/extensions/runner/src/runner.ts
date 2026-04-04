@@ -54,7 +54,18 @@ const DemoEntityLive = DemoEntity.toLayer(
                 steps: tctx.steps,
               })
             }
-            yield* Effect.log("Boom!")
+            yield* Effect.logInfo("Boom!", {
+              rpc: envelope.tag,
+              requestId: String(envelope.requestId),
+              entityAddress: String(envelope.address),
+              entityId: envelope.address.entityId,
+              shardId: String(envelope.address.shardId),
+              entityType: envelope.address.entityType,
+              target: payload.target,
+              traceId: envelope.traceId,
+              spanId: envelope.spanId,
+              sampled: envelope.sampled,
+            })
           }),
         )
 

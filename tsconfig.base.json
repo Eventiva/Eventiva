@@ -28,6 +28,7 @@
             "remote1/Module": ["apps/remote1/src/remote-entry.ts"],
             "remote2/Module": ["apps/remote2/src/remote-entry.ts"],
             "@eventiva/core": ["packages/core/src/index.ts"],
+            "@eventiva/cluster-tooling": ["packages/cluster-tooling/src/index.ts"],
             "@eventiva/extensions.runner": ["packages/extensions/runner/src/index.ts"],
             "@eventiva/extensions.shooter": ["packages/extensions/shooter/src/index.ts"],
             "@eventiva/extensions.slow-shooter": ["packages/extensions/slow-shooter/src/index.ts"],
