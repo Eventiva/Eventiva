@@ -1,5 +1,5 @@
 import { ClusterPlatformContext } from "@eventiva/core"
-import { Effect } from "effect"
+import { Effect, Layer } from "effect"
 import { makeRunnerEntry } from "./runner.js"
 
 /**
@@ -15,4 +15,12 @@ export class RunnerExtension extends Effect.Service<RunnerExtension>()(
       return { _tag: "@eventiva/extensions/RunnerExtension" as const }
     }),
   },
-) {}
+) {
+  /**
+   * Colocated local cluster: entity pipeline + forked shooter programs replace `makeRunnerEntry`;
+   * satisfy the tag with a no-op implementation.
+   */
+  static Local = Layer.succeed(RunnerExtension, {
+    _tag: "@eventiva/extensions/RunnerExtension" as const,
+  })
+}

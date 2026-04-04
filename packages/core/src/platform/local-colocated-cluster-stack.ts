@@ -13,6 +13,8 @@ import * as Option from "effect/Option"
  */
 export function localColocatedClusterStack(config: {
   readonly throughShardingPipeline: Layer.Layer<any, any, any>
+  /** Merged `Local` extension layers from `createClusterDatabasePlatform` `applicationLayers`. */
+  readonly applicationLayers: Layer.Layer<unknown, unknown, never>
   readonly hookRegistrationLayers: Layer.Layer<unknown, unknown, never>
   readonly observabilityLayer: Layer.Layer<any, any, never>
 }): Layer.Layer<unknown, unknown, never> {
@@ -21,6 +23,7 @@ export function localColocatedClusterStack(config: {
   const shardsPerGroup = Number(process.env.SHARDS_PER_GROUP ?? "2")
 
   return (config.throughShardingPipeline as Layer.Layer<unknown, unknown, never>).pipe(
+    Layer.provideMerge(config.applicationLayers),
     Layer.provideMerge(config.hookRegistrationLayers),
     Layer.provideMerge(TransformRegistryLive),
     Layer.provideMerge(HookRegistryLive),

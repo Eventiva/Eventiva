@@ -15,9 +15,9 @@ import {
   HooksKafkaDemoRegistrationExtension,
 } from "@eventiva/extensions.hooks-kafka-demo"
 import { demoEntityLayers as entityLayers, RunnerExtension } from "@eventiva/extensions.runner"
-// import { shooterProgram, ShooterExtension } from "@eventiva/extensions.shooter"
-import { slowShooterProgram, SlowShooterExtension } from "@eventiva/extensions.slow-shooter"
-// import { speedShooterProgram, SpeedShooterExtension } from "@eventiva/extensions.speed-shooter"
+import { ShooterExtension } from "@eventiva/extensions.shooter"
+import { SlowShooterExtension } from "@eventiva/extensions.slow-shooter"
+import { SpeedShooterExtension } from "@eventiva/extensions.speed-shooter"
 import { Layer } from "effect"
 
 const hookRegistrationLayers = Layer.mergeAll(
@@ -26,12 +26,12 @@ const hookRegistrationLayers = Layer.mergeAll(
   HooksKafkaDemoRegistrationExtension.Default,
 ) as Layer.Layer<unknown, unknown, never>
 
-const applicationLayers = Layer.mergeAll(
-  RunnerExtension.Default,
-  // ShooterExtension.Default,
-  // SpeedShooterExtension.Default,
-  SlowShooterExtension.Default,
-) as Layer.Layer<unknown, unknown, never>
+const applicationLayers = [
+  RunnerExtension,
+  ShooterExtension,
+  SpeedShooterExtension,
+  SlowShooterExtension,
+]
 
 const { Platform: PostgresqlClusterPlatform, runIfMain } = createPlatform({
   serviceId: "eventiva/platform/postgresql/ClusterPlatform",
@@ -42,11 +42,6 @@ const { Platform: PostgresqlClusterPlatform, runIfMain } = createPlatform({
   kafkaHookBootstrapLayer: hooksKafkaDemoBootstrapLayer,
   localColocated: {
     entityLayers: entityLayers as unknown as Layer.Layer<any, any, any>,
-    shooterPrograms: [
-      // shooterProgram,
-      // speedShooterProgram,
-      slowShooterProgram,
-    ]
   },
 })
 
