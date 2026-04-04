@@ -198,11 +198,25 @@ async function main(): Promise<void> {
             };
 
             for (let attempt = 1; attempt <= maxLoadAttempts; attempt++) {
-                await tryLoadDockerImage();
-                if (loadedAny) break;
-                if (await tryLoadArchive()) {
-                    loadedAny = true;
-                    break;
+                // Podman: `kind load docker-image` can leave a stale tag on the node; archive load updates reliably.
+                if (engine === 'podman') {
+                    if (await tryLoadArchive()) {
+                        loadedAny = true;
+                        break;
+                    }
+                } else {
+                    await tryLoadDockerImage();
+                    if (loadedAny) break;
+                }
+                if (!loadedAny && engine !== 'podman') {
+                    if (await tryLoadArchive()) {
+                        loadedAny = true;
+                        break;
+                    }
+                }
+                if (!loadedAny && engine === 'podman') {
+                    await tryLoadDockerImage();
+                    if (loadedAny) break;
                 }
                 if (attempt < maxLoadAttempts) {
                     console.warn(
@@ -277,11 +291,24 @@ async function main(): Promise<void> {
             };
 
             for (let attempt = 1; attempt <= maxLoadAttempts; attempt++) {
-                await tryLoadMysqlDockerImage();
-                if (mysqlLoadedAny) break;
-                if (await tryLoadMysqlArchive()) {
-                    mysqlLoadedAny = true;
-                    break;
+                if (engine === 'podman') {
+                    if (await tryLoadMysqlArchive()) {
+                        mysqlLoadedAny = true;
+                        break;
+                    }
+                } else {
+                    await tryLoadMysqlDockerImage();
+                    if (mysqlLoadedAny) break;
+                }
+                if (!mysqlLoadedAny && engine !== 'podman') {
+                    if (await tryLoadMysqlArchive()) {
+                        mysqlLoadedAny = true;
+                        break;
+                    }
+                }
+                if (!mysqlLoadedAny && engine === 'podman') {
+                    await tryLoadMysqlDockerImage();
+                    if (mysqlLoadedAny) break;
                 }
                 if (attempt < maxLoadAttempts) {
                     console.warn(

@@ -156,12 +156,12 @@ export function clusterHookKafkaStackFromEnv(): Layer.Layer<
   if (process.env.CLUSTER_HOOK_BUS !== "kafka") {
     return Layer.empty
   }
-  const engineClients = Layer.mergeAll(
-    clusterHookKafkaConsumerLayer,
-    clusterHookKafkaProducerLayer,
-    clusterHookKafkaEngineLayer,
+  const engine = clusterHookKafkaEngineLayer
+  const kafkaClients = Layer.mergeAll(
+    Layer.provide(clusterHookKafkaConsumerLayer, engine),
+    Layer.provide(clusterHookKafkaProducerLayer, engine),
   )
-  return Layer.provideMerge(clusterHookKafkaDaemonLayer, engineClients) as Layer.Layer<
+  return Layer.provideMerge(clusterHookKafkaDaemonLayer, kafkaClients) as Layer.Layer<
     never,
     ConnectionException,
     HookRegistry
