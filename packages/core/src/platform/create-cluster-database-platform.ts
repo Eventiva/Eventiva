@@ -1,3 +1,8 @@
+import {
+  collectColocatedShooterPrograms,
+  mergeApplicationLayerVariants,
+  type ApplicationLayerInput,
+} from "./application-layer-variants.js"
 import { buildColocatedEntityPipeline } from "./colocated-entity-pipeline.js"
 import { clusterPlatformContextSync, clusterPlatformMainFor } from "./cluster-database-platform.js"
 import { localColocatedClusterStack } from "./local-colocated-cluster-stack.js"
@@ -28,15 +33,25 @@ export type CreateClusterDatabasePlatformConfig = {
   readonly database: { readonly sqlLayer: Layer.Layer<any, any, never> }
   readonly observability: { readonly layer: Layer.Layer<any, any, never> }
   readonly hookRegistrationLayers: Layer.Layer<unknown, unknown, never>
-  readonly applicationLayers: Layer.Layer<unknown, unknown, never>
+  /**
+   * Extension layers per deployment: `Default` for distributed SQL-backed cluster;
+   * `Local` for colocated in-memory cluster (often no-op where forked colocated programs replace mode-gated entries).
+   *
+   * Each item may be an `Effect.Service` **class** (`RunnerExtension`, …) or an explicit
+   * `{ Default, Local }` override object.
+   */
+  readonly applicationLayers: ReadonlyArray<ApplicationLayerInput>
   readonly kafkaHookBootstrapLayer: Layer.Layer<never, unknown, unknown>
   /**
    * When set, `EVENTIVA_CLUSTER_INFRASTRUCTURE=local` builds the colocated pipeline from
-   * `entityLayers` + `shooterPrograms`, then completes the local cluster stack in core.
+   * `entityLayers` + forked shooter effects, then completes the local cluster stack in core.
+   *
+   * `shooterPrograms` defaults to {@link collectColocatedShooterPrograms}(`applicationLayers`)
+   * (each extension may define optional static `Program`). Override explicitly when needed.
    */
   readonly localColocated?: {
     readonly entityLayers: Layer.Layer<any, any, any>
-    readonly shooterPrograms: ReadonlyArray<Effect.Effect<any, any, any>>
+    readonly shooterPrograms?: ReadonlyArray<Effect.Effect<any, any, any>>
   }
 }
 
@@ -66,15 +81,21 @@ export function createClusterDatabasePlatform(
     sync: syncPayload,
   }) {}
 
-  const distributedMain = clusterPlatformMainFor(PlatformDefinition, config.applicationLayers)
+  const distributedApplicationLayers = mergeApplicationLayerVariants(config.applicationLayers, "Default")
+
+  const distributedMain = clusterPlatformMainFor(PlatformDefinition, distributedApplicationLayers)
 
   const throughShardingPipeline =
     config.localColocated === undefined
       ? undefined
       : buildColocatedEntityPipeline({
           entityLayers: config.localColocated.entityLayers,
-          shooterPrograms: config.localColocated.shooterPrograms,
+          shooterPrograms:
+            config.localColocated.shooterPrograms ??
+            collectColocatedShooterPrograms(config.applicationLayers),
         })
+
+  const localApplicationLayers = mergeApplicationLayerVariants(config.applicationLayers, "Local")
 
   const localMain =
     throughShardingPipeline === undefined
@@ -82,6 +103,7 @@ export function createClusterDatabasePlatform(
       : localColocatedSupervisedLaunch(
           localColocatedClusterStack({
             throughShardingPipeline,
+            applicationLayers: localApplicationLayers,
             hookRegistrationLayers: config.hookRegistrationLayers,
             observabilityLayer: config.observability.layer,
           }),
@@ -92,7 +114,7 @@ export function createClusterDatabasePlatform(
     if (clusterInfrastructure === "local") {
       if (localMain === undefined) {
         throw new Error(
-          "EVENTIVA_CLUSTER_INFRASTRUCTURE=local requires `localColocated.entityLayers` and `localColocated.shooterPrograms` in createClusterDatabasePlatform",
+          "EVENTIVA_CLUSTER_INFRASTRUCTURE=local requires `localColocated.entityLayers` in createClusterDatabasePlatform",
         )
       }
       yield* localMain
