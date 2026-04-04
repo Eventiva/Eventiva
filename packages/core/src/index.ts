@@ -46,6 +46,14 @@ export {
   type CreateClusterDatabasePlatformConfig,
   type ClusterDatabasePlatformHandle,
 } from "./platform/create-cluster-database-platform.js"
+export {
+  collectColocatedShooterPrograms,
+  mergeApplicationLayerVariants,
+  resolveApplicationLayerInput,
+  type ApplicationLayerInput,
+  type ApplicationLayerVariant,
+  type ApplicationServiceStatics,
+} from "./platform/application-layer-variants.js"
 export { buildColocatedEntityPipeline } from "./platform/colocated-entity-pipeline.js"
 export { localColocatedClusterStack } from "./platform/local-colocated-cluster-stack.js"
 export { localColocatedSupervisedLaunch } from "./platform/local-colocated-supervised-launch.js"

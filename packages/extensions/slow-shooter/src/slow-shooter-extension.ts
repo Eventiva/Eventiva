@@ -1,6 +1,6 @@
 import { ClusterPlatformContext } from "@eventiva/core"
-import { Effect } from "effect"
-import { makeSlowShooterEntry } from "./slow-shooter.js"
+import { Effect, Layer } from "effect"
+import { makeSlowShooterEntry, slowShooterProgram } from "./slow-shooter.js"
 
 /** Slow shooter when `CLUSTER_APP_MODE` is `slow-shooter`. */
 export class SlowShooterExtension extends Effect.Service<SlowShooterExtension>()(
@@ -12,4 +12,11 @@ export class SlowShooterExtension extends Effect.Service<SlowShooterExtension>()
       return { _tag: "@eventiva/extensions/SlowShooterExtension" as const }
     }),
   },
-) {}
+) {
+  /** Colocated local cluster: forked `slowShooterProgram` replaces mode-gated entry. */
+  static Local = Layer.succeed(SlowShooterExtension, {
+    _tag: "@eventiva/extensions/SlowShooterExtension" as const,
+  })
+
+  static Program = slowShooterProgram
+}
