@@ -1,0 +1,36 @@
+---
+description: Route to specialists; when multiple subagents are needed, use Agents Orchestrator or adopt its playbook from .cursor/agents/agents-orchestrator.md.
+alwaysApply: true
+---
+
+# Subagent routing
+
+Before investing significant effort, **pick the specialist that best matches the user’s goal**, not a default “general” path.
+
+## When to delegate via the Task tool
+
+- The task has a **clear domain** (security, accessibility, CI, Nx boundaries, docs, marketing vertical, game engine, etc.) and a matching subagent exists.
+- The task is **large or parallelizable** (e.g. broad repo exploration, independent workstreams) — use **`explore`** or **`generalPurpose`** as appropriate, and parallelize only when work is independent.
+- The workspace already names a delegate (e.g. **documentation-creator** for new/changed Nx packages) — follow that rule and invoke that subagent.
+- You need **more than one specialist subagent** — use **`Agents Orchestrator`** (or adopt its playbook; see **Multiple specialties** below).
+
+## How to choose
+
+1. **Match intent to specialty**, not file extension alone. Example: CI failure triage → **`ci-watcher`** or **`fix-ci`** skill workflow; module tags/deps → **`module-boundaries`** skill + relevant architect agents.
+2. **Prefer narrow over broad**: a domain agent beats `generalPurpose` when the fit is obvious.
+3. **Read the agent brief** when unsure: open `.cursor/agents/<kebab-name>.md` and use the agent whose description aligns with the request.
+4. **Do not** spawn subagents for **trivial, one-shot edits** (typos, single-line fixes) where the main agent is faster and equally correct.
+
+## Multiple specialties (more than one subagent)
+
+If the task **requires more than one specialist subagent**, do **not** improvise ad-hoc coordination. Default to one of:
+
+1. **Delegate orchestration**: Spawn the **`Agents Orchestrator`** subagent (Task tool) and let it drive handoffs, ordering, and quality gates across specialists.
+2. **Be the orchestrator**: If you stay in this session, **assume that role**: read `.cursor/agents/agents-orchestrator.md` and follow its workflow (phases, handoffs, evidence, retries). Spawn other specialists **through** that playbook—treat the file as the orchestrator’s system prompt.
+
+Specialists still do **one domain each**; the orchestrator owns sequencing, context passed between steps, conflict resolution, and the single coherent result for the user.
+
+## After delegation
+
+- Give the subagent a **self-contained prompt** with goal, constraints, paths, and what to return.
+- **Synthesize** the subagent’s result for the user; do not paste raw dumps unless asked.
