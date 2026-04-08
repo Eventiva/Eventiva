@@ -1,3 +1,6 @@
 [submodule "tests"]
 	path = tests
 	url = https://github.com/Eventiva/tests
+[submodule "Examples/cluster-docker"]
+	path = Examples/cluster-docker
+	url = https://github.com/tim-smart/cluster-docker
