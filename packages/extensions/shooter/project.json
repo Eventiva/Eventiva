@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["lint", "^build"],
       "options": {
         "outputPath": "dist/extensions/shooter",
         "main": "packages/extensions/shooter/src/index.ts",

@@ -1,0 +1,15 @@
+{
+  "name": "@eventiva/extensions.schema-demo",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "dependencies": {
+    "@eventiva/core": "workspace:*",
+    "@eventiva/databases.pg": "workspace:*",
+    "drizzle-orm": "1.0.0-beta.18-dc9676b",
+    "effect": "3.19.19",
+    "tslib": "^2.3.0"
+  }
+}

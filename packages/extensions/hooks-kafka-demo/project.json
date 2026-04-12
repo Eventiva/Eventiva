@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["lint", "^build"],
       "options": {
         "outputPath": "dist/extensions/hooks-kafka-demo",
         "main": "packages/extensions/hooks-kafka-demo/src/index.ts",

@@ -20,6 +20,7 @@
         "@eventiva/extensions.shooter": "workspace:*",
         "@eventiva/extensions.slow-shooter": "workspace:*",
         "@eventiva/extensions.speed-shooter": "workspace:*",
+        "@eventiva/integrations.kafka": "workspace:^",
         "effect": "3.19.19",
         "tslib": "^2.3.0"
     }

@@ -1,6 +1,6 @@
 import { RunnerAddress } from "@effect/cluster"
 import { makeClusterLocalRunnerLayer } from "../cluster/local-socket-layers.js"
-import { HookRegistryLive, TransformRegistryLive } from "../hooks/index.js"
+import { HookRegistryLive, TransformRegistryLive, hookRemotePublisherNoopLive } from "../hooks/index.js"
 import { Layer } from "effect"
 import * as Option from "effect/Option"
 
@@ -27,6 +27,7 @@ export function localColocatedClusterStack(config: {
     Layer.provideMerge(config.hookRegistrationLayers),
     Layer.provideMerge(TransformRegistryLive),
     Layer.provideMerge(HookRegistryLive),
+    Layer.provideMerge(hookRemotePublisherNoopLive),
     Layer.provideMerge(noKafkaStack),
     Layer.provideMerge(noKafkaStack),
     Layer.provideMerge(

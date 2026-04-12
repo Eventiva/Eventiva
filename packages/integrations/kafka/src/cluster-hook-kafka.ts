@@ -1,9 +1,11 @@
 import {
-  HookRegistry,
+  HookHandlerExecutor,
+  HookRemotePublisher,
   clusterHookDispatchTopicDefault,
   decodeHookDispatchEnvelope,
   encodeHookDispatchEnvelope,
   makeHookDispatchEnvelope,
+  type HookDispatchEnvelope,
   type HookPhase,
   type HookScope,
 } from "@eventiva/core"
@@ -68,6 +70,22 @@ export const clusterHookKafkaProducerLayer = Producer.layer({
   allowAutoTopicCreation: true,
 })
 
+/** Publishes hook envelopes to the configured Kafka topic; requires `Producer` from `effect-kafka`. */
+export const hookRemotePublisherKafkaLive = Layer.effect(
+  HookRemotePublisher,
+  Effect.sync(() => ({
+    publish: (envelope: HookDispatchEnvelope) =>
+      Effect.gen(function* () {
+        const topic = clusterHookDispatchTopicFromEnv()
+        const body = encodeHookDispatchEnvelope(envelope)
+        yield* Producer.send({
+          topic,
+          messages: [{ key: envelope.eventId, value: body }],
+        })
+      }),
+  })),
+)
+
 const hookDispatchDedupeMax = Number(process.env.EVENTIVA_HOOK_DEDUPE_MAX ?? String(defaultDedupeMax))
 
 export const clusterHookKafkaDaemonLayer = Layer.scopedDiscard(
@@ -81,7 +99,7 @@ export const clusterHookKafkaDaemonLayer = Layer.scopedDiscard(
     const program = Consumer.serveStream(topic).pipe(
       Stream.runForEach((record) =>
         Effect.gen(function* () {
-          const hooks = yield* HookRegistry
+          const executor = yield* HookHandlerExecutor
           if (!record.value) {
             yield* record.commit()
             return
@@ -103,11 +121,7 @@ export const clusterHookKafkaDaemonLayer = Layer.scopedDiscard(
             yield* record.commit()
             return
           }
-          yield* hooks.run(
-            envelope.scope as HookScope,
-            envelope.phase as HookPhase,
-            envelope.payload,
-          )
+          yield* executor.executeEnvelope(envelope)
           yield* record.commit()
         }),
       ),
@@ -144,26 +158,35 @@ export const publishClusterHookDispatch = (
     })
   })
 
+const hookRemotePublisherNoopLive = Layer.succeed(HookRemotePublisher, {
+  publish: () => Effect.void,
+})
+
 /**
- * When `CLUSTER_HOOK_BUS=kafka`, merges consumer daemon + Kafka engine.
- * Requires {@link HookRegistry} from the parent stack.
+ * When `CLUSTER_HOOK_BUS=kafka`: Kafka consumer + {@link HookRemotePublisher} backed by the cluster topic.
+ * Otherwise: no-op {@link HookRemotePublisher} so {@link HookRegistryLive} can stay composable.
+ * Requires {@link HookHandlerExecutor} from the hook stack when using Kafka.
  */
 export function clusterHookKafkaStackFromEnv(): Layer.Layer<
-  never,
+  HookRemotePublisher,
   ConnectionException,
-  HookRegistry
+  HookHandlerExecutor
 > {
   if (process.env.CLUSTER_HOOK_BUS !== "kafka") {
-    return Layer.empty
+    return hookRemotePublisherNoopLive as Layer.Layer<
+      HookRemotePublisher,
+      ConnectionException,
+      HookHandlerExecutor
+    >
   }
   const engine = clusterHookKafkaEngineLayer
-  const kafkaClients = Layer.mergeAll(
-    Layer.provide(clusterHookKafkaConsumerLayer, engine),
-    Layer.provide(clusterHookKafkaProducerLayer, engine),
-  )
-  return Layer.provideMerge(clusterHookKafkaDaemonLayer, kafkaClients) as Layer.Layer<
-    never,
+  const producerStack = Layer.provide(clusterHookKafkaProducerLayer, engine)
+  const consumerStack = Layer.provide(clusterHookKafkaConsumerLayer, engine)
+  const publisher = Layer.provide(hookRemotePublisherKafkaLive, producerStack)
+  const daemon = Layer.provideMerge(clusterHookKafkaDaemonLayer, consumerStack)
+  return Layer.mergeAll(publisher, daemon) as Layer.Layer<
+    HookRemotePublisher,
     ConnectionException,
-    HookRegistry
+    HookHandlerExecutor
   >
 }

@@ -14,14 +14,34 @@ export {
   clusterHookBusValues,
   clusterHookDispatchTopicConfig,
   clusterHookDispatchTopicDefault,
+  clusterTransformPipelineConfig,
+  clusterTransformPipelineValues,
+  type ClusterTransformPipeline,
+  clusterInfrastructureConfig,
+  clusterInfrastructureValues,
   type ClusterHookBus,
+  type ClusterInfrastructure,
 } from "./config/cluster-hook-config.js"
 export {
   runtimeTierConfig,
   runtimeTierValues,
   type RuntimeTier,
 } from "./config/runtime-tier.js"
-export { DemoEntity, DelayedBullet, DeliverAtBullet } from "./schema.js"
+export { DemoEntity, DelayedBullet, DeliverAtBullet } from "./cluster-demo-entity.js"
+export * from "./schema-registry/index.js"
+export * from "./database/database.js"
+export * from "./database/index.js"
+export * from "./crud/crud-rpc.js"
+export * from "./crud/crud-handlers.js"
+export * from "./entity/entity-base.js"
+export * from "./entity/entity-registry.js"
+export * from "./extensions/extension-hooks.js"
+export * from "./runtime/run-core-startup.js"
+export * from "./config/runtime-config.js"
+export * from "./security/index.js"
+export * from "./schema-registry/typeid-schema.js"
+export * from "./schema-registry/schema-encryption.js"
+export * from "./transforms/index.js"
 export { type PlatformContext } from "./platform/platform-context.js"
 export { ClusterPlatformContext } from "./platform/cluster-platform-context.js"
 export type { ClusterAppEntry } from "./platform/cluster-app-entry.js"
@@ -47,21 +67,39 @@ export {
   type ClusterDatabasePlatformHandle,
 } from "./platform/create-cluster-database-platform.js"
 export {
+  clusterExtensionRoleOf,
   collectColocatedShooterPrograms,
   mergeApplicationLayerVariants,
+  mergeRegistrationLayers,
+  partitionApplicationLayersByRole,
   resolveApplicationLayerInput,
   type ApplicationLayerInput,
   type ApplicationLayerVariant,
   type ApplicationServiceStatics,
+  type ClusterExtensionRole,
 } from "./platform/application-layer-variants.js"
 export { buildColocatedEntityPipeline } from "./platform/colocated-entity-pipeline.js"
 export { localColocatedClusterStack } from "./platform/local-colocated-cluster-stack.js"
 export { localColocatedSupervisedLaunch } from "./platform/local-colocated-supervised-launch.js"
 export {
+  HookHandlerExecutor,
   HookRegistry,
   HookRegistryLive,
+  HookRemotePublisher,
+  hookRemotePublisherNoopLive,
   TransformRegistry,
   TransformRegistryLive,
+  TransformRegistryPipelineRpcLive,
+  transformPipelineRpcSupportLayers,
+  EVENTIVA_TRANSFORM_PIPELINE_TABLE,
+  ensureTransformPipelineTable,
+  loadTransformPipelineRows,
+  TransformExtensionRpcResolver,
+  TransformExtensionRpcResolverLive,
+  transformExtensionRpcUrlEnvKey,
+  type TransformPipelineRow,
+  type TransformRpcExecuteRequest,
+  type TransformRpcExecuteResponse,
   appendTransformStep,
   appendTransformStepsFromDiff,
   cloneTransformSnapshot,

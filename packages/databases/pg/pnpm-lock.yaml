@@ -1,0 +1,190 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@effect/sql':
+        specifier: ^0.21.0
+        version: 0.21.3(effect@3.19.19)
+      '@effect/sql-pg':
+        specifier: ^0.34.0
+        version: 0.34.21(@effect/sql@0.21.3(effect@3.19.19))(effect@3.19.19)
+      '@eventiva/core':
+        specifier: workspace:*
+        version: link:../../core
+      drizzle-orm:
+        specifier: ^0.38.0
+        version: 0.38.4(postgres@3.4.8)
+      effect:
+        specifier: ^3.19.17
+        version: 3.19.19
+
+packages:
+
+  '@effect/sql-pg@0.34.21':
+    resolution: {integrity: sha512-fi+Tf3aBQMkPouCxSqsO7Q7Yg5euWLmfhhJXcwWUueG9IGi9lg8adkYE/4kVmDmzZWLkdVFSqYMvxskQ7hjgkA==}
+    peerDependencies:
+      '@effect/experimental': ^0.44.21
+      '@effect/platform': ^0.80.21
+      '@effect/sql': ^0.33.21
+      effect: ^3.14.21
+
+  '@effect/sql@0.21.3':
+    resolution: {integrity: sha512-BqgxpeH1JtGfwe59ejsI9p5bxs165MOymhO7FcpIPj5Q7iS3UD/iNJi3KX992RrwOIgEnMm1AsEy9Bs1gQenpw==}
+    peerDependencies:
+      '@effect/experimental': ^0.32.16
+      '@effect/platform': ^0.69.31
+      effect: ^3.10.19
+
+  '@opentelemetry/semantic-conventions@1.40.0':
+    resolution: {integrity: sha512-cifvXDhcqMwwTlTK04GBNeIe7yyo28Mfby85QXFe1Yk8nmi36Ab/5UQwptOx84SsoGNRg+EVSjwzfSZMy6pmlw==}
+    engines: {node: '>=14'}
+
+  '@standard-schema/spec@1.1.0':
+    resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  drizzle-orm@0.38.4:
+    resolution: {integrity: sha512-s7/5BpLKO+WJRHspvpqTydxFob8i1vo2rEx4pY6TGY7QSMuUfWUuzaY0DIpXCkgHOo37BaFC+SJQb99dDUXT3Q==}
+    peerDependencies:
+      '@aws-sdk/client-rds-data': '>=3'
+      '@cloudflare/workers-types': '>=4'
+      '@electric-sql/pglite': '>=0.2.0'
+      '@libsql/client': '>=0.10.0'
+      '@libsql/client-wasm': '>=0.10.0'
+      '@neondatabase/serverless': '>=0.10.0'
+      '@op-engineering/op-sqlite': '>=2'
+      '@opentelemetry/api': ^1.4.1
+      '@planetscale/database': '>=1'
+      '@prisma/client': '*'
+      '@tidbcloud/serverless': '*'
+      '@types/better-sqlite3': '*'
+      '@types/pg': '*'
+      '@types/react': '>=18'
+      '@types/sql.js': '*'
+      '@vercel/postgres': '>=0.8.0'
+      '@xata.io/client': '*'
+      better-sqlite3: '>=7'
+      bun-types: '*'
+      expo-sqlite: '>=14.0.0'
+      knex: '*'
+      kysely: '*'
+      mysql2: '>=2'
+      pg: '>=8'
+      postgres: '>=3'
+      prisma: '*'
+      react: '>=18'
+      sql.js: '>=1'
+      sqlite3: '>=5'
+    peerDependenciesMeta:
+      '@aws-sdk/client-rds-data':
+        optional: true
+      '@cloudflare/workers-types':
+        optional: true
+      '@electric-sql/pglite':
+        optional: true
+      '@libsql/client':
+        optional: true
+      '@libsql/client-wasm':
+        optional: true
+      '@neondatabase/serverless':
+        optional: true
+      '@op-engineering/op-sqlite':
+        optional: true
+      '@opentelemetry/api':
+        optional: true
+      '@planetscale/database':
+        optional: true
+      '@prisma/client':
+        optional: true
+      '@tidbcloud/serverless':
+        optional: true
+      '@types/better-sqlite3':
+        optional: true
+      '@types/pg':
+        optional: true
+      '@types/react':
+        optional: true
+      '@types/sql.js':
+        optional: true
+      '@vercel/postgres':
+        optional: true
+      '@xata.io/client':
+        optional: true
+      better-sqlite3:
+        optional: true
+      bun-types:
+        optional: true
+      expo-sqlite:
+        optional: true
+      knex:
+        optional: true
+      kysely:
+        optional: true
+      mysql2:
+        optional: true
+      pg:
+        optional: true
+      postgres:
+        optional: true
+      prisma:
+        optional: true
+      react:
+        optional: true
+      sql.js:
+        optional: true
+      sqlite3:
+        optional: true
+
+  effect@3.19.19:
+    resolution: {integrity: sha512-Yc8U/SVXo2dHnaP7zNBlAo83h/nzSJpi7vph6Hzyl4ulgMBIgPmz3UzOjb9sBgpFE00gC0iETR244sfXDNLHRg==}
+
+  fast-check@3.23.2:
+    resolution: {integrity: sha512-h5+1OzzfCC3Ef7VbtKdcv7zsstUQwUDlYpUTvjeUsJAssPgLn7QzbboPtL5ro04Mq0rPOsMzl7q5hIbRs2wD1A==}
+    engines: {node: '>=8.0.0'}
+
+  postgres@3.4.8:
+    resolution: {integrity: sha512-d+JFcLM17njZaOLkv6SCev7uoLaBtfK86vMUXhW1Z4glPWh4jozno9APvW/XKFJ3CCxVoC7OL38BqRydtu5nGg==}
+    engines: {node: '>=12'}
+
+  pure-rand@6.1.0:
+    resolution: {integrity: sha512-bVWawvoZoBYpp6yIoQtQXHZjmz35RSVHnUOTefl8Vcjr8snTPY1wnpSPMWekcFwbxI6gtmT7rSYPFvz71ldiOA==}
+
+snapshots:
+
+  '@effect/sql-pg@0.34.21(@effect/sql@0.21.3(effect@3.19.19))(effect@3.19.19)':
+    dependencies:
+      '@effect/sql': 0.21.3(effect@3.19.19)
+      '@opentelemetry/semantic-conventions': 1.40.0
+      effect: 3.19.19
+      postgres: 3.4.8
+
+  '@effect/sql@0.21.3(effect@3.19.19)':
+    dependencies:
+      '@opentelemetry/semantic-conventions': 1.40.0
+      effect: 3.19.19
+
+  '@opentelemetry/semantic-conventions@1.40.0': {}
+
+  '@standard-schema/spec@1.1.0': {}
+
+  drizzle-orm@0.38.4(postgres@3.4.8):
+    optionalDependencies:
+      postgres: 3.4.8
+
+  effect@3.19.19:
+    dependencies:
+      '@standard-schema/spec': 1.1.0
+      fast-check: 3.23.2
+
+  fast-check@3.23.2:
+    dependencies:
+      pure-rand: 6.1.0
+
+  postgres@3.4.8: {}
+
+  pure-rand@6.1.0: {}

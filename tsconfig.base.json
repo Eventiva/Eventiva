@@ -40,7 +40,9 @@
             "@eventiva/platforms.postgresql/platform": ["packages/platforms/postgresql/src/platform.ts"],
             "@eventiva/platforms.mysql": ["packages/platforms/mysql/src/index.ts"],
             "@eventiva/platforms.mysql/platform": ["packages/platforms/mysql/src/platform.ts"],
-            "@eventiva/integrations.kafka": ["packages/integrations/kafka/src/index.ts"]
+            "@eventiva/integrations.kafka": ["packages/integrations/kafka/src/index.ts"],
+            "@eventiva/databases.pg": ["packages/databases/pg/src/index.ts"],
+            "@eventiva/extensions.schema-demo": ["packages/extensions/schema-demo/src/index.ts"]
         }
     }
 }

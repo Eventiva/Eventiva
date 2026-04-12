@@ -4,7 +4,7 @@ import {
   type PlatformContext,
   clusterAppModeConfig,
 } from "@eventiva/core"
-import { Effect } from "effect"
+import { Effect, Layer } from "effect"
 import {
   BY_RESNOVAS_WORDART,
   COPYRIGHT_STATEMENT,
@@ -30,21 +30,34 @@ export function logCopyrightNoticeBanner(): Effect.Effect<void, never, never> {
  * Demo extension: registers runner `onLoad` to print wordart + copyright.
  * Dependencies are declared so `Default` is self-contained for platform `Layer.mergeAll`.
  *
- * @see https://effect.website/docs/requirements-management/layers/#simplifying-service-definitions-with-effectservice
+ * `accessors: true` exposes {@link CopyrightNoticeExtension.logCopyrightBanner} as
+ * `yield* CopyrightNoticeExtension.logCopyrightBanner` when this service is in context.
+ *
+ * @see https://effect.website/docs/requirements-management/layers/#enabling-direct-method-access
  */
 export class CopyrightNoticeExtension extends Effect.Service<CopyrightNoticeExtension>()(
   "@eventiva/extensions/CopyrightNoticeExtension",
   {
     dependencies: [HookRegistryLive],
+    accessors: true,
     effect: Effect.gen(function* () {
       const hooks = yield* HookRegistry
       yield* hooks.register({ _tag: "runner" }, "onLoad", (_payload) => logCopyrightNoticeBanner())
       return {
         _tag: "@eventiva/extensions/CopyrightNoticeExtension" as const,
+        logCopyrightBanner: logCopyrightNoticeBanner(),
       }
     }),
   },
-) {}
+) {
+  /** Runner graph only; colocated local uses the same registration merge (`Default`). */
+  static readonly clusterExtensionRole = "registration" as const
+
+  static Local = Layer.succeed(CopyrightNoticeExtension, {
+    _tag: "@eventiva/extensions/CopyrightNoticeExtension" as const,
+    logCopyrightBanner: Effect.void,
+  })
+}
 
 /** No-op entry — real work is {@link CopyrightNoticeExtension} merged via `PlatformContext.extensionLayers`. */
 export function makeCopyrightNoticeEntry(

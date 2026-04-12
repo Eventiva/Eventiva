@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["lint", "^build"],
       "options": {
         "outputPath": "dist/integrations/kafka",
         "main": "packages/integrations/kafka/src/index.ts",

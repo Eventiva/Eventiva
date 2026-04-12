@@ -10,26 +10,25 @@ import type { HookScope } from "./types.js"
  * Subscribes to `Sharding.getRegistrationEvents` and dispatches `onRegister` hooks
  * with scopes `entityType` / `singleton` matching the cluster event.
  */
-export const shardingRegistrationHooksLayer: Layer.Layer<never, never, HookRegistry | Sharding> =
-  Layer.scopedDiscard(
-    Effect.gen(function* () {
-      const sharding = yield* Sharding
-      const hooks = yield* HookRegistry
+export const shardingRegistrationHooksLayer = Layer.scopedDiscard(
+  Effect.gen(function* () {
+    const sharding = yield* Sharding
+    const hooks = yield* HookRegistry
 
-      const handle = (ev: ShardingRegistrationEvent) => {
-        if (ev._tag === "EntityRegistered") {
-          const scope: HookScope = {
-            _tag: "entityType",
-            entityType: ev.entity.type as string,
-          }
-          return hooks.run(scope, "onRegister", ev)
+    const handle = (ev: ShardingRegistrationEvent) => {
+      if (ev._tag === "EntityRegistered") {
+        const scope: HookScope = {
+          _tag: "entityType",
+          entityType: ev.entity.type as string,
         }
-        const scope: HookScope = { _tag: "singleton", name: ev.address.name }
         return hooks.run(scope, "onRegister", ev)
       }
+      const scope: HookScope = { _tag: "singleton", name: ev.address.name }
+      return hooks.run(scope, "onRegister", ev)
+    }
 
-      yield* Effect.forkScoped(
-        Stream.runForEach(sharding.getRegistrationEvents, handle),
-      )
-    }),
-  )
+    yield* Effect.forkScoped(
+      Stream.runForEach(sharding.getRegistrationEvents, handle),
+    )
+  }),
+) as Layer.Layer<never, never, HookRegistry | Sharding>

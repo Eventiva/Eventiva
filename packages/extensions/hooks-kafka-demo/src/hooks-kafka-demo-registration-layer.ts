@@ -1,15 +1,16 @@
 import { HookRegistry, HookRegistryLive } from "@eventiva/core"
-import { Effect } from "effect"
+import { Effect, Layer } from "effect"
 
 /**
  * Registers runner-scoped handlers for local `onLoad` (bus off) or Kafka consumer (bus kafka).
  *
- * @see https://effect.website/docs/requirements-management/layers/#simplifying-service-definitions-with-effectservice
+ * @see https://effect.website/docs/requirements-management/layers/#enabling-direct-method-access
  */
 export class HooksKafkaDemoRegistrationExtension extends Effect.Service<HooksKafkaDemoRegistrationExtension>()(
   "@eventiva/extensions/HooksKafkaDemoRegistrationExtension",
   {
     dependencies: [HookRegistryLive],
+    accessors: true,
     effect: Effect.gen(function* () {
       const hooks = yield* HookRegistry
       yield* hooks.register({ _tag: "runner" }, "onLoad", () =>
@@ -30,4 +31,10 @@ export class HooksKafkaDemoRegistrationExtension extends Effect.Service<HooksKaf
       }
     }),
   },
-) {}
+) {
+  static readonly clusterExtensionRole = "registration" as const
+
+  static Local = Layer.succeed(HooksKafkaDemoRegistrationExtension, {
+    _tag: "@eventiva/extensions/HooksKafkaDemoRegistrationExtension" as const,
+  })
+}

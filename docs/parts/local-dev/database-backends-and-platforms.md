@@ -94,7 +94,7 @@ Use **GET/POST/PATCH** on **`/api/contacts`** and **`POST /api/rpc/contacts`** w
 
 | Package | Role |
 | ------- | ---- |
-| `@eventiva/databases.shared` | Backend registry, `resolveActiveDatabaseBackendId`, `activateDatabaseStackFromEnv`, `activateDatabaseBackend`. |
+| `@eventiva/core` (database shared facades) | Backend registry, `resolveActiveDatabaseBackendId`, `activateDatabaseStackFromEnv`, `activateDatabaseBackend`, dialect column facades. |
 | `@eventiva/databases.pg` / `@eventiva/databases.sqlite` | Driver-specific layers and DDL implementations. |
 | `packages/platforms/postgresql` | Runnable platform; registers Postgres backend; env-selected active backend; HTTP from **`EVENTIVA_HTTP_PORT`** (default **3000**). |
 | `packages/platforms/sqlite-demo` | Runnable demo; SQLite only; HTTP from **`EVENTIVA_HTTP_PORT`** (default **3000**). |

@@ -4,7 +4,7 @@ import { NodeContext } from '@effect/platform-node';
 import * as Path from '@effect/platform/Path';
 import * as Effect from 'effect/Effect';
 import { exitCodeInherit } from './cluster-shell.js';
-import { CLUSTER_FPK_OUT, CLUSTER_FPK_SRC } from './cluster-fpk-paths.js';
+import { CLUSTER_FPK_OUT, CLUSTER_FPK_ROOT, CLUSTER_FPK_SRC } from './cluster-fpk-paths.js';
 
 const fpkArgs = (srcRel: string, outRel: string) =>
     ['exec', 'fpk', '-d', srcRel, '-o', outRel, '-f', 'yaml', '-i', 'package.json'] as const;
@@ -21,7 +21,13 @@ export const renderClusterProgram = (cwd: string): Effect.Effect<number, unknown
         if (exists) {
             yield* fs.remove(outDir, { recursive: true });
         }
-        return yield* exitCodeInherit(cwd, 'pnpm', [...fpkArgs(CLUSTER_FPK_SRC, CLUSTER_FPK_OUT)]);
+        const fpkTsconfig = path.join(cwd, CLUSTER_FPK_ROOT, 'tsconfig.json');
+        const fpkEnv: NodeJS.ProcessEnv = {
+            ...process.env,
+            /** Keeps @fpk/cli's ts-node on this tree's compiler options (avoids TS5109 with workspace NodeNext). */
+            TS_NODE_PROJECT: fpkTsconfig,
+        };
+        return yield* exitCodeInherit(cwd, 'pnpm', [...fpkArgs(CLUSTER_FPK_SRC, CLUSTER_FPK_OUT)], fpkEnv);
     });
 
 export const renderClusterSync = (cwd: string): Promise<number> =>

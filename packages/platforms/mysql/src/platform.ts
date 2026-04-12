@@ -9,9 +9,9 @@ import {
 import { CopyrightNoticeExtension } from "@eventiva/extensions.copyright-notice"
 import { ExampleTransformExtension } from "@eventiva/extensions.example-transform"
 import {
-  hooksKafkaDemoBootstrapLayer,
   HooksKafkaDemoRegistrationExtension,
 } from "@eventiva/extensions.hooks-kafka-demo"
+import { clusterHookKafkaStackFromEnv } from "@eventiva/integrations.kafka"
 import { RunnerExtension } from "@eventiva/extensions.runner"
 import { ShooterExtension } from "@eventiva/extensions.shooter"
 import { SlowShooterExtension } from "@eventiva/extensions.slow-shooter"
@@ -52,7 +52,7 @@ export class MysqlClusterPlatform extends Effect.Service<MysqlClusterPlatform>()
       sqlLayer: mysqlClusterSqlLayer,
       observabilityLayer: clusterObservabilityLayer,
       hookSidecarLayers: hookRegistrationLayers,
-      kafkaHookBootstrapLayer: hooksKafkaDemoBootstrapLayer,
+      kafkaHookBootstrapLayer: clusterHookKafkaStackFromEnv(),
     }),
   },
 ) {}

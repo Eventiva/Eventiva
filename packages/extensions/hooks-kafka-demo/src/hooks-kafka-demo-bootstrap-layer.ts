@@ -1,33 +1,21 @@
-import { clusterHookBusConfig } from "@eventiva/core"
-import { publishClusterHookDispatch } from "@eventiva/integrations.kafka"
-import { randomUUID } from "node:crypto"
+import { HookRegistry } from "@eventiva/core"
 import * as Effect from "effect/Effect"
 import * as Layer from "effect/Layer"
 
 /**
- * When `CLUSTER_HOOK_BUS=kafka`, publishes two records to the hook dispatch topic so the
- * in-process consumer runs registered handlers (replaces skipped local `onLoad` for runner scope).
- * Merged after the Kafka hook stack in the runner so `Producer` is in scope.
+ * After a short delay, dispatches `hooksKafkaDemoPing` through {@link HookRegistry.run} so the
+ * same hook bus path runs as for all other hooks (PubSub / Kafka / inline).
+ * Runner `onLoad` is handled by `runnerOnLoadHooksLayer` only.
+ * Merged after the hook + Kafka stack in the runner.
  */
 export const hooksKafkaDemoBootstrapLayer = Layer.effectDiscard(
   Effect.gen(function* () {
-    const bus = yield* clusterHookBusConfig
-    if (bus !== "kafka") {
-      return
-    }
     yield* Effect.forkDaemon(
       Effect.gen(function* () {
-        yield* Effect.sleep("750 millis")
-        yield* publishClusterHookDispatch(randomUUID(), "onLoad", { _tag: "runner" }, {})
-        yield* Effect.logInfo("[hooks-kafka-demo] published runner onLoad to hook dispatch topic")
-        yield* Effect.sleep("150 millis")
-        yield* publishClusterHookDispatch(
-          randomUUID(),
-          "hooksKafkaDemoPing",
-          { _tag: "runner" },
-          { demo: true },
-        )
-        yield* Effect.logInfo("[hooks-kafka-demo] published hooksKafkaDemoPing to hook dispatch topic")
+        yield* Effect.sleep("900 millis")
+        const hooks = yield* HookRegistry
+        yield* hooks.run({ _tag: "runner" }, "hooksKafkaDemoPing", { demo: true })
+        yield* Effect.logInfo("[hooks-kafka-demo] dispatched hooksKafkaDemoPing through hook bus")
       }),
     )
   }),

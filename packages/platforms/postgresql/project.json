@@ -8,6 +8,7 @@
         "build": {
             "executor": "@nx/js:tsc",
             "outputs": ["{options.outputPath}"],
+            "dependsOn": ["lint", "^build"],
             "options": {
                 "outputPath": "dist/platforms/postgresql",
                 "main": "packages/platforms/postgresql/src/index.ts",
@@ -51,9 +52,14 @@
                 "cwd": "{workspaceRoot}",
                 "env": {
                     "NODE_ENV": "development",
-                    "CLUSTER_HOOK_BUS": "off",
                     "EVENTIVA_CLUSTER_INFRASTRUCTURE": "local",
-                    "EVENTIVA_RUNTIME_TIER": "local"
+                    "EVENTIVA_RUNTIME_TIER": "local",
+                    "CLUSTER_HOOK_BUS": "off",
+                    "DB_DATABASE": "effect_cluster",
+                    "DB_USER": "cluster",
+                    "DB_PASSWORD": "cluster",
+                    "DB_HOST": "localhost",
+                    "DB_PORT": "5432"
                 }
             },
             "dependsOn": ["build"]

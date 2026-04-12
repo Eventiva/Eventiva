@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["lint", "^build"],
       "options": {
         "outputPath": "dist/extensions/runner",
         "main": "packages/extensions/runner/src/index.ts",

@@ -33,9 +33,14 @@ export function clusterPlatformMainFor<Service extends PlatformContext>(
     readonly Default: Layer.Layer<Service, any, any>
   },
   applicationLayers: Layer.Layer<unknown, unknown, never>,
+  options?: {
+    /** Merged with `platformTag.Default` when provided (e.g. Drizzle schema bootstrap). */
+    readonly platformLayer?: Layer.Layer<Service, any, any>
+  },
 ): Effect.Effect<void, unknown, never> {
+  const platformLayer = options?.platformLayer ?? platformTag.Default
   return clusterPlatformApplicationLaunch(
     platformTag as unknown as Parameters<typeof clusterPlatformApplicationLaunch>[0],
     applicationLayers,
-  ).pipe(Effect.provide(platformTag.Default)) as Effect.Effect<void, unknown, never>
+  ).pipe(Effect.provide(platformLayer)) as Effect.Effect<void, unknown, never>
 }

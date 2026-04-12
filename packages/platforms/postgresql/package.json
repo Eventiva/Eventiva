@@ -13,13 +13,16 @@
         "@effect/sql": "0.49.0",
         "@effect/workflow": "^0.16.0",
         "@eventiva/core": "workspace:*",
+        "@eventiva/databases.pg": "workspace:*",
         "@eventiva/extensions.copyright-notice": "workspace:*",
         "@eventiva/extensions.example-transform": "workspace:*",
         "@eventiva/extensions.hooks-kafka-demo": "workspace:^",
         "@eventiva/extensions.runner": "workspace:*",
+        "@eventiva/extensions.schema-demo": "workspace:*",
         "@eventiva/extensions.shooter": "workspace:*",
         "@eventiva/extensions.slow-shooter": "workspace:*",
         "@eventiva/extensions.speed-shooter": "workspace:*",
+        "@eventiva/integrations.kafka": "workspace:^",
         "effect": "3.19.19",
         "tslib": "^2.3.0"
     }

@@ -193,7 +193,7 @@ pnpm nx run platforms-postgresql:build
 
 Other HTTP / workload entrypoints and ports are documented under `packages/platforms/postgresql` and link:docs/parts/local-dev/database-backends-and-platforms.md[database-backends-and-platforms.md].
 
-Environment variables such as `EVENTIVA_DATABASE`, `DATABASE`, and database connection settings apply as documented in the platform (`packages/platforms/postgresql`) and `@eventiva/databases.shared` (backend registry and dialect facades). The Postgres backend is registered in `packages/platforms/postgresql/src/register-database-backends.ts`.
+Environment variables such as `EVENTIVA_DATABASE`, `DATABASE`, and database connection settings apply as documented in the platform (`packages/platforms/postgresql`) and `@eventiva/core` (backend registry and dialect facades).
 
 ==== Tests Repository
 

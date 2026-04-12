@@ -8,6 +8,7 @@
     "build": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
+      "dependsOn": ["lint", "^build"],
       "options": {
         "outputPath": "dist/extensions/copyright-notice",
         "main": "packages/extensions/copyright-notice/src/index.ts",

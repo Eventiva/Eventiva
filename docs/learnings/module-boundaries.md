@@ -29,7 +29,7 @@ Projects can have multiple tags (e.g., `["type:extension", "layer:backend", "cap
 
 ### `type:database`
 
-**Examples**: `@eventiva/databases.pg`, `@eventiva/databases.shared`
+**Examples**: `@eventiva/databases.pg` (shared Drizzle dialect facades and backend registry live in `@eventiva/core`)
 
 - **Purpose**: Database implementations and adapters
 - **Can depend on**: `type:core`, `type:shared`

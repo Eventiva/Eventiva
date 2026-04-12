@@ -1,0 +1,20 @@
+{
+  "name": "extensions-schema-demo",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/extensions/schema-demo/src",
+  "projectType": "library",
+  "tags": ["type:extension", "layer:backend", "capability:entities"],
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "dependsOn": ["lint", "^build"],
+      "options": {
+        "outputPath": "dist/extensions/schema-demo",
+        "main": "packages/extensions/schema-demo/src/index.ts",
+        "tsConfig": "packages/extensions/schema-demo/tsconfig.lib.json",
+        "assets": []
+      }
+    }
+  }
+}

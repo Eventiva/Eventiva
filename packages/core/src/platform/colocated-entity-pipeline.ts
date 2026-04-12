@@ -6,7 +6,7 @@ import { Effect, Layer } from "effect"
  * Caller supplies `entityLayers` (e.g. from `@eventiva/extensions.runner`) and the shooter `Effect`s to fork.
  */
 export function buildColocatedEntityPipeline(config: {
-  readonly entityLayers: Layer.Layer<any, any, any>
+  readonly entityLayers: Layer.Layer<never, unknown, unknown>
   /** Long-running shooter / client loops to fork as scoped fibers (requirements vary by extension). */
   readonly shooterPrograms: ReadonlyArray<Effect.Effect<any, any, any>>
 }): Layer.Layer<any, any, any> {

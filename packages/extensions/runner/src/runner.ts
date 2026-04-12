@@ -5,6 +5,7 @@ import {
   HookRegistryLive,
   TransformRegistry,
   TransformRegistryLive,
+  TransformRegistryPipelineRpcLive,
   clusterAppModeConfig,
   emptyTransformContext,
   makeClusterSqlRunnerLayer,
@@ -143,17 +144,21 @@ export function makeRunnerEntry(
     }
     const ext = ctx.extensionLayers ?? Layer.empty
     const kafkaBootstrap = ctx.kafkaHookBootstrapLayer ?? Layer.empty
+    const transformRegistryLayer =
+      process.env.EVENTIVA_TRANSFORM_PIPELINE === "rpc"
+        ? TransformRegistryPipelineRpcLive
+        : TransformRegistryLive
     /**
      * `Layer.mergeAll` can build siblings in an order where extension layers
      * (`CopyrightNoticeExtension`, `ExampleTransformExtension`) run before `HookRegistryLive`
-     * is available, causing "Service not found: HookRegistry" at runtime.
+     * (hook registry + executor + bus) is available, causing "Service not found: HookRegistry" at runtime.
      * Chain with `provideMerge` so registries wrap dependents deterministically.
      */
     const stack = demoEntityLayers.pipe(
       Layer.provideMerge(runnerOnLoadHooksLayer),
       Layer.provideMerge(shardingRegistrationHooksLayer),
       Layer.provideMerge(ext),
-      Layer.provideMerge(TransformRegistryLive),
+      Layer.provideMerge(transformRegistryLayer),
       Layer.provideMerge(HookRegistryLive),
       Layer.provideMerge(clusterHookKafkaStackFromEnv()),
       Layer.provideMerge(kafkaBootstrap),
