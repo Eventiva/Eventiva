@@ -25,7 +25,7 @@
         "@opentelemetry/semantic-conventions": "^1.33.0",
         "@sentry/node": "^9.0.0",
         "@sentry/opentelemetry": "^9.0.0",
-        "drizzle-orm": "1.0.0-beta.18-dc9676b",
+        "drizzle-orm": "1.0.0-beta.20",
         "effect": "3.19.19",
         "tslib": "^2.3.0",
         "typeid-js": "^1.1.0"
