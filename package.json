@@ -137,7 +137,7 @@
         "@opentelemetry/sdk-logs": "^0.203.0",
         "@opentelemetry/sdk-metrics": "^2.0.0",
         "effect": "^3.19.17",
-        "expo": "~54.0.0",
+        "expo": "~55.0.14",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-native": "0.84.1",
