@@ -6,6 +6,6 @@
     "type": "module",
     "generators": "./generators.json",
     "dependencies": {
-        "@nx/devkit": "22.5.4"
+        "@nx/devkit": "22.6.5"
     }
 }
