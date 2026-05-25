@@ -59,7 +59,8 @@
             "effect": "3.19.19",
             "jsonpath-plus": "^10.3.0",
             "parse-duration": "^2.1.5",
-            "axios": "1.16.1"
+            "axios": "1.16.1",
+            "qs": "6.15.2"
         },
         "patchedDependencies": {
             "effect@3.19.19": "patches/effect@3.19.19.patch"
