@@ -60,7 +60,8 @@
             "jsonpath-plus": "^10.3.0",
             "parse-duration": "^2.1.5",
             "axios": "1.16.1",
-            "qs": "6.15.2"
+            "qs": "6.15.2",
+            "yaml": "2.9.0"
         },
         "patchedDependencies": {
             "effect@3.19.19": "patches/effect@3.19.19.patch"
