@@ -8,8 +8,8 @@
   "dependencies": {
     "@eventiva/core": "workspace:*",
     "@eventiva/integrations.kafka": "workspace:*",
-    "@effect/cluster": "0.56.4",
-    "@effect/platform-node": "0.104.0",
+    "@effect/cluster": "0.58.2",
+    "@effect/platform-node": "0.106.0",
     "effect": "3.19.19",
     "tslib": "^2.3.0"
   }
