@@ -307,3 +307,9 @@ vitest.config.*.timestamp*
 .claude/worktrees
 .claude/settings.local.json
 .data/
+
+# Graphify: repo-local tool install, knowledge graph, cache and isolated home.
+# Tracked parts are tools/graphify/, .graphifyignore and docs/graphify.md.
+.graphify/
+tools/graphify/graphify.local.env
+graphify-out/

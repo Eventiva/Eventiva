@@ -1,0 +1,96 @@
+# Graphify exclusions for the Eventiva monorepo.
+#
+# Git-style syntax. `.gitignore` is already applied automatically and takes
+# precedence: a path excluded by `.gitignore` cannot be re-included here.
+# Graphify also has built-in skips for `.git`, `node_modules`, `dist`, `build`,
+# `target`, virtualenv/cache directories, `.env*`, key and certificate formats,
+# and credential stores. The entries below are the Eventiva-specific additions
+# and the defence-in-depth restatements that matter for this repository.
+#
+# See docs/graphify.md for the reasoning and for how to verify exclusions.
+
+# --- Secrets and credentials -------------------------------------------------
+# Restated explicitly rather than relying on built-ins alone. If any of these
+# ever stop being gitignored, they must still never reach the graph.
+.env
+.env.*
+*.pem
+*.key
+*.p8
+*.p12
+*.jks
+*.mobileprovision
+*.keystore
+secrets/
+**/secrets/
+credentials.json
+**/credentials.json
+
+# --- Private and customer data -----------------------------------------------
+# The repository holds no customer data today; these keep it that way by
+# default if an export, dump or scratch dataset is ever dropped in a clone.
+.data/
+db/dumps/
+**/*.dump
+**/*.sqlite
+**/*.sqlite3
+**/*.csv
+**/*.tsv
+private/
+**/private/
+
+# --- Package managers and vendored dependencies ------------------------------
+node_modules/
+.pnpm-store/
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+patches/
+
+# --- Build output and generated code -----------------------------------------
+dist/
+build/
+out-tsc/
+web-build/
+coverage/
+tmp/
+.expo/
+.next/
+**/*.tsbuildinfo
+**/*.min.js
+**/*.map
+**/.gen/
+**/.terraform/
+**/.cdktf.out/
+
+# --- Tool caches --------------------------------------------------------------
+.nx/
+.cache/
+.parcel-cache/
+.turbo/
+.graphify/
+.history/
+
+# --- Editor, CI and agent configuration ---------------------------------------
+# Agent rule files are instructions to tooling, not product code. Indexing them
+# floods the graph with prose that describes how to work rather than what the
+# system does.
+.cursor/
+.vscode/
+.idea/
+.claude/
+.github/
+
+# --- Binary assets -------------------------------------------------------------
+assets/
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.svg
+**/*.ico
+**/*.woff
+**/*.woff2
+**/*.ttf
+**/*.mp4
+**/*.pdf

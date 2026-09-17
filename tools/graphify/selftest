@@ -1,0 +1,78 @@
+#!/usr/bin/env sh
+#
+# Verifies the privacy contract of the Eventiva Graphify index: that excluded
+# paths never become graph content and that no secret material is present.
+#
+# Run after building a graph:
+#   tools/graphify/graphify index
+#   tools/graphify/selftest
+#
+# Exits non-zero on the first violation.
+
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+REPO_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd -P)
+GRAPH_JSON="$REPO_ROOT/.graphify/index/graphify-out/graph.json"
+VENV_PYTHON="$REPO_ROOT/.graphify/tools/graphifyy/bin/python"
+
+[ -f "$GRAPH_JSON" ] || {
+    printf 'selftest: no graph at %s\nRun: tools/graphify/graphify index\n' "$GRAPH_JSON" >&2
+    exit 1
+}
+[ -x "$VENV_PYTHON" ] || {
+    printf 'selftest: graphify is not installed. Run: tools/graphify/graphify setup\n' >&2
+    exit 1
+}
+
+"$VENV_PYTHON" - "$GRAPH_JSON" <<'PY'
+import json, sys
+
+graph = json.load(open(sys.argv[1]))
+nodes = graph.get("nodes", [])
+raw = json.dumps(graph)
+
+source_files = {
+    n.get("source_file") or n.get("file") or n.get("path")
+    for n in nodes
+}
+source_files.discard(None)
+
+# Paths that must never contribute indexed content.
+EXCLUDED_PATHS = [
+    "node_modules/", ".git/", ".env", "dist/", "build/", "coverage/",
+    ".nx/", ".cursor/", ".github/", ".vscode/", "assets/", "patches/",
+    "pnpm-lock.yaml", "package-lock.json", ".graphify/", "tmp/",
+    ".npmrc", "secrets/", ".pnpm-store/",
+]
+
+# Strings that would indicate secret material reached the graph.
+SECRET_MARKERS = [
+    "BEGIN RSA PRIVATE KEY", "BEGIN PRIVATE KEY", "BEGIN OPENSSH PRIVATE KEY",
+    "_authToken", "AKIA", "xoxb-", "sk-ant-", "ghp_",
+]
+
+failures = []
+
+for pattern in EXCLUDED_PATHS:
+    hits = sorted(f for f in source_files if pattern in f)
+    if hits:
+        failures.append(f"excluded path indexed: {pattern} -> {hits[:3]}")
+
+for marker in SECRET_MARKERS:
+    if marker in raw:
+        failures.append(f"secret marker present in graph: {marker}")
+
+print(f"nodes            : {len(nodes)}")
+print(f"indexed files    : {len(source_files)}")
+print(f"excluded checks  : {len(EXCLUDED_PATHS)}")
+print(f"secret checks    : {len(SECRET_MARKERS)}")
+
+if failures:
+    print("\nFAILED:")
+    for f in failures:
+        print(f"  - {f}")
+    sys.exit(1)
+
+print("\nPASS: no excluded path and no secret marker reached the graph.")
+PY
