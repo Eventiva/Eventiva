@@ -1,0 +1,292 @@
+#!/usr/bin/env sh
+#
+# Repo-local Graphify wrapper for Eventiva contributors.
+# Everything it installs or writes lives under <repo>/.graphify, which is
+# gitignored. Nothing is installed globally and no machine paths are baked in.
+#
+# Usage: tools/graphify/graphify <command> [args]
+# Run `tools/graphify/graphify help` for the command list, or read
+# docs/graphify.md for the full guide.
+
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+REPO_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../.." && pwd -P)
+STATE_DIR="$REPO_ROOT/.graphify"
+
+# --- Pinned configuration -----------------------------------------------------
+# Pins come from the feasibility gate. Change them deliberately, not casually:
+# see the "Updating the pin" section of docs/graphify.md.
+GRAPHIFY_SPEC='graphifyy[mcp,ollama,sql]==0.9.63'
+GRAPHIFY_PYTHON='3.13'
+GRAPHIFY_MODEL='qwen2.5-coder:7b'
+OLLAMA_ROOT='http://127.0.0.1:11434'
+
+# Optional per-machine overrides. Untracked; see docs/graphify.md.
+if [ -f "$SCRIPT_DIR/graphify.local.env" ]; then
+    # shellcheck disable=SC1091
+    . "$SCRIPT_DIR/graphify.local.env"
+fi
+
+TOOL_DIR="$STATE_DIR/tools"
+BIN_DIR="$STATE_DIR/bin"
+GRAPHIFY_HOME="$STATE_DIR/home"
+INDEX_DIR="$STATE_DIR/index"
+GRAPH_JSON="$INDEX_DIR/graphify-out/graph.json"
+MODE_FILE="$STATE_DIR/mode"
+VENV_PYTHON="$TOOL_DIR/graphifyy/bin/python"
+
+die() {
+    printf 'graphify: %s\n' "$1" >&2
+    exit 1
+}
+
+info() {
+    printf '%s\n' "$1" >&2
+}
+
+require_uv() {
+    if ! command -v uv >/dev/null 2>&1; then
+        cat >&2 <<'EOF'
+graphify: `uv` is not on PATH.
+
+uv is the Python installer this wrapper uses. Install it yourself — this
+script will not install system tooling on your behalf:
+
+  curl -LsSf https://astral.sh/uv/install.sh | sh     # macOS / Linux
+  brew install uv                                     # Homebrew
+  pipx install uv                                     # if you already use pipx
+
+Then re-run: tools/graphify/graphify setup
+EOF
+        exit 1
+    fi
+}
+
+require_setup() {
+    [ -x "$BIN_DIR/graphify" ] || die 'not set up yet. Run: tools/graphify/graphify setup'
+}
+
+require_graph() {
+    [ -f "$GRAPH_JSON" ] || die 'no graph yet. Run: tools/graphify/graphify index'
+}
+
+# Runs a graphify subcommand with a hardened, repo-local environment.
+#
+# HOME is redirected so Graphify's global graph (~/.graphify/global-graph.json)
+# can never accumulate Eventiva content in a shared location — a merged global
+# graph is readable by any MCP client that can reach it, so we keep this
+# repository out of one entirely.
+#
+# Provider API keys are cleared so that an ambient key in your shell cannot
+# silently route repository content to a paid remote model. Graphify's own
+# default backend is "whichever API key is set"; this wrapper always passes an
+# explicit backend instead.
+run_graphify() {
+    env -u OPENAI_API_KEY -u ANTHROPIC_API_KEY -u GEMINI_API_KEY \
+        -u GOOGLE_API_KEY -u DEEPSEEK_API_KEY -u MOONSHOT_API_KEY \
+        -u KIMI_API_KEY -u AWS_ACCESS_KEY_ID -u AWS_SECRET_ACCESS_KEY \
+        -u AWS_SESSION_TOKEN \
+        HOME="$GRAPHIFY_HOME" \
+        OLLAMA_BASE_URL="$OLLAMA_ROOT/v1" \
+        GRAPHIFY_QUERY_LOG_DISABLE=1 \
+        "$BIN_DIR/graphify" "$@"
+}
+
+require_ollama() {
+    command -v curl >/dev/null 2>&1 ||
+        die 'curl is needed to check the local Ollama server.'
+    curl -fsS --max-time 5 "$OLLAMA_ROOT/api/tags" >/dev/null 2>&1 ||
+        die "no Ollama server answering at $OLLAMA_ROOT. Start it with 'ollama serve', or index without --semantic."
+    curl -fsS --max-time 5 "$OLLAMA_ROOT/api/tags" 2>/dev/null |
+        grep -q "\"$GRAPHIFY_MODEL\"" ||
+        die "model '$GRAPHIFY_MODEL' is not pulled. Run: ollama pull $GRAPHIFY_MODEL"
+}
+
+cmd_setup() {
+    require_uv
+    mkdir -p "$TOOL_DIR" "$BIN_DIR" "$GRAPHIFY_HOME" "$INDEX_DIR"
+    info "Installing $GRAPHIFY_SPEC into $STATE_DIR (repo-local, ~200 MiB)..."
+    UV_TOOL_DIR="$TOOL_DIR" UV_TOOL_BIN_DIR="$BIN_DIR" \
+        uv tool install --force --python "$GRAPHIFY_PYTHON" "$GRAPHIFY_SPEC"
+    info ''
+    info "Installed: $("$BIN_DIR/graphify" --version 2>/dev/null || echo "$GRAPHIFY_SPEC")"
+    info 'Next: tools/graphify/graphify index'
+}
+
+cmd_index() {
+    require_setup
+    mode='code'
+    force=''
+    for arg in "$@"; do
+        case "$arg" in
+            --semantic) mode='semantic' ;;
+            --force) force='--force' ;;
+            *) die "unknown option for index: $arg" ;;
+        esac
+    done
+
+    if [ "$mode" = 'semantic' ]; then
+        require_ollama
+        info "Indexing with local semantic extraction ($GRAPHIFY_MODEL)..."
+        # shellcheck disable=SC2086
+        run_graphify extract "$REPO_ROOT" \
+            --backend ollama --model "$GRAPHIFY_MODEL" \
+            --max-concurrency 1 --no-cluster --no-viz \
+            --out "$INDEX_DIR" $force
+    else
+        info 'Indexing code only (local AST parsers, no model, no network)...'
+        # shellcheck disable=SC2086
+        run_graphify extract "$REPO_ROOT" \
+            --code-only --no-cluster --no-viz \
+            --out "$INDEX_DIR" $force
+    fi
+
+    printf '%s\n' "$mode" >"$MODE_FILE"
+    info ''
+    cmd_status
+}
+
+# Refresh deliberately re-runs `extract` rather than `graphify update`.
+#
+# `update` accepts neither --code-only nor --backend and persists no record of
+# how the graph was originally built, so it re-scans under its own default
+# policy. On a code-only index that silently widens the graph to documents and
+# can hand them to an auto-detected model backend. `extract` is already
+# incremental — it honours the manifest and semantic cache — so replaying the
+# original flags gives incremental refresh with no mode drift.
+cmd_refresh() {
+    require_setup
+    require_graph
+    [ -f "$MODE_FILE" ] || die 'cannot tell how this graph was built. Run: tools/graphify/graphify index'
+    mode=$(cat "$MODE_FILE")
+
+    force=''
+    for arg in "$@"; do
+        case "$arg" in
+            --force) force='--force' ;;
+            *) die "unknown option for refresh: $arg" ;;
+        esac
+    done
+
+    if [ "$mode" = 'semantic' ]; then
+        cmd_index --semantic ${force:+--force}
+    else
+        cmd_index ${force:+--force}
+    fi
+}
+
+cmd_query() {
+    require_setup
+    require_graph
+    [ "$#" -gt 0 ] || die 'query needs a question, e.g. graphify query "how are events scheduled"'
+    run_graphify query "$@" --graph "$GRAPH_JSON"
+}
+
+cmd_mcp() {
+    require_setup
+    if [ "${1:-}" = '--print-config' ]; then
+        cat <<EOF
+{
+  "mcpServers": {
+    "graphify-eventiva": {
+      "command": "$REPO_ROOT/tools/graphify/graphify",
+      "args": ["mcp"]
+    }
+  }
+}
+EOF
+        return 0
+    fi
+    require_graph
+    # stdio only. Graphify's MCP server treats a client-supplied project_path as
+    # a lookup key, not an authorization boundary: it will read any graph.json
+    # the server process can reach on disk. stdio keeps that blast radius to the
+    # single client that spawned this process. Do not add an HTTP transport here.
+    exec env -u OPENAI_API_KEY -u ANTHROPIC_API_KEY -u GEMINI_API_KEY \
+        -u GOOGLE_API_KEY -u DEEPSEEK_API_KEY \
+        HOME="$GRAPHIFY_HOME" GRAPHIFY_QUERY_LOG_DISABLE=1 \
+        "$BIN_DIR/graphify-mcp" --graph "$GRAPH_JSON" --transport stdio
+}
+
+cmd_status() {
+    printf 'state dir : %s\n' "$STATE_DIR"
+    if [ -x "$BIN_DIR/graphify" ]; then
+        printf 'installed : %s\n' "$GRAPHIFY_SPEC"
+    else
+        printf 'installed : no (run: tools/graphify/graphify setup)\n'
+        return 0
+    fi
+    if [ ! -f "$GRAPH_JSON" ]; then
+        printf 'graph     : none (run: tools/graphify/graphify index)\n'
+        return 0
+    fi
+    printf 'mode      : %s\n' "$(cat "$MODE_FILE" 2>/dev/null || echo unknown)"
+    printf 'graph     : %s (%s)\n' "$GRAPH_JSON" \
+        "$(du -h "$GRAPH_JSON" | cut -f1)"
+    if [ -x "$VENV_PYTHON" ]; then
+        "$VENV_PYTHON" - "$GRAPH_JSON" <<'PY'
+import json, sys
+with open(sys.argv[1]) as fh:
+    g = json.load(fh)
+nodes = g.get("nodes", [])
+links = g.get("links", g.get("edges", []))
+print(f"nodes     : {len(nodes)}")
+print(f"edges     : {len(links)}")
+PY
+    fi
+}
+
+cmd_clean() {
+    [ -d "$STATE_DIR" ] || {
+        info 'nothing to remove.'
+        return 0
+    }
+    if [ "${1:-}" = '--index-only' ]; then
+        rm -rf "$INDEX_DIR" "$MODE_FILE"
+        info 'Removed the graph and index. The installed tool is kept.'
+        return 0
+    fi
+    rm -rf "$STATE_DIR"
+    info "Removed $STATE_DIR (tool, graph, cache and isolated home)."
+}
+
+cmd_help() {
+    cat <<'EOF'
+Repo-local Graphify for Eventiva. All state lives in <repo>/.graphify (gitignored).
+
+  setup                 Install the pinned Graphify into <repo>/.graphify
+  index [--semantic]    Build the graph. Default is code-only: local AST
+                        parsers, no model, no network. --semantic additionally
+                        reads Markdown via a local Ollama model.
+        [--force]       Ignore the incremental manifest and re-scan everything.
+  refresh [--force]     Re-run the index in the same mode it was built in.
+  query "<question>"    Traverse the graph and print the relevant context.
+  mcp                   Serve the graph to an MCP client over stdio.
+      --print-config    Print a client config snippet for this clone.
+  status                Show install, mode, graph location and counts.
+  clean [--index-only]  Remove the graph, or the whole .graphify directory.
+  -- <args>             Pass arguments straight to the pinned graphify binary.
+
+Full guide, including security notes: docs/graphify.md
+EOF
+}
+
+command=${1:-help}
+[ "$#" -gt 0 ] && shift
+
+case "$command" in
+    setup) cmd_setup "$@" ;;
+    index) cmd_index "$@" ;;
+    refresh) cmd_refresh "$@" ;;
+    query) cmd_query "$@" ;;
+    mcp) cmd_mcp "$@" ;;
+    status) cmd_status "$@" ;;
+    clean) cmd_clean "$@" ;;
+    --)
+        require_setup
+        run_graphify "$@"
+        ;;
+    help | -h | --help) cmd_help ;;
+    *) die "unknown command '$command'. Run: tools/graphify/graphify help" ;;
+esac
