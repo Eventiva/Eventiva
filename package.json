@@ -115,7 +115,7 @@
         "jsonc-eslint-parser": "^3.1.0",
         "metro-config": "~0.83.0",
         "metro-resolver": "~0.83.0",
-        "nx": "22.5.4",
+        "nx": "22.7.7",
         "postcss": "8.4.38",
         "prettier": "~3.6.2",
         "react-refresh": "~0.14.0",
