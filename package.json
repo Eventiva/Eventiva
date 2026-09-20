@@ -141,6 +141,6 @@
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
         "react-native": "0.84.1",
-        "react-router-dom": "6.30.3"
+        "react-router-dom": "7.18.4"
     }
 }
