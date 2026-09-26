@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Resnovas/smartcloud/main/schema/smartcloud.schema.json
+# smartcloud v2 configuration. See https://github.com/Resnovas/smartcloud
+# Migrated from the v1 .github/config.json with `smartcloud migrate`.
+version: 2
+labels:
+  type:core:
+    name: type:core
+    color: 0E8A16
+    description: Core module - can be depended on by any other module
+  type:database:
+    name: type:database
+    color: 1D76DB
+    description: Database module - can only be depended on by platforms (except
+      devDependencies)
+  type:extension:
+    name: type:extension
+    color: FBCA04
+    description: Extension module - depends on core and extensions; used by extensions and platforms
+  type:platform:
+    name: type:platform
+    color: B60205
+    description: Platform module - top level, nothing can depend on this
+  layer:backend:
+    name: layer:backend
+    color: "5319E7"
+    description: Backend layer - can depend on backend and shared layers
+  layer:frontend:
+    name: layer:frontend
+    color: E99695
+    description: Frontend layer - can depend on frontend and shared layers
+  layer:shared:
+    name: layer:shared
+    color: C2E0C6
+    description: Shared layer - can only depend on shared layer
+  capability:entities:
+    name: capability:entities
+    color: BFD4F2
+    description: Contains entity definitions and CRUD operations
+  capability:workflows:
+    name: capability:workflows
+    color: D4C5F9
+    description: Contains workflow definitions and execution logic
+  capability:ui:
+    name: capability:ui
+    color: FAD8C7
+    description: Contains UI components and frontend interfaces
+

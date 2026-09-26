@@ -1,41 +1,38 @@
 name: Management - Github Management
 on:
     issues:
-        types: [opened, edited, closed, reopened]
+        types: [opened, edited, reopened, labeled, unlabeled]
     pull_request:
-        types: [opened, edited, closed, reopened, synchronize]
-    merge_group:
+        types: [opened, edited, synchronize, reopened, ready_for_review]
+    pull_request_review:
+        types: [submitted, dismissed]
+    push:
+        branches: [main]
+    schedule:
+        - cron: '0 6 * * *'
+    workflow_dispatch:
 
 permissions:
     contents: read
 
 jobs:
-    release-mastermind:
-        name: Release Mastermind
+    smartcloud:
+        name: smartcloud
         runs-on: ubuntu-latest
         permissions:
-            contents: write
+            contents: read
+            checks: write
+            issues: write
             pull-requests: write
         steps:
-            - uses: actions/checkout@v6
-              with:
-                  token: ${{ secrets.BOT_TOKEN || github.token }}
-                  submodules: 'recursive'
-
             - name: Harden Runner
               uses: step-security/harden-runner@v2.15.1
               with:
                   egress-policy: audit
 
-            - name: Check for config
-              id: check_config
-              run: |
-                  if [ -f .github/config.json ]; then echo "exists=true" >> "$GITHUB_OUTPUT"; else echo "exists=false" >> "$GITHUB_OUTPUT"; fi
-
-            - name: Release Mastermind
-              if: steps.check_config.outputs.exists == 'true'
-              uses: Resnovas/smartcloud@1.0.0-beta.8 # 1.0.0-beta.8
+            # smartcloud reads .github/smartcloud.yml from the default branch
+            # through the API, so no checkout is needed.
+            - name: smartcloud
+              uses: Resnovas/smartcloud@v2
               with:
                   GITHUB_TOKEN: ${{ secrets.BOT_TOKEN || github.token }}
-                  config: .github/config.json
-                  configRef: main
