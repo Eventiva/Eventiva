@@ -10,7 +10,7 @@
         ".": "./src/index.ts"
     },
     "dependencies": {
-        "@effect/platform": "0.94.5",
+        "@effect/platform": "0.97.2",
         "@effect/platform-node": "0.104.0",
         "effect": "3.19.19"
     }
